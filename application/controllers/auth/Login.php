@@ -59,7 +59,7 @@ class Login extends CI_Controller
                                 'is_active' => $result['data']['is_active'],
                                 'jenis_perusahaan' => $result['data']['jenis_perusahaan'],
                                 'lengkap' => $this->isProfileComplete((int) $result['data']['id_pengguna']) ? '1' : '0',
-                                'wa_status' => $result['data']['whatsapp_status'],
+                                // 'wa_status' => $result['data']['whatsapp_status'],
                             ];
                             $this->session->set_userdata('user_data', $data_session);
                             $flag = true;
@@ -105,7 +105,7 @@ class Login extends CI_Controller
 
     protected function login(string $email, string $password): ?object
     {
-        $this->db->select('id_pengguna, nama, email, kategori, status, token, is_active, foto, jenis_perusahaan, whatsapp_status as wa_status');
+        $this->db->select('id_pengguna, nama, email, kategori, status, token, is_active, foto, jenis_perusahaan, ');
         $this->db->from('pengguna');
         $this->db->where('email', $email);
         $this->db->where('password', $password);
