@@ -1,0 +1,11 @@
+<svg width="94" height="80" viewBox="0 0 94 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_1007_1478" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="14" y="0" width="80" height="80">
+<rect x="14" width="80" height="80" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_1007_1478)">
+<path d="M24 70V23.584H37.584V10H70.416V37.25H84V70H58.084V56.416H49.916V70H24ZM29.584 64.416H37.584V56.416H29.584V64.416ZM29.584 50.834H37.584V42.75H29.584V50.834ZM29.584 37.25H37.584V29.166H29.584V37.25ZM43.166 50.834H51.25V42.75H43.166V50.834ZM43.166 37.25H51.25V29.166H43.166V37.25ZM43.166 23.584H51.25V15.584H43.166V23.584ZM56.75 50.834H64.834V42.75H56.75V50.834ZM56.75 37.25H64.834V29.166H56.75V37.25ZM56.75 23.584H64.834V15.584H56.75V23.584ZM70.416 64.416H78.416V56.416H70.416V64.416ZM70.416 50.834H78.416V42.75H70.416V50.834Z" fill="#DD4B39" fill-opacity="0.7"/>
+</g>
+<circle cx="35" cy="36" r="32" fill="#DD4B39" fill-opacity="0.2"/>
+<circle cx="12" cy="12" r="12" fill="#DD4B39" fill-opacity="0.2"/>
+<circle cx="14" cy="24" r="8" fill="#DD4B39" fill-opacity="0.2"/>
+</svg>

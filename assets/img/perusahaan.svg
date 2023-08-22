@@ -1,0 +1,11 @@
+<svg width="97" height="84" viewBox="0 0 97 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="35" cy="36" r="32" fill="#DD4B39" fill-opacity="0.2"/>
+<circle cx="12" cy="12" r="12" fill="#DD4B39" fill-opacity="0.2"/>
+<circle cx="14" cy="24" r="8" fill="#DD4B39" fill-opacity="0.2"/>
+<mask id="mask0_1007_1470" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="17" y="4" width="80" height="80">
+<rect x="17" y="4" width="80" height="80" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_1007_1470)">
+<path d="M27 74V27.416H47.416V20.084L57 10.666L66.584 20.084V41.084H87V74H27ZM32.584 68.416H40.666V60.334H32.584V68.416ZM32.584 54.75H40.666V46.666H32.584V54.75ZM32.584 41.084H40.666V33H32.584V41.084ZM52.916 68.416H61.084V60.334H52.916V68.416ZM52.916 54.75H61.084V46.666H52.916V54.75ZM52.916 41.084H61.084V33H52.916V41.084ZM52.916 27.416H61.084V19.334H52.916V27.416ZM73.334 68.416H81.416V60.334H73.334V68.416ZM73.334 54.75H81.416V46.666H73.334V54.75Z" fill="#DD4B39" fill-opacity="0.7"/>
+</g>
+</svg>

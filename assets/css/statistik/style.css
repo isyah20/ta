@@ -1,0 +1,1273 @@
+.competitor {
+	background-color: #ffff;
+	padding: 10px;
+}
+
+.competitor h5 {
+	color: #8b6464;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.competitor h4,
+.market h4 {
+	color: black;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.competitor hr .market hr {
+	border: 1.5px solid #8b6464;
+	background-color: #8b6464;
+}
+
+.chart-bg {
+	background-color: #ffff;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px 2px rgba(153, 153, 153, 0.1);
+	padding: 10px;
+}
+
+.statistik-menang {
+	padding: 20px;
+	background-color: #df3131;
+	background-image: url(../../img/statistik-menang.png);
+	background-size: cover;
+	border-radius: 10px;
+	width: 100%;
+	min-height: 400px;
+	height: auto;
+}
+
+.statistik-menang h5,
+.ikut-tender h5 {
+	color: #ffff;
+	font-size: 20px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.ikut-tender h4 {
+	font-size: 50px;
+	font-weight: 700;
+	text-align: center;
+	margin: auto;
+	color: #ffff;
+}
+
+.statistik-menang h6 {
+	color: #ffff;
+	font-size: 16px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.statistik-menang .kalah {
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+	background-color: #f8a5a5;
+	margin: auto;
+}
+
+.statistik-menang .menang {
+	background-color: #6ee7b7;
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+	margin: auto;
+}
+
+.ikut-tender {
+	padding: 20px;
+	background-color: #f46f31;
+	background-image: url(../../img/ikut-tender.png);
+	background-size: cover;
+	border-radius: 10px;
+	width: 100%;
+	min-height: 200px;
+	height: auto;
+	align-content: center;
+	align-items: center;
+}
+
+.summary-box {
+	min-width: 200px;
+	width: auto;
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px 2px rgba(153, 153, 153, 0.084);
+	padding: 20px;
+	margin: auto;
+}
+
+.summary-box p {
+	color: #b89494;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.summary-box-2 {
+	min-width: 57px;
+	width: auto;
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0px 0px 2px 2px rgba(153, 153, 153, 0.084);
+	padding: 5px;
+	margin: 3px;
+}
+
+.summary-box-2 p {
+	color: #b89494;
+	font-size: 9px;
+	font-weight: 700;
+	margin-bottom: 0;
+}
+
+.aktivitas {
+	min-width: 200px;
+	width: auto;
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px 2px rgba(153, 153, 153, 0.084);
+	padding: 20px;
+	margin: auto;
+	background-color: #f0e2e2;
+}
+
+.penawaran h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 39px;
+	color: #000000;
+}
+
+.penawaran .head-table {
+	color: #ffffff;
+	align-items: center;
+	background: rgba(240, 226, 226, 1);
+
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+
+	height: 50px;
+	font-weight: 700;
+	font-size: 16px;
+	font-style: normal;
+}
+.penawaran .table-pagination {
+	display: flex;
+	padding-left: 0;
+	list-style: none;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.penawaran .row-table {
+	background: #ffffff;
+	border-radius: 0px;
+	/*border: 1px solid rgba(225, 203, 203, 1);*/
+	border-top: 1px solid rgba(225, 203, 203, 1);
+	border-bottom: 1px solid rgba(225, 203, 203, 1);
+	width: 1288px;
+}
+
+.text-brown {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	color: #8b6464;
+	padding-left: 10px;
+}
+
+.table-cipung {
+	display: flex;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 960px) {
+	.penawaran .data-table div {
+		padding: 0px;
+	}
+	.penawaran .myTable {
+		overflow-y: scroll;
+		overflow-x: hidden;
+		max-height: 550px;
+		width: 1288px;
+	}
+	.penawaran .head-table {
+		width: 1288px;
+	}
+	.penawaran .row-table {
+		width: 1288px;
+		border: 1px solid rgba(225, 203, 203, 1);
+	}
+	.penawaran .col-kode {
+		width: 800px;
+	}
+	.penawaran .col-nama {
+		width: 210px;
+	}
+	.penawaran .col-jenis {
+		width: 210px;
+	}
+	.penawaran .col-klpd {
+		width: 130px;
+	}
+	.penawaran .col-hps {
+		width: 400px;
+	}
+	.table-cipung {
+		width: 1280px;
+	}
+}
+.penawaran .text1 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	color: #000000;
+	padding-left: 10px;
+}
+.penawaran .text2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 22px;
+	color: #139728;
+	padding-left: 10px;
+}
+.penawaran .text3 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 22px;
+	color: #00c008;
+	padding-left: 10px;
+}
+.penawaran .text4 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 22px;
+	color: #000000;
+	padding-left: 10px;
+}
+.penawaran .text5 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	color: #000000;
+	padding-left: 10px;
+}
+
+.penawaran td {
+	background: white;
+}
+
+.penawaran table,
+.penawaran th,
+.penawaran td {
+	border-top: 1px solid rgba(225, 203, 203, 1);
+	border-bottom: 1px solid rgba(225, 203, 203, 1);
+}
+/*
+.penawaran table tr:last-child td:first-child {
+	border: 2px solid orange;
+	border-bottom-left-radius: 10px;
+}
+
+.penawaran table tr:last-child td:last-child {
+	border: 2px solid green;
+	border-bottom-right-radius: 10px;
+}
+*/
+
+.penawaran table {
+	border: 1px solid rgba(225, 203, 203, 1);
+}
+.penawaran .text_presentase {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 25px;
+	color: #8b6464;
+}
+
+.penawaran .presentase1 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 35px;
+	line-height: 55px;
+	color: #139728;
+}
+
+.penawaran .presentase2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 35px;
+	line-height: 55px;
+	color: #e05151;
+}
+
+.user-dashboard {
+	background-color: #ffff;
+	padding-top: 20px;
+}
+
+.dashboard-hero {
+	background-color: #ffeee6;
+	width: 100%;
+	min-height: 100px;
+	height: auto;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+.dh-img {
+	max-width: 230px;
+	height: auto;
+	flex-wrap: wrap;
+	object-fit: cover;
+	margin: auto;
+}
+
+/*-=============================================
+			# User Asosiasi Dashboard
+==============================================-*/
+
+/*-==========================================
+		# 		Anggota TIM			#
+				   TABLE 
+===========================================-*/
+
+.anggota h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 39px;
+	color: #000000;
+}
+
+.anggota .text-brown {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 27px;
+	color: #8b6464;
+	padding-left: 10px;
+}
+
+.table-cipung {
+	display: flex;
+	justify-content: center;
+}
+.anggota th:first-of-type {
+	border-top-left-radius: 10px;
+}
+.anggota th:last-of-type {
+	border-top-right-radius: 10px;
+}
+.anggota tr:last-of-type td:first-of-type {
+	border-bottom-left-radius: 10px;
+}
+.anggota tr:last-of-type td:last-of-type {
+	border-bottom-right-radius: 10px;
+}
+@media only screen and (max-width: 960px) {
+	.anggota .data-table div {
+		padding: 0px;
+	}
+	.anggota .col-kode {
+		width: 100px;
+	}
+	.anggota .col-nama {
+		width: 300px;
+	}
+	.anggota .col-jenis {
+		width: 130px;
+	}
+	.anggota .col-klpd {
+		width: 130px;
+	}
+	.anggota .col-hps {
+		width: 130px;
+	}
+	.table-cipung {
+		width: 1000px;
+	}
+}
+.anggota .text1 {
+	font-weight: 400;
+	font-size: 15px;
+	color: white;
+	background-color: #553333;
+	text-decoration: none;
+	display: inline-block;
+	padding: 3px 10px;
+	border-radius: 7px;
+}
+
+.anggota .text2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 50px;
+	color: #000000;
+}
+.anggota .text3 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 50px;
+	text-align: center;
+	color: #000000;
+}
+.anggota .text4 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 50px;
+	color: #139728;
+	text-align: center;
+}
+.anggota .text5 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 50px;
+	color: #d21b1b;
+	text-align: center;
+}
+
+.anggota td {
+	background: white;
+}
+/*
+.anggota th,
+.anggota td {
+	border-top: 1px solid rgba(225, 203, 203, 1);
+	border-bottom: 1px solid rgba(225, 203, 203, 1);
+}
+
+.anggota table {
+	border: 1px solid rgba(225, 203, 203, 1);
+	border-radius: 10px;
+}
+*/
+.anggota table {
+	border-spacing: 0;
+	border-collapse: separate;
+	/* border-radius: 10px; */
+	border: 1px solid rgba(225, 203, 203, 1);
+}
+
+/* Apply a border to the bottom of all but the last row */
+.anggota table > thead > tr:not(:last-child) > th,
+.anggota table > thead > tr:not(:last-child) > td,
+.anggota table > tbody > tr:not(:last-child) > th,
+.anggota table > tbody > tr:not(:last-child) > td,
+.anggota table > tfoot > tr:not(:last-child) > th,
+.anggota table > tfoot > tr:not(:last-child) > td,
+.anggota table > tr:not(:last-child) > td,
+.anggota table > tr:not(:last-child) > th,
+.anggota table > thead:not(:last-child),
+.anggota table > tbody:not(:last-child),
+.anggota table > tfoot:not(:last-child) {
+	border-bottom: 1px solid rgba(225, 203, 203, 1);
+}
+
+.anggota tbody {
+	display: block;
+}
+
+.anggota thead,
+.anggota tbody tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.sel3 .select2-container {
+	box-sizing: border-box;
+	display: inline-block;
+	margin: 5px;
+	position: relative;
+	vertical-align: middle;
+}
+
+.sel3 .select2-container--default .select2-selection--single {
+	background-color: #f0e2e2;
+	border: 1px solid #f0e2e2;
+	border-radius: 4px;
+	height: 40px;
+	display: flex;
+	align-self: center;
+}
+
+.sel3
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__rendered {
+	color: rgb(0, 0, 0);
+	line-height: 28px;
+	align-self: center;
+}
+
+.sel3
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__arrow {
+	height: 26px;
+	position: absolute;
+	top: 6px;
+	right: 1px;
+	width: 20px;
+	/* color: #ffffff; */
+}
+
+.sel3
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__arrow
+	b {
+	border-color: #bf0c0c transparent transparent transparent;
+	border-style: solid;
+	border-width: 5px 4px 0 4px;
+	height: 0;
+	left: 50%;
+	margin-left: -4px;
+	margin-top: -2px;
+	position: absolute;
+	top: 50%;
+	width: 0;
+}
+
+.sel3
+	.select2-container--default.select2-container--open
+	.select2-selection--single
+	.select2-selection__arrow
+	b {
+	border-color: transparent transparent #bf0c0c transparent;
+	border-width: 0 4px 5px 4px;
+}
+
+.sel2 .select2-container {
+	box-sizing: border-box;
+	display: inline-block;
+	margin: 5px;
+	position: relative;
+	vertical-align: middle;
+}
+
+.sel2 .select2-container--default .select2-selection--single {
+	background-color: #e05151;
+	border: 1px solid #e05151;
+	border-radius: 4px;
+	height: 40px;
+	display: flex;
+	align-self: center;
+}
+
+.sel2
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__rendered {
+	color: #ffff;
+	line-height: 28px;
+	align-self: center;
+}
+
+.sel2
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__arrow {
+	height: 26px;
+	position: absolute;
+	top: 6px;
+	right: 1px;
+	width: 20px;
+	/* color: #ffffff; */
+}
+
+.sel2
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__arrow
+	b {
+	border-color: #ffff transparent transparent transparent;
+	border-style: solid;
+	border-width: 5px 4px 0 4px;
+	height: 0;
+	left: 50%;
+	margin-left: -4px;
+	margin-top: -2px;
+	position: absolute;
+	top: 50%;
+	width: 0;
+}
+
+.sel2
+	.select2-container--default.select2-container--open
+	.select2-selection--single
+	.select2-selection__arrow
+	b {
+	border-color: transparent transparent #ffff transparent;
+	border-width: 0 4px 5px 4px;
+}
+
+.search-asosiasi {
+	height: 25px;
+	display: flex;
+	justify-content: end;
+}
+.search-asosiasi input {
+	background: url(https://api.iconify.design/material-symbols/search.svg?color=%23e05151)
+		no-repeat center center / contain;
+	background-position: 3%;
+	background-size: 10%;
+	height: 40px;
+	border-radius: 10px;
+	border: 1px solid #e05151;
+	padding-left: 40px;
+}
+
+.asosiasi_table {
+	top: -26px !important;
+}
+
+.asosiasi_table tr td:nth-child(1) {
+	width: 10%;
+	text-align: center;
+}
+
+.asosiasi_table tr td:nth-child(2) {
+	width: 34%;
+}
+.asosiasi_table tr td:nth-child(3) {
+	width: 10%;
+}
+.asosiasi_table tr td:nth-child(4) {
+	width: 10%;
+}
+.asosiasi_table tr td:nth-child(5) {
+	width: 10%;
+}
+
+.asosiasi_table tr td:nth-child(6) {
+	width: 10%;
+	align-self: center;
+	text-align: left;
+}
+
+.asosiasi_table tr th:nth-child(1) {
+	width: 10%;
+	padding: 0px;
+}
+
+.asosiasi_table tr th:nth-child(2) {
+	width: 34%;
+	padding: 0px;
+}
+.asosiasi_table tr th:nth-child(3) {
+	width: 10%;
+	padding: 0px;
+}
+.asosiasi_table tr th:nth-child(4) {
+	width: 10%;
+	padding: 0px;
+}
+.asosiasi_table tr th:nth-child(5) {
+	width: 10%;
+	padding: 0px;
+}
+.asosiasi_table tr th:nth-child(6) {
+	width: 10%;
+	padding: 0px;
+}
+
+.table-cipung .dataTables_scrollBody {
+	overflow-x: hidden !important;
+}
+
+.anggota .row-table {
+	border-radius: 0px !important;
+}
+
+/*-==========================================
+		# 		Anggota TIM			#
+				DATA SAMPING
+===========================================-*/
+
+.anggota h3 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	color: #b89494;
+}
+
+.anggota h1 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 38px;
+	color: #553333;
+}
+
+.anggota span {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.anggota p {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 418px) {
+	.anggota h3 {
+		font-family: "Ubuntu";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 15px;
+		color: #b89494;
+	}
+
+	.anggota h1 {
+		font-family: "Ubuntu";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 30px;
+		color: #553333;
+	}
+
+	.anggota span {
+		font-family: "Ubuntu";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 12px;
+	}
+
+	.anggota p {
+		font-family: "Ubuntu";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 12px;
+		color: #000000;
+		margin-bottom: 0px;
+	}
+}
+
+.anggota .btn_add {
+	align-items: center;
+	text-align: center;
+	padding: 10px;
+	height: 37px;
+	background: #e05151;
+	border-radius: 5px;
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	letter-spacing: 0.015em;
+	color: #ffffff;
+}
+
+.anggota .dropdown-menu .select-item {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #d21b1b;
+}
+
+.anggota .btn_blacklist {
+	/* width: 40px;
+	height: 44px; */
+	height: 37px;
+	padding: 7px 8px;
+	background: #373737;
+	box-shadow: 0px 0px 5.30744px rgba(0, 0, 0, 0.05);
+	border-radius: 5.30744px;
+}
+
+.anggota thead {
+	background: #f0e2e2;
+}
+
+/*-========================================
+			#	SUPPLIER	#
+=========================================-*/
+
+.input_filter-text {
+	background: none;
+	border: none;
+	height: 50%;
+	padding: 7px;
+}
+
+.input_filter-text[type="text"]:focus {
+	background: #ffffff;
+	/* border: non; */
+}
+
+.input_filter-text::placeholder {
+	/* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: black;
+	opacity: 1; /* Firefox */
+}
+
+.input_filter-text:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: black;
+}
+
+.input_filter-text::-ms-input-placeholder {
+	/* Microsoft Edge */
+	color: black;
+}
+
+.supplier .lpse h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 39px;
+	color: #000000;
+}
+
+.supplier .lpse .text-brown {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 27px;
+	color: #8b6464;
+	padding-left: 10px;
+}
+
+.supplier .table-cipung {
+	display: flex;
+	justify-content: center;
+}
+.supplier .lpse th:first-of-type {
+	border-top-left-radius: 10px;
+}
+.supplier .lpse th:last-of-type {
+	border-top-right-radius: 10px;
+}
+.supplier .lpse tr:last-of-type td:first-of-type {
+	border-bottom-left-radius: 10px;
+}
+.supplier .lpse tr:last-of-type td:last-of-type {
+	border-bottom-right-radius: 10px;
+}
+@media only screen and (max-width: 960px) {
+	.supplier .lpse .data-table div {
+		padding: 0px;
+	}
+	.supplier .lpse .col-kode {
+		width: 100px;
+	}
+	.supplier .lpse .col-nama {
+		width: 300px;
+	}
+	.supplier .lpse .col-jenis {
+		width: 130px;
+	}
+	.supplier .lpse .col-klpd {
+		width: 130px;
+	}
+	.supplier .lpse .col-hps {
+		width: 130px;
+	}
+	.table-cipung {
+		width: 1000px;
+	}
+}
+.supplier .lpse .text1 {
+	font-weight: 400;
+	font-size: 15px;
+	color: white;
+	background-color: #553333;
+	text-decoration: none;
+	display: inline-block;
+	padding: 3px 10px;
+	border-radius: 7px;
+}
+
+.supplier .lpse .text2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 25px;
+	color: #000000;
+}
+.supplier .lpse .text3 {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 31px;
+	color: #000000;
+	padding: 5px;
+}
+.supplier .lpse .text4 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	color: #139728;
+	padding-left: 20px;
+}
+
+.supplier .lpse td {
+	background: white;
+}
+/*
+.supplier .lpse th,
+.supplier .lpse td {
+	border-top: 1px solid rgba(225, 203, 203, 1);
+	border-bottom: 1px solid rgba(225, 203, 203, 1);
+}
+
+.supplier .lpse table {
+	border: 1px solid rgba(225, 203, 203, 1);
+	border-radius: 10px;
+}
+*/
+.supplier .lpse table {
+	border-spacing: 0;
+	border-collapse: separate;
+	/* border-radius: 10px; */
+	border: 1px solid rgba(225, 203, 203, 1);
+	top: -26px !important;
+}
+
+.supplier .row-table {
+	border-radius: 0px !important;
+}
+
+/* Apply a border to the bottom of all but the last row */
+.supplier .lpse table > thead > tr:not(:last-child) > th,
+.supplier .lpse table > thead > tr:not(:last-child) > td,
+.supplier .lpse table > tbody > tr:not(:last-child) > th,
+.supplier .lpse table > tbody > tr:not(:last-child) > td,
+.supplier .lpse table > tfoot > tr:not(:last-child) > th,
+.supplier .lpse table > tfoot > tr:not(:last-child) > td,
+.supplier .lpse table > tr:not(:last-child) > td,
+.supplier .lpse table > tr:not(:last-child) > th,
+.supplier .lpse table > thead:not(:last-child),
+.supplier .lpse table > tbody:not(:last-child),
+.supplier .lpse table > tfoot:not(:last-child) {
+	border-bottom: 1px solid rgba(225, 203, 203, 1);
+}
+
+.supplier .btn-look {
+	background: none;
+	border: none;
+}
+
+.supplier .modal-header {
+	background-image: url(../../img/detail_kontak.svg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 80px;
+	border-bottom: none;
+}
+
+.supplier .modal-footer {
+	justify-content: center;
+	border-top: none;
+}
+
+.supplier .modal-footer button {
+	width: auto;
+	height: 48px;
+	background: #df3131;
+	border-radius: 3px;
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	color: #ffffff;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	border: none;
+	padding: 7px 70px;
+}
+
+.supplier .tag-value h5 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20px;
+	color: #8b6464;
+}
+
+.supplier .tag-value p {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 20px;
+	color: #000000;
+	padding: 0px;
+}
+
+.supplier tbody {
+	display: block;
+	height: 500px;
+	overflow: auto;
+}
+.supplier thead,
+.supplier tbody tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+.supplier thead {
+	width: calc(101.3% - 1em);
+	background: #f0e2e2;
+}
+
+.data_count h3 {
+	margin-bottom: 0px;
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 40px;
+	line-height: 55px;
+	color: #553333;
+}
+
+.data_count p {
+	margin-bottom: 0px;
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 25px;
+	color: #000000;
+}
+
+.bg-supplier {
+	background-color: #ffff;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px 2px rgba(153, 153, 153, 0.1);
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.head_bg-supplier {
+	background: #e05151;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.kategori-supplier h3 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 34px;
+	line-height: 39px;
+	color: #ffffff;
+	margin-bottom: 0px;
+}
+
+.kategori-supplier table tr:nth-child(odd) {
+	background-color: white;
+}
+
+.kategori-supplier table {
+	box-shadow: none;
+	border: 1px solid rgba(225, 203, 203, 1);
+	border-radius: 10px;
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+.kategori-supplier table > thead > tr:not(:last-child) > th,
+.kategori-supplier table > thead > tr:not(:last-child) > td,
+.kategori-supplier table > tbody > tr:not(:last-child) > th,
+.kategori-supplier table > tbody > tr:not(:last-child) > td,
+.kategori-supplier table > tfoot > tr:not(:last-child) > th,
+.kategori-supplier table > tfoot > tr:not(:last-child) > td,
+.kategori-supplier table > tr:not(:last-child) > td,
+.kategori-supplier table > tr:not(:last-child) > th,
+.kategori-supplier table > thead:not(:last-child),
+.kategori-supplier table > tbody:not(:last-child),
+.kategori-supplier table > tfoot:not(:last-child) {
+	border-bottom: 1px solid rgba(225, 203, 203, 1);
+}
+
+.kategori-supplier td {
+	padding: 7px 7px;
+}
+
+.kategori-supplier table tr td:first-child {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	color: #000000;
+}
+
+.kategori-supplier table tr td:last-child {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 20px;
+	color: #e05151;
+}
+
+.kategori-supplier table tr:first-child td:first-child {
+	border-top-left-radius: 10px;
+}
+.kategori-supplier table tr:first-child td:last-child {
+	border-top-right-radius: 10px;
+}
+.kategori-supplier table tr:last-of-type td:first-of-type {
+	border-bottom-left-radius: 10px;
+}
+.kategori-supplier table tr:last-of-type td:last-of-type {
+	border-bottom-right-radius: 10px;
+}
+
+.cek {
+	visibility: hidden;
+}
+
+.sup .sel2 {
+	background: #ffffff;
+	border: 1.5px solid #e1cbcb;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 10px;
+	padding: 10px;
+	width: 300px;
+}
+
+.sup .sel2 .select2-container--default .select2-selection--single {
+	background: #f0e2e2;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+	border: none;
+	border-radius: 4px;
+	/* width: 267px; */
+	height: 40px;
+	display: flex;
+	align-self: center;
+}
+
+.sup
+	.sel2
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__arrow {
+	height: 26px;
+	position: absolute;
+	top: 6px;
+	width: 20px;
+	right: 10px;
+	/* color: #ffffff; */
+}
+
+.sup
+	.sel2
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__rendered {
+	color: #000000;
+	line-height: 28px;
+	align-self: center;
+}
+
+.sup
+	.sel2
+	.select2-container--default
+	.select2-selection--single
+	.select2-selection__arrow
+	b {
+	border-color: #bf0c0c transparent transparent transparent;
+}
+
+.sup
+	.sel2
+	.select2-container--default.select2-container--open
+	.select2-selection--single
+	.select2-selection__arrow
+	b {
+	border-color: transparent transparent #bf0c0c transparent;
+}
+
+.supplier td:nth-child(1) {
+	width: 119px;
+	/* background-color: red; */
+	text-align: center;
+}
+
+.supplier td:nth-child(2) {
+	width: 300px;
+	/* background-color: red; */
+}
+
+.supplier td:nth-child(3) {
+	width: 425px;
+	/* background-color: red; */
+}
+
+.supplier td:nth-child(4) {
+	/* width: 300px; */
+	text-align: left;
+	/* background-color: red; */
+}
+
+.supplier td:nth-child(5) {
+	/* width: 425px; */
+	text-align: left;
+	/* background-color: red; */
+}
+
+.supplier .dataTables_scrollBody {
+	overflow-x: hidden !important;
+}
+
+/*-=============================================
+			#			MAP			#
+===============================================-*/
+
+#map .leaflet-control {
+	display: none;
+}
+#map .leaflet-pane {
+	z-index: 0 !important;
+}

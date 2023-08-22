@@ -1,0 +1,413 @@
+/* for header */
+header {
+	color: white;
+}
+
+header div .link-list li {
+	list-style: none;
+	color: white;
+	font-size: 12px;
+}
+
+header div .link-list li a {
+	text-decoration: none;
+	color: white;
+	padding: 4px;
+}
+
+.title-tender {
+	font-size: 22px;
+	color: white;
+}
+
+.subtitle-tender {
+	font-size: 16px;
+}
+
+header div .subtitle-tender:not(:last-child) {
+	/* for divider */
+	border-right: 2px solid #ffff;
+	padding-right: 10px;
+}
+
+/* header div .subtitle-tender {
+	font-size: 14px;
+	color: white;
+} */
+
+.icon-jadwal {
+	padding: 0;
+	text-decoration: none;
+}
+
+/* //Peserta */
+.detail-peserta {
+	/* Detail peserta */
+	position: absolute;
+	width: 1786px;
+	height: 1080px;
+	left: 59px;
+	top: 1362px;
+
+	/* Shadow Dashboard */
+	box-shadow: 0px 0px 20px 2px rgba(153, 153, 153, 0.1);
+}
+
+th#jadwal {
+	color: #FFFFFF;
+	background-color: #E05151;
+	vertical-align: middle;
+	font-weight: 700;
+	font-size: 16px;
+}
+
+thead#peserta {
+	border-radius: 10px 10px 0px 0px;
+}
+
+th#peserta {
+	color: #8b6464;
+	vertical-align: middle;
+	font-weight: 700;
+	font-size: 16px;
+}
+
+tr#peserta:nth-child(odd) {
+	background-color: #f0e2e2;
+}
+
+tr#peserta:nth-child(even) {
+	background-color: #ffffff;
+}
+
+#scroll {
+	display: block;
+	padding: 5px;
+	margin-top: 5px;
+	width: 100%;
+	height: 500px;
+	overflow: scroll;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #df3131b2;
+	border-radius: 10px;
+}
+
+/* height */
+::-webkit-scrollbar:horizontal {
+	height: 7px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #b30000;
+}
+
+/* Modal Jadwal */
+/* section #modalJadwal .modal-content .modal-body .card-body {
+	border: 5px solid red;
+} */
+section #modalJadwal .modal-body .card-body {
+	border-bottom: 8px solid #bf0c0c;
+	background-color: #ffff;
+	background-image: url(../../img/rincian-bg.png);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+section #modalJadwal .modal-body .card-body .body-perubahan-jadwal {
+	border-right: 1.5px solid black;
+}
+section #modalJadwal .modal-body .card-body .text-tanggal-modal,
+section #modalJadwal .modal-body .card-body span {
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 18px;
+}
+section #modalJadwal .modal-body .card-body .text-tanggal-modal {
+	position: relative;
+}
+
+section #modalJadwal .modal-body .card-body .circle-small {
+	height: 1em;
+	width: 1em;
+	background-color: black;
+	border-radius: 50%;
+	/* display: block; */
+	/* left: -30px;
+	top: 2px; */
+}
+
+section #modalJadwal .modal-body .card-body .circle-small.vertical-line:after {
+	content: "";
+	position: relative;
+	background-color: black;
+	border: 1px solid;
+	opacity: 1;
+	/* height: 2vh; */
+	max-height: calc(100% - 10px);
+	width: 2px;
+	max-width: 100%;
+	left: 5px;
+	top: -20px;
+	/* margin-left: -20.5%; */
+	/* transform: rotate(90deg);
+	-webkit-transform: rotate(90deg); */
+}
+
+section #modalJadwal .modal-body .card-body .text-perubahan-jadwal {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+@media (max-width: 575.98px) {
+	/* for header */
+	header div .title-tender {
+		font-size: 18px;
+		color: white;
+	}
+
+	header div .subtitle-tender {
+		font-size: 9px !important;
+		color: white;
+	}
+
+	/* modal */
+	section #modalJadwal .modal-header img {
+		width: 18px;
+		height: 70px;
+	}
+
+	section
+		#modalJadwal
+		.modal-body
+		.card-body
+		.circle-small.vertical-line:after {
+		display: none;
+	}
+	section #modalJadwal .modal-body .card-body .text-perubahan-jadwal {
+		font-size: 12px;
+	}
+	section #modalJadwal .modal-body .card-body .text-tanggal-modal,
+	section #modalJadwal .modal-body .card-body span {
+		font-weight: 500;
+		font-size: 10px;
+		line-height: 12px;
+	}
+}
+
+/* For Container of Section Jadwal */
+#jadwal .container {
+	background-color: #ffff;
+}
+
+header {
+	color: white;
+}
+
+header div .link-list li {
+	style: none;
+	color: white;
+	font-size: 12px;
+}
+
+/* header div .title-tender {
+	font-size: 32px;
+} */
+
+/* header div .subtitle-tender {
+	font-size: 18px;
+} */
+
+/* ------------------------------------------------
+CLASS TENDER 
+---------------------------------------------------*/
+
+.rincian {
+	padding: 30px;
+	font-family: "Ubuntu";
+	font-style: normal;
+}
+
+.rincian .container {
+	justify-content: center;
+	padding: 10px;
+	align-items: center;
+	bottom: 0;
+	top: 70px;
+	left: 50px;
+	right: 50px;
+}
+
+.rincian-box {
+	width: 100%;
+	max-width: 100%;
+	background-color: #ffff;
+	background-image: url(../../img/rincian-bg.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 20px;
+	border-bottom: 10px solid #bf0c0c;
+	padding: 15px;
+	margin: auto;
+	justify-content: center;
+}
+
+.rincian-img {
+	z-index: 4;
+	width: 80%;
+	height: auto;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	margin: auto;
+}
+
+.close-jadwal {
+	background: transparent
+		url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="50" height="50" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"%3E%3Cpath fill="%23bf0c0c" d="M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504L738.304 195.2a64 64 0 0 1 90.496 90.496L602.496 512L828.8 738.304a64 64 0 0 1-90.496 90.496L512 602.496L285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 512L195.2 285.696a64 64 0 0 1 0-90.496z"%2F%3E%3C%2Fsvg%3E')
+		center/1em auto no-repeat;
+	opacity: 1;
+}
+
+
+.modal-rincian .modal-header {
+	background-color: #bf0c0c;
+}
+.rincian-box table th,
+.modal-rincian table th {
+	color: #fff;
+	background-color: #bf0c0c;
+}
+.rincian-box table th,
+.modal-rincian table th,
+.rincian-box table td,
+.modal-rincian table td {
+	width: auto;
+}
+.rincian-box table td, 
+.modal-rincian table td, 
+.rincian-box table th,
+.modal-rincian table th {
+	border: 0.5px solid #aaa;
+	font-size: 14px;
+	line-height: 24px;
+}
+.rincian-box.data-table .nav-tabs .nav-link {
+	border: none;
+	border-radius: 10px;
+	background: #ccc;
+	margin-right: 10px;
+	color: #444;
+}
+.rincian-box.data-table .nav-tabs .nav-link:hover {
+	background: #ddd;
+	color: #000;
+}
+.rincian-box.data-table .nav-tabs .nav-link.active {
+	background: #bf0c0c;
+	color: #fff;
+}
+.rincian-box.data-table .badge.badge-info {
+	color: #000 !important;
+	background-color: RGBA(13,202,240,var(--bs-bg-opacity,1)) !important;
+}
+.rincian-box.data-table .badge.badge-success {
+	color: #fff !important;
+	background-color: RGBA(25,135,84,var(--bs-bg-opacity,1)) !important;
+}
+.rincian-box.data-table .badge.badge-success {
+	color: #fff !important;
+	background-color: RGBA(25,135,84,var(--bs-bg-opacity,1)) !important;
+}
+.rincian-box.data-table .badge.badge-danger {
+	color: #fff !important;
+	background-color: RGBA(220,53,69,var(--bs-bg-opacity,1)) !important;
+}
+.rincian-box.data-table .badge.badge-warning {
+	color: #000 !important;
+	background-color: RGBA(255,193,7,var(--bs-bg-opacity,1)) !important;
+}
+.rincian-box.data-table .fa.fa-close:before {
+	content: "\f00d";
+}
+td.tengah
+{
+	  vertical-align: middle;
+	  font-size: 15px;
+	  font-weight: 600;
+}
+
+td.namapeserta
+{
+	vertical-align: middle;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+box.deskripsi1
+{
+	font-family: 'Ubuntu'; 
+	font-style: normal; 
+	font-weight: 550;
+	font-size: 13px; 
+	text-align: center; 
+	line-height: 22px; 
+	color: #FFFFFF;
+}
+
+box.deskripsi2
+{
+	height: 25px; 
+	border-radius: 9px;
+	display:inline-block;
+}
+
+#tooltip
+{ 
+	width:20px; 
+	height:20px;
+	cursor: pointer;
+}
+
+#tooltipText
+{ 
+	position:absolute;
+	padding:3px;
+	background:#DF3131; 
+	color: #ffffff;
+	font-size:xx-small;
+	border-radius: 7px;
+	visibility: hidden;
+}
+
+#tooltipText2
+{ 
+	position:absolute;
+	padding:3px;
+	background:#694747; 
+	color: #ffffff;
+	font-size:xx-small;
+	border-radius: 7px;
+	visibility: hidden;
+}
+
+#tooltip:hover #tooltipText
+{
+	visibility: visible;
+}
+
+#tooltip:hover #tooltipText2
+{
+	visibility: visible;
+}
+
