@@ -622,10 +622,10 @@
                 return "<span>Menampilkan lainnya...</span>";
             },
             searching: function () {
-              return "<span>Mencari hasil...</span>";
+                return "<span>Mencari hasil...</span>";
             },
             errorLoading: function() {
-              return "<span>Gagal menampilkan jenis pengadaan</span>";
+                return "<span>Gagal menampilkan jenis pengadaan</span>";
             }
         },
         escapeMarkup: function(markup) {
