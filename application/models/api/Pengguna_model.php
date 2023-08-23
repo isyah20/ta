@@ -32,13 +32,15 @@ class Pengguna_model extends CI_Model
     public function ubahPengguna($id, $data_new)
     {
         $this->db->where('id_pengguna', $id);
+
         return $this->db->update('pengguna', $data_new);
     }
 
     public function hapusPengguna($id)
     {
         $this->db->where('id_pengguna', $id);
-        return $this->db->delete('pengguna');
+        $this->db->delete('pengguna');
+        return $this->db->affected_rows();
     }
 
     public function login($email, $password)
