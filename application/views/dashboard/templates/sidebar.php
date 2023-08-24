@@ -11,7 +11,7 @@
             </div>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item mt-3 ">
-                <a class="nav-link collapsed" href="<?= base_url("home") ?>">
+                <a class="nav-link collapsed" href="<?= base_url("pengguna") ?>">
                     <img src="<?= base_url("assets/img/box-dash.svg") ?>" alt="">
                     <span>Dashboard</span>
                 </a>
