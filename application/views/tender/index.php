@@ -734,7 +734,7 @@ if ($jadwalSaatIni != null) {
 						<th scope="col" id="peserta">Nama Peserta</th>
 						<th scope="col" id="peserta">Harga Penawaran</th>
 						<th scope="col" id="peserta">Harga Terkoreksi</th>
-						<th scope="col" id="peserta">Harga Kontrak</th>
+						<th scope="col" id="peserta">Harga Kontrak</th>ggbgb,8y
 					</tr>
 				</thead>
 				<tbody id="tampil">
