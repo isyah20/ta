@@ -2,15 +2,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 <style>
- .card1 {
-    width: 300px;
-    margin: 30px auto;
-    padding: 50px;
-    border: 1px solid #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
 .red-row {
     background-color: red;
     color: white;
@@ -64,7 +55,7 @@
   .custom-container {
     display: flex;
     padding: 20px;
-    height: 89px;
+    height: 70px;
     align-items: flex-start;
     gap: 8px;
     border-radius: 10px 10px 0px 0px;
@@ -89,10 +80,6 @@
     align-items: center;
     border-bottom: 1px solid var(--neutral-100, #F0E2E2) /* Garis merah di setiap baris */
   }
-
-  /* .custom-table tr:last-child td {
-    border-bottom: none; /* Menghilangkan garis bawah pada baris terakhir */
-
 
   .custom-table tr td:first-child {
     border-left: 1px solid var(--neutral-100, #F0E2E2); /* Garis merah di kiri setiap sel */
@@ -120,7 +107,7 @@
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
           <div >
-            <h5 class="card-title fs-2">22.627</h5>
+            <h5 class="card-title fs-2" style="color:#553333">22.627</h5>
             <p class="card-text">Total Tender</p>
           </div> 
             <div class="text-end">
@@ -133,7 +120,7 @@
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
           <div >
-            <h5 class="card-title fs-2">22.627</h5>
+            <h5 class="card-title fs-2" style="color:#553333">22.627</h5>
             <p class="card-text">Total Tender</p>
           </div>
             <div class="text-end">
@@ -146,7 +133,7 @@
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
           <div >
-            <h5 class="card-title fs-2">22.627</h5>
+            <h5 class="card-title fs-2" style="color:#553333">22.627</h5>
             <p class="card-text">Total Tender</p>
           </div>
             <div class="text-end">
@@ -154,38 +141,34 @@
             </div>
         </div>
       </div>
-    </div>
-   
+    </div>  
     <div class="col-md-3" style="width: 420px;">
-  <div class="card-category">
-    <div class="custom-container">
-      <h3 style="color: white;">Kategori</h3>
-    </div>
-    <div class="custom-table-container">
-      <table class="custom-table">
-        <tr>
-          <td style="padding-left: 10px;">Jasa Konsultasi Badan Usaha Konstruksi<span class="red-text">10</span></td>
-        </tr>
-        <tr>
-          <td style="padding-left: 10px;">Pengadaan Barang<span class="red-text">10</span></td>
-        </tr>
-        <tr>
-          <td style="padding-left: 10px;">Jenis Lainnya<span class="red-text">10</span></td>
-        </tr>
-        <tr>
-          <td style="padding-left: 10px;">Pekerjaan Konstruksi<span class="red-text">10</span></td>
-        </tr>
-        <tr>
-          <td style="padding-left: 10px;">Jasa Konsultansi Badan Usaha Konstruksi<span class="red-text">10</span></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
-  
-
-</div>
-
+      <div class="card-category pb-1">
+        <div class="custom-container">
+          <h3 style="color: white;">Kategori</h3>
+        </div>
+        <div class="custom-table-container">
+          <table class="custom-table">
+            <tr>
+              <td style="padding-left: 10px;">Jasa Konsultasi Badan Usaha Konstruksi<span class="red-text">10</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px;">Pengadaan Barang<span class="red-text">10</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px;">Jenis Lainnya<span class="red-text">10</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px;">Pekerjaan Konstruksi<span class="red-text">10</span></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 10px;">Jasa Konsultansi Badan Usaha Konstruksi<span class="red-text">10</span></td>
+            </tr>
+          </table>
+          </div>
+          </div>
+        </div> 
+      </div>
       </div>
     </div>
   </div>
