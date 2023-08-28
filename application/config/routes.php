@@ -307,6 +307,8 @@ $route['perubahan-jadwal/(:num)'] = 'admin/PerubahanJadwal/getPerubahan/$1';
 $route['perubahan-jadwal/create/(:num)'] = 'admin/PerubahanJadwal/create/$1';
 
 //Kelola Tender
+$route['tender/getData'] = 'admin/Tender/getData';
+$route['lpse/getData'] = 'admin/Lpse/getData';
 $route['tender'] = 'admin/Tender';
 $route['tender/create'] = 'admin/Tender/create';
 $route['tender/update/(:num)'] = 'admin/Tender/update/$1';
