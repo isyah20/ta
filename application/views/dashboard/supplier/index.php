@@ -105,12 +105,32 @@
   .red-text {
     color: #E05151;
   }
+  @media (max-width: 576px) {
+    .wide {
+      text-align: center;
+      margin: 4px 35px;
+      width: 320px !important;
+    }
+  }
 </style>
 
 <section class="container py-5 pt-5 pb-3 mt-5">
-  <div class="row">
-    <div class="col-md-2" style="width: 300px">
-      <div class="shadow-sm p-1 my-1 bg-white rounded">
+  <div class="row justify-content-center">
+  <div class="col-md-2 wide" style="width: 300px">
+      <div class="shadow-sm p-3 my-1 bg-white rounded">
+        <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
+          <div >
+            <h5 class="card-title fs-2">22.627</h5>
+            <p class="card-text">Total Tender</p>
+          </div> 
+            <div class="text-end">
+              <img src="<?= base_url('assets\img\icon card peserta (5).svg') ?>" alt="">
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 wide" style="width: 300px">
+      <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
           <div >
             <h5 class="card-title fs-2">22.627</h5>
@@ -122,19 +142,16 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2" style="width: 300px">
+    <div class="col-md-2 wide" style="width: 300px">
       <div class="shadow-sm p-3 my-1 bg-white rounded">
-        <div class="card-body">
-          <h5 class="card-title">22.267</h5>
-          <p class="card-text">Tender Aktif</p>       
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2" style="width: 300px">
-      <div class="shadow-sm p-3 my-1 bg-white rounded">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Tender Hari ini</p>       
+        <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
+          <div >
+            <h5 class="card-title fs-2">22.627</h5>
+            <p class="card-text">Total Tender</p>
+          </div>
+            <div class="text-end">
+              <img src="<?= base_url('assets\img\icon card peserta (5).svg') ?>" alt="">
+            </div>
         </div>
       </div>
     </div>
@@ -168,19 +185,6 @@
   
 
 </div>
-
-
-        <!-- <div class="card-body" style="background-color: #E05151;">     
-          <p class="card-title mb-4" style="font-size: 34px">Kategori</p>
-          <table class="table table-bordered" style="border-radius:5px">
-            <tbody>
-              <tr>
-                <th>Jasa Konsultasi Badan Usaha Konstruksi</th>
-                <td scope="row">1</td>
-              </tr>
-            </tbody>
-          </table>     
-        </div> -->
 
       </div>
     </div>
