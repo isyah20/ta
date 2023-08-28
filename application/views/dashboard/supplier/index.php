@@ -24,22 +24,25 @@
     text-align: center;
     border-radius: 0 0 10px 10px;
 }
+
 </style>
 
-<section class="container-fluid pt-5 pb-3 mt-5">
+<section class="container py-5 pt-5 pb-3 mt-5">
   <div class="row">
-    <div class="col-md-3">
-      <div class="shadow-sm p-3 my-1 bg-white rounded">
-        <div class="card-body">
-          <h5 class="card-title">22.627</h5>
-          <p class="card-text">Total Tender</p>
-          <div>
-            <img src="<?= base_url('assets\img\icon card peserta (5).svg') ?>" alt="">
+    <div class="col-md-2" style="width: 300px">
+      <div class="shadow-sm p-1 my-1 bg-white rounded">
+        <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
+          <div >
+            <h5 class="card-title fs-2">22.627</h5>
+            <p class="card-text">Total Tender</p>
           </div>
+            <div class="text-end">
+              <img src="<?= base_url('assets\img\icon card peserta (5).svg') ?>" alt="">
+            </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2" style="width: 300px">
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body">
           <h5 class="card-title">22.267</h5>
@@ -47,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2" style="width: 300px">
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
@@ -55,8 +58,8 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="col-md-4">
+      <div >
       <div class="card1">
         <table>
             <tr class="red-row">
