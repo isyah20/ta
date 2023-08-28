@@ -204,7 +204,8 @@ class Tender extends CI_Controller
         $output = shell_exec("scrapy crawl tender_terbaru"); # -a start_lpse=10 -a end_lpse=15
         print_r($output);*/
 
-        chdir('/www/wwwroot/tenderplus.id/python');
+        // chdir('/www/wwwroot/tenderplus.id/python');
+        chdir('../tenderplus/python');
         $output = shell_exec("python3 tender_terbaru.py");
         print_r($output);
     }

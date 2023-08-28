@@ -903,7 +903,8 @@
 	
 	$(document).ready(function() {
 	    //getKatalogTenderTerbaru();
-	    let id_pengguna = Cookies.get('id_pengguna', { domain: 'tenderplus.id' });
+	    // let id_pengguna = Cookies.get('id_pengguna', { domain: 'tenderplus.id' });
+		let id_pengguna = Cookies.get('id_pengguna', { domain: 'dev.tenderplus.id' });
 	    
 	    var jum_tender;
 	    $.ajax({

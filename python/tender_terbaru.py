@@ -3,10 +3,17 @@ import mysql.connector
 from bs4 import BeautifulSoup
 from pyproc import Lpse
 
+# koneksi = mysql.connector.connect(
+#     host="localhost",
+#     user="tenderplus",
+#     password="accJp8Dm3z6jPFfc",
+#     database="tenderplus"
+# )
+
 koneksi = mysql.connector.connect(
-    host="localhost",
+    host="dev.swevel.com",
     user="tenderplus",
-    password="accJp8Dm3z6jPFfc",
+    password="C%87SfcjjaHb*te",
     database="tenderplus"
 )
 

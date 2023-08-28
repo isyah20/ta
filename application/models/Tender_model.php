@@ -204,11 +204,17 @@ class Tender_model extends CI_Model
     //katalog homepage
     public function getKatalogTenderTerbaru($page_number, $page_size)
     {
-        $sql = "SELECT kode_tender,nama_tender,jenis_tender,ROUND(hps,0) AS hps,akhir_daftar,nama_lpse,foto,url,CONCAT(url,'/lelang/',kode_tender,'/pengumumanlelang') AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pembuatan),DATEDIFF(CURRENT_DATE,tgl_update)) AS update_hari
-		        FROM tender_terbaru,lpse,jenis_tender
-		        WHERE tender_terbaru.id_lpse=lpse.id_lpse AND tender_terbaru.jenis_pengadaan=jenis_tender.id_jenis AND akhir_daftar>=CURRENT_TIMESTAMP
-		        ORDER BY akhir_daftar
-		        LIMIT {$page_number},{$page_size}";
+        // $sql = "SELECT kode_tender,nama_tender,jenis_tender,ROUND(hps,0) AS hps,akhir_daftar,nama_lpse,foto,url,CONCAT(url,'/lelang/',kode_tender,'/pengumumanlelang') AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pembuatan),DATEDIFF(CURRENT_DATE,tgl_update)) AS update_hari
+		//         FROM tender_terbaru,lpse,jenis_tender
+		//         WHERE tender_terbaru.id_lpse=lpse.id_lpse AND tender_terbaru.jenis_pengadaan=jenis_tender.id_jenis AND akhir_daftar>=CURRENT_TIMESTAMP
+		//         ORDER BY akhir_daftar
+		//         LIMIT {$page_number},{$page_size}";
+
+        $sql = "SELECT kode_tender,nama_tender,jenis_tender,ROUND(hps,0) AS hps,akhir_daftar,nama_lpse,foto,CONCAT(url,'/lelang/',kode_tender,'/pengumumanlelang') AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pembuatan),DATEDIFF(CURRENT_DATE,tgl_update)) AS update_hari
+        FROM tender_terbaru,lpse,jenis_tender
+        WHERE tender_terbaru.id_lpse=lpse.id_lpse AND tender_terbaru.jenis_pengadaan=jenis_tender.id_jenis
+        ORDER BY akhir_daftar DESC
+        LIMIT {$page_number},{$page_size}";
 
         return $this->db->query($sql);
     }
@@ -350,7 +356,8 @@ class Tender_model extends CI_Model
 
     public function getJumKatalogTenderTerbaru()
     {
-        $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru WHERE akhir_daftar>=CURRENT_TIMESTAMP";
+        // $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru WHERE akhir_daftar>=CURRENT_TIMESTAMP";
+        $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru";
 
         return $this->db->query($sql);
     }
