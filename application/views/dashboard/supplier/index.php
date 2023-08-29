@@ -2,15 +2,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 <style>
-.red-row {
+  .animation{
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+  .red-row {
     background-color: red;
     color: white;
     text-align: center;
     border-radius: 10px 10px 0 0;
 }
 
-/* Gaya baris tabel putih */
-.white-row {
+  .white-row {
     background-color: white;
     text-align: center;
     border-radius: 0 0 10px 10px;
@@ -92,6 +98,7 @@
   .red-text {
     color: #E05151;
   }
+
   @media (max-width: 576px) {
     .wide {
       text-align: center;
@@ -103,47 +110,47 @@
 
 <section class="container py-5 pt-5 pb-3 mt-5">
   <div class="row justify-content-center">
-  <div class="col-md-2 wide" style="width: 300px">
+  <div class="col-md-2 wide ms-0 wow fadeInUp animation" data-wow-delay="0.2s" style="width: 300px">
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
           <div >
-            <h5 class="card-title fs-2" style="color:#553333">22.627</h5>
-            <p class="card-text">Total Tender</p>
+            <h5 class="card-title fs-2 wow fadeInUp" style="color:#553333" data-wow-delay="0.5s">22.627</h5>
+            <p class="card-text wow fadeInUp" data-wow-delay="0.5s">Total Tender</p>
           </div> 
-            <div class="text-end">
+            <div class="wow fadeInUp" data-wow-delay="0.3s">
               <img src="<?= base_url('assets\img\icon card peserta (5).svg') ?>" alt="">
             </div>
         </div>
       </div>
     </div>
-    <div class="col-md-2 wide" style="width: 300px">
+    <div class="col-md-2 wide ms-0 wow fadeInUp animation" data-wow-delay="0.2s" style="width: 300px">
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
           <div >
-            <h5 class="card-title fs-2" style="color:#553333">22.627</h5>
-            <p class="card-text">Total Tender</p>
-          </div>
-            <div class="text-end">
+            <h5 class="card-title fs-2 wow fadeInUp" style="color:#553333" data-wow-delay="0.5s">200</h5>
+            <p class="card-text wow fadeInUp" data-wow-delay="0.5s">Tender Aktif</p>
+          </div> 
+            <div class="wow fadeInUp" data-wow-delay="0.3s">
               <img src="<?= base_url('assets\img\icon card peserta (5).svg') ?>" alt="">
             </div>
         </div>
       </div>
     </div>
-    <div class="col-md-2 wide" style="width: 300px">
+    <div class="col-md-2 wide ms-0 wow fadeInUp animation" data-wow-delay="0.2s" style="width: 300px">
       <div class="shadow-sm p-3 my-1 bg-white rounded">
         <div class="card-body d-flex justify-content-between align-items-center px-3 py-1">
           <div >
-            <h5 class="card-title fs-2" style="color:#553333">22.627</h5>
-            <p class="card-text">Total Tender</p>
-          </div>
-            <div class="text-end">
+            <h5 class="card-title fs-2 wow fadeInUp" style="color:#553333" data-wow-delay="0.5s">61</h5>
+            <p class="card-text wow fadeInUp" data-wow-delay="0.5s">Tender Hari ini</p>
+          </div> 
+            <div class="wow fadeInUp" data-wow-delay="0.3s">
               <img src="<?= base_url('assets\img\icon card peserta (5).svg') ?>" alt="">
             </div>
         </div>
       </div>
-    </div>  
+    </div> 
     <div class="col-md-3" style="width: 420px;">
-      <div class="card-category pb-1">
+      <div class="card-category pb-1 wow fadeInUp animation" data-wow-delay="0.2s">
         <div class="custom-container">
           <h3 style="color: white;">Kategori</h3>
         </div>
