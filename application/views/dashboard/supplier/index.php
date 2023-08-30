@@ -195,7 +195,7 @@
           <tbody class="tbody custom-tbody mb-5" style="padding-top: 10px;">
             <tr>
               <th></th>
-              <td class="shadow-sm my-4 bg-black rounded-4" style="color:#fff;">1</td>
+              <td class="shadow-sm my-4 bg-black rounded-4" style=" width: 1px; color:#fff;">1</td>
               <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
               <td>jasa konsultasi</td>
               <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
