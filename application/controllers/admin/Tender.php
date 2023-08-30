@@ -86,7 +86,7 @@ class Tender extends CI_Controller
         ];
 
         $this->output->set_content_type('aplication/json')->set_output(json_encode($output));
-    }
+}
 
     public function create()
     {

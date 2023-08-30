@@ -3,37 +3,58 @@
         background: #DF3131;
         padding: 8px;
     }
-    
+
     .profile-nav .nav-item .nav-link.active {
         background: #c50000;
         padding: 10px 15px;
         border-radius: 7px;
     }
-    
-    ul.navbar-nav { padding-right: 15px !important; }
-    
-    .dropdown-profile .nav-link { padding: 10px !important; }
-    
-    .dropdown-profile .dropdown-menu, .dropdown-menus .dropdown-menu { width: 240px; }
-    
-    .dropdown-profile li a.active, .dropdown-menus li a.active, .dropdown-profile li a:hover, .dropdown-menus li a:hover, .dropdown-profile a.nav-link:focus, .dropdown-profile a.nav-link:hover, .dropdown-item:focus {
+
+    ul.navbar-nav {
+        padding-right: 15px !important;
+    }
+
+    .dropdown-profile .nav-link {
+        padding: 10px !important;
+    }
+
+    .dropdown-profile .dropdown-menu,
+    .dropdown-menus .dropdown-menu {
+        width: 240px;
+    }
+
+    .dropdown-profile li a.active,
+    .dropdown-menus li a.active,
+    .dropdown-profile li a:hover,
+    .dropdown-menus li a:hover,
+    .dropdown-profile a.nav-link:focus,
+    .dropdown-profile a.nav-link:hover,
+    .dropdown-item:focus {
         background: #c50000;
         border-radius: 0;
         padding: 10px !important;
     }
-    
-    .dropdown-profile .text-dropdown, .dropdown-menus .text-dropdown, .profile-dropdown h3 { font-size: 15px; }
-    
-    .profile-dropdown h4 { font-size: 14px; }
-    
+
+    .dropdown-profile .text-dropdown,
+    .dropdown-menus .text-dropdown,
+    .profile-dropdown h3 {
+        font-size: 15px;
+    }
+
+    .profile-dropdown h4 {
+        font-size: 14px;
+    }
+
     #nav_paket {
         background: #ffa600;
         padding: 5px 10px;
         font-size: 14px;
         border-radius: 0 10px 0 10px;
     }
-    
-    .dropdown-item iconify-icon { color: #fff; }
+
+    .dropdown-item iconify-icon {
+        color: #fff;
+    }
 </style>
 
 <nav class="navbar profile-nav navbar-expand-md fixed-top">
@@ -78,7 +99,7 @@
                     </li>
                 <?php endif; */ ?>
             </ul>
-            
+
             <div class="dropdown dropdown-profile d-md-block">
                 <a class="nav-link dropdown-toggle text-white link-danger text-center p-2 rounded-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <iconify-icon inline icon="bi:person" width="20" height="20"></iconify-icon>
@@ -131,29 +152,32 @@
 
 <script>
     var id_pengguna, nama_pengguna, foto;
-    
-    $(document).ready(function () {
-        id_pengguna = Cookies.get('id_pengguna', { domain: 'tenderplus.id' });
-        
+
+    $(document).ready(function() {
+        id_pengguna = Cookies.get('id_pengguna', {
+            // domain: 'tenderplus.id'
+            domain: 'tenderplus.test'
+        });
+
         if (id_pengguna) {
             $.ajax({
-                type : 'GET',
-                url : "<?= base_url('api/getProfilPengguna/') ?>"+id_pengguna,
+                type: 'GET',
+                url: "<?= base_url('api/getProfilPengguna/') ?>" + id_pengguna,
                 dataType: "JSON",
-                success : function(data){
+                success: function(data) {
                     if (data != null) {
                         let jenis, kategori, status, token, jenis_perusahaan, paket, url_dashboard;
-                        
+
                         foto = data.foto;
-                        if (foto != null && foto != '') $('.img-profile-dropdown, .img-profile').prop('src',"<?= base_url('uploads/') ?>" + foto);
-                        else $('.img-profile-dropdown, .img-profile').prop('src',"<?= base_url('assets/img/img-profile-default.png') ?>");
-            
+                        if (foto != null && foto != '') $('.img-profile-dropdown, .img-profile').prop('src', "<?= base_url('uploads/') ?>" + foto);
+                        else $('.img-profile-dropdown, .img-profile').prop('src', "<?= base_url('assets/img/img-profile-default.png') ?>");
+
                         nama_pengguna = data.nama;
                         jenis = data.jenis_perusahaan;
                         kategori = data.kategori;
                         status = data.status;
                         token = data.token;
-                        
+
                         if (jenis == '1') jenis_perusahaan = 'Konsultan Badan Usaha';
                         else if (jenis == '2') jenis_perusahaan = 'Konsultan Perorangan';
                         else if (jenis == '3') jenis_perusahaan = 'Kontraktor';
@@ -161,16 +185,16 @@
                             if (kategori == '3') jenis_perusahaan = 'Asosiasi';
                             else if (kategori == '4') jenis_perusahaan = 'Suplier';
                         }
-                        
+
                         if (status == '0') paket = 'Standard';
                         else if (status == '1') paket = 'Premium';
                         else if (status == '2') paket = 'Trial';
-                        
+
                         if (kategori == '2') url_dashboard = "<?= base_url('user-dashboard') ?>";
-                	    else if (kategori == '3') url_dashboard = "<?= base_url('asosiasi') ?>";
-                	    else if (kategori == '4') url_dashboard = "<?= base_url('suplier') ?>";
-                	    
-                	    $('#nav_dashboard').prop('href',url_dashboard);
+                        else if (kategori == '3') url_dashboard = "<?= base_url('asosiasi') ?>";
+                        else if (kategori == '4') url_dashboard = "<?= base_url('suplier') ?>";
+
+                        $('#nav_dashboard').prop('href', url_dashboard);
                         $('.nama-pengguna').html(nama_pengguna);
                         $('#nav_jenis_perusahaan').html(jenis_perusahaan);
                         $('#nav_paket').html(paket);
@@ -181,10 +205,10 @@
                 }
             });
         } else window.location.href = "<?= base_url('login') ?>";
-        
-    	$('.nav-item .nav-link').on('click', function() {
-    		$('.nav-item .nav-link').removeClass('active').removeClass('fw-bold');
-    		$(this).addClass('fw-bold active');
-    	});
+
+        $('.nav-item .nav-link').on('click', function() {
+            $('.nav-item .nav-link').removeClass('active').removeClass('fw-bold');
+            $(this).addClass('fw-bold active');
+        });
     })
 </script>

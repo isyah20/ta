@@ -215,7 +215,7 @@
                 <h3 class="tender-title text-center wow fadeInUp d-inline-block px-3 pb-2" data-wow-delay="0.5s">Paket Tender</h3>
             </div>
 
-            <!--<div class="row wow fadeInUp justify-content-center mx-0 px-1 filter" data-wow-delay="0.5s">
+            <div class="row wow fadeInUp justify-content-center mx-0 px-1 filter" data-wow-delay="0.5s">
                 <input type="text" class="filter-item" id="keyword" placeholder="Kode Tender atau Nama Tender" style="padding: 0 14px;width: 30%;border: none;margin-left: 6px;">
 
                 <select class="my-lg-2 my-1 select2-wilayah" id="wilayah" style="width: 25%;"></select>
@@ -256,7 +256,7 @@
                         </div>
                     </div>
                 </ul>
-                
+
                 <div class="dropdown dropdown-profile dropdown-sorting" style="width: 4%;padding-left: 0;padding-right: 7px;">
                     <a class="nav-link dropdown-toggle link-danger text-center p-2 rounded-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-filter-circle" style="font-size: 27px;"></i>
@@ -268,7 +268,7 @@
                         <li class="dropdown-item d-flex text-dropdown" data-sort="4">Akhir Pendaftaran Terlama</li>
                     </ul>
                 </div>
-            </div>-->
+            </div>
 
             <div class="row wow fadeInUp mx-0 my-2" id="list-paket" data-wow-delay="0.5s"></div>
             <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>

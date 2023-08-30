@@ -19,7 +19,7 @@ class DashboardUser extends CI_Controller
         if (!get_cookie('id_pengguna')) {
             redirect('login');
         }
-        
+
         $this->load->model('Pengguna_model');
         $this->load->model('Peserta_model');
         $this->load->model('PesertaTender_model');
@@ -33,11 +33,11 @@ class DashboardUser extends CI_Controller
             $status = $this->Pengguna_model->getStatusPengguna($id_pengguna)->row();
             if ($status->status == '0') $this->listTenderPage();
             else $this->monitorAndStatTenderPage();
-            
-            $this->listTenderPage();
+
+            // $this->listTenderPage();
         } else redirect('login');
     }
-    
+
     // Dashboard untuk user premium
     public function monitorAndStatTenderPage()
     {
@@ -101,7 +101,7 @@ class DashboardUser extends CI_Controller
                 'klpd' => '',
                 'tahun' => $tahun
             ];
-            
+
             // $params = array_map(fn ($item) => htmlspecialchars($item), $params);
             $result = $this->PesertaTenderModel->getPesertaTenderFilterAkumulasi($params);
             $total = [];
@@ -212,7 +212,7 @@ class DashboardUser extends CI_Controller
         // $this->load->view('dashboard/templates/navbar');
         $this->load->view('templates/footer');
     }
-    
+
     // Dashboard untuk user free
     public function listTenderPage()
     {
@@ -576,9 +576,9 @@ class DashboardUser extends CI_Controller
             } else {
                 $timeSeriesUser = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             }
-            ?>
-			<p class="d-none" id="chart1"><?php echo json_encode($timeSeriesUser) ?></p>
-			<?php
+?>
+            <p class="d-none" id="chart1"><?php echo json_encode($timeSeriesUser) ?></p>
+            <?php
             // api/ApiPesertaTender/getIdFilterHps
             $hps = $this->PesertaTender_model->getFilterHps($npwp, $data['cariKLPD'], $data['cariTahun']);
             if (isset($hps['status']) && $hps['status'] != false) {
@@ -637,8 +637,8 @@ class DashboardUser extends CI_Controller
                 $range['range5'] = 0;
             }
             ?>
-			<p class="d-none" id="chart3"><?php echo json_encode($range) ?></p>
-			<?php
+            <p class="d-none" id="chart3"><?php echo json_encode($range) ?></p>
+            <?php
 
             $responses = $this->PesertaTender_model->getFilterTotal($npwp, $data['cariKLPD'], $data['cariTahun']);
             $total = [];
@@ -669,7 +669,7 @@ class DashboardUser extends CI_Controller
             }
 
             ?>
-			<p class="d-none" id="chart2"><?php echo json_encode($akumulasi) ?></p>
+            <p class="d-none" id="chart2"><?php echo json_encode($akumulasi) ?></p>
 <?php
 
         }

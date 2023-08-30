@@ -1,3 +1,4 @@
+<!-- Data Chart -->
 <div class="d-none" id="dataChart">
     <p class="d-none" id="chart1"><?php echo json_encode($timeSeriesUser) ?></p>
     <p class="d-none" id="chart2"><?php echo json_encode($akumulasi) ?></p>
@@ -199,6 +200,7 @@ if (!$npwpComplete) : ?>
                 </div>
             </div>
 
+            <!-- Notif tender -->
             <div class="col-lg-4 ">
                 <h4 class="my-2" style="font-weight:510; font-size: 22px;">Notifikasi</h4>
                 <?php if ($notif != null) {
@@ -236,12 +238,14 @@ if (!$npwpComplete) : ?>
         </div>
 
         <div class="row">
+            <!-- Time Series Ikut Tender -->
             <div class="col-lg-6">
                 <div class="overflow-auto chart-bg mt-4" style="height:92%">
                     <h5 style="color:#000000; margin:20px; font-weight:600"> TIME SERIES IKUT TENDER</h5>
                     <div class="chart1" style="margin:0; padding:0"><canvas id="timeSeries-user"></canvas></div>
                 </div>
             </div>
+            <!-- Riwayat ikut tender HPS -->
             <div class="col-lg-6">
                 <div class="chart-bg  mt-4 mb-2" style="height:92%">
                     <div style="padding:0">
@@ -304,7 +308,9 @@ if (!$npwpComplete) : ?>
 
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 <script defer src="<?= base_url() ?>assets/js/alpine-3.12.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script>
+    console.log('test');
     const npwpComplete = parseInt(<?= $npwpComplete ? '1' : '0' ?>);
     const worker = new Worker('dashboard-worker.js')
     worker.onmessage = (event) => {
@@ -341,6 +347,8 @@ if (!$npwpComplete) : ?>
     // getData(klpd, tahun);
 
     klpd = $('#klpd').find(":selected").val();
+    // klpd = $('#klpd').find(":selected").val();
+    console.log($("#klpd").find(":selected").val());
     const userId = '<?= $userId ?>';
     {
         if (npwpComplete == 1) {
@@ -431,6 +439,20 @@ if (!$npwpComplete) : ?>
                 }
             })
         })
+
+        $('#klpd').on('change', function() {
+            klpd = $('#klpd').val();
+            console.log(klpd);
+            getData(klpd, tahun);
+            sendMsg(klpd, tahun)
+        });
+
+        $('#tahun').on('change', function() {
+            tahun = $('#tahun').val();
+            getData(klpd, tahun);
+            // sendMsg(klpd, tahun)
+        });
+
     })
     // $('input[type="checkbox"][name="klpd"]').on('change', function(){
 
@@ -450,22 +472,16 @@ if (!$npwpComplete) : ?>
 
     // klpd = $('#klpd').find(":checked", true).val();
 
-    $('#klpd').on('change', function() {
-        klpd = $('#klpd').val();
-        // getData(klpd, tahun);
-        sendMsg(klpd, tahun)
-    });
 
 
-    tahun = $('#tahun').find(":selected").val();
-    $('#tahun').on('change', function() {
-        tahun = $('#tahun').val();
-        // getData(klpd, tahun);
-        sendMsg(klpd, tahun)
-    });
+
+    // tahun = $('#tahun').find(":selected").val();
+    console.log(tahun);
+
 
     function getData(klpd, tahun) {
         $('#loading-filter').text('');
+        console.log(klpd, tahun);
         $.ajax({
                 url: "DashboardUser/chart/",
                 type: "POST",
@@ -477,7 +493,16 @@ if (!$npwpComplete) : ?>
                     $('#loading-filter').text('Loading...');
                 }
             })
+            // ajaxRequest.done(function(response, textStatus, jqXHR) {
+            //     console.log(response);
+            //     // Show successfully for submit message
+            //     // $("#result").html('Submitted successfully');
+            // });
+            // .fail((jqXHR, textStatus, err) => {
+            //     $('#loading-filter').text('');
+            // });
             .done((result) => {
+                console.log(result);
                 $('#loading-filter').text('');
                 $('#dataChart').html(result);
                 setChart();
