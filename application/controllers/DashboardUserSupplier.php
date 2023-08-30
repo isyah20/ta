@@ -320,4 +320,23 @@ class DashboardUserSupplier extends CI_Controller
     // <?php
     //         }
     //     }
+
+
+    public function getJumTender()
+    {
+        $response = $this->Supplier_model->getJumTender()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+
+    public function getListJenisTender(){
+        $items = $this->Supplier_model->getListJenisTender();
+        echo json_encode($items);
+    }
 }

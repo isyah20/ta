@@ -312,4 +312,21 @@ class Supplier_model extends CI_Model
         // $n++;
         return print_r(json_encode($option));
     }
+
+    public function getJumTender()
+    {
+        // $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru WHERE akhir_daftar>=CURRENT_TIMESTAMP";
+        $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru";
+
+        return $this->db->query($sql);
+    }
+
+    public function getListJenisTender(){
+        $sql = "SELECT jenis_tender.jenis_tender, COUNT(id_pemenang) AS total_tender
+        FROM pemenang, jenis_tender
+        WHERE pemenang.jenis_tender = jenis_tender.id_jenis
+        GROUP BY jenis_tender.jenis_tender";
+
+        return $this->db->query($sql)->result();
+    }
 }
