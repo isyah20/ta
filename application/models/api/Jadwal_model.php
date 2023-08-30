@@ -75,9 +75,9 @@ class Jadwal_model extends CI_Model
     //public function getIdJadwalBY
     public function getJadwalById($id)
     {
-        $this->db->select(['jadwal.id_tender', 'jadwal.id_jadwal', 'tahapan.nama_tahapan AS tahapan', 'jadwal.tgl_mulai', 'jadwal.tgl_akhir', 'jadwal.perubahan', 'jadwal.id_perubahan', 'tahapan.icon']);
+        $this->db->select(['jadwal.kode_tender', 'jadwal.id_jadwal', 'tahapan.nama_tahap AS tahapan', 'jadwal.tgl_mulai', 'jadwal.tgl_akhir', 'jadwal.perubahan', 'tahapan.icon']);
         $this->db->from('jadwal');
-        $this->db->join('tahapan', 'tahapan.id_tahapan = jadwal.id_tahapan');
+        $this->db->join('tahapan', 'tahapan.id_tahap = jadwal.id_tahap');
         $this->db->where('jadwal.id_Jadwal', $id);
         $query = $this->db->get();
         $row = $query->row();
@@ -90,10 +90,10 @@ class Jadwal_model extends CI_Model
 
     public function getJadwalByTenderId($id)
     {
-        $this->db->select(['jadwal.id_jadwal', 'jadwal.id_tender', 'jadwal.id_tahapan', 'tahapan.nama_tahapan AS tahapan', 'jadwal.tgl_mulai', 'jadwal.tgl_akhir', 'jadwal.perubahan', 'jadwal.id_perubahan', 'tahapan.icon']);
+        $this->db->select(['jadwal.id_jadwal', 'jadwal.kode_tender', 'jadwal.id_tahap', 'tahapan.nama_tahap AS tahapan', 'jadwal.tgl_mulai', 'jadwal.tgl_akhir', 'jadwal.perubahan', 'tahapan.icon']);
         $this->db->from('jadwal');
-        $this->db->join('tahapan', 'tahapan.id_tahapan = jadwal.id_tahapan');
-        $this->db->where('jadwal.id_tender', $id);
+        $this->db->join('tahapan', 'tahapan.id_tahap = jadwal.id_tahap');
+        $this->db->where('jadwal.kode_tender', $id);
         $query = $this->db->get();
         return $query->result();
     }

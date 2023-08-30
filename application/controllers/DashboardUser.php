@@ -30,9 +30,9 @@ class DashboardUser extends CI_Controller
     {
         $id_pengguna = get_cookie('id_pengguna');
         if ($id_pengguna) {
-            /*$status = $this->Pengguna_model->getStatusPengguna($id_pengguna)->row();
+            $status = $this->Pengguna_model->getStatusPengguna($id_pengguna)->row();
             if ($status->status == '0') $this->listTenderPage();
-            else $this->monitorAndStatTenderPage();*/
+            else $this->monitorAndStatTenderPage();
             
             $this->listTenderPage();
         } else redirect('login');

@@ -34,9 +34,9 @@
 
     .select2-container--bootstrap-5 .select2-selection--single {
         padding: 0.85rem 2.25rem .85rem 1rem;
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
-        background-position: right .75rem center;
+        background-position: right .76rem center;
         background-size: 18px 18px;
     }
 
