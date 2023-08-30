@@ -2260,7 +2260,7 @@ class Tender_model extends CI_Model
 
     public function spNewTenderNotification()
     {
-        $query = $this->db->query("CALL splitString((SELECT GROUP_CONCAT(id_kategori_lpse) FROM preferensi WHERE status_preferensi = 1), ',')");
+        $query = $this->db->query("CALL splitStringAndProcess((SELECT GROUP_CONCAT(id_lpse) FROM preferensi WHERE status = 1), ',')");
         $res = $query->result_array();
 
         $query->next_result();

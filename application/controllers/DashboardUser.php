@@ -32,7 +32,7 @@ class DashboardUser extends CI_Controller
         if ($id_pengguna) {
             $status = $this->Pengguna_model->getStatusPengguna($id_pengguna)->row();
             if ($status->status == '0') $this->listTenderPage();
-            else $this->monitorAndStatTenderPage();
+            $this->monitorAndStatTenderPage();
             
             $this->listTenderPage();
         } else redirect('login');
