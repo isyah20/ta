@@ -190,22 +190,8 @@
           <h3 style="color: white;">Kategori</h3>
         </div>
         <div class="custom-table-container">
-          <table class="custom-table">
-            <tr>
-              <td style="padding-left: 10px;">Jasa Konsultasi Badan Usaha Konstruksi<span class="red-text">10</span></td>
-            </tr>
-            <tr>
-              <td style="padding-left: 10px;">Pengadaan Barang<span class="red-text">10</span></td>
-            </tr>
-            <tr>
-              <td style="padding-left: 10px;">Jenis Lainnya<span class="red-text">10</span></td>
-            </tr>
-            <tr>
-              <td style="padding-left: 10px;">Pekerjaan Konstruksi<span class="red-text">10</span></td>
-            </tr>
-            <tr>
-              <td style="padding-left: 10px;">Jasa Konsultansi Badan Usaha Konstruksi<span class="red-text">10</span></td>
-            </tr>
+          <table class="custom-table" id="category-table">
+            
           </table>
         </div>
       </div>
@@ -267,3 +253,25 @@
   </div>
   </div>
 </section>
+
+<script>
+        $(document).ready(function() {
+            loadItems();
+        });
+        
+        function loadItems() {
+            $.ajax({
+              url : "<?php echo site_url('DashboardUserSupplier/getListJenisTender'); ?>",
+              dataType: "JSON",
+                success: function(data) {
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<tr>';
+                        html += '<td  style="padding-left: 10px;">' + data[i].jenis_tender + '<span class="red-text">' + data[i].total_tender + '</span>' + '</td>';
+                        html += '</tr>';
+                    }
+                    $('#category-table').html(html);
+                }
+            });
+        }
+</script>
