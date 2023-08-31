@@ -200,7 +200,7 @@
   .custom-container {
     display: flex;
     padding: 20px;
-    height: 89px;
+    height: 70px;
     align-items: flex-start;
     gap: 8px;
     border-radius: 10px 10px 0px 0px;
@@ -378,8 +378,9 @@
             });
         }
 </script>
-        
-        <div id="sec-pemenang-terbaru" style="display: none;">
+
+<section>
+    <div id="sec-pemenang-terbaru" style="display: none;">
             <div class="text-center mb-3">
                 <h3 class="tender-title text-center wow fadeInUp d-inline-block px-3 pb-2" data-wow-delay="0.5s">Pemenang Tender</h3>
             </div>
@@ -441,7 +442,7 @@
             
             <div class="row wow fadeInUp mx-0 my-2" id="list-pemenang" data-wow-delay="0.5s"></div>
             <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
-        </div>
+            </div>
     </div>
 </section>
 
