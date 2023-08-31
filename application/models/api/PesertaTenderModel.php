@@ -86,6 +86,8 @@ class PesertaTenderModel extends CI_Model
 
     public function getPesertaTenderFilter($data)
     {
+        // $klpd = $data['id_lpse'];
+        // $tahun = $data['tahun'];
         $klpd = json_decode(str_replace('&quot;', '', $data['klpd']), true);
         $tahun = json_decode(str_replace('&quot;', '', $data['tahun']), true);
 
@@ -102,7 +104,10 @@ class PesertaTenderModel extends CI_Model
         $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender');
         $this->db->where('peserta_tender.npwp', $data['npwp']);
         if ($tahun != null) {
-            $this->db->where("YEAR('paket.tanggal_pembuatan') = ($tahun)", null, false);
+            $this->db->where('YEAR(paket.tanggal_pembuatan)', $tahun);
+        }
+        if ($klpd != null) {
+            $this->db->where('id_lpse', $klpd);
         }
         // $this->db->where_in('id_lpse', $klpd);
         $this->db->group_by('paket.kode_tender');
@@ -124,7 +129,7 @@ class PesertaTenderModel extends CI_Model
             $this->db->where('peserta_tender.npwp', $data['npwp']);
         }
         if (!empty($data['tahun'])) {
-            $this->db->where('YEAR(paket.tanggal_pembuatan)', 2022);
+            $this->db->where('YEAR(paket.tanggal_pembuatan)', $data['tahun']);
         }
         if (!empty($data['id_lpse'])) {
             $this->db->where('paket.id_lpse', $data['id_lpse']);

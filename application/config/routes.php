@@ -115,6 +115,8 @@ $route['lupa/ubah/pass/(:any)'] = 'auth/LupaPassword/ubahPass/$1';
 // User
 //===========================================
 //Dashboard
+$route['user-dashboard/chart']['POST'] = 'DashboardUser/chart';
+
 $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';

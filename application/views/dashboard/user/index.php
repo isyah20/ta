@@ -162,11 +162,11 @@ if (!$npwpComplete) : ?>
                             <div class="col text-center mt-4 mb-4" style="padding:0">
                                 <h6 style="font-size:12px; margin-top:10%; "><b>Total Tender</b></h6>
                                 <!-- <h5 style="font-size:30px" id="ikut"><b><?= $total['3'] ?></b></h5> -->
-                                <h5 style="font-size:30px" id="ikut"><b><?php if (empty($total)) {
-                                                                            echo '0';
-                                                                        } else {
-                                                                            echo $total['0'];
-                                                                        } ?></b></h5>
+                                <h5 style="font-size:30px" id="total"><b><?php if (empty($total)) {
+                                                                                echo '0';
+                                                                            } else {
+                                                                                echo $total['0'];
+                                                                            } ?></b></h5>
                             </div>
                             <div class="col mt-4 mb-4">
                                 <div class="row">
@@ -184,11 +184,11 @@ if (!$npwpComplete) : ?>
                                                                                                                                                 } else {
                                                                                                                                                     echo $total['2'];
                                                                                                                                                 } ?> Kalah</h5>
-                                        <h5 id="total" class="tender-summary"><span class="tender-summary-span tender-summary-span-total"></span><?php if (empty($total)) {
-                                                                                                                                                        echo '0';
-                                                                                                                                                    } else {
-                                                                                                                                                        echo $total['3'];
-                                                                                                                                                    } ?> Proses</h5>
+                                        <h5 id="ikut" class="tender-summary"><span class="tender-summary-span tender-summary-span-total"></span><?php if (empty($total)) {
+                                                                                                                                                    echo '0';
+                                                                                                                                                } else {
+                                                                                                                                                    echo $total['3'];
+                                                                                                                                                } ?> Ikut Tender</h5>
                                     </div>
                                 </div>
                             </div>
@@ -443,14 +443,14 @@ if (!$npwpComplete) : ?>
         $('#klpd').on('change', function() {
             klpd = $('#klpd').val();
             console.log(klpd);
-            getData(klpd, tahun);
-            sendMsg(klpd, tahun)
+            // getData(klpd, tahun);
+            sendMsg(klpd, tahun);
         });
 
         $('#tahun').on('change', function() {
             tahun = $('#tahun').val();
-            getData(klpd, tahun);
-            // sendMsg(klpd, tahun)
+            // getData(klpd, tahun);
+            sendMsg(klpd, tahun);
         });
 
     })
@@ -486,22 +486,19 @@ if (!$npwpComplete) : ?>
                 url: "DashboardUser/chart/",
                 type: "POST",
                 data: {
+                    // data: {
                     cariKLPD: JSON.stringify(klpd),
                     cariTahun: tahun
+                    // }
+                    // cariKLPD: JSON.stringify(klpd),
+                    // cariTahun: tahun
                 },
                 beforeSend: (jqXHR, settings) => {
                     $('#loading-filter').text('Loading...');
                 }
             })
-            // ajaxRequest.done(function(response, textStatus, jqXHR) {
-            //     console.log(response);
-            //     // Show successfully for submit message
-            //     // $("#result").html('Submitted successfully');
-            // });
-            // .fail((jqXHR, textStatus, err) => {
-            //     $('#loading-filter').text('');
-            // });
             .done((result) => {
+                console.log(result);
                 console.log(result);
                 $('#loading-filter').text('');
                 $('#dataChart').html(result);
@@ -748,10 +745,10 @@ if (!$npwpComplete) : ?>
         };
         option && myChart.setOption(option);
 
-        $('#total').html(`<span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['0'] + ` Total Tender`);
+        $('#ikut').html(`<span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['3'] + ` Ikut Tender`);
         $('#menang').html(`<span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['1'] + ` Menang`);
         $('#kalah').html(`<span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['2'] + ` Kalah`);
-        $('#ikut').html(` <b>` + chart2['3'] + `</b>`);
+        $('#total').html(` <b>` + chart2['0'] + `</b>`);
 
         get3 = document.getElementById('chart3').innerHTML;
         let chart3 = JSON.parse(get3);
