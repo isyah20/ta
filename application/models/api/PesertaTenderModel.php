@@ -89,22 +89,73 @@ class PesertaTenderModel extends CI_Model
         $klpd = json_decode(str_replace('&quot;', '', $data['klpd']), true);
         $tahun = json_decode(str_replace('&quot;', '', $data['tahun']), true);
 
+        // print_r($tahun);
+        // print_r($klpd);
+        // $tahun = 2022;
+        // $data['npwp'] = '02.750.385.3-013.000';
+
         $this->db->select('*');
-        $this->db->select('CAST(SUBSTRING(paket.tanggal_pembuatan, 6, 2) AS DATE) AS month');
-        $this->db->select('CAST(SUBSTRING(paket.tanggal_pembuatan, 1, 4) AS DATE) AS year');
+        // $this->db->select('CAST(SUBSTRING(paket.tanggal_pembuatan, 6, 2) AS DATE) AS month');
+        // $this->db->select('CAST(SUBSTRING(paket.tanggal_pembuatan, 1, 4) AS DATE) AS year');
         $this->db->select('count(paket.kode_tender) AS count');
         $this->db->from('peserta_tender');
         $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender');
         $this->db->where('peserta_tender.npwp', $data['npwp']);
         if ($tahun != null) {
-            $this->db->where("YEAR(`paket.tanggal_pembuatan`) = ($tahun)", null, false);
+            $this->db->where("YEAR('paket.tanggal_pembuatan') = ($tahun)", null, false);
         }
-        $this->db->where_in('id_lpse', $klpd);
+        // $this->db->where_in('id_lpse', $klpd);
         $this->db->group_by('paket.kode_tender');
         $query = $this->db->get();
+        var_dump($query->result_array());
         return $query->result_array();
     }
 
+    public function getPesertaPemenangTenderFilter($data)
+    {
+        $this->db->select('*');
+        $this->db->select("CASE WHEN pemenang.npwp = peserta_tender.npwp THEN 'true' ELSE 'false' END AS status_pemenang");
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 6, 2) AS month');
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 1, 4) AS year');
+        $this->db->from('peserta_tender');
+        $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender');
+        $this->db->join('pemenang', 'pemenang.kode_tender = peserta_tender.kode_tender');
+        if (!empty($data['npwp'])) {
+            $this->db->where('peserta_tender.npwp', $data['npwp']);
+        }
+        if (!empty($data['tahun'])) {
+            $this->db->where('YEAR(paket.tanggal_pembuatan)', 2022);
+        }
+        if (!empty($data['id_lpse'])) {
+            $this->db->where('paket.id_lpse', $data['id_lpse']);
+        }
+        $query = $this->db->get();
+        return $query->result_array();
+        // var_dump($data['tahun'], $query->result_array());
+    }
+    public function getJumlahTenderFilterTahun($tahun)
+    {
+        $this->db->select('kode_tender');
+        $this->db->distinct();
+        // $this->db->select("CASE WHEN pemenang.npwp = peserta_tender.npwp THEN 'true' ELSE 'false' END AS status_pemenang");
+        // $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 6, 2) AS month');
+        // $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 1, 4) AS year');
+        $this->db->from('paket');
+        // $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender');
+        // $this->db->join('pemenang', 'pemenang.kode_tender = peserta_tender.kode_tender');
+        // if (!empty($data['npwp'])) {
+        //     $this->db->where('peserta_tender.npwp', $data['npwp']);
+        // }
+        if (!empty($data['tahun'])) {
+            $this->db->where('YEAR(paket.tanggal_pembuatan)', $data['tahun']);
+        }
+        if (!empty($data['id_lpse'])) {
+            $this->db->where('paket.id_lpse', $data['id_lpse']);
+        }
+        $query = $this->db->get();
+        return $query->num_rows();
+        // var_dump($data['tahun'], $query->result_array());
+    }
     // public function getPesertaTenderFilter($data)
     // {
     //     // $data = [

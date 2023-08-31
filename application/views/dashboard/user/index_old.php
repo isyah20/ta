@@ -515,7 +515,6 @@ if (!$npwpComplete) : ?>
 
     get1 = document.getElementById('chart1').innerHTML;
     let chart1 = JSON.parse(JSON.parse(get1));
-    console.log(chart1);
 
     const ctx = document.getElementById('timeSeries-user');
     new Chart(ctx, {
