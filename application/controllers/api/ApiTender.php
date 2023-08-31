@@ -296,6 +296,24 @@ class ApiTender extends RestController
         }
     }
 
+    public function tenderNotif_get()
+    {
+        $resultTender = $this->Tender_model->getTenderNotif();
+
+        if ($resultTender) {
+            $this->response([
+                'status' => true,
+                'data' => $resultTender,
+                'total' => count($resultTender),
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Tidak ada tender baru',
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
     public function search_post()
     {
         $search = htmlspecialchars((string) $this->post('s', true));

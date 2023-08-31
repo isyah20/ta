@@ -2258,13 +2258,65 @@ class Tender_model extends CI_Model
     // 	return $query->result_array();
     // }
 
+    public function getTenderNotif2()
+    {
+        // $this->load->helper('date');
+
+        $this->db->select(['tender_terbaru.id', 'tender_terbaru.nama_tender', 'tender_terbaru.id_lpse', 'lpse.nama_lpse', 'lpse.id_kategori', 'kategori_lpse.nama_kategori']);
+        $this->db->from('tender_terbaru');
+        // $this->db->join('preferensi', 'tender_terbaru.id_lpse IN (preferensi.id_lpse)');
+        // $this->db->join('pengguna', 'pengguna.id_pengguna = preferensi.id_pengguna');
+        $this->db->join('lpse', 'lpse.id_lpse = tender_terbaru.id_lpse');
+        $this->db->join('kategori_lpse', 'kategori_lpse.id_kategori = lpse.id_kategori');
+        $this->db->where('tgl_pembuatan BETWEEN "' . date('Y-m-d') . '" - INTERVAL 24 HOUR AND "' . date('Y-m-d') . '"');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getTenderNotif()
+    {
+        $this->db->select([
+            'tender_terbaru.id',
+            'tender_terbaru.nama_tender',
+            'GROUP_CONCAT(DISTINCT REPLACE(preferensi.id_lpse, "|", ", ") ORDER BY preferensi.id_pengguna ASC) AS id_lpse_list',
+            'pengguna.nama',
+            'pengguna.email',
+            'tender_terbaru.id_lpse',
+            'lpse.nama_lpse',
+            'lpse.id_kategori',
+            'kategori_lpse.nama_kategori'
+        ]);
+        $this->db->from('tender_terbaru');
+        $this->db->join('preferensi', 'FIND_IN_SET(tender_terbaru.id_lpse, REPLACE(preferensi.id_lpse, "|", ",")) > 0');
+        $this->db->join('pengguna', 'pengguna.id_pengguna = preferensi.id_pengguna');
+        $this->db->join('lpse', 'lpse.id_lpse = tender_terbaru.id_lpse');
+        $this->db->join('kategori_lpse', 'kategori_lpse.id_kategori = lpse.id_kategori');
+        $this->db->where('tender_terbaru.tgl_pembuatan BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 24 HOUR) AND CURRENT_DATE()');
+        $this->db->group_by([
+            'tender_terbaru.id',
+            'tender_terbaru.nama_tender',
+            'pengguna.nama',
+            'pengguna.email',
+            'tender_terbaru.id_lpse',
+            'lpse.nama_lpse',
+            'lpse.id_kategori',
+            'kategori_lpse.nama_kategori'
+        ]);
+        
+        $query = $this->db->get();
+        return $query->result_array();
+        
+    }
+
     public function spNewTenderNotification()
     {
         $query = $this->db->query("CALL splitStringAndProcess((SELECT GROUP_CONCAT(id_lpse) FROM preferensi WHERE status = 1), ',')");
-        $response = $query->result_array();
+        $res = $query->result_array();
+
         $query->next_result();
         $query->free_result();
-        return $response;
+
+        return $res;
     }
 
     public function newTenderNotification()

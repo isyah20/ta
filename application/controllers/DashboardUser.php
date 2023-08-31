@@ -48,7 +48,7 @@ class DashboardUser extends CI_Controller
         $npwpComplete = $this->isNpwpFilled((int) $sessionData['id_pengguna']);
         $notif = null;
         try {
-            $tenderResp = $this->client->request('GET', 'tender/notifikasi-tender-baru-dashboard-user', $this->client->getConfig('headers'));
+            $tenderResp = $this->client->request('GET', 'tender/notif', $this->client->getConfig('headers'));
             if ($tenderResp->getStatusCode() == 200) {
                 $notif = json_decode($tenderResp->getBody()->getContents(), true);
                 $notif = $notif['data'] ?? [];
