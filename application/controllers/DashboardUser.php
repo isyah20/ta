@@ -67,10 +67,10 @@ class DashboardUser extends CI_Controller
         //get LPSE
         $lpse = $this->client->request('GET', 'lpse', $this->client->getConfig('headers'));
         $peserta = $this->Peserta_model->getPesertaNpwp($pengguna['npwp']);
-        $tahun = date('Y');
+        // $tahun = date('Y');
         // var_dump($tahun);
         // die;
-        $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' => "", 'tahun' => $tahun));
+        $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' => "", 'tahun' => ''));
 
         // Statistik Ikut Tender
         $timeSeriesUser = array_fill(0, 12, 0);
@@ -86,7 +86,7 @@ class DashboardUser extends CI_Controller
         }
 
         // time sereies chart Tender
-        $akumulasi[0] = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' => "", 'tahun' => $tahun));
+        $akumulasi[0] = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' => "", 'tahun' => ''));
         $akumulasi[1] = $totalMenang;
         $akumulasi[2] = $totalKalah;
         $akumulasi[3] = $totalKalah + $totalMenang;

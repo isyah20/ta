@@ -342,13 +342,13 @@ if (!$npwpComplete) : ?>
         })
     }
 
-    let klpd = null,
-        tahun = null;
+    let klpd = '',
+        tahun = '';
     // getData(klpd, tahun);
 
-    klpd = $('#klpd').find(":selected").val();
     // klpd = $('#klpd').find(":selected").val();
-    console.log($("#klpd").find(":selected").val());
+    // klpd = $('#klpd').find(":selected").val();
+    // console.log($("#klpd").find(":selected").val());
     const userId = '<?= $userId ?>';
     {
         if (npwpComplete == 1) {
