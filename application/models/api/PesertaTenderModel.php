@@ -133,7 +133,7 @@ class PesertaTenderModel extends CI_Model
         return $query->result_array();
         // var_dump($data['tahun'], $query->result_array());
     }
-    public function getJumlahTenderFilterTahun($tahun)
+    public function getJumlahTenderFilter($data)
     {
         $this->db->select('kode_tender');
         $this->db->distinct();
