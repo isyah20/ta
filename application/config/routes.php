@@ -464,6 +464,7 @@ $route['api/tender/sp-notifikasi-tender-baru'] = 'api/ApiTender/spNotifikasiTend
 $route['api/tender/notifikasi-tender-baru'] = 'api/ApiTender/notifikasiTenderBaru';
 $route['api/tender/notifikasi-tender-baru-by-keyword'] = 'api/ApiTender/notifikasiTenderBaruByKeyword';
 $route['api/tender/notifikasi-tender-baru-dashboard-user'] = 'api/ApiTender/notifikasiTenderBaruDashboardUser';
+$route['api/tender/notif'] = 'api/ApiTender/tenderNotif';
 $route['api/tender/s'] = 'api/ApiTender/search';
 $route['api/tender/s-limit'] = 'api/ApiTender/searchLim';
 $route['api/tender/s-count'] = 'api/ApiTender/searchC';

@@ -469,7 +469,7 @@ class PesertaTenderModel extends CI_Model
 
         $this->db->select('count(kode_tender)');
         $this->db->from('paket');
-        $this->db->where("`kode_tender` IN ($sub)", null, false);
+        $this->db->where("`kode_tender` IN ($sub)", null, false);   
         $this->db->where("`nilai_hps_paket` < 500000000", null, false);
         $range1 = $this->db->get_compiled_select();
 

@@ -54,15 +54,15 @@ class DashboardUser extends CI_Controller
         $npwpComplete = !empty($pengguna['npwp']);
 
         $notif = null;
-        // try {
-        //     $tenderResp = $this->client->request('GET', 'tender/notifikasi-tender-baru-dashboard-user', $this->client->getConfig('headers'));
-        //     if ($tenderResp->getStatusCode() == 200) {
-        //         $notif = json_decode($tenderResp->getBody()->getContents(), true);
-        //         $notif = $notif['data'] ?? [];
-        //     }
-        // } catch (ClientException $e) {
-        //     $notif = null;
-        // }
+        try {
+            $tenderResp = $this->client->request('GET', 'tender/notif', $this->client->getConfig('headers'));
+            if ($tenderResp->getStatusCode() == 200) {
+                $notif = json_decode($tenderResp->getBody()->getContents(), true);
+                $notif = $notif['data'] ?? [];
+            }
+        } catch (ClientException $e) {
+            $notif = null;
+        }
 
         //get LPSE
         $lpse = $this->client->request('GET', 'lpse', $this->client->getConfig('headers'));
