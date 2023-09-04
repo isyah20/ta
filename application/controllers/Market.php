@@ -50,7 +50,7 @@ class Market extends CI_Controller
                     $wilayahByName = null;
                 }
 
-                if ($wilayahByName !== null && count($wilayahByName['data']) == 2) {
+                if ($wilayahByName != null && count($wilayahByName['data']) == 2) {
                     if (count($wilayahByName['data']) > 1) {
                         $alamatFind = $alamatExplode[$i - 1];
                         if (strtolower($alamatFind) == 'kabupaten') {
@@ -70,7 +70,7 @@ class Market extends CI_Controller
                         }
                         // }
                     }
-                } elseif ($wilayahByName !== null && count($wilayahByName['data']) <= 1) {
+                } elseif ($wilayahByName != null && count($wilayahByName['data']) <= 1) {
                     $idWilayahDef = $wilayahByName['data'][0]['id_wilayah'];
                     break;
                 }
