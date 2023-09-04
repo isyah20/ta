@@ -60,7 +60,6 @@ class DashboardUser extends CI_Controller
                 $notif = json_decode($tenderResp->getBody()->getContents(), true);
                 $notif = $notif['data'] ?? [];
             } else {
-                die;
                 $notif = null;
             }
         } catch (ClientException $e) {

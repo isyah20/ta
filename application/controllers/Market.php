@@ -4,6 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 use App\components\traits\ClientApi;
 use GuzzleHttp\Exception\ClientException;
+use App\components\UserCategory;
+use App\components\CompanyType;
 
 class Market extends CI_Controller
 {
@@ -11,10 +13,22 @@ class Market extends CI_Controller
 
     public function __construct()
     {
+
         parent::__construct();
-        if (!$this->session->userdata('user_data') && $this->session->userdata('user_data')['kategori'] != 2) {
+        $companyType = 0;
+        if ($this->session->userdata('user_data') != null && isset($this->session->user_data['jenis_perusahaan'])) {
+            $companyType = (int) $this->session->user_data['jenis_perusahaan'];
+        }
+
+        if (!$this->session->userdata('user_data') && $this->session->userdata('user_data')['kategori'] != UserCategory::SRV_PROVIDER) {
             redirect('login');
         }
+
+        // Jika jenis perusahaan bukan konsultan badan usaha maka redirect ke home
+        if ($companyType != CompanyType::ENT_BUSINESS_CONSULTANT) {
+            redirect('home');
+        }
+
         $this->load->model('Tender_model');
         $this->load->model('KategoriLpse_model');
         $this->load->model('Lpse_model');
