@@ -121,6 +121,7 @@ $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';
 $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
+$route['suplier/form-leads'] = 'DashboardUserSupplier/formDataLeads';
 $route['suplier/crm'] = 'DashboardUserSupplier/CRM';
 $route['suplier/statistik'] = 'DashboardUserSupplier/datastatistik';
 $route['index_table'] = 'DashboardUserSupplier/index_table';

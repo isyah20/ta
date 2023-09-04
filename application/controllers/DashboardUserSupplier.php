@@ -47,6 +47,18 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function formDataLeads()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/form_leads');
+        $this->load->view('templates/footer');
+    }
+
     public function CRM()
     {
         $data = [
