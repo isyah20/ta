@@ -310,7 +310,7 @@ class ApiTender extends RestController
             $this->response([
                 'status' => false,
                 'message' => 'Tidak ada tender baru',
-            ], RestController::HTTP_NOT_FOUND);
+            ], RestController::HTTP_BAD_REQUEST);
         }
     }
 
