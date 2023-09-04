@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-// use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ClientException;
 use App\components\traits\ClientApi;
 use App\components\traits\User;
 use App\components\UserCategory;
@@ -59,8 +59,12 @@ class DashboardUser extends CI_Controller
             if ($tenderResp->getStatusCode() == 200) {
                 $notif = json_decode($tenderResp->getBody()->getContents(), true);
                 $notif = $notif['data'] ?? [];
+            } else {
+                die;
+                $notif = null;
             }
         } catch (ClientException $e) {
+            // die;
             $notif = null;
         }
 
@@ -173,6 +177,8 @@ class DashboardUser extends CI_Controller
         $data = [
             'title' => 'Dashboard'
         ];
+        var_dump($data);
+        // die;
 
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');

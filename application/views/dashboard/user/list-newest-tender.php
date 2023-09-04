@@ -281,6 +281,7 @@
 </script>
 
 <script>
+    var id_pengguna = <?= $this->session->user_data['id_pengguna']; ?>;
     var keyword = '',
         jenis_pengadaan = '',
         hps_awal = 0,
@@ -296,10 +297,12 @@
             dataType: "JSON",
             success: function(data) {
                 if (data != null) {
+                    console.log(data);
                     $('#sec-set-preferensi').hide();
 
                     setTimeout(function() {
                         let status = $('#status_user').val();
+                        console.log(status);
                         if (status == '0') {
                             $('#sec-upgrade-paket').show();
                             $('#sec-tender-terbaru').hide();
@@ -307,75 +310,78 @@
                             $('#sec-upgrade-paket').hide();
                             $('#sec-tender-terbaru').show();
 
-                            // filterTender();
+                            filterTender();
 
-                            $.ajax({
-                                url: "<?= base_url() ?>api/getJumKatalogTenderTerbaruByPengguna/" + id_pengguna,
-                                type: "GET",
-                                dataType: "JSON",
-                                success: function(data) {
-                                    jum_tender = data.jumlah;
+                            // $.ajax({
+                            //     url: "<?= base_url() ?>api/getJumKatalogTenderTerbaruByPengguna/" + id_pengguna,
+                            //     type: "GET",
+                            //     dataType: "JSON",
+                            //     success: function(data) {
+                            //         jum_tender = data.jumlah;
 
-                                    if (jum_tender > 0) {
-                                        $('#pagination-container').pagination({
-                                            dataSource: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna/" + id_pengguna + "/" + jum_tender,
-                                            locator: '',
-                                            totalNumber: jum_tender,
-                                            pageSize: 10,
-                                            autoHidePrevious: true,
-                                            autoHideNext: true,
-                                            showNavigator: true,
-                                            formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> tender terbaru',
-                                            position: 'bottom',
-                                            className: 'paginationjs-theme-red paginationjs-big',
-                                            ajax: {
-                                                beforeSend: function(xhr, settings) {
-                                                    const url = settings.url
-                                                    const params = new URLSearchParams(url)
-                                                    let currentPageNum = params.get('pageNumber')
-                                                    currentPageNum = parseInt(currentPageNum)
-                                                    if (currentPageNum >= 2 && id_pengguna == 0) {
-                                                        window.location.href = `${base_url}login`
-                                                        return false
-                                                    }
+                            //         if (jum_tender > 0) {
+                            //             $('#pagination-container').pagination({
+                            //                 dataSource: "<?= base_url() ?>api/ /" + id_pengguna + "/" + jum_tender,
+                            //                 locator: '',
+                            //                 totalNumber: jum_tender,
+                            //                 pageSize: 10,
+                            //                 autoHidePrevious: true,
+                            //                 autoHideNext: true,
+                            //                 showNavigator: true,
+                            //                 formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> tender terbaru',
+                            //                 position: 'bottom',
+                            //                 className: 'paginationjs-theme-red paginationjs-big',
+                            //                 ajax: {
+                            //                     beforeSend: function(xhr, settings) {
+                            //                         const url = settings.url
+                            //                         const params = new URLSearchParams(url)
+                            //                         let currentPageNum = params.get('pageNumber')
+                            //                         currentPageNum = parseInt(currentPageNum)
+                            //                         if (currentPageNum >= 2 && id_pengguna == 0) {
+                            //                             window.location.href = `${base_url}login`
+                            //                             return false
+                            //                         }
 
-                                                    $('#list-paket').html('<div class="d-flex justify-content-center my-4"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
-                                                }
-                                            },
-                                            callback: function(data, pagination) {
-                                                if (data != '') {
-                                                    let html = template(data);
-                                                    $('#list-paket').html(html);
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        $('#list-paket').html(`
-                                            <div class="row align-items-center rounded-3 bg-white shadow my-3" style="width: 98.2%;margin-inline: 12px;">
-                                                <div class="col-md-2 p-3 text-center">
-                                                    <img src="<?= base_url("assets/img/rincian 2.png") ?>" width="140" alt="">
-                                                </div>
-                                                <div class="col-md-10 p-3 text-center text-md-start">
-                                                    <h4 class="mb-2">Tender terbaru kosong!</h4>
-                                                    <p class="m-0">Tidak ada tender terbaru sesuai kata kunci yang Anda tentukan.<br>Silakan bisa coba atur ulang kata kunci pencarian Anda untuk mendapatkan informasi tender terbaru sesuai yang diharapkan!</p>
-                                                </div>
-                                            </div>
-                                        `);
+                            //                         $('#list-paket').html('<div class="d-flex justify-content-center my-4"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                            //                     }
+                            //                 },
+                            //                 callback: function(data, pagination) {
+                            //                     if (data != '') {
+                            //                         let html = template(data);
+                            //                         $('#list-paket').html(html);
+                            //                     }
+                            //                 }
+                            //             });
+                            //         } else {
+                            //             $('#list-paket').html(`
+                            //                 <div class="row align-items-center rounded-3 bg-white shadow my-3" style="width: 98.2%;margin-inline: 12px;">
+                            //                     <div class="col-md-2 p-3 text-center">
+                            //                         <img src="<?= base_url("assets/img/rincian 2.png") ?>" width="140" alt="">
+                            //                     </div>
+                            //                     <div class="col-md-10 p-3 text-center text-md-start">
+                            //                         <h4 class="mb-2">Tender terbaru kosong!</h4>
+                            //                         <p class="m-0">Tidak ada tender terbaru sesuai kata kunci yang Anda tentukan.<br>Silakan bisa coba atur ulang kata kunci pencarian Anda untuk mendapatkan informasi tender terbaru sesuai yang diharapkan!</p>
+                            //                     </div>
+                            //                 </div>
+                            //             `);
 
-                                        $('#pagination-container').hide();
-                                    }
-                                },
-                                error: function(jqXHR, textStatus, errorThrown) {}
-                            });
+                            //             $('#pagination-container').hide();
+                            //         }
+                            //     },
+                            //     error: function(jqXHR, textStatus, errorThrown) {}
+                            // });
                         }
                     }, 1000);
                 } else $('#sec-set-preferensi').show();
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("EROOORRR");
+            }
         });
     });
 
     function filterTender(sort = '3') {
+        console.log('INNN');
         let params = {
             'id_pengguna': id_pengguna,
             'keyword': keyword,
@@ -388,13 +394,14 @@
         };
 
         $.ajax({
-            url: "<?= base_url() ?>api/getJumKatalogTenderTerbaruByPengguna1",
+            // url: "<?= base_url() ?>api/getJumKatalogTenderTerbaruByPengguna1",
+            url: "<?= base_url() ?>api/getKatalogPemenangTerbaruByPengguna1",
             type: "POST",
             dataType: "JSON",
             data: params,
             success: function(data) {
                 jum_tender = data.jumlah;
-
+                console.log(data)
                 if (jum_tender > 0) {
                     $('#pagination-container').pagination({
                         dataSource: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna1",
@@ -425,6 +432,7 @@
                         },
                         callback: function(data, pagination) {
                             if (data != '') {
+                                console.log(data);
                                 let html = template(data);
                                 $('#list-paket').html(html);
                             }

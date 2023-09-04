@@ -718,7 +718,7 @@ class Tender_model extends CI_Model
                 $this->db->limit($limit, $start);
                 $query = $this->db->get();
                 return $query->result_array();
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[0] == 2) {
                 $this->db->order_by('tender.nama_tender', 'desc');
                 $this->db->limit($limit, $start);
@@ -726,40 +726,40 @@ class Tender_model extends CI_Model
                 return $query->result_array();
                 // return print_r(json_encode($query->result_array()));
             } elseif // // Jenis Pengadaan
-                // if ($orderby[1] == 1) {
-                // 	$this->db->order_by('jenis_tender', 'asc');
-                //  $this->db->limit($limit, $start);
-                // 	$query = $this->db->get();
-                // return $query->result_array();
-                // return print_r(json_encode($query->result_array()));
-                // } else if ($orderby[1] == 2) {
-                // 	$this->db->order_by('jenis_tender', 'desc');
-                //  $this->db->limit($limit, $start);
-                //	$query = $this->db->get();
-                // return $query->result_array();
-                // return print_r(json_encode($query->result_array()));
-                // } else
-                // // tahapan
-                // if ($orderby[2] == 1) {
-                // 	$this->db->order_by('tender_status', 'asc');
-                //  $this->db->limit($limit, $start);
-                // 	$query = $this->db->get();
-                // return $query->result_array();
-                // return print_r(json_encode($query->result_array()));
-                // } else if ($orderby[2] == 2) {
-                // 	$this->db->order_by('tender_status', 'desc');
-                //  $this->db->limit($limit, $start);
-                //	$query = $this->db->get();
-                // return $query->result_array();
-                // return print_r(json_encode($query->result_array()));
-                // } else
-                // hps
+            // if ($orderby[1] == 1) {
+            // 	$this->db->order_by('jenis_tender', 'asc');
+            //  $this->db->limit($limit, $start);
+            // 	$query = $this->db->get();
+            // return $query->result_array();
+            // return print_r(json_encode($query->result_array()));
+            // } else if ($orderby[1] == 2) {
+            // 	$this->db->order_by('jenis_tender', 'desc');
+            //  $this->db->limit($limit, $start);
+            //	$query = $this->db->get();
+            // return $query->result_array();
+            // return print_r(json_encode($query->result_array()));
+            // } else
+            // // tahapan
+            // if ($orderby[2] == 1) {
+            // 	$this->db->order_by('tender_status', 'asc');
+            //  $this->db->limit($limit, $start);
+            // 	$query = $this->db->get();
+            // return $query->result_array();
+            // return print_r(json_encode($query->result_array()));
+            // } else if ($orderby[2] == 2) {
+            // 	$this->db->order_by('tender_status', 'desc');
+            //  $this->db->limit($limit, $start);
+            //	$query = $this->db->get();
+            // return $query->result_array();
+            // return print_r(json_encode($query->result_array()));
+            // } else
+            // hps
             ($orderby[3] == 1) {
                 $this->db->order_by('nilai_hps', 'asc');
                 $this->db->limit($limit, $start);
                 $query = $this->db->get();
                 return $query->result_array();
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[3] == 2) {
                 $this->db->order_by('nilai_hps', 'desc');
                 $this->db->limit($limit, $start);
@@ -1112,13 +1112,13 @@ class Tender_model extends CI_Model
             // Nama Tender
             if ($orderby[0] == 1) {
                 $this->db->order_by('tender.nama_tender', 'asc');
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[0] == 2) {
                 $this->db->order_by('tender.nama_tender', 'desc');
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[3] == 1) {
                 $this->db->order_by('nilai_hps', 'asc');
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[3] == 2) {
                 $this->db->order_by('nilai_hps', 'desc');
                 // return print_r(json_encode($query->result_array()));
@@ -2302,10 +2302,9 @@ class Tender_model extends CI_Model
             'lpse.id_kategori',
             'kategori_lpse.nama_kategori'
         ]);
-        
+
         $query = $this->db->get();
         return $query->result_array();
-        
     }
 
     public function spNewTenderNotification()
@@ -2334,9 +2333,11 @@ class Tender_model extends CI_Model
         $dataneww = json_encode($datanew);
         $newImplode = str_replace(['[', ']'], '', $dataneww);
 
-        $this->db->select(['paket.kod_tender', 'paket.nama_tender', 'pengguna.nama', 'pengguna.email', 'pengguna.no_telp',
+        $this->db->select([
+            'paket.kod_tender', 'paket.nama_tender', 'pengguna.nama', 'pengguna.email', 'pengguna.no_telp',
             'detail_tender.lokasi_pekerjaan', 'lpse.nama_lpse', 'paket.kualifikasi_usaha', 'paket.nilai_hps_paket', 'paket.tahun_anggaran',
-            'jenis_tender.jenis_tender', 'detail_tender.nilai_pagu', 'tender.metode_evaluasi', 'paket.tanggal_pembuatan', ]);
+            'jenis_tender.jenis_tender', 'detail_tender.nilai_pagu', 'tender.metode_evaluasi', 'paket.tanggal_pembuatan',
+        ]);
         $this->db->from('lpse');
         $this->db->join('preferensi', 'lpse.id_kategori IN (' . $newImplode . ')');
         $this->db->join('pengguna', 'pengguna.id_pengguna = preferensi.id_pengguna');
