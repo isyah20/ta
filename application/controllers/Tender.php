@@ -999,8 +999,8 @@ class Tender extends CI_Controller
 
     public function getKatalogPemenangTerbaruByPengguna($id_pengguna, $jum_pemenang)
     {
-        $page_size = $_GET['pageSize'];
-        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $page_size = $_POST['pageSize'];
+        $page_number = ($_POST['pageNumber'] - 1) * $page_size;
         $response = $this->Tender_model->getKatalogPemenangTerbaruByPengguna($id_pengguna, $jum_pemenang, $page_number, $page_size)->result();
 
         $this->output

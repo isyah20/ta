@@ -395,7 +395,7 @@
 
         $.ajax({
             // url: "<?= base_url() ?>api/getJumKatalogTenderTerbaruByPengguna1",
-            url: "<?= base_url() ?>api/getKatalogPemenangTerbaruByPengguna1",
+            url: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna",
             type: "POST",
             dataType: "JSON",
             data: params,
@@ -404,7 +404,7 @@
                 console.log(data)
                 if (jum_tender > 0) {
                     $('#pagination-container').pagination({
-                        dataSource: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna1",
+                        dataSource: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna",
                         locator: '',
                         totalNumber: jum_tender,
                         pageSize: 10,
