@@ -34,7 +34,7 @@
                                 },
                                 order: [],
                                 ajax: {
-                                    url: "<?= base_url('admin/tender/getdata') ?>",
+                                    url: "<?= base_url('admin/Tender/getdata') ?>",
                                     type: "POST"
                                 },
                                 columnDefs: [{

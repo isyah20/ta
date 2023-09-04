@@ -35,6 +35,42 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function dataLeads()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/data_leads');
+        $this->load->view('templates/footer');
+    }
+
+    public function formDataLeads()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/form_leads');
+        $this->load->view('templates/footer');
+    }
+
+    public function CRM()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/crm');
+        $this->load->view('templates/footer');
+    }
+
     public function table_data()
     {
         $search = [
@@ -320,4 +356,23 @@ class DashboardUserSupplier extends CI_Controller
     // <?php
     //         }
     //     }
+
+
+    public function getJumTender()
+    {
+        $response = $this->Supplier_model->getJumTender()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+
+    public function getListJenisTender(){
+        $items = $this->Supplier_model->getListJenisTender();
+        echo json_encode($items);
+    }
 }

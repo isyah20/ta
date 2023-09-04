@@ -72,7 +72,7 @@
             <div class="row justify-content-center mx-0 mt-lg-0 mt-4 px-1 filter">
                 <div class="col-lg p-0 mx-1 my-1 d-flex align-items-center" style="height: 50px;">
                     <select id="wilayah" class="form-select" style="width: 100% !important;"></select>
-                    <script>
+                    <!-- <script>
                         $("#wilayah").select2({
                             // theme : 'bootstrap-5',
                             ajax: {
@@ -100,7 +100,7 @@
                             // templateResult: formatRepo,
                             // templateSelection: formatRepoSelection
                         });
-                    </script>
+                    </script> -->
                 </div>
                 <div class="col-lg p-0 mx-1 my-1 d-flex align-items-center" style="height: 50px;">
                     <select id="lpse" class="form-select" style="width: 100% !important;"></select>
@@ -149,7 +149,7 @@
                     <div class="row mx-1 my-2">
                         <input class="mx-2" type="text" placeholder="Search.." id="myInput2" style="width: 95%;" onkeyup="filterFunction2()">
                     </div>
-                    <script>
+                    <!-- <script>
                         function filterFunction2() {
                             var input, filter, ul, li, a, i;
                             input = document.getElementById("myInput2");
@@ -165,7 +165,7 @@
                                 }
                             }
                         }
-                    </script>
+                    </script> -->
                     <div class="m-0 p-0" id="listJenisPengadaan">
 
                     </div>
@@ -560,39 +560,39 @@
     // $('.select2-selection.select2-selection--multiple').addClass("form-py-2");
     // $('.select2-search__field').css("color","black");
 
-    $('#wilayah').change(function() {
-        console.log('cek wilayah clicked');
-        console.log($(this).val());
-        let idWilayah = $(this).val();
-        $("#lpse").select2({
-            // theme : 'bootstrap-5',
-            // allowClear: true,
-            ajax: {
-                url: "Market/getLpseWil/" + idWilayah,
-                dataType: 'json',
-                data: function(params) {
-                    return {
-                        q: params.term, // search term
-                        page: params.page
-                    };
-                },
-                results: function(data) {
-                    return {
-                        results: $.map(data, function(item) {
-                            return {
-                                text: item.text,
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-            },
-            placeholder: 'LPSE',
-            // minimumInputLength: 1,
-            // templateResult: formatRepo,
-            // templateSelection: formatRepoSelection
-        });
-    });
+    // $('#wilayah').change(function() {
+    //     console.log('cek wilayah clicked');
+    //     console.log($(this).val());
+    //     let idWilayah = $(this).val();
+    //     $("#lpse").select2({
+    //         // theme : 'bootstrap-5',
+    //         // allowClear: true,
+    //         ajax: {
+    //             url: "Market/getLpseWil/" + idWilayah,
+    //             dataType: 'json',
+    //             data: function(params) {
+    //                 return {
+    //                     q: params.term, // search term
+    //                     page: params.page
+    //                 };
+    //             },
+    //             results: function(data) {
+    //                 return {
+    //                     results: $.map(data, function(item) {
+    //                         return {
+    //                             text: item.text,
+    //                             id: item.id
+    //                         }
+    //                     })
+    //                 };
+    //             },
+    //         },
+    //         placeholder: 'LPSE',
+    //         // minimumInputLength: 1,
+    //         // templateResult: formatRepo,
+    //         // templateSelection: formatRepoSelection
+    //     });
+    // });
 
     // Filter =============================
     klpd = [], jenisPengadaan = [], hps = [], tahunC1 = null, tahunC2 = null, tahunC3 = null;
@@ -616,98 +616,98 @@
     //     getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3);
     // });
 
-    function setJenisPengadaan(id) {
-        console.log(jenisPengadaan);
-        let cek = document.getElementById('jenisPengadaan' + id);
-        if (cek.checked) {
-            const index = jenisPengadaan.findIndex((obj) => obj === cek.value);
-            if (index === -1) {
-                jenisPengadaan.push(cek.value);
-            } else {
-                jenisPengadaan[index] = cek.value;
-            }
-        } else if (cek.checked == false) {
-            jenisPengadaan.splice(jenisPengadaan.indexOf(cek.value), 1);
-        }
-        getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
-        getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3);
-    }
+    // function setJenisPengadaan(id) {
+    //     console.log(jenisPengadaan);
+    //     let cek = document.getElementById('jenisPengadaan' + id);
+    //     if (cek.checked) {
+    //         const index = jenisPengadaan.findIndex((obj) => obj === cek.value);
+    //         if (index === -1) {
+    //             jenisPengadaan.push(cek.value);
+    //         } else {
+    //             jenisPengadaan[index] = cek.value;
+    //         }
+    //     } else if (cek.checked == false) {
+    //         jenisPengadaan.splice(jenisPengadaan.indexOf(cek.value), 1);
+    //     }
+    //     getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
+    //     getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3);
+    // }
 
-    $('#hps').change(function() {
-        hps = $(this).val();
-        if ($(this).val() == 0) {
-            $('#placeHps').html('Semua');
-        } else if ($(this).val() == 1) {
-            $('#placeHps').html('<500JT');
-        } else if ($(this).val() == 2) {
-            $('#placeHps').html('1M - 10M');
-        } else if ($(this).val() == 3) {
-            $('#placeHps').html('10M - 100M');
-        } else if ($(this).val() == 4) {
-            $('#placeHps').html('>100M');
-        }
-        getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
-        getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3);
-    });
+    // $('#hps').change(function() {
+    //     hps = $(this).val();
+    //     if ($(this).val() == 0) {
+    //         $('#placeHps').html('Semua');
+    //     } else if ($(this).val() == 1) {
+    //         $('#placeHps').html('<500JT');
+    //     } else if ($(this).val() == 2) {
+    //         $('#placeHps').html('1M - 10M');
+    //     } else if ($(this).val() == 3) {
+    //         $('#placeHps').html('10M - 100M');
+    //     } else if ($(this).val() == 4) {
+    //         $('#placeHps').html('>100M');
+    //     }
+    //     getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
+    //     getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3);
+    // });
 
-    tahunC1 = $('#tahunC1').find(":selected").val();
-    tahunC2 = $('#tahunC2').find(":selected").val();
-    tahunC3 = $('#tahunC3').find(":selected").val();
-    $('#tahunC1').on('change', function() {
-        tahunC1 = $('#tahunC1').val();
-        getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
-    });
+    // tahunC1 = $('#tahunC1').find(":selected").val();
+    // tahunC2 = $('#tahunC2').find(":selected").val();
+    // tahunC3 = $('#tahunC3').find(":selected").val();
+    // $('#tahunC1').on('change', function() {
+    //     tahunC1 = $('#tahunC1').val();
+    //     getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
+    // });
 
-    $('#tahunC2').on('change', function() {
-        tahunC2 = $('#tahunC2').val();
-        getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
-    });
+    // $('#tahunC2').on('change', function() {
+    //     tahunC2 = $('#tahunC2').val();
+    //     getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
+    // });
 
-    $('#tahunC3').on('change', function() {
-        tahunC3 = $('#tahunC3').val();
-        getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
-        getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3);
-    });
+    // $('#tahunC3').on('change', function() {
+    //     tahunC3 = $('#tahunC3').val();
+    //     getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3);
+    //     getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3);
+    // });
 
-    function getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3) {
-        if (klpd == null) {
-            klpd = [];
-        }
-        if (jenisPengadaan == null) {
-            jenisPengadaan = [];
-        }
-        if (hps == null) {
-            hps = [];
-        }
-        if (klpd.length <= 0) {
-            klpd = null;
-        }
-        if (jenisPengadaan.length <= 0) {
-            jenisPengadaan = null;
-        }
-        if (hps.length <= 0) {
-            hps = null;
-        }
-        //let idWilayah = document.getElementById('idWilayah').innerHTML;
-        $.ajax({
-            url: "market/chart/",
-            type: "POST",
-            data: {
-                //cariIdWilayahDef: idWilayah,
-                cariKLPD: JSON.stringify(klpd),
-                cariJenisPengadaan: JSON.stringify(jenisPengadaan),
-                cariHPS: JSON.stringify(hps),
-                cariTahunC1: JSON.stringify(tahunC1),
-                cariTahunC2: JSON.stringify(tahunC2),
-                cariTahunC3: JSON.stringify(tahunC3)
-            },
-            success: function(result) {
-                $('#dataChart').html(result);
-                setChart();
-            }
-        });
-        page = 1;
-    }
+    // function getData(klpd, jenisPengadaan, hps, tahunC1, tahunC2, tahunC3) {
+    //     if (klpd == null) {
+    //         klpd = [];
+    //     }
+    //     if (jenisPengadaan == null) {
+    //         jenisPengadaan = [];
+    //     }
+    //     if (hps == null) {
+    //         hps = [];
+    //     }
+    //     if (klpd.length <= 0) {
+    //         klpd = null;
+    //     }
+    //     if (jenisPengadaan.length <= 0) {
+    //         jenisPengadaan = null;
+    //     }
+    //     if (hps.length <= 0) {
+    //         hps = null;
+    //     }
+    //     //let idWilayah = document.getElementById('idWilayah').innerHTML;
+    //     $.ajax({
+    //         url: "market/chart/",
+    //         type: "POST",
+    //         data: {
+    //             //cariIdWilayahDef: idWilayah,
+    //             cariKLPD: JSON.stringify(klpd),
+    //             cariJenisPengadaan: JSON.stringify(jenisPengadaan),
+    //             cariHPS: JSON.stringify(hps),
+    //             cariTahunC1: JSON.stringify(tahunC1),
+    //             cariTahunC2: JSON.stringify(tahunC2),
+    //             cariTahunC3: JSON.stringify(tahunC3)
+    //         },
+    //         success: function(result) {
+    //             $('#dataChart').html(result);
+    //             setChart();
+    //         }
+    //     });
+    //     page = 1;
+    // }
 
     function getPesertaByLpse(klpd, jenisPengadaan, hps, tahunC3) {
         if (klpd == null) {
