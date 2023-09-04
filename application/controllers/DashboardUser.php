@@ -19,10 +19,11 @@ class DashboardUser extends CI_Controller
         if (!get_cookie('id_pengguna')) {
             redirect('login');
         }
-        
+
         $this->load->model('Pengguna_model');
         $this->load->model('Peserta_model');
         $this->load->model('PesertaTender_model');
+        $this->load->model('Api/PesertaTenderModel');
         $this->init();
     }
 
@@ -33,22 +34,28 @@ class DashboardUser extends CI_Controller
             $status = $this->Pengguna_model->getStatusPengguna($id_pengguna)->row();
             if ($status->status == '0') $this->listTenderPage();
             else $this->monitorAndStatTenderPage();
-            
-            $this->listTenderPage();
+
+            // $this->listTenderPage();
         } else redirect('login');
     }
-    
+
     // Dashboard untuk user premium
     public function monitorAndStatTenderPage()
     {
         $this->load->library('session');
         $this->load->library('user');
+        $this->load->model('api/Peserta_model');
         $this->load->model('api/PesertaTenderModel');
+        $this->load->model('scrapping/Pengguna_model');
+        $this->load->model('scrapping/Lpse_model');
+
         $sessionData = $this->session->user_data;
-        $npwpComplete = $this->isNpwpFilled((int) $sessionData['id_pengguna']);
+        $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
+        $npwpComplete = !empty($pengguna['npwp']);
+
         $notif = null;
         try {
-            $tenderResp = $this->client->request('GET', 'tender/notifikasi-tender-baru-dashboard-user', $this->client->getConfig('headers'));
+            $tenderResp = $this->client->request('GET', 'tender/notif', $this->client->getConfig('headers'));
             if ($tenderResp->getStatusCode() == 200) {
                 $notif = json_decode($tenderResp->getBody()->getContents(), true);
                 $notif = $notif['data'] ?? [];
@@ -59,148 +66,95 @@ class DashboardUser extends CI_Controller
 
         //get LPSE
         $lpse = $this->client->request('GET', 'lpse', $this->client->getConfig('headers'));
-        //get pengguna
-        $userResp = $this->client->request('GET', 'pengguna/' . $this->session->user_data['id_pengguna'], $this->client->getConfig('headers'));
-        $pengguna = json_decode($userResp->getBody()->getContents(), true)['data'];
-        $npwp = '0';
-        if ($npwp = $pengguna['npwp'] != null) {
-            $npwp = $pengguna['npwp'];
-        }
+        $peserta = $this->Peserta_model->getPesertaNpwp($pengguna['npwp']);
+        // $tahun = date('Y');
+        // var_dump($tahun);
+        // die;
+        $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' => "", 'tahun' => ''));
 
-        $peserta = $this->Peserta_model->getPesertaNpwp($npwp);
-        if (isset($peserta['status']) && $peserta['status'] != false) {
-            $peserta = $peserta['data'];
-        } else {
-            $peserta = null;
-        }
-        $tahun = (int) date('Y');
-
-        // get peserta tender (time series user)
-        $response = $this->PesertaTender_model->getFilterTender($npwp, "", $tahun);
-        if (isset($response['status']) && $response['status'] != false) {
-            $monthly = $response['data'];
-            $timeSeriesUser = [];
-
-            for ($i = 0; $i < 12; $i++) {
-                $timeSeriesUser[$i] = 0;
-                foreach ($monthly as $bulan) {
-                    if ($bulan['month'] == $i + 1) {
-                        $timeSeriesUser[$i]++;
-                    }
-                }
-            }
-        } else {
-            $timeSeriesUser = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        }
-
-        // get peserta tender (akumulasi ikut tender)
-        // $response = $this->client->request('GET', 'pesertatendertotal/' . $npwp,  $this->client->getConfig('headers'));
-        try {
-            $params = [
-                'npwp' => $npwp,
-                'klpd' => '',
-                'tahun' => $tahun
-            ];
-            
-            // $params = array_map(fn ($item) => htmlspecialchars($item), $params);
-            $result = $this->PesertaTenderModel->getPesertaTenderFilterAkumulasi($params);
-            $total = [];
-            if (is_array($result) && count($result) > 0) {
-                $total = $result;
-            }
-
-            if (count($total)) {
-                $akumulasi = [];
-                foreach ($total as $data) {
-                    $akumulasi[0] = (int) $data['total'];
-                    $akumulasi[1] = (int) $data['menang'];
-                    $akumulasi[2] = (int) $data['kalah'];
-                    $akumulasi[3] = (int) $data['ikut'];
-                }
-
-                if (($total['0']['menang'] + $total['0']['kalah']) != 0) {
-                    $akumulasi[4] = round($total['0']['menang'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
-                    $akumulasi[5] = round($total['0']['kalah'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
-                } else {
-                    $akumulasi[4] = 0;
-                    $akumulasi[5] = 0;
-                }
+        // Statistik Ikut Tender
+        $timeSeriesUser = array_fill(0, 12, 0);
+        $totalMenang = 0;
+        $totalKalah = 0;
+        foreach ($dataPesertaTender as $dpt => $valueDPT) {
+            $timeSeriesUser[((int)$valueDPT['month']) - 1]++;
+            if ($valueDPT['status_pemenang'] == 'true') {
+                $totalMenang++;
             } else {
-                $akumulasi = [0, 0, 0, 0, 0, 0, 0];
+                $totalKalah++;
             }
-        } catch (ClientException $e) {
-            $akumulasi = [0, 0, 0, 0, 0, 0, 0];
         }
 
-        $hps = $this->PesertaTender_model->getFilterHps($npwp, "", $tahun);
-        if (isset($hps['status']) && $hps['status'] != false) {
-            $hps = $hps['data'];
-            $range = [];
-            $range1 = [];
-            $range2 = [];
-            $range3 = [];
-            $range4 = [];
-            $range5 = [];
+        // time sereies chart Tender
+        $akumulasi[0] = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' => "", 'tahun' => ''));
+        $akumulasi[1] = $totalMenang;
+        $akumulasi[2] = $totalKalah;
+        $akumulasi[3] = $totalKalah + $totalMenang;
+        $akumulasi[4] = (($totalKalah + $totalMenang) != 0) ? ($totalMenang / ($totalKalah + $totalMenang) * 100) : 0;
+        $akumulasi[5] = (($totalKalah + $totalMenang) != 0) ? ($totalKalah / ($totalKalah + $totalMenang) * 100) : 0;
 
-            for ($i = 0; $i < 12; $i++) {
-                $hps1 = 0;
-                $hps2 = 0;
-                $hps3 = 0;
-                $hps4 = 0;
-                $hps5 = 0;
-                foreach ($hps as $range) {
-                    if ($range['month'] == $i + 1) {
-                        if ($range['nilai_hps'] < 500000000) {
-                            $hps1++;
-                        } elseif ($range['nilai_hps'] >= 500000000 && $range['nilai_hps'] < 1000000000) {
-                            $hps2++;
-                        } elseif ($range['nilai_hps'] >= 1000000000 && $range['nilai_hps'] < 10000000000) {
-                            $hps3++;
-                        } elseif ($range['nilai_hps'] >= 10000000000 && $range['nilai_hps'] < 100000000000) {
-                            $hps4++;
-                        } elseif ($range['nilai_hps'] >= 100000000000) {
+        // hps chart ikut tender
+        for ($i = 0; $i < 12; $i++) {
+            $hps1 = 0;
+            $hps2 = 0;
+            $hps3 = 0;
+            $hps4 = 0;
+            $hps5 = 0;
+            foreach ($dataPesertaTender as $range) {
+                if ($range['month'] == $i + 1) {
+
+                    switch (true) {
+                        case $range['nilai_hps'] >= 100000000000:
                             $hps5++;
-                        }
+                            break;
+                        case $range['nilai_hps'] >= 10000000000:
+                            $hps4++;
+                            break;
+                        case $range['nilai_hps'] >= 1000000000:
+                            $hps3++;
+                            break;
+                        case $range['nilai_hps'] >= 500000000:
+                            $hps2++;
+                            break;
+                        default:
+                            $hps1++;
+                            break;
                     }
                 }
-
-                $range1[] = $hps1;
-                $range2[] = $hps2;
-                $range3[] = $hps3;
-                $range4[] = $hps4;
-                $range5[] = $hps5;
             }
 
-            $range[0] = $range1;
-            $range[1] = $range2;
-            $range[2] = $range3;
-            $range[3] = $range4;
-            $range[4] = $range5;
-
-            $range['range1'] = array_sum($range1);
-            $range['range2'] = array_sum($range2);
-            $range['range3'] = array_sum($range3);
-            $range['range4'] = array_sum($range4);
-            $range['range5'] = array_sum($range5);
-        } else {
-            $range['range1'] = 0;
-            $range['range2'] = 0;
-            $range['range3'] = 0;
-            $range['range4'] = 0;
-            $range['range5'] = 0;
+            $range1[] = $hps1;
+            $range2[] = $hps2;
+            $range3[] = $hps3;
+            $range4[] = $hps4;
+            $range5[] = $hps5;
         }
 
+        $range[0] = $range1;
+        $range[1] = $range2;
+        $range[2] = $range3;
+        $range[3] = $range4;
+        $range[4] = $range5;
+
+        $range['range1'] = array_sum($range1);
+        $range['range2'] = array_sum($range2);
+        $range['range3'] = array_sum($range3);
+        $range['range4'] = array_sum($range4);
+        $range['range5'] = array_sum($range5);
+
+        // var_dump($peserta);
+        // die;
         $data = [
             'title' => 'Dashboard',
             'lpse' => json_decode($lpse->getBody()->getContents(), true)['data'],
             'pengguna' => $pengguna,
-            'peserta' => $peserta,
-            // 'npwp' => $npwp,
+            'peserta' => $peserta['data'],
+            'npwp' => $npwpComplete ? $pengguna['npwp'] : null,
             'notif' => $notif,
             'timeSeriesUser' => isset($timeSeriesUser) ? json_encode($timeSeriesUser) : null,
             'akumulasi' => isset($akumulasi) ? json_encode($akumulasi) : null,
             'range' => isset($range) ? json_encode($range) : null,
-            'photo' => $this->user->getPhotoProfile((int) $sessionData['id_pengguna'], $this->db),
+            // 'photo' => $this->user->getPhotoProfile((int) $sessionData['id_pengguna'], ''),
             'userId' => (int) $sessionData['id_pengguna'],
             'userStatus' => (int) $sessionData['status'],
             'npwpComplete' => $npwpComplete,
@@ -212,7 +166,7 @@ class DashboardUser extends CI_Controller
         // $this->load->view('dashboard/templates/navbar');
         $this->load->view('templates/footer');
     }
-    
+
     // Dashboard untuk user free
     public function listTenderPage()
     {
@@ -233,18 +187,18 @@ class DashboardUser extends CI_Controller
         return count($matches) > 0;
     }
 
-    protected function isNpwpFilled(int $userId)
-    {
-        $query = $this->db->select('npwp')->from('pengguna')->where('id_pengguna', $userId)->get();
-        $row = $query->row();
-        if (
-            $row == null
-            || ($row != null && (trim($row->npwp) == '' || !$this->isNpwpValid($row->npwp)))
-        ) {
-            return false;
-        }
-        return true;
-    }
+    // protected function isNpwpFilled(int $userId)
+    // {
+    //     $query = $this->db->select('npwp')->from('pengguna')->where('id_pengguna', $userId)->get();
+    //     $row = $query->row();
+    //     if (
+    //         $row == null
+    //         || ($row != null && (trim($row->npwp) == '' || !$this->isNpwpValid($row->npwp)))
+    //     ) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
     protected function getPesertaTender($npwp, $tahun): array
     {
@@ -528,150 +482,91 @@ class DashboardUser extends CI_Controller
     {
         $data = $this->input->post();
         if ($data != null) {
-            //get npwp
-            // $response = $this->client->request('GET', 'pengguna/' . $this->session->user_data['id_pengguna'], $this->client->getConfig('headers'));
-            // $pengguna = json_decode($response->getBody()->getContents(), true)['data'];
-            $userId = $this->session->user_data['id_pengguna'];
-            $query = $this->db->select('npwp')->from('pengguna')->where('id_pengguna', $userId)->get();
-            $row = $query->row_array();
+            // return $data['cariTahun'];
+            $this->load->library('session');
+            $this->load->library('user');
+            $this->load->model('api/Peserta_model');
+            $this->load->model('api/PesertaTenderModel');
+            $this->load->model('scrapping/Pengguna_model');
+            $this->load->model('scrapping/Lpse_model');
 
-            if (count($row) > 0 && isset($row['npwp'])) {
-                $npwp = $row['npwp'];
-            } else {
-                $npwp = '0';
-            }
+            $sessionData = $this->session->user_data;
+            $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
 
-            // api/models/PesertaTenderModel/getPesertaTenderFilter
-            $response = $this->PesertaTender_model->getFilterTender($npwp, $data['cariKLPD'], $data['cariTahun']);
-            if (isset($response['status']) && $response['status'] !== false) {
-                $monthly = $response['data'];
+            // $peserta = $this->Peserta_model->getPesertaNpwp($pengguna['npwp']);
+            $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
 
-                $timeSeriesUser = [];
-
-                if ($data['cariTahun'] != null) {
-                    for ($i = 0; $i < 12; $i++) {
-                        $timeSeriesUser[$i] = 0;
-                        foreach ($monthly as $bulan) {
-                            // $tgl = strtotime($bulan['tgl_pembuatan']);
-                            // $tgl = date('Y', $tgl);
-                            // if ($tgl == $data['cariTahun']) {
-                            if ($bulan['month'] == $i + 1) {
-                                $timeSeriesUser[$i]++;
-                            }
-                            // }
-                        }
-                    }
+            // Statistik Ikut Tender
+            $timeSeriesUser = array_fill(0, 12, 0);
+            $totalMenang = 0;
+            $totalKalah = 0;
+            foreach ($dataPesertaTender as $dpt => $valueDPT) {
+                $timeSeriesUser[((int)$valueDPT['month']) - 1]++;
+                if ($valueDPT['status_pemenang'] == 'true') {
+                    $totalMenang++;
                 } else {
-                    if (is_iterable($monthly)) {
-                        for ($i = 0; $i < 12; $i++) {
-                            $timeSeriesUser[$i] = 0;
-                            foreach ($monthly as $bulan) {
-                                if ($bulan['month'] == $i + 1) {
-                                    $timeSeriesUser[$i]++;
-                                }
-                            }
-                        }
-                    }
+                    $totalKalah++;
                 }
-            } else {
-                $timeSeriesUser = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             }
-            ?>
-			<p class="d-none" id="chart1"><?php echo json_encode($timeSeriesUser) ?></p>
-			<?php
-            // api/ApiPesertaTender/getIdFilterHps
-            $hps = $this->PesertaTender_model->getFilterHps($npwp, $data['cariKLPD'], $data['cariTahun']);
-            if (isset($hps['status']) && $hps['status'] != false) {
-                $hps = $hps['data'];
-                $range = [];
-                $range1 = [];
-                $range2 = [];
-                $range3 = [];
-                $range4 = [];
-                $range5 = [];
 
-                for ($i = 0; $i < 12; $i++) {
-                    $hps1 = 0;
-                    $hps2 = 0;
-                    $hps3 = 0;
-                    $hps4 = 0;
-                    $hps5 = 0;
-                    foreach ($hps as $range) {
-                        if ($range['month'] == $i + 1) {
-                            if ($range['nilai_hps'] < 500000000) {
-                                $hps1++;
-                            } elseif ($range['nilai_hps'] >= 500000000 && $range['nilai_hps'] < 1000000000) {
-                                $hps2++;
-                            } elseif ($range['nilai_hps'] >= 1000000000 && $range['nilai_hps'] < 10000000000) {
-                                $hps3++;
-                            } elseif ($range['nilai_hps'] >= 10000000000 && $range['nilai_hps'] < 100000000000) {
-                                $hps4++;
-                            } elseif ($range['nilai_hps'] >= 100000000000) {
+            // time sereies chart Tender
+            $akumulasi[0] = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+            $akumulasi[1] = $totalMenang;
+            $akumulasi[2] = $totalKalah;
+            $akumulasi[3] = $totalKalah + $totalMenang;
+            $akumulasi[4] = (($totalKalah + $totalMenang) != 0) ? ($totalMenang / ($totalKalah + $totalMenang) * 100) : 0;
+            $akumulasi[5] = (($totalKalah + $totalMenang) != 0) ? ($totalKalah / ($totalKalah + $totalMenang) * 100) : 0;
+
+            // hps chart ikut tender
+            for ($i = 0; $i < 12; $i++) {
+                $hps1 = 0;
+                $hps2 = 0;
+                $hps3 = 0;
+                $hps4 = 0;
+                $hps5 = 0;
+                foreach ($dataPesertaTender as $range) {
+                    if ($range['month'] == $i + 1) {
+
+                        switch (true) {
+                            case $range['nilai_hps'] >= 100000000000:
                                 $hps5++;
-                            }
+                                break;
+                            case $range['nilai_hps'] >= 10000000000:
+                                $hps4++;
+                                break;
+                            case $range['nilai_hps'] >= 1000000000:
+                                $hps3++;
+                                break;
+                            case $range['nilai_hps'] >= 500000000:
+                                $hps2++;
+                                break;
+                            default:
+                                $hps1++;
+                                break;
                         }
                     }
-                    $range1[] = $hps1;
-                    $range2[] = $hps2;
-                    $range3[] = $hps3;
-                    $range4[] = $hps4;
-                    $range5[] = $hps5;
                 }
 
-                $range[0] = $range1;
-                $range[1] = $range2;
-                $range[2] = $range3;
-                $range[3] = $range4;
-                $range[4] = $range5;
-
-                $range['range1'] = array_sum($range1);
-                $range['range2'] = array_sum($range2);
-                $range['range3'] = array_sum($range3);
-                $range['range4'] = array_sum($range4);
-                $range['range5'] = array_sum($range5);
-            } else {
-                $range['range1'] = 0;
-                $range['range2'] = 0;
-                $range['range3'] = 0;
-                $range['range4'] = 0;
-                $range['range5'] = 0;
-            }
-            ?>
-			<p class="d-none" id="chart3"><?php echo json_encode($range) ?></p>
-			<?php
-
-            $responses = $this->PesertaTender_model->getFilterTotal($npwp, $data['cariKLPD'], $data['cariTahun']);
-            $total = [];
-            if ($responses != null && $responses->getStatusCode() == 200) {
-                $total = json_decode($responses->getBody()->getContents(), true);
+                $range1[] = $hps1;
+                $range2[] = $hps2;
+                $range3[] = $hps3;
+                $range4[] = $hps4;
+                $range5[] = $hps5;
             }
 
-            if (isset($total['status']) && $total['status'] != false) {
-                $akumulasi = [];
-                $total = $total['data'];
+            $range[0] = $range1;
+            $range[1] = $range2;
+            $range[2] = $range3;
+            $range[3] = $range4;
+            $range[4] = $range5;
 
-                foreach ($total as $data) {
-                    $akumulasi[0] = (int) $data['total'];
-                    $akumulasi[1] = (int) $data['menang'];
-                    $akumulasi[2] = (int) $data['kalah'];
-                    $akumulasi[3] = (int) $data['ikut'];
-                }
+            $range['range1'] = array_sum($range1);
+            $range['range2'] = array_sum($range2);
+            $range['range3'] = array_sum($range3);
+            $range['range4'] = array_sum($range4);
+            $range['range5'] = array_sum($range5);
 
-                if (($total['0']['menang'] + $total['0']['kalah']) != 0) {
-                    $akumulasi[4] = round($total['0']['menang'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
-                    $akumulasi[5] = round($total['0']['kalah'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
-                } else {
-                    $akumulasi[4] = 0;
-                    $akumulasi[5] = 0;
-                }
-            } else {
-                $akumulasi = [0, 0, 0, 0, 0, 0, 0];
-            }
-
-            ?>
-			<p class="d-none" id="chart2"><?php echo json_encode($akumulasi) ?></p>
-<?php
-
+            echo '<p class="d-none" id="chart1">' . json_encode($timeSeriesUser) . '</p><p class="d-none" id="chart3">' . json_encode($range) . '</p><p class="d-none" id="chart2">' . json_encode($akumulasi) . '</p>';
         }
     }
 

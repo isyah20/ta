@@ -115,6 +115,8 @@ $route['lupa/ubah/pass/(:any)'] = 'auth/LupaPassword/ubahPass/$1';
 // User
 //===========================================
 //Dashboard
+$route['user-dashboard/chart']['POST'] = 'DashboardUser/chart';
+
 $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';
@@ -309,6 +311,8 @@ $route['perubahan-jadwal/(:num)'] = 'admin/PerubahanJadwal/getPerubahan/$1';
 $route['perubahan-jadwal/create/(:num)'] = 'admin/PerubahanJadwal/create/$1';
 
 //Kelola Tender
+$route['tender/getData'] = 'admin/Tender/getData';
+$route['lpse/getData'] = 'admin/Lpse/getData';
 $route['tender'] = 'admin/Tender';
 $route['tender/create'] = 'admin/Tender/create';
 $route['tender/update/(:num)'] = 'admin/Tender/update/$1';
@@ -462,6 +466,7 @@ $route['api/tender/sp-notifikasi-tender-baru'] = 'api/ApiTender/spNotifikasiTend
 $route['api/tender/notifikasi-tender-baru'] = 'api/ApiTender/notifikasiTenderBaru';
 $route['api/tender/notifikasi-tender-baru-by-keyword'] = 'api/ApiTender/notifikasiTenderBaruByKeyword';
 $route['api/tender/notifikasi-tender-baru-dashboard-user'] = 'api/ApiTender/notifikasiTenderBaruDashboardUser';
+$route['api/tender/notif'] = 'api/ApiTender/tenderNotif';
 $route['api/tender/s'] = 'api/ApiTender/search';
 $route['api/tender/s-limit'] = 'api/ApiTender/searchLim';
 $route['api/tender/s-count'] = 'api/ApiTender/searchC';
