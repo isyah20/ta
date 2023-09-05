@@ -13,7 +13,6 @@
         color: #fff;
         background-color: #E05151;
         text-align: center;
-        padding: 10px;
     }
 
     tbody {
@@ -45,6 +44,25 @@
         background-color: #EB650D;
         color: #fff;
     }
+
+    .card-body {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 5px;
+        margin-right: 10px;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .card-title {
+        color: #B89494;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 3rem;
+        font-weight: bold;
+    }
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -55,23 +73,69 @@
 </section>
 
 <section class="bg-white ">
-    <div class="col-md-2 wide ms-0 wow fadeInUp animation" data-wow-delay="0.2s" style="width: 300px">
-        <div class="shadow-sm p-3 my-1 bg-white rounded">
-            <div class="card-body d-flex justify-content-between align-items-center px-1 py-1">
-                <div>
-                    <p class="card-text wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-7 justify-content d-flex">
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 250px">
+                    <div class="shadow-sm bg-white">
+                        <div class="card-body">
+                            <div>
+                                <p>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
+                                </p>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <p>
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 48px; height: 48px;">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="wow fadeInUp" data-wow-delay="0.3s">
-                    <img src="<?= base_url('assets\img\icon_card_people_peserta.jpg') ?>" alt="">
-                    <h5 class="card-title fs-5 wow fadeInUp" style="color:#553333" data-wow-delay="0.5s">99</h5>
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 250px">
+                    <div class="shadow-sm bg-white">
+                        <div class="card-body">
+                            <div>
+                                <p>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
+                                </p>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <p>
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 48px; height: 48px;">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 250px">
+                    <div class="shadow-sm bg-white">
+                        <div class="card-body">
+                            <div>
+                                <p>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
+                                </p>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <p>
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 48px; height: 48px;">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
-                <table class="table table-striped">
+                <table class="table table-striped custom-table-container">
                     <thead class="thead">
                         <tr>
                             <th></th>
@@ -92,8 +156,8 @@
                             <td>jasa konsultasi</td>
                             <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>08123123456 (Joko)</td>
-                            <td> <a href="#" class="btn btn-custom btn-danger">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td><u>08123123456 (Joko)</u></td>
+                            <td> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
                         </tr>
                         <tr>
                             <th></th>
@@ -102,7 +166,7 @@
                             <td>jasa konsultasi</td>
                             <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>08123123456 (Joko)</td>
+                            <td><u>08123123456 (Joko)</u></td>
                             <td> <a style="px: -0.75rem; py: -0.75rem;" href="#" class="btn btn-danger">Lengkapi Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
                         </tr>
                     </tbody>
