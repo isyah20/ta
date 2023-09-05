@@ -35,6 +35,10 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function addToLeads($id){
+
+    }
+
     public function dataLeads()
     {
         $data = [
