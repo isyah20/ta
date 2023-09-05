@@ -329,4 +329,8 @@ class Supplier_model extends CI_Model
 
         return $this->db->query($sql)->result();
     }
+
+    public function addToLeads($data){
+        return $this->db->insert('data_leads', $data);
+    }
 }

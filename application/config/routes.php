@@ -120,6 +120,7 @@ $route['user-dashboard/chart']['POST'] = 'DashboardUser/chart';
 $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';
+$route['suplier/(:num)'] = 'DashboardUserSupplier/addToLeads';
 $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/form-leads'] = 'DashboardUserSupplier/formDataLeads';
 $route['suplier/crm'] = 'DashboardUserSupplier/CRM';
