@@ -355,4 +355,16 @@ class Supplier_model extends CI_Model
         $query = $this->db->get();
         return $query->row(); 
     }
+
+    public function updateLeadData($id, $data) {
+        $this->db->where('id_lead', $id);
+        $this->db->update('data_leads', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function updateCompletedDataLead($id_lead, $completed) {
+        $data = array('completed' => $completed);
+        $this->db->where('id_lead', $id_lead);
+        $this->db->update('data_leads', $data);
+    }
 }

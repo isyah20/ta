@@ -79,7 +79,7 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function formDataLeads($id)
+    public function editDataLeads($id)
     {
         $lead = $this->Supplier_model->getDataLeadById($id);
 
@@ -92,6 +92,36 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('dashboard/supplier/form_leads', $lead);
         $this->load->view('templates/footer');
     }
+
+    public function updateDataLeads(){
+        $id_lead = $_POST['id_lead']; 
+        $telp = $_POST['no_telepon']; 
+        $nama = $_POST['nama']; 
+        $email = $_POST['email']; 
+        
+        $dataTelp = array();
+        $dataEmail = array();
+        $index = 0;
+        
+        foreach ($telp as $dataNoTelp) { 
+            array_push($dataTelp, array(
+                'no_telepon' => $dataNoTelp,
+                'nama' => $nama[$index],
+            ));
+            
+            $index++;
+        }
+        
+        
+        $sql = $this->SiswaModel->save_batch($data); 
+        if ($sql) { // Jika sukses
+            $this->Supplier_model->updateCompletedDataLead($id_lead, 1);
+            echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('index.php/siswa')."';</script>";
+        } else { // Jika gagal
+            echo "<script>alert('Data gagal disimpan');window.location = '".base_url('index.php/siswa/form')."';</script>";
+        }
+    }
+    
 
     public function CRM()
     {

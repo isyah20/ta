@@ -244,7 +244,7 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress2" class="form-label">Alamat</label>
-                                        <textarea id="alamat" disabled="disabled" name="alamat" class="form-control mb-2"><?php echo $alamat; ?></textarea>
+                                        <textarea id="alamat" disabled="disabled" name="alamat" class="form-control mb-2" value=""><?php echo $alamat; ?></textarea>
                                     </div>
                                 </form>
                             </div>
