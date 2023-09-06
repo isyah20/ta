@@ -64,7 +64,8 @@ class DashboardUserSupplier extends CI_Controller
         $data = [
             'title' => 'Dashboard'
         ];
-
+        // var_dump("TEST");
+        // die;
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/supplier/crm');
@@ -125,7 +126,7 @@ class DashboardUserSupplier extends CI_Controller
             $totaldata[7] = (int) $t['kat_5'];
             $totaldata[8] = (int) $t['total'];
         }
-        ?>
+?>
         <p class="d-none" id="chart1"><?php echo json_encode($totaldata) ?></p>
 <?php
     }
@@ -371,7 +372,8 @@ class DashboardUserSupplier extends CI_Controller
         exit;
     }
 
-    public function getListJenisTender(){
+    public function getListJenisTender()
+    {
         $items = $this->Supplier_model->getListJenisTender();
         echo json_encode($items);
     }
