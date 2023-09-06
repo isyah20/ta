@@ -68,7 +68,7 @@
     padding-left: 30px; /* Menambahkan ruang di sebelah kiri judul */
   }
 
-  .box h4::before {
+  .box h4::before { 
     content: "•"; /* Karakter titik */
     margin-top: 4px;
     margin-right: 5px; /* Jarak antara titik dan judul */
@@ -105,9 +105,9 @@
   </div>
 </section>
 <section>
-  <div class="container-fluid py-4" id="scroll-marker">
+  <div class="container-fluid py-4 mx-4" id="scroll-marker">
       <div class="row">
-        <div class="col-md-3 mx-5">
+        <div class="col-md-3 mx-3">
           <div id="container1" class="box red" data-number="1">
             <h4 class="pt-2">Perusahaan</h4>
               <div class="card" draggable="true">
@@ -141,7 +141,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="mx-3">
           <div id="container2" class="box green" data-number="2">
             <h4 class="pt-2">Container 2</h4>
             <div class="card" draggable="true">
@@ -149,7 +149,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="mx-3">
           <div id="container3" class="box blue" data-number="3">
             <h4 class="pt-2">Container 3</h4>
             <div class="card" draggable="true">
@@ -157,7 +157,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="mx-3">
           <div id="container4" class="box orange" data-number="4">
             <h4 class="pt-2">Container 4</h4>
             <div class="card" draggable="true">
@@ -165,7 +165,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="mx-3">
           <div id="container5" class="box purple" data-number="5">
             <h4 class="pt-2">Container 5</h4>
             <div class="card" draggable="true">
@@ -173,7 +173,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="mx-3">
           <div id="container5" class="box purple" data-number="5">
             <h4 class="pt-2">Container 5</h4>
             <div class="card" draggable="true">
