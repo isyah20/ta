@@ -214,39 +214,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <section id="profile" class="profile" style="min-height: 100vh;">
-        <div class="modal fade" id="otpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="otpModalLabel">Verifikasi WhatsApp</h5>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p>Kami telah mengirimkan kode OTP ke nomor WhatsApp Anda.<br>Silakan masukkan 4 digit kode OTP yang telah dikirimkan!</p>
-                        <div class="mb-2 fail-otp" style="display: none;">
-                            <small class="text-danger">Kode OTP yang Anda masukkan tidak valid.</small>
-                        </div>
-                        <div class="mb-2 countdown" style="display: none;">
-                            <p class="text-primary"></p>
-                        </div>
-                        <div class="d-flex justify-content-center my-4">
-                            <input class="otp-input" type="text" maxlength="1" id="kode_1" />
-                            <input class="otp-input" type="text" maxlength="1" id="kode_2" />
-                            <input class="otp-input" type="text" maxlength="1" id="kode_3" />
-                            <input class="otp-input" type="text" maxlength="1" id="kode_4" />
-                        </div>
-                        <div class="text-center mb-2">
-                            <p class="mb-0" style="font-size: 15px;">Tidak menerima kode OTP?</p>
-                            <button class="btn btn-outline-danger mt-2" id="btn-resend" style="padding: 3px 10px;" onclick="cekVerifikasi(0)">Kirim Ulang</button>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-success" id="btn-otp" onclick="verifyWA()">Verifikasi</button>
-                        <button class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="container-fluid profile-sampul py-5" style="padding: 0;overflow-x: hidden;">
             <img class="w-100" src="<?= base_url("assets/img/banner_form.png") ?>" alt="Banner">
             <div class="col-lg-12" style="margin-top: -170px;">
@@ -265,23 +232,23 @@
                                 <form class="row g-3">
                                     <div class="col-12">
                                         <label for="inputEmail4" class="form-label">Nama Perusahaan</label>
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="PT SANGKURIANG INTERNASIONAL">
+                                        <input type="text" disabled="disabled" class="form-control" id="inputEmail4" value="<?php echo $nama_pemenang; ?>">
                                     </div>
                                     <div class="col-12">
                                         <label for="inputPassword4" class="form-label">Tender yang dimenangkan</label>
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi">
+                                        <input type="text" disabled="disabled" class="form-control" id="inputPassword4" value="<?php echo $nama_tender; ?>">
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label">NPWP</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="XX . YYY . YYY - Z - XXX . YYY">
+                                        <input type="text" disabled="disabled" class="form-control" id="inputAddress" value="<?php echo $npwp; ?>">
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress2" class="form-label">Nilai HPS</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Rp 220.000.000">
+                                        <input type="text" disabled="disabled" class="form-control" id="inputAddress2" value="<?php echo $nilai_hps; ?>">
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress2" class="form-label">Alamat</label>
-                                        <textarea id="alamat" name="alamat" class="form-control mb-2" placeholder="Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710"></textarea>
+                                        <textarea id="alamat" disabled="disabled" name="alamat" class="form-control mb-2"><?php echo $alamat; ?></textarea>
                                     </div>
                                 </form>
                             </div>
@@ -301,7 +268,7 @@
                                         <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
                                     </div>
                                     <div id="container-telp"></div>
-                                    <button onclick="tambahkanKolomTelp()" class="custom-button justify-content-center">
+                                    <button type="button" onclick="tambahkanKolomTelp()" class="custom-button justify-content-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                             <path d="M19.4583 10.2083H16.5416V16.0417H10.7083V18.9583H16.5416V24.7917H19.4583V18.9583H25.2916V16.0417H19.4583V10.2083ZM18 2.91667C9.94996 2.91667 3.41663 9.45001 3.41663 17.5C3.41663 25.55 9.94996 32.0833 18 32.0833C26.05 32.0833 32.5833 25.55 32.5833 17.5C32.5833 9.45001 26.05 2.91667 18 2.91667ZM18 29.1667C11.5687 29.1667 6.33329 23.9313 6.33329 17.5C6.33329 11.0688 11.5687 5.83334 18 5.83334C24.4312 5.83334 29.6666 11.0688 29.6666 17.5C29.6666 23.9313 24.4312 29.1667 18 29.1667Z" fill="#CCCCCC" />
                                         </svg>
@@ -315,7 +282,7 @@
                                         <input type="text" class="form-control" id="email">
                                     </div>
                                     <div id="container-email"></div>
-                                    <button onclick="tambahkanKolomTelp()" class="custom-button justify-content-center">
+                                    <button type="button" onclick="tambahkanKolomEmail()" class="custom-button justify-content-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                             <path d="M19.4583 10.2083H16.5416V16.0417H10.7083V18.9583H16.5416V24.7917H19.4583V18.9583H25.2916V16.0417H19.4583V10.2083ZM18 2.91667C9.94996 2.91667 3.41663 9.45001 3.41663 17.5C3.41663 25.55 9.94996 32.0833 18 32.0833C26.05 32.0833 32.5833 25.55 32.5833 17.5C32.5833 9.45001 26.05 2.91667 18 2.91667ZM18 29.1667C11.5687 29.1667 6.33329 23.9313 6.33329 17.5C6.33329 11.0688 11.5687 5.83334 18 5.83334C24.4312 5.83334 29.6666 11.0688 29.6666 17.5C29.6666 23.9313 24.4312 29.1667 18 29.1667Z" fill="#CCCCCC" />
                                         </svg>
