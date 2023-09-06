@@ -970,8 +970,8 @@ class Tender extends CI_Controller
 
     public function getKatalogTenderTerbaruByPengguna($id_pengguna, $jum_tender)
     {
-        $page_size = $_GET['pageSize'];
-        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $page_size = $_POST['pageSize'];
+        $page_number = ($_POST['pageNumber'] - 1) * $page_size;
         $response = $this->Tender_model->getKatalogTenderTerbaruByPengguna($id_pengguna, $jum_tender, $page_number, $page_size)->result();
 
         $this->output
@@ -985,9 +985,23 @@ class Tender extends CI_Controller
 
     public function getKatalogTenderTerbaruByPengguna1()
     {
-        parse_str(file_get_contents('php://input'), $data);
+        // parse_str(file_get_contents('php://input'), $data);
+        $data = [
+            'id_pengguna'   => 38,
+            'keyword'       => '',
+            'jenis_pengadaan' => '',
+            'nilai_hps_awal' => 0,
+            'nilai_hps_akhir' => 0,
+            'prov'          => '',
+            'kab'           => '',
+            'pageSize'      => 200,
+            'pageNumber'    => 10,
+            'sort'          => 1,
+        ];
         $response = $this->Tender_model->getKatalogTenderTerbaruByPengguna1($data)->result();
-
+        // var_dump($_SESSION[]);
+        // var_dump($response);
+        // die;
         $this->output
             ->set_status_header(200)
             ->set_content_type('application/json')
@@ -1098,8 +1112,8 @@ class Tender extends CI_Controller
     public function getListLokasiPekerjaan()
     {
         $response = array(
-            "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
-            "results" => $this->Tender_model->getListLokasiPekerjaan(
+            // "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+            "results" => $this->Tender_model->getListLokasiPekerjaanTenderTerbaru(
                 $this->input->get("q"),
                 $this->input->get("id_pengguna"),
                 $this->input->get("jenis"),

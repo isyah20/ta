@@ -383,28 +383,35 @@
     function filterTender(sort = '3') {
         console.log('INNN');
         let params = {
-            'id_pengguna': id_pengguna,
+            // 'id_pengguna': id_pengguna,
             'keyword': keyword,
             'jenis_pengadaan': jenis_pengadaan,
             'nilai_hps_awal': hps_awal,
             'nilai_hps_akhir': hps_akhir,
             'prov': prov,
             'kab': kab,
-            'sort': sort
+            'sort': sort,
+            'pageSize': 10,
+            'pageNumber': 1,
         };
 
         $.ajax({
-            // url: "<?= base_url() ?>api/getJumKatalogTenderTerbaruByPengguna1",
-            url: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna",
+            url: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna1",
+            // url: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna/" + id_pengguna + "/1",
             type: "POST",
             dataType: "JSON",
             data: params,
             success: function(data) {
-                jum_tender = data.jumlah;
-                console.log(data)
+                // jum_tender = data.jumlah;
+                jum_tender = Object.keys(data).length;
+                console.log('FUnction Succes Filter');
+                console.log(Object.keys(data).length);
+                // console.log(data + "SUCCES")
                 if (jum_tender > 0) {
+                    console.log('IF');
                     $('#pagination-container').pagination({
-                        dataSource: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna",
+                        dataSource: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna1",
+                        // dataSource: "<?= base_url() ?>api/getKatalogTenderTerbaruByPengguna/" + id_pengguna + "/1",
                         locator: '',
                         totalNumber: jum_tender,
                         pageSize: 10,
@@ -432,13 +439,14 @@
                         },
                         callback: function(data, pagination) {
                             if (data != '') {
-                                console.log(data);
+                                // console.log(data);
                                 let html = template(data);
                                 $('#list-paket').html(html);
                             }
                         }
                     });
                 } else {
+                    console.log('ELSE');
                     $('#list-paket').html(`
                         <div class="row align-items-center rounded-3 bg-white shadow my-3" style="width: 98.2%;margin-inline: 12px;">
                             <div class="col-md-2 p-3 text-center">
@@ -454,7 +462,10 @@
                     $('#pagination-container').hide();
                 }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('FUnction Error Filter', errorThrown, textStatus);
+
+            }
         });
     }
 
@@ -642,6 +653,67 @@
 
         filterTender();
     });
+    // $('.select2-wilayah').select2({
+    //     placeholder: "Lokasi Pekerjaan",
+    //     theme: 'bootstrap-5',
+    //     allowClear: true,
+    //     "language": {
+    //         noResults: function() {
+    //             return "<span>Tidak ada lokasi pekerjaan</span>";
+    //         },
+    //         loadingMore: function() {
+    //             return "<span>Menampilkan lainnya...</span>";
+    //         },
+    //         searching: function() {
+    //             return "<span>Mencari hasil...</span>";
+    //         },
+    //         errorLoading: function() {
+    //             return "<span>Gagal menampilkan lokasi pekerjaan</span>";
+    //         }
+    //     },
+    //     escapeMarkup: function(markup) {
+    //         return markup;
+    //     },
+    //     ajax: {
+    //         url: "<?= base_url('api/getListLokasiPekerjaan') ?>",
+    //         dataType: 'json',
+    //         delay: 250,
+    //         data: function(params) {
+    //             return {
+    //                 q: params.term,
+    //                 id_pengguna: id_pengguna,
+    //                 jenis: '2',
+    //                 page_limit: 10,
+    //                 page: (params.page > 1 ? params.page - 1 : params.page)
+    //             };
+    //         },
+    //         processResults: function(data, params) {
+    //             params.page = params.page || 1;
+    //             return {
+    //                 results: data.results,
+    //                 pagination: {
+    //                     more: (params.page * 10) < data.total_count
+    //                 }
+    //             };
+    //         },
+    //         cache: true
+    //     },
+    //     templateResult: formatData
+    // }).on('change', function() {
+    //     let wilayah = $(this).val();
+
+    //     if (wilayah != null) {
+    //         if (wilayah.includes('00')) {
+    //             prov = wilayah;
+    //             kab = '';
+    //         } else {
+    //             kab = wilayah;
+    //             prov = '';
+    //         }
+    //     } else kab = prov = '';
+
+    //     filterTender();
+    // });
 
     $('.select2-jenis-pengadaan').select2({
         placeholder: "Jenis Pengadaan",
