@@ -391,8 +391,12 @@ $route['api/pengguna/check-user-trial'] = 'api/ApiPengguna/checkAndUpdateUserTyp
 
 // restAPI route for verify
 $route['api/verify/status/(:any)'] = 'api/ApiPengguna/verifyCheck/$1';
-$route['api/verify/(:any)'] = 'api/ApiPengguna/verify/$1';
+$route['api/verify'] = 'api/ApiPengguna/verify';
 $route['api/verifySend'] = 'api/ApiPengguna/verifySend';
+
+// fixed one (maybe)
+$route['api/cekVerif'] = 'api/ApiPengguna/checkVerif/$1';
+$route['api/verifikasi'] = 'api/ApiPengguna/verif/$1';
 
 // restAPI Detail Tender
 $route['api/detailtender'] = 'api/ApiDetailTender/index';

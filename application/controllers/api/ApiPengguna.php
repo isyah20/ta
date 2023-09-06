@@ -201,13 +201,58 @@ class ApiPengguna extends RestController
         }
     }
 
-    public function verify_post($token)
+    public function checkVerif_get($email)
+    {
+        $email = $this->get('email');
+        $resultPengguna = $this->Pengguna_model->cekVerif($email);
+
+        if ($resultPengguna) {
+            $this->response([
+                'status' => true,
+                'data' => $resultPengguna,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'not found',
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function verif_post($token)
     {
         $email = $this->input->get('email');
         $data = [
             'email' => $email,
             'password' => md5($this->post('password')),
             'token' => $token,
+            // 'is_active' => '1',
+            'tgl_update' => date('Y-m-d H:i:s'),
+        ];
+        $resultPengguna = $this->Pengguna_model->verifUser($data);
+
+        if ($resultPengguna) {
+            $this->response([
+                'status' => true,
+                'data' => $resultPengguna,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'not found',
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function verify_post()
+    {
+        $email = $this->post('email');
+        $password = $this->post('password');
+        $data = [
+            'email' => $email,
+            'password' => md5($password),
+            // 'token' => $token,
+            'is_active' => '1',
             'tgl_update' => date('Y-m-d H:i:s'),
         ];
         $resultPengguna = $this->Pengguna_model->verify($data);
