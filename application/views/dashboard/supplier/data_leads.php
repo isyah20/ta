@@ -25,7 +25,7 @@
 
     .rounded {
         border-radius: 40%;
-        border-width: 1rem;
+        border-width: 5rem;
     }
 
     .custom-table-container {
@@ -50,18 +50,24 @@
         margin-bottom: 20px;
         margin-left: 5px;
         margin-right: 10px;
-        border-radius: 10px 10px 10px 10px;
+        border-radius: 40%;
     }
 
     .card-title {
         color: #B89494;
-        font-size: 1rem;
+        font-size: 0.75rem;
         font-weight: bold;
     }
 
     .card-text {
-        font-size: 3rem;
+        font-size: 1.75rem;
         font-weight: bold;
+    }
+
+    .form-select-custom {
+        color: #CCCCCC;
+        border-radius: 10px 10px 10px 10px;
+        font-size: 1rem;
     }
 </style>
 
@@ -77,7 +83,26 @@
         <div class="row">
             <div class="col-5"></div>
             <div class="col-7 justify-content d-flex">
-                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 250px">
+                <div class="card-select">
+                    <div class="select-custom">
+                        <div class="ro"></div>
+                        <select class="form-select-custom" aria-label="Default select example" style="color: #E05151; border-color: #E05151;">
+                            <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
+                            <option selected>Wilayah : Jawa Barat</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <select class="form-select-custom" aria-label="Default select example">
+                            <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
+                            <option selected>LPSE</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                     <div class="shadow-sm bg-white">
                         <div class="card-body">
                             <div>
@@ -87,14 +112,14 @@
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 48px; height: 48px;">
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px;">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 250px">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                     <div class="shadow-sm bg-white">
                         <div class="card-body">
                             <div>
@@ -104,14 +129,14 @@
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 48px; height: 48px;">
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px;">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 250px">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                     <div class="shadow-sm bg-white">
                         <div class="card-body">
                             <div>
@@ -121,7 +146,7 @@
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 48px; height: 48px;">
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px;">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
                                 </p>
                             </div>
@@ -158,6 +183,16 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td><u>08123123456 (Joko)</u></td>
                             <td> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
+                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                            <td>jasa konsultasi</td>
+                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
+                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
+                            <td><u>08123123456 (Joko)</u></td>
+                            <td> <a style="px: -0.75rem; py: -0.75rem;" href="#" class="btn btn-danger">Lengkapi Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
                         </tr>
                         <tr>
                             <th></th>
