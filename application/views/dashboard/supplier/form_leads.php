@@ -204,6 +204,10 @@
             .justify-content-start {
                 justify-content: center !important;
             }
+
+            .form-suplier {
+                margin-top: 6rem !important;
+            }
         }
     </style>
 
@@ -246,7 +250,7 @@
         <div class="container-fluid profile-sampul py-5" style="padding: 0;overflow-x: hidden;">
             <img class="w-100" src="<?= base_url("assets/img/banner_form.png") ?>" alt="Banner">
             <div class="col-lg-12" style="margin-top: -170px;">
-                <div class="row justify-content-center">
+                <div class="form-suplier row justify-content-center">
 
                     <div class="col-12 col-lg-8 bg-white rounded-3 p-3 mx-3 mb-5" id="form-profile-tab" style="box-shadow: 0px 0px 25px 2px rgba(95, 95, 95, 0.20);">
                         <div class="d-flex justify-content-center p-2 border-bottom">
