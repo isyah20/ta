@@ -36,7 +36,28 @@ class DashboardUserSupplier extends CI_Controller
     }
 
     public function addToLeads($id){
+        $id_exists = $this->Supplier_model->isIdPemenangExists($id);
 
+        if ($id_exists) {
+            echo 'ID sudah ada di database.';
+        } else {
+            $data = [
+                "id_pemenang" => $id,
+            ];
+            
+            $this->db->insert('data_leads', $data);
+        }
+        $response = array(
+	        'Success' => true,
+	        'Info' => 'Preferensi tender berhasil disimpan.',
+	    );
+
+	    $this->output
+	         ->set_status_header(200)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
     }
 
     public function dataLeads()
@@ -51,15 +72,24 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function formDataLeads()
+    public function getDataLeads()
     {
+        $data = $this->Supplier_model->getDataLeads();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function formDataLeads($id)
+    {
+        $lead = $this->Supplier_model->getDataLeadById($id);
+
         $data = [
             'title' => 'Dashboard'
         ];
 
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
-        $this->load->view('dashboard/supplier/form_leads');
+        $this->load->view('dashboard/supplier/form_leads', $lead);
         $this->load->view('templates/footer');
     }
 

@@ -163,7 +163,6 @@
                 <table class="table table-striped custom-table-container">
                     <thead class="thead">
                         <tr>
-                            <th></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama Perusahaan</th>
                             <th class="custom-padding">Tender Yang Dimenangkan</th>
@@ -173,8 +172,8 @@
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="data-leads">
+                        <!-- <tr>
                             <th></th>
                             <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -193,20 +192,40 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td><u>08123123456 (Joko)</u></td>
                             <td> <a style="px: -0.75rem; py: -0.75rem;" href="#" class="btn btn-danger">Lengkapi Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
-                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td>jasa konsultasi</td>
-                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
-                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><u>08123123456 (Joko)</u></td>
-                            <td> <a style="px: -0.75rem; py: -0.75rem;" href="#" class="btn btn-danger">Lengkapi Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            var leads = "";
+            $.each(data, function(index, value) {
+                var rowNumber = index + 1;
+                leads += 
+                    `<tr>
+                        <td>` + rowNumber + `</td>
+                        <td>` + value.nama_pemenang + `</td>
+                        <td>` + value.nama_tender + `</td>
+                        <td>` + value.nilai_hps + `</td>
+                        <td>` + value.npwp + `</td>
+                        <td>` + value.completed + `</td>
+                        <td>
+                            <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
+                            <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
+                        </td>
+                    </tr>`
+            });
+            $("#data-leads").html(leads);
+        }
+    });
+});
+</script>
