@@ -330,7 +330,29 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql)->result();
     }
 
-    public function addToLeads($data){
-        return $this->db->insert('data_leads', $data);
+    public function isIdPemenangExists($id) {
+        $query = $this->db->get_where('data_leads', array('id_pemenang' => $id));
+        return $query->num_rows() > 0;
+    }
+
+    public function getDataLeads(){
+        $sql = "SELECT id_lead, nama_pemenang, nama_tender, nilai_hps, npwp, completed, alamat
+        FROM data_leads, pemenang 
+        WHERE data_leads.id_pemenang = pemenang.id_pemenang";
+
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
+
+    public function getDataLeadById($id)
+    {
+        $this->db->select('data_leads.*, pemenang.* ');
+        $this->db->from('data_leads');
+        $this->db->join('pemenang', 'data_leads.id_pemenang = pemenang.id_pemenang');
+        $this->db->where('data_leads.id_lead', $id);
+
+        $query = $this->db->get();
+        return $query->row(); 
     }
 }
