@@ -16,7 +16,7 @@
     }
 
     tbody {
-        text-align: center;
+        text-align: left;
     }
 
     .green-text {
@@ -39,11 +39,13 @@
     }
 
     .btn-custom {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
         background-color: #EB650D;
         color: #fff;
     }
+
+    .btn-outline-danger {}
 
     .card-body {
         margin-top: 20px;
@@ -69,6 +71,8 @@
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
     }
+
+    
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -201,17 +205,17 @@
 </section>
 
 <script>
-$(document).ready(function() {
-    $.ajax({
-        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            var leads = "";
-            $.each(data, function(index, value) {
-                var rowNumber = index + 1;
-                leads += 
-                    `<tr>
+    $(document).ready(function() {
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var leads = "";
+                $.each(data, function(index, value) {
+                    var rowNumber = index + 1;
+                    leads +=
+                        `<tr>
                         <td>` + rowNumber + `</td>
                         <td>` + value.nama_pemenang + `</td>
                         <td>` + value.nama_tender + `</td>
@@ -223,9 +227,9 @@ $(document).ready(function() {
                             <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
                         </td>
                     </tr>`
-            });
-            $("#data-leads").html(leads);
-        }
+                });
+                $("#data-leads").html(leads);
+            }
+        });
     });
-});
 </script>
