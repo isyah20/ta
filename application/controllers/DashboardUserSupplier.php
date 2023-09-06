@@ -35,6 +35,31 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function addToLeads($id){
+        $id_exists = $this->Supplier_model->isIdPemenangExists($id);
+
+        if ($id_exists) {
+            echo 'ID sudah ada di database.';
+        } else {
+            $data = [
+                "id_pemenang" => $id,
+            ];
+            
+            $this->db->insert('data_leads', $data);
+        }
+        $response = array(
+	        'Success' => true,
+	        'Info' => 'Preferensi tender berhasil disimpan.',
+	    );
+
+	    $this->output
+	         ->set_status_header(200)
+	         ->set_content_type('application/json')
+	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	         ->_display();
+	    exit;
+    }
+
     public function dataLeads()
     {
         $data = [
@@ -47,17 +72,56 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function formDataLeads()
+    public function getDataLeads()
     {
+        $data = $this->Supplier_model->getDataLeads();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function editDataLeads($id)
+    {
+        $lead = $this->Supplier_model->getDataLeadById($id);
+
         $data = [
             'title' => 'Dashboard'
         ];
 
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
-        $this->load->view('dashboard/supplier/form_leads');
+        $this->load->view('dashboard/supplier/form_leads', $lead);
         $this->load->view('templates/footer');
     }
+
+    public function updateDataLeads(){
+        $id_lead = $_POST['id_lead']; 
+        $telp = $_POST['no_telepon']; 
+        $nama = $_POST['nama']; 
+        $email = $_POST['email']; 
+        
+        $dataTelp = array();
+        $dataEmail = array();
+        $index = 0;
+        
+        foreach ($telp as $dataNoTelp) { 
+            array_push($dataTelp, array(
+                'no_telepon' => $dataNoTelp,
+                'nama' => $nama[$index],
+            ));
+            
+            $index++;
+        }
+        
+        
+        $sql = $this->SiswaModel->save_batch($data); 
+        if ($sql) { // Jika sukses
+            $this->Supplier_model->updateCompletedDataLead($id_lead, 1);
+            echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('index.php/siswa')."';</script>";
+        } else { // Jika gagal
+            echo "<script>alert('Data gagal disimpan');window.location = '".base_url('index.php/siswa/form')."';</script>";
+        }
+    }
+    
 
     public function CRM()
     {

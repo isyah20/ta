@@ -352,7 +352,7 @@ class Tender_model extends CI_Model
         else if ($sort == '3') $order = "tgl_pemenang DESC";
         else if ($sort == '4') $order = "tgl_pemenang ASC";
 
-        $sql = "SELECT kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
+        $sql = "SELECT id_pemenang,kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
                 FROM preferensi,pemenang
                 INNER JOIN lpse ON pemenang.id_lpse=lpse.id_lpse
                 INNER JOIN jenis_tender ON pemenang.jenis_tender=jenis_tender.id_jenis
