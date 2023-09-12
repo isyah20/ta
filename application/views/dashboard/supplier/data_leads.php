@@ -12,7 +12,7 @@
     .thead {
         color: #fff;
         background-color: #E05151;
-        text-align: center;
+        text-align: left;
     }
 
     tbody {
@@ -45,7 +45,10 @@
         color: #fff;
     }
 
-    .btn-outline-danger {}
+    .underlined {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
     .card-body {
         margin-top: 20px;
@@ -72,7 +75,19 @@
         font-size: 1rem;
     }
 
-    
+    .toggle-button {
+        padding: 10px;
+        background-color: #059669;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5rem;
+    }
+
+    /* Style untuk ikon visibility */
+    .toggle-button i {
+        margin-left: 10px;
+    }
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -167,36 +182,34 @@
                 <table class="table table-striped custom-table-container">
                     <thead class="thead">
                         <tr>
+                            <th></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama Perusahaan</th>
-                            <th class="custom-padding">Tender Yang Dimenangkan</th>
-                            <th class="custom-padding">Nilai HPS</th>
                             <th class="custom-padding">NPWP</th>
-                            <th class="custom-padding">Contact person</th>
+                            <th class="custom-padding">Email</th>
+                            <th class="custom-padding">No.Telp/WA</th>
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <!-- <tr>
+                        <tr>
                             <th></th>
                             <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td>jasa konsultasi</td>
-                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><u>08123123456 (Joko)</u></td>
-                            <td> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
                         </tr>
                         <tr>
                             <th></th>
                             <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td>jasa konsultasi</td>
-                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><u>08123123456 (Joko)</u></td>
-                            <td> <a style="px: -0.75rem; py: -0.75rem;" href="#" class="btn btn-danger">Lengkapi Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
-                        </tr> -->
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -204,7 +217,7 @@
     </div>
 </section>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
@@ -219,7 +232,6 @@
                         <td>` + rowNumber + `</td>
                         <td>` + value.nama_pemenang + `</td>
                         <td>` + value.nama_tender + `</td>
-                        <td>` + value.nilai_hps + `</td>
                         <td>` + value.npwp + `</td>
                         <td>` + value.completed + `</td>
                         <td>
@@ -232,4 +244,4 @@
             }
         });
     });
-</script>
+</script>-->
