@@ -191,7 +191,7 @@ class DashboardUserSupplier extends CI_Controller
         }
         ?>
         <p class="d-none" id="chart1"><?php echo json_encode($totaldata) ?></p>
-<?php
+    <?php
     }
 
     //     public function fetch()

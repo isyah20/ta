@@ -126,6 +126,7 @@ $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['suplier/form-leads/(:num)'] = 'DashboardUserSupplier/editDataLeads/$1';
 $route['suplier/crm'] = 'DashboardUserSupplier/CRM';
 $route['suplier/statistik'] = 'DashboardUserSupplier/datastatistik';
+$route['marketing'] = 'DashboardUserMarketing';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';
 $route['asosiasi'] = 'DashboardUserAsosiasi';
