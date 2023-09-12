@@ -63,6 +63,7 @@ class DashboardUser extends CI_Controller
                 $notif = null;
             }
         } catch (ClientException $e) {
+            // die;
             $notif = null;
         }
 
@@ -175,6 +176,8 @@ class DashboardUser extends CI_Controller
         $data = [
             'title' => 'Dashboard'
         ];
+        var_dump($data);
+        // die;
 
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');

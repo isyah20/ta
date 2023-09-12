@@ -86,7 +86,7 @@ class WilayahModel extends CI_Model
     public function getWilayahByName($nama)
     {
         $nama = str_replace('%20', ' ', $nama);
-        return $this->db->query("SELECT id_wilayah FROM wilayah WHERE wilayah='{$nama}'");
+        return $this->db->query("SELECT id_wilayah FROM wilayah WHERE wilayah='{$nama}'")->result();
         
         /*$response = $this->client->request('POST', 'wilayah/getWilayahByName', [
             'form_params' => [

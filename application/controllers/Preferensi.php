@@ -187,6 +187,7 @@ class Preferensi extends CI_Controller
                  
         $response = array(
 	        'Success' => true,
+            
 	        'Info' => 'Preferensi tender berhasil disimpan.',
 	    );
 
