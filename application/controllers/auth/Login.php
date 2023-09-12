@@ -28,6 +28,8 @@ class Login extends CI_Controller
             redirect('');
         } else {
             $google_client = new Google\Client();
+            // $google_client->setClientId('397353161605-icd30d2vnjh3tngrm47ngq2iuuq9i7pr.apps.googleusercontent.com'); // ClientID
+            // $google_client->setClientSecret('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'); // Client Secret Key
             $google_client->setClientId('397353161605-icd30d2vnjh3tngrm47ngq2iuuq9i7pr.apps.googleusercontent.com'); // ClientID
             $google_client->setClientSecret('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'); // Client Secret Key
             $google_client->setRedirectUri(base_url() . 'login'); // Redirect Uri
@@ -48,8 +50,8 @@ class Login extends CI_Controller
                         $result = json_decode($response->getBody()->getContents(), true);
                         if ($result['status'] == 200) {
                             $userId = $result['data']['id_pengguna'];
-                            set_cookie('id_pengguna', $userId, time()+86400);
-                            
+                            set_cookie('id_pengguna', $userId, time() + 86400);
+
                             $data_session = [
                                 'id_pengguna' => $userId,
                                 'nama' => $result['data']['nama'],
@@ -152,8 +154,8 @@ class Login extends CI_Controller
                     if ((int) $userCat != UserCategory::ADMIN) {
                         $userStatus = $this->updateUserType($userSts, (int) $userId);
                     }
-                    
-                    set_cookie('id_pengguna', $userId, time()+86400);
+
+                    set_cookie('id_pengguna', $userId, time() + 86400);
 
                     $data_session = [
                         'id_pengguna' => $userId,
@@ -243,7 +245,7 @@ class Login extends CI_Controller
         $this->session->unset_userdata('access_token');
         $this->session->unset_userdata('user_preferensi');
         delete_cookie('id_pengguna');
-        
+
         redirect('');
     }
 
@@ -288,10 +290,10 @@ class Login extends CI_Controller
                     'auth' => $this->client->getConfig('headers')['auth'],
                 ]
             );
-            
+
             $userId = json_decode($response->getBody()->getContents(), true)['data']['id_pengguna'];
-            set_cookie('id_pengguna', $userId, time()+86400);
-            
+            set_cookie('id_pengguna', $userId, time() + 86400);
+
             $data_session = [
                 'id_pengguna' => $userId,
                 'nama' => $params['form_params']['nama'],

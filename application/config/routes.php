@@ -637,6 +637,12 @@ $route['npwp'] = 'profilePengguna/updateNpwp';
 //restAPI route for paket pembelian
 $route['pembayaran/paketpembelian'] = 'Pembayaran/paketPembelian';
 
+// API Mobile
+$route['api-mobile/login'] = 'api-mobile/ApiAuth/login';
+$route['api-mobile/regist'] = 'api-mobile/ApiAuth/regist';
+$route['api-mobile/complete-profil'] = 'api-mobile/ApiAuth/completeProfil';
+
+
 //Admin
 // $route['admin'] = 'admin/admin';
 // $route['pengguna'] = 'admin/pengguna';

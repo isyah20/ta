@@ -57,6 +57,7 @@ class LupaPassword extends CI_Controller
                 $config['crlf'] = "\r\n";
                 $config['newline'] = "\r\n";
                 $config['smtp_crypto'] = "ssl"; //pengaturan smtp
+                // $config['smtp_crypto'] = "tls"; //pengaturan smtp
                 $config['wordwrap'] = true;
 
                 //memanggil library email dan set konfigurasi untuk pengiriman email
