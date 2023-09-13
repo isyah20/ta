@@ -187,7 +187,6 @@
         </div>
     </div>
 
-
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
@@ -227,9 +226,8 @@
             </div>
         </div>
     </div>
-
     <div class="col-12 py-5">
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px;">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-0">
@@ -282,12 +280,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

@@ -217,10 +217,130 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="popup" id="popup">
+                    <div class="popup-content">
+                        <span class="popup-close" id="popup-close">&times;</span>
+                        <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
+                        <h2>Contact Person</h2>
+                        <p>PT Telekomunikasi Indonesia</p>
+                        <table class="table table-striped popup-table">
+                            <thead class="popup-thead">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Posisi</th>
+                                    <th>Email</th>
+                                    <th>No. Telp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td>joko</td>
+                                <td>HRD</td>
+                                <td>hrd@telkom.co.id</td>
+                                <td>0811-2345-6666</td>
+                            </tbody>
+                        </table>
+                        <button class="popup-button" id="popup-close-button">Tutup</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup = document.getElementById('popup');
+        const closeButton = document.getElementById('popup-close');
+        const closePopupButton = document.getElementById('popup-close-button');
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        closeButton.addEventListener('click', closePopup);
+        closePopupButton.addEventListener('click', closePopup);
+    });
+</script>
+<style>
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*.popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 50px;
+        cursor: pointer;
+    }*/
+
+    .popup-button {
+        background-color: red;
+        color: white;
+        padding: 10px 180px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .popup-table {
+        padding: 0.5rem 0.5rem;
+        margin-top: 20px;
+    }
+
+    .popup img {
+        margin-top: -5rem;
+    }
+
+    body.modal-open {
+        overflow: hidden;
+    }
+
+    .popup-thead {
+        font-size: small;
+        margin-top: 2rem;
+    }
+</style>
+
+<script>
+    const popup = document.getElementById('popup');
+    const popupClose = document.getElementById('popup-close');
+    const toggleButton = document.querySelector('.toggle-button');
+
+    toggleButton.addEventListener('click', () => {
+        popup.style.display = 'block';
+        document.body.classList.add('modal-open');
+    });
+
+    popupClose.addEventListener('click', () => {
+        popup.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    });
+</script>
+
 
 <!-- <script>
     $(document).ready(function() {
