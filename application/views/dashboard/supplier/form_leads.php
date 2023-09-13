@@ -349,7 +349,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 text-center py-3">
+                        <div class="col-12 py-3">
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -361,10 +361,26 @@
                                         </div>
 
                                         <div class="modal-body border-0">
-                                            <h3 class="modal-title" id="exampleModalLabel">Mau kami bantu
+                                            <h3 class="modal-title" id="exampleModalLabel">Input Marketing
                                             </h3>
-                                            <p>carikan informasi tentang perusahaan ini ?</p>
-                                            <img style="width: 300px;" src="<?= base_url("assets/img/ilustrasi-popup.png") ?>" alt="Popup">
+                                            <p> Tambahkan untuk memasarkan produkmu</p>
+                                            <div class="input-popup">
+                                                <form class="row g-3 align-content-center">
+                                                    <div class="col-12">
+                                                        <label for="inputCity" class="form-label">No. Telp/WA</label>
+                                                        <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label for="inputCity" class="form-label">No. Telp/WA</label>
+                                                        <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label for="inputCity" class="form-label">No. Telp/WA</label>
+                                                        <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
+                                                    </div>
+
+                                                </form>
+                                            </div>
                                             <div class="d-flex justify-content-start mt-3 gap-2">
                                                 <div></div>
                                                 <div class="link flex-row align-items-center w-100">
