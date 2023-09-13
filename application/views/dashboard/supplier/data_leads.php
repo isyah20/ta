@@ -35,7 +35,6 @@
         align-items: center;
         color: white;
         font-size: 15px;
-        font-weight: bold;
     }
 
     .custom-table-container {
@@ -83,7 +82,6 @@
     }
 
     .toggle-button {
-        margin-left: 40px;
         padding: 5px;
         background-color: #059669;
         color: #fff;
@@ -94,20 +92,6 @@
     /* Style untuk ikon visibility */
     .toggle-button i {
         margin-left: 5px;
-    }
-
-    .underlined-text {
-        text-decoration: underline;
-    }
-
-    .custom-icon {
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .custom-icon i {
-        margin-right: 5px;
-        /* Jarak antara ikon dan teks */
     }
 </style>
 
@@ -126,13 +110,15 @@
                 <div class="card-select">
                     <div class="select-custom">
                         <div class="ro"></div>
-                        <select class="form-select-custom" aria-label="Default select example">
-                            <option selected><span class="custom-icon"><img src="<?= base_url('assets\img\pajamas_status.svg') ?>" alt=""></img></span>Wilayah : Jawa Barat</option>
+                        <select class="form-select-custom" aria-label="Default select example" style="color: #E05151; border-color: #E05151;">
+                            <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
+                            <option selected>Wilayah : Jawa Barat</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
                         <select class="form-select-custom" aria-label="Default select example">
+                            <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
                             <option selected>LPSE</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -150,7 +136,7 @@
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;"> <!-- Tambahkan margin-right untuk memberikan jarak antara gambar dan angka -->
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px;">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
                                 </p>
                             </div>
@@ -167,7 +153,7 @@
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px;">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
                                 </p>
                             </div>
@@ -184,7 +170,7 @@
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px;">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
                                 </p>
                             </div>
@@ -216,132 +202,25 @@
                             <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><span class="underlined-text">office@telkom.co.id</span></td>
-                            <td><span class="underlined-text">0274 7471 234 (Office)</span><button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
                         </tr>
                         <tr>
                             <th></th>
-                            <td><span class="rounded">2</span></td>
+                            <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><span class="underlined-text">office@telkom.co.id</span></td>
-                            <td><span class="underlined-text">0274 7471 234 (Office)</span><button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="popup" id="popup">
-                    <div class="popup-content">
-                        <span class="popup-close" id="popup-close">&times;</span>
-                        <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
-                        <h2>Contact Person</h2>
-                        <p>PT Telekomunikasi Indonesia</p>
-                        <table class="table table-striped popup-table">
-                            <thead class="popup-thead">
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Posisi</th>
-                                    <th>Email</th>
-                                    <th>No. Telp</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <td>joko</td>
-                                <td>HRD</td>
-                                <td>hrd@telkom.co.id</td>
-                                <td>0811-2345-6666</td>
-                            </tbody>
-                        </table>
-                        <button class="popup-button">Tutup</button>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 </section>
-
-<style>
-    .popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 999;
-    }
-
-    .popup-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-        max-width: 80%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /*.popup-close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 50px;
-        cursor: pointer;
-    }*/
-
-    .popup-button {
-        background-color: red;
-        color: white;
-        padding: 10px 180px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
-
-    .popup-table {
-        padding: 0.5rem 0.5rem;
-        margin-top: 20px;
-    }
-
-    .popup img {
-        margin-top: -5rem;
-    }
-
-    body.modal-open {
-        overflow: hidden;
-    }
-
-    .popup-thead {
-        font-size: small;
-        margin-top: 2rem;
-    }
-</style>
-
-<script>
-    const popup = document.getElementById('popup');
-    const popupClose = document.getElementById('popup-close');
-    const toggleButton = document.querySelector('.toggle-button');
-
-    toggleButton.addEventListener('click', () => {
-        popup.style.display = 'block';
-        document.body.classList.add('modal-open');
-    });
-
-    popupClose.addEventListener('click', () => {
-        popup.style.display = 'none';
-        document.body.classList.remove('modal-open');
-    });
-</script>
-
 
 <!-- <script>
     $(document).ready(function() {
@@ -355,8 +234,8 @@
                     var rowNumber = index + 1;
                     leads +=
                         `<tr>
-                        <td><span class="rounded">` + rowNumber + `</span></td>
-                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + rowNumber + `</td>
+                        <td>` + value.nama_pemenang + `</td>
                         <td>` + value.nama_tender + `</td>
                         <td>` + value.npwp + `</td>
                         <td>` + value.completed + `</td>
@@ -370,4 +249,4 @@
             }
         });
     });
-</script>
+</script>-->
