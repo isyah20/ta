@@ -204,7 +204,11 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
-                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td>
+                                <button class="btn btn-outline-warning" data-toggle="modal" data-target="#detailModal">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
                         </tr>
                         <tr>
                             <th></th>
@@ -213,8 +217,13 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
-                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td>
+                                <button class="btn btn-outline-warning" data-toggle="modal" data-target="#detailModal">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
                         </tr>
+                        
                     </tbody>
                 </table>
                 <div class="popup" id="popup">
@@ -370,3 +379,5 @@
         });
     });
 </script>-->
+
+
