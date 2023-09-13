@@ -314,7 +314,7 @@
                                         <label for="inputCity" class="form-label">Nama Kontak</label>
                                         <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
                                     </div>
-                                    <div class="row g-3" id="container-telp"></div>
+                                    <div class="row g-2" id="container-telp"></div>
                                     <button type="button" onclick="tambahkanKolomTelp()" class="custom-button justify-content-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                             <path d="M19.4583 10.2083H16.5416V16.0417H10.7083V18.9583H16.5416V24.7917H19.4583V18.9583H25.2916V16.0417H19.4583V10.2083ZM18 2.91667C9.94996 2.91667 3.41663 9.45001 3.41663 17.5C3.41663 25.55 9.94996 32.0833 18 32.0833C26.05 32.0833 32.5833 25.55 32.5833 17.5C32.5833 9.45001 26.05 2.91667 18 2.91667ZM18 29.1667C11.5687 29.1667 6.33329 23.9313 6.33329 17.5C6.33329 11.0688 11.5687 5.83334 18 5.83334C24.4312 5.83334 29.6666 11.0688 29.6666 17.5C29.6666 23.9313 24.4312 29.1667 18 29.1667Z" fill="#CCCCCC" />
@@ -349,10 +349,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 text-center py-3">
-
-
-                            <!-- Modal -->
+                        <div class="col-12 py-3">
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -364,10 +361,26 @@
                                         </div>
 
                                         <div class="modal-body border-0">
-                                            <h3 class="modal-title" id="exampleModalLabel">Mau kami bantu
+                                            <h3 class="modal-title" id="exampleModalLabel">Input Marketing
                                             </h3>
-                                            <p>carikan informasi tentang perusahaan ini ?</p>
-                                            <img style="width: 300px;" src="<?= base_url("assets/img/ilustrasi-popup.png") ?>" alt="Popup">
+                                            <p> Tambahkan untuk memasarkan produkmu</p>
+                                            <div class="input-popup">
+                                                <form class="row g-3 align-content-center">
+                                                    <div class="col-12">
+                                                        <label for="inputCity" class="form-label">No. Telp/WA</label>
+                                                        <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label for="inputCity" class="form-label">No. Telp/WA</label>
+                                                        <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label for="inputCity" class="form-label">No. Telp/WA</label>
+                                                        <input type="text" class="form-control" id="inputCity" placeholder="Ketik disini.....">
+                                                    </div>
+
+                                                </form>
+                                            </div>
                                             <div class="d-flex justify-content-start mt-3 gap-2">
                                                 <div></div>
                                                 <div class="link flex-row align-items-center w-100">
