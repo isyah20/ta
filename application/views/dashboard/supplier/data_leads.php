@@ -234,10 +234,11 @@
                 <div class="popup" id="popup">
                     <div class="popup-content">
                         <span class="popup-close" id="popup-close">&times;</span>
+                        <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
                         <h2>Contact Person</h2>
                         <p>PT Telekomunikasi Indonesia</p>
-                        <table class="table table-striped custom-table-container">
-                            <thead>
+                        <table class="table table-striped popup-table">
+                            <thead class="popup-thead">
                                 <tr>
                                     <th>Nama</th>
                                     <th>Posisi</th>
@@ -284,28 +285,48 @@
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Menengahkan konten secara horizontal */
+        justify-content: center;
     }
 
-    .popup-close {
+    /*.popup-close {
         position: absolute;
         top: 10px;
         right: 10px;
-        font-size: 20px;
+        font-size: 50px;
         cursor: pointer;
-    }
+    }*/
 
     .popup-button {
         background-color: red;
         color: white;
-        padding: 10px 20px;
+        padding: 10px 180px;
         border: none;
         border-radius: 5px;
         margin-top: 20px;
     }
 
+    .popup-table {
+        padding: 0.5rem 0.5rem;
+        margin-top: 20px;
+    }
+
+    .popup img {
+        margin-top: -5rem;
+        /* Mengatur margin top untuk gambar */
+    }
+
     /* CSS untuk latar belakang yang tidak berubah */
     body.modal-open {
         overflow: hidden;
+    }
+
+    .popup-thead {
+        font-size: small;
+        margin-top: 2rem;
     }
 </style>
 
