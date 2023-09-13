@@ -222,7 +222,7 @@
     </div>
 </section>
 
-<!-- <script>
+<script>
     $(document).ready(function() {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
@@ -234,8 +234,8 @@
                     var rowNumber = index + 1;
                     leads +=
                         `<tr>
-                        <td>` + rowNumber + `</td>
-                        <td>` + value.nama_pemenang + `</td>
+                        <td><span class="rounded">` + rowNumber + `</span></td>
+                        <td>` + value.nama_perusahaan + `</td>
                         <td>` + value.nama_tender + `</td>
                         <td>` + value.npwp + `</td>
                         <td>` + value.completed + `</td>
@@ -249,4 +249,4 @@
             }
         });
     });
-</script>-->
+</script>

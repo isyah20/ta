@@ -336,7 +336,7 @@ class Supplier_model extends CI_Model
     }
 
     public function getDataLeads(){
-        $sql = "SELECT id_lead, nama_pemenang, nama_tender, nilai_hps, npwp, completed, alamat
+        $sql = "SELECT id_lead, id_pemenang, nama_perusahaan, npwp, profil
         FROM data_leads, pemenang 
         WHERE data_leads.id_pemenang = pemenang.id_pemenang";
 
