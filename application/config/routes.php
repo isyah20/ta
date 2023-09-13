@@ -225,6 +225,7 @@ $route['api/getKatalogPemenangTerbaruByPengguna1'] = 'Tender/getKatalogPemenangT
 $route['api/getJumKatalogTenderTerbaru'] = 'Tender/getJumKatalogTenderTerbaru';
 $route['api/getJumKatalogTenderTerbaruByPengguna/(:num)'] = 'Tender/getJumKatalogTenderTerbaruByPengguna/$1';
 $route['api/getJumKatalogTenderTerbaruByPengguna1'] = 'Tender/getJumKatalogTenderTerbaruByPengguna1';
+$route['api/getJumKatalogTenderTerbaruByPengguna/(:num)/(:num)'] = 'Tender/getJumKatalogTenderTerbaruByPengguna/$1/$2';
 $route['api/getJumKatalogPemenangTerbaruByPengguna/(:num)'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna/$1';
 $route['api/getJumKatalogPemenangTerbaruByPengguna1'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna1';
 $route['api/getListLokasiPekerjaan'] = 'Tender/getListLokasiPekerjaan';
@@ -395,6 +396,10 @@ $route['api/pengguna/check-user-trial'] = 'api/ApiPengguna/checkAndUpdateUserTyp
 $route['api/verify/status/(:any)'] = 'api/ApiPengguna/verifyCheck/$1';
 $route['api/verify/(:any)'] = 'api/ApiPengguna/verify/$1';
 $route['api/verifySend'] = 'api/ApiPengguna/verifySend';
+
+// fixed one (maybe)
+$route['api/cekVerif'] = 'api/ApiPengguna/checkVerif/$1';
+$route['api/verifikasi'] = 'api/ApiPengguna/verif/$1';
 
 // restAPI Detail Tender
 $route['api/detailtender'] = 'api/ApiDetailTender/index';

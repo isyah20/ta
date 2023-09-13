@@ -72,14 +72,31 @@ class Pengguna_model extends CI_Model
         return $query->row_array();
     }
 
+    public function cekVerif($email)
+    {
+        $this->db->select('pengguna.nama, pengguna.email, pengguna.kategori, pengguna.status, pengguna.token, pengguna.is_active, pengguna.whatsapp_status');
+        $this->db->from('pengguna');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function verifUser($email)
+    {
+        $this->db->set('is_active', 1);
+        $this->db->where('email', $email);
+        $this->db->update('pengguna');
+        return $this->db->get_where('pengguna', ['email' => $email])->row_array();
+    }
+
     public function verify($data)
     {
         // TODO: dikomen sementara untuk test lengkapi profile
-        // $this->db->set('is_active', 1);
+        $this->db->set('is_active', $data['is_active']);
         $this->db->where('email', $data['email']);
-        $this->db->where('token', $data['token']);
+        // $this->db->where('token', $data['token']);
         $this->db->update('pengguna', $data);
-        $this->db->select('pengguna.id_pengguna, pengguna.nama, pengguna.email, pengguna.kategori, pengguna.jenis_perusahaan, pengguna.status, pengguna.whatsapp_status');
+        $this->db->select('pengguna.id_pengguna, pengguna.nama, pengguna.email, pengguna.kategori, pengguna.jenis_perusahaan, pengguna.status, pengguna.is_active, pengguna.whatsapp_status');
         return $this->db->get_where('pengguna', ['email' => $data['email']])->row_array();
     }
 

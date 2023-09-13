@@ -571,7 +571,7 @@
         };
 
         $.ajax({
-        url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna1",
+        url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna/" + id_pengguna,
         type: "POST",
         dataType: "JSON",
         data: params,

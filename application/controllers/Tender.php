@@ -209,7 +209,7 @@ class Tender extends CI_Controller
         $output = shell_exec("python3 tender_terbaru.py");
         print_r($output);
     }
-    
+
     public function getLokasiTenderTerbaru()
     {
         chdir('/www/wwwroot/tenderplus.id/python');
@@ -423,7 +423,7 @@ class Tender extends CI_Controller
         $output = shell_exec("python3 pemenang_baru.py");
         print_r($output);
     }
-    
+
     public function getTenderPemenang()
     {
         chdir('/www/wwwroot/tenderplus.id/python');
@@ -551,7 +551,7 @@ class Tender extends CI_Controller
                                 'link' => $url
                             ];
                         }
-                        
+
                         if ($jum_tender->jumlah > $this->limit_paket) {
                             $pesan = "Halo *{$penerima->nama}*,\n\nTerdapat *{$jum_tender->jumlah} paket baru* yang dapat Anda menangkan bersama TenderPlus.\nLihat selengkapnya pada halaman dashboard Anda.\nBerikut ini {$this->limit_paket} paket di antaranya:\n{$paket}";
                         } else {
@@ -677,7 +677,7 @@ class Tender extends CI_Controller
                             'link' => $url
                         ];
                     }
-                    
+
                     if ($jum_tender->jumlah > $this->limit_paket) {
                         $pesan = "Halo *{$penerima->nama}*,\n\nTerdapat *{$jum_tender->jumlah} paket baru* yang dapat Anda menangkan bersama TenderPlus.\nLihat selengkapnya pada halaman dashboard Anda.\nBerikut ini {$this->limit_paket} paket di antaranya:\n{$paket}";
                     } else {
@@ -785,7 +785,7 @@ class Tender extends CI_Controller
                                 'link' => $url
                             ];
                         }
-                        
+
                         if ($jum_tender->jumlah > $this->limit_paket) {
                             $pesan = "Halo *{$penerima->nama}*,\n\nTerdapat *{$jum_tender->jumlah} pemenang tender baru* yang dapat Anda follow up bersama TenderPlus.\nLihat selengkapnya pada halaman dashboard Anda.\nBerikut ini {$this->limit_paket} pemenang tender di antaranya:\n{$paket}";
                         } else {
@@ -894,7 +894,7 @@ class Tender extends CI_Controller
                             'link' => $url
                         ];
                     }
-                    
+
                     if ($jum_tender->jumlah > $this->limit_paket) {
                         $pesan = "Halo *{$penerima->nama}*,\n\nTerdapat *{$jum_tender->jumlah} pemenang tender baru* yang dapat Anda follow up bersama TenderPlus.\nLihat selengkapnya pada halaman dashboard Anda.\nBerikut ini {$this->limit_paket} pemenang tender di antaranya:\n{$paket}";
                     } else {
@@ -970,8 +970,8 @@ class Tender extends CI_Controller
 
     public function getKatalogTenderTerbaruByPengguna($id_pengguna, $jum_tender)
     {
-        $page_size = $_GET['pageSize'];
-        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $page_size = $_POST['pageSize'];
+        $page_number = ($_POST['pageNumber'] - 1) * $page_size;
         $response = $this->Tender_model->getKatalogTenderTerbaruByPengguna($id_pengguna, $jum_tender, $page_number, $page_size)->result();
 
         $this->output
@@ -982,12 +982,26 @@ class Tender extends CI_Controller
 
         exit;
     }
-    
+
     public function getKatalogTenderTerbaruByPengguna1()
     {
-        parse_str(file_get_contents('php://input'), $data);
+        // parse_str(file_get_contents('php://input'), $data);
+        $data = [
+            'id_pengguna'   => 38,
+            'keyword'       => '',
+            'jenis_pengadaan' => '',
+            'nilai_hps_awal' => 0,
+            'nilai_hps_akhir' => 0,
+            'prov'          => '',
+            'kab'           => '',
+            'pageSize'      => 200,
+            'pageNumber'    => 10,
+            'sort'          => 1,
+        ];
         $response = $this->Tender_model->getKatalogTenderTerbaruByPengguna1($data)->result();
-
+        // var_dump($_SESSION[]);
+        // var_dump($response);
+        // die;
         $this->output
             ->set_status_header(200)
             ->set_content_type('application/json')
@@ -999,8 +1013,8 @@ class Tender extends CI_Controller
 
     public function getKatalogPemenangTerbaruByPengguna($id_pengguna, $jum_pemenang)
     {
-        $page_size = $_GET['pageSize'];
-        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $page_size = $_POST['pageSize'];
+        $page_number = ($_POST['pageNumber'] - 1) * $page_size;
         $response = $this->Tender_model->getKatalogPemenangTerbaruByPengguna($id_pengguna, $jum_pemenang, $page_number, $page_size)->result();
 
         $this->output
@@ -1011,7 +1025,7 @@ class Tender extends CI_Controller
 
         exit;
     }
-    
+
     public function getKatalogPemenangTerbaruByPengguna1()
     {
         parse_str(file_get_contents('php://input'), $data);
@@ -1051,10 +1065,12 @@ class Tender extends CI_Controller
 
         exit;
     }
-    
+
     public function getJumKatalogTenderTerbaruByPengguna1()
     {
         parse_str(file_get_contents('php://input'), $data);
+        var_dump($data);
+        die;
         $response = $this->Tender_model->getJumKatalogTenderTerbaruByPengguna1($data)->row();
 
         $this->output
@@ -1078,7 +1094,7 @@ class Tender extends CI_Controller
 
         exit;
     }
-    
+
     public function getJumKatalogPemenangTerbaruByPengguna1()
     {
         parse_str(file_get_contents('php://input'), $data);
@@ -1092,48 +1108,50 @@ class Tender extends CI_Controller
 
         exit;
     }
-    
-    public function getListLokasiPekerjaan(){
-	    $response = array(
-	      "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
-	      "results" => $this->Tender_model->getListLokasiPekerjaan(
-	      					$this->input->get("q"),
-	      					$this->input->get("id_pengguna"),
-	      					$this->input->get("jenis"),
-	      					$this->input->get("page") * $this->input->get("page_limit"),
-	      					$this->input->get("page_limit")
-	      			   )
-	    );
 
-	    $this->output
-	      	 ->set_status_header(200)
-	      	 ->set_content_type('application/json')
-	      	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-	      	 ->_display();
-	    exit;
-  	}
-  	
-  	public function getListJenisPengadaan(){
-	    $response = array(
-	      "total_count" => $this->Tender_model->getJumlahListJenisPengadaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
-	      "results" => $this->Tender_model->getListJenisPengadaan(
-	      					$this->input->get("q"),
-	      					$this->input->get("id_pengguna"),
-	      					$this->input->get("jenis"),
-	      					$this->input->get("page") * $this->input->get("page_limit"),
-	      					$this->input->get("page_limit")
-	      			   )
-	    );
+    public function getListLokasiPekerjaan()
+    {
+        $response = array(
+            // "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+            "results" => $this->Tender_model->getListLokasiPekerjaanTenderTerbaru(
+                $this->input->get("q"),
+                $this->input->get("id_pengguna"),
+                $this->input->get("jenis"),
+                $this->input->get("page") * $this->input->get("page_limit"),
+                $this->input->get("page_limit")
+            )
+        );
 
-	    $this->output
-	      	 ->set_status_header(200)
-	      	 ->set_content_type('application/json')
-	      	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-	      	 ->_display();
-	    exit;
-  	}
-  	
-  	/*public function index($id)
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
+
+    public function getListJenisPengadaan()
+    {
+        $response = array(
+            "total_count" => $this->Tender_model->getJumlahListJenisPengadaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+            "results" => $this->Tender_model->getListJenisPengadaan(
+                $this->input->get("q"),
+                $this->input->get("id_pengguna"),
+                $this->input->get("jenis"),
+                $this->input->get("page") * $this->input->get("page_limit"),
+                $this->input->get("page_limit")
+            )
+        );
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
+
+    /*public function index($id)
     {
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $explode = explode('/', $url);
