@@ -35,30 +35,30 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function addToLeads($id){
-        $id_exists = $this->Supplier_model->isIdPemenangExists($id);
+    // public function addToLeads($id){
+    //     $id_exists = $this->Supplier_model->isIdPemenangExists($id);
 
-        if ($id_exists) {
-            echo 'ID sudah ada di database.';
-        } else {
-            $data = [
-                "id_pemenang" => $id,
-            ];
+    //     if ($id_exists) {
+    //         echo 'ID sudah ada di database.';
+    //     } else {
+    //         $data = [
+    //             "id_pemenang" => $id,
+    //         ];
             
-            $this->db->insert('data_leads', $data);
-        }
-        $response = array(
-	        'Success' => true,
-	        'Info' => 'Preferensi tender berhasil disimpan.',
-	    );
+    //         $this->db->insert('data_leads', $data);
+    //     }
+    //     $response = array(
+	//         'Success' => true,
+	//         'Info' => 'Preferensi tender berhasil disimpan.',
+	//     );
 
-	    $this->output
-	         ->set_status_header(200)
-	         ->set_content_type('application/json')
-	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-	         ->_display();
-	    exit;
-    }
+	//     $this->output
+	//          ->set_status_header(200)
+	//          ->set_content_type('application/json')
+	//          ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	//          ->_display();
+	//     exit;
+    // }
 
     public function dataLeads()
     {
@@ -132,6 +132,18 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/supplier/crm');
+        $this->load->view('templates/footer');
+    }
+
+    public function marketing()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/marketing');
         $this->load->view('templates/footer');
     }
 
