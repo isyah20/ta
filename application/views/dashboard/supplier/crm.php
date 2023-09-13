@@ -106,10 +106,11 @@
   </div>
 </section>
 <section>
-  <div class="container-fluid pb-4 mx-4" id="scroll-marker">
-      <div class="row">
-        <div class="col-md-3 mx-3">
-          <div id="container1" style="height:1200px" class="box red" data-number="1">
+
+<div class="container-fluid pb-4 mx-4" id="scroll-marker">
+  <div class="row">
+    <div class="col">
+        <div id="container1" style="height:1200px" class="box red" data-number="1">
             <h4 class="pt-2">Perusahaan</h4>
               <div class="card" draggable="true">
                 <p>PT Cahaya Asia Ya Putra Dewa</p>
@@ -164,34 +165,105 @@
                 <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
               </div>
             </div>
-          </div>
         </div>
-        <div class="mx-3">
-          <div id="container2" class="box green" data-number="2">
-            <h4 class="pt-2">Container 2</h4>
-            <div class="card" draggable="true">
-              <p>Card 2</p>
+      
+    </div>
+    <div class="col">
+      <div class="row">
+          <div class="col">
+            <div class="mx-3">
+              <div id="container2" class="box green" data-number="2">
+                <h4 class="pt-2">Container 2</h4>
+                <div class="card" draggable="true">
+                  <p>Card 2</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mx-3">
+              <div id="container3" class="box blue" data-number="3">
+                <h4 class="pt-2">Container 3</h4>
+                <div class="card" draggable="true">
+                  <p>Card 3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mx-3">
+                <div id="container3" class="box blue" data-number="3">
+                  <h4 class="pt-2">Container 3</h4>
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mx-3">
-          <div id="container3" class="box blue" data-number="3">
-            <h4 class="pt-2">Container 3</h4>
-            <div class="card" draggable="true">
-              <p>Card 3</p>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mx-3">
-          <div id="container4" class="box orange" data-number="4">
-            <h4 class="pt-2">Container 4</h4>
-            <div class="card" draggable="true">
-              <p>Card 4</p>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 </section>
 
 <script>

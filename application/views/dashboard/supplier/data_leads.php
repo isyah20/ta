@@ -187,17 +187,17 @@
                 <table class="table table-striped custom-table-container">
                     <thead class="thead">
                         <tr>
-                            <th></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama Perusahaan</th>
                             <th class="custom-padding">NPWP</th>
                             <th class="custom-padding">Email</th>
                             <th class="custom-padding">No.Telp/WA</th>
+                            <th></th>
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <tr>
+                        <!-- <tr>
                             <th></th>
                             <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -214,7 +214,7 @@
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
                 <div class="popup" id="popup">
@@ -342,7 +342,7 @@
 </script>
 
 
-<!-- <script>
+<script>
     $(document).ready(function() {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
@@ -354,11 +354,12 @@
                     var rowNumber = index + 1;
                     leads +=
                         `<tr>
-                        <td>` + rowNumber + `</td>
-                        <td>` + value.nama_pemenang + `</td>
-                        <td>` + value.nama_tender + `</td>
+                        <td><span class="rounded">` + rowNumber + `</span></td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + value.npwp+ `</td>
                         <td>` + value.npwp + `</td>
-                        <td>` + value.completed + `</td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
                             <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
                             <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
@@ -369,4 +370,4 @@
             }
         });
     });
-</script>-->
+</script>
