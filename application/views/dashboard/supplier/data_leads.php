@@ -12,11 +12,13 @@
     .thead {
         color: #fff;
         background-color: #E05151;
-        text-align: center;
+        text-align: left;
+        font-size: 15px;
     }
 
     tbody {
-        text-align: center;
+        text-align: left;
+        font-size: 15px;
     }
 
     .green-text {
@@ -24,25 +26,34 @@
     }
 
     .rounded {
-        border-radius: 40%;
-        border-width: 5rem;
+        width: 25px;
+        height: 25px;
+        background-color: #553333;
+        border-radius: 10px 10px 10px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 15px;
     }
 
     .custom-table-container {
         border-radius: 10px 10px 10px 10px;
-        /* Radius sudut 10px */
         overflow: hidden;
-        /* Menghilangkan overflow jika ada */
         border: 1px solid var(--neutral-100, #F0E2E2);
-        /* Garis merah di sekitar tabel */
 
     }
 
     .btn-custom {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
         background-color: #EB650D;
         color: #fff;
+    }
+
+    .underlined {
+        border-collapse: collapse;
+        width: 100%;
     }
 
     .card-body {
@@ -68,6 +79,19 @@
         color: #CCCCCC;
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
+    }
+
+    .toggle-button {
+        padding: 5px;
+        background-color: #059669;
+        color: #fff;
+        border: none;
+        border-radius: 5rem;
+    }
+
+    /* Style untuk ikon visibility */
+    .toggle-button i {
+        margin-left: 5px;
     }
 </style>
 
@@ -163,36 +187,34 @@
                 <table class="table table-striped custom-table-container">
                     <thead class="thead">
                         <tr>
+                            <th></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama Perusahaan</th>
-                            <th class="custom-padding">Tender Yang Dimenangkan</th>
-                            <th class="custom-padding">Nilai HPS</th>
                             <th class="custom-padding">NPWP</th>
-                            <th class="custom-padding">Contact person</th>
+                            <th class="custom-padding">Email</th>
+                            <th class="custom-padding">No.Telp/WA</th>
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <!-- <tr>
+                        <tr>
                             <th></th>
-                            <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
+                            <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td>jasa konsultasi</td>
-                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><u>08123123456 (Joko)</u></td>
-                            <td> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
                         </tr>
                         <tr>
                             <th></th>
-                            <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
+                            <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td>jasa konsultasi</td>
-                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><u>08123123456 (Joko)</u></td>
-                            <td> <a style="px: -0.75rem; py: -0.75rem;" href="#" class="btn btn-danger">Lengkapi Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
-                        </tr> -->
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -200,22 +222,21 @@
     </div>
 </section>
 
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            var leads = "";
-            $.each(data, function(index, value) {
-                var rowNumber = index + 1;
-                leads += 
-                    `<tr>
+<!-- <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var leads = "";
+                $.each(data, function(index, value) {
+                    var rowNumber = index + 1;
+                    leads +=
+                        `<tr>
                         <td>` + rowNumber + `</td>
                         <td>` + value.nama_pemenang + `</td>
                         <td>` + value.nama_tender + `</td>
-                        <td>` + value.nilai_hps + `</td>
                         <td>` + value.npwp + `</td>
                         <td>` + value.completed + `</td>
                         <td>
@@ -223,9 +244,9 @@ $(document).ready(function() {
                             <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
                         </td>
                     </tr>`
-            });
-            $("#data-leads").html(leads);
-        }
+                });
+                $("#data-leads").html(leads);
+            }
+        });
     });
-});
-</script>
+</script>-->
