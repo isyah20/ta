@@ -263,7 +263,6 @@
 </section>
 
 <style>
-    /* CSS untuk popup */
     .popup {
         display: none;
         position: fixed;
@@ -288,7 +287,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* Menengahkan konten secara horizontal */
         justify-content: center;
     }
 
@@ -316,10 +314,8 @@
 
     .popup img {
         margin-top: -5rem;
-        /* Mengatur margin top untuk gambar */
     }
 
-    /* CSS untuk latar belakang yang tidak berubah */
     body.modal-open {
         overflow: hidden;
     }
