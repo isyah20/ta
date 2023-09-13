@@ -253,15 +253,28 @@
                                 <td>0811-2345-6666</td>
                             </tbody>
                         </table>
-                        <button class="popup-button">Tutup</button>
+                        <button class="popup-button" id="popup-close-button">Tutup</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </section>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup = document.getElementById('popup');
+        const closeButton = document.getElementById('popup-close');
+        const closePopupButton = document.getElementById('popup-close-button');
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        closeButton.addEventListener('click', closePopup);
+        closePopupButton.addEventListener('click', closePopup);
+    });
+</script>
 <style>
     .popup {
         display: none;
