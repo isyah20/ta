@@ -362,6 +362,18 @@ class Tender_model extends CI_Model
                 ORDER BY {$order}
                 LIMIT {$page_number},{$page_size}";
 
+        // query to insert to table data leads from table pemenang pemenang that has field of id pemenang, nama perusahaan, npmwp
+        // $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp) SELECT id_pemenang, nama_pemenang, npwp FROM pemenang WHERE npmw NOT IN (SELECT npwp FROM data_leads)";
+        $sql3 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp) 
+                SELECT id_pemenang, nama_pemenang, npwp
+                FROM pemenang_tender
+                WHERE npwp NOT IN (SELECT npwp FROM data_leads)
+                AND DATE(tgl_pemenang) = CURRENT_DATE";
+
+        $this->db->query($sql3);
+
+
+
         return $this->db->query($sql);
     }
 
