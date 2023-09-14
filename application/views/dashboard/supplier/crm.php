@@ -5,12 +5,8 @@
       display: flex;
       justify-content: flex-start;
          /* Mengatur kontainer agar sejajar ke kiri */
-      overflow-x: auto; 
+      overflow-x: hidden; 
         /* Mengaktifkan overflow horizontal jika kontainer melebihi lebar layar */
-    }
-    .row {
-      flex-wrap: nowrap;
-         /* Mencegah pemutaran baris ke bawah saat kontainer melebihi lebar layar */
     }
     .box {
       display: inline-block; /* Menjadikan kotak inline block */
@@ -18,21 +14,23 @@
       border: none; /* Menghapus border */
       border-radius: 5px;
       min-width: 250px; /* Mengatur lebar minimum untuk mencegah kontainer terlalu kecil */
-      height: 1000px;
+      height: 400px;
       max-height: calc(100vh - 40px); /* Mengatur tinggi maksimal untuk kontainer */
       overflow-y: auto;
     }
     .box .card {
-      width: calc(100% - 50px); /* Mengatur lebar kartu 100% minus 50px untuk jarak 25px di setiap sisi kartu */
-      height: 100px; /* Anda dapat menyesuaikan tinggi kartu sesuai kebutuhan Anda */
+      width: 250px; /* Mengatur lebar kartu 100% minus 50px untuk jarak 25px di setiap sisi kartu */
+      height: 60px; /* Anda dapat menyesuaikan tinggi kartu sesuai kebutuhan Anda */
       background-color: white;
       color: black;
-      border-radius: 5px;       
-      text-align: center;
-      line-height: 100px;
+      border-radius: 5px;
       cursor: grab;
-      margin: 25px; /* Menambahkan margin 25px ke semua sisi kartu */
+      margin:10px;
     }
+    .card p {
+    margin: 0;
+    padding: 3px 3px 0px 3px ;
+  }
   .red {
     background-color: #ebcffc;
   }
@@ -65,7 +63,7 @@
   /* Menambahkan titik berukuran lebih besar */
   .box h4 {
     position: relative; /* Menjadikan posisi relatif untuk judul */
-    padding-left: 30px; /* Menambahkan ruang di sebelah kiri judul */
+    padding-left: 30px;
   }
 
   .box h4::before { 
@@ -78,7 +76,7 @@
     top: 50%; /* Titik sejajar dengan judul secara vertikal */
     transform: translateY(
       -50%
-    ); /* Mengatur posisi vertikal titik secara tepat di tengah judul */
+    ); 
   }
 
   /* Memberikan warna berbeda untuk setiap kontainer */
@@ -100,89 +98,172 @@
 
 <section class="py-5">
   <div class="mt-5 px-5">
-    <h2>Selamat Datang!</h2>
-    <h2>Yuk Segera Bagi Tugas Tim Marketingmu</h2>
+    <h3>Selamat Datang!</h3>
+    <h3>Yuk Segera Bagi Tugas Tim Marketingmu</h3>
+  </div>
+  <div class="col-md-3 pt-3 px-5">
+   <button class="btn btn-primary" id="addContainerBtn">Tambahkan Anggota</button>
   </div>
 </section>
 <section>
-  <div class="container-fluid py-4 mx-4" id="scroll-marker">
-      <div class="row">
-        <div class="col-md-3 mx-3">
-          <div id="container1" class="box red" data-number="1">
+
+<div class="container-fluid pb-4 mx-4" id="scroll-marker">
+  <div class="row">
+    <div class="col">
+        <div id="container1" style="height:1200px" class="box red" data-number="1">
             <h4 class="pt-2">Perusahaan</h4>
               <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa Lingga</p>
-                <!-- <p class="circle"></p> -->
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
               </div>
               <div class="card" draggable="true">
-                <p>Card 1</p>
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
               </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+              <div class="card" draggable="true">
+                <p>PT Cahaya Asia Ya Putra Dewa</p>
+                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+              </div>
+            </div>
+        </div>
+      
+    </div>
+    <div class="col">
+      <div class="row">
+          <div class="col">
+            <div class="mx-3">
+              <div id="container2" class="box green" data-number="2">
+                <h4 class="pt-2">Container 2</h4>
+                <div class="card" draggable="true">
+                  <p>Card 2</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mx-3">
+              <div id="container3" class="box blue" data-number="3">
+                <h4 class="pt-2">Container 3</h4>
+                <div class="card" draggable="true">
+                  <p>Card 3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mx-3">
+                <div id="container3" class="box blue" data-number="3">
+                  <h4 class="pt-2">Container 3</h4>
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
               <div class="card" draggable="true">
                 <p>Card 2</p>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
               <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>Card 3</p>
+                <p>Card 2</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="mx-3">
-          <div id="container2" class="box green" data-number="2">
-            <h4 class="pt-2">Container 2</h4>
-            <div class="card" draggable="true">
-              <p>Card 2</p>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mx-3">
-          <div id="container3" class="box blue" data-number="3">
-            <h4 class="pt-2">Container 3</h4>
-            <div class="card" draggable="true">
-              <p>Card 3</p>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mx-3">
-          <div id="container4" class="box orange" data-number="4">
-            <h4 class="pt-2">Container 4</h4>
-            <div class="card" draggable="true">
-              <p>Card 4</p>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mx-3">
-          <div id="container5" class="box purple" data-number="5">
-            <h4 class="pt-2">Container 5</h4>
-            <div class="card" draggable="true">
-              <p>Card 5</p>
-            </div>
-          </div>
-        </div>
-        <div class="mx-3">
-          <div id="container5" class="box purple" data-number="5">
-            <h4 class="pt-2">Container 5</h4>
-            <div class="card" draggable="true">
-              <p>Card 5</p>
+        <div class="col">
+          <div class="mx-3">
+            <div id="container2" class="box green" data-number="2">
+              <h4 class="pt-2">Container 2</h4>
+              <div class="card" draggable="true">
+                <p>Card 2</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 </section>
 
 <script>
@@ -237,7 +318,7 @@
           cardCount || 0
         })`;
       }
-
+s
       // Fungsi untuk memantau perubahan jumlah card dalam kontainer
       function observeCardChanges(container) {
         const observer = new MutationObserver((mutationsList) => {
@@ -282,4 +363,5 @@
 
       // Memulai pengecekan dan pemindahan card
       checkAndMoveCard();
+
     </script>

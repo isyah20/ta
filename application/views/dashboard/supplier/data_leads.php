@@ -12,11 +12,13 @@
     .thead {
         color: #fff;
         background-color: #E05151;
-        text-align: center;
+        text-align: left;
+        font-size: 15px;
     }
 
     tbody {
-        text-align: center;
+        text-align: left;
+        font-size: 15px;
     }
 
     .green-text {
@@ -24,25 +26,34 @@
     }
 
     .rounded {
-        border-radius: 40%;
-        border-width: 5rem;
+        width: 25px;
+        height: 25px;
+        background-color: #553333;
+        border-radius: 10px 10px 10px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 15px;
     }
 
     .custom-table-container {
         border-radius: 10px 10px 10px 10px;
-        /* Radius sudut 10px */
         overflow: hidden;
-        /* Menghilangkan overflow jika ada */
         border: 1px solid var(--neutral-100, #F0E2E2);
-        /* Garis merah di sekitar tabel */
 
     }
 
     .btn-custom {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
         background-color: #EB650D;
         color: #fff;
+    }
+
+    .underlined {
+        border-collapse: collapse;
+        width: 100%;
     }
 
     .card-body {
@@ -69,6 +80,31 @@
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
     }
+
+    .toggle-button {
+        padding: 5px;
+        background-color: #059669;
+        color: #fff;
+        border: none;
+        border-radius: 5rem;
+    }
+
+    /* Style untuk ikon visibility */
+    .toggle-button i {
+        margin-left: 5px;
+    }
+
+    .toggle-button-detail {
+        padding: 5px;
+        border: none;
+        border-color: #EB650D;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    /* Style untuk ikon visibility */
+    /* .toggle-button-detail i {
+        margin-left: 5px;
+    } */
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -165,67 +201,308 @@
                         <tr>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama Perusahaan</th>
-                            <th class="custom-padding">Tender Yang Dimenangkan</th>
-                            <th class="custom-padding">Nilai HPS</th>
                             <th class="custom-padding">NPWP</th>
-                            <th class="custom-padding">Contact person</th>
+                            <th class="custom-padding">Email</th>
+                            <th class="custom-padding">No.Telp/WA</th>
+                            <th></th>
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <!-- <tr>
+                        <tr>
                             <th></th>
-                            <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
+                            <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td>jasa konsultasi</td>
-                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><u>08123123456 (Joko)</u></td>
-                            <td> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td>
+                                <button class="btn toggle-button-detail btn-outline-warning " id="detailButton1">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
                         </tr>
                         <tr>
                             <th></th>
-                            <td><span class="shadow-sm my-4 bg-black rounded-5" style="color:#fff;">1</span></td>
+                            <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td>jasa konsultasi</td>
-                            <td class="green-text" style="font-weight: bold;">Rp134.750.000,00</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td><u>08123123456 (Joko)</u></td>
-                            <td> <a style="px: -0.75rem; py: -0.75rem;" href="#" class="btn btn-danger">Lengkapi Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
-                        </tr> -->
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td>
+                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+                <div class="popup" id="popup-contact">
+                    <div class="contact-content">
+                        <span class="popup-close" id="popup-close">&times;</span>
+                        <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
+                        <h2>Contact Person</h2>
+                        <p>PT Telekomunikasi Indonesia</p>
+                        <table class="table table-striped popup-table">
+                            <thead class="popup-thead">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Posisi</th>
+                                    <th>Email</th>
+                                    <th>No. Telp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td>joko</td>
+                                <td>HRD</td>
+                                <td>hrd@telkom.co.id</td>
+                                <td>0811-2345-6666</td>
+                            </tbody>
+                        </table>
+                        <button class="popup-button" id="popup-close-button">Tutup</button>
+                    </div>
+                </div>
 </section>
 
 <script>
-$(document).ready(function() {
-    $.ajax({
-        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            var leads = "";
-            $.each(data, function(index, value) {
-                var rowNumber = index + 1;
-                leads += 
-                    `<tr>
-                        <td>` + rowNumber + `</td>
-                        <td>` + value.nama_pemenang + `</td>
-                        <td>` + value.nama_tender + `</td>
-                        <td>` + value.nilai_hps + `</td>
-                        <td>` + value.npwp + `</td>
-                        <td>` + value.completed + `</td>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup = document.getElementById('popup');
+        const closeButton = document.getElementById('popup-close');
+        const closePopupButton = document.getElementById('popup-close-button');
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+        closeButton.addEventListener('click', closePopup);
+        closePopupButton.addEventListener('click', closePopup);
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup_detail = document.getElementById('popup_detail');
+        const closeButton = document.getElementById('popup_close');
+        const closePopupButton = document.getElementById('popup-close-button');
+
+        function close_Popup() {
+            popup_detail.style.display = 'none';
+        }
+
+        closeButton.addEventListener('click', close_Popup);
+        closePopupButton.addEventListener('click', close_Popup);
+    });
+</script>
+
+
+<style>
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*.popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 50px;
+        cursor: pointer;
+    }*/
+
+    .popup-button {
+        background-color: #E05151;
+        color: white;
+        padding: 10px 180px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .popup-table {
+        padding: 0.5rem 0.5rem;
+        margin-top: 20px;
+    }
+
+    .popup img {
+        margin-top: -5rem;
+    }
+
+    body.modal-open {
+        overflow: hidden;
+    }
+
+    .popup-thead {
+        font-size: small;
+        margin-top: 2rem;
+    }
+</style>
+
+<style>
+    .popup_detail {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 999;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        max-width: 80%;
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        justify-content: left;
+    }
+
+    .popup_content_detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup_close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .popup-button {
+        background-color: #E05151;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .popup img {
+        width: 100px;
+        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
+        height: 100px;
+        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
+    }
+
+    .popup h2 {
+        font-size: 24px;
+        margin-top: 40px;
+        color: #333;
+    }
+
+    .popup p {
+        font-size: 18px;
+        margin-top: 10px;
+        color: #555;
+    }
+</style>
+
+<script>
+    const popup = document.getElementById('popup');
+    const popupClose = document.getElementById('popup-close');
+    const toggleButton = document.querySelector('.toggle-button');
+
+    toggleButton.addEventListener('click', () => {
+        popup.style.display = 'block';
+        document.body.classList.add('modal-open');
+    });
+
+    popupClose.addEventListener('click', () => {
+        popup.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    });
+</script>
+
+<script>
+    // Fungsi untuk menampilkan modal saat baris tabel diklik
+function openModal(id) {
+  // Mengambil data modal melalui AJAX
+  $.ajax({
+    url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>", // Ganti dengan URL yang sesuai
+    type: "GET",
+    data: { id: id },
+    success: function (data) {
+      $("#contact-content").html(data);
+      $("#popup-contact").show();
+    },
+    error: function () {
+      alert("Terjadi kesalahan saat mengambil data.");
+    },
+  });
+}
+
+// Fungsi untuk menutup modal
+function closeModal() {
+  $("#popup-contact").hide();
+}
+
+// Event listener untuk menampilkan modal saat baris tabel diklik
+$(document).on("click", ".toggle-button", function () {
+  var id = $(this).data("id");
+  openModal(id);
+});
+
+// Event listener untuk menutup modal saat tombol penutup diklik
+$(document).on("click", "#popup-close", function () {
+  closeModal();
+});
+
+    $(document).ready(function() {
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var leads = "";
+                $.each(data, function(index, value) {
+                    var rowNumber = index + 1;
+                    leads +=
+                        `<tr>
+                        <td><span class="rounded">` + rowNumber + `</span></td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + value.npwp+ `</td>
+                        <td>` + value.email + `</td>
+                        <td>` + value.no_telp + `</td>
+                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
                             <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
                             <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
                         </td>
                     </tr>`
-            });
-            $("#data-leads").html(leads);
-        }
+                });
+                $("#data-leads").html(leads);
+            }
+        });
     });
-});
 </script>
+
