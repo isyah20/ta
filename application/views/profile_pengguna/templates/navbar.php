@@ -71,7 +71,18 @@
                     <a class="nav-link text-white link-danger text-center active fw-bold" href="" id="nav_dashboard">Dashboard</a>
                 </li>
 
-                <?php /* if ($userCat == UserCategory::SRV_PROVIDER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
+                <?php 
+                use App\components\UserCategory;
+                use App\components\UserType;
+                use App\components\CompanyType;
+
+                // $this->load->library('input');
+                $userCat = $_COOKIE['kategori'];
+                $userStatus = $_COOKIE['status'];
+                $isProfileComplete = $_COOKIE['lengkap']; 
+                $companyType = $_COOKIE['jenis_perusahaan'];
+
+                if ($userCat == UserCategory::SRV_PROVIDER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
                     <li class="nav-item dropdown dropdown-profile">
                         <a class="nav-link dropdown-toggle text-white link-danger text-center" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <b>Analytics</b>
@@ -97,7 +108,54 @@
                             <?php endif; ?>
                         </ul>
                     </li>
-                <?php endif; */ ?>
+                <?php endif; ?>
+                <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link text-white link-danger text-center active fw-bold" href="" id="nav_dashboard">Data Leads</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white link-danger text-center fw-bold" href="" id="nav_dashboard">Plotting Tim</a>
+                    </li> -->
+                    <li class="nav-item dropdown dropdown-profile">
+                        <a class="nav-link dropdown-toggle text-white link-danger text-center" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <b>Analytics</b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end my-2 p-0 rounded-3">
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative" href="<?= base_url('market') ?>">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Analisis Pasar</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative rounded-bottom" href="<?= base_url('competitor') ?>">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Analisis Kompetitor</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative rounded-bottom" href="">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Data Leads</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative rounded-bottom" href="">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Plotting Tim</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
             </ul>
 
             <div class="dropdown dropdown-profile d-md-block">
@@ -157,6 +215,7 @@
         id_pengguna = Cookies.get('id_pengguna', {
             // domain: 'tenderplus.id'
             domain: 'tenderplus.test'
+            // domain = 'localhost/tenderplus'
         });
 
         if (id_pengguna) {
