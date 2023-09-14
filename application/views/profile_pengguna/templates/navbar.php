@@ -110,13 +110,13 @@
                     </li>
                 <?php endif; ?>
                 <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center active fw-bold" href="" id="nav_dashboard">Data Leads</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="" id="nav_dashboard">Plotting Tim</a>
-                    </li> -->
-                    <li class="nav-item dropdown dropdown-profile">
+                    </li>
+                    <!-- <li class="nav-item dropdown dropdown-profile">
                         <a class="nav-link dropdown-toggle text-white link-danger text-center" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <b>Analytics</b>
                         </a>
@@ -154,7 +154,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                 <?php endif; ?>
             </ul>
 
