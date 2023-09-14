@@ -217,11 +217,8 @@
                         </tr> -->
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-                <div class="popup" id="popup-contact">
-                    <div class="contact-content">
+                <div class="popup" id="popup">
+                    <div class="popup-content">
                         <span class="popup-close" id="popup-close">&times;</span>
                         <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
                         <h2>Contact Person</h2>
@@ -245,6 +242,9 @@
                         <button class="popup-button" id="popup-close-button">Tutup</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <script>
@@ -343,40 +343,36 @@
 
 
 <script>
-    // Fungsi untuk menampilkan modal saat baris tabel diklik
-function openModal(id) {
-  // Mengambil data modal melalui AJAX
-  $.ajax({
-    url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>", // Ganti dengan URL yang sesuai
-    type: "GET",
-    data: { id: id },
-    success: function (data) {
-      $("#contact-content").html(data);
-      $("#popup-contact").show();
-    },
-    error: function () {
-      alert("Terjadi kesalahan saat mengambil data.");
-    },
-  });
-}
+    function openModal(id) {
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>", 
+            type: "GET",
+            data: { id: id },
+            success: function (data) {
+            $("#popup-content").html(data);
+            $("#popup").show();
+            },
+            error: function () {
+            alert("Terjadi kesalahan saat mengambil data.");
+            },
+        });
+    }
 
-// Fungsi untuk menutup modal
-function closeModal() {
-  $("#popup-contact").hide();
-}
+    function closeModal() {
+        $("#popup").hide();
+    }
 
-// Event listener untuk menampilkan modal saat baris tabel diklik
-$(document).on("click", ".toggle-button", function () {
-  var id = $(this).data("id");
-  openModal(id);
-});
+    $(document).on("click", ".toggle-button", function () {
+        var id = $(this).data("id");
+        openModal(id);
+    });
 
-// Event listener untuk menutup modal saat tombol penutup diklik
-$(document).on("click", "#popup-close", function () {
-  closeModal();
-});
 
-    $(document).ready(function() {
+    $(document).on("click", "#popup-close", function () {
+        closeModal();
+    });
+
+$(document).ready(function() {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
             type: "GET",
@@ -394,8 +390,9 @@ $(document).on("click", "#popup-close", function () {
                         <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
-                            <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
-                            <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
+                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
+                                <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
                         </td>
                     </tr>`
                 });
