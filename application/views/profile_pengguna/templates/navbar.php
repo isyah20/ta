@@ -111,7 +111,7 @@
                 <?php endif; ?>
                 <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
                     <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center active fw-bold" href="" id="nav_dashboard">Data Leads</a>
+                        <a class="nav-link text-white link-danger text-center fw-bold" href="" id="nav_dashboard">Data Leads</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="" id="nav_dashboard">Plotting Tim</a>
