@@ -117,10 +117,6 @@
         flex-shrink: 0;
     }
 
-    .custom-button svg {
-        margin-right: 8px;
-    }
-
     .custom-modal {
 
         height: 768px;
@@ -137,9 +133,20 @@
         border-radius: 5px;
         background: var(--primary-red-400, #DF3131);
         color: white;
-
         text-decoration: none;
+        cursor: pointer;
 
+    }
+
+    .btn-batal {
+        display: flex;
+        padding: 15px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        border-radius: 5px;
+        text-decoration: none;
         cursor: pointer;
 
     }
@@ -157,6 +164,25 @@
     .modal-body p {
         font-size: 18px;
         /* Ganti ukuran font sesuai dengan keinginan Anda */
+    }
+
+    .custom-button {
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        color: var(--Grey, #CCC);
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 22px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .custom-button svg {
+        margin-right: 8px;
     }
 
     @media (max-width: 767px) {
@@ -180,7 +206,7 @@
             <div class="d-flex justify-content-start mt-3 gap-2">
                 <div></div>
                 <div class="link d-flex flex-row align-items-center">
-                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#exampleModal"><i class="fas me-1"></i>Tambahkan Anggota</a></span>
+                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Anggota</a></span>
                 </div>
 
             </div>
@@ -210,7 +236,8 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office)</i></button></td>
-                            <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>
+
                         </tr>
                         <tr>
                             <th></th>
@@ -219,15 +246,16 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office)</td>
-                            <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <!-- modal input marketing -->
     <div class="col-12 py-5">
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: -30px;">
+        <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-0">
@@ -238,7 +266,7 @@
 
 
                     <div class="modal-body border-0">
-                        <h3 class="modal-title" id="exampleModalLabel">Input Marketing</h3>
+                        <h3 class="modal-title" id="inputMarketingModalLabel">Input Marketing</h3>
                         <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
                         <div class="input-popup justify-content-end">
                             <form class="row g-2">
@@ -280,6 +308,134 @@
             </div>
         </div>
     </div>
+    <!-- end modal input marketing -->
+    <!-- modal hapus -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
+                        <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
+                        <div class="input-popup align-items-center">
+                            <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Hapus
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn btn-batal btn-sm border btn-outline">
+                                        <i class="fas me-1"></i>Batal
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal hapus -->
+
+    <!-- modal lengkapi leads  -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
+        <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
+                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                        <div class="input-popup align-items-center">
+                            <div class="input-popup justify-content-end">
+                                <form class="row g-2">
+                                    <div class="col-12">
+                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
+                                        <input type="text" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
+                                        <textarea class="form-control" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
+                                    </div>
+                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
+
+                                    <div class="col-6">
+                                        <label for="inputNama" class="form-label text-start">Nama</label>
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                        <input type="text" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputEmail" class="form-label text-start">Email</label>
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                        <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                    </div>
+
+
+                                    <button type="button" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        Tambah Kontak
+                                    </button>
+                                    <!-- <button type="button" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        Hapus Kontak
+                                    </button> -->
+                                </form>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Tambahkan
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="my-2 text-center">
+                            <p style="font-size: 15px;">
+                                Mari Kami bantu carikan informasi tentang perusahaan ini?
+                                <a href="#">
+                                    Klik Disini
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal lengkapi leads -->
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
