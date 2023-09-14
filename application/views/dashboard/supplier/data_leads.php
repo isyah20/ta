@@ -93,6 +93,18 @@
     .toggle-button i {
         margin-left: 5px;
     }
+
+    .toggle-button-detail {
+        padding: 5px;
+        border: none;
+        border-color: #EB650D;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    /* Style untuk ikon visibility */
+    /* .toggle-button-detail i {
+        margin-left: 5px;
+    } */
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -187,12 +199,12 @@
                 <table class="table table-striped custom-table-container">
                     <thead class="thead">
                         <tr>
-                            <th></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama Perusahaan</th>
                             <th class="custom-padding">NPWP</th>
                             <th class="custom-padding">Email</th>
                             <th class="custom-padding">No.Telp/WA</th>
+                            <th></th>
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
@@ -205,7 +217,7 @@
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td>
-                                <button class="btn btn-outline-warning" data-toggle="modal" data-target="#detailModal">Detail</button>
+                                <button class="btn toggle-button-detail btn-outline-warning " id="detailButton1">Detail</button>
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
                                 <a class="btn btn-outline-danger">Hapus</a>
                             </td>
@@ -218,12 +230,11 @@
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td>
-                                <button class="btn btn-outline-warning" data-toggle="modal" data-target="#detailModal">Detail</button>
+                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
                                 <a class="btn btn-outline-danger">Hapus</a>
                             </td>
                         </tr>
-                        
                     </tbody>
                 </table>
                 <div class="popup" id="popup">
@@ -251,7 +262,19 @@
                         <button class="popup-button" id="popup-close-button">Tutup</button>
                     </div>
                 </div>
+
             </div>
+        </div>
+    </div>
+    </div>
+    <div class="popup_detail" id="popup_detail">
+        <div class="popup_content_detail">
+            <span class="popup_close" id="popup_close">&times;</span>
+            <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
+            <img src="<?= base_url('assets\foto_popup.svg') ?>" alt="">
+            <h2>PT. Telekomunikasi Indonesia, Tbk.</h2>
+            <p>Jakarta</p>
+            <p></p>
         </div>
     </div>
 </section>
@@ -270,6 +293,24 @@
         closePopupButton.addEventListener('click', closePopup);
     });
 </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup_detail = document.getElementById('popup_detail');
+        const closeButton = document.getElementById('popup_close');
+        const closePopupButton = document.getElementById('popup-close-button');
+
+        function close_Popup() {
+            popup_detail.style.display = 'none';
+        }
+
+        closeButton.addEventListener('click', close_Popup);
+        closePopupButton.addEventListener('click', close_Popup);
+    });
+</script>
+
+
 <style>
     .popup {
         display: none;
@@ -307,7 +348,7 @@
     }*/
 
     .popup-button {
-        background-color: red;
+        background-color: #E05151;
         color: white;
         padding: 10px 180px;
         border: none;
@@ -334,6 +375,70 @@
     }
 </style>
 
+<style>
+    .popup_detail {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 999;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        max-width: 80%;
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        justify-content: left;
+    }
+
+    .popup_content_detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup_close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .popup-button {
+        background-color: #E05151;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .popup img {
+        width: 100px;
+        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
+        height: 100px;
+        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
+    }
+
+    .popup h2 {
+        font-size: 24px;
+        margin-top: 40px;
+        color: #333;
+    }
+
+    .popup p {
+        font-size: 18px;
+        margin-top: 10px;
+        color: #555;
+    }
+</style>
+
 <script>
     const popup = document.getElementById('popup');
     const popupClose = document.getElementById('popup-close');
@@ -346,6 +451,22 @@
 
     popupClose.addEventListener('click', () => {
         popup.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    });
+</script>
+
+<script>
+    const popup_detail = document.getElementById('popup_detail');
+    const popup_close = document.getElementById('popup_close');
+    const toggleButtonDetail = document.querySelector('.toggle-button-detail');
+
+    toggleButtonDetail.addEventListener('click', () => {
+        popup_detail.style.display = 'block';
+        document.body.classList.add('modal-open');
+    });
+
+    popup_close.addEventListener('click', () => {
+        popup_detail.style.display = 'none';
         document.body.classList.remove('modal-open');
     });
 </script>
@@ -363,11 +484,12 @@
                     var rowNumber = index + 1;
                     leads +=
                         `<tr>
-                        <td>` + rowNumber + `</td>
-                        <td>` + value.nama_pemenang + `</td>
-                        <td>` + value.nama_tender + `</td>
+                        <td><span class="rounded">` + rowNumber + `</span></td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + value.npwp+ `</td>
                         <td>` + value.npwp + `</td>
-                        <td>` + value.completed + `</td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
                             <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
                             <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
@@ -378,6 +500,4 @@
             }
         });
     });
-</script>-->
-
-
+</script> -->
