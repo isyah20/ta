@@ -166,7 +166,7 @@ class Login extends CI_Controller
                         'is_active' => $user->is_active,
                         'photo' => $user->foto,
                         'jenis_perusahaan' => $companyType,
-                        'wa_status' => $user->wa_status,
+                        // 'wa_status' => $user->wa_status,
                         'lengkap' => $this->isProfileComplete((int) $userId) ? '1' : '0',
                     ];
 

@@ -637,10 +637,23 @@ $route['npwp'] = 'profilePengguna/updateNpwp';
 //restAPI route for paket pembelian
 $route['pembayaran/paketpembelian'] = 'Pembayaran/paketPembelian';
 
-// API Mobile
+// ================================================================
+// MOBILE API
+// ================================================================
+// mobile restAPI route for Auth
 $route['api-mobile/login'] = 'api-mobile/ApiAuth/login';
 $route['api-mobile/regist'] = 'api-mobile/ApiAuth/regist';
 $route['api-mobile/complete-profil'] = 'api-mobile/ApiAuth/completeProfil';
+$route['api-mobile/send-reset-key'] = 'api-mobile/ApiAuth/sendResetKey';
+$route['api-mobile/get-reset-key'] = 'api-mobile/ApiAuth/getResetKey';
+$route['api-mobile/change-password/(:any)'] = 'api-mobile/ApiAuth/changePassword/$1';
+
+// mobile restAPI route for pengguna
+$route['api-mobile/pengguna'] = 'api-mobile/ApiPengguna/index';
+$route['api-mobile/pengguna/create'] = 'api-mobile/ApiPengguna/create';
+$route['api-mobile/pengguna/update/(:num)'] = 'api-mobile/ApiPengguna/update/$1';
+$route['api-mobile/pengguna/delete/(:num)'] = 'api-mobile/ApiPengguna/destroy/$1';
+$route['api-mobile/pengguna/check-user-trial'] = 'api-mobile/ApiPengguna/checkAndUpdateUserType';
 
 
 //Admin

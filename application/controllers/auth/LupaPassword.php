@@ -49,11 +49,14 @@ class LupaPassword extends CI_Controller
                 $config['useragent'] = 'Codeigniter';
                 $config['protocol'] = "smtp";
                 $config['mailtype'] = "html";
-                $config['smtp_host'] = "sv2.ecc.co.id"; //pengaturan smtp
+                $config['smtp_host'] = "smtp.gmail.com"; //pengaturan smtp
+                // $config['smtp_host'] = "sv2.ecc.co.id"; //pengaturan smtp
                 $config['smtp_port'] = "465";
                 $config['smtp_timeout'] = "5";
-                $config['smtp_user'] = "security@tenderplus.id"; // isi dengan email
-                $config['smtp_pass'] = "HLILrJW8uTLJ"; // isi dengan password
+                $config['smtp_user'] = "misterlemper@gmail.com"; // isi dengan email
+                $config['smtp_pass'] = "xvzihfwhawxxyjgb"; // isi dengan password
+                // $config['smtp_user'] = "security@tenderplus.id"; // isi dengan email
+                // $config['smtp_pass'] = "HLILrJW8uTLJ"; // isi dengan password
                 $config['crlf'] = "\r\n";
                 $config['newline'] = "\r\n";
                 $config['smtp_crypto'] = "ssl"; //pengaturan smtp
@@ -64,7 +67,8 @@ class LupaPassword extends CI_Controller
                 $this->email->initialize($config);
 
                 //konfigurasi pengiriman
-                $this->email->from('no-reply@tenderplus.id', 'Tender Plus');
+                // $this->email->from('no-reply@tenderplus.id', 'Tender Plus');
+                $this->email->from('misterlemper@gmail.com', 'Tender Plus');
                 $this->email->to($this->input->post('email'));
                 $this->email->subject("Reset Your Password");
 
@@ -220,7 +224,8 @@ class LupaPassword extends CI_Controller
                     $this->session->set_flashdata('success', 'Silakan cek email ' . $this->input->post('email') . 'untuk mengubah password!');
                     redirect('lupa/cekemail');
                 } else {
-                    $this->session->set_flashdata('error', 'Gagal mengirim email ke' . $this->input->post('email') . '!');
+                    show_error($this->email->print_debugger());
+                    $this->session->set_flashdata('error', 'Gagal mengirim email ke ' . $this->input->post('email') . '!');
                 }
                 $this->index();
             } else {

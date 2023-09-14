@@ -17,6 +17,19 @@ class Reset_model extends CI_Model
             return false;
         }
     }
+    public function getResetKeyByEmail($email)
+    {
+        $this->db->select('pengguna.email, pengguna.reset_key, pengguna.expire_key');
+        $this->db->where('email', $email);
+        $this->db->from('pengguna');
+        $query = $this->db->get()->row_array();
+        return $query;
+        if (!empty($query)) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
 
     public function update_reset_key($email, $reset_key)
     {
