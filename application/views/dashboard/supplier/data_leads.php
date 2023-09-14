@@ -93,6 +93,18 @@
     .toggle-button i {
         margin-left: 5px;
     }
+
+    .toggle-button-detail {
+        padding: 5px;
+        border: none;
+        border-color: #EB650D;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    /* Style untuk ikon visibility */
+    /* .toggle-button-detail i {
+        margin-left: 5px;
+    } */
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -197,14 +209,18 @@
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <!-- <tr>
+                        <tr>
                             <th></th>
                             <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
-                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
+                            <td>
+                                <button class="btn toggle-button-detail btn-outline-warning " id="detailButton1">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
                         </tr>
                         <tr>
                             <th></th>
@@ -213,8 +229,12 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
-                            <td> <a class="btn btn-outline-warning">Detail</a> <a href="#" class="btn btn-danger btn-custom">Edit Data</a> <a class="btn btn-outline-danger">Hapus</a></td>
-                        </tr> -->
+                            <td>
+                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="popup" id="popup">
@@ -261,6 +281,24 @@
         closePopupButton.addEventListener('click', closePopup);
     });
 </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup_detail = document.getElementById('popup_detail');
+        const closeButton = document.getElementById('popup_close');
+        const closePopupButton = document.getElementById('popup-close-button');
+
+        function close_Popup() {
+            popup_detail.style.display = 'none';
+        }
+
+        closeButton.addEventListener('click', close_Popup);
+        closePopupButton.addEventListener('click', close_Popup);
+    });
+</script>
+
+
 <style>
     .popup {
         display: none;
@@ -298,7 +336,7 @@
     }*/
 
     .popup-button {
-        background-color: red;
+        background-color: #E05151;
         color: white;
         padding: 10px 180px;
         border: none;
@@ -325,6 +363,70 @@
     }
 </style>
 
+<style>
+    .popup_detail {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 999;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        max-width: 80%;
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        justify-content: left;
+    }
+
+    .popup_content_detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup_close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .popup-button {
+        background-color: #E05151;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .popup img {
+        width: 100px;
+        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
+        height: 100px;
+        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
+    }
+
+    .popup h2 {
+        font-size: 24px;
+        margin-top: 40px;
+        color: #333;
+    }
+
+    .popup p {
+        font-size: 18px;
+        margin-top: 10px;
+        color: #555;
+    }
+</style>
+
 <script>
     const popup = document.getElementById('popup');
     const popupClose = document.getElementById('popup-close');
@@ -340,7 +442,6 @@
         document.body.classList.remove('modal-open');
     });
 </script>
-
 
 <script>
     function openModal(id) {
