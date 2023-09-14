@@ -15,6 +15,7 @@ class DashboardUserSupplier extends CI_Controller
             redirect('login');
         }
 
+        // $this->load->library('input');
         $this->load->helper('tanggal');
         $this->load->model('Lpse_model');
         $this->load->model('Pemenang_model');
@@ -114,10 +115,10 @@ class DashboardUserSupplier extends CI_Controller
         
         
         $sql = $this->SiswaModel->save_batch($data); 
-        if ($sql) { // Jika sukses
+        if ($sql) {
             $this->Supplier_model->updateCompletedDataLead($id_lead, 1);
             echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('index.php/siswa')."';</script>";
-        } else { // Jika gagal
+        } else {
             echo "<script>alert('Data gagal disimpan');window.location = '".base_url('index.php/siswa/form')."';</script>";
         }
     }
