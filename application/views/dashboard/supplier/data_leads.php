@@ -44,12 +44,12 @@
 
     }
 
-    .btn-custom {
+    /* .btn-custom {
         padding-left: 10px;
         padding-right: 10px;
         background-color: #EB650D;
         color: #fff;
-    }
+    } */
 
     .underlined {
         border-collapse: collapse;
@@ -174,6 +174,64 @@
         font-size: small;
         margin-top: 2rem;
     }
+
+    /* modal popup */
+    .modal-dialog {
+        display: flex;
+        width: 518px;
+        height: 555px;
+        padding: 20px 30px 30px 30px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+    }
+
+    .modal-title {
+        color: var(--font-dark-grey, #333);
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 33px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .custom-modal {
+
+        height: 768px;
+
+    }
+
+    /* button popup */
+    .btn-custom {
+        display: flex;
+        padding: 15px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        border-radius: 5px;
+        background: var(--primary-red-400, #DF3131);
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+
+    }
+
+    .btn-batal {
+        display: flex;
+        padding: 15px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+
+    }
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -288,7 +346,7 @@
                             <td>
                                 <button class="btn btn-outline-warning " id="detailButton1" onclick="toggle_button_detail()">Detail</button>
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
-                                <a class="btn btn-outline-danger">Hapus</a>
+                                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
                         </tr>
                         <tr>
@@ -301,7 +359,7 @@
                             <td>
                                 <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
-                                <a class="btn btn-outline-danger">Hapus</a>
+                                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
                         </tr>
                     </tbody>
@@ -334,7 +392,8 @@
             </div>
         </div>
     </div>
-    <div class="popup_detail" id="popup_detail">
+
+    <!-- <div class="popup_detail" id="popup_detail">
         <div class="popup_content_detail">
             <span class="popup_close_detail" id="popup_close_detail">&times;</span>
             <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
@@ -389,8 +448,142 @@
             </div>
             </p>
         </div>
+    </div> -->
+    <!-- modal hapus -->
+    <div class="col-12 py-5">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+                    <div class="modal-body border-0 text-center">
+                        <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
+                        <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
+                        <div class="input-popup align-items-center justify-content-center">
+                            <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Hapus
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn btn-batal btn-sm border btn-outline">
+                                        <i class="fas me-1"></i>Batal
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+    <!-- end modal hapus -->
+    <!-- modal lengkapi leads  -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
+        <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
+                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                        <div class="input-popup align-items-center">
+                            <div class="input-popup justify-content-end">
+                                <form class="row g-2">
+                                    <div class="col-12">
+                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
+                                        <input type="text" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
+                                        <textarea class="form-control" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
+                                    </div>
+                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
+
+                                    <div class="col-6">
+                                        <label for="inputNama" class="form-label text-start">Nama</label>
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                        <input type="text" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputEmail" class="form-label text-start">Email</label>
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                        <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                    </div>
+
+
+                                    <button type="button" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        Tambah Kontak
+                                    </button>
+                                    <!-- <button type="button" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        Hapus Kontak
+                                    </button> -->
+                                </form>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Tambahkan
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="my-2 text-center">
+                            <p style="font-size: 15px;">
+                                Mari Kami bantu carikan informasi tentang perusahaan ini?
+                                <a href="#">
+                                    Klik Disini
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal lengkapi leads -->
 </section>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -602,9 +795,10 @@
                         <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
-                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
+                                
+                                <button class="btn btn-outline-warning" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi New</button>
                                 <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
-                                <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
+                                <button class="btn btn-outline-danger" id="detailButton2" data-toggle="modal" data-target="#deleteModal">Hapus</button>
                         </td>
                     </tr>`
                 });
