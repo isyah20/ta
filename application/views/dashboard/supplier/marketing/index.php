@@ -1,69 +1,121 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-    .search {
+    .animation {
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .thead {
+        color: #fff;
+        background-color: #E05151;
+        text-align: left;
+        font-size: 15px;
+    }
+
+    tbody {
+        text-align: left;
+        font-size: 15px;
+    }
+
+    .green-text {
+        color: #139728;
+    }
+
+    .rounded {
+        width: 25px;
+        height: 25px;
+        background-color: #553333;
+        border-radius: 10px 10px 10px 10px;
         display: flex;
+        justify-content: center;
         align-items: center;
-        justify-content: space-between;
-        text-align: center;
+        color: white;
+        font-size: 15px;
     }
 
-    .search__input {
-        font-family: inherit;
-        font-size: inherit;
-        background-color: #f4f2f2;
-        border: none;
-        color: #646464;
-        padding: 0.7rem 1rem;
-        border-radius: 30px;
-        width: 40em;
-        transition: all ease-in-out .5s;
-        margin-right: -2rem;
+    .custom-table-container {
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+
     }
 
-    .search__input:hover,
-    .search__input:focus {
-        /* box-shadow: 0 0 1em #00000013; */
+    .btn-custom {
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #EB650D;
+        color: #fff;
     }
 
-    .search__input:focus {
-        outline: none;
-        /* background-color: #f0eeee; */
+    .underlined {
+        border-collapse: collapse;
+        width: 100%;
     }
 
-    .search__input::-webkit-input-placeholder {
-        font-weight: 100;
-        color: #ccc;
+    .animation {
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
 
-    .search__input:focus+.search__button {
-        /* background-color: #f0eeee; */
+    .thead {
+        color: #fff;
+        background-color: #E05151;
+        text-align: left;
+        font-size: 15px;
     }
 
-    .search__button {
-        border: none;
-        /* background-color: #f4f2f2; */
-        margin-top: .1em;
+    tbody {
+        text-align: left;
+        font-size: 15px;
     }
 
-    .search__button:hover {
-        cursor: pointer;
+    .green-text {
+        color: #139728;
     }
 
-    .search__icon {
-        height: 1.3em;
-        width: 1.3em;
-        fill: #b4b4b4;
+    .rounded {
+        width: 25px;
+        height: 25px;
+        background-color: #553333;
+        border-radius: 10px 10px 10px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 15px;
+    }
+
+    .custom-table-container {
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+
+    }
+
+    .btn-custom {
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #EB650D;
+        color: #fff;
+    }
+
+    .underlined {
+        border-collapse: collapse;
+        width: 100%;
     }
 </style>
 <section class="pt-5 mt-5">
     <div class="container pb-3 pt-2 mb-4 border-bottom">
-
         <div class="col-md-6">
             <h2>Hi Bambang
             </h2>
-
-
         </div>
-        <div class="col-6">
+        <!-- <div class="col-6">
             <div class="search">
                 <input type="text" class="search__input" placeholder="Type your text">
                 <button class="search__button">
@@ -74,7 +126,74 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </div> -->
 
     </div>
+    <!-- table -->
+    <div class="container wow fadeInUp">
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table-container">
+                        <thead class="thead">
+                            <tr>
+                                <th class="custom-padding">No.</th>
+                                <th class="custom-padding">
+                                    <img src="<?= base_url("assets/img/icon-apartment.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Nama Perusahaan
+                                </th>
+                                <th class="custom-padding">
+                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Status
+                                </th>
+                                <th class="custom-padding">
+                                    <img src="<?= base_url("assets/img/icon-priority.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Prioritas
+                                </th>
+                                <th class="custom-padding">
+                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Jadwal
+                                </th>
+                                <th class="custom-padding">
+                                    <img src="<?= base_url("assets/img/icon-cp.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Contact Person
+                                </th>
+                                <th class="custom-padding"></th>
+                                <th class="custom-padding">
+                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Catatan
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-leads">
+                            <tr class="my-2">
+                                <td><span class="rounded">1</span></td>
+                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td>Negotiation</td>
+                                <td>High</td>
+                                <td>02/12/2024</td>
+                                <td>0811-2345-6666 (Office)</td>
+                                <td>office@telkom.co.id</td>
+                                <td>Lancarr Semua Gess</td>
+                            </tr>
+                            <tr class="my-2">
+                                <td><span class="rounded">1</span></td>
+                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td>Done</td>
+                                <td>Very High</td>
+                                <td>02/10/2024</td>
+                                <td>0811-2345-6666 (Office)</td>
+                                <td>office@telkom.co.id</td>
+                                <td>Sudah selesai tinggal promosi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
 </section>
+
+<script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>

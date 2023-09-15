@@ -56,6 +56,11 @@
         width: 100%;
     }
 
+    .card-data {
+        border-radius: 10px;
+        background: var(--shade-font-white, #FFF);
+    }
+
     .card-body {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -238,7 +243,7 @@
                 </div>
                 <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                     <div class="shadow-sm bg-white">
-                        <div class="card-body">
+                        <div class="card-body card-data">
                             <div>
                                 <p>
                                 <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
@@ -593,8 +598,8 @@
                         <td><span class="rounded">` + rowNumber + `</span></td>
                         <td>` + value.nama_perusahaan + `</td>
                         <td>` + value.npwp + `</td>
-                        <td>` + value.npwp + `</td>
-                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + value.email + `</td>
+                        <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
                                 <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
