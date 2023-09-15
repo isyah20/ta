@@ -142,6 +142,11 @@
         flex-direction: column;
         align-items: center;
         gap: 40px;
+    }
+
+    .custom-modal-delete {
+
+        height: 768px;
 
     }
 
@@ -501,7 +506,7 @@
     <!-- modal hapus -->
     <div class="col-12 py-5">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
-            <div class="modal-dialog custom-modal" role="document">
+            <div class="modal-dialog custom-modal-delete" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-0">
                         <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
@@ -633,7 +638,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
+<!-- <script>
     // Fungsi untuk menampilkan popup input kontak
     // function tampilkanPopupInputKontak() {
     //     $('#inputKontakModal').modal('show');
@@ -645,4 +650,13 @@
     //     $('#inputKontakModal').modal('hide');
     //     $('#infoKontakModal').modal('show');
     // }
-</script>
+</script> -->
+
+<!-- <script>
+    // Fungsi untuk mengubah nilai sel saat date picker diubah
+    function updateCellValue() {
+        var datePicker = document.getElementById("datePicker");
+        var cell = datePicker.parentNode.parentNode;
+        cell.innerHTML = datePicker.value;
+    }
+</script> -->
