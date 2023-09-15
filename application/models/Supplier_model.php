@@ -369,6 +369,16 @@ class Supplier_model extends CI_Model
         return $query->row(); 
     }
 
+    public function getKontakLeadById($id)
+    {
+        $this->db->select('*');
+        $this->db->from('kontak_lead');
+        $this->db->where('id_lead', $id);
+
+        $query = $this->db->get();
+        return $query->result_array(); 
+    }
+
     public function updateLeadData($id, $data) {
         $this->db->where('id_lead', $id);
         $this->db->update('data_leads', $data);
