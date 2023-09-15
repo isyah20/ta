@@ -212,7 +212,7 @@
             </div>
         </div>
     </div>
-
+    <!-- tabel marketing -->
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
@@ -246,13 +246,17 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office)</td>
-                            <td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
+                            <td>
+                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <!-- end tabel marketing -->
+
     <!-- modal input marketing -->
     <div class="col-12 py-5">
         <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
@@ -309,6 +313,7 @@
         </div>
     </div>
     <!-- end modal input marketing -->
+
     <!-- modal hapus -->
     <div class="col-12 py-5">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
@@ -434,6 +439,64 @@
         </div>
     </div>
     <!-- end modal lengkapi leads -->
+
+    <!-- modal popup info kontak -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
+        <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <img src="<?= base_url("assets/img/red-whatsapp.svg") ?>" alt="Image" style="width: 75px; height: 75px; padding: 0;">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="infoKontakModalLabel">Lengkapi Leads</h3>
+                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                        <div class="input-popup align-items-center">
+                            <div class="input-popup justify-content-end">
+                                <h2>Contact Person</h2>
+                                <p>PT Telekomunikasi Indonesia</p>
+                                <table class="table table-striped popup-table">
+                                    <thead class="popup-thead">
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Posisi</th>
+                                            <th>Email</th>
+                                            <th>No. Telp</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data-kontak">
+                                        <td>joko</td>
+                                        <td>HRD</td>
+                                        <td>hrd@telkom.co.id</td>
+                                        <td>0811-2345-6666</td>
+                                        <td>aisdiau</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Tambahkan Kontak
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal popup info kontak -->
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
