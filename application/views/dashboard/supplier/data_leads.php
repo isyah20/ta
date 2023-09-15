@@ -486,7 +486,7 @@
                             <div></div>
                             <div class="link flex-row align-items-center w-100">
                                 <span>
-                                    <a class="btn-custom text-white text-center">
+                                    <a href="<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/' . $id); ?>" class="btn-custom text-white text-center">
                                         <i class="fas me-1"></i>Hapus
                                     </a>
                                 </span>
@@ -858,12 +858,28 @@
                         <td>
                                 <button class="btn btn-danger" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi Data</button>
                                 <button class="btn btn-outline-warning" id="detailButton2" data-toggle="modal" data-target="">Detail</button>
-                                <button class="btn btn-outline-danger" id="detailButton2" data-toggle="modal" data-target="#deleteModal">Hapus</button>
+                                <button class="btn btn-outline-danger" id="deleteBtn" data-toggle="modal" data-target="#deleteModal">Hapus</button>
                         </td>
                     </tr>`
                 });
                 $("#data-leads").html(leads);
             }
+        });
+    });
+
+    //delete
+    $(document).ready(function () {
+        // Tangkap klik tombol Hapus
+        $('#deleteBtn').click(function () {
+            var item_id = $(this).data('id');
+            $('#confirmDelete').attr('data-id', item_id); // Set data-id pada tombol konfirmasi
+        });
+
+        // Tangkap klik tombol Ya pada modal
+        $('#confirmDelete').click(function () {
+            var item_id = $(this).attr('data-id');
+            // Redirect atau kirim permintaan AJAX ke kontroler untuk menghapus item berdasarkan item_id
+            window.location.href = "<?php echo base_url('item_controller/confirm_delete/'); ?>" + item_id;
         });
     });
 </script>

@@ -137,6 +137,10 @@ class DashboardUserSupplier extends CI_Controller
         }
     }
     
+    public function deleteDataLeadById($id) {
+        $this->Supplier_model->deleteDataLeadById($id);
+        redirect('suplier/leads');
+    }
 
     public function CRM()
     {
