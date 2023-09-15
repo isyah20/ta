@@ -252,7 +252,7 @@
                                     <th>No. Telp</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="data-kontak">
                                 <td>joko</td>
                                 <td>HRD</td>
                                 <td>hrd@telkom.co.id</td>
@@ -446,10 +446,23 @@
 <script>
     function openModal(id) {
         $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>", 
+            url: "<?php echo site_url('suplier/getKontak/') ?>" + id, 
             type: "GET",
-            data: { id: id },
+            dataType: "JSON",
+            // data: { id: id },
+            // data : id,
             success: function (data) {
+            var kontak = "";
+            $.each(data, function (index, value) {
+                kontak +=
+                `<tr>
+                    <td>` + value.nama + `</td>
+                    <td>` + value.posisi + `</td>
+                    <td>` + value.email + `</td>
+                    <td>` + value.no_telp + `</td>
+                </tr>`
+            });
+            $("#data-kontak").html(kontak);
             $("#popup-content").html(data);
             $("#popup").show();
             },
@@ -464,7 +477,9 @@
     }
 
     $(document).on("click", ".toggle-button", function () {
-        var id = $(this).data("id");
+        // var id = $(this).data("id_lead");
+        // var id = value.id_lead;
+        let id = $(this).closest("tr").find("td:eq(0)").text();
         openModal(id);
     });
 
