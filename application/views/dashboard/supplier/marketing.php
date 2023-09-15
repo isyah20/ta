@@ -236,7 +236,7 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office)</i></button></td>
-                            <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>
+                            <td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
 
                         </tr>
                         <tr>
@@ -246,7 +246,7 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office)</td>
-                            <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
+                            <td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -310,7 +310,7 @@
     </div>
     <!-- end modal input marketing -->
     <!-- modal hapus -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+    <div class="col-12 py-5">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -319,12 +319,10 @@
                             <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                         </button>
                     </div>
-
-
-                    <div class="modal-body border-0">
+                    <div class="modal-body border-0 text-center">
                         <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
                         <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
-                        <div class="input-popup align-items-center">
+                        <div class="input-popup align-items-center justify-content-center">
                             <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
                         </div>
                         <div class="d-flex justify-content-start mt-3 gap-2">
@@ -341,7 +339,7 @@
                             <div></div>
                             <div class="link flex-row align-items-center w-100">
                                 <span>
-                                    <a class="btn btn-batal btn-sm border btn-outline">
+                                    <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
                                         <i class="fas me-1"></i>Batal
                                     </a>
                                 </span>
