@@ -56,6 +56,11 @@
         width: 100%;
     }
 
+    .card-data {
+        border-radius: 10px;
+        background: var(--shade-font-white, #FFF);
+    }
+
     .card-body {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -174,7 +179,7 @@
                 </div>
                 <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                     <div class="shadow-sm bg-white">
-                        <div class="card-body">
+                        <div class="card-body card-data">
                             <div>
                                 <p>
                                 <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
@@ -446,15 +451,17 @@
 <script>
     function openModal(id) {
         $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>", 
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
             type: "GET",
-            data: { id: id },
-            success: function (data) {
-            $("#popup-content").html(data);
-            $("#popup").show();
+            data: {
+                id: id
             },
-            error: function () {
-            alert("Terjadi kesalahan saat mengambil data.");
+            success: function(data) {
+                $("#popup-content").html(data);
+                $("#popup").show();
+            },
+            error: function() {
+                alert("Terjadi kesalahan saat mengambil data.");
             },
         });
     }
@@ -463,17 +470,17 @@
         $("#popup").hide();
     }
 
-    $(document).on("click", ".toggle-button", function () {
+    $(document).on("click", ".toggle-button", function() {
         var id = $(this).data("id");
         openModal(id);
     });
 
 
-    $(document).on("click", "#popup-close", function () {
+    $(document).on("click", "#popup-close", function() {
         closeModal();
     });
 
-$(document).ready(function() {
+    $(document).ready(function() {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
             type: "GET",
@@ -486,7 +493,7 @@ $(document).ready(function() {
                         `<tr>
                         <td><span class="rounded">` + rowNumber + `</span></td>
                         <td>` + value.nama_perusahaan + `</td>
-                        <td>` + value.npwp+ `</td>
+                        <td>` + value.npwp + `</td>
                         <td>` + value.email + `</td>
                         <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
@@ -502,4 +509,3 @@ $(document).ready(function() {
         });
     });
 </script>
-
