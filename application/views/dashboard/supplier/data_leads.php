@@ -94,7 +94,7 @@
         margin-left: 5px;
     }
 
-    .toggle-button-detail {
+    .toggle_button_detail {
         padding: 5px;
         border: none;
         border-color: #EB650D;
@@ -102,9 +102,73 @@
     }
 
     /* Style untuk ikon visibility */
-    /* .toggle-button-detail i {
+    .toggle_button_detail i {
         margin-left: 5px;
-    } */
+    }
+</style>
+
+<style>
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*.popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 50px;
+        cursor: pointer;
+    }*/
+
+    .popup-button {
+        background-color: #E05151;
+        color: white;
+        padding: 10px 180px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .popup-table {
+        padding: 0.5rem 0.5rem;
+        margin-top: 20px;
+    }
+
+    .popup img {
+        margin-top: -5rem;
+    }
+
+    body.modal-open {
+        overflow: hidden;
+    }
+
+    .popup-thead {
+        font-size: small;
+        margin-top: 2rem;
+    }
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -217,7 +281,7 @@
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td>
-                                <button class="btn toggle-button-detail btn-outline-warning " id="detailButton1">Detail</button>
+                                <button class="btn btn-outline-warning " id="detailButton1" onclick="toggle_button_detail()">Detail</button>
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
                                 <a class="btn btn-outline-danger">Hapus</a>
                             </td>
@@ -262,19 +326,63 @@
                         <button class="popup-button" id="popup-close-button">Tutup</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    </div>
     <div class="popup_detail" id="popup_detail">
         <div class="popup_content_detail">
-            <span class="popup_close" id="popup_close">&times;</span>
+            <span class="popup_close_detail" id="popup_close_detail">&times;</span>
             <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
-            <img src="<?= base_url('assets\foto_popup.svg') ?>" alt="">
             <h2>PT. Telekomunikasi Indonesia, Tbk.</h2>
-            <p>Jakarta</p>
-            <p></p>
+            <p>Jakarta, Indonesia</p>
+            <p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="profile-container">
+                            <span><img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt=""></span>
+                            <h5>Profil Singkat Perusahaan</h5>
+                        </div>
+                        <div class="col-9 p-1">
+                            <p class="justify-text">
+                                PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan dan berkantor pusat resmi di Bandung dan berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="item">
+                            <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
+                            <h5>NPWP</h5>
+                            <p>08.178.554.2-123.213</p>
+                        </div>
+                        <div class="item">
+                            <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
+                            <h5>Alamat</h5>
+                            <p>Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="contact-container">
+                            <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
+                            <h5>Contact Person</h5>
+                            <div class="container text-center">
+                                <div class="row">
+                                    <div class="col-6 col-sm-3">Office</div>
+                                    <div class="col-6 col-sm-6">(0274) 5980 3112
+                                        office@telkom.id</div>
+
+                                    <div class="w-100"></div>
+
+                                    <div class="col-6 col-sm-3">Budi (HRD)</div>
+                                    <div class="col-6 col-sm-6">0811 2332 1000
+                                        budi@telkom.id</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </p>
         </div>
     </div>
 </section>
@@ -298,7 +406,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const popup_detail = document.getElementById('popup_detail');
-        const closeButton = document.getElementById('popup_close');
+        const closeButton = document.getElementById('popup_close_detail');
         const closePopupButton = document.getElementById('popup-close-button');
 
         function close_Popup() {
@@ -306,76 +414,10 @@
         }
 
         closeButton.addEventListener('click', close_Popup);
-        closePopupButton.addEventListener('click', close_Popup); 
-        <span class = "popup-close"id = "popup-close"style = "background-color: red; border-radius: 50%; padding: 5px 10px; color: white; cursor: pointer;" > & times; </span>
-
+        closePopupButton.addEventListener('click', close_Popup);
     });
 </script>
 
-
-<style>
-    .popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 999;
-    }
-
-    .popup-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-        max-width: 80%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /*.popup-close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 50px;
-        cursor: pointer;
-    }*/
-
-    .popup-button {
-        background-color: #E05151;
-        color: white;
-        padding: 10px 180px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
-
-    .popup-table {
-        padding: 0.5rem 0.5rem;
-        margin-top: 20px;
-    }
-
-    .popup img {
-        margin-top: -5rem;
-    }
-
-    body.modal-open {
-        overflow: hidden;
-    }
-
-    .popup-thead {
-        font-size: small;
-        margin-top: 2rem;
-    }
-</style>
 
 <style>
     .popup_detail {
@@ -402,13 +444,15 @@
         justify-content: center;
     }
 
-    .popup_close {
+    .popup_close_detail {
         position: absolute;
         top: 10px;
         right: 10px;
         font-size: 24px;
         cursor: pointer;
         color: #000;
+        /* border-radius: 10px 10px 10px 10px;
+        border-color: #E05151; */
     }
 
     .popup-button {
@@ -423,9 +467,7 @@
 
     .popup img {
         width: 100px;
-        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
         height: 100px;
-        /* Sesuaikan ukuran gambar dengan kebutuhan Anda */
     }
 
     .popup h2 {
@@ -439,6 +481,38 @@
         margin-top: 10px;
         color: #555;
     }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-container img {
+        margin-right: 10px;
+    }
+
+    .justify-text {
+        text-align: justify;
+        display: flex;
+        flex-direction: row;
+    }
+
+    /* .item {
+        margin-bottom: 20px;
+    }
+
+    .item img {
+        margin-right: 5px;
+    }
+
+    .contact-container {
+        margin-bottom: 20px;
+    }
+
+    .contact-container img {
+        margin-right: 5px;
+    } */
 </style>
 
 <script>
@@ -459,22 +533,52 @@
 
 <script>
     const popup_detail = document.getElementById('popup_detail');
-    const popup_close = document.getElementById('popup_close');
-    const toggleButtonDetail = document.querySelector('.toggle-button-detail');
+    const popupCloseDetail = document.getElementById('popup_close_detail');
+    const toggleButtonDetail = document.querySelector('.toggle_button_detail');
 
     toggleButtonDetail.addEventListener('click', () => {
         popup_detail.style.display = 'block';
         document.body.classList.add('modal-open');
     });
 
-    popup_close.addEventListener('click', () => {
+    popupCloseDetail.addEventListener('click', () => {
         popup_detail.style.display = 'none';
         document.body.classList.remove('modal-open');
     });
 </script>
 
+<script>
+    function openModal(id) {
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            data: {
+                id: id
+            },
+            success: function(data) {
+                $("#popup-content").html(data);
+                $("#popup").show();
+            },
+            error: function() {
+                alert("Terjadi kesalahan saat mengambil data.");
+            },
+        });
+    }
 
-<!-- <script>
+    function closeModal() {
+        $("#popup").hide();
+    }
+
+    $(document).on("click", ".toggle-button", function() {
+        var id = $(this).data("id");
+        openModal(id);
+    });
+
+
+    $(document).on("click", "#popup-close", function() {
+        closeModal();
+    });
+
     $(document).ready(function() {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
@@ -488,13 +592,14 @@
                         `<tr>
                         <td><span class="rounded">` + rowNumber + `</span></td>
                         <td>` + value.nama_perusahaan + `</td>
-                        <td>` + value.npwp+ `</td>
+                        <td>` + value.npwp + `</td>
                         <td>` + value.npwp + `</td>
                         <td>` + value.nama_perusahaan + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
-                            <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
-                            <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
+                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
+                                <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
                         </td>
                     </tr>`
                 });
@@ -502,4 +607,4 @@
             }
         });
     });
-</script> -->
+</script>
