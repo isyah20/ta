@@ -17,6 +17,7 @@
       height: 400px;
       max-height: calc(100vh - 40px); /* Mengatur tinggi maksimal untuk kontainer */
       overflow-y: auto;
+      margin-bottom: 20px;
     }
     .box .card {
       width: 250px; /* Mengatur lebar kartu 100% minus 50px untuk jarak 25px di setiap sisi kartu */
@@ -31,23 +32,30 @@
     margin: 0;
     padding: 3px 3px 0px 3px ;
   }
-  .red {
+
+  .title{
+    margin-left: 15px;
+    width: 270px; 
+    border-radius:5px;
+    padding: 5px 15px 5px 15px;
+  }
+  .purple {
     background-color: #ebcffc;
   }
 
-  .green {
+  .red {
     background-color: #fec1c1;
   }
 
-  .blue {
+  .green {
     background-color: #f8f5bd;
   }
 
-  .orange {
+  .blue {
     background-color: #d0e9f9;
   }
 
-  .purple {
+  .orange {
     background-color: purple;
   }
 
@@ -94,12 +102,14 @@
 
   #container1 h4::before {
     color: #8e44ad;}
+
+    
   </style>
 
 <section class="py-5">
   <div class="mt-5 px-5">
-    <h3>Selamat Datang!</h3>
-    <h3>Yuk Segera Bagi Tugas Tim Marketingmu</h3>
+    <h4>Selamat Datang!</h4>
+    <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
   </div>
   <div class="col-md-3 pt-3 px-5">
    <button class="btn btn-primary" id="addContainerBtn">Tambahkan Anggota</button>
@@ -109,8 +119,8 @@
 
 <div class="container-fluid pb-4 mx-4" id="scroll-marker">
   <div class="row">
-    <div class="col">
-        <div id="container1" style="height:1200px" class="box red" data-number="1">
+    <div class="col mx-3">
+        <div id="container1" style="height:1200px; margin-right: 50px;" class="box red" data-number="1">
             <h4 class="pt-2">Perusahaan</h4>
               <div class="card" draggable="true">
                 <p>PT Cahaya Asia Ya Putra Dewa</p>
@@ -166,14 +176,13 @@
               </div>
             </div>
         </div>
-      
     </div>
     <div class="col">
       <div class="row">
           <div class="col">
+            <h4 class="green title" onclick="toggleCardVisibility('container2')">Container 2</h4>
             <div class="mx-3">
               <div id="container2" class="box green" data-number="2">
-                <h4 class="pt-2">Container 2</h4>
                 <div class="card" draggable="true">
                   <p>Card 2</p>
                 </div>
@@ -181,9 +190,9 @@
             </div>
           </div>
           <div class="col">
+            <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
             <div class="mx-3">
               <div id="container3" class="box blue" data-number="3">
-                <h4 class="pt-2">Container 3</h4>
                 <div class="card" draggable="true">
                   <p>Card 3</p>
                 </div>
@@ -191,75 +200,55 @@
             </div>
           </div>
           <div class="col">
+            <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
             <div class="mx-3">
-                <div id="container3" class="box blue" data-number="3">
-                  <h4 class="pt-2">Container 3</h4>
-                  <div class="card" draggable="true">
-                    <p>Card 3</p>
-                  </div>
+              <div id="container3" class="box orange" data-number="4">
+                <div class="card" draggable="true">
+                  <p>Card 3</p>
                 </div>
+              </div>
             </div>
           </div>
           <div class="col">
-          <div class="mx-3">
-            <div id="container2" class="box green" data-number="2">
-              <h4 class="pt-2">Container 2</h4>
-              <div class="card" draggable="true">
-                <p>Card 2</p>
+            <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 3</h4>
+            <div class="mx-3">
+              <div id="container3" class="box green" data-number="5">
+                <div class="card" draggable="true">
+                  <p>Card 3</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="mx-3">
-            <div id="container2" class="box green" data-number="2">
-              <h4 class="pt-2">Container 2</h4>
-              <div class="card" draggable="true">
-                <p>Card 2</p>
+          <div class="col">
+            <h4 class="blue title">Container 3</h4>
+            <div class="mx-3">
+              <div id="container3" class="box blue" data-number="3">
+                <div class="card" draggable="true">
+                  <p>Card 3</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="mx-3">
-            <div id="container2" class="box green" data-number="2">
-              <h4 class="pt-2">Container 2</h4>
-              <div class="card" draggable="true">
-                <p>Card 2</p>
+          <div class="col">
+            <h4 class="blue title">Container 3</h4>
+            <div class="mx-3">
+              <div id="container3" class="box blue" data-number="3">
+                <div class="card" draggable="true">
+                  <p>Card 3</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="mx-3">
-            <div id="container2" class="box green" data-number="2">
-              <h4 class="pt-2">Container 2</h4>
-              <div class="card" draggable="true">
-                <p>Card 2</p>
+          <div class="col">
+            <h4 class="blue title">Container 3</h4>
+            <div class="mx-3">
+              <div id="container3" class="box blue" data-number="3">
+                <div class="card" draggable="true">
+                  <p>Card 3</p>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="mx-3">
-            <div id="container2" class="box green" data-number="2">
-              <h4 class="pt-2">Container 2</h4>
-              <div class="card" draggable="true">
-                <p>Card 2</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="mx-3">
-            <div id="container2" class="box green" data-number="2">
-              <h4 class="pt-2">Container 2</h4>
-              <div class="card" draggable="true">
-                <p>Card 2</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          </div>          
       </div>
     </div>
   </div>
@@ -364,4 +353,17 @@ s
       // Memulai pengecekan dan pemindahan card
       checkAndMoveCard();
 
+      // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
+  function toggleCardVisibility(containerId) {
+    const container = document.getElementById(containerId);
+    const card = container.querySelector(".card");
+
+    if (card.style.display === "none") {
+      card.style.display = "inline-block";
+      container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
+    } else {
+      card.style.display = "none";
+      container.style.display = "none"; // Menyembunyikan container jika card terlihat
+    }
+  }
     </script>
