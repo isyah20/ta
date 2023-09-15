@@ -1,5 +1,6 @@
 <link href="<?= base_url() ?>assets/css/home/pagination.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
     .animation {
@@ -231,6 +232,21 @@
         text-decoration: none;
         cursor: pointer;
 
+    }
+
+    .custom-button {
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        color: var(--Grey, #CCC);
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 22px;
+        cursor: pointer;
+        outline: none;
     }
 </style>
 
@@ -521,6 +537,8 @@
                                     </div>
                                     <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
 
+
+
                                     <div class="col-6">
                                         <label for="inputNama" class="form-label text-start">Nama</label>
                                         <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
@@ -539,15 +557,17 @@
                                         <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
                                     </div>
 
-
-                                    <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                    <div class="row g-2" id="container-kontak"></div>
+                                    <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                         Tambah Kontak
                                     </button>
+
                                     <!-- <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                         Hapus Kontak
                                     </button> -->
+
                                 </form>
                             </div>
                         </div>
@@ -578,7 +598,7 @@
 </section>
 
 
-
+<!-- script popup -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -615,6 +635,35 @@
     });
 </script>
 
+<!-- script tambahkan contact -->
+<script>
+    function tambahkanKolomKontak() {
+        var container = document.getElementById("container-kontak");
+
+        for (var i = 0; i < 4; i++) {
+            var newInput = document.createElement("div");
+            newInput.classList.add("col-6");
+            newInput.innerHTML = '<label for="inputNama' + i + '" class="form-label text-start">Nama</label><input type="text" class="form-control" id="inputNama' + i + '" placeholder="Subandi">';
+
+            var newInput2 = document.createElement("div");
+            newInput2.classList.add("col-6");
+            newInput2.innerHTML = '<label for="inputPosisi' + i + '" class="form-label text-start">Posisi</label><input type="text" class="form-control" id="inputPosisi' + i + '" placeholder="Marketing">';
+
+            var newInput3 = document.createElement("div");
+            newInput3.classList.add("col-6");
+            newInput3.innerHTML = '<label for="inputEmail' + i + '" class="form-label text-start">Email</label><input type="text" class="form-control" id="inputEmail' + i + '" placeholder="Subandi@gmail.com">';
+
+            var newInput4 = document.createElement("div");
+            newInput4.classList.add("col-6");
+            newInput4.innerHTML = '<label for="inputNoHP' + i + '" class="form-label text-start">No. HP/WA</label><input type="text" class="form-control" id="inputNoHP' + i + '" placeholder="0878 6463 0101">';
+
+            container.appendChild(newInput);
+            container.appendChild(newInput2);
+            container.appendChild(newInput3);
+            container.appendChild(newInput4);
+        }
+    }
+</script>
 
 <style>
     .popup_detail {

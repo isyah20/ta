@@ -402,11 +402,11 @@
 
 
                                     <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        <img src="<?= base_url("assets/img/revome-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                         Tambah Kontak
                                     </button>
                                     <!-- <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        <img src="<?= base_url("assets/img/add-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                         Hapus Kontak
                                     </button> -->
                                 </form>
