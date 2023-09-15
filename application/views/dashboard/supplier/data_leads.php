@@ -449,6 +449,7 @@
             </p>
         </div>
     </div> -->
+
     <!-- modal hapus -->
     <div class="col-12 py-5">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
@@ -479,7 +480,7 @@
                             <div></div>
                             <div class="link flex-row align-items-center w-100">
                                 <span>
-                                    <a class="btn btn-batal btn-sm border btn-outline">
+                                    <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
                                         <i class="fas me-1"></i>Batal
                                     </a>
                                 </span>
@@ -490,10 +491,8 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- end modal hapus -->
+
     <!-- modal lengkapi leads  -->
     <div class="col-12 py-5 align-content-center justify-content-center">
         <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
@@ -808,9 +807,8 @@
                         <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
-                                
-                                <button class="btn btn-outline-warning" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi New</button>
-                                <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
+                                <button class="btn btn-danger" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi Data</button>
+                                <button class="btn btn-outline-warning" id="detailButton2" data-toggle="modal" data-target="">Detail</button>
                                 <button class="btn btn-outline-danger" id="detailButton2" data-toggle="modal" data-target="#deleteModal">Hapus</button>
                         </td>
                     </tr>`
