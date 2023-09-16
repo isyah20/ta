@@ -83,6 +83,7 @@ $route['payment/check-order/(:num)'] = 'Pembayaran/checkOrder/$1';
 //===========================================
 // Auth
 //===========================================
+$route['blank'] = 'auth/register/blankPageMobile';
 // Register
 $route['register'] = 'auth/register';
 $route['register/pengguna'] = 'auth/register/aksi_register';
@@ -91,6 +92,7 @@ $route['newaccount'] = 'auth/register/newacc';
 
 // verifikasi
 $route['verify/(:any)'] = 'auth/register/verify/$1';
+$route['verify-mobile/(:any)/(:any)'] = 'auth/register/verifyMobile/$1/$2';
 $route['verify/pengguna/(:any)'] = 'auth/register/aksi_verify/$1';
 $route['cekemail/verify'] = 'auth/register/cekEmail';
 $route['send/verify/(:any)'] = 'auth/register/sendEmail/$1';
@@ -109,6 +111,7 @@ $route['lupa'] = 'auth/LupaPassword';
 $route['lupa/sendemail'] = 'auth/LupaPassword/emailValidation';
 $route['lupa/cekemail'] = 'auth/LupaPassword/cekEmail';
 $route['lupa/ubah/(:any)'] = 'auth/LupaPassword/resetValidation/$1';
+$route['lupa/ubah-mobile/(:any)'] = 'auth/LupaPassword/resetValidationMobile/$1';
 $route['lupa/ubah/pass/(:any)'] = 'auth/LupaPassword/ubahPass/$1';
 
 //===========================================
@@ -647,6 +650,9 @@ $route['api-mobile/complete-profil'] = 'api-mobile/ApiAuth/completeProfil';
 $route['api-mobile/send-reset-key'] = 'api-mobile/ApiAuth/sendResetKey';
 $route['api-mobile/get-reset-key'] = 'api-mobile/ApiAuth/getResetKey';
 $route['api-mobile/change-password/(:any)'] = 'api-mobile/ApiAuth/changePassword/$1';
+$route['api-mobile/send-verify'] = 'api-mobile/ApiAuth/verifySend';
+$route['api-mobile/verify'] = 'api-mobile/ApiAuth/verify';
+$route['api-mobile/check-verify'] = 'api-mobile/ApiAuth/verifyCheck';
 
 // mobile restAPI route for pengguna
 $route['api-mobile/pengguna'] = 'api-mobile/ApiPengguna/index';

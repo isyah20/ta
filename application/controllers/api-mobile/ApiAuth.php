@@ -39,6 +39,7 @@ class ApiAuth extends RestController
             $data = [
                 'email' => $this->post('email'),
                 'kategori' => $this->post('kategori'),
+                'token' => random_string('alnum', 25),
             ];
 
             $resultPengguna = $this->Pengguna_model->tambahPengguna($data);
@@ -104,6 +105,7 @@ class ApiAuth extends RestController
                 // 'status' => $this->post('status'),
                 // 'token' => $this->post('token'),
                 // 'is_active' => $this->post('is_active'),
+                // 'is_active' => 1,
                 'tgl_update' => date('Y-m-d H:i:s'),
             ];
             if (null != $this->post('npwp')) {
@@ -158,6 +160,195 @@ class ApiAuth extends RestController
                     'message' => 'Email atau password salah',
                 ], RestController::HTTP_NOT_FOUND);
             }
+        }
+    }
+
+    public function verifyCheck_get()
+    {
+        // $token = $this->get('token');
+        $email = $this->get('email');
+        $resultPengguna = $this->Pengguna_model->cekVerif($email);
+
+        if ($resultPengguna) {
+            $this->response([
+                'status' => true,
+                'data' => $resultPengguna,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data not found!',
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+
+    public function verify_post()
+    {
+        $email = $this->input->post('email');
+        $token = $this->input->post('token');
+
+        $check = $this->Pengguna_model->verifyCheck($token, $email);
+
+        if (isset($check)) {
+            $resultPengguna = $this->Pengguna_model->verifUser($email);
+
+            if ($resultPengguna) {
+                $this->response([
+                    'status' => true,
+                    'data' => $resultPengguna,
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Data not found',
+                ], RestController::HTTP_BAD_REQUEST);
+            }
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Email atau token tidak sesuai!',
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function verifySend_get()
+    {
+        $email = $this->input->get('email');
+        $result = $this->Pengguna_model->getByEmail($email);
+
+        if ($result) {
+            $tokenOld = random_string('alnum', 25);
+            $tokenUpdate = $this->Pengguna_model->updateToken($email, $tokenOld);
+            $token = $tokenUpdate['token'];
+            $this->load->library('email');
+            $config = [];
+            $config['charset'] = 'utf-8';
+            $config['useragent'] = 'Codeigniter';
+            $config['protocol'] = "smtp";
+            $config['mailtype'] = "html";
+            $config['smtp_host'] = "smtp.gmail.com"; //pengaturan smtp
+            // $config['smtp_host'] = "sv2.ecc.co.id"; //pengaturan smtp
+            $config['smtp_port'] = "465";
+            $config['smtp_timeout'] = "5";
+            $config['smtp_user'] = "misterlemper@gmail.com"; // isi dengan email
+            $config['smtp_pass'] = "xvzihfwhawxxyjgb"; // isi dengan password
+            // $config['smtp_user'] = "security@tenderplus.id"; // isi dengan email
+            // $config['smtp_pass'] = "HLILrJW8uTLJ"; // isi dengan password
+            $config['crlf'] = "\r\n";
+            $config['newline'] = "\r\n";
+            $config['smtp_crypto'] = "ssl"; //pengaturan smtp
+            // $config['smtp_crypto'] = "tls"; //pengaturan smtp
+            $config['wordwrap'] = true;
+
+            //memanggil library email dan set konfigurasi untuk pengiriman email
+            $this->email->initialize($config);
+
+            //konfigurasi pengiriman
+            $this->email->from('misterlemper@gmail.com', 'Tender Plus');
+            $this->email->to($email);
+            $this->email->subject("Verifikasi Email");
+
+            $message = "<html>
+                <body class=t0 style=\"min-width:100%;Margin:0px;padding:0px;background-color:#F0F0F0;\">
+                <div class=t1 style=\"background-color:#F0F0F0;\"><table role=presentation width=100% cellpadding=0 cellspacing=0 border=0 align=center><tr>
+                <td class=t113 style=\"font-size:0;line-height:0;mso-line-height-rule:exactly;\" valign=top align=center>
+
+                <div class=t55 style=\"display:inline-table;text-align:initial;vertical-align:inherit;width:100%;max-width:600px;\">
+                    <table role=presentation width=100% cellpadding=0 cellspacing=0 class=t57>
+                    
+                    <tr>
+                        <td class=t58 style=\"background-color:unset;\">
+                        <table role=presentation width=100% cellpadding=0 cellspacing=0><tr>
+                        <td><div class=t103 style=\"mso-line-height-rule:exactly;mso-line-height-alt:25px;line-height:25px;font-size:1px;display:block;\">&nbsp;</div></td>
+                    </tr>
+
+                    <tr>                        
+                        <td><table class=t95 role=presentation cellpadding=0 cellspacing=0 align=center><tr><td class=t96 style=\"width:315px;\">
+                        <h1 class=t90 style=\"text-decoration:none;text-transform:none;direction:ltr;color:#000000;text-align:center;mso-line-height-rule:exactly;mso-text-raise:1px;font:normal 500 40px/44px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\">
+                        Dear Pengguna Tender+</h1></td></tr></table></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class=t94 style=\"mso-line-height-rule:exactly;mso-line-height-alt:30px;line-height:30px;font-size:1px;display:block;\">&nbsp;</div></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><table class=t85 role=presentation cellpadding=0 cellspacing=0 align=center><tr><td class=t86 style=\"width:350px;\">
+                        <p class=t92 style=\"text-decoration:none;text-transform:none;direction:ltr;color:#666666;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 500 20px/30px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\">
+                        Untuk Mengaktifkan Akun anda, klik tombol di bawah ini.</p></td></tr></table></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class=t71 style=\"mso-line-height-rule:exactly;mso-line-height-alt:20px;line-height:20px;font-size:1px;display:block;\">&nbsp;</div></td>
+                    </tr>
+                        
+                    <tr>
+                        <td><table class=t73 role=presentation cellpadding=0 cellspacing=0 align=center><tr><td class=t74 
+                        style=\"background-color:#DB2828;width:308px;text-align:center;line-height:58px;mso-line-height-rule:exactly;mso-text-raise:11px;border-radius:14px 14px 14px 14px;\">
+                        <a class=t80 href='" . site_url('verify-mobile/' . $email . '/' . $token) . "'  style=\"display:block;text-decoration:none;direction:ltr;color:#FFFFFF;text-align:center;mso-line-height-rule:exactly;mso-text-raise:11px;font:normal 600 21px/58px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\" target=_blank>Verifikasi Akun</a></td></tr></table></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class=t71 style=\"mso-line-height-rule:exactly;mso-line-height-alt:20px;line-height:20px;font-size:1px;display:block;\">&nbsp;</div></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><table class=t63 role=presentation cellpadding=0 cellspacing=0 align=center><tr><td class=t64 style=\"width:350px;\">
+                        <p class=t70 style=\"text-decoration:none;text-transform:none;direction:ltr;color:#B3B3B3;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 400 16px/25px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\"></p></td></tr></table></td>
+                    </tr>
+
+                    <tr>
+                        <center>
+                            <img src='https://tenderplus.id/assets/img/logo-tender.png' width='150px' heigth='150px'>
+                        </center>
+
+                        <a href='https://www.instagram.com/beecons/'>
+								<iconify-icon class=\"iconify\" icon=\"akar-icons:instagram-fill\" 
+                                width=\"20\" height=\"20\"></iconify-icon>
+							</a>
+                    </tr>
+
+                    <tr>
+                        <p class=t70 style=\"text-decoration:none;text-transform:none;direction:ltr;color:#000000;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 400 16px/25px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\">                       
+					    <a href='" . site_url("tentang_kami") . "' style=\"text-decoration:none;text-transform:none;direction:ltr;color:#000000;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 400 16px/25px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\">Tentang Kami .</a>
+					    <a href='" . site_url("kebijakan_privasi") . "' style=\"text-decoration:none;text-transform:none;direction:ltr;color:#000000;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 400 16px/25px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\">Kebijakan Privasi .</a>
+					    <a href='" . site_url("hubungi_kami") . "' style=\"text-decoration:none;text-transform:none;direction:ltr;color:#000000;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 400 16px/25px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\"> Kontak Kami .</a>
+					    <a href='" . site_url("faq") . "' style=\"text-decoration:none;text-transform:none;direction:ltr;color:#000000;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 400 16px/25px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\"> FAQ</a>
+                    </tr>
+
+                    <tr>
+                        <p class=t70 style=\"text-decoration:none;text-transform:none;direction:ltr;color:#000000;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;font:normal 400 16px/25px BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Fira Sans';\">
+                        &copy; 2022. Tender+</p></td></tr></table></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class=t62 style=\"mso-line-height-rule:exactly;mso-line-height-alt:25px;line-height:25px;font-size:1px;display:block;\">&nbsp;</div></td></tr></table></td>
+                    </tr>
+                    
+                    </table>
+                </div>
+                </body>
+                </html>";
+
+            $this->email->message($message);
+
+            if ($this->email->send()) {
+                $this->response([
+                    'status' => true,
+                    'data' => 'Email berhasil dikirim',
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Email gagal dikirim',
+                ], RestController::HTTP_BAD_REQUEST);
+            }
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Akun Belum Terdaftar, Silahkan Daftar Terlebih Dahulu',
+            ], RestController::HTTP_BAD_REQUEST);
         }
     }
 
@@ -237,7 +428,7 @@ class ApiAuth extends RestController
                                                                         <table role=\"presentation\" style=\"width:auto;border-collapse:collapse;border:0;border-spacing:0;\">
                                                                             <tr>
                                                                                 <td align=\"center\" style=\"background:#BF0C0C;border-radius:3px;padding:0;\">
-                                                                                    <a href='" . site_url('lupa/ubah/' . $reset_key) . '?email=' . $email . "' style=\"text-decoration: none;\">
+                                                                                    <a href='" . site_url('lupa/ubah-mobile/' . $reset_key) . '?email=' . $email . "' style=\"text-decoration: none;\">
                                                                                         <p style=\"font-size: 14px;margin:18px 12px;line-height:0;font-family:Ubuntu,sans-serif;color: #ffffff;font-style: normal;font-weight: 500;\">Ubah Kata Sandi</p>
                                                                                     </a>
                                                                                 </td>
@@ -396,6 +587,7 @@ class ApiAuth extends RestController
             ], RestController::HTTP_BAD_REQUEST);
         }
     }
+
 
 
     public function changePassword_post($reset_key)

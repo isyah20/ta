@@ -2,8 +2,11 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use App\components\traits\ClientMobileApi;
+
 class LupaPassword extends CI_Controller
 {
+    use ClientMobileApi;
     public function __construct()
     {
         parent::__construct();
@@ -12,6 +15,7 @@ class LupaPassword extends CI_Controller
         $this->load->library('email');
         $this->load->helper('form');
         $this->load->helper('string');
+        $this->initMobile();
     }
 
     public function index()
@@ -251,6 +255,21 @@ class LupaPassword extends CI_Controller
             $this->load->view('auth/templates/main_head', $data);
             $this->load->view('auth/new-password', $data);
             $this->load->view('auth/templates/main_end');
+        }
+    }
+    public function resetValidationMobile($reset_key)
+    {
+        $email = $this->input->get('email');
+        $data['pengguna'] = $this->Reset_model->getResetKey($reset_key, $email);
+        if (!$data['pengguna']) {
+            $this->session->set_flashdata('error', 'Permintaan reset anda tidak valid');
+            redirect('blank');
+        } elseif ($data['pengguna']['expire_key'] == 1) {
+            $this->session->set_flashdata('error', 'Link Expired, Silahkan Send Email lagi');
+            $this->index();
+        } elseif ($data['pengguna']['reset_key'] != null && $data['pengguna']['expire_key'] != 1) {
+            $this->session->set_flashdata('success', 'Link Valid, silahkan ubah password akun di aplikasi mobile tenderplus Anda!');
+            redirect('blank');
         }
     }
 
