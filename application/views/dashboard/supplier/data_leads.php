@@ -486,7 +486,7 @@
                             <div></div>
                             <div class="link flex-row align-items-center w-100">
                                 <span>
-                                    <a href="<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/' . $id); ?>" class="btn-custom text-white text-center">
+                                    <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
                                         <i class="fas me-1"></i>Hapus
                                     </a>
                                 </span>
@@ -839,16 +839,18 @@
     });
 
     $(document).ready(function() {
-        $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                var leads = "";
-                $.each(data, function(index, value) {
-                    var rowNumber = index + 1;
-                    leads +=
-                        `<tr>
+    // Memuat data lead melalui AJAX
+    $.ajax({
+        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            var leads = "";
+
+            $.each(data, function(index, value) {
+                var rowNumber = index + 1;
+                leads +=
+                    `<tr>
                         <td><span class="rounded">` + rowNumber + `</span></td>
                         <td>` + value.nama_perusahaan + `</td>
                         <td>` + value.npwp + `</td>
@@ -856,30 +858,25 @@
                         <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
-                                <button class="btn btn-danger" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi Data</button>
                                 <button class="btn btn-outline-warning" id="detailButton2" data-toggle="modal" data-target="">Detail</button>
-                                <button class="btn btn-outline-danger" id="deleteBtn" data-toggle="modal" data-target="#deleteModal">Hapus</button>
+                                <button class="btn btn-danger" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi Data</button>
+                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
                         </td>
-                    </tr>`
+                    </tr>`;
+            });
+
+            $("#data-leads").html(leads);
+
+            //delete action
+            $(".deleteBtnLead").click(function() {
+                var id_lead = $(this).data("id");
+
+                $("#deleteConfirmedBtn").click(function() {
+                    window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
                 });
-                $("#data-leads").html(leads);
-            }
-        });
+            });
+        }
     });
+});
 
-    //delete
-    $(document).ready(function () {
-        // Tangkap klik tombol Hapus
-        $('#deleteBtn').click(function () {
-            var item_id = $(this).data('id');
-            $('#confirmDelete').attr('data-id', item_id); // Set data-id pada tombol konfirmasi
-        });
-
-        // Tangkap klik tombol Ya pada modal
-        $('#confirmDelete').click(function () {
-            var item_id = $(this).attr('data-id');
-            // Redirect atau kirim permintaan AJAX ke kontroler untuk menghapus item berdasarkan item_id
-            window.location.href = "<?php echo base_url('item_controller/confirm_delete/'); ?>" + item_id;
-        });
-    });
 </script>
