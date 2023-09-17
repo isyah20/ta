@@ -627,7 +627,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     function openModal(id) {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
@@ -704,4 +704,4 @@
             }
         });
     });
-</script>
+</script> -->
