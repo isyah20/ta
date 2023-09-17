@@ -622,11 +622,12 @@
 
     popupCloseDetail.addEventListener('click', () => {
         popupDetail.style.display = 'none';
-        document.body.classList.remove('modal-open-detail');
+        document.body.class
+        List.remove('modal-open-detail');
     });
 </script>
 
-<!-- <script>
+<script>
     function openModal(id) {
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
@@ -703,4 +704,4 @@
             }
         });
     });
-</script> -->
+</script>
