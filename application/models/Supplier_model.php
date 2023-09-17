@@ -338,9 +338,9 @@ class Supplier_model extends CI_Model
     public function getDataLeads(){
         $sql = "SELECT data_leads.*,
         IFNULL(kontak_lead.nama, '') AS nama_kontak, 
-               IFNULL(kontak_lead.posisi, '') AS posisi, 
-               IFNULL(kontak_lead.no_telp, '') AS no_telp, 
-               IFNULL(kontak_lead.email, '') AS email
+                IFNULL(kontak_lead.posisi, '') AS posisi, 
+                IFNULL(kontak_lead.no_telp, '') AS no_telp, 
+                IFNULL(kontak_lead.email, '') AS email
         FROM data_leads
         LEFT JOIN (
             SELECT kontak_lead.*
@@ -369,15 +369,24 @@ class Supplier_model extends CI_Model
         return $query->row(); 
     }
 
-    public function updateLeadData($id, $data) {
+    public function getKontakLeadById($id)
+    {
+        $this->db->select('*');
+        $this->db->from('kontak_lead');
         $this->db->where('id_lead', $id);
-        $this->db->update('data_leads', $data);
-        return $this->db->affected_rows();
+
+        $query = $this->db->get();
+        return $query->result_array(); 
     }
 
-    public function updateCompletedDataLead($id_lead, $completed) {
-        $data = array('completed' => $completed);
-        $this->db->where('id_lead', $id_lead);
-        $this->db->update('data_leads', $data);
+    public function deleteDataLeadById($id) {
+        $this->db->where('id_lead', $id);
+        $this->db->delete('data_leads');
     }
+
+    public function deleteKontakLeadById($id) {
+        $this->db->where('id_lead', $id);
+        $this->db->delete('kontak_lead');
+    }
+
 }

@@ -1,5 +1,6 @@
 <link href="<?= base_url() ?>assets/css/home/pagination.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
     .animation {
@@ -44,12 +45,12 @@
 
     }
 
-    .btn-custom {
+    /* .btn-custom {
         padding-left: 10px;
         padding-right: 10px;
         background-color: #EB650D;
         color: #fff;
-    }
+    } */
 
     .underlined {
         border-collapse: collapse;
@@ -185,6 +186,79 @@
         font-size: small;
         margin-top: 2rem;
     }
+
+    /* modal popup */
+    .modal-dialog {
+        display: flex;
+        width: 518px;
+        height: 555px;
+        padding: 20px 30px 30px 30px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+    }
+
+    .modal-title {
+        color: var(--font-dark-grey, #333);
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 33px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .custom-modal {
+
+        height: 768px;
+
+    }
+
+    /* button popup */
+    .btn-custom {
+        display: flex;
+        padding: 15px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        border-radius: 5px;
+        background: var(--primary-red-400, #DF3131);
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+
+    }
+
+    .btn-batal {
+        display: flex;
+        padding: 15px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+
+    }
+
+    .custom-button {
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        color: var(--Grey, #CCC);
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 22px;
+        cursor: pointer;
+        outline: none;
+    }
 </style>
 
 <style>
@@ -212,7 +286,6 @@
         align-items: left;
         justify-content: left;
         max-height: 80vh;
-        /* Atur tinggi maksimum konten sesuai kebutuhan Anda, gunakan vh (viewport height) */
         overflow-y: scroll;
     }
 
@@ -386,182 +459,320 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-body card-data">
-                                <div>
-                                    <p>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                    </p>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col">
-                    <table class="table table-striped custom-table-container">
-                        <thead class="thead">
-                            <tr>
-                                <th class="custom-padding">No.</th>
-                                <th class="custom-padding">Nama Perusahaan</th>
-                                <th class="custom-padding">NPWP</th>
-                                <th class="custom-padding">Email</th>
-                                <th class="custom-padding">No.Telp/WA</th>
-                                <th></th>
-                                <th class="custom-padding">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="data-leads">
-                            <tr>
-                                <th></th>
-                                <td><span class="rounded">1</span></td>
-                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                                <td>office@telkom.co.id</td>
-                                <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
-                                <td>
-                                    <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
-                                    <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
-                                    <a class="btn btn-outline-danger">Hapus</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td><span class="rounded">1</span></td>
-                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                                <td>office@telkom.co.id</td>
-                                <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
-                                <td>
-                                    <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
-                                    <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
-                                    <a class="btn btn-outline-danger">Hapus</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="popup" id="popup">
-                        <div class="popup-content">
-                            <span class="popup-close" id="popup-close">&times;</span>
-                            <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
-                            <h2>Contact Person</h2>
-                            <p>PT Telekomunikasi Indonesia</p>
-                            <table class="table table-striped popup-table">
-                                <thead class="popup-thead">
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Posisi</th>
-                                        <th>Email</th>
-                                        <th>No. Telp</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <td>joko</td>
-                                    <td>HRD</td>
-                                    <td>hrd@telkom.co.id</td>
-                                    <td>0811-2345-6666</td>
-                                </tbody>
-                            </table>
-                            <button class="popup-button" id="popup-close">Tutup</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="popupDetail" id="popupDetail">
-            <div class="popup-content-detail">
-                <span class="popup-close-detail" id="popup-close-detail"><img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt=""></span>
-                <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
-                <h5 style="margin-left: 30px; margin-top:5;">PT. Telekomunikasi Indonesia, Tbk.</h5>
-                <p style="margin-left: 30px; margin-top:0px;">Jakarta, Indonesia</p>
-                <p>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="profile-container">
-                                <span><img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt=""></span>
-                                <h8 class="h8">Profil Singkat Perusahaan</h8>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                    <div class="shadow-sm bg-white">
+                        <div class="card-body card-data">
+                            <div>
+                                <p>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
+                                </p>
                             </div>
-                        </div>
-                        <div class="row">
-                            <p style="margin-left: 50px; margin-right: 40px;">
-                                PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan danberkantor pusat resmi di Bandung dan
-                                <br>berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
-                            </p>
-                        </div>
-                        <div class="col-6">
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
-                                <h8 class="h8">NPWP</h8>
-                                <p class="justify-text">08.178.554.2-123.213</p>
-                            </div>
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
-                                <h8 class="h8">Alamat</h8>
-                                <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
-                            </div>
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
-                                <h8 class="h8">Riwayat Menang Tender</h8>
-                                <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)
-                                <p class="bullets-text">Peralatan Maintenance Jaringan Pemeritah Kabupaten Malang
-                                <p class="bullets-text">Manajemen Alokasi Pemerataan Penggunaan Jaringan Selular
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <p>
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px;">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
                                 </p>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="contact-container">
-                                <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
-                                <h8 class="h8">Contact Person</h8>
-                                <div class="container text-left">
-                                    <div class="row" style="margin-left: 10px;">
-                                        <div class="col-6 col-sm-4">Office (NO.Telp Kantor)</div>
-                                        <div class="col-6 col-sm-6">
-                                            <p>(0274) 5980 3112 <br>office@telkom.id</p>
-                                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                        <div class="w-100"></div>
+    <div class="container wow fadeInUp">
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped custom-table-container">
+                    <thead class="thead">
+                        <tr>
+                            <th class="custom-padding">No.</th>
+                            <th class="custom-padding">Nama Perusahaan</th>
+                            <th class="custom-padding">NPWP</th>
+                            <th class="custom-padding">Email</th>
+                            <th class="custom-padding">No.Telp/WA</th>
+                            <th></th>
+                            <th class="custom-padding">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data-leads">
+                        <tr>
+                            <th></th>
+                            <td><span class="rounded">1</span></td>
+                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td>
+                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td><span class="rounded">1</span></td>
+                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
+                            <td>office@telkom.co.id</td>
+                            <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
+                            <td>
+                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
+                                <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
+                                <a class="btn btn-outline-danger">Hapus</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="popup" id="popup">
+                    <div class="popup-content">
+                        <span class="popup-close" id="popup-close">&times;</span>
+                        <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
+                        <h2>Contact Person</h2>
+                        <p>PT Telekomunikasi Indonesia</p>
+                        <table class="table table-striped popup-table">
+                            <thead class="popup-thead">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Posisi</th>
+                                    <th>Email</th>
+                                    <th>No. Telp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td>joko</td>
+                                <td>HRD</td>
+                                <td>hrd@telkom.co.id</td>
+                                <td>0811-2345-6666</td>
+                            </tbody>
+                        </table>
+                        <button class="popup-button" id="popup-close">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popupDetail" id="popupDetail">
+        <div class="popup-content-detail">
+            <span class="popup-close-detail" id="popup-close-detail"><img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt=""></span>
+            <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
+            <h5 style="margin-left: 30px; margin-top:5;">PT. Telekomunikasi Indonesia, Tbk.</h5>
+            <p style="margin-left: 30px; margin-top:0px;">Jakarta, Indonesia</p>
+            <p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="profile-container">
+                            <span><img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt=""></span>
+                            <h8 class="h8">Profil Singkat Perusahaan</h8>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p style="margin-left: 50px; margin-right: 40px;">
+                            PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan danberkantor pusat resmi di Bandung dan
+                            <br>berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <div class="item">
+                            <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
+                            <h8 class="h8">NPWP</h8>
+                            <p class="justify-text">08.178.554.2-123.213</p>
+                        </div>
+                        <div class="item">
+                            <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
+                            <h8 class="h8">Alamat</h8>
+                            <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
+                        </div>
+                        <div class="item">
+                            <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
+                            <h8 class="h8">Riwayat Menang Tender</h8>
+                            <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)
+                            <p class="bullets-text">Peralatan Maintenance Jaringan Pemeritah Kabupaten Malang
+                            <p class="bullets-text">Manajemen Alokasi Pemerataan Penggunaan Jaringan Selular
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="contact-container">
+                            <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
+                            <h8 class="h8">Contact Person</h8>
+                            <div class="container text-left">
+                                <div class="row" style="margin-left: 10px;">
+                                    <div class="col-6 col-sm-4">Office (NO.Telp Kantor)</div>
+                                    <div class="col-6 col-sm-6">
+                                        <p>(0274) 5980 3112 <br>office@telkom.id</p>
+                                    </div>
 
-                                        <div class="col-6 col-sm-4">Budi (HRD)</div>
-                                        <div class="col-6 col-sm-6">
-                                            <p>0811 2332 1000 <br>budi@telkom.id</p>
-                                        </div>
+                                    <div class="w-100"></div>
 
-                                        <div class="w-100"></div>
+                                    <div class="col-6 col-sm-4">Budi (HRD)</div>
+                                    <div class="col-6 col-sm-6">
+                                        <p>0811 2332 1000 <br>budi@telkom.id</p>
+                                    </div>
 
-                                        <div class="col-6 col-sm-4">Susi Susanti (Purchasing)</div>
-                                        <div class="col-6 col-sm-6">
-                                            <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
-                                        </div>
+                                    <div class="w-100"></div>
 
-                                        <div class="w-100"></div>
+                                    <div class="col-6 col-sm-4">Susi Susanti (Purchasing)</div>
+                                    <div class="col-6 col-sm-6">
+                                        <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
+                                    </div>
 
-                                        <div class="col-6 col-sm-4">Jokowi Santoso (Direktur Utama)</div>
-                                        <div class="col-6 col-sm-6">
-                                            <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
-                                        </div>
+                                    <div class="w-100"></div>
+
+                                    <div class="col-6 col-sm-4">Jokowi Santoso (Direktur Utama)</div>
+                                    <div class="col-6 col-sm-6">
+                                        <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </p>
+            </div>
+            </p>
+        </div>
+    </div>
+    </div>
+
+    <!-- modal hapus -->
+    <div class="col-12 py-5">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+                    <div class="modal-body border-0 text-center">
+                        <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
+                        <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
+                        <div class="input-popup align-items-center justify-content-center">
+                            <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Hapus
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
+                                        <i class="fas me-1"></i>Batal
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <!-- end modal hapus -->
+
+    <!-- modal lengkapi leads  -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
+        <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
+                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                        <div class="input-popup align-items-center">
+                            <div class="input-popup justify-content-end">
+                                <form class="row g-2">
+                                    <div class="col-12">
+                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
+                                        <input type="text" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
+                                        <textarea class="form-control" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
+                                    </div>
+                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
+
+
+
+                                    <div class="col-6">
+                                        <label for="inputNama" class="form-label text-start">Nama</label>
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                        <input type="text" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputEmail" class="form-label text-start">Email</label>
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                        <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                    </div>
+
+                                    <div class="row g-2" id="container-kontak"></div>
+                                    <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        Tambah Kontak
+                                    </button>
+
+                                    <!-- <button type="button" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        Hapus Kontak
+                                    </button> -->
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Tambahkan
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="my-2 text-center">
+                            <p style="font-size: 15px;">
+                                Mari Kami bantu carikan informasi tentang perusahaan ini?
+                                <a href="#">
+                                    Klik Disini
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal lengkapi leads -->
 </section>
+
+
+<!-- script popup -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -627,17 +838,58 @@
     });
 </script>
 
+<!-- script tambahkan contact -->
+<script>
+    function tambahkanKolomKontak() {
+        var container = document.getElementById("container-kontak");
+
+        for (var i = 0; i < 4; i++) {
+            var newInput = document.createElement("div");
+            newInput.classList.add("col-6");
+            newInput.innerHTML = '<label for="inputNama' + i + '" class="form-label text-start">Nama</label><input type="text" class="form-control" id="inputNama' + i + '" placeholder="Subandi">';
+
+            var newInput2 = document.createElement("div");
+            newInput2.classList.add("col-6");
+            newInput2.innerHTML = '<label for="inputPosisi' + i + '" class="form-label text-start">Posisi</label><input type="text" class="form-control" id="inputPosisi' + i + '" placeholder="Marketing">';
+
+            var newInput3 = document.createElement("div");
+            newInput3.classList.add("col-6");
+            newInput3.innerHTML = '<label for="inputEmail' + i + '" class="form-label text-start">Email</label><input type="text" class="form-control" id="inputEmail' + i + '" placeholder="Subandi@gmail.com">';
+
+            var newInput4 = document.createElement("div");
+            newInput4.classList.add("col-6");
+            newInput4.innerHTML = '<label for="inputNoHP' + i + '" class="form-label text-start">No. HP/WA</label><input type="text" class="form-control" id="inputNoHP' + i + '" placeholder="0878 6463 0101">';
+
+            container.appendChild(newInput);
+            container.appendChild(newInput2);
+            container.appendChild(newInput3);
+            container.appendChild(newInput4);
+        }
+    }
+</script>
+
 <!-- <script>
     function openModal(id) {
         $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            url: "<?php echo site_url('suplier/getKontak/') ?>" + id, 
             type: "GET",
-            data: {
-                id: id
-            },
-            success: function(data) {
-                $("#popup-content").html(data);
-                $("#popup").show();
+            dataType: "JSON",
+            // data: { id: id },
+            // data : id,
+            success: function (data) {
+            var kontak = "";
+            $.each(data, function (index, value) {
+                kontak +=
+                `<tr>
+                    <td>` + value.nama + `</td>
+                    <td>` + value.posisi + `</td>
+                    <td>` + value.email + `</td>
+                    <td>` + value.no_telp + `</td>
+                </tr>`
+            });
+            $("#data-kontak").html(kontak);
+            $("#popup-content").html(data);
+            $("#popup").show();
             },
             error: function() {
                 alert("Terjadi kesalahan saat mengambil data.");
@@ -649,8 +901,10 @@
         $("#popup").hide();
     }
 
-    $(document).on("click", ".toggle-button", function() {
-        var id = $(this).data("id");
+    $(document).on("click", ".toggle-button", function () {
+        // var id = $(this).data("id_lead");
+        // var id = value.id_lead;
+        let id = $(this).closest("tr").find("td:eq(0)").text();
         openModal(id);
     });
 
@@ -677,16 +931,18 @@
     });
 
     $(document).ready(function() {
-        $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                var leads = "";
-                $.each(data, function(index, value) {
-                    var rowNumber = index + 1;
-                    leads +=
-                        `<tr>
+    // Memuat data lead melalui AJAX
+    $.ajax({
+        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            var leads = "";
+
+            $.each(data, function(index, value) {
+                var rowNumber = index + 1;
+                leads +=
+                    `<tr>
                         <td><span class="rounded">` + rowNumber + `</span></td>
                         <td>` + value.nama_perusahaan + `</td>
                         <td>` + value.npwp + `</td>
@@ -694,14 +950,25 @@
                         <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
-                                <button class="btn btn-outline-warning" id="detailButton2">Detail</button>
-                                <a href="${base_url}suplier/form-leads/${value.id_lead}" class="btn btn-danger btn-custom">Edit Data</a>
-                                <a href="${base_url}suplier/${value.id_lead}" class="btn btn-outline-danger">Hapus</a>
+                                <button class="btn btn-outline-warning" id="detailButton2" data-toggle="modal" data-target="">Detail</button>
+                                <button class="btn btn-danger" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi Data</button>
+                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
                         </td>
-                    </tr>`
+                    </tr>`;
+            });
+
+            $("#data-leads").html(leads);
+
+            //delete action
+            $(".deleteBtnLead").click(function() {
+                var id_lead = $(this).data("id");
+
+                $("#deleteConfirmedBtn").click(function() {
+                    window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
                 });
-                $("#data-leads").html(leads);
-            }
-        });
+            });
+        }
     });
-</script> -->
+});
+
+</script>

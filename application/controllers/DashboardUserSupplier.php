@@ -80,6 +80,20 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
+    public function getDataLeadsById($id)
+    {
+        $data = $this->Supplier_model->getDataLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getKontakLeadById($id)
+    {
+        $data = $this->Supplier_model->getKontakLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
     public function editDataLeads($id)
     {
         $lead = $this->Supplier_model->getDataLeadById($id);
@@ -123,6 +137,12 @@ class DashboardUserSupplier extends CI_Controller
         }
     }
     
+    public function deleteDataLeadById($id) {
+        $this->Supplier_model->deleteKontakLeadById($id);
+        $this->Supplier_model->deleteDataLeadById($id);
+        redirect('suplier/leads');
+        
+    }
 
     public function CRM()
     {
