@@ -526,35 +526,34 @@
                         <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
                         <div class="input-popup align-items-center">
                             <div class="input-popup justify-content-end">
-                                <form class="row g-2">
+                                <form class="row g-2" method="post" action="<?= site_url('DashboardUserSupplier/updateDataLeads'. $lead['id']) ?>">
+                                    <input type="hidden" name="id_lead" value="<?= $lead_id ?>">
                                     <div class="col-12">
                                         <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                        <input type="text" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
+                                        <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
                                     </div>
                                     <div class="col-12">
                                         <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
-                                        <textarea class="form-control" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
+                                        <textarea class="form-control" name="profil" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
                                     </div>
                                     <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
 
-
-
                                     <div class="col-6">
                                         <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
+                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
                                     </div>
 
                                     <div class="col-6">
                                         <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                        <input type="text" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                        <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
                                     </div>
                                     <div class="col-6">
                                         <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                        <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
                                     </div>
                                     <div class="col-6">
                                         <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                        <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                        <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
                                     </div>
 
                                     <div class="row g-2" id="container-kontak"></div>
@@ -563,24 +562,20 @@
                                         Tambah Kontak
                                     </button>
 
-                                    <!-- <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                        Hapus Kontak
-                                    </button> -->
+                                    
 
-                                </form>
+                                
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mt-3 gap-2">
                             <div></div>
                             <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a class="btn-custom text-white text-center">
-                                        <i class="fas me-1"></i>Tambahkan
-                                    </a>
-                                </span>
+                                <button type="submit" class="btn-custom text-white text-center">
+                                    <i class="fas me-1"></i>Tambahkan
+                                </button>
                             </div>
                         </div>
+                        </form>
                         <div class="my-2 text-center">
                             <p style="font-size: 15px;">
                                 Mari Kami bantu carikan informasi tentang perusahaan ini?
@@ -637,31 +632,50 @@
 
 <!-- script tambahkan contact -->
 <script>
+    var kontakCounter = 1;
+
     function tambahkanKolomKontak() {
-        var container = document.getElementById("container-kontak");
+        kontakCounter++;
 
-        for (var i = 0; i < 4; i++) {
-            var newInput = document.createElement("div");
-            newInput.classList.add("col-6");
-            newInput.innerHTML = '<label for="inputNama' + i + '" class="form-label text-start">Nama</label><input type="text" class="form-control" id="inputNama' + i + '" placeholder="Subandi">';
+        var containerKontak = document.getElementById('container-kontak');
 
-            var newInput2 = document.createElement("div");
-            newInput2.classList.add("col-6");
-            newInput2.innerHTML = '<label for="inputPosisi' + i + '" class="form-label text-start">Posisi</label><input type="text" class="form-control" id="inputPosisi' + i + '" placeholder="Marketing">';
+        var newKontakDiv = document.createElement('div');
+        newKontakDiv.className = 'row g-2';
 
-            var newInput3 = document.createElement("div");
-            newInput3.classList.add("col-6");
-            newInput3.innerHTML = '<label for="inputEmail' + i + '" class="form-label text-start">Email</label><input type="text" class="form-control" id="inputEmail' + i + '" placeholder="Subandi@gmail.com">';
+        newKontakDiv.innerHTML = `
+            <button type="button" onclick="hapusKolomKontak(${kontakCounter})" class="custom-button justify-content-center">
+                <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                Hapus Kontak
+            </button>
 
-            var newInput4 = document.createElement("div");
-            newInput4.classList.add("col-6");
-            newInput4.innerHTML = '<label for="inputNoHP' + i + '" class="form-label text-start">No. HP/WA</label><input type="text" class="form-control" id="inputNoHP' + i + '" placeholder="0878 6463 0101">';
+            <div class="col-6">
+                <label for="inputNama${kontakCounter}" class="form-label text-start">Nama</label>
+                <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputNama${kontakCounter}" placeholder="Nama Kontak">
+            </div>
 
-            container.appendChild(newInput);
-            container.appendChild(newInput2);
-            container.appendChild(newInput3);
-            container.appendChild(newInput4);
-        }
+            <div class="col-6">
+                <label for="inputPosisi${kontakCounter}" class="form-label text-start">Posisi</label>
+                <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi${kontakCounter}" placeholder="Posisi Kontak">
+            </div>
+
+            <div class="col-6">
+                <label for="inputEmail${kontakCounter}" class="form-label text-start">Email</label>
+                <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail${kontakCounter}" placeholder="Email Kontak">
+            </div>
+
+            <div class="col-6">
+                <label for="inputNoHP${kontakCounter}" class="form-label text-start">No. HP/WA</label>
+                <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP${kontakCounter}" placeholder="No. HP/WA Kontak">
+            </div>
+        `;
+
+        containerKontak.appendChild(newKontakDiv);
+    }
+
+    function hapusKolomKontak(counter) {
+        var containerKontak = document.getElementById('container-kontak');
+        var kolomKontak = document.getElementById(`inputNama${counter}`).closest('.row.g-2');
+        containerKontak.removeChild(kolomKontak);
     }
 </script>
 

@@ -94,47 +94,35 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function editDataLeads($id)
-    {
-        $lead = $this->Supplier_model->getDataLeadById($id);
+    public function updateDataLeads($id) {
+        // Mengambil data dari formulir
+        $dataLeads = array(
+            'nama_perusahaan' => $this->input->post('nama_perusahaan'),
+            'profil' => $this->input->post('profil')
+            // Tambahkan kolom lain sesuai kebutuhan
+        );
 
-        $data = [
-            'title' => 'Dashboard'
-        ];
+        $leadId = $this->input->post('id_lead');
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('profile_pengguna/templates/navbar');
-        $this->load->view('dashboard/supplier/form_leads', $lead);
-        $this->load->view('templates/footer');
-    }
+        $this->Supplier_model->updateDataLead($leadId, $dataLeads);
 
-    public function updateDataLeads(){
-        $id_lead = $_POST['id_lead']; 
-        $telp = $_POST['no_telepon']; 
-        $nama = $_POST['nama']; 
-        $email = $_POST['email']; 
-        
-        $dataTelp = array();
-        $dataEmail = array();
-        $index = 0;
-        
-        foreach ($telp as $dataNoTelp) { 
-            array_push($dataTelp, array(
-                'no_telepon' => $dataNoTelp,
-                'nama' => $nama[$index],
-            ));
-            
-            $index++;
+        // Mengambil data dari formulir kontak
+        $kontakData = $this->input->post('kontak');
+
+        // Insert data kontak ke tabel kontak
+        foreach ($kontakData as $kontak) {
+            $dataKontak = array(
+                'id_lead' => $leadId, // ID lead yang sesuai
+                'nama' => $kontak['nama'],
+                'posisi' => $kontak['posisi'],
+                'email' => $kontak['email'],
+                'no_telp' => $kontak['no_telp']
+            );
+            $this->Supplier_model->insertKontakLead($dataKontak);
         }
-        
-        
-        $sql = $this->SiswaModel->save_batch($data); 
-        if ($sql) {
-            $this->Supplier_model->updateCompletedDataLead($id_lead, 1);
-            echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('index.php/siswa')."';</script>";
-        } else {
-            echo "<script>alert('Data gagal disimpan');window.location = '".base_url('index.php/siswa/form')."';</script>";
-        }
+
+        // Redirect atau tampilkan pesan sukses
+        redirect('suplier/leads');
     }
     
     public function deleteDataLeadById($id) {
