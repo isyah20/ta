@@ -66,5 +66,23 @@ class Supplier_api extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function insertPlotting($data)
+    {
+        $this->db->insert('plot_tim', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function updatePlotting($data, $id)
+    {
+        $this->db->update('plot_tim', $data, ['id_plot' => $id]);
+        return $this->db->affected_rows();
+    }
+
+    public function deletePlotting($id)
+    {
+        $this->db->delete('plot_tim', ['id_plot' => $id]);
+        return $this->db->affected_rows();
+    }
+
 
 }

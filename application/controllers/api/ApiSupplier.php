@@ -147,4 +147,75 @@ class ApiSupplier extends RestController
         //     ], RestController::HTTP_BAD_REQUEST);
         // }
     }
+
+    // Function Plotting
+    public function insertIntoPlot_post()
+    {
+        $data = [
+            'id_tim' => $this->post('id_tim'),
+            'id_pemenang' => $this->post('id_pemenang'),
+        ];
+
+        if ($this->Supplier_api->insertPlotting($data) > 0) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil ditambahkan'
+            ], RestController::HTTP_CREATED);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal ditambahkan'
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function updatePlotting_post($id)
+    {
+        // $id = $this->post('id_plot');
+        $data = [
+            'id_tim' => $this->post('id_tim'),
+            'id_pemenang' => $this->post('id_pemenang'),
+        ];
+
+        if ($id === null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Berikan id'
+            ], RestController::HTTP_BAD_REQUEST);
+        } else if ($this->Supplier_api->updatePlotting($data, $id) > 0) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil diubah'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal diubah'
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function deletePlotting_delete($id)
+    {
+        // $id = $this->get('id_plot');
+        if ($id === null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Berikan id'
+            ], RestController::HTTP_BAD_REQUEST);
+        } else {
+            if ($this->Supplier_api->deletePlotting($id) > 0) {
+                $this->response([
+                    'status' => true,
+                    'id' => $id,
+                    'message' => 'Data berhasil dihapus'
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Data tidak ditemukan'
+                ], RestController::HTTP_NOT_FOUND);
+            }
+        }
+    }
 }
