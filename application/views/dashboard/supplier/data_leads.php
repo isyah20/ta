@@ -391,6 +391,23 @@
         content: "\2022";
         margin-right: 8px;
     }
+
+
+    .custom-modal-lg {
+        width: 950px !important;
+        display: flex;
+        height: auto;
+        padding: 20px 30px 30px 30px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+    }
+
+    .modal p {
+        font-size: 14px;
+    }
 </style>
 
 <section class="bg-white pt-5 mt-5">
@@ -558,7 +575,7 @@
     <!-- end modal kontak detail -->
 
     <!-- modal detail -->
-    <div class="popupDetail" id="popupDetail">
+    <!-- <div class="popupDetail" id="popupDetail">
         <div class="popup-content-detail">
             <span class="popup-close-detail" id="popup-close-detail"><img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt=""></span>
             <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
@@ -638,127 +655,205 @@
             </div>
             </p>
         </div>
-    </div>
+    </div> -->
+    <!-- END MODAL detail  -->
 
-    <!-- modal hapus -->
-    <div class="col-12 py-5">
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
-            <div class="modal-dialog custom-modal" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
-                    </div>
-                    <div class="modal-body border-0 text-center">
-                        <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
-                        <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
-                        <div class="input-popup align-items-center justify-content-center">
-                            <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
+
+    <!-- Tombol yang akan membuka modal -->
+
+    <!-- Modal Detail-->
+    <div class="modal fade" id="popupDetailModal" tabindex="-1" role="dialog" aria-labelledby="popupDetailLabel" aria-hidden="true">
+        <div class="custom-modal-lg modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                        <img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                    </button>
+                </div>
+                <div class="modal-body border-0">
+                    <h5 style="margin-left: 30px;">PT. Telekomunikasi Indonesia, Tbk.</h5>
+                    <p style="margin-left: 30px;">Jakarta, Indonesia</p>
+                    <p>
+                    <div class="col-12">
+                        <div class="profile-container">
+                            <span><img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt=""></span>
+                            <h8 class="h8">Profil Singkat Perusahaan</h8>
                         </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
-                                        <i class="fas me-1"></i>Hapus
-                                    </a>
-                                </span>
+                    </div>
+                    <p style="margin-left: 50px; margin-right: 40px; ">
+                        PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan dan berkantor pusat resmi di Bandung dan
+                        berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
+                    </p>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="item">
+                                <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
+                                <h8 class="h8">NPWP</h8>
+                                <p class="justify-text">08.178.554.2-123.213</p>
+                            </div>
+                            <div class="item">
+                                <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
+                                <h8 class="h8">Alamat</h8>
+                                <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
+                            </div>
+                            <div class="item">
+                                <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
+                                <h8 class="h8">Riwayat Menang Tender</h8>
+                                <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)</p>
+                                <!-- <p class="bullets-text">Peralatan Maintenance Jaringan Pemerintah Kabupaten Malang</p> -->
+
                             </div>
                         </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
-                                        <i class="fas me-1"></i>Batal
-                                    </a>
-                                </span>
+                        <div class="col-6">
+                            <div class="contact-container">
+                                <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
+                                <h8 class="h8">Contact Person</h8>
+                                <div class="container text-left">
+                                    <div class="row">
+                                        <div class="col-6 col-sm-4">
+                                            <p>Office (NO.Telp Kantor)</p>
+                                            <p>Budi (HRD)</p>
+                                            <p>Susi Susanti (Purchasing)</p>
+                                            <p>Jokowi Santoso (Direktur Utama)</p>
+                                        </div>
+                                        <div class="col-6 col-sm-6">
+                                            <p>(0274) 5980 3112 <br>office@telkom.id</p>
+                                            <p>0811 2332 1000 <br>budi@telkom.id</p>
+                                            <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
+                                            <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end modal hapus -->
 
-    <!-- modal lengkapi leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
-        <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
-            <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
+
+
+        <!-- modal hapus -->
+        <div class="col-12 py-5">
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
+                <div class="modal-dialog custom-modal" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                            </button>
+                        </div>
+                        <div class="modal-body border-0 text-center">
+                            <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
+                            <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
+                            <div class="input-popup align-items-center justify-content-center">
+                                <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
+                            </div>
+                            <div class="d-flex justify-content-start mt-3 gap-2">
+                                <div></div>
+                                <div class="link flex-row align-items-center w-100">
+                                    <span>
+                                        <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
+                                            <i class="fas me-1"></i>Hapus
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start mt-3 gap-2">
+                                <div></div>
+                                <div class="link flex-row align-items-center w-100">
+                                    <span>
+                                        <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
+                                            <i class="fas me-1"></i>Batal
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal hapus -->
+
+        <!-- modal lengkapi leads  -->
+        <div class="col-12 py-5 align-content-center justify-content-center">
+            <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+                <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                            </button>
+                        </div>
 
 
-                    <div class="modal-body border-0">
-                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
-                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-                        <div class="input-popup align-items-center">
-                            <div class="input-popup justify-content-end">
-                                <form class="row g-2" method="post" id="formLengkapiLead">
-                                    <div class="col-12">
-                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                        <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
-                                        <textarea class="form-control" name="profil" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
-                                    </div>
-                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
+                        <div class="modal-body border-0">
+                            <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
+                            <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                            <div class="input-popup align-items-center">
+                                <div class="input-popup justify-content-end">
+                                    <form class="row g-2" method="post" id="formLengkapiLead">
+                                        <div class="col-12">
+                                            <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
+                                            <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
+                                            <textarea class="form-control" name="profil" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
+                                        </div>
+                                        <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
 
-                                    <div class="col-6">
-                                        <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
-                                    </div>
+                                        <div class="col-6">
+                                            <label for="inputNama" class="form-label text-start">Nama</label>
+                                            <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
+                                        </div>
 
-                                    <div class="col-6">
-                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                        <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                        <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
-                                    </div>
+                                        <div class="col-6">
+                                            <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                            <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="inputEmail" class="form-label text-start">Email</label>
+                                            <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                            <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                        </div>
 
-                                    <div class="row g-2" id="container-kontak"></div>
-                                    <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                        Tambah Kontak
+                                        <div class="row g-2" id="container-kontak"></div>
+                                        <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
+                                            <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                            Tambah Kontak
+                                        </button>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start mt-3 gap-2">
+                                <div></div>
+                                <div class="link flex-row align-items-center w-100">
+                                    <button type="submit" class="btn-custom text-white text-center w-100 border-0">
+                                        <i class="fas me-1"></i>Tambahkan
                                     </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <button type="submit" class="btn-custom text-white text-center w-100 border-0">
-                                    <i class="fas me-1"></i>Tambahkan
-                                </button>
+                            </form>
+                            <div class="my-2 text-center">
+                                <p style="font-size: 15px;">
+                                    Mari Kami bantu carikan informasi tentang perusahaan ini?
+                                    <a href="#">
+                                        Klik Disini
+                                    </a>
+                                </p>
                             </div>
-                        </div>
-                        </form>
-                        <div class="my-2 text-center">
-                            <p style="font-size: 15px;">
-                                Mari Kami bantu carikan informasi tentang perusahaan ini?
-                                <a href="#">
-                                    Klik Disini
-                                </a>
-                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end modal lengkapi leads -->
+        <!-- end modal lengkapi leads -->
 </section>
 
 
@@ -902,7 +997,7 @@
                         <td>` + value.no_telp + `</td>
                         <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
                         <td>
-                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
+                                <button class="btn btn-outline-warning lengkapiBtn" data-toggle="modal" data-target="#popupDetailModal" data-id="` + value.id_lead + `">Detail</button>
                                 <button class="btn btn-danger lengkapiBtn" data-toggle="modal" data-target="#lengkapiLeadsModal" data-id="` + value.id_lead + `">Lengkapi Data</button>
                                 <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
                         </td>
