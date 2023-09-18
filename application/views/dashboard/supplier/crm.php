@@ -80,23 +80,6 @@
     padding-left: 30px;
   }
 
-  .box h4::before {
-    content: "•";
-    /* Karakter titik */
-    margin-top: 4px;
-    margin-right: 5px;
-    /* Jarak antara titik dan judul */
-    font-size: 40px;
-    /* Ukuran font titik lebih besar */
-    position: absolute;
-    /* Menjadikan posisi absolut untuk titik */
-    left: 12px;
-    /* Titik sejajar dengan judul */
-    top: 50%;
-    /* Titik sejajar dengan judul secara vertikal */
-    transform: translateY(-50%);
-  }
-
   /* Memberikan warna berbeda untuk setiap kontainer */
   #container2 h4::before {
     color: #e74c3c;
@@ -178,11 +161,11 @@
   </div>
 </section>
 <section>
-  <div class="container-fluid pb-4 mx-4" id="scroll-marker">
+  <div class="container-fluid pb-4 mx-4">
     <div class="row">
       <div class="col mx-3">
-          <div id="container1" style="height:1200px; margin-right: 50px;" class="box red" data-number="1">
-              <h4 class="pt-2">Perusahaan</h4>
+          <div id="container1" style="height:1200px; margin-right: 50px;" class="box red">
+              <h4 class="pt-2"> Daftar Perusahaan</h4>
                 <div class="card" draggable="true">
                   <p>PT Cahaya Asia Ya Putra Dewa</p>
                   <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
@@ -241,9 +224,9 @@
       <div class="col">
         <div class="row">
             <div class="col">
-              <h4 class="green title" onclick="toggleCardVisibility('container2')">Container 2</h4>
+              <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri</h4>
               <div class="mx-3">
-                <div id="container2" class="box green" data-number="2">
+                <div id="container2" class="box green">
                 <div class="card" draggable="true">
                   <p>PT Cepogo Cheese Park</p>
                   <p style="font-size: 14px; color:#10B981;">Boyolali</p>
@@ -254,7 +237,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
               <div class="mx-3">
-                <div id="container3" class="box blue" data-number="3">
+                <div id="container3" class="box blue">
                   <div class="card" draggable="true">
                   <p>PT Cepogo Cheese Park</p>
                   <p style="font-size: 14px; color:#10B981;">Boyolali</p>
@@ -265,7 +248,7 @@
             <div class="col">
               <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
               <div class="mx-3">
-                <div id="container4" class="box orange" data-number="4">
+                <div id="container4" class="box orange">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -275,7 +258,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
               <div class="mx-3">
-                <div id="container5" class="box green" data-number="5">
+                <div id="container5" class="box green">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -285,7 +268,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
               <div class="mx-3">
-                <div id="container6" class="box green" data-number="6">
+                <div id="container6" class="box green">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -295,7 +278,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
               <div class="mx-3">
-                <div id="container7" class="box blue" data-number="7">
+                <div id="container7" class="box blue">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -305,7 +288,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
               <div class="mx-3">
-                <div id="container8" class="box blue" data-number="3">
+                <div id="container8" class="box blue">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -319,7 +302,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container9')">Container 2</h4>
               <div class="mx-3">
-                <div id="container9" class="box green" data-number="9">
+                <div id="container9" class="box green">
                 <div class="card" draggable="true">
                   <p>PT Cepogo Cheese Park</p>
                   <p style="font-size: 14px; color:#10B981;">Boyolali</p>
@@ -330,7 +313,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
               <div class="mx-3">
-                <div id="container3" class="box blue" data-number="3">
+                <div id="container3" class="box blue">
                   <div class="card" draggable="true">
                   <p>PT Cepogo Cheese Park</p>
                   <p style="font-size: 14px; color:#10B981;">Boyolali</p>
@@ -341,7 +324,7 @@
             <div class="col">
               <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
               <div class="mx-3">
-                <div id="container4" class="box orange" data-number="4">
+                <div id="container4" class="box orange">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -351,7 +334,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
               <div class="mx-3">
-                <div id="container5" class="box green" data-number="5">
+                <div id="container5" class="box green">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -361,7 +344,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
               <div class="mx-3">
-                <div id="container6" class="box green" data-number="6">
+                <div id="container6" class="box green">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -371,7 +354,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
               <div class="mx-3">
-                <div id="container7" class="box blue" data-number="7">
+                <div id="container7" class="box blue">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -381,7 +364,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
               <div class="mx-3">
-                <div id="container8" class="box blue" data-number="3">
+                <div id="container8" class="box blue">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -395,7 +378,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container10')">Container 2</h4>
               <div class="mx-3">
-                <div id="container10" class="box green" data-number="10">
+                <div id="container10" class="box green">
                 <div class="card" draggable="true">
                   <p>PT Cepogo Cheese Park</p>
                   <p style="font-size: 14px; color:#10B981;">Boyolali</p>
@@ -406,7 +389,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
               <div class="mx-3">
-                <div id="container3" class="box blue" data-number="3">
+                <div id="container3" class="box blue">
                   <div class="card" draggable="true">
                   <p>PT Cepogo Cheese Park</p>
                   <p style="font-size: 14px; color:#10B981;">Boyolali</p>
@@ -417,7 +400,7 @@
             <div class="col">
               <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
               <div class="mx-3">
-                <div id="container4" class="box orange" data-number="4">
+                <div id="container4" class="box orange">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -427,7 +410,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
               <div class="mx-3">
-                <div id="container5" class="box green" data-number="5">
+                <div id="container5" class="box green">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -437,7 +420,7 @@
             <div class="col">
               <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
               <div class="mx-3">
-                <div id="container6" class="box green" data-number="6">
+                <div id="container6" class="box green">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -447,7 +430,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
               <div class="mx-3">
-                <div id="container7" class="box blue" data-number="7">
+                <div id="container7" class="box blue">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -457,7 +440,7 @@
             <div class="col">
               <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
               <div class="mx-3">
-                <div id="container8" class="box blue" data-number="3">
+                <div id="container8" class="box blue">
                   <div class="card" draggable="true">
                     <p>Card 3</p>
                   </div>
@@ -531,100 +514,32 @@
       const cards = document.querySelectorAll(".card");
       let isDragging = false;
       let draggedCard = null;
-      let scrollMarker = document.getElementById("scroll-marker"); // Ambil elemen penanda scroll
-      let isScrolling = false;
 
-  cards.forEach((card, index) => {
-    card.addEventListener("dragstart", () => {
-      isDragging = true;
-      draggedCard = card;
-      card.classList.add("dragging");
-    });
-
-    card.addEventListener("dragend", () => {
-      isDragging = false;
-      draggedCard.classList.remove("dragging");
-      draggedCard = null;
-    });
-  });
-
-  containers.forEach((container) => {
-    container.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      // Memulai pemantauan posisi mouse saat card di atas kontainer
-      container.addEventListener("mousemove", handleMouseMove);
-    });
-
-    container.addEventListener("drop", () => {
-      if (isDragging) {
-        container.appendChild(draggedCard);
-        updateCardCount(container);
-      }
-      // Menghentikan pemantauan posisi mouse setelah card di-drop
-      container.removeEventListener("mousemove", handleMouseMove);
-    });
-
-    // Menambahkan jumlah card awal dan pemantauan perubahan jumlah card
-    updateCardCount(container);
-    observeCardChanges(container);
-  });
-
-  // Fungsi untuk menghitung dan menampilkan jumlah card dalam kontainer
-  function updateCardCount(container) {
-    const cardsInContainer = container.querySelectorAll(".card");
-    const title = container.querySelector("h4");
-    const cardCount = cardsInContainer.length;
-    title.textContent = `Container ${container.dataset.number} (${
-          cardCount || 0
-        })`;
-      }
-      // Fungsi untuk memantau perubahan jumlah card dalam kontainer
-      function observeCardChanges(container) {
-        const observer = new MutationObserver((mutationsList) => {
-          updateCardCount(container);
+      cards.forEach((card, index) => {
+        card.addEventListener("dragstart", () => {
+          isDragging = true;
+          draggedCard = card;
+          card.classList.add("dragging");
         });
 
-    // Memantau perubahan dalam kontainer (penambahan atau penghapusan elemen card)
-    observer.observe(container, {
-      childList: true,
-      subtree: true
-    });
-  }
+        card.addEventListener("dragend", () => {
+          isDragging = false;
+          draggedCard.classList.remove("dragging");
+          draggedCard = null;
+        });
+      });
 
-  // Fungsi yang akan dipanggil saat card ditarik di atas kontainer
-  function handleMouseMove(event) {
-    if (isDragging) {
-      // Menyimpan posisi mouse saat card ditarik
-      const mouseY = event.clientY;
+      containers.forEach((container) => {
+        container.addEventListener("dragover", (e) => {
+          e.preventDefault();
+        });
 
-      // Menentukan jika card ditarik ke bawah area penanda scroll
-      const scrollMarkerRect = scrollMarker.getBoundingClientRect();
-      if (mouseY >= scrollMarkerRect.top && mouseY <= scrollMarkerRect.bottom) {
-        isScrolling = true;
-      } else {
-        isScrolling = false;
-      }
-    }
-  }
-
-  // Memantau posisi mouse saat mouseup (untuk menghentikan scroll jika sedang berlangsung)
-  document.addEventListener("mouseup", () => {
-    isScrolling = false;
-  });
-
-  // Mengecek apakah perlu scroll dan memindahkan card jika diperlukan
-  function checkAndMoveCard() {
-    if (isDragging && isScrolling) {
-      // Menggulirkan ke kontainer paling kanan jika ditarik ke bawah area penanda scroll
-      const lastContainer = containers[containers.length - 1];
-      lastContainer.appendChild(draggedCard);
-      updateCardCount(lastContainer);
-    }
-    requestAnimationFrame(checkAndMoveCard);
-  }
-
-      // Memulai pengecekan dan pemindahan card
-      checkAndMoveCard();
+        container.addEventListener("drop", () => {
+          if (isDragging) {
+            container.appendChild(draggedCard);
+          }
+        });
+      });
 
       // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
       function toggleCardVisibility(containerId) {
