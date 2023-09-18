@@ -333,7 +333,7 @@
                             <div></div>
                             <div class="link flex-row align-items-center w-100">
                                 <span>
-                                    <a class="btn-custom text-white text-center">
+                                    <a id="hapus-modal" class="btn-custom text-white text-center">
                                         <i class="fas me-1"></i>Hapus
                                     </a>
                                 </span>
@@ -522,12 +522,43 @@
                         '<td style="font-weight: bold;">' + data.data[i].posisi + '</td>' +
                         '<td>' + data.data[i].email + '</td>' +
                         '<td>' + data.data[i].no_telp + '</td>' +
-                        '<td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a> </td>' +
+                        '<td>' +
+                            '<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
+                            '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
+                        '</td>' +
                         // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
                         '</tr>';
 
                 }
                 $('#data-leads').html(html);
+
+                // Delete action
+                $(".btn-del").click(function() {
+                    var id_tim = $(this).data("id");
+
+                    $('#hapus-modal').click(function(event) {
+                        event.preventDefault();
+                        // Make an AJAX request
+                        $.ajax({
+                            url: "<?= base_url('api/supplier/delete/') ?>" + id_tim,
+                            type: 'DELETE',
+                            // data: formData,
+                            success: function(response) {
+                                if (response.status == true) {
+                                    alert('Data berhasil dihapus');
+                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                } else {
+                                    alert('Data gagal dihapus');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+                
+                
             }
         })
     });
@@ -563,6 +594,7 @@
                 }
             });
         });
-    });
+    })
+    // Ajax for delete
 
 </script>

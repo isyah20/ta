@@ -84,5 +84,12 @@ class Supplier_api extends CI_Model
         return $this->db->affected_rows();
     }
 
+    // Insert the same Tim to table pengguna
+    public function insertTimToPengguna($data)
+    {
+        $this->db->insert('pengguna', $data);
+        return $this->db->affected_rows();
+    }
+
 
 }

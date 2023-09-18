@@ -12,6 +12,7 @@ use App\components\traits\ClientApi;
 use chriskacerguis\RestServer\RestController;
 use App\components\UserCategory;
 use App\components\traits\User;
+use App\components\UserType;
 
 class ApiSupplier extends RestController
 {
@@ -23,7 +24,10 @@ class ApiSupplier extends RestController
     {
         parent::__construct();
         $this->load->model('api/Supplier_api');
-        // $this->init();
+        $this->load->model('api/Pengguna_model');
+        $this->load->library('form_validation', 'google');
+        $this->load->helper('form');
+        $this->init();
     }
 
     public function index_get()
@@ -71,11 +75,39 @@ class ApiSupplier extends RestController
             'alamat' => $this->post('alamat'),
         ];
 
+        $token = random_string('alnum', 25);
+
+        $data_pengguna = [
+            'nama' => $this->post('nama_tim'),
+            'email' => $this->post('email'),
+            'alamat' => $this->post('alamat'),
+            'no_telp' => $this->post('no_telp'),
+            'kategori' => UserCategory::MARKETING,
+            'password' => md5($this->post('password')),
+            'token' => $token,
+            'is_active' => 1,
+            'tgl_update' => date('Y-m-d H:i:s'),
+            'status' => UserType::PAID,
+        ];
+
+        // if($this->Supplier_api->insertTimToPengguna($data_pengguna) > 0){
+        //     $this->response([
+        //         'status' => true,
+        //         'message' => 'Data berhasil ditambahkan'
+        //     ], RestController::HTTP_CREATED);
+        // } else {
+        //     $this->response([
+        //         'status' => false,
+        //         'message' => 'Data gagal ditambahkan'
+        //     ], RestController::HTTP_BAD_REQUEST);
+        // }
+        $this->Supplier_api->insertTimToPengguna($data_pengguna);
         if ($this->Supplier_api->createTimMarketing($data) > 0) {
             $this->response([
                 'status' => true,
                 'message' => 'Data berhasil ditambahkan'
             ], RestController::HTTP_CREATED);
+            $this->Supplier_api->insertTimToPengguna($data_pengguna);
         } else {
             $this->response([
                 'status' => false,
