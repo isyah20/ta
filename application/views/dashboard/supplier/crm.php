@@ -1,34 +1,37 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 <style>
-    .container-fluid {
-      display: flex;
-      justify-content: flex-start;
+  .container-fluid {
+    justify-content: flex-start;
+    display: flex;
          /* Mengatur kontainer agar sejajar ke kiri */
-      overflow-x: hidden; 
+    overflow-x: hidden; 
         /* Mengaktifkan overflow horizontal jika kontainer melebihi lebar layar */
-    }
-    .box {
-      display: inline-block; /* Menjadikan kotak inline block */
-      margin-right: 0; /* Menghapus margin-right untuk menghapus jarak antara kontainer */
-      border: none; /* Menghapus border */
-      border-radius: 5px;
-      min-width: 250px; /* Mengatur lebar minimum untuk mencegah kontainer terlalu kecil */
-      height: 400px;
-      max-height: calc(100vh - 40px); /* Mengatur tinggi maksimal untuk kontainer */
-      overflow-y: auto;
-      margin-bottom: 20px;
-    }
-    .box .card {
-      width: 250px; /* Mengatur lebar kartu 100% minus 50px untuk jarak 25px di setiap sisi kartu */
-      height: 60px; /* Anda dapat menyesuaikan tinggi kartu sesuai kebutuhan Anda */
-      background-color: white;
-      color: black;
-      border-radius: 5px;
-      cursor: grab;
-      margin:10px;
-    }
-    .card p {
+  }
+
+  .box {
+    display: inline-block; /* Menjadikan kotak inline block */
+    margin-right: 0; /* Menghapus margin-right untuk menghapus jarak antara kontainer */
+    border: none; /* Menghapus border */
+    border-radius: 5px;
+    min-width: 250px; /* Mengatur lebar minimum untuk mencegah kontainer terlalu kecil */
+    height: 400px;
+    max-height: calc(100vh - 40px); /* Mengatur tinggi maksimal untuk kontainer */
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+
+  .box .card {
+    width: 250px; /* Mengatur lebar kartu 100% minus 50px untuk jarak 25px di setiap sisi kartu */
+    height: 60px; /* Anda dapat menyesuaikan tinggi kartu sesuai kebutuhan Anda */
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    cursor: grab;
+    margin:10px;
+  }
+
+  .card p {
     margin: 0;
     padding: 3px 3px 0px 3px;
   }
@@ -39,6 +42,7 @@
     border-radius:5px;
     padding: 5px 15px 5px 15px;
   }
+
   .purple {
     background-color: #ebcffc;
   }
@@ -240,6 +244,158 @@
               <h4 class="green title" onclick="toggleCardVisibility('container2')">Container 2</h4>
               <div class="mx-3">
                 <div id="container2" class="box green" data-number="2">
+                <div class="card" draggable="true">
+                  <p>PT Cepogo Cheese Park</p>
+                  <p style="font-size: 14px; color:#10B981;">Boyolali</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
+              <div class="mx-3">
+                <div id="container3" class="box blue" data-number="3">
+                  <div class="card" draggable="true">
+                  <p>PT Cepogo Cheese Park</p>
+                  <p style="font-size: 14px; color:#10B981;">Boyolali</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
+              <div class="mx-3">
+                <div id="container4" class="box orange" data-number="4">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
+              <div class="mx-3">
+                <div id="container5" class="box green" data-number="5">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
+              <div class="mx-3">
+                <div id="container6" class="box green" data-number="6">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
+              <div class="mx-3">
+                <div id="container7" class="box blue" data-number="7">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
+              <div class="mx-3">
+                <div id="container8" class="box blue" data-number="3">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>         
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container9')">Container 2</h4>
+              <div class="mx-3">
+                <div id="container9" class="box green" data-number="9">
+                <div class="card" draggable="true">
+                  <p>PT Cepogo Cheese Park</p>
+                  <p style="font-size: 14px; color:#10B981;">Boyolali</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
+              <div class="mx-3">
+                <div id="container3" class="box blue" data-number="3">
+                  <div class="card" draggable="true">
+                  <p>PT Cepogo Cheese Park</p>
+                  <p style="font-size: 14px; color:#10B981;">Boyolali</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
+              <div class="mx-3">
+                <div id="container4" class="box orange" data-number="4">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
+              <div class="mx-3">
+                <div id="container5" class="box green" data-number="5">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
+              <div class="mx-3">
+                <div id="container6" class="box green" data-number="6">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
+              <div class="mx-3">
+                <div id="container7" class="box blue" data-number="7">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
+              <div class="mx-3">
+                <div id="container8" class="box blue" data-number="3">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>         
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container10')">Container 2</h4>
+              <div class="mx-3">
+                <div id="container10" class="box green" data-number="10">
                 <div class="card" draggable="true">
                   <p>PT Cepogo Cheese Park</p>
                   <p style="font-size: 14px; color:#10B981;">Boyolali</p>
