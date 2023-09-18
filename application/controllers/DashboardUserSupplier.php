@@ -100,6 +100,13 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
+    public function getKontakLeadByNama($nama)
+    {
+        $data = $this->Supplier_model->getKontakLeadByName($nama);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
     public function updateDataLeads($id) {
         // Mengambil data dari formulir
         $dataLeads = array(

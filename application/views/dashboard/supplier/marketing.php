@@ -228,8 +228,8 @@
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="data-tim">
-                        <!-- <tr>
+                    <tbody id="data-leads">
+                        <tr>
                             <th></th>
                             <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -246,8 +246,6 @@
                             <td style="font-weight: bold;">08.178.554.2-123.213</td>
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office)</td>
-                            <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
-                        </tr> -->
                             <td>
                                 <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
@@ -524,11 +522,12 @@
                         '<td style="font-weight: bold;">' + data.data[i].posisi + '</td>' +
                         '<td>' + data.data[i].email + '</td>' +
                         '<td>' + data.data[i].no_telp + '</td>' +
-                        '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
+                        '<td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a> </td>' +
+                        // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
                         '</tr>';
 
                 }
-                $('#data-tim').html(html);
+                $('#data-leads').html(html);
             }
         })
     });
@@ -565,74 +564,5 @@
             });
         });
     });
-    $(document).ready(function() {
-    // Function to retrieve item data and populate the edit form
-    function retrieveItemData(itemId) {
-        $.ajax({
-            type: "GET",
-            url: "http://your-codeigniter-app/items/getItem/" + itemId, // Replace with the correct URL
-            dataType: "json",
-            success: function(response) {
-                // Populate the edit form fields with retrieved data
-                $("#edit-item-id").val(response.id);
-                $("#edit-item-name").val(response.name);
-                
-                // Display the edit form
-                $("#edit-form").show();
-            },
-            error: function(xhr, status, error) {
-                // Handle AJAX error, if needed
-                console.log("AJAX Error: " + error);
-            }
-        });
-    }
-
-    // Handle "Edit" button click
-    $(".edit-button").click(function() {
-        // Get the item ID from the data attribute
-        var itemId = $(this).closest("li").data("id");
-        
-        // Call the retrieveItemData function to fetch and display item data
-        retrieveItemData(itemId);
-    });
-
-    // Handle form submission for editing
-    $("#item-edit-form").submit(function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        
-        // Get form data
-        var formData = {
-            id: $("#edit-item-id").val(),
-            name: $("#edit-item-name").val()
-        };
-
-        // Make an AJAX request to update the item data
-        $.ajax({
-            type: "POST",
-            url: "http://your-codeigniter-app/items/updateItem", // Replace with the correct URL for updating
-            data: formData,
-            success: function(response) {
-                if (response.status === true) {
-                    // Reload the page or refresh the item list
-                    // Optionally, you can display a success message
-                    location.reload();
-                } else {
-                    // Handle error response, if needed
-                    console.log("Error: " + response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                // Handle AJAX error, if needed
-                console.log("AJAX Error: " + error);
-            }
-        });
-    });
-
-    // Handle "Retrieve Data" button click
-    $("#retrieve-data-button").click(function() {
-        // Replace '1' with the item ID you want to retrieve
-        retrieveItemData(1);
-    });
-});
 
 </script>

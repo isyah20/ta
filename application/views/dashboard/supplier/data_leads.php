@@ -935,7 +935,7 @@
 <script>
     function openModal(id) {
         $.ajax({
-            url: "<?php echo site_url('suplier/getKontak/') ?>" + id,
+            url: "<?php echo site_url('suplier/getKontakNama/') ?>" + id,
             type: "GET",
             dataType: "JSON",
             // data: { id: id },
@@ -968,7 +968,7 @@
     $(document).on("click", ".toggle-button", function() {
         // var id = $(this).data("id_lead");
         // var id = value.id_lead;
-        let id = $(this).closest("tr").find("td:eq(0)").text();
+        let id = $(this).closest("tr").find("td:eq(2)").text();
         openModal(id);
     });
 

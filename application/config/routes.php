@@ -124,6 +124,7 @@ $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
+$route['suplier/getKontakNama/(:any)'] = 'DashboardUserSupplier/getKontakLeadByNama/$1';
 $route['suplier/form-leads/(:num)'] = 'DashboardUserSupplier/editDataLeads/$1';
 $route['suplier/crm'] = 'DashboardUserSupplier/CRM';
 $route['suplier/marketing'] = 'DashboardUserSupplier/marketing';

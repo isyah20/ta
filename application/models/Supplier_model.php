@@ -373,7 +373,23 @@ class Supplier_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('kontak_lead');
-        $this->db->where('id_lead', $id);
+        // $this->db->where('id_lead', $id);
+        // join data lead to get id lead
+        $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
+        $this->db->where('kontak_lead.id_lead', $id);
+
+        $query = $this->db->get();
+        return $query->result_array(); 
+    }
+
+    public function getKontakLeadByName($name)
+    {
+        $this->db->select('*');
+        $this->db->from('kontak_lead');
+        // $this->db->where('nama', $name);
+        // get nama_perusahaan from data lead
+        $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
+        $this->db->where('data_leads.npwp', $name);
 
         $query = $this->db->get();
         return $query->result_array(); 
