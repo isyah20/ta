@@ -127,11 +127,15 @@ $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
+$route['suplier/getKontakNama/(:any)'] = 'DashboardUserSupplier/getKontakLeadByNama/$1';
 $route['suplier/form-leads/(:num)'] = 'DashboardUserSupplier/editDataLeads/$1';
 $route['suplier/crm'] = 'DashboardUserSupplier/CRM';
 $route['suplier/marketing'] = 'DashboardUserSupplier/marketing';
 $route['suplier/statistik'] = 'DashboardUserSupplier/datastatistik';
 $route['marketing'] = 'DashboardUserMarketing';
+$route['api/supplier/tim'] = 'DashboardUserSupplier/getTimMarketing';
+$route['api/supplier/tim/add'] = 'DashboardUserSupplier/addTimMarketing';
+$route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarketing/$1';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';
 $route['asosiasi'] = 'DashboardUserAsosiasi';
@@ -374,6 +378,13 @@ $route['artikel'] = 'admin/artikel';
 
 $route['api/statistikhome'] = 'api/ApiTender/getdatastatistik';
 
+//restAPI route for Suplier 
+$route['api/supplier/get'] = 'api/ApiSupplier';
+$route['api/supplier/create'] = 'api/ApiSupplier/create';
+$route['api/supplier/delete/(:num)'] = 'api/ApiSupplier/deleteTim/$1';
+$route['api/supplier/update/(:num)'] = 'api/ApiSupplier/editTimMarketing/$1';
+$route['api/supplier/getId'] = 'api/ApiSupplier/getbyId';
+
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
 
@@ -602,6 +613,10 @@ $route['api/preferensi/tender/(:num)'] = 'api/ApiPreferensi/preferensiTender/$1'
 $route['api/preferensi/create'] = 'api/ApiPreferensi';
 $route['api/preferensi/update/(:num)'] = 'api/ApiPreferensi/update/$1';
 $route['api/preferensi/s/(:num)'] = 'api/ApiPreferensi/tenderS/$1';
+
+// API Supplier
+// $route['api/supplier/tim'] = 'api/ApiSupplier';
+// $route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
 
 //===========================================
 // Scrapping

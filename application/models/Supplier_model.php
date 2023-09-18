@@ -321,7 +321,8 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql);
     }
 
-    public function getListJenisTender(){
+    public function getListJenisTender()
+    {
         $sql = "SELECT jenis_tender.jenis_tender, COUNT(id_pemenang) AS total_tender
         FROM pemenang, jenis_tender
         WHERE pemenang.jenis_tender = jenis_tender.id_jenis
@@ -330,28 +331,38 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql)->result();
     }
 
-    public function isIdPemenangExists($id) {
+    public function isIdPemenangExists($id)
+    {
         $query = $this->db->get_where('data_leads', array('id_pemenang' => $id));
         return $query->num_rows() > 0;
     }
 
-    public function getDataLeads(){
-        $sql = "SELECT data_leads.*,
-        IFNULL(kontak_lead.nama, '') AS nama_kontak, 
-                IFNULL(kontak_lead.posisi, '') AS posisi, 
-                IFNULL(kontak_lead.no_telp, '') AS no_telp, 
-                IFNULL(kontak_lead.email, '') AS email
-        FROM data_leads
-        LEFT JOIN (
-            SELECT kontak_lead.*
+    public function getDataLeads()
+    {
+        $sql = "SELECT
+        data_leads.*,
+        IFNULL(kontak_lead.nama, '') AS nama_kontak,
+        IFNULL(kontak_lead.posisi, '') AS posisi,
+        IFNULL(kontak_lead.no_telp, '') AS no_telp,
+        IFNULL(kontak_lead.email, '') AS email,
+        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
+        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
+        IFNULL(wilayah.wilayah, '') AS wilayah
+    FROM data_leads
+    LEFT JOIN (
+        SELECT kontak_lead.*
+        FROM kontak_lead
+        INNER JOIN (
+            SELECT id_lead, MIN(id_kontak) AS oldest
             FROM kontak_lead
-            INNER JOIN (
-                SELECT id_lead, MIN(id_kontak) AS oldest
-                FROM kontak_lead
-                GROUP BY id_lead
-            ) oldest_contacts ON kontak_lead.id_lead = oldest_contacts.id_lead
-            AND kontak_lead.id_kontak = oldest_contacts.oldest
-        ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead";
+            GROUP BY id_lead
+        ) oldest_contacts ON kontak_lead.id_lead = oldest_contacts.id_lead
+        AND kontak_lead.id_kontak = oldest_contacts.oldest
+    ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+    LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+    LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah;
+    ";
 
         $query = $this->db->query($sql);
 
@@ -366,36 +377,85 @@ class Supplier_model extends CI_Model
         $this->db->where('data_leads.id_lead', $id);
 
         $query = $this->db->get();
-        return $query->row(); 
+        return $query->row();
     }
 
     public function getKontakLeadById($id)
     {
         $this->db->select('*');
         $this->db->from('kontak_lead');
-        $this->db->where('id_lead', $id);
+        // $this->db->where('id_lead', $id);
+        // join data lead to get id lead
+        $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
+        $this->db->where('kontak_lead.id_lead', $id);
 
         $query = $this->db->get();
-        return $query->result_array(); 
+        return $query->result_array();
     }
 
-    public function updateDataLead($id, $data) {
+    public function getKontakLeadByName($name)
+    {
+        $this->db->select('*');
+        $this->db->from('kontak_lead');
+        // $this->db->where('nama', $name);
+        // get nama_perusahaan from data lead
+        $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
+        $this->db->where('data_leads.npwp', $name);
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function updateDataLead($id, $data)
+    {
         $this->db->where('id_lead', $id);
         return $this->db->update('data_leads', $data);
     }
 
-    public function insertKontakLead($data) {
+    public function insertKontakLead($data)
+    {
         return $this->db->insert('kontak_lead', $data);
     }
 
-    public function deleteDataLeadById($id) {
+    public function deleteDataLeadById($id)
+    {
         $this->db->where('id_lead', $id);
         $this->db->delete('data_leads');
     }
 
-    public function deleteKontakLeadById($id) {
+    public function deleteKontakLeadById($id)
+    {
         $this->db->where('id_lead', $id);
         $this->db->delete('kontak_lead');
     }
 
+    public function getTimMarketing()
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getTimMarketingbyId($id)
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $this->db->where('id_tim', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function createTimMarketing($data)
+    {
+        // $data = [
+        //     'nama_tim' => $this->input->post('nama_tim', true),
+        //     'posisi' => $this->input->post('posisi', true),
+        //     'no_telp' => $this->input->post('no_telp', true),
+        //     'email' => $this->input->post('email', true),
+        //     'alamat' => $this->input->post('alamat', true), 
+        // ];
+        $this->db->insert('tim_marketing', $data);
+        return $this->db->affected_rows();
+    }
 }
