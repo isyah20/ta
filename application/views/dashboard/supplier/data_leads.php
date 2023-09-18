@@ -403,12 +403,11 @@
 <section class="bg-white ">
     <div class="overflow">
         <div class="container">
-            <div class="row">
+            <div class="row ">
                 <div class="col-6"></div>
                 <div class="col-6 justify-content d-flex">
-                    <div class="card-select">
+                    <!-- <div class="card-select">
                         <div class="select-custom">
-                            <div class="row"></div>
                             <select class="form-select-custom" aria-label="Default select example" style="color: #E05151; border-color: #E05151;">
                                 <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
                                 <option selected>Wilayah : Jawa Barat</option>
@@ -424,7 +423,7 @@
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                         <div class="shadow-sm bg-white">
                             <div class="card-body">
@@ -435,7 +434,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px;">
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
                                     </p>
                                 </div>
@@ -452,27 +451,27 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px;">
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                    <div class="shadow-sm bg-white">
-                        <div class="card-body card-data">
-                            <div>
-                                <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                </p>
-                            </div>
-                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px;">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
-                                </p>
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                        <div class="shadow-sm bg-white">
+                            <div class="card-body card-data">
+                                <div>
+                                    <p>
+                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
+                                    </p>
+                                </div>
+                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                    <p>
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -530,31 +529,31 @@
     </div>
 
     <!-- modal kontak detail -->
-                <div class="popup" id="popup">
-                    <div class="popup-content">
-                        <span class="popup-close" id="popup-close">&times;</span>
-                        <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
-                        <h2>Contact Person</h2>
-                        <p>PT Telekomunikasi Indonesia</p>
-                        <table class="table table-striped popup-table">
-                            <thead class="popup-thead">
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Posisi</th>
-                                    <th>Email</th>
-                                    <th>No. Telp</th>
-                                </tr>
-                            </thead>
-                            <tbody id="data-kontak">
-                                <td>joko</td>
-                                <td>HRD</td>
-                                <td>hrd@telkom.co.id</td>
-                                <td>0811-2345-6666</td>
-                            </tbody>
-                        </table>
-                        <button class="popup-button" id="popup-close-button">Tutup</button>
-                    </div>
-                </div>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="popup-close" id="popup-close">&times;</span>
+            <img src="<?= base_url('assets\img\icon_contact.svg') ?>" alt="">
+            <h2>Contact Person</h2>
+            <p>PT Telekomunikasi Indonesia</p>
+            <table class="table table-striped popup-table">
+                <thead class="popup-thead">
+                    <tr>
+                        <th>Nama</th>
+                        <th>Posisi</th>
+                        <th>Email</th>
+                        <th>No. Telp</th>
+                    </tr>
+                </thead>
+                <tbody id="data-kontak">
+                    <td>joko</td>
+                    <td>HRD</td>
+                    <td>hrd@telkom.co.id</td>
+                    <td>0811-2345-6666</td>
+                </tbody>
+            </table>
+            <button class="popup-button" id="popup-close-button">Tutup</button>
+        </div>
+    </div>
     <!-- end modal kontak detail -->
 
     <!-- modal detail -->
@@ -735,9 +734,9 @@
                                         Tambah Kontak
                                     </button>
 
-                                    
 
-                                
+
+
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mt-3 gap-2">
@@ -886,19 +885,19 @@
 </script>
 
 <script>
-$(document).ready(function() {
-    // Memuat data lead melalui AJAX
-    $.ajax({
-        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            var leads = "";
+    $(document).ready(function() {
+        // Memuat data lead melalui AJAX
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var leads = "";
 
-            $.each(data, function(index, value) {
-                var rowNumber = index + 1;
-                leads +=
-                    `<tr>
+                $.each(data, function(index, value) {
+                    var rowNumber = index + 1;
+                    leads +=
+                        `<tr>
                         <td><span class="rounded">` + rowNumber + `</span></td>
                         <td>` + value.nama_perusahaan + `</td>
                         <td>` + value.npwp + `</td>
@@ -911,53 +910,53 @@ $(document).ready(function() {
                                 <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
                         </td>
                     </tr>`;
-            });
-
-            $("#data-leads").html(leads);
-
-            //delete lead action
-            $(".deleteBtnLead").click(function() {
-                var id_lead = $(this).data("id");
-
-                $("#deleteConfirmedBtn").click(function() {
-                    window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
                 });
-            });
 
-            //lengkapi lead action
-            $(".lengkapiBtn").click(function() {
-                var id_lead = $(this).data("id");
+                $("#data-leads").html(leads);
 
-                var form = document.getElementById("formLengkapiLead");
-                form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
-            });
-        }
+                //delete lead action
+                $(".deleteBtnLead").click(function() {
+                    var id_lead = $(this).data("id");
+
+                    $("#deleteConfirmedBtn").click(function() {
+                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
+                    });
+                });
+
+                //lengkapi lead action
+                $(".lengkapiBtn").click(function() {
+                    var id_lead = $(this).data("id");
+
+                    var form = document.getElementById("formLengkapiLead");
+                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
+                });
+            }
+        });
     });
-});
 </script>
 
 <script>
     function openModal(id) {
         $.ajax({
-            url: "<?php echo site_url('suplier/getKontak/') ?>" + id, 
+            url: "<?php echo site_url('suplier/getKontak/') ?>" + id,
             type: "GET",
             dataType: "JSON",
             // data: { id: id },
             // data : id,
-            success: function (data) {
-            var kontak = "";
-            $.each(data, function (index, value) {
-                kontak +=
-                `<tr>
+            success: function(data) {
+                var kontak = "";
+                $.each(data, function(index, value) {
+                    kontak +=
+                        `<tr>
                     <td>` + value.nama + `</td>
                     <td>` + value.posisi + `</td>
                     <td>` + value.email + `</td>
                     <td>` + value.no_telp + `</td>
                 </tr>`
-            });
-            $("#data-kontak").html(kontak);
-            $("#popup-content").html(data);
-            $("#popup").show();
+                });
+                $("#data-kontak").html(kontak);
+                $("#popup-content").html(data);
+                $("#popup").show();
             },
             error: function() {
                 alert("Terjadi kesalahan saat mengambil data.");
@@ -969,7 +968,7 @@ $(document).ready(function() {
         $("#popup").hide();
     }
 
-    $(document).on("click", ".toggle-button", function () {
+    $(document).on("click", ".toggle-button", function() {
         // var id = $(this).data("id_lead");
         // var id = value.id_lead;
         let id = $(this).closest("tr").find("td:eq(0)").text();
@@ -997,5 +996,4 @@ $(document).ready(function() {
     $(document).on("click", "#popup_close_detail", function() {
         closeModal();
     });
-
 </script>
