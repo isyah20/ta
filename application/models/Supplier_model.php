@@ -361,7 +361,8 @@ class Supplier_model extends CI_Model
     ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
     LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
     LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
-    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah;";
+    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah;
+    ";
 
         $query = $this->db->query($sql);
 
@@ -383,7 +384,23 @@ class Supplier_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('kontak_lead');
-        $this->db->where('id_lead', $id);
+        // $this->db->where('id_lead', $id);
+        // join data lead to get id lead
+        $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
+        $this->db->where('kontak_lead.id_lead', $id);
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getKontakLeadByName($name)
+    {
+        $this->db->select('*');
+        $this->db->from('kontak_lead');
+        // $this->db->where('nama', $name);
+        // get nama_perusahaan from data lead
+        $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
+        $this->db->where('data_leads.npwp', $name);
 
         $query = $this->db->get();
         return $query->result_array();
@@ -410,5 +427,35 @@ class Supplier_model extends CI_Model
     {
         $this->db->where('id_lead', $id);
         $this->db->delete('kontak_lead');
+    }
+
+    public function getTimMarketing()
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getTimMarketingbyId($id)
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $this->db->where('id_tim', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function createTimMarketing($data)
+    {
+        // $data = [
+        //     'nama_tim' => $this->input->post('nama_tim', true),
+        //     'posisi' => $this->input->post('posisi', true),
+        //     'no_telp' => $this->input->post('no_telp', true),
+        //     'email' => $this->input->post('email', true),
+        //     'alamat' => $this->input->post('alamat', true), 
+        // ];
+        $this->db->insert('tim_marketing', $data);
+        return $this->db->affected_rows();
     }
 }

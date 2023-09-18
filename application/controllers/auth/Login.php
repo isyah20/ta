@@ -80,7 +80,10 @@ class Login extends CI_Controller
                         redirect('asosiasi');
                     } elseif ($result == UserCategory::SUPPLIER) {
                         redirect('suplier');
-                    } else {
+                    } elseif ($result == UserCategory::MARKETING) {
+                        redirect('marketing');
+                    } 
+                    else {
                         echo 'Not found!';
                     }
                 }
@@ -180,7 +183,7 @@ class Login extends CI_Controller
                     }
 
                     $this->session->set_userdata('user_data', $data_session);
-                    if ($companyType == 0 && $userCat != 4) {
+                    if ($companyType == 0 && $userCat != 5) {
                         redirect('profile');
                     }
 
@@ -196,7 +199,10 @@ class Login extends CI_Controller
                             redirect('asosiasi');
                         } elseif ($userCat == UserCategory::SUPPLIER) {
                             redirect('suplier');
-                        } else {
+                        } elseif ($userCat == UserCategory::MARKETING) {
+                            redirect('marketing');
+                        } 
+                        else {
                             echo 'Not found!';
                         }
                     }
