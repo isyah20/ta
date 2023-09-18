@@ -123,12 +123,15 @@ $route['user-dashboard/chart']['POST'] = 'DashboardUser/chart';
 $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';
-$route['suplier/(:num)'] = 'DashboardUserSupplier/addToLeads/$1';
 $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
+$route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
+$route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
 $route['suplier/form-leads/(:num)'] = 'DashboardUserSupplier/editDataLeads/$1';
 $route['suplier/crm'] = 'DashboardUserSupplier/CRM';
+$route['suplier/marketing'] = 'DashboardUserSupplier/marketing';
 $route['suplier/statistik'] = 'DashboardUserSupplier/datastatistik';
+$route['marketing'] = 'DashboardUserMarketing';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';
 $route['asosiasi'] = 'DashboardUserAsosiasi';
@@ -396,7 +399,7 @@ $route['api/pengguna/check-user-trial'] = 'api/ApiPengguna/checkAndUpdateUserTyp
 
 // restAPI route for verify
 $route['api/verify/status/(:any)'] = 'api/ApiPengguna/verifyCheck/$1';
-$route['api/verify'] = 'api/ApiPengguna/verify';
+$route['api/verify/(:any)'] = 'api/ApiPengguna/verify/$1';
 $route['api/verifySend'] = 'api/ApiPengguna/verifySend';
 
 // fixed one (maybe)

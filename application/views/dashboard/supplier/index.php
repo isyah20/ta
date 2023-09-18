@@ -571,7 +571,7 @@
         };
 
         $.ajax({
-        url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna1",
+        url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna/" + id_pengguna,
         type: "POST",
         dataType: "JSON",
         data: params,
@@ -681,7 +681,6 @@
                             <div class="d-flex justify-content-between mt-3">
                                 <div></div>
                                 <div class="link d-flex flex-row align-items-center" style="gap: 15px">
-                                <span><a class="btn btn-sm border btn-outline text-white" href="${base_url}suplier/${data[i].id_pemenang}" target="_blank" style="background: var(--primary-red-500, #D21B1B);"><i class="fas me-1"></i>Masukkan ke Leads</a></span>
                                 <span><a class="btn btn-sm border btn-outline" href="${base_url}detail-pemenang/${data[i].kode_tender}" target="_blank"><i class="fas me-1"></i>Detail Pemenang</a></span>
                                 </div>
                             </div>

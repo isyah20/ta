@@ -15,6 +15,7 @@ class DashboardUserSupplier extends CI_Controller
             redirect('login');
         }
 
+        // $this->load->library('input');
         $this->load->helper('tanggal');
         $this->load->model('Lpse_model');
         $this->load->model('Pemenang_model');
@@ -35,30 +36,30 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function addToLeads($id){
-        $id_exists = $this->Supplier_model->isIdPemenangExists($id);
+    // public function addToLeads($id){
+    //     $id_exists = $this->Supplier_model->isIdPemenangExists($id);
 
-        if ($id_exists) {
-            echo 'ID sudah ada di database.';
-        } else {
-            $data = [
-                "id_pemenang" => $id,
-            ];
+    //     if ($id_exists) {
+    //         echo 'ID sudah ada di database.';
+    //     } else {
+    //         $data = [
+    //             "id_pemenang" => $id,
+    //         ];
             
-            $this->db->insert('data_leads', $data);
-        }
-        $response = array(
-	        'Success' => true,
-	        'Info' => 'Preferensi tender berhasil disimpan.',
-	    );
+    //         $this->db->insert('data_leads', $data);
+    //     }
+    //     $response = array(
+	//         'Success' => true,
+	//         'Info' => 'Preferensi tender berhasil disimpan.',
+	//     );
 
-	    $this->output
-	         ->set_status_header(200)
-	         ->set_content_type('application/json')
-	         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-	         ->_display();
-	    exit;
-    }
+	//     $this->output
+	//          ->set_status_header(200)
+	//          ->set_content_type('application/json')
+	//          ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	//          ->_display();
+	//     exit;
+    // }
 
     public function dataLeads()
     {
@@ -79,49 +80,55 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function editDataLeads($id)
+    public function getDataLeadsById($id)
     {
-        $lead = $this->Supplier_model->getDataLeadById($id);
-
-        $data = [
-            'title' => 'Dashboard'
-        ];
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('profile_pengguna/templates/navbar');
-        $this->load->view('dashboard/supplier/form_leads', $lead);
-        $this->load->view('templates/footer');
+        $data = $this->Supplier_model->getDataLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function updateDataLeads(){
-        $id_lead = $_POST['id_lead']; 
-        $telp = $_POST['no_telepon']; 
-        $nama = $_POST['nama']; 
-        $email = $_POST['email']; 
-        
-        $dataTelp = array();
-        $dataEmail = array();
-        $index = 0;
-        
-        foreach ($telp as $dataNoTelp) { 
-            array_push($dataTelp, array(
-                'no_telepon' => $dataNoTelp,
-                'nama' => $nama[$index],
-            ));
-            
-            $index++;
+    public function getKontakLeadById($id)
+    {
+        $data = $this->Supplier_model->getKontakLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function updateDataLeads($id) {
+        // Mengambil data dari formulir
+        $dataLeads = array(
+            'nama_perusahaan' => $this->input->post('nama_perusahaan'),
+            'profil' => $this->input->post('profil')
+            // Tambahkan kolom lain sesuai kebutuhan
+        );
+
+        $this->Supplier_model->updateDataLead($id, $dataLeads);
+
+        // Mengambil data dari formulir kontak
+        $kontakData = $this->input->post('kontak');
+
+        // Insert data kontak ke tabel kontak
+        foreach ($kontakData as $kontak) {
+            $dataKontak = array(
+                'id_lead' => $id, // ID lead yang sesuai
+                'nama' => $kontak['nama'],
+                'posisi' => $kontak['posisi'],
+                'email' => $kontak['email'],
+                'no_telp' => $kontak['no_telp']
+            );
+            $this->Supplier_model->insertKontakLead($dataKontak);
         }
-        
-        
-        $sql = $this->SiswaModel->save_batch($data); 
-        if ($sql) { // Jika sukses
-            $this->Supplier_model->updateCompletedDataLead($id_lead, 1);
-            echo "<script>alert('Data berhasil disimpan');window.location = '".base_url('index.php/siswa')."';</script>";
-        } else { // Jika gagal
-            echo "<script>alert('Data gagal disimpan');window.location = '".base_url('index.php/siswa/form')."';</script>";
-        }
+
+        // Redirect atau tampilkan pesan sukses
+        redirect('suplier/leads');
     }
     
+    public function deleteDataLeadById($id) {
+        $this->Supplier_model->deleteKontakLeadById($id);
+        $this->Supplier_model->deleteDataLeadById($id);
+        redirect('suplier/leads');
+        
+    }
 
     public function CRM()
     {
@@ -133,6 +140,18 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/supplier/crm');
+        $this->load->view('templates/footer');
+    }
+
+    public function marketing()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/marketing');
         $this->load->view('templates/footer');
     }
 
@@ -192,7 +211,7 @@ class DashboardUserSupplier extends CI_Controller
         }
 ?>
         <p class="d-none" id="chart1"><?php echo json_encode($totaldata) ?></p>
-<?php
+    <?php
     }
 
     //     public function fetch()

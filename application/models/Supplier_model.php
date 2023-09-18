@@ -336,9 +336,22 @@ class Supplier_model extends CI_Model
     }
 
     public function getDataLeads(){
-        $sql = "SELECT id_lead, nama_pemenang, nama_tender, nilai_hps, npwp, completed, alamat
-        FROM data_leads, pemenang 
-        WHERE data_leads.id_pemenang = pemenang.id_pemenang";
+        $sql = "SELECT data_leads.*,
+        IFNULL(kontak_lead.nama, '') AS nama_kontak, 
+                IFNULL(kontak_lead.posisi, '') AS posisi, 
+                IFNULL(kontak_lead.no_telp, '') AS no_telp, 
+                IFNULL(kontak_lead.email, '') AS email
+        FROM data_leads
+        LEFT JOIN (
+            SELECT kontak_lead.*
+            FROM kontak_lead
+            INNER JOIN (
+                SELECT id_lead, MIN(id_kontak) AS oldest
+                FROM kontak_lead
+                GROUP BY id_lead
+            ) oldest_contacts ON kontak_lead.id_lead = oldest_contacts.id_lead
+            AND kontak_lead.id_kontak = oldest_contacts.oldest
+        ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead";
 
         $query = $this->db->query($sql);
 
@@ -356,15 +369,33 @@ class Supplier_model extends CI_Model
         return $query->row(); 
     }
 
-    public function updateLeadData($id, $data) {
+    public function getKontakLeadById($id)
+    {
+        $this->db->select('*');
+        $this->db->from('kontak_lead');
         $this->db->where('id_lead', $id);
-        $this->db->update('data_leads', $data);
-        return $this->db->affected_rows();
+
+        $query = $this->db->get();
+        return $query->result_array(); 
     }
 
-    public function updateCompletedDataLead($id_lead, $completed) {
-        $data = array('completed' => $completed);
-        $this->db->where('id_lead', $id_lead);
-        $this->db->update('data_leads', $data);
+    public function updateDataLead($id, $data) {
+        $this->db->where('id_lead', $id);
+        return $this->db->update('data_leads', $data);
     }
+
+    public function insertKontakLead($data) {
+        return $this->db->insert('kontak_lead', $data);
+    }
+
+    public function deleteDataLeadById($id) {
+        $this->db->where('id_lead', $id);
+        $this->db->delete('data_leads');
+    }
+
+    public function deleteKontakLeadById($id) {
+        $this->db->where('id_lead', $id);
+        $this->db->delete('kontak_lead');
+    }
+
 }

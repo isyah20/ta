@@ -156,6 +156,9 @@ class Login extends CI_Controller
                     }
 
                     set_cookie('id_pengguna', $userId, time() + 86400);
+                    set_cookie('kategori', $userCat, time() + 86400);
+                    set_cookie('status', $userStatus, time() + 86400);
+                    set_cookie('jenis_perusahaan', $companyType, time() + 86400);
 
                     $data_session = [
                         'id_pengguna' => $userId,
@@ -169,6 +172,8 @@ class Login extends CI_Controller
                         // 'wa_status' => $user->wa_status,
                         'lengkap' => $this->isProfileComplete((int) $userId) ? '1' : '0',
                     ];
+
+                    set_cookie('lengkap', $data_session['lengkap'], time() + 86400);
 
                     $userPref = null;
                     if ($this->session->userdata('user_preferensi') == null) {
@@ -245,6 +250,10 @@ class Login extends CI_Controller
         $this->session->unset_userdata('access_token');
         $this->session->unset_userdata('user_preferensi');
         delete_cookie('id_pengguna');
+        delete_cookie('kategori');
+        delete_cookie('status');
+        delete_cookie('jenis_perusahaan');
+        delete_cookie('lengkap');
 
         redirect('');
     }
