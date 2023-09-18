@@ -468,6 +468,62 @@
       </div>
     </div>
   </div>
+  <!-- modal input marketing -->
+  <div class="col-12 py-5">
+    <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
+      <div class="modal-dialog custom-modal" role="document">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+              <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+            </button>
+          </div>
+
+
+          <div class="modal-body border-0">
+            <h3 class="modal-title" id="inputMarketingModalLabel">Input Marketing</h3>
+            <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+            <div class="input-popup justify-content-end">
+              <form class="row g-2">
+                <div class="col-12">
+                  <label for="inputNama" class="form-label text-start">Nama</label>
+                  <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
+                </div>
+                <div class="col-12">
+                  <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                  <input type="text" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi">
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail" class="form-label text-start">Email</label>
+                  <input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email">
+                </div>
+                <div class="col-12">
+                  <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                  <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA">
+                </div>
+                <div class="col-12">
+                  <label for="inputAlamat" class="form-label text-start">Alamat</label>
+                  <textarea class="form-control" id="inputAlamat" placeholder="Masukkan Alamat" rows="2"></textarea>
+                </div>
+
+              </form>
+            </div>
+            <div class="d-flex justify-content-start mt-3 gap-2">
+              <div></div>
+              <div class="link flex-row align-items-center w-100">
+                <span>
+                  <a class="btn-custom text-white text-center">
+                    <i class="fas me-1"></i>Klik Disini
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal input marketing -->
 </section>
 
     <script>
