@@ -390,4 +390,34 @@ class Supplier_model extends CI_Model
         $this->db->where('id_lead', $id_lead);
         $this->db->update('data_leads', $data);
     }
+
+    public function getTimMarketing()
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getTimMarketingbyId($id)
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $this->db->where('id_tim', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function createTimMarketing($data)
+    {
+        // $data = [
+        //     'nama_tim' => $this->input->post('nama_tim', true),
+        //     'posisi' => $this->input->post('posisi', true),
+        //     'no_telp' => $this->input->post('no_telp', true),
+        //     'email' => $this->input->post('email', true),
+        //     'alamat' => $this->input->post('alamat', true), 
+        // ];
+        $this->db->insert('tim_marketing', $data);
+        return $this->db->affected_rows();
+    }
 }

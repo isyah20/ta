@@ -24,6 +24,12 @@ class DashboardUserSupplier extends CI_Controller
         $this->init();
     }
 
+    public function getToken()
+    {
+        $this->output->set_header('Content-Type: application/json');
+        echo json_encode([], JSON_NUMERIC_CHECK);
+    }
+
     public function index()
     {
         $data = [
@@ -161,6 +167,49 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/supplier/marketing');
         $this->load->view('templates/footer');
+    }
+
+    public function getTimMarketing()
+    {
+        $data = $this->Supplier_model->getTimMarketing();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getTimMarketingById($id)
+    {
+        $data = $this->Supplier_model->getTimMarketingById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function addTimMarketing()
+    {
+        $data = [
+            'nama_tim' => $this->input->post('nama_tim'),
+            'posisi' => $this->input->post('posisi'),
+            'no_telp' => $this->input->post('no_telp'),
+            'email' => $this->input->post('email'),
+            'alamat' => $this->input->post('alamat'),
+        ];
+
+        // $this->db->insert('tim_marketing', $data);
+        $data = $this->Supplier_model->createTimMarketing($data);
+
+        $response = array(
+            'Data' => $data,
+            'Success' => true,
+            'Info' => 'Tim marketing berhasil ditambahkan.',
+        );
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+
+
     }
 
     public function table_data()

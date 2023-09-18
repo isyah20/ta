@@ -228,8 +228,8 @@
                             <th class="custom-padding">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="data-leads">
-                        <tr>
+                    <tbody id="data-tim">
+                        <!-- <tr>
                             <th></th>
                             <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -247,7 +247,7 @@
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office)</td>
                             <td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -269,39 +269,38 @@
                         <h3 class="modal-title" id="inputMarketingModalLabel">Input Marketing</h3>
                         <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
                         <div class="input-popup justify-content-end">
-                            <form class="row g-2">
+                            <form id="form-input" class="row g-2">
                                 <div class="col-12">
                                     <label for="inputNama" class="form-label text-start">Nama</label>
-                                    <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
+                                    <input type="text" name="nama_tim" class="form-control" id="inputNama" placeholder="Masukkan Nama" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                    <input type="text" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi">
+                                    <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputEmail" class="form-label text-start">Email</label>
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email">
+                                    <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Masukkan Email" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                    <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA">
+                                    <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAlamat" class="form-label text-start">Alamat</label>
-                                    <textarea class="form-control" id="inputAlamat" placeholder="Masukkan Alamat" rows="2"></textarea>
+                                    <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
                                 </div>
-
+                                <div class="d-flex justify-content-start mt-3 gap-2">
+                                <div class="link flex-row align-items-center w-100">
+                                    <span>
+                                        <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                        <a href="#" id="submit-input" class="btn-custom text-white text-center">
+                                            <i class="fas me-1"></i>Klik Disini
+                                        </a>
+                                    </span>
+                                </div>
                             </form>
                         </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a class="btn-custom text-white text-center">
-                                        <i class="fas me-1"></i>Klik Disini
-                                    </a>
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -442,3 +441,135 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
+
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/get",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                let html = '';
+                let i;
+                for (i = 0; i < data.data.length; i++) {
+                    html += '<tr>' +
+                        '<th></th>' +
+                        '<td><span class="rounded">' + (i + 1) + '</span></td>' +
+                        '<td style="font-weight: bold;" class="">' + data.data[i].nama_tim + '</td>' +
+                        '<td style="font-weight: bold;">' + data.data[i].posisi + '</td>' +
+                        '<td>' + data.data[i].email + '</td>' +
+                        '<td>' + data.data[i].no_telp + '</td>' +
+                        '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
+                        '</tr>';
+
+                }
+                $('#data-tim').html(html);
+            }
+        })
+    });
+    $(document).ready(function() {
+        // Handle form submission
+        $('#submit-input').click(function(event) {
+            event.preventDefault();
+
+            // Get the form instance
+            var formData = {
+                nama_tim: $('input[name=nama_tim]').val(),
+                posisi: $('input[name=posisi]').val(),
+                email: $('input[name=email]').val(),
+                no_telp: $('input[name=no_telp]').val(),
+                alamat: $('textarea[name=alamat]').val(),
+            };
+
+            // Make an AJAX request
+            $.ajax({
+                url: '<?= base_url("api/supplier/create") ?>',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.status == true) {
+                        alert('Data berhasil ditambahkan');
+                        window.location.href = "<?= base_url('suplier/marketing') ?>";
+                    } else {
+                        alert('Data gagal ditambahkan');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+    // Function to retrieve item data and populate the edit form
+    function retrieveItemData(itemId) {
+        $.ajax({
+            type: "GET",
+            url: "http://your-codeigniter-app/items/getItem/" + itemId, // Replace with the correct URL
+            dataType: "json",
+            success: function(response) {
+                // Populate the edit form fields with retrieved data
+                $("#edit-item-id").val(response.id);
+                $("#edit-item-name").val(response.name);
+                
+                // Display the edit form
+                $("#edit-form").show();
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX error, if needed
+                console.log("AJAX Error: " + error);
+            }
+        });
+    }
+
+    // Handle "Edit" button click
+    $(".edit-button").click(function() {
+        // Get the item ID from the data attribute
+        var itemId = $(this).closest("li").data("id");
+        
+        // Call the retrieveItemData function to fetch and display item data
+        retrieveItemData(itemId);
+    });
+
+    // Handle form submission for editing
+    $("#item-edit-form").submit(function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        // Get form data
+        var formData = {
+            id: $("#edit-item-id").val(),
+            name: $("#edit-item-name").val()
+        };
+
+        // Make an AJAX request to update the item data
+        $.ajax({
+            type: "POST",
+            url: "http://your-codeigniter-app/items/updateItem", // Replace with the correct URL for updating
+            data: formData,
+            success: function(response) {
+                if (response.status === true) {
+                    // Reload the page or refresh the item list
+                    // Optionally, you can display a success message
+                    location.reload();
+                } else {
+                    // Handle error response, if needed
+                    console.log("Error: " + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX error, if needed
+                console.log("AJAX Error: " + error);
+            }
+        });
+    });
+
+    // Handle "Retrieve Data" button click
+    $("#retrieve-data-button").click(function() {
+        // Replace '1' with the item ID you want to retrieve
+        retrieveItemData(1);
+    });
+});
+
+</script>
