@@ -171,40 +171,81 @@
   <div class="container-fluid pb-4 mx-4">
     <div class="row">
       <div class="col mx-3">
-        <div id="container1" style="height:1200px; margin-right: 50px;" class="box red">
+        <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box red" data-id="0">
           <h4 class="pt-2"> Daftar Perusahaan</h4>
-          <div class="card" draggable="true">
+          <!-- <div class="card drag-element" draggable="true">
             <p>PT Cahaya Asia Ya Putra Dewa</p>
             <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-          </div>
+          </div> -->
 
 
         </div>
       </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <div id="big-container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
     <script>
       $(document).ready(function() {
         getDataLead();
+        getDataTim();
+        getLeadByTim();
+        getPlotTim();
+        console.log(getLeadByTim(1), 'return data lead tim');
       });
+
+      function getPlotTim() {
+        var data = [];
+        $.ajax({
+          url: "<?= base_url('api/supplier/plot-tim'); ?>",
+          type: "GET",
+          // data: {
+          //   id_tim: id
+          // },
+          async: false,
+          success: function(result) {
+            console.log(result, 'test DATA PLOT');
+            data = result;
+          }
+        });
+        return data;
+      }
 
       function getDataLead() {
         $.ajax({
-          url: "<?= base_url('DashboardUserSupplier/getDataLeads'); ?>",
+          url: "<?= base_url('suplier/getleads'); ?>",
           type: "GET",
           success: function(result) {
             console.log(result);
+            var dataLeadPlotted = getPlotTim();
             var leads = '<h4 class="pt-2"> Daftar Perusahaan</h4>';
-
+            // console.log(dataLeadPlotted, "PLOTTEDDDDDD");
+            // console.log(dataLeadPlotted);
             $.each(result, function(index, value) {
-              console.log(value, 'test_value')
+              var next = false;
+              if (dataLeadPlotted.length != 0) {
+                $.each(dataLeadPlotted, function(indexPlot, valuePlot) {
+                  // console.log(valuePlot, "DATA PLOTTED");
+                  if (value.id_lead == valuePlot.id_lead) {
+                    next = true;
+                    return false; //BREAK
+                  }
+                });
+                if (next) {
+                  console.log('CONTINUE?');
+                  return true; // CONTINUE
+                }
+              }
+
+              console.log(value, 'test_value');
               var rowNumber = index + 1;
               leads +=
-                `<div class="card" draggable="true">
-                <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
-                </div>`;
+                `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
+      <p>` + value.nama_perusahaan + `</p>
+      <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+    </div>`;
             });
 
             $("#container1").html(leads);
@@ -212,13 +253,77 @@
           }
         });
       }
+
+      function getDataTim() {
+        $.ajax({
+          url: "<?= base_url('api/supplier/tim-suplier'); ?>",
+          type: "GET",
+          success: function(result) {
+            console.log(result);
+            var leads = `<div class="col">
+      <div class="row">`;
+
+            $.each(result, function(index, value) {
+              console.log(value, 'test_value')
+              console.log((index + 1) % 4 == 0, "test INDEX");
+              if ((index + 1) % 4 == 0) {
+                leads += `</div>
+        </div> <div class="col">
+      <div class="row">`;
+              }
+              console.log(value.id_tim, "VALUE ID TIM");
+              console.log(getLeadByTim(value.id_tim));
+              var rowNumber = index + 1;
+              leads +=
+                `<div class="col"><h4 class="green title" onclick="toggleCardVisibility('container'` + index + 2 + `)">` + value.nama_tim + `</h4>
+          <div class="mx-3">
+            <div id="container` + index + 2 + `" class="workspace box green" data-id="` + value.id_tim + `">` +
+                getLeadByTim(value.id_tim) +
+                `</div>
+          </div></div>`;
+            });
+            leads +=
+              ` </div>
+        </div>`
+            $("#big-container").html(leads);
+            control();
+          }
+        });
+      }
+
+      function getLeadByTim(id) {
+        var leads = '';
+        $.ajax({
+          url: "<?= base_url('api/supplier/lead/tim'); ?>",
+          type: "GET",
+          data: {
+            id_tim: id
+          },
+          async: false,
+          success: function(result) {
+            console.log(result, 'test lead tim');
+            $.each(result, function(index, value) {
+              console.log(value, 'test_value LEad time jer js')
+              console.log(value.nama_perusahaan)
+              var rowNumber = index + 1;
+              leads +=
+                `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
+                <p>` + value.nama_perusahaan + `</p>
+                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+                </div>`;
+            });
+          }
+        });
+        console.log(leads, "LEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAD");
+        return leads;
+      }
     </script>
-    <div class="col">
+    <!-- <div class="col">
       <div class="row">
         <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri</h4>
+          <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4>
           <div class="mx-3">
-            <div id="container2" class="box green">
+            <div id="container2" class="workspace box green" data-id="10101">
               <div class="card" draggable="true">
                 <p>PT Cepogo Cheese Park</p>
                 <p style="font-size: 14px; color:#10B981;">Boyolali</p>
@@ -229,9 +334,9 @@
         <div class="col">
           <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
           <div class="mx-3">
-            <div id="container3" class="box blue">
-              <div class="card" draggable="true">
-                <p>PT Cepogo Cheese Park</p>
+            <div id="container3" class="workspace box blue">
+              <div class="card drag-element" draggable="true">
+                <p>PT Cepogo Cheese Park DRag</p>
                 <p style="font-size: 14px; color:#10B981;">Boyolali</p>
               </div>
             </div>
@@ -240,7 +345,7 @@
         <div class="col">
           <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
           <div class="mx-3">
-            <div id="container4" class="box orange">
+            <div id="container4" class="workspace box orange">
               <div class="card" draggable="true">
                 <p>Card 3</p>
               </div>
@@ -250,7 +355,7 @@
         <div class="col">
           <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
           <div class="mx-3">
-            <div id="container5" class="box green">
+            <div id="container5" class="workspace box green">
               <div class="card" draggable="true">
                 <p>Card 3</p>
               </div>
@@ -260,7 +365,7 @@
         <div class="col">
           <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
           <div class="mx-3">
-            <div id="container6" class="box green">
+            <div id="container6" class="workspace box green">
               <div class="card" draggable="true">
                 <p>Card 3</p>
               </div>
@@ -440,7 +545,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   </div>
   <!-- modal input marketing -->
@@ -530,28 +635,89 @@
 
       container.addEventListener("drop", () => {
         if (isDragging) {
+
+          console.log(draggedCard);
+          var leadId = draggedCard.getAttribute('data-id');
+          var timId = container.getAttribute('data-id');
+
+          // Kirim data ke server menggunakan Ajax
+          $.ajax({
+            url: '<?= base_url('suplier/test-crm'); ?>',
+            type: 'POST',
+            data: {
+              id_lead: leadId,
+              id_tim: timId
+            },
+            dataType: 'json',
+            success: function(response) {
+              console.log(response);
+              // if (response.success) {
+              //   alert(response.message);
+              // } else {
+              //   alert('Gagal menyimpan data.');
+              // }
+            },
+            error: function() {
+              alert('Terjadi kesalahan dalam mengirim data.');
+            }
+
+          });
+
+
           container.appendChild(draggedCard);
         }
       });
     });
 
-    // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
-    function toggleCardVisibility(containerId) {
-      const container = document.getElementById(containerId);
-      const card = container.querySelector(".card");
+    // $(".workspace").droppable({
+    //   accept: ".drag-element",
+    //   drop: function(event, ui) {
+    //     console.log("DROP");
+    //     var elementId = ui.draggable.data("id");
 
-      if (card.style.display === "none") {
-        card.style.display = "inline-block";
-        container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
-      } else {
-        card.style.display = "none";
-        container.style.display = "none"; // Menyembunyikan container jika card terlihat
-      }
+    //     // Kirim data ke server menggunakan Ajax
+    //     $.ajax({
+    //       url: 'suplier/test-crm',
+    //       type: 'POST',
+    //       data: {
+    //         elementId: elementId
+    //       },
+    //       dataType: 'json',
+    //       success: function(response) {
+    //         console.log(response);
+    //         if (response.success) {
+    //           alert(response.message);
+    //         } else {
+    //           alert('Gagal menyimpan data.');
+    //         }
+    //       },
+    //       error: function() {
+    //         alert('Terjadi kesalahan dalam mengirim data.');
+    //       }
+    //     });
+    //   }
+    // });
+
+
+  }
+
+
+  // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
+  function toggleCardVisibility(containerId) {
+    const container = document.getElementById(containerId);
+    const card = container.querySelector(".card");
+
+    if (card.style.display === "none") {
+      card.style.display = "inline-block";
+      container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
+    } else {
+      card.style.display = "none";
+      container.style.display = "none"; // Menyembunyikan container jika card terlihat
     }
   }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

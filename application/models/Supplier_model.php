@@ -369,6 +369,24 @@ class Supplier_model extends CI_Model
         return $query->result_array();
     }
 
+    public function getDataLeadByIdTim($id_tim)
+    {
+        $sql = "SELECT  
+        plot_tim.*,
+        data_leads.*,
+        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
+        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
+        IFNULL(wilayah.wilayah, '') AS wilayah
+    FROM plot_tim
+    JOIN data_leads ON plot_tim.id_lead = data_leads.id_lead 
+    LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+    LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+    WHERE plot_tim.id_tim = " . $id_tim . ";
+        ";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
     public function getDataLeadById($id)
     {
         $this->db->select('data_leads.*, pemenang.* ');
@@ -406,6 +424,33 @@ class Supplier_model extends CI_Model
         return $query->result_array();
     }
 
+    public function getPlotTim()
+    {
+        $this->db->select('*');
+        $this->db->from('plot_tim');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function insertUpdatePlotTim($id_lead, $id_tim)
+    {
+        $this->db->select('*');
+        $this->db->from('plot_tim');
+        $this->db->where('id_lead', $id_lead);
+        // $this->db->where('id_tim', $id_tim);
+
+        $query = $this->db->get();
+        $isSet = $query->num_rows();
+
+        if ($isSet > 0) {
+            return $this->db->update('plot_tim', ['id_tim' => $id_tim]);
+        }
+        return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
+    }
+    public function deletePlotTimByIdLead($id_lead)
+    {
+        $this->db->where('id_lead', $id_lead);
+        $this->db->delete('plot_tim');
+    }
     public function updateDataLead($id, $data)
     {
         $this->db->where('id_lead', $id);
@@ -436,7 +481,14 @@ class Supplier_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-
+    public function getTimBySupplierId($id_supplier)
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $this->db->where('id_supplier', $id_supplier);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     public function getTimMarketingbyId($id)
     {
         $this->db->select(['*']);
