@@ -678,6 +678,22 @@ class Register extends CI_Controller
     public function verifyMobile($email, $token)
     {
         try {
+            $check = $this->Pengguna_model->verifyCheck($token, $email);
+
+            if (isset($check)) {
+                $resultPengguna = $this->Pengguna_model->verifUser($email);
+
+                if ($resultPengguna) {
+                    $this->session->set_flashdata('success', 'Email Anda sudah terverifikasi.<br>Silakan login menggunakan akun di aplikasi mobile Tenderplus Anda!');
+                    redirect('blank');
+                } else {
+                    $this->session->set_flashdata('error', 'Data tidak ditemukan!');
+                    redirect('blank');
+                }
+            } else {
+                $this->session->set_flashdata('error', 'Email gagal diverifikasi.<br>Silakan coba menggunakan email lain!');
+                redirect('blank');
+            }
             $result = $this->clientMobile->request('get', 'check-verify?email=' . $email, $this->client->getConfig('headers'));
             $result = json_decode($result->getBody()->getContents(), true);
             if ($result['data']['is_active'] == 1) {
