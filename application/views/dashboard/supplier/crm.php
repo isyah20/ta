@@ -102,8 +102,6 @@
 
   #container1 h4::before {
     color: #8e44ad;}
-
-    
   </style>
 
 <section class="py-5">
@@ -116,146 +114,147 @@
   </div>
 </section>
 <section>
-
-<div class="container-fluid pb-4 mx-4" id="scroll-marker">
-  <div class="row">
-    <div class="col mx-3">
-        <div id="container1" style="height:1200px; margin-right: 50px;" class="box red" data-number="1">
-            <h4 class="pt-2">Perusahaan</h4>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+  <div class="container-fluid pb-4 mx-4" id="scroll-marker">
+    <div class="row">
+      <div class="col mx-3">
+          <div id="container1" style="height:1200px; margin-right: 50px;" class="box red" data-number="1">
+              <h4 class="pt-2">Perusahaan</h4>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
+                <div class="card" draggable="true">
+                  <p>PT Cahaya Asia Ya Putra Dewa</p>
+                  <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+                </div>
               </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
-              </div>
-              <div class="card" draggable="true">
-                <p>PT Cahaya Asia Ya Putra Dewa</p>
-                <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
+          </div>
+      </div>
+      <div class="col">
+        <div class="row">
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container2')">Container 2</h4>
+              <div class="mx-3">
+                <div id="container2" class="box green" data-number="2">
+                <div class="card" draggable="true">
+                  <p>PT Cepogo Cheese Park</p>
+                  <p style="font-size: 14px; color:#10B981;">Boyolali</p>
+                </div>
+                </div>
               </div>
             </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
+              <div class="mx-3">
+                <div id="container3" class="box blue" data-number="3">
+                  <div class="card" draggable="true">
+                  <p>PT Cepogo Cheese Park</p>
+                  <p style="font-size: 14px; color:#10B981;">Boyolali</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
+              <div class="mx-3">
+                <div id="container4" class="box orange" data-number="4">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
+              <div class="mx-3">
+                <div id="container5" class="box green" data-number="5">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
+              <div class="mx-3">
+                <div id="container6" class="box green" data-number="6">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
+              <div class="mx-3">
+                <div id="container7" class="box blue" data-number="7">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
+              <div class="mx-3">
+                <div id="container8" class="box blue" data-number="3">
+                  <div class="card" draggable="true">
+                    <p>Card 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>         
         </div>
-    </div>
-    <div class="col">
-      <div class="row">
-          <div class="col">
-            <h4 class="green title" onclick="toggleCardVisibility('container2')">Container 2</h4>
-            <div class="mx-3">
-              <div id="container2" class="box green" data-number="2">
-                <div class="card" draggable="true">
-                  <p>Card 2</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
-            <div class="mx-3">
-              <div id="container3" class="box blue" data-number="3">
-                <div class="card" draggable="true">
-                  <p>Card 3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
-            <div class="mx-3">
-              <div id="container3" class="box orange" data-number="4">
-                <div class="card" draggable="true">
-                  <p>Card 3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 3</h4>
-            <div class="mx-3">
-              <div id="container3" class="box green" data-number="5">
-                <div class="card" draggable="true">
-                  <p>Card 3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <h4 class="blue title">Container 3</h4>
-            <div class="mx-3">
-              <div id="container3" class="box blue" data-number="3">
-                <div class="card" draggable="true">
-                  <p>Card 3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <h4 class="blue title">Container 3</h4>
-            <div class="mx-3">
-              <div id="container3" class="box blue" data-number="3">
-                <div class="card" draggable="true">
-                  <p>Card 3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <h4 class="blue title">Container 3</h4>
-            <div class="mx-3">
-              <div id="container3" class="box blue" data-number="3">
-                <div class="card" draggable="true">
-                  <p>Card 3</p>
-                </div>
-              </div>
-            </div>
-          </div>          
       </div>
     </div>
   </div>
-</div>
 </section>
 
-<script>
+    <script>
       const containers = document.querySelectorAll(".box");
       const cards = document.querySelectorAll(".card");
       let isDragging = false;
@@ -307,7 +306,6 @@
           cardCount || 0
         })`;
       }
-s
       // Fungsi untuk memantau perubahan jumlah card dalam kontainer
       function observeCardChanges(container) {
         const observer = new MutationObserver((mutationsList) => {
@@ -354,16 +352,16 @@ s
       checkAndMoveCard();
 
       // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
-  function toggleCardVisibility(containerId) {
-    const container = document.getElementById(containerId);
-    const card = container.querySelector(".card");
+      function toggleCardVisibility(containerId) {
+        const container = document.getElementById(containerId);
+        const card = container.querySelector(".card");
 
-    if (card.style.display === "none") {
-      card.style.display = "inline-block";
-      container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
-    } else {
-      card.style.display = "none";
-      container.style.display = "none"; // Menyembunyikan container jika card terlihat
-    }
-  }
+        if (card.style.display === "none") {
+          card.style.display = "inline-block";
+          container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
+        } else {
+          card.style.display = "none";
+          container.style.display = "none"; // Menyembunyikan container jika card terlihat
+        }
+      }
     </script>
