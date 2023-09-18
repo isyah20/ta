@@ -525,6 +525,11 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal kontak detail -->
                 <div class="popup" id="popup">
                     <div class="popup-content">
                         <span class="popup-close" id="popup-close">&times;</span>
@@ -540,19 +545,19 @@
                                     <th>No. Telp</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="data-kontak">
                                 <td>joko</td>
                                 <td>HRD</td>
                                 <td>hrd@telkom.co.id</td>
                                 <td>0811-2345-6666</td>
                             </tbody>
                         </table>
-                        <button class="popup-button" id="popup-close">Tutup</button>
+                        <button class="popup-button" id="popup-close-button">Tutup</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+    <!-- end modal kontak detail -->
+
+    <!-- modal detail -->
     <div class="popupDetail" id="popupDetail">
         <div class="popup-content-detail">
             <span class="popup-close-detail" id="popup-close-detail"><img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt=""></span>
@@ -634,7 +639,6 @@
             </p>
         </div>
     </div>
-    </div>
 
     <!-- modal hapus -->
     <div class="col-12 py-5">
@@ -696,8 +700,7 @@
                         <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
                         <div class="input-popup align-items-center">
                             <div class="input-popup justify-content-end">
-                                <form class="row g-2" method="post" action="<?= site_url('DashboardUserSupplier/updateDataLeads'. $lead['id']) ?>">
-                                    <input type="hidden" name="id_lead" value="<?= $lead_id ?>">
+                                <form class="row g-2" method="post" id="formLengkapiLead">
                                     <div class="col-12">
                                         <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
                                         <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
@@ -853,22 +856,22 @@
 
             <div class="col-6">
                 <label for="inputNama${kontakCounter}" class="form-label text-start">Nama</label>
-                <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputNama${kontakCounter}" placeholder="Nama Kontak">
+                <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputNama${kontakCounter}" placeholder="Subandi">
             </div>
 
             <div class="col-6">
                 <label for="inputPosisi${kontakCounter}" class="form-label text-start">Posisi</label>
-                <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi${kontakCounter}" placeholder="Posisi Kontak">
+                <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi${kontakCounter}" placeholder="Marketing">
             </div>
 
             <div class="col-6">
                 <label for="inputEmail${kontakCounter}" class="form-label text-start">Email</label>
-                <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail${kontakCounter}" placeholder="Email Kontak">
+                <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail${kontakCounter}" placeholder="subandi@gmail.com">
             </div>
 
             <div class="col-6">
                 <label for="inputNoHP${kontakCounter}" class="form-label text-start">No. HP/WA</label>
-                <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP${kontakCounter}" placeholder="No. HP/WA Kontak">
+                <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP${kontakCounter}" placeholder="082345678901">
             </div>
         `;
 
@@ -882,7 +885,58 @@
     }
 </script>
 
-<!-- <script>
+<script>
+$(document).ready(function() {
+    // Memuat data lead melalui AJAX
+    $.ajax({
+        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            var leads = "";
+
+            $.each(data, function(index, value) {
+                var rowNumber = index + 1;
+                leads +=
+                    `<tr>
+                        <td><span class="rounded">` + rowNumber + `</span></td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + value.npwp + `</td>
+                        <td>` + value.email + `</td>
+                        <td>` + value.no_telp + `</td>
+                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
+                        <td>
+                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
+                                <button class="btn btn-danger lengkapiBtn" data-toggle="modal" data-target="#lengkapiLeadsModal" data-id="` + value.id_lead + `">Lengkapi Data</button>
+                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
+                        </td>
+                    </tr>`;
+            });
+
+            $("#data-leads").html(leads);
+
+            //delete lead action
+            $(".deleteBtnLead").click(function() {
+                var id_lead = $(this).data("id");
+
+                $("#deleteConfirmedBtn").click(function() {
+                    window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
+                });
+            });
+
+            //lengkapi lead action
+            $(".lengkapiBtn").click(function() {
+                var id_lead = $(this).data("id");
+
+                var form = document.getElementById("formLengkapiLead");
+                form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
+            });
+        }
+    });
+});
+</script>
+
+<script>
     function openModal(id) {
         $.ajax({
             url: "<?php echo site_url('suplier/getKontak/') ?>" + id, 
@@ -943,46 +997,5 @@
     $(document).on("click", "#popup_close_detail", function() {
         closeModal();
     });
-
-    $(document).ready(function() {
-    // Memuat data lead melalui AJAX
-    $.ajax({
-        url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            var leads = "";
-
-            $.each(data, function(index, value) {
-                var rowNumber = index + 1;
-                leads +=
-                    `<tr>
-                        <td><span class="rounded">` + rowNumber + `</span></td>
-                        <td>` + value.nama_perusahaan + `</td>
-                        <td>` + value.npwp + `</td>
-                        <td>` + value.email + `</td>
-                        <td>` + value.no_telp + `</td>
-                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
-                        <td>
-                                <button class="btn btn-outline-warning" id="detailButton2" data-toggle="modal" data-target="">Detail</button>
-                                <button class="btn btn-danger" id="detailButton2" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi Data</button>
-                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
-                        </td>
-                    </tr>`;
-            });
-
-            $("#data-leads").html(leads);
-
-            //delete action
-            $(".deleteBtnLead").click(function() {
-                var id_lead = $(this).data("id");
-
-                $("#deleteConfirmedBtn").click(function() {
-                    window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
-                });
-            });
-        }
-    });
-});
 
 </script>

@@ -380,7 +380,7 @@ class Supplier_model extends CI_Model
     }
 
     public function updateDataLead($id, $data) {
-        $this->db->where('id', $id);
+        $this->db->where('id_lead', $id);
         return $this->db->update('data_leads', $data);
     }
 

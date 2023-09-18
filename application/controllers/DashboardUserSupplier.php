@@ -102,9 +102,7 @@ class DashboardUserSupplier extends CI_Controller
             // Tambahkan kolom lain sesuai kebutuhan
         );
 
-        $leadId = $this->input->post('id_lead');
-
-        $this->Supplier_model->updateDataLead($leadId, $dataLeads);
+        $this->Supplier_model->updateDataLead($id, $dataLeads);
 
         // Mengambil data dari formulir kontak
         $kontakData = $this->input->post('kontak');
@@ -112,7 +110,7 @@ class DashboardUserSupplier extends CI_Controller
         // Insert data kontak ke tabel kontak
         foreach ($kontakData as $kontak) {
             $dataKontak = array(
-                'id_lead' => $leadId, // ID lead yang sesuai
+                'id_lead' => $id, // ID lead yang sesuai
                 'nama' => $kontak['nama'],
                 'posisi' => $kontak['posisi'],
                 'email' => $kontak['email'],
