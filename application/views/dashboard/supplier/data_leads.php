@@ -505,7 +505,7 @@
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td>
-                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
+                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
                                 <a class="btn btn-outline-danger">Hapus</a>
                             </td>
@@ -814,6 +814,7 @@
     });
 </script>
 
+
 <script>
     const popupDetail = document.getElementById('popupDetail');
     const popupCloseDetail = document.getElementById('popup-close-detail');
@@ -882,57 +883,6 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        // Memuat data lead melalui AJAX
-        $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                var leads = "";
-
-                $.each(data, function(index, value) {
-                    var rowNumber = index + 1;
-                    leads +=
-                        `<tr>
-                        <td><span class="rounded">` + rowNumber + `</span></td>
-                        <td>` + value.nama_perusahaan + `</td>
-                        <td>` + value.npwp + `</td>
-                        <td>` + value.email + `</td>
-                        <td>` + value.no_telp + `</td>
-                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
-                        <td>
-                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
-                                <button class="btn btn-danger lengkapiBtn" data-toggle="modal" data-target="#lengkapiLeadsModal" data-id="` + value.id_lead + `">Lengkapi Data</button>
-                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
-                        </td>
-                    </tr>`;
-                });
-
-                $("#data-leads").html(leads);
-
-                //delete lead action
-                $(".deleteBtnLead").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    $("#deleteConfirmedBtn").click(function() {
-                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
-                    });
-                });
-
-                //lengkapi lead action
-                $(".lengkapiBtn").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    var form = document.getElementById("formLengkapiLead");
-                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
-                });
-            }
-        });
-    });
-</script>
-
-<script>
     function openModal(id) {
         $.ajax({
             url: "<?php echo site_url('suplier/getKontak/') ?>" + id,
@@ -994,3 +944,55 @@
         closeModal();
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        // Memuat data lead melalui AJAX
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var leads = "";
+
+                $.each(data, function(index, value) {
+                    var rowNumber = index + 1;
+                    leads +=
+                        `<tr>
+                        <td><span class="rounded">` + rowNumber + `</span></td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + value.npwp + `</td>
+                        <td>` + value.email + `</td>
+                        <td>` + value.no_telp + `</td>
+                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
+                        <td>
+                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
+                                <button class="btn btn-danger lengkapiBtn" data-toggle="modal" data-target="#lengkapiLeadsModal" data-id="` + value.id_lead + `">Lengkapi Data</button>
+                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
+                        </td>
+                    </tr>`;
+                });
+
+                $("#data-leads").html(leads);
+
+                //delete lead action
+                $(".deleteBtnLead").click(function() {
+                    var id_lead = $(this).data("id");
+
+                    $("#deleteConfirmedBtn").click(function() {
+                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
+                    });
+                });
+
+                //lengkapi lead action
+                $(".lengkapiBtn").click(function() {
+                    var id_lead = $(this).data("id");
+
+                    var form = document.getElementById("formLengkapiLead");
+                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
+                });
+            }
+        });
+    });
+</script>
+
