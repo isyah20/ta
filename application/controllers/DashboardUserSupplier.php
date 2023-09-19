@@ -146,10 +146,15 @@ class DashboardUserSupplier extends CI_Controller
 
     public function CRM()
     {
+        // $data = $this->Supplier_model->insertUpdatePlotTim(1, 12);
+        // var_dump($data);
+        // die;
+
         $data = [
             'title' => 'Dashboard'
         ];
-        // var_dump("TEST");
+
+        // var_dump($_COOKIE['id_pengguna']);
         // die;
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
@@ -168,10 +173,42 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('dashboard/supplier/marketing');
         $this->load->view('templates/footer');
     }
+    public function testCRM()
+    {
+        $id_lead = $this->input->post('id_lead');
+        $id_tim = $this->input->post('id_tim');
+        if ($id_tim == 0) {
+            $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
+        } else {
+            $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        }
+        // $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
 
+    public function getPlotTim()
+    {
+        $data = $this->Supplier_model->getPlotTim();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
     public function getTimMarketing()
     {
         $data = $this->Supplier_model->getTimMarketing();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+    public function getLeadByIdTim()
+    {
+        $id_tim = $this->input->get('id_tim');
+        $data = $this->Supplier_model->getDataLeadByIdTim($id_tim);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+    public function getTimMarketingByIdSupplier()
+    {
+        $data = $this->Supplier_model->getTimBySupplierId($_COOKIE['id_pengguna']);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
