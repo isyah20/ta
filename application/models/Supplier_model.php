@@ -321,7 +321,8 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql);
     }
 
-    public function getListJenisTender(){
+    public function getListJenisTender()
+    {
         $sql = "SELECT jenis_tender.jenis_tender, COUNT(id_pemenang) AS total_tender
         FROM pemenang, jenis_tender
         WHERE pemenang.jenis_tender = jenis_tender.id_jenis
@@ -330,12 +331,14 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql)->result();
     }
 
-    public function isIdPemenangExists($id) {
+    public function isIdPemenangExists($id)
+    {
         $query = $this->db->get_where('data_leads', array('id_pemenang' => $id));
         return $query->num_rows() > 0;
     }
 
-    public function getDataLeads(){
+    public function getDataLeads()
+    {
         $sql = "SELECT
         data_leads.*,
         IFNULL(kontak_lead.nama, '') AS nama_kontak,
@@ -374,7 +377,7 @@ class Supplier_model extends CI_Model
         $this->db->where('data_leads.id_lead', $id);
 
         $query = $this->db->get();
-        return $query->row(); 
+        return $query->row();
     }
 
     public function getKontakLeadById($id)
@@ -387,7 +390,7 @@ class Supplier_model extends CI_Model
         $this->db->where('kontak_lead.id_lead', $id);
 
         $query = $this->db->get();
-        return $query->result_array(); 
+        return $query->result_array();
     }
 
     public function getKontakLeadByName($name)
@@ -400,24 +403,28 @@ class Supplier_model extends CI_Model
         $this->db->where('data_leads.npwp', $name);
 
         $query = $this->db->get();
-        return $query->result_array(); 
+        return $query->result_array();
     }
 
-    public function updateDataLead($id, $data) {
+    public function updateDataLead($id, $data)
+    {
         $this->db->where('id_lead', $id);
         return $this->db->update('data_leads', $data);
     }
 
-    public function insertKontakLead($data) {
+    public function insertKontakLead($data)
+    {
         return $this->db->insert('kontak_lead', $data);
     }
 
-    public function deleteDataLeadById($id) {
+    public function deleteDataLeadById($id)
+    {
         $this->db->where('id_lead', $id);
         $this->db->delete('data_leads');
     }
 
-    public function deleteKontakLeadById($id) {
+    public function deleteKontakLeadById($id)
+    {
         $this->db->where('id_lead', $id);
         $this->db->delete('kontak_lead');
     }

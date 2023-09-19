@@ -51,20 +51,20 @@ class DashboardUserSupplier extends CI_Controller
     //         $data = [
     //             "id_pemenang" => $id,
     //         ];
-            
+
     //         $this->db->insert('data_leads', $data);
     //     }
     //     $response = array(
-	//         'Success' => true,
-	//         'Info' => 'Preferensi tender berhasil disimpan.',
-	//     );
+    //         'Success' => true,
+    //         'Info' => 'Preferensi tender berhasil disimpan.',
+    //     );
 
-	//     $this->output
-	//          ->set_status_header(200)
-	//          ->set_content_type('application/json')
-	//          ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-	//          ->_display();
-	//     exit;
+    //     $this->output
+    //          ->set_status_header(200)
+    //          ->set_content_type('application/json')
+    //          ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+    //          ->_display();
+    //     exit;
     // }
 
     public function dataLeads()
@@ -107,7 +107,8 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function updateDataLeads($id) {
+    public function updateDataLeads($id)
+    {
         // Mengambil data dari formulir
         $dataLeads = array(
             'nama_perusahaan' => $this->input->post('nama_perusahaan'),
@@ -135,12 +136,12 @@ class DashboardUserSupplier extends CI_Controller
         // Redirect atau tampilkan pesan sukses
         redirect('suplier/leads');
     }
-    
-    public function deleteDataLeadById($id) {
+
+    public function deleteDataLeadById($id)
+    {
         $this->Supplier_model->deleteKontakLeadById($id);
         $this->Supplier_model->deleteDataLeadById($id);
         redirect('suplier/leads');
-        
     }
 
     public function CRM()
@@ -207,8 +208,6 @@ class DashboardUserSupplier extends CI_Controller
             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
             ->_display();
         exit;
-
-
     }
 
     public function table_data()
@@ -267,7 +266,7 @@ class DashboardUserSupplier extends CI_Controller
         }
 ?>
         <p class="d-none" id="chart1"><?php echo json_encode($totaldata) ?></p>
-    <?php
+<?php
     }
 
     //     public function fetch()
