@@ -394,7 +394,7 @@
             <h3 class="tender-title text-center wow fadeInUp d-inline-block px-3 pb-2" data-wow-delay="0.5s">Pemenang Tender</h3>
         </div>
 
-        <div class="row wow fadeInUp justify-content-center px-1 filter" data-wow-delay="0.5s">
+        <!-- <div class="row wow fadeInUp justify-content-center px-1 filter" data-wow-delay="0.5s">
             <input type="text" class="filter-item" id="keyword" placeholder="Nama Tender atau Nama Pemenang" style="padding: 0 14px;width: 30%;border: none;margin-left: 6px;">
 
             <select class="my-lg-2 my-1 select2-wilayah" id="wilayah" style="width: 25%;"></select>
@@ -447,7 +447,7 @@
                 <li class="dropdown-item d-flex text-dropdown" data-sort="4">Penetapan Pemenang Terlama</li>
             </ul>
             </div>
-        </div>
+        </div> -->
 
         <div class="row wow fadeInUp mx-0 my-2" id="list-pemenang" data-wow-delay="0.5s"></div>
         <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>

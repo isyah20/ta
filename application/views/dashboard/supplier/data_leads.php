@@ -420,7 +420,7 @@
 <section class="bg-white ">
     <div class="overflow">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-6"></div>
                 <div class="col-6 justify-content d-flex">
                     <div class="card-select">
@@ -494,7 +494,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
