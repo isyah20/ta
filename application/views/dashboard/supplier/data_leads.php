@@ -81,8 +81,27 @@
         font-weight: bold;
     }
 
+    .card-select {
+        font-size: 10px;
+        margin-left: 28px;
+        margin-top: 20px;
+        display: flex;
+    }
+
+    .custom-select {
+        margin-bottom: 15px;
+    }
+
     .form-select-custom {
         color: #CCCCCC;
+        border-radius: 10px 10px 10px 10px;
+        font-size: 1rem;
+        margin-top: 8px;
+    }
+
+    .form-input-custom {
+        color: #CCC;
+        border-color: #CCC;
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
     }
@@ -404,26 +423,46 @@
     <div class="overflow">
         <div class="container">
             <div class="row ">
-                <div class="col-6"></div>
-                <div class="col-6 justify-content d-flex">
-                    <!-- <div class="card-select">
+                <div class="col-6">
+                    <div class="card-select wow fadeInUp">
                         <div class="select-custom">
-                            <select class="form-select-custom" aria-label="Default select example" style="color: #E05151; border-color: #E05151;">
-                                <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
-                                <option selected>Wilayah : Jawa Barat</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="form-select-custom" aria-label="Default select example">
-                                <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
-                                <option selected>LPSE</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <div class="row">
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>
+                                        <span><img src="<?= base_url('assets\img\icon_filter.svg') ?>" alt="" style="width: 16px; height: 16px; margin-right: 5px;"></span>Wilayah :
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>LPSE : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>HPS : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-3 form-select-custom custom-select">
+                                    <option selected>Jenis Pengadaan : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+
+                                <div class="w-100"></div>
+                                
+                                <input type="text" class="col-9 form-input-custom" placeholder="Cari nama tender atau pemenang">
+
+                            </div>
                         </div>
-                    </div> -->
+                    </div>
+                </div>
+                <div class="col-6 justify-content d-flex">
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                         <div class="shadow-sm bg-white">
                             <div class="card-body">
