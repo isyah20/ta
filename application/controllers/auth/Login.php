@@ -28,6 +28,8 @@ class Login extends CI_Controller
             redirect('');
         } else {
             $google_client = new Google\Client();
+            // $google_client->setClientId('397353161605-icd30d2vnjh3tngrm47ngq2iuuq9i7pr.apps.googleusercontent.com'); // ClientID
+            // $google_client->setClientSecret('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'); // Client Secret Key
             $google_client->setClientId('397353161605-icd30d2vnjh3tngrm47ngq2iuuq9i7pr.apps.googleusercontent.com'); // ClientID
             $google_client->setClientSecret('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'); // Client Secret Key
             $google_client->setRedirectUri(base_url() . 'login'); // Redirect Uri
@@ -48,8 +50,8 @@ class Login extends CI_Controller
                         $result = json_decode($response->getBody()->getContents(), true);
                         if ($result['status'] == 200) {
                             $userId = $result['data']['id_pengguna'];
-                            set_cookie('id_pengguna', $userId, time()+86400);
-                            
+                            set_cookie('id_pengguna', $userId, time() + 86400);
+
                             $data_session = [
                                 'id_pengguna' => $userId,
                                 'nama' => $result['data']['nama'],
@@ -80,7 +82,10 @@ class Login extends CI_Controller
                         redirect('asosiasi');
                     } elseif ($result == UserCategory::SUPPLIER) {
                         redirect('suplier');
-                    } else {
+                    } elseif ($result == UserCategory::MARKETING) {
+                        redirect('marketing');
+                    } 
+                    else {
                         echo 'Not found!';
                     }
                 }
@@ -152,11 +157,11 @@ class Login extends CI_Controller
                     if ((int) $userCat != UserCategory::ADMIN) {
                         $userStatus = $this->updateUserType($userSts, (int) $userId);
                     }
-                    
-                    set_cookie('id_pengguna', $userId, time()+86400);
-                    set_cookie('kategori', $userCat, time()+86400);
-                    set_cookie('status', $userStatus, time()+86400);
-                    set_cookie('jenis_perusahaan', $companyType, time()+86400);
+
+                    set_cookie('id_pengguna', $userId, time() + 86400);
+                    set_cookie('kategori', $userCat, time() + 86400);
+                    set_cookie('status', $userStatus, time() + 86400);
+                    set_cookie('jenis_perusahaan', $companyType, time() + 86400);
 
                     $data_session = [
                         'id_pengguna' => $userId,
@@ -167,11 +172,11 @@ class Login extends CI_Controller
                         'is_active' => $user->is_active,
                         'photo' => $user->foto,
                         'jenis_perusahaan' => $companyType,
-                        'wa_status' => $user->wa_status,
+                        // 'wa_status' => $user->wa_status,
                         'lengkap' => $this->isProfileComplete((int) $userId) ? '1' : '0',
                     ];
 
-                    set_cookie('lengkap', $data_session['lengkap'], time()+86400);
+                    set_cookie('lengkap', $data_session['lengkap'], time() + 86400);
 
                     $userPref = null;
                     if ($this->session->userdata('user_preferensi') == null) {
@@ -180,7 +185,7 @@ class Login extends CI_Controller
                     }
 
                     $this->session->set_userdata('user_data', $data_session);
-                    if ($companyType == 0 && $userCat != 4) {
+                    if ($companyType == 0 && $userCat != 5) {
                         redirect('profile');
                     }
 
@@ -196,7 +201,10 @@ class Login extends CI_Controller
                             redirect('asosiasi');
                         } elseif ($userCat == UserCategory::SUPPLIER) {
                             redirect('suplier');
-                        } else {
+                        } elseif ($userCat == UserCategory::MARKETING) {
+                            redirect('marketing');
+                        } 
+                        else {
                             echo 'Not found!';
                         }
                     }
@@ -252,7 +260,7 @@ class Login extends CI_Controller
         delete_cookie('status');
         delete_cookie('jenis_perusahaan');
         delete_cookie('lengkap');
-        
+
         redirect('');
     }
 
@@ -297,10 +305,10 @@ class Login extends CI_Controller
                     'auth' => $this->client->getConfig('headers')['auth'],
                 ]
             );
-            
+
             $userId = json_decode($response->getBody()->getContents(), true)['data']['id_pengguna'];
-            set_cookie('id_pengguna', $userId, time()+86400);
-            
+            set_cookie('id_pengguna', $userId, time() + 86400);
+
             $data_session = [
                 'id_pengguna' => $userId,
                 'nama' => $params['form_params']['nama'],

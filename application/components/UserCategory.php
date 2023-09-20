@@ -12,9 +12,10 @@ class UserCategory
     public const SRV_PROVIDER = 2;
     public const ASSOCIATION = 3;
     public const SUPPLIER = 4;
+    public const MARKETING = 5;
 
     public static function getNonAdmin(): array
     {
-        return [static::SRV_PROVIDER, static::ASSOCIATION, static::SUPPLIER];
+        return [static::SRV_PROVIDER, static::ASSOCIATION, static::SUPPLIER, static::MARKETING];
     }
 }

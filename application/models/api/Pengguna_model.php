@@ -18,8 +18,9 @@ class Pengguna_model extends CI_Model
 
     public function getPenggunaById($id)
     {
-        $query = $this->db->get_where('pengguna', ['id_pengguna' => $id]);
-        return $query->row_array();
+        $this->db->select('*');
+        $query = $this->db->get_where('pengguna', ['id_pengguna' => $id])->row_array();
+        return $query;
     }
 
     public function tambahPengguna($data)
