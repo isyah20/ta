@@ -377,7 +377,7 @@
                 <div class="icon-text">
                     <img src="<?= base_url('assets\img\icon-npwp.svg') ?>" alt="">
                     <p class="mb-0 ms-2 wow fadeInUp">08.178.554.2-123.213</p>
-                    <img src="<?= base_url('assets\img\icon-location.svg') ?>" alt="" style="margin-left: 30px;">
+                    <img src="<?= base_url('assets\img\icon-location.svg') ?>" alt="" style="margin-left: 30px; margin-bottom: 3px">
                     <p class="mb-0 ms-2 wow fadeInUp">Jl. Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta</p>
                 </div>
 
