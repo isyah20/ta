@@ -15,12 +15,19 @@ class DashboardUserSupplier extends CI_Controller
             redirect('login');
         }
 
+        // $this->load->library('input');
         $this->load->helper('tanggal');
         $this->load->model('Lpse_model');
         $this->load->model('Pemenang_model');
         $this->load->model('Supplier_model');
         $this->load->model('api/Pemenang_model', 'pemenang');
         $this->init();
+    }
+
+    public function getToken()
+    {
+        $this->output->set_header('Content-Type: application/json');
+        echo json_encode([], JSON_NUMERIC_CHECK);
     }
 
     public function index()
@@ -33,6 +40,211 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/supplier/index');
         $this->load->view('templates/footer');
+    }
+
+    // public function addToLeads($id){
+    //     $id_exists = $this->Supplier_model->isIdPemenangExists($id);
+
+    //     if ($id_exists) {
+    //         echo 'ID sudah ada di database.';
+    //     } else {
+    //         $data = [
+    //             "id_pemenang" => $id,
+    //         ];
+
+    //         $this->db->insert('data_leads', $data);
+    //     }
+    //     $response = array(
+    //         'Success' => true,
+    //         'Info' => 'Preferensi tender berhasil disimpan.',
+    //     );
+
+    //     $this->output
+    //          ->set_status_header(200)
+    //          ->set_content_type('application/json')
+    //          ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+    //          ->_display();
+    //     exit;
+    // }
+
+    public function dataLeads()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/data_leads');
+        $this->load->view('templates/footer');
+    }
+
+    public function getDataLeads()
+    {
+        $data = $this->Supplier_model->getDataLeads();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getDataLeadsById($id)
+    {
+        $data = $this->Supplier_model->getDataLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getKontakLeadById($id)
+    {
+        $data = $this->Supplier_model->getKontakLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getKontakLeadByNama($nama)
+    {
+        $data = $this->Supplier_model->getKontakLeadByName($nama);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function updateDataLeads($id)
+    {
+        // Mengambil data dari formulir
+        $dataLeads = array(
+            'nama_perusahaan' => $this->input->post('nama_perusahaan'),
+            'profil' => $this->input->post('profil')
+            // Tambahkan kolom lain sesuai kebutuhan
+        );
+
+        $this->Supplier_model->updateDataLead($id, $dataLeads);
+
+        // Mengambil data dari formulir kontak
+        $kontakData = $this->input->post('kontak');
+
+        // Insert data kontak ke tabel kontak
+        foreach ($kontakData as $kontak) {
+            $dataKontak = array(
+                'id_lead' => $id, // ID lead yang sesuai
+                'nama' => $kontak['nama'],
+                'posisi' => $kontak['posisi'],
+                'email' => $kontak['email'],
+                'no_telp' => $kontak['no_telp']
+            );
+            $this->Supplier_model->insertKontakLead($dataKontak);
+        }
+
+        // Redirect atau tampilkan pesan sukses
+        redirect('suplier/leads');
+    }
+
+    public function deleteDataLeadById($id)
+    {
+        $this->Supplier_model->deleteKontakLeadById($id);
+        $this->Supplier_model->deleteDataLeadById($id);
+        redirect('suplier/leads');
+    }
+
+    public function CRM()
+    {
+        // $data = $this->Supplier_model->insertUpdatePlotTim(1, 12);
+        // var_dump($data);
+        // die;
+
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        // var_dump($_COOKIE['id_pengguna']);
+        // die;
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/crm');
+        $this->load->view('templates/footer');
+    }
+
+    public function marketing()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/marketing');
+        $this->load->view('templates/footer');
+    }
+    public function testCRM()
+    {
+        $id_lead = $this->input->post('id_lead');
+        $id_tim = $this->input->post('id_tim');
+        if ($id_tim == 0) {
+            $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
+        } else {
+            $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        }
+        // $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getPlotTim()
+    {
+        $data = $this->Supplier_model->getPlotTim();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+    public function getTimMarketing()
+    {
+        $data = $this->Supplier_model->getTimMarketing();
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+    public function getLeadByIdTim()
+    {
+        $id_tim = $this->input->get('id_tim');
+        $data = $this->Supplier_model->getDataLeadByIdTim($id_tim);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+    public function getTimMarketingByIdSupplier()
+    {
+        $data = $this->Supplier_model->getTimBySupplierId($_COOKIE['id_pengguna']);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getTimMarketingById($id)
+    {
+        $data = $this->Supplier_model->getTimMarketingById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function addTimMarketing()
+    {
+        $data = [
+            'nama_tim' => $this->input->post('nama_tim'),
+            'posisi' => $this->input->post('posisi'),
+            'no_telp' => $this->input->post('no_telp'),
+            'email' => $this->input->post('email'),
+            'alamat' => $this->input->post('alamat'),
+        ];
+
+        // $this->db->insert('tim_marketing', $data);
+        $data = $this->Supplier_model->createTimMarketing($data);
+
+        $response = array(
+            'Data' => $data,
+            'Success' => true,
+            'Info' => 'Tim marketing berhasil ditambahkan.',
+        );
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
     }
 
     public function table_data()
@@ -89,7 +301,7 @@ class DashboardUserSupplier extends CI_Controller
             $totaldata[7] = (int) $t['kat_5'];
             $totaldata[8] = (int) $t['total'];
         }
-        ?>
+?>
         <p class="d-none" id="chart1"><?php echo json_encode($totaldata) ?></p>
 <?php
     }
@@ -335,7 +547,8 @@ class DashboardUserSupplier extends CI_Controller
         exit;
     }
 
-    public function getListJenisTender(){
+    public function getListJenisTender()
+    {
         $items = $this->Supplier_model->getListJenisTender();
         echo json_encode($items);
     }

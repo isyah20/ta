@@ -173,7 +173,7 @@ if ($isArray && count($preferensi) == 0) {
                                 <label for="kategori" class="col-sm-4 col-xl-3 col-form-label">Jenis Pengadaan<span class="text-danger fw-bold ms-1">*</span></label>
                                 <div class="col-sm-8 col-xl-9">
                                     <select class="js col-lg form-select text-align-center my-lg-2 my-1" id="kategori" name="kategori[]" multiple="multiple" 
-                                         <?= ($isDisabledInputBtn ? 'disabled="true"' : '') ?>>
+                                        <?= ($isDisabledInputBtn ? 'disabled="true"' : '') ?>>
                                         <?php if ($isSupplier && empty($listId)): ?>
                                             <?php foreach ($listProcurementType as $val): ?>
                                             <option value="<?= $val['id_jenis'] ?>" selected><?= $val['jenis_tender'] ?></option>
@@ -237,7 +237,7 @@ if (is_array($preferensi) && count($preferensi) > 0 && (float) $preferensi['nila
                                     <input class="form-control mb-3" type="text" name="nilai_hps_akhir" id="nilai_hps_akhir" placeholder="Nilai HPS akhir" value="<?= $nilai_hps_akhir ?? '' ?>">
                                 </div>
                             </div> */ ?>
-                             <div class="m-0 border p-3 rounded-3">
+                            <div class="m-0 border p-3 rounded-3">
                                 <h5 class="mb-2">Pengaturan LPSE</h5>
                                 <p>Di bawah ini merupakan pengaturan LPSE yang dapat Anda tentukan sesuai kebutuhan.<br>LPSE terpilih adalah sumber paket tender yang berasal dari LPSE terkait yang akan ditampilkan sebagai informasi tender terbaru.</p>
                                 <div class="row m-0 bg-light border p-2 rounded-3">

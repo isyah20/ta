@@ -49,6 +49,7 @@ class DashboardUserAsosiasi extends CI_Controller
         ];
 
         $response_rata = $this->anggota->getdatadinamisavg($search, $id_pengguna);
+        // die;
         $rata1 = [];
         foreach ($response_rata as $b) {
             $rata1[0] = $b['persen_ikut_tender'];
@@ -87,8 +88,7 @@ class DashboardUserAsosiasi extends CI_Controller
         } else {
             $akumulasi = [0, 0, 0, 0];
         }
-        $lpse = $this->lpse->getAllLpse();
-        ;
+        $lpse = $this->lpse->getAllLpse();;
         $wilayah = $this->WilayahModel->getAllWilayah();
         $blacklist = $this->blacklist->getAll();
         foreach ($blacklist['data'] as $b);
@@ -105,7 +105,6 @@ class DashboardUserAsosiasi extends CI_Controller
             'response' => json_encode($response),
             // 'anggota' => $anggota['data']
         ];
-
         $this->load->library('user');
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar', [
@@ -187,10 +186,10 @@ class DashboardUserAsosiasi extends CI_Controller
             $rata1[6] = $b['persen_kalah_tender'];
             $rata1[7] = $b['persen_penurunan_tender'];
         }
-        ?>
+?>
         <p class="d-none" id="chart2"><?php echo json_encode($rata1) ?></p>
         <?php
-                $id_pengguna = $this->session->user_data['id_pengguna'];
+        $id_pengguna = $this->session->user_data['id_pengguna'];
         $response = $this->anggota->getdatadinamis($search, $id_pengguna);
         if (json_encode($response) != "[]") {
             $akumulasi = [];

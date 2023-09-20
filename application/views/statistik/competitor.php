@@ -8,13 +8,13 @@
 </div>
 <?php
 $summary = json_decode($range);
-    $total = json_decode($akumulasi);
-    ?>
+$total = json_decode($akumulasi);
+?>
 
 
 <!-- <?php
-            if ($npwp == 0) {
-                ?>
+        if ($npwp == 0) {
+        ?>
     <script type="text/javascript">
         $(window).on('load', function() {
             $('#ikutModal').modal('show');
@@ -22,8 +22,8 @@ $summary = json_decode($range);
     </script>
 
 <?php
-            }
-    ?> -->
+        }
+?> -->
 
 
 <div class="modal fade" id="ikutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -62,12 +62,12 @@ $summary = json_decode($range);
                         <select class="col-lg-4 js-data-example-ajax mx-1 my-lg-2 my-1" id="klpd" name="klpd" style="margin:0">
                             <option value="">Semua LPSE</option>
                             <?php
-                                foreach ($lpse as $lpse) :
-                                    ?>
+                            foreach ($lpse as $lpse) :
+                            ?>
                                 <option value="<?= $lpse['id_lpse'] ?>"><?php echo $lpse['nama_lpse'] ?></option>
                             <?php
-                                endforeach;
-    ?>
+                            endforeach;
+                            ?>
                         </select>
                         <script>
                             $(document).ready(function() {
@@ -77,12 +77,12 @@ $summary = json_decode($range);
 
                         <select class="col-lg-4 js-data-example-ajax2" id="peserta" name="peserta" style="margin:0">
                             <?php
-    foreach ($peserta as $p) :
-        ?>
+                            foreach ($peserta as $p) :
+                            ?>
                                 <option value="<?= $p['npwp'] ?>"><?php echo $p['nama_peserta'] ?></option>
                             <?php
-    endforeach;
-    ?>
+                            endforeach;
+                            ?>
                         </select>
                         <script>
                             $(document).ready(function() {
@@ -95,14 +95,14 @@ $summary = json_decode($range);
                             <!-- <option class="select-tahun-option" value="" selected disabled>Tahun</option> -->
                             <option class="select-tahun-option" selected value="">Semua tahun</option>
                             <?php
-    $tahun = (int) date('Y');
-    for ($i = 0; $i < 5; $i++) :
-        ?>
+                            $tahun = (int) date('Y');
+                            for ($i = 0; $i < 5; $i++) :
+                            ?>
                                 <option class="select-tahun-option" value="<?= $tahun ?>"><?= $tahun ?></option>
                             <?php
-            $tahun--;
-    endfor;
-    ?>
+                                $tahun--;
+                            endfor;
+                            ?>
                         </select>
                         <script>
                             $(document).ready(function() {
@@ -120,25 +120,25 @@ $summary = json_decode($range);
                     <select class="col-lg form-select text-align-center mx-1 my-lg-2 my-1" aria-label="Default select example" name="peserta" id="peserta">
                         <?php
                         foreach ($peserta as $data) :
-                            ?>
+                        ?>
                             <option class="select-tahun-option" value="<?= $data['npwp'] ?>"><?= $data['nama_peserta'] ?></option>
                         <?php
                         endforeach;
-    ?>
+                        ?>
                     </select>
 
 
 
                     <select class="col-lg form-select text-align-center mx-1 my-lg-2 my-1" aria-label="Default select example" name="tahun" id="tahun">
                         <?php
-    $tahun = (int) date('Y');
-    for ($i = 0; $i < 5; $i++) :
-        ?>
+                        $tahun = (int) date('Y');
+                        for ($i = 0; $i < 5; $i++) :
+                        ?>
                             <option class="select-tahun-option" value="<?= $tahun ?>"><?= $tahun ?></option>
                         <?php
-            $tahun--;
-    endfor;
-    ?>
+                            $tahun--;
+                        endfor;
+                        ?>
                     </select>
                 </div> -->
 
@@ -223,21 +223,21 @@ $summary = json_decode($range);
                         </thead>
                         <tbody id="turun" style="overflow-y: scroll; max-height:520px">
                             <?php
-                            if (is_iterable($penurunan)):
+                            if (is_iterable($penurunan)) :
                                 foreach ($penurunan['0'] as $data) :
-                                    ?>
-                                <tr>
-                                    <td class="col-lg-4 col-kode text1 mx-1 mt-2 mb-2"><?= $data['nama_tender'] ?></td>
-                                    <td class="col-lg-2 col-nama text2 mx-1 mt-2 mb-2"><?= 'Rp.' . number_format($data['nilai_hps']); ?></td>
-                                    <td class="col-lg-2 col-jenis text3 mx-1 mt-2 mb-2"><?= 'Rp.' . number_format($data['harga_penawaran']); ?></td>
-                                    <td class="col-lg-1 col-klpd text4 mx-1 mt-2 mb-2"><?= $data['penurunan'] . ' %' ?></td>
-                                    <td class="col-lg col-hps text5 mx-1 mt-2 mb-2">Alasan Penawaran Alasan Penawaran Alasan Penawaran Alasan Penawaran Alasan PenawaranAlasan Penawaran
-                                    </td>
-                                </tr>
+                            ?>
+                                    <tr>
+                                        <td class="col-lg-4 col-kode text1 mx-1 mt-2 mb-2"><?= $data['nama_tender'] ?></td>
+                                        <td class="col-lg-2 col-nama text2 mx-1 mt-2 mb-2"><?= 'Rp.' . number_format($data['nilai_hps']); ?></td>
+                                        <td class="col-lg-2 col-jenis text3 mx-1 mt-2 mb-2"><?= 'Rp.' . number_format($data['harga_penawaran']); ?></td>
+                                        <td class="col-lg-1 col-klpd text4 mx-1 mt-2 mb-2"><?= $data['penurunan'] . ' %' ?></td>
+                                        <td class="col-lg col-hps text5 mx-1 mt-2 mb-2">Alasan Penawaran Alasan Penawaran Alasan Penawaran Alasan Penawaran Alasan PenawaranAlasan Penawaran
+                                        </td>
+                                    </tr>
                             <?php
                                 endforeach;
                             endif;
-    ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -249,11 +249,11 @@ $summary = json_decode($range);
                         <h1 class="presentase1" id="presentase1"><?= $penurunan['2'] . '%'; ?></h1>
                     </div>
                 </div>*/ ?>
-                <?php if (isset($penurunan['1'])): ?>
-                <div class="col-lg-4 chart-bg mx-4 mb-4">
-                    <p class="text_presentase">Rata - rata Persentase Penurunan HPS</p>
-                    <h1 class="presentase2" id="presentase2"><?= $penurunan['1'] . '%'; ?></h1>
-                </div>
+                <?php if (isset($penurunan['1'])) : ?>
+                    <div class="col-lg-4 chart-bg mx-4 mb-4">
+                        <p class="text_presentase">Rata - rata Persentase Penurunan HPS</p>
+                        <h1 class="presentase2" id="presentase2"><?= $penurunan['1'] . '%'; ?></h1>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
@@ -270,7 +270,7 @@ $summary = json_decode($range);
             <h5 style="color:#000000; margin:20px; margin-top:10px"> Summary nilai HPS</h5>
             <?php $summaryVars = get_object_vars($summary); ?>
             <div class="row d-flex justify-content-center">
-                <div class="col-lg-auto summary-box mb-2">
+                <div class="col-lg-auto summary-box mb-2 justify-content-center">
                     <p>&lt;500 juta </p>
                     <h4 style="font-size:30px" id="sum1"><?= isset($summaryVars['range1']) ? $summary->range1 : '0' ?> <span><img src="<?= base_url('assets/img/under-500.png') ?>" alt=""></span></h4>
                 </div>
@@ -660,7 +660,7 @@ $summary = json_decode($range);
 
     <?php
     foreach ($latlong as $l) {
-        ?>
+    ?>
         // console.log($l);
 
         L.marker([<?= $l['latitude'] ?>, <?= $l['longitude'] ?>], {
@@ -677,7 +677,7 @@ $summary = json_decode($range);
             //     // }
             //     ["Provinsi Daerah Istimewa Yogyakarta", -7.794342, 110.366508]
             //
-    ?>
+            ?>
     // ];
     // for (var i = 0; i < locations.length; i++) {
     //     marker = new L.marker([locations[i][1], locations[i][2]], {

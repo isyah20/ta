@@ -1,3 +1,4 @@
+<!-- Data Chart -->
 <div class="d-none" id="dataChart">
     <p class="d-none" id="chart1"><?php echo json_encode($timeSeriesUser) ?></p>
     <p class="d-none" id="chart2"><?php echo json_encode($akumulasi) ?></p>
@@ -161,11 +162,11 @@ if (!$npwpComplete) : ?>
                             <div class="col text-center mt-4 mb-4" style="padding:0">
                                 <h6 style="font-size:12px; margin-top:10%; "><b>Total Tender</b></h6>
                                 <!-- <h5 style="font-size:30px" id="ikut"><b><?= $total['3'] ?></b></h5> -->
-                                <h5 style="font-size:30px" id="ikut"><b><?php if (empty($total)) {
-                                                                            echo '0';
-                                                                        } else {
-                                                                            echo $total['0'];
-                                                                        } ?></b></h5>
+                                <h5 style="font-size:30px" id="total"><b><?php if (empty($total)) {
+                                                                                echo '0';
+                                                                            } else {
+                                                                                echo $total['0'];
+                                                                            } ?></b></h5>
                             </div>
                             <div class="col mt-4 mb-4">
                                 <div class="row">
@@ -183,11 +184,11 @@ if (!$npwpComplete) : ?>
                                                                                                                                                 } else {
                                                                                                                                                     echo $total['2'];
                                                                                                                                                 } ?> Kalah</h5>
-                                        <h5 id="total" class="tender-summary"><span class="tender-summary-span tender-summary-span-total"></span><?php if (empty($total)) {
-                                                                                                                                                        echo '0';
-                                                                                                                                                    } else {
-                                                                                                                                                        echo $total['3'];
-                                                                                                                                                    } ?> Proses</h5>
+                                        <h5 id="ikut" class="tender-summary"><span class="tender-summary-span tender-summary-span-total"></span><?php if (empty($total)) {
+                                                                                                                                                    echo '0';
+                                                                                                                                                } else {
+                                                                                                                                                    echo $total['3'];
+                                                                                                                                                } ?> Ikut Tender</h5>
                                     </div>
                                 </div>
                             </div>
@@ -199,11 +200,12 @@ if (!$npwpComplete) : ?>
                 </div>
             </div>
 
+            <!-- Notif tender -->
             <div class="col-lg-4 ">
-                <h4 class="my-2" style="font-weight:510; font-size: 22px;">Notifikasi</h4>
+                <h4 class="my-2 mb-4" style="font-weight:510; font-size: 22px; ">Notifikasi</h4>
                 <?php if ($notif != null) {
                     foreach ($notif as $row) : ?>
-                        <div class="mt-4" style="max-height: 340px; overflow:auto;">
+                        <div class="mt-2 mb-1" style="max-height: 340px; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
 
                             <div class="row summary-box d-flex align-content-center mb-2" style="height:auto">
                                 <div class="col">
@@ -218,7 +220,7 @@ if (!$npwpComplete) : ?>
                     <?php
                     endforeach;
                 } else { ?>
-                    <div class="mt-4" style="max-height: 340px; overflow:auto;">
+                    <div class="mt-2 mb-1" style="max-height: 340px; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
                         <div class="row summary-box d-flex align-content-center mb-2" style="height:auto">
                             <div class="col">
                                 <h6 style="font-weight:600; font-size:14px">Tidak terdapat notifikasi Tender baru</h6>
@@ -236,27 +238,28 @@ if (!$npwpComplete) : ?>
         </div>
 
         <div class="row">
+            <!-- Time Series Ikut Tender -->
             <div class="col-lg-6">
-                <div class="overflow-auto chart-bg mt-4" style="height:92%">
+                <div class="overflow-auto chart-bg mt-4" style="height:92%; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
                     <h5 style="color:#000000; margin:20px; font-weight:600"> TIME SERIES IKUT TENDER</h5>
                     <div class="chart1" style="margin:0; padding:0"><canvas id="timeSeries-user"></canvas></div>
                 </div>
             </div>
+            <!-- Riwayat ikut tender HPS -->
             <div class="col-lg-6">
-                <div class="chart-bg  mt-4 mb-2" style="height:92%">
+                <div class="chart-bg  mt-4 mb-2" style="height:92%; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
                     <div style="padding:0">
                         <h5 style="color:#000000;margin:10px; font-size:14px; font-weight:600"> Riwayat Ikut Tender Berdasarkan HPS</h5>
                         <div class="chart3" style="margin:0; padding:0">
                             <canvas id="riwayatHPS"></canvas>
                         </div>
                     </div>
-                    <h5 style="color:#000000; margin:10px; margin-top:0; font-size:14px; font-weight:600"> Summary nilai HPS</h5>
                     <center>
-                        <div class="row d-flex justify-content-center" style="padding:5px; margin:auto">
+                        <div class="row d-flex justify-content-center" style="padding:5px; margin:auto; gap: 30px;">
                             <div class="col-lg-auto summary-box-2">
                                 <p>
                                     <500 juta </p>
-                                        <h4 style="font-size:12px; font-weight:600; " id="sum1"><?php if (empty($summary)) {
+                                        <h4 style="font-size:20px; font-weight:600; " id="sum1"><?php if (empty($summary)) {
                                                                                                     echo '0';
                                                                                                 } else {
                                                                                                     echo $summary->range1;
@@ -264,7 +267,7 @@ if (!$npwpComplete) : ?>
                             </div>
                             <div class="col-lg-auto summary-box-2">
                                 <p> 500Jt - 1M </p>
-                                <h4 style="font-size:12px; font-weight:600" id="sum2"><?php if (empty($summary)) {
+                                <h4 style="font-size:20px; font-weight:600" id="sum2"><?php if (empty($summary)) {
                                                                                             echo '0';
                                                                                         } else {
                                                                                             echo $summary->range2;
@@ -272,7 +275,7 @@ if (!$npwpComplete) : ?>
                             </div>
                             <div class="col-lg-auto summary-box-2">
                                 <p> 1M -10M </p>
-                                <h4 style="font-size:12px; font-weight:600" id="sum3"><?php if (empty($summary)) {
+                                <h4 style="font-size:20px; font-weight:600" id="sum3"><?php if (empty($summary)) {
                                                                                             echo '0';
                                                                                         } else {
                                                                                             echo $summary->range3;
@@ -280,7 +283,7 @@ if (!$npwpComplete) : ?>
                             </div>
                             <div class="col-lg-auto summary-box-2">
                                 <p> 10M - 100M </p>
-                                <h4 style="font-size:12px; font-weight:600" id="sum4"><?php if (empty($summary)) {
+                                <h4 style="font-size:20px; font-weight:600" id="sum4"><?php if (empty($summary)) {
                                                                                             echo '0';
                                                                                         } else {
                                                                                             echo $summary->range4;
@@ -288,13 +291,14 @@ if (!$npwpComplete) : ?>
                             </div>
                             <div class="col-lg-auto summary-box-2">
                                 <p> >100M </p>
-                                <h4 style="font-size:12px; font-weight:600" id="sum5"><?php if (empty($summary)) {
+                                <h4 style="font-size:22px; font-weight:600" id="sum5"><?php if (empty($summary)) {
                                                                                             echo '0';
                                                                                         } else {
                                                                                             echo $summary->range5;
                                                                                         }  ?> <span><img src="<?= base_url('assets/img/over-100m.png') ?>" width="20px" alt=""></span></h4>
                             </div>
                         </div>
+                        <h5 style="color:#000000; margin:10px; margin-top:0; font-size:14px; font-weight:600"> Summary nilai HPS</h5>
 
                     </center>
                 </div>
@@ -304,7 +308,9 @@ if (!$npwpComplete) : ?>
 
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 <script defer src="<?= base_url() ?>assets/js/alpine-3.12.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script>
+    console.log('test');
     const npwpComplete = parseInt(<?= $npwpComplete ? '1' : '0' ?>);
     const worker = new Worker('dashboard-worker.js')
     worker.onmessage = (event) => {
@@ -336,11 +342,13 @@ if (!$npwpComplete) : ?>
         })
     }
 
-    let klpd = null,
-        tahun = null;
+    let klpd = '',
+        tahun = '';
     // getData(klpd, tahun);
 
-    klpd = $('#klpd').find(":selected").val();
+    // klpd = $('#klpd').find(":selected").val();
+    // klpd = $('#klpd').find(":selected").val();
+    // console.log($("#klpd").find(":selected").val());
     const userId = '<?= $userId ?>';
     {
         if (npwpComplete == 1) {
@@ -431,6 +439,20 @@ if (!$npwpComplete) : ?>
                 }
             })
         })
+
+        $('#klpd').on('change', function() {
+            klpd = $('#klpd').val();
+            console.log(klpd);
+            // getData(klpd, tahun);
+            sendMsg(klpd, tahun);
+        });
+
+        $('#tahun').on('change', function() {
+            tahun = $('#tahun').val();
+            // getData(klpd, tahun);
+            sendMsg(klpd, tahun);
+        });
+
     })
     // $('input[type="checkbox"][name="klpd"]').on('change', function(){
 
@@ -450,34 +472,34 @@ if (!$npwpComplete) : ?>
 
     // klpd = $('#klpd').find(":checked", true).val();
 
-    $('#klpd').on('change', function() {
-        klpd = $('#klpd').val();
-        // getData(klpd, tahun);
-        sendMsg(klpd, tahun)
-    });
 
 
-    tahun = $('#tahun').find(":selected").val();
-    $('#tahun').on('change', function() {
-        tahun = $('#tahun').val();
-        // getData(klpd, tahun);
-        sendMsg(klpd, tahun)
-    });
+
+    // tahun = $('#tahun').find(":selected").val();
+    console.log(tahun);
+
 
     function getData(klpd, tahun) {
         $('#loading-filter').text('');
+        console.log(klpd, tahun);
         $.ajax({
                 url: "DashboardUser/chart/",
                 type: "POST",
                 data: {
+                    // data: {
                     cariKLPD: JSON.stringify(klpd),
                     cariTahun: tahun
+                    // }
+                    // cariKLPD: JSON.stringify(klpd),
+                    // cariTahun: tahun
                 },
                 beforeSend: (jqXHR, settings) => {
                     $('#loading-filter').text('Loading...');
                 }
             })
             .done((result) => {
+                console.log(result);
+                console.log(result);
                 $('#loading-filter').text('');
                 $('#dataChart').html(result);
                 setChart();
@@ -490,6 +512,7 @@ if (!$npwpComplete) : ?>
 
     get1 = document.getElementById('chart1').innerHTML;
     let chart1 = JSON.parse(JSON.parse(get1));
+    console.log(chart1);
 
     const ctx = document.getElementById('timeSeries-user');
     new Chart(ctx, {
@@ -722,10 +745,10 @@ if (!$npwpComplete) : ?>
         };
         option && myChart.setOption(option);
 
-        $('#total').html(`<span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['0'] + ` Total Tender`);
+        $('#ikut').html(`<span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['3'] + ` Ikut Tender`);
         $('#menang').html(`<span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['1'] + ` Menang`);
         $('#kalah').html(`<span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['2'] + ` Kalah`);
-        $('#ikut').html(` <b>` + chart2['3'] + `</b>`);
+        $('#total').html(` <b>` + chart2['0'] + `</b>`);
 
         get3 = document.getElementById('chart3').innerHTML;
         let chart3 = JSON.parse(get3);

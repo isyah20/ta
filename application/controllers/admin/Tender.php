@@ -69,12 +69,12 @@ class Tender extends CI_Controller
         $no = $_POST['start'];
         foreach ($results as $result) {
             $row = [];
-            $row[] = $result->id_tender;
+            // $row[] = $result->id_tender;
             $row[] = $result->id_lpse;
-            $row[] = $result->id_jenis;
+            // $row[] = $result->id_jenis;
             $row[] = $result->nama_tender;
-            $row[] = $result->nilai_hps;
-            $row[] = $result->nilai_kontrak;
+            // $row[] = $result->nilai_hps;
+            // $row[] = $result->nilai_kontrak;
             $data[] = $row;
         }
 
@@ -86,7 +86,7 @@ class Tender extends CI_Controller
         ];
 
         $this->output->set_content_type('aplication/json')->set_output(json_encode($output));
-    }
+}
 
     public function create()
     {
