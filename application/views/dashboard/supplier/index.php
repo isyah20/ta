@@ -241,46 +241,183 @@
   }
 
     @media (max-width: 576px) {
-    .wide {
-      text-align: center;
-      margin: 4px 35px;
-      width: 320px !important;
+        .wide {
+            text-align: center;
+            margin: 4px 35px;
+            width: 320px !important;
+        }
+
+        .sec-pemenang-terbaru {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .card-data {
+        border-radius: 10px;
+        background: var(--shade-font-white, #FFF);
+    }
+
+    .card-body {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 5px;
+        margin-right: 10px;
+        border-radius: 40%;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .card-title {
+        color: #B89494;
+        font-size: 0.75rem;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .card-text {
+        font-size: 1.75rem;
+        font-weight: bold;
+    }
+
+    .content-above-navbar {
+        margin-top: 100px;
+        /* Increase the margin-top value as needed */
+        z-index: 999;
+        /* Adjust the z-index value as needed */
+    }
+
+    .card-select {
+        font-size: 10px;
+        margin-left: 28px;
+        margin-top: 20px;
+        display: flex;
+    }
+
+    .custom-select {
+        margin-bottom: 15px;
+        border: 1px solid;
+        background-color: white;
+    } 
+
+    .form-select-custom {
+        /* width: 180px; */
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
+        margin-top: 8px;
+        padding: 10px;
+    }
+
+    .form-input-custom {
+        /* height: 40px; */
+        /* color: #CCC; */
+        /* border-color: #CCC; */
+        border-radius: 20px;
+        font-size: 1rem;
+        width: 520px;
     }
   }
 </style>
 
-<section class="bg-white pt-5 pb-3 mt-5">
-    <div class="container-lg d-flex justify-content-center align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <img src="<?= base_url("assets/img/dashboard-hero.png")?>" width="90" alt="">
-        <h4 class="mb-0 ms-2 wow fadeInUp">Selamat Datang, <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!</h4>
-    </div>
-</section>
-
-<section>
-    <div class="container py-5" x-data="newestTender">
-        <div class="row align-items-center rounded-3 bg-white shadow mx-0 my-3 wow fadeInUp" id="sec-set-preferensi" data-wow-delay="0.7s" style="display: none;">
-            <div class="col-md-2 p-3 text-center text-md-end">
-                <img src="<?= base_url("assets/img/rincian 2.png")?>" width="140" alt="">
-            </div>
-            <div class="col-md-8 p-3 text-center text-md-start">
-                <h4 class="mb-2">Preferensi tender belum ditentukan!</h4>
-                <p class="m-0">Hai <span class="fw-semibold nama-pengguna"></span>, Anda belum dapat melihat pemenang tender terbaru.<br>Lakukan pengaturan preferensi untuk mendapatkan informasi pemenang tender terbaru yang sesuai!</p>
-            </div>
-            <div class="col-md-2 p-3 text-center">
-                <a href="<?= base_url() ?>preferensi" class="btn btn-danger m-1">Pengaturan</a>
+<section class="pt-6 mt-6">
+    <div class="container">
+        <div class="row justify-content d-flex content-above-navbar">
+            <div class="col-md-4 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
+                <img src="<?= base_url("assets/img/dashboard-hero.png") ?>" width="90" alt="">
+                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="10" alt="">
+                <h4 class="mb-0 ms-2 wow fadeInUp">Selamat Datang!<p>Yuk Lengkapi Data Calon Customermu</p>
+                </h4>
             </div>
         </div>
-        
-        <div class="row align-items-center rounded-3 bg-white shadow mx-0 my-3 wow fadeInUp" id="sec-upgrade-paket" data-wow-delay="0.7s" style="display: none;">
-            <div class="col-md-2 p-3 text-center text-md-end">
-                <img src="<?= base_url("assets/img/rincian 2.png")?>" width="140" alt="">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="card-select wow fadeInUp">
+                    <div class="select-custom">
+                        <div class="row">
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                <select style="border:none;">
+                                    <option selected style="border:1px;">
+                                        Lokasi Pekerjaan
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                <select style="border:none;">
+                                    <option selected style="border:1px;">
+                                        Jenis Pengadaan
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                <select style="border:none;">
+                                    <option selected style="border:1px;">
+                                        Nilai Penawaran
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 40px; padding:5px">
+                                <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" alt="">
+                            </div>
+                            <div class="form-select-custom custom-select" style="padding:5px;padding-left:30px; margin-right:50px">
+                                <input type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                            <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20"  alt="">
+                            </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-8 p-3 text-center text-md-start">
-                <h4 class="mb-2">Upgrade paket akun premium!</h4>
-                <p class="m-0">Hai <span class="fw-semibold nama-pengguna"></span>, akun Anda saat ini berada pada paket standard.<br>Silakan upgrade akun Anda ke paket premium untuk melihat informasi pemenang tender terbaru!</p>
-            </div>
-            <div class="col-md-2 p-3 text-center">
-                <a href="<?= base_url() ?>pricing_plan" class="btn btn-danger m-1">Upgrade</a>
+            <div class="col-6 justify-content d-flex">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
+                    <div class="shadow-sm bg-white">
+                        <div class="card-body">
+                            <div>
+                                <p>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
+                                </p>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <p>
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
+                    <div class="shadow-sm bg-white">
+                        <div class="card-body">
+                            <div>
+                                <p>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
+                                </p>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <p>
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
