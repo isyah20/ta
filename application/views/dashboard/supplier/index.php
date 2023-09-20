@@ -409,7 +409,7 @@
                         <div class="card-body">
                             <div>
                                 <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Pemenang Tender</h1>
                                 </p>
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
@@ -426,7 +426,7 @@
                         <div class="card-body">
                             <div>
                                 <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Pemenang Tender Terbaru</h1>
                                 </p>
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
