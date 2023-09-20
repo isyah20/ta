@@ -659,7 +659,7 @@
     <!-- END MODAL detail  -->
 
 
-    <!-- Tombol yang akan membuka modal -->
+
 
     <!-- Modal Detail-->
     <div class="modal fade" id="popupDetailModal" tabindex="-1" role="dialog" aria-labelledby="popupDetailLabel" aria-hidden="true">
@@ -732,128 +732,127 @@
                 </div>
             </div>
         </div>
+    </div>
 
-
-
-        <!-- modal hapus -->
-        <div class="col-12 py-5">
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
-                <div class="modal-dialog custom-modal" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-0">
-                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                            </button>
-                        </div>
-                        <div class="modal-body border-0 text-center">
-                            <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
-                            <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
-                            <div class="input-popup align-items-center justify-content-center">
-                                <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
-                            </div>
-                            <div class="d-flex justify-content-start mt-3 gap-2">
-                                <div></div>
-                                <div class="link flex-row align-items-center w-100">
-                                    <span>
-                                        <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
-                                            <i class="fas me-1"></i>Hapus
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-start mt-3 gap-2">
-                                <div></div>
-                                <div class="link flex-row align-items-center w-100">
-                                    <span>
-                                        <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
-                                            <i class="fas me-1"></i>Batal
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+    <!-- modal hapus -->
+    <div class="col-12 py-5">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- end modal hapus -->
-
-        <!-- modal lengkapi leads  -->
-        <div class="col-12 py-5 align-content-center justify-content-center">
-            <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
-                <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-0">
-                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                            </button>
+                    <div class="modal-body border-0 text-center">
+                        <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
+                        <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
+                        <div class="input-popup align-items-center justify-content-center">
+                            <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
                         </div>
-
-
-                        <div class="modal-body border-0">
-                            <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
-                            <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-                            <div class="input-popup align-items-center">
-                                <div class="input-popup justify-content-end">
-                                    <form class="row g-2" method="post" id="formLengkapiLead">
-                                        <div class="col-12">
-                                            <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                            <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
-                                            <textarea class="form-control" name="profil" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
-                                        </div>
-                                        <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
-
-                                        <div class="col-6">
-                                            <label for="inputNama" class="form-label text-start">Nama</label>
-                                            <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
-                                        </div>
-
-                                        <div class="col-6">
-                                            <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                            <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="inputEmail" class="form-label text-start">Email</label>
-                                            <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                            <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
-                                        </div>
-
-                                        <div class="row g-2" id="container-kontak"></div>
-                                        <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
-                                            <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                            Tambah Kontak
-                                        </button>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-start mt-3 gap-2">
-                                <div></div>
-                                <div class="link flex-row align-items-center w-100">
-                                    <button type="submit" class="btn-custom text-white text-center w-100 border-0">
-                                        <i class="fas me-1"></i>Tambahkan
-                                    </button>
-                                </div>
-                            </div>
-                            </form>
-                            <div class="my-2 text-center">
-                                <p style="font-size: 15px;">
-                                    Mari Kami bantu carikan informasi tentang perusahaan ini?
-                                    <a href="#">
-                                        Klik Disini
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
+                                        <i class="fas me-1"></i>Hapus
                                     </a>
-                                </p>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
+                                        <i class="fas me-1"></i>Batal
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- end modal lengkapi leads -->
+    </div>
+    <!-- end modal hapus -->
+
+    <!-- modal lengkapi leads  -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
+        <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
+                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                        <div class="input-popup align-items-center">
+                            <div class="input-popup justify-content-end">
+                                <form class="row g-2" method="post" id="formLengkapiLead">
+                                    <div class="col-12">
+                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
+                                        <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
+                                        <textarea class="form-control" name="profil" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
+                                    </div>
+                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
+
+                                    <div class="col-6">
+                                        <label for="inputNama" class="form-label text-start">Nama</label>
+                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                        <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputEmail" class="form-label text-start">Email</label>
+                                        <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                        <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                    </div>
+
+                                    <div class="row g-2" id="container-kontak"></div>
+                                    <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
+                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                        Tambah Kontak
+                                    </button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <button type="submit" class="btn-custom text-white text-center w-100 border-0">
+                                    <i class="fas me-1"></i>Tambahkan
+                                </button>
+                            </div>
+                        </div>
+                        </form>
+                        <div class="my-2 text-center">
+                            <p style="font-size: 15px;">
+                                Mari Kami bantu carikan informasi tentang perusahaan ini?
+                                <a href="#">
+                                    Klik Disini
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal lengkapi leads -->
 </section>
 
 
