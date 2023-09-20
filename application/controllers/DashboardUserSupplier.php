@@ -93,6 +93,17 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
+    public function detailDataLead($id){
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/detail_lead');
+        $this->load->view('templates/footer');
+    }
+
     public function getKontakLeadById($id)
     {
         $data = $this->Supplier_model->getKontakLeadById($id);
