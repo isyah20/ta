@@ -81,8 +81,27 @@
         font-weight: bold;
     }
 
+    .card-select {
+        font-size: 10px;
+        margin-left: 28px;
+        margin-top: 20px;
+        display: flex;
+    }
+
+    .custom-select {
+        margin-bottom: 15px;
+    }
+
     .form-select-custom {
         color: #CCCCCC;
+        border-radius: 10px 10px 10px 10px;
+        font-size: 1rem;
+        margin-top: 8px;
+    }
+
+    .form-input-custom {
+        color: #CCC;
+        border-color: #CCC;
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
     }
@@ -420,28 +439,47 @@
 <section class="bg-white ">
     <div class="overflow">
         <div class="container">
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6 justify-content d-flex">
-                    <div class="card-select">
+            <div class="row ">
+                <div class="col-6">
+                    <div class="card-select wow fadeInUp">
                         <div class="select-custom">
-                            <div class="row"></div>
-                            <select class="form-select-custom" aria-label="Default select example" style="color: #E05151; border-color: #E05151;">
-                                <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
-                                <option selected>Wilayah : Jawa Barat</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="form-select-custom" aria-label="Default select example">
-                                <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
-                                <option selected>LPSE</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <div class="row">
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>
+                                        <span><img src="<?= base_url('assets\img\icon_filter.svg') ?>" alt="" style="width: 16px; height: 16px; margin-right: 5px;"></span>Wilayah :
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>LPSE : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>HPS : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-3 form-select-custom custom-select">
+                                    <option selected>Jenis Pengadaan : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+
+                                <div class="w-100"></div>
+
+                                <input type="text" class="col-9 form-input-custom" placeholder="Cari nama tender atau pemenang">
+
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-6 justify-content d-flex">
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                         <div class="shadow-sm bg-white">
                             <div class="card-body">
@@ -452,7 +490,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px;">
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
                                     </p>
                                 </div>
@@ -469,27 +507,27 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px;">
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                    <div class="shadow-sm bg-white">
-                        <div class="card-body card-data">
-                            <div>
-                                <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                </p>
-                            </div>
-                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px;">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
-                                </p>
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                        <div class="shadow-sm bg-white">
+                            <div class="card-body card-data">
+                                <div>
+                                    <p>
+                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
+                                    </p>
+                                </div>
+                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                    <p>
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -514,7 +552,7 @@
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <tr>
+                        <!-- <tr>
                             <th></th>
                             <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -522,7 +560,7 @@
                             <td>office@telkom.co.id</td>
                             <td>0274 7471 234 (Office) <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button></td>
                             <td>
-                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
+                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
                                 <a class="btn btn-outline-danger">Hapus</a>
                             </td>
@@ -539,7 +577,7 @@
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
                                 <a class="btn btn-outline-danger">Hapus</a>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -573,93 +611,6 @@
         </div>
     </div>
     <!-- end modal kontak detail -->
-
-    <!-- modal detail -->
-    <!-- <div class="popupDetail" id="popupDetail">
-        <div class="popup-content-detail">
-            <span class="popup-close-detail" id="popup-close-detail"><img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt=""></span>
-            <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
-            <h5 style="margin-left: 30px; margin-top:5;">PT. Telekomunikasi Indonesia, Tbk.</h5>
-            <p style="margin-left: 30px; margin-top:0px;">Jakarta, Indonesia</p>
-            <p>
-            <div class="container">
-                <div class="row">
-                    <div class="col-9">
-                        <div class="profile-container">
-                            <span><img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt=""></span>
-                            <h8 class="h8">Profil Singkat Perusahaan</h8>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p style="margin-left: 50px; margin-right: 40px;">
-                            PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan danberkantor pusat resmi di Bandung dan
-                            <br>berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
-                        </p>
-                    </div>
-                    <div class="col-6">
-                        <div class="item">
-                            <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
-                            <h8 class="h8">NPWP</h8>
-                            <p class="justify-text">08.178.554.2-123.213</p>
-                        </div>
-                        <div class="item">
-                            <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
-                            <h8 class="h8">Alamat</h8>
-                            <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
-                        </div>
-                        <div class="item">
-                            <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
-                            <h8 class="h8">Riwayat Menang Tender</h8>
-                            <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)
-                            <p class="bullets-text">Peralatan Maintenance Jaringan Pemeritah Kabupaten Malang
-                            <p class="bullets-text">Manajemen Alokasi Pemerataan Penggunaan Jaringan Selular
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="contact-container">
-                            <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
-                            <h8 class="h8">Contact Person</h8>
-                            <div class="container text-left">
-                                <div class="row" style="margin-left: 10px;">
-                                    <div class="col-6 col-sm-4">Office (NO.Telp Kantor)</div>
-                                    <div class="col-6 col-sm-6">
-                                        <p>(0274) 5980 3112 <br>office@telkom.id</p>
-                                    </div>
-
-                                    <div class="w-100"></div>
-
-                                    <div class="col-6 col-sm-4">Budi (HRD)</div>
-                                    <div class="col-6 col-sm-6">
-                                        <p>0811 2332 1000 <br>budi@telkom.id</p>
-                                    </div>
-
-                                    <div class="w-100"></div>
-
-                                    <div class="col-6 col-sm-4">Susi Susanti (Purchasing)</div>
-                                    <div class="col-6 col-sm-6">
-                                        <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
-                                    </div>
-
-                                    <div class="w-100"></div>
-
-                                    <div class="col-6 col-sm-4">Jokowi Santoso (Direktur Utama)</div>
-                                    <div class="col-6 col-sm-6">
-                                        <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </p>
-        </div>
-    </div> -->
-    <!-- END MODAL detail  -->
-
-
-
 
     <!-- Modal Detail-->
     <div class="modal fade" id="popupDetailModal" tabindex="-1" role="dialog" aria-labelledby="popupDetailLabel" aria-hidden="true">
@@ -908,6 +859,7 @@
     });
 </script>
 
+
 <script>
     const popupDetail = document.getElementById('popupDetail');
     const popupCloseDetail = document.getElementById('popup-close-detail');
@@ -976,6 +928,69 @@
 </script>
 
 <script>
+    function openModal(id) {
+        $.ajax({
+            url: "<?php echo site_url('suplier/getKontakNama/') ?>" + id,
+            type: "GET",
+            dataType: "JSON",
+            // data: { id: id },
+            // data : id,
+            success: function(data) {
+                var kontak = "";
+                $.each(data, function(index, value) {
+                    kontak +=
+                        `<tr>
+                    <td>` + value.nama + `</td>
+                    <td>` + value.posisi + `</td>
+                    <td>` + value.email + `</td>
+                    <td>` + value.no_telp + `</td>
+                </tr>`
+                });
+                $("#data-kontak").html(kontak);
+                $("#popup-content").html(data);
+                $("#popup").show();
+            },
+            error: function() {
+                alert("Terjadi kesalahan saat mengambil data.");
+            },
+        });
+    }
+
+    function closeModal() {
+        $("#popup").hide();
+    }
+
+    $(document).on("click", ".toggle-button", function() {
+        // var id = $(this).data("id_lead");
+        // var id = value.id_lead;
+        let id = $(this).closest("tr").find("td:eq(2)").text();
+        openModal(id);
+    });
+
+
+    $(document).on("click", "#popup-close", function() {
+        closeModal();
+    });
+
+    // Detail pop up
+    function closeModal() {
+        $("#popup_detail").hide();
+    }
+
+    $(document).on("click", ".toggle_button_detail", function() {
+        var id = $(this).data("id");
+        openModal(id);
+        $("#popup_detail").show();
+
+    });
+
+
+    $(document).on("click", "#popup_close_detail", function() {
+        closeModal();
+    });
+</script>
+
+<script>
     $(document).ready(function() {
         // Memuat data lead melalui AJAX
         $.ajax({
@@ -1023,68 +1038,5 @@
                 });
             }
         });
-    });
-</script>
-
-<script>
-    function openModal(id) {
-        $.ajax({
-            url: "<?php echo site_url('suplier/getKontak/') ?>" + id,
-            type: "GET",
-            dataType: "JSON",
-            // data: { id: id },
-            // data : id,
-            success: function(data) {
-                var kontak = "";
-                $.each(data, function(index, value) {
-                    kontak +=
-                        `<tr>
-                    <td>` + value.nama + `</td>
-                    <td>` + value.posisi + `</td>
-                    <td>` + value.email + `</td>
-                    <td>` + value.no_telp + `</td>
-                </tr>`
-                });
-                $("#data-kontak").html(kontak);
-                $("#popup-content").html(data);
-                $("#popup").show();
-            },
-            error: function() {
-                alert("Terjadi kesalahan saat mengambil data.");
-            },
-        });
-    }
-
-    function closeModal() {
-        $("#popup").hide();
-    }
-
-    $(document).on("click", ".toggle-button", function() {
-        // var id = $(this).data("id_lead");
-        // var id = value.id_lead;
-        let id = $(this).closest("tr").find("td:eq(0)").text();
-        openModal(id);
-    });
-
-
-    $(document).on("click", "#popup-close", function() {
-        closeModal();
-    });
-
-    // Detail pop up
-    function closeModal() {
-        $("#popup_detail").hide();
-    }
-
-    $(document).on("click", ".toggle_button_detail", function() {
-        var id = $(this).data("id");
-        openModal(id);
-        $("#popup_detail").show();
-
-    });
-
-
-    $(document).on("click", "#popup_close_detail", function() {
-        closeModal();
     });
 </script>

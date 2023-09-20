@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 use GuzzleHttp\Exception\ClientException;
 use App\components\traits\User;
 use App\components\traits\ClientApi;
+use App\components\traits\ClientMobileApi;
 use App\components\UserType;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -13,6 +14,7 @@ class Register extends CI_Controller
 {
     use User;
     use ClientApi;
+    use ClientMobileApi;
     use \App\models\traits\Wilayah;
 
     public function __construct()
@@ -27,6 +29,7 @@ class Register extends CI_Controller
         $this->load->library('form_validation', 'google');
         $this->load->helper('form');
         $this->init();
+        $this->initMobile();
     }
 
     public function index()
@@ -144,7 +147,7 @@ class Register extends CI_Controller
         $this->session->unset_userdata('user_preferensi');
         redirect('register');
     }
-    
+
     public function lengkapi_profile()
     {
         $data = [
@@ -623,9 +626,9 @@ class Register extends CI_Controller
         }
     }
 
-    public function verify($token, $email)
+    public function verify($token)
     {
-        // $email = $this->input->get('email');
+        $email = $this->input->get('email');
         try {
             $result = $this->client->request('get', 'verify/status/' . $token . '?email=' . $email, $this->client->getConfig('headers'));
             $result = json_decode($result->getBody()->getContents(), true);
@@ -671,6 +674,45 @@ class Register extends CI_Controller
             $this->session->set_flashdata('error', 'Email gagal diverifikasi.<br>Silakan coba menggunakan email lain!');
             redirect('login');
         }
+    }
+    public function verifyMobile($email, $token)
+    {
+        try {
+            $check = $this->Pengguna_model->verifyCheck($token, $email);
+
+            if (isset($check)) {
+                $resultPengguna = $this->Pengguna_model->verifUser($email);
+
+                if ($resultPengguna) {
+                    $this->session->set_flashdata('success', 'Email Anda sudah terverifikasi.<br>Silakan login menggunakan akun di aplikasi mobile Tenderplus Anda!');
+                    redirect('blank');
+                } else {
+                    $this->session->set_flashdata('error', 'Data tidak ditemukan!');
+                    redirect('blank');
+                }
+            } else {
+                $this->session->set_flashdata('error', 'Email gagal diverifikasi.<br>Silakan coba menggunakan email lain!');
+                redirect('blank');
+            }
+            $result = $this->clientMobile->request('get', 'check-verify?email=' . $email, $this->client->getConfig('headers'));
+            $result = json_decode($result->getBody()->getContents(), true);
+            if ($result['data']['is_active'] == 1) {
+                $this->session->set_flashdata('success', 'Email Anda sudah terverifikasi.<br>Silakan login menggunakan akun di aplikasi mobile Tenderplus Anda!');
+                redirect('blank');
+            } else {
+                $this->session->set_flashdata('error', 'Email gagal diverifikasi.<br>Silakan coba menggunakan email lain!');
+                redirect('blank');
+            }
+        } catch (Exception $e) {
+            $this->session->set_flashdata('error', 'Email gagal diverifikasi.<br>Silakan coba menggunakan email lain!');
+            redirect('blank');
+        }
+    }
+    public function blankPageMobile()
+    {
+        // $this->load->view('auth/templates/main_head');
+        $this->load->view('auth/blank');
+        // $this->load->view('auth/templates/main_end');
     }
 
     public function sendEmail($email)

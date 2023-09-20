@@ -83,6 +83,7 @@ $route['payment/check-order/(:num)'] = 'Pembayaran/checkOrder/$1';
 //===========================================
 // Auth
 //===========================================
+$route['blank'] = 'auth/register/blankPageMobile';
 // Register
 $route['register'] = 'auth/register';
 $route['register/pengguna'] = 'auth/register/aksi_register';
@@ -91,6 +92,7 @@ $route['newaccount'] = 'auth/register/newacc';
 
 // verifikasi
 $route['verify/(:any)'] = 'auth/register/verify/$1';
+$route['verify-mobile/(:any)/(:any)'] = 'auth/register/verifyMobile/$1/$2';
 $route['verify/pengguna/(:any)'] = 'auth/register/aksi_verify/$1';
 $route['cekemail/verify'] = 'auth/register/cekEmail';
 $route['send/verify/(:any)'] = 'auth/register/sendEmail/$1';
@@ -109,6 +111,7 @@ $route['lupa'] = 'auth/LupaPassword';
 $route['lupa/sendemail'] = 'auth/LupaPassword/emailValidation';
 $route['lupa/cekemail'] = 'auth/LupaPassword/cekEmail';
 $route['lupa/ubah/(:any)'] = 'auth/LupaPassword/resetValidation/$1';
+$route['lupa/ubah-mobile/(:any)'] = 'auth/LupaPassword/resetValidationMobile/$1';
 $route['lupa/ubah/pass/(:any)'] = 'auth/LupaPassword/ubahPass/$1';
 
 //===========================================
@@ -120,15 +123,23 @@ $route['user-dashboard/chart']['POST'] = 'DashboardUser/chart';
 $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';
+$route['suplier/test-crm'] = 'DashboardUserSupplier/testCRM';
 $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
-$route['suplier/form-leads/(:num)'] = 'DashboardUserSupplier/editDataLeads/$1';
+$route['suplier/getKontakNama/(:any)'] = 'DashboardUserSupplier/getKontakLeadByNama/$1';
+$route['suplier/leads/(:num)'] = 'DashboardUserSupplier/detailDataLead/$1';
 $route['suplier/crm'] = 'DashboardUserSupplier/CRM';
 $route['suplier/marketing'] = 'DashboardUserSupplier/marketing';
 $route['suplier/statistik'] = 'DashboardUserSupplier/datastatistik';
 $route['marketing'] = 'DashboardUserMarketing';
+$route['api/supplier/tim'] = 'DashboardUserSupplier/getTimMarketing';
+$route['api/supplier/plot-tim'] = 'DashboardUserSupplier/getPlotTim';
+$route['api/supplier/tim-suplier'] = 'DashboardUserSupplier/getTimMarketingByIdSupplier';
+$route['api/supplier/lead/tim'] = 'DashboardUserSupplier/getLeadByIdTim';
+$route['api/supplier/tim/add'] = 'DashboardUserSupplier/addTimMarketing';
+$route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarketing/$1';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';
 $route['asosiasi'] = 'DashboardUserAsosiasi';
@@ -371,6 +382,13 @@ $route['artikel'] = 'admin/artikel';
 
 $route['api/statistikhome'] = 'api/ApiTender/getdatastatistik';
 
+//restAPI route for Suplier 
+$route['api/supplier/get'] = 'api/ApiSupplier';
+$route['api/supplier/create'] = 'api/ApiSupplier/create';
+$route['api/supplier/delete/(:num)'] = 'api/ApiSupplier/deleteTim/$1';
+$route['api/supplier/update/(:num)'] = 'api/ApiSupplier/editTimMarketing/$1';
+$route['api/supplier/getId'] = 'api/ApiSupplier/getbyId';
+
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
 
@@ -600,6 +618,10 @@ $route['api/preferensi/create'] = 'api/ApiPreferensi';
 $route['api/preferensi/update/(:num)'] = 'api/ApiPreferensi/update/$1';
 $route['api/preferensi/s/(:num)'] = 'api/ApiPreferensi/tenderS/$1';
 
+// API Supplier
+// $route['api/supplier/tim'] = 'api/ApiSupplier';
+// $route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
+
 //===========================================
 // Scrapping
 //===========================================
@@ -639,6 +661,28 @@ $route['npwp'] = 'profilePengguna/updateNpwp';
 
 //restAPI route for paket pembelian
 $route['pembayaran/paketpembelian'] = 'Pembayaran/paketPembelian';
+
+// ================================================================
+// MOBILE API
+// ================================================================
+// mobile restAPI route for Auth
+$route['api-mobile/login'] = 'api-mobile/ApiAuth/login';
+$route['api-mobile/regist'] = 'api-mobile/ApiAuth/regist';
+$route['api-mobile/complete-profil'] = 'api-mobile/ApiAuth/completeProfil';
+$route['api-mobile/send-reset-key'] = 'api-mobile/ApiAuth/sendResetKey';
+$route['api-mobile/get-reset-key'] = 'api-mobile/ApiAuth/getResetKey';
+$route['api-mobile/change-password/(:any)'] = 'api-mobile/ApiAuth/changePassword/$1';
+$route['api-mobile/send-verify'] = 'api-mobile/ApiAuth/verifySend';
+$route['api-mobile/verify'] = 'api-mobile/ApiAuth/verify';
+$route['api-mobile/check-verify'] = 'api-mobile/ApiAuth/verifyCheck';
+
+// mobile restAPI route for pengguna
+$route['api-mobile/pengguna'] = 'api-mobile/ApiPengguna/index';
+$route['api-mobile/pengguna/create'] = 'api-mobile/ApiPengguna/create';
+$route['api-mobile/pengguna/update/(:num)'] = 'api-mobile/ApiPengguna/update/$1';
+$route['api-mobile/pengguna/delete/(:num)'] = 'api-mobile/ApiPengguna/destroy/$1';
+$route['api-mobile/pengguna/check-user-trial'] = 'api-mobile/ApiPengguna/checkAndUpdateUserType';
+
 
 //Admin
 // $route['admin'] = 'admin/admin';
