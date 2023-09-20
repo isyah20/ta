@@ -91,5 +91,28 @@ class Supplier_api extends CI_Model
         return $this->db->affected_rows();
     }
 
+    // Get profile field only from data_lead
+    public function getProfile($id)
+    {
+        $this->db->select(['*']);
+        $this->db->from('data_lead');
+        $this->db->where('id_lead', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    // insert into field profile
+    public function insertProfile($data, $id)
+    {
+        $this->db->update('data_lead', $data, ['id_lead' => $id]);
+        return $this->db->affected_rows();
+    }
+
+    // update field profile in data_lead
+    public function updateProfile($data, $id)
+    {
+        $this->db->update('data_lead', $data, ['id_lead' => $id]);
+        return $this->db->affected_rows();
+    }
 
 }

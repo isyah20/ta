@@ -380,7 +380,7 @@ $route['api/supplier/get'] = 'api/ApiSupplier';
 $route['api/supplier/create'] = 'api/ApiSupplier/create';
 $route['api/supplier/delete/(:num)'] = 'api/ApiSupplier/deleteTim/$1';
 $route['api/supplier/update/(:num)'] = 'api/ApiSupplier/editTimMarketing/$1';
-$route['api/supplier/getId'] = 'api/ApiSupplier/getbyId';
+$route['api/supplier/getId/(:num)'] = 'api/ApiSupplier/getbyId/$1';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';

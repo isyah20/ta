@@ -47,9 +47,9 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getbyId_get()
+    public function getbyId_get($id)
     {
-        $id = $this->get('id_tim');
+        // $id = $this->get('id_tim');
         $data = $this->Supplier_api->getTimMarketingById($id);
         
         if ($data) {
@@ -248,6 +248,74 @@ class ApiSupplier extends RestController
                     'message' => 'Data tidak ditemukan'
                 ], RestController::HTTP_NOT_FOUND);
             }
+        }
+    }
+
+    public function getProfile_get($id)
+    {
+        // $id = $this->get('id_lead');
+        $data = $this->Supplier_api->getProfile($id);
+        
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function insertProfile_post($id)
+    {
+        // $id = $this->post('id_lead');
+        $data = [
+            'profile' => $this->post('profile') 
+        ];
+
+        if ($id === null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Berikan id'
+            ], RestController::HTTP_BAD_REQUEST);
+        } else if ($this->Supplier_api->insertProfile($data, $id) > 0) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil diubah'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal diubah'
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function updateProfile_post($id)
+    {
+        // $id = $this->post('id_lead');
+        $data = [
+            'profile' => $this->post('profile')
+        ];
+
+        if ($id === null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Berikan id'
+            ], RestController::HTTP_BAD_REQUEST);
+        } else if ($this->Supplier_api->updateProfile($data, $id) > 0) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil diubah'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal diubah'
+            ], RestController::HTTP_BAD_REQUEST);
         }
     }
 }
