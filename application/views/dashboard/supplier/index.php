@@ -320,7 +320,6 @@
 
     .custom-select {
         margin-bottom: 15px;
-<<<<<<< HEAD
         border: 1px solid;
         background-color: white;
     } 
@@ -341,22 +340,6 @@
         border-radius: 20px;
         font-size: 1rem;
         width: 520px;
-=======
-    }
-
-    .form-select-custom {
-        color: #CCCCCC;
-        border-radius: 10px 10px 10px 10px;
-        font-size: 1rem;
-        margin-top: 8px;
-    }
-
-    .form-input-custom {
-        color: #CCC;
-        border-color: #CCC;
-        border-radius: 10px 10px 10px 10px;
-        font-size: 1rem;
->>>>>>> ayun
     }
 </style>
 
@@ -365,10 +348,7 @@
         <div class="row justify-content d-flex content-above-navbar">
             <div class="col-md-4 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
                 <img src="<?= base_url("assets/img/dashboard-hero.png") ?>" width="90" alt="">
-<<<<<<< HEAD
                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="10" alt="">
-=======
->>>>>>> ayun
                 <h4 class="mb-0 ms-2 wow fadeInUp">Selamat Datang!<p>Yuk Lengkapi Data Calon Customermu</p>
                 </h4>
             </div>
@@ -380,7 +360,6 @@
                 <div class="card-select wow fadeInUp">
                     <div class="select-custom">
                         <div class="row">
-<<<<<<< HEAD
                             <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                 <select style="border:none;">
@@ -421,40 +400,6 @@
                                 <input type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
                             <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20"  alt="">
                             </div>
-=======
-                            <select class="col-4 col-sm-2 form-select-custom custom-select">
-                                <option selected>
-                                    <span><img src="<?= base_url('assets\img\icon_filter.svg') ?>" alt="" style="width: 16px; height: 16px; margin-right: 5px;"></span>Wilayah :
-                                </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="col-4 col-sm-2 form-select-custom custom-select">
-                                <option selected>LPSE : </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="col-4 col-sm-2 form-select-custom custom-select">
-                                <option selected>HPS : </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="col-4 col-sm-3 form-select-custom custom-select">
-                                <option selected>Jenis Pengadaan : </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-
-                            <div class="w-100"></div>
-
-                            <input type="text" class="col-9 form-input-custom" placeholder="Cari nama tender atau pemenang">
-
-                        </div>
->>>>>>> ayun
                     </div>
                 </div>
             </div>
@@ -493,26 +438,6 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                    <div class="shadow-sm bg-white">
-                        <div class="card-body card-data">
-                            <div>
-                                <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                </p>
-                            </div>
-                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
->>>>>>> ayun
             </div>
         </div>
     </div>
