@@ -2,7 +2,8 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CRM_model extends CI_Model {
+class CRM_model extends CI_Model
+{
     public function __construct()
     {
         parent::__construct();
@@ -13,12 +14,17 @@ class CRM_model extends CI_Model {
         $query = $this->db->get('tim_marketing');
         return $query->result_array();
     }
-
+    public function getTimBySuplierId($id_suplier)
+    {
+        $query = $this->db->get_where('tim_marketing', ['id_suplier' => $id_suplier]);
+        return $query->result_array();
+    }
     public function getAllAnggota()
     {
         $query = $this->db->get('anggota');
         return $query->result_array();
     }
+
 
     public function getTimById($id)
     {
@@ -83,9 +89,4 @@ class CRM_model extends CI_Model {
         $query = $this->db->get();
         return $query->row();
     }
-
-    
 }
-
-
-?>

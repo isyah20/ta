@@ -321,7 +321,8 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql);
     }
 
-    public function getListJenisTender(){
+    public function getListJenisTender()
+    {
         $sql = "SELECT jenis_tender.jenis_tender, COUNT(id_pemenang) AS total_tender
         FROM pemenang, jenis_tender
         WHERE pemenang.jenis_tender = jenis_tender.id_jenis
@@ -330,34 +331,62 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql)->result();
     }
 
-    public function isIdPemenangExists($id) {
+    public function isIdPemenangExists($id)
+    {
         $query = $this->db->get_where('data_leads', array('id_pemenang' => $id));
         return $query->num_rows() > 0;
     }
 
-    public function getDataLeads(){
-        $sql = "SELECT data_leads.*,
-        IFNULL(kontak_lead.nama, '') AS nama_kontak, 
-                IFNULL(kontak_lead.posisi, '') AS posisi, 
-                IFNULL(kontak_lead.no_telp, '') AS no_telp, 
-                IFNULL(kontak_lead.email, '') AS email
-        FROM data_leads
-        LEFT JOIN (
-            SELECT kontak_lead.*
+    public function getDataLeads()
+    {
+        $sql = "SELECT
+        data_leads.*,
+        IFNULL(kontak_lead.nama, '') AS nama_kontak,
+        IFNULL(kontak_lead.posisi, '') AS posisi,
+        IFNULL(kontak_lead.no_telp, '') AS no_telp,
+        IFNULL(kontak_lead.email, '') AS email,
+        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
+        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
+        IFNULL(wilayah.wilayah, '') AS wilayah
+    FROM data_leads
+    LEFT JOIN (
+        SELECT kontak_lead.*
+        FROM kontak_lead
+        INNER JOIN (
+            SELECT id_lead, MIN(id_kontak) AS oldest
             FROM kontak_lead
-            INNER JOIN (
-                SELECT id_lead, MIN(id_kontak) AS oldest
-                FROM kontak_lead
-                GROUP BY id_lead
-            ) oldest_contacts ON kontak_lead.id_lead = oldest_contacts.id_lead
-            AND kontak_lead.id_kontak = oldest_contacts.oldest
-        ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead";
+            GROUP BY id_lead
+        ) oldest_contacts ON kontak_lead.id_lead = oldest_contacts.id_lead
+        AND kontak_lead.id_kontak = oldest_contacts.oldest
+    ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+    LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+    LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah;
+    ";
 
         $query = $this->db->query($sql);
 
         return $query->result_array();
     }
 
+    public function getDataLeadByIdTim($id_tim)
+    {
+        $sql = "SELECT  
+        plot_tim.*,
+        data_leads.*,
+        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
+        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
+        IFNULL(wilayah.wilayah, '') AS wilayah
+    FROM plot_tim
+    JOIN data_leads ON plot_tim.id_lead = data_leads.id_lead 
+    LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+    LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+    WHERE plot_tim.id_tim = " . $id_tim . ";
+        ";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
     public function getDataLeadById($id)
     {
         $this->db->select('data_leads.*, pemenang.* ');
@@ -366,7 +395,7 @@ class Supplier_model extends CI_Model
         $this->db->where('data_leads.id_lead', $id);
 
         $query = $this->db->get();
-        return $query->row(); 
+        return $query->row();
     }
 
     public function getKontakLeadById($id)
@@ -379,7 +408,7 @@ class Supplier_model extends CI_Model
         $this->db->where('kontak_lead.id_lead', $id);
 
         $query = $this->db->get();
-        return $query->result_array(); 
+        return $query->result_array();
     }
 
     public function getKontakLeadByName($name)
@@ -392,24 +421,55 @@ class Supplier_model extends CI_Model
         $this->db->where('data_leads.npwp', $name);
 
         $query = $this->db->get();
-        return $query->result_array(); 
+        return $query->result_array();
     }
 
-    public function updateDataLead($id, $data) {
+    public function getPlotTim()
+    {
+        $this->db->select('*');
+        $this->db->from('plot_tim');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function insertUpdatePlotTim($id_lead, $id_tim)
+    {
+        $this->db->select('*');
+        $this->db->from('plot_tim');
+        $this->db->where('id_lead', $id_lead);
+        // $this->db->where('id_tim', $id_tim);
+
+        $query = $this->db->get();
+        $isSet = $query->num_rows();
+
+        if ($isSet > 0) {
+            return $this->db->update('plot_tim', ['id_tim' => $id_tim]);
+        }
+        return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
+    }
+    public function deletePlotTimByIdLead($id_lead)
+    {
+        $this->db->where('id_lead', $id_lead);
+        $this->db->delete('plot_tim');
+    }
+    public function updateDataLead($id, $data)
+    {
         $this->db->where('id_lead', $id);
         return $this->db->update('data_leads', $data);
     }
 
-    public function insertKontakLead($data) {
+    public function insertKontakLead($data)
+    {
         return $this->db->insert('kontak_lead', $data);
     }
 
-    public function deleteDataLeadById($id) {
+    public function deleteDataLeadById($id)
+    {
         $this->db->where('id_lead', $id);
         $this->db->delete('data_leads');
     }
 
-    public function deleteKontakLeadById($id) {
+    public function deleteKontakLeadById($id)
+    {
         $this->db->where('id_lead', $id);
         $this->db->delete('kontak_lead');
     }
@@ -421,7 +481,14 @@ class Supplier_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-
+    public function getTimBySupplierId($id_supplier)
+    {
+        $this->db->select(['*']);
+        $this->db->from('tim_marketing');
+        $this->db->where('id_supplier', $id_supplier);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     public function getTimMarketingbyId($id)
     {
         $this->db->select(['*']);

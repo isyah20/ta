@@ -2,8 +2,11 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use App\components\traits\ClientMobileApi;
+
 class LupaPassword extends CI_Controller
 {
+    use ClientMobileApi;
     public function __construct()
     {
         parent::__construct();
@@ -12,6 +15,7 @@ class LupaPassword extends CI_Controller
         $this->load->library('email');
         $this->load->helper('form');
         $this->load->helper('string');
+        $this->initMobile();
     }
 
     public function index()
@@ -49,21 +53,26 @@ class LupaPassword extends CI_Controller
                 $config['useragent'] = 'Codeigniter';
                 $config['protocol'] = "smtp";
                 $config['mailtype'] = "html";
-                $config['smtp_host'] = "sv2.ecc.co.id"; //pengaturan smtp
+                $config['smtp_host'] = "smtp.gmail.com"; //pengaturan smtp
+                // $config['smtp_host'] = "sv2.ecc.co.id"; //pengaturan smtp
                 $config['smtp_port'] = "465";
                 $config['smtp_timeout'] = "5";
-                $config['smtp_user'] = "security@tenderplus.id"; // isi dengan email
-                $config['smtp_pass'] = "HLILrJW8uTLJ"; // isi dengan password
+                $config['smtp_user'] = "misterlemper@gmail.com"; // isi dengan email
+                $config['smtp_pass'] = "xvzihfwhawxxyjgb"; // isi dengan password
+                // $config['smtp_user'] = "security@tenderplus.id"; // isi dengan email
+                // $config['smtp_pass'] = "HLILrJW8uTLJ"; // isi dengan password
                 $config['crlf'] = "\r\n";
                 $config['newline'] = "\r\n";
                 $config['smtp_crypto'] = "ssl"; //pengaturan smtp
+                // $config['smtp_crypto'] = "tls"; //pengaturan smtp
                 $config['wordwrap'] = true;
 
                 //memanggil library email dan set konfigurasi untuk pengiriman email
                 $this->email->initialize($config);
 
                 //konfigurasi pengiriman
-                $this->email->from('no-reply@tenderplus.id', 'Tender Plus');
+                // $this->email->from('no-reply@tenderplus.id', 'Tender Plus');
+                $this->email->from('misterlemper@gmail.com', 'Tender Plus');
                 $this->email->to($this->input->post('email'));
                 $this->email->subject("Reset Your Password");
 
@@ -219,7 +228,8 @@ class LupaPassword extends CI_Controller
                     $this->session->set_flashdata('success', 'Silakan cek email ' . $this->input->post('email') . 'untuk mengubah password!');
                     redirect('lupa/cekemail');
                 } else {
-                    $this->session->set_flashdata('error', 'Gagal mengirim email ke' . $this->input->post('email') . '!');
+                    show_error($this->email->print_debugger());
+                    $this->session->set_flashdata('error', 'Gagal mengirim email ke ' . $this->input->post('email') . '!');
                 }
                 $this->index();
             } else {
@@ -245,6 +255,21 @@ class LupaPassword extends CI_Controller
             $this->load->view('auth/templates/main_head', $data);
             $this->load->view('auth/new-password', $data);
             $this->load->view('auth/templates/main_end');
+        }
+    }
+    public function resetValidationMobile($reset_key)
+    {
+        $email = $this->input->get('email');
+        $data['pengguna'] = $this->Reset_model->getResetKey($reset_key, $email);
+        if (!$data['pengguna']) {
+            $this->session->set_flashdata('error', 'Permintaan reset anda tidak valid');
+            redirect('blank');
+        } elseif ($data['pengguna']['expire_key'] == 1) {
+            $this->session->set_flashdata('error', 'Link Expired, Silahkan Send Email lagi');
+            $this->index();
+        } elseif ($data['pengguna']['reset_key'] != null && $data['pengguna']['expire_key'] != 1) {
+            $this->session->set_flashdata('success', 'Link Valid, silahkan ubah password akun di aplikasi mobile tenderplus Anda!');
+            redirect('blank');
         }
     }
 
