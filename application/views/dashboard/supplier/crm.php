@@ -275,7 +275,7 @@
               console.log(getLeadByTim(value.id_tim));
               var rowNumber = index + 1;
               leads +=
-                `<div class="col"><h4 class="green title" onclick="toggleCardVisibility('container'` + index + 2 + `)">` + value.nama_tim + `</h4>
+                `<div class="col"><h4 class="green title" onclick="toggleCardVisibility('container` + index + 2 + `)">` + value.nama_tim + `</h4>
           <div class="mx-3">
             <div id="container` + index + 2 + `" class="workspace box green" data-id="` + value.id_tim + `">` +
                 getLeadByTim(value.id_tim) +
@@ -704,6 +704,7 @@
 
   // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
   function toggleCardVisibility(containerId) {
+    console.log("CLICKED");
     const container = document.getElementById(containerId);
     const card = container.querySelector(".card");
 
