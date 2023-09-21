@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 use GuzzleHttp\Client;
 
@@ -160,14 +160,39 @@ class Supplier_api extends CI_Model
     }
 
     //Get pemenang by npwp
-    public function getPemenangByNPWP($npwp) {
+    public function getPemenangByNPWP($npwp)
+    {
         $this->db->select('pemenang.*, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(tgl_pemenang) AS tahun');
         $this->db->from('pemenang');
         $this->db->join('jenis_tender', 'pemenang.jenis_tender = jenis_tender.id_jenis', 'LEFT');
         $this->db->where('npwp', $npwp);
         $query = $this->db->get();
         return $query->result();
-
     }
+    //Get pemenang filter
+    public function getPemenangFilter($npwp, $lokasi, $jenis, $penawaran_awal, $penawaran_akhir, $tahun)
+    {
+        $this->db->select('pemenang.*, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(pemenang.tgl_pemenang) AS tahun');
+        $this->db->from('pemenang');
+        $this->db->join('jenis_tender', 'pemenang.jenis_tender = jenis_tender.id_jenis', 'LEFT');
+        $this->db->where('npwp', $npwp);
+        if (!empty($jenis)) {
+            $this->db->where('jenis_tender.jenis_tender', $jenis);
+        }
+        if (!empty($lokasi)) {
+            $this->db->like('lokasi_pekerjaan', $lokasi);
+        }
+        if (!empty($penawaran_awal)) {
+            $this->db->where('harga_penawaran >=', $penawaran_awal);
+        }
+        if (!empty($penawaran_akhir)) {
+            $this->db->where('harga_penawaran <=', $penawaran_akhir);
+        }
+        if (!empty($tahun)) {
+            $this->db->where('YEAR(pemenang.tgl_pemenang)', $tahun);
+        }
+        $query = $this->db->get();
 
+        return $query->result();
+    }
 }

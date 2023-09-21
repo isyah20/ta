@@ -108,7 +108,7 @@
         border: none;
         vertical-align: middle;
         height: 65px !important;
-        padding: 0px 7px 0px 30px !important; 
+        padding: 0px 7px 0px 30px !important;
     }
 
     th,
@@ -368,10 +368,10 @@
     }
 
     #imageButton {
-    border: none;
-    padding: 0;
-    background: none;
-    cursor: pointer;
+        border: none;
+        padding: 0;
+        background: none;
+        cursor: pointer;
     }
 
     #imageButton:hover {
@@ -381,7 +381,6 @@
     #saveButton {
         display: none;
     }
-
 </style>
 <style>
     .animation {
@@ -775,7 +774,7 @@
                             <h4 class="h4">Profil Singkat Perusahaan</h4>
                             <img id="imageButton" src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" alt="">
                             <button id="saveButton" type="submit" class="btn btn-danger">
-                                    <i id="saveButton" class="fas me-1"></i>Tambahkan
+                                <i id="saveButton" class="fas me-1"></i>Tambahkan
                             </button>
                         </div>
                         <div class="profile-info my-2">
@@ -851,82 +850,76 @@
                 </div>
             </div>
             <div class="container wow fadeInUp">
-            <h3 class="title-pemenang">Riwayat Menang Tender</h3>
-            <div class="col-8">
-                        <div class="card-select wow fadeInUp">
-                            <div class="select-custom">
-                                <div class="row">
-                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
-                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                        <select class="select2-wilayah" id="wilayah" style="border:none;">
-                                            <option selected style="border:1px;">
-                                                Lokasi Pekerjaan
-                                            </option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
-                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                        <select class="select2-jenis-pengadaan" style="border:none;">
-                                            <option selected style="border:1px;">
-                                                Jenis Pengadaan
-                                            </option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                    <!-- Select Trigger Filter Nilai Penawaran -->
-                                    <div id="dropdownHPS" class="form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                        <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
-                                    </div>
-                                    <!-- Tampilah Nilai Penawaran -->
-                                    <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
-                                        <div class="row m-0 formset-hps justify-content-center">
-                                            <div class="col-12 text-center" style="border-bottom: 1px solid #ddd;">
-                                                <div class="form-check p-0">
-                                                    <input class="form-check-input" style="float: none;" type="checkbox" id="checkallhps" name="checkallhps" checked>
-                                                    <label class="form-check-label ps-1" for="checkallhps">Semua</label>
-                                                    <div class="form-text mt-0 mb-2">Centang untuk menampilkan semua nilai penawaran</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 text-center">
-                                                <p class="my-3">Silakan atur rentang nilai penawaran pada kolom di bawah ini:</p>
-                                            </div>
-                                            <div class="col-sm-5 pe-sm-0">
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text">Nilai Awal (Rp)</span>
-                                                    <input class="form-control" type="text" name="nilai_hps_awal" id="nilai_hps_awal" value="0" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-1 text-center py-1 px-0 d-none d-sm-block">-</div>
-                                            <div class="col-sm-5 ps-sm-0">
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text">Nilai Akhir (Rp)</span>
-                                                    <input class="form-control" type="text" name="nilai_hps_akhir" id="nilai_hps_akhir" value="0" disabled>
-                                                    <div class="invalid-feedback">Nilai penawaran akhir harus lebih besar!</div>
-                                                </div>
+                <h3 class="title-pemenang">Riwayat Menang Tender</h3>
+                <div class="col-8">
+                    <div class="card-select wow fadeInUp">
+                        <div class="select-custom">
+                            <div class="row">
+                                <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <select class="select2-wilayah" style="border:none;">
+                                        <option></option>
+                                        <!-- <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
+                                    </select>
+                                </div>
+                                <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <select class="select2-jenis-pengadaan" style="border:none;">
+                                        <option></option>
+                                        <!-- <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
+                                    </select>
+                                </div>
+                                <!-- Select Trigger Filter Nilai Penawaran -->
+                                <div id="dropdownHPS" class="form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
+                                </div>
+                                <!-- Tampilah Nilai Penawaran -->
+                                <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
+                                    <div class="row m-0 formset-hps justify-content-center">
+                                        <div class="col-12 text-center" style="border-bottom: 1px solid #ddd;">
+                                            <div class="form-check p-0">
+                                                <input class="form-check-input" style="float: none;" type="checkbox" id="checkallhps" name="checkallhps" checked>
+                                                <label class="form-check-label ps-1" for="checkallhps">Semua</label>
+                                                <div class="form-text mt-0 mb-2">Centang untuk menampilkan semua nilai penawaran</div>
                                             </div>
                                         </div>
-                                    </ul>
-                                    <div class="form-select-custom w-300 d-flex" style="width: 130px; margin-right:5px">
-                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                        <select class="select2-wilayah" id="wilayah" style="border:none;">
-                                            <option selected style="border:1px;">
-                                                Tahun
-                                            </option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
+                                        <div class="col-12 text-center">
+                                            <p class="my-3">Silakan atur rentang nilai penawaran pada kolom di bawah ini:</p>
+                                        </div>
+                                        <div class="col-sm-5 pe-sm-0">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Nilai Awal (Rp)</span>
+                                                <input class="form-control" type="text" name="nilai_hps_awal" id="nilai_hps_awal" value="0" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 text-center py-1 px-0 d-none d-sm-block">-</div>
+                                        <div class="col-sm-5 ps-sm-0">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Nilai Akhir (Rp)</span>
+                                                <input class="form-control" type="text" name="nilai_hps_akhir" id="nilai_hps_akhir" value="0" disabled>
+                                                <div class="invalid-feedback">Nilai penawaran akhir harus lebih besar!</div>
+                                            </div>
+                                        </div>
                                     </div>
+                                </ul>
+                                <div class="form-select-custom w-300 d-flex" style="width: 130px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <select class="select2-tahun" id="wilayah" style="border:none;">
+                                        <option></option>
+                                        <!-- <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <table class="table custom-table-container">
@@ -1137,6 +1130,7 @@
     <!-- end modal hapus -->
 </section>
 
+
 <!-- script popup -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -1144,14 +1138,54 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- script tambahkan contact -->
 <script>
+    var global_npwp = '',
+        global_jenis_pengadaan = '',
+        global_penwaran_awal = 0,
+        global_penwaran_akhir = 0,
+        global_tahun = 0,
+        global_loc = '';
     // Get nama perusahaan and profil from data_leads and set it to the frontend
     $(document).ready(function() {
+        $('#checkallhps').on('click', function() {
+            let allhps = this.checked;
+            $('#nilai_hps_awal, #nilai_hps_akhir').prop('disabled', allhps);
+
+            if (allhps) hps_awal = hps_akhir = 0;
+            else {
+                $('#nilai_hps_awal').focus();
+                global_penwaran_awal = $('#nilai_hps_awal').val();
+                global_penwaran_akhir = $('#nilai_hps_akhir').val();
+            }
+
+            filterRiwayat();
+        });
+        $('#nilai_hps_awal, #nilai_hps_akhir').inputmask('decimal', {
+            'alias': 'numeric',
+            'groupSeparator': '.',
+            'autoGroup': true,
+            'digits': 0,
+            'digitsOptional': false,
+            'allowMinus': false,
+            'placeholder': '0',
+            'rightAlign': false,
+            'autoUnmask': true
+        }).on('keyup', function() {
+            global_penwaran_awal = $('#nilai_hps_awal').val();
+            global_penwaran_akhir = $('#nilai_hps_akhir').val();
+
+            if (parseInt(global_penwaran_akhir) < parseInt(global_penwaran_awal)) $('#nilai_hps_akhir').addClass('is-invalid');
+            else {
+                $('#nilai_hps_akhir').removeClass('is-invalid');
+                filterRiwayat();
+            }
+        });
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getProfile/1",
+            url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getProfile/1",
             method: "GET",
             dataType: "json",
             success: function(data) {
                 var id_leads = data.data.id_lead;
+                global_npwp = data.data.npwp;
                 var npwp = data.data.npwp;
                 console.log(id_leads);
                 console.log(npwp);
@@ -1159,7 +1193,7 @@
                 $("#editableParagraph").html(data.data.profil);
                 $("#npwp").html(data.data.npwp);
                 $("#alamat").html(data.data.alamat);
-                
+
                 $("#imageButton").click(function() {
                     $("#editableParagraph").attr("contenteditable", "true");
                     $("#saveButton").css("display", "block");
@@ -1215,26 +1249,13 @@
                 });
 
                 $.ajax({
-                    url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/"+ npwp,
+                    url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getPemenangByNPWP/" + npwp,
                     method: "GET",
                     dataType: "json",
-                    success: function(data){
-                        var riwayatTender = "";
-
-                    $.each(data.data, function(index, value) {
-                        var rowNumber = index + 1;
-                        riwayatTender +=
-                        `<tr>
-                            <td style="text-align:center">` + rowNumber + `</td>
-                            <td class="custom-padding">` + (value.nama_tender || '') + `</td>
-                            <td>` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</td>
-                            <td>` + (value.jenis_pengadaan || '') + `</td>
-                            <td style="color:#10B981">` + formatRupiah(value.harga_penawaran, 'Rp. ' || '') + `</td>
-                            <td style="color:#EB650D">` + (value.tahun || '') + `</td>
-                        </tr>`;
-                    });
-
-                    $("#riwayat-tender").html(riwayatTender);
+                    success: function(data) {
+                        console.log(data.data);
+                        initialSelect(data.data)
+                        setTabelRiwayat(data);
                     }
                 });
             }
@@ -1242,7 +1263,7 @@
 
         // Ajax to get data kontak
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getContact/1",
+            url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getContact/1",
             method: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -1353,12 +1374,189 @@
                 console.error(error);
             }
         })
+
+        function setTabelRiwayat(data) {
+            var riwayatTender = "";
+
+            $.each(data.data, function(index, value) {
+                var rowNumber = index + 1;
+                riwayatTender +=
+                    `<tr>
+    <td style="text-align:center">` + rowNumber + `</td>
+    <td class="custom-padding">` + (value.nama_tender || '') + `</td>
+    <td>` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</td>
+    <td>` + (value.jenis_pengadaan || '') + `</td>
+    <td style="color:#10B981">` + formatRupiah(value.harga_penawaran, 'Rp. ' || '') + `</td>
+    <td style="color:#EB650D">` + (value.tahun || '') + `</td>
+</tr>`;
+            });
+
+            $("#riwayat-tender").html(riwayatTender);
+        }
+
+        function initialSelect(data) {
+            let lokasi = [];
+            let jenis = [];
+            let tahun = [];
+
+            $.each(data, function(index, value) {
+                if (!lokasi.includes((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim())) {
+                    lokasi.push((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim());
+                }
+                if (!jenis.includes(value.jenis_pengadaan)) {
+                    jenis.push(value.jenis_pengadaan);
+                }
+                if (!tahun.includes(value.tahun)) {
+                    tahun.push(value.tahun);
+                }
+            });
+            console.log(lokasi, jenis, tahun, "UNIQ");
+
+            $('.select2-jenis-pengadaan').select2({
+                placeholder: "Jenis Pengadaan",
+                theme: 'bootstrap-5',
+                allowClear: true,
+                "language": {
+                    noResults: function() {
+                        return "<span>Tidak ada jenis pengadaan</span>";
+                    },
+                    loadingMore: function() {
+                        return "<span>Menampilkan lainnya...</span>";
+                    },
+                    searching: function() {
+                        return "<span>Mencari hasil...</span>";
+                    },
+                    errorLoading: function() {
+                        return "<span>Gagal menampilkan jenis pengadaan</span>";
+                    }
+                },
+                escapeMarkup: function(markup) {
+                    return markup;
+                },
+                data: jenis
+            }).on('change', function() {
+                global_jenis_pengadaan = $(this).val();
+                filterRiwayat();
+            });
+            $('.select2-wilayah').select2({
+                placeholder: "Lokasi Pekerjaan",
+                theme: 'bootstrap-5',
+                allowClear: true,
+                "language": {
+                    noResults: function() {
+                        return "<span>Tidak ada lokasi pekerjaan</span>";
+                    },
+                    loadingMore: function() {
+                        return "<span>Menampilkan lainnya...</span>";
+                    },
+                    searching: function() {
+                        return "<span>Mencari hasil...</span>";
+                    },
+                    errorLoading: function() {
+                        return "<span>Gagal menampilkan lokasi pekerjaan</span>";
+                    }
+                },
+                escapeMarkup: function(markup) {
+                    return markup;
+                },
+                data: lokasi
+            }).on('change', function() {
+                global_loc = $(this).val();
+                filterRiwayat();
+            });
+            $('.select2-tahun').select2({
+                placeholder: "Tahun",
+                theme: 'bootstrap-5',
+                allowClear: true,
+                "language": {
+                    noResults: function() {
+                        return "<span>Tidak ada tahun</span>";
+                    },
+                    loadingMore: function() {
+                        return "<span>Menampilkan lainnya...</span>";
+                    },
+                    searching: function() {
+                        return "<span>Mencari hasil...</span>";
+                    },
+                    errorLoading: function() {
+                        return "<span>Gagal menampilkan tahun</span>";
+                    }
+                },
+                escapeMarkup: function(markup) {
+                    return markup;
+                },
+                data: tahun
+            }).on('change', function() {
+                global_tahun = $(this).val();
+                console.log(tahun, "Value Tahun Select");
+                filterRiwayat();
+            });
+        }
+
+        function filterRiwayat() {
+            console.log(global_tahun);
+            let params = {
+                'npwp': global_npwp,
+                'jenis_pengadaan': global_jenis_pengadaan,
+                'nilai_penawaran_awal': global_penwaran_awal,
+                'nilai_penawaran_akhir': global_penwaran_akhir,
+                'lokasi': global_loc,
+                'tahun': global_tahun,
+            };
+
+            // $.ajax({
+            //     url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getPemenangFilter",
+            //     // url: "<?= base_url() ?>api/supplier/getPemenangFilter/" + npwp + "/" + loc + "/" + jenis_pengadaan + "/" + penwaran_awal + "/" + penwaran_akhir + "/" + tahun,
+            //     type: "POST",
+            //     dataType: "JSON",
+            //     data: params,
+            //     success: function(data) {
+            //         console.log(data, "data Filtered");
+            //     },
+            //     error: function(jqXHR, textStatus, errorThrown) {}
+            // });
+            console.log(params);
+            $.ajax({
+                url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getPemenangFilter",
+                method: "POST",
+                dataType: "json",
+                data: params,
+                success: function(data) {
+                    console.log(data);
+                    setTabelRiwayat(data);
+                    // initialSelect(data.data)
+                    // var riwayatTender = "";
+
+                    // $.each(data.data, function(index, value) {
+                    //     var rowNumber = index + 1;
+                    //     riwayatTender +=
+                    //         `<tr>
+                    //     <td style="text-align:center">` + rowNumber + `</td>
+                    //     <td class="custom-padding">` + (value.nama_tender || '') + `</td>
+                    //     <td>` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</td>
+                    //     <td>` + (value.jenis_pengadaan || '') + `</td>
+                    //     <td style="color:#10B981">` + formatRupiah(value.harga_penawaran, 'Rp. ' || '') + `</td>
+                    //     <td style="color:#EB650D">` + (value.tahun || '') + `</td>
+                    // </tr>`;
+                    // });
+
+                    // $("#riwayat-tender").html(riwayatTender);
+                },
+                error: function() {
+                    var data = [];
+                    setTabelRiwayat(data);
+                },
+            });
+
+        }
     });
 
+
+
     // $(document).ready(function() {
-       
+
     // })
-    
+
     // saveButton.style.display = "none";
 
     // var imageButton = document.getElementById("imageButton");

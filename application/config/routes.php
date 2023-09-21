@@ -400,6 +400,9 @@ $route['api/supplier/insertContact'] = 'api/ApiSupplier/insertContact';
 $route['api/supplier/updateContact/(:num)'] = 'api/ApiSupplier/updateContact/$1';
 $route['api/supplier/deleteContact/(:num)'] = 'api/ApiSupplier/deleteContact/$1';
 $route['api/supplier/getPemenangByNPWP/(:any)'] = 'api/ApiSupplier/getPemenangByNPWP/$1';
+// $route['api/supplier/getPemenangFilter/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'api/ApiSupplier/getPemenangFilter/$1/$2/$3/$4/$5/$6';
+// $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/getPemenangFilter';
+$route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';

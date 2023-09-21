@@ -1036,6 +1036,7 @@
             },
             processResults: function(data, params) {
                 params.page = params.page || 1;
+                console.log(data, "data Pengadaan");
                 return {
                     results: data.results,
                     pagination: {
