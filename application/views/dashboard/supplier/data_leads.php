@@ -222,14 +222,6 @@
         justify-content: center;
     }
 
-    /*.popup-close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 50px;
-        cursor: pointer;
-    }*/
-
     .popup-button {
         background-color: #E05151;
         color: white;
@@ -705,10 +697,6 @@
         outline: none;
     }
 
-    .custom-button svg {
-        margin-right: 8px;
-    }
-
     .image-modal {
         position: absolute;
         top: 0%;
@@ -905,128 +893,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const popup = document.getElementById('popup');
-        const closeButton = document.getElementById('popup-close');
-        const closePopupButton = document.getElementById('popup-close-button');
-
-        function closePopup() {
-            popup.style.display = 'none';
-        }
-
-        closeButton.addEventListener('click', closePopup);
-        closePopupButton.addEventListener('click', closePopup);
-    });
-</script>
-
-<script>
-    const popup = document.getElementById('popup');
-    const popupClose = document.getElementById('popup-close');
-    const toggleButton = document.querySelector('.toggle-button');
-
-    toggleButton.addEventListener('click', () => {
-        popup.style.display = 'block';
-        document.body.classList.add('modal-open');
-    });
-
-    popupClose.addEventListener('click', () => {
-        popup.style.display = 'none';
-        document.body.classList.remove('modal-open');
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const popupDetail = document.getElementById('popup-detail');
-        const closeButtonDetail = document.getElementById('popup-close-detail');
-        /* const closePopupButtonDetail = document.getElementById('popup-close-button_detail'); */
-
-        function closePopupDetail() {
-            popupDetail.style.display = 'none';
-        }
-
-        closeButtonDetail.addEventListener('click', closePopupDetail);
-        /* closePopupButtonDetail.addEventListener('click', closePopupdetail); */
-    });
-</script>
-
-
-
-<script>
-    const popupDetail = document.getElementById('popupDetail');
-    const popupCloseDetail = document.getElementById('popup-close-detail');
-    const toggleButtonDetail = document.querySelector('.toggle-button-detail');
-
-    toggleButtonDetail.addEventListener('click', () => {
-        // popupDetail.style.display = 'block';
-        // document.body.classList.add('modal-open-detail');
-
-        // open new page
-        window.open("<?= base_url('suplier/leads/1') ?>");
-        // console.log("Test Trigger");
-    });
-
-    popupCloseDetail.addEventListener('click', () => {
-        popupDetail.style.display = 'none';
-        document.body.class
-        List.remove('modal-open-detail');
-    });
-</script>
-
-<!-- script tambahkan contact -->
-<script>
-    var kontakCounter = 1;
-
-    function tambahkanKolomKontak() {
-        kontakCounter++;
-
-        var containerKontak = document.getElementById('container-kontak');
-
-        var newKontakDiv = document.createElement('div');
-        newKontakDiv.className = 'row g-2';
-
-        newKontakDiv.innerHTML = `
-            <button type="button" onclick="hapusKolomKontak(${kontakCounter})" class="custom-button justify-content-center">
-                <img src="<?= base_url("assets/img/revome-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                Hapus Kontak
-            </button>
-
-            <div class="col-6">
-                <label for="inputNama${kontakCounter}" class="form-label text-start">Nama</label>
-                <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputNama${kontakCounter}" placeholder="Subandi">
-            </div>
-
-            <div class="col-6">
-                <label for="inputPosisi${kontakCounter}" class="form-label text-start">Posisi</label>
-                <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi${kontakCounter}" placeholder="Marketing">
-            </div>
-
-            <div class="col-6">
-                <label for="inputEmail${kontakCounter}" class="form-label text-start">Email</label>
-                <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail${kontakCounter}" placeholder="subandi@gmail.com">
-            </div>
-
-            <div class="col-6">
-                <label for="inputNoHP${kontakCounter}" class="form-label text-start">No. HP/WA</label>
-                <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP${kontakCounter}" placeholder="082345678901">
-            </div>
-        `;
-
-        containerKontak.appendChild(newKontakDiv);
-    }
-
-    function hapusKolomKontak(counter) {
-        var containerKontak = document.getElementById('container-kontak');
-        var kolomKontak = document.getElementById(`inputNama${counter}`).closest('.row.g-2');
-        containerKontak.removeChild(kolomKontak);
-    }
-</script>
 
 <script>
     function openModal(id) {
         $.ajax({
-            url: "<?php echo site_url('suplier/getKontakNama/') ?>" + id,
             url: "<?php echo site_url('suplier/getKontakNama/') ?>" + id,
             type: "GET",
             dataType: "JSON",
@@ -1090,7 +960,7 @@
 
 <script>
     $(document).ready(function() {
-        // Memuat data lead melalui AJAX
+        // get data leads
         $.ajax({
             url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
             type: "GET",
@@ -1108,7 +978,7 @@
                         <td class="npwp">` + (value.npwp || '') + `</td>
                         <td>` + (value.nama || '') + `</td>
                         <td><a class="email" href="mailto:`+value.email+`">` + (value.email || '') + `</a></td>
-                        <td>` + (value.no_telp || '') + `<span><button class="allcontact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                        <td>` + (value.no_telp || '') + `<span><button class="allcontact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
                         <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
                         <td>
                             <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
@@ -1117,23 +987,6 @@
                 });
 
                 $("#data-leads").html(leads);
-
-                //delete lead action
-                $(".deleteBtnLead").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    $("#deleteConfirmedBtn").click(function() {
-                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
-                    });
-                });
-
-                //lengkapi lead action
-                $(".lengkapiBtn").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    var form = document.getElementById("formLengkapiLead");
-                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
-                });
             }
         });
     });
