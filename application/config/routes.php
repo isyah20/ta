@@ -399,6 +399,7 @@ $route['api/supplier/getContactById/(:num)'] = 'api/ApiSupplier/getContactById/$
 $route['api/supplier/insertContact'] = 'api/ApiSupplier/insertContact';
 $route['api/supplier/updateContact/(:num)'] = 'api/ApiSupplier/updateContact/$1';
 $route['api/supplier/deleteContact/(:num)'] = 'api/ApiSupplier/deleteContact/$1';
+$route['api/supplier/getPemenangByNPWP/(:any)'] = 'api/ApiSupplier/getPemenangByNPWP/$1';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';

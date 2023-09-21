@@ -159,4 +159,15 @@ class Supplier_api extends CI_Model
         return $this->db->affected_rows();
     }
 
+    //Get pemenang by npwp
+    public function getPemenangByNPWP($npwp) {
+        $this->db->select('pemenang.*, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(tgl_pemenang) AS tahun');
+        $this->db->from('pemenang');
+        $this->db->join('jenis_tender', 'pemenang.jenis_tender = jenis_tender.id_jenis', 'LEFT');
+        $this->db->where('npwp', $npwp);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
 }
