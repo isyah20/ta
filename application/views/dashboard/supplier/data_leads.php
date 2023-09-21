@@ -111,7 +111,7 @@
 
     .card-input {
         font-size: 10px;
-        margin-left: 28px;
+        margin-left: 20px;
         margin-top: 2rem;
         display: flex;
         width: 500px;
@@ -184,6 +184,12 @@
         font-size: 1rem;
         width: 420px;
         padding-left: 10px;
+    }
+
+    .allcontact {
+        background-color: #FFF;
+        border: none;
+        margin-left: 15px;
     }
 </style>
 
@@ -500,7 +506,7 @@
 <section class="bg-white ">
     <div class="overflow">
         <div class="container">
-            <div class="row ">
+            <div class="row">
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
                         <div class="row">
@@ -579,7 +585,7 @@
                             <td class="npwp">08.178.554.2-123.213</td>
                             <td class="">Syaifuddin Jaelani</td>
                             <td class="email">office@telkom.co.id</td>
-                            <td>0274 7471 234 <span class="icon"><img src="<?= base_url('assets\img\icon_allcontact.svg') ?>" alt=""><span></span></img></span></td>
+                            <td>0274 7471 234 <span><button class="allcontact"><img src="<?= base_url('assets\img\icon_allcontact.svg') ?>" alt="" title="kontak lainnya"></img></button></span></td>
                             <td>Jakarta, Indonesia</td>
                             <td>
                                 <button class="btn btn-success toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
@@ -591,7 +597,7 @@
                             <td class="npwp">08.178.554.2-123.213</td>
                             <td class="">Syaifuddin Jaelani</td>
                             <td class="email" style="gap: 10px;">office@telkom.co.id</td>
-                            <td>0274 7471 234 <span class="icon"><img src="<?= base_url('assets\img\icon_allcontact.svg') ?>" alt="" title="kontak lainnya"></img></span></td>
+                            <td>0274 7471 234 <span><button class="allcontact"><img src="<?= base_url('assets\img\icon_allcontact.svg') ?>" alt="" title="kontak lainnya"></img></button></span></td>
                             <td>Jakarta, Indonesia</td>
                             <td>
                                 <button class="btn btn-success toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
