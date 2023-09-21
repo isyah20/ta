@@ -42,7 +42,8 @@
     }
 
     .select2-container--bootstrap-5 .select2-selection--single {
-        padding: 0.85rem 2.25rem .85rem 1rem;
+        
+        /* padding: 0.85rem 2.25rem .85rem 1rem; */
         background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
         background-position: right .76rem center;
@@ -50,15 +51,18 @@
     }
 
     .select2-container--bootstrap-5 .select2-selection {
-        width: 100%;
-        min-height: calc(2.3em + .75rem + 2px);
+        width: 135px;
+        /* min-height: calc(2.3em + .75rem + 2px); */
+        /* min-height:10px; */
         /* padding: .375rem .75rem; */
+        padding: 7px 0px 5px 5px;
         font-family: inherit;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
-        color: #212529;
+        /* color: #212529; */
         /* background-color: #f0e2e2; */
+        background-color: transparent;
         border: none;
         border-radius: 5px;
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -91,7 +95,7 @@
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
         border: 1px solid var(--bs-border-color-translucent);
         border-radius: 5px;
-        left: 12px;
+        left: 10px;
         top: 2px;
         z-index: 1000;
     }
@@ -100,7 +104,7 @@
         box-sizing: border-box;
         cursor: pointer;
         display: block;
-        height: 52px;
+        /* height: 18px; */
         user-select: none;
         -webkit-user-select: none;
     }
@@ -108,8 +112,9 @@
     .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear,
     .select2-container--bootstrap-5 .select2-selection--single .select2-selection__clear {
         cursor: pointer;
-        width: 7px;
-        right: 31px;
+        /* width: 7px; */
+        right: 0px;
+        bottom: 10px;
         background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
     }
 
@@ -118,12 +123,14 @@
     }
 
     .select2-sorting+.select2-container--bootstrap-5 {
-        padding-right: 6px;
+        /* padding-right: 6px; */
         padding-left: 0;
     }
 
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
-        width: 307px !important;
+        /* width: 307px !important; */
+        left:-25px;
+        width: 180px !important;
     }
 
     .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
@@ -318,25 +325,19 @@
         display: flex;
     }
 
-    .custom-select {
+    .form-select-custom {
+        /* width: 610px; */
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
+        /* margin-top: 8px; */
+        /* padding: 10px; */
         margin-bottom: 15px;
         border: 1px solid;
         background-color: white;
     }
 
-    .form-select-custom {
-        /* width: 180px; */
-        color: #CCCCCC;
-        border-radius: 20px;
-        font-size: 1rem;
-        margin-top: 8px;
-        padding: 10px;
-    }
-
     .form-input-custom {
-        /* height: 40px; */
-        /* color: #CCC; */
-        /* border-color: #CCC; */
         border-radius: 20px;
         font-size: 1rem;
         width: 520px;
@@ -360,7 +361,7 @@
                 <div class="card-select wow fadeInUp">
                     <div class="select-custom">
                         <div class="row">
-                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                            <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                 <select class="select2-wilayah" id="wilayah" style="border:none;">
                                     <option selected style="border:1px;">
@@ -371,7 +372,7 @@
                                     <option value="3">Three</option>
                                 </select>
                             </div>
-                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                            <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                 <select class="select2-jenis-pengadaan" style="border:none;">
                                     <option selected style="border:1px;">
@@ -383,16 +384,9 @@
                                 </select>
                             </div>
                             <!-- Select Trigger Filter Nilai Penawaran -->
-                            <div id="dropdownHPS" class="form-select-custom custom-select w-300 d-flex" style="width: 180px;" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <div id="dropdownHPS" class="form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                <select style="border:none;">
-                                    <!-- <option selected style="border:1px;">
-                                        Nilai Penawaran
-                                    </option> -->
-                                    <!-- <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option> -->
-                                </select>
+                                <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
                             </div>
                             <!-- Tampilah Nilai Penawaran -->
                             <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
@@ -426,7 +420,7 @@
 
                             <!-- Filtering -->
                             <div class="dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 0;padding-right: 7px;">
-                                <a class="form-select-custom custom-select w-300 d-flex" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="form-select-custom w-300 d-flex" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" alt="">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end my-2 py-2 rounded-3">
@@ -438,7 +432,7 @@
                             </div>
 
                             <!-- Search Nama -->
-                            <div class="form-select-custom custom-select" style="padding:5px;padding-left:30px; margin-right:50px">
+                            <div class="form-select-custom" style="padding:5px;padding-left:30px; margin-right:50px width:610px;">
                                 <input id="keyword" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
                                 <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
                             </div>
