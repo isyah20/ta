@@ -113,21 +113,13 @@
     .card-input {
         font-size: 10px;
         margin-left: 28px;
-        margin-top: 4rem;
+        margin-top: 2rem;
         display: flex;
         width: 500px;
     }
 
     .tbody-tr {
         gap: 10px;
-    }
-
-    .form-input-custom {
-        color: #CCC;
-        border-color: #CCC;
-        border-radius: 10px 10px 10px 10px;
-        font-size: 1rem;
-        width: 100rem;
     }
 
     .toggle-button {
@@ -172,31 +164,27 @@
         overflow: auto;
     }
 
-    /* styles.css */
-    .input-group {
-        border-radius: 10px;
+    .custom-select {
+        margin-bottom: 10px;
+        border: 1px solid;
+        background-color: white;
     }
 
-    .input-group-append {
-        border-radius: 0 10px 10px 0;
+    .form-select-custom {
+        /* width: 180px; */
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
     }
 
-    .input-group-text {
-        background: transparent;
-        border: none;
-        padding: 0;
-        position: relative;
-        right: 10px;
-        top: 20px;
-        border-radius: 10px 10px 10px 10px;
-    }
-
-    .fa-search {
-        position: absolute;
-        left: 1px;
-        top: 80%;
-        transform: translateY(-50%);
-        border-radius: 10px 10px 10px 10px;
+    .form-input-custom {
+        /* height: 40px; */
+        /* color: #CCC; */
+        /* border-color: #CCC; */
+        border-radius: 20px;
+        font-size: 1rem;
+        width: 420px;
+        padding-left: 10px;
     }
 </style>
 
@@ -517,13 +505,9 @@
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
                         <div class="row">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-input-custom" placeholder="Cari nama tender atau pemenang">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-search"></i>
-                                    </span>
-                                </div>
+                            <div class="form-select-custom custom-select" style="padding:5px; margin-right:20px">
+                                <input type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                                <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
                             </div>
                         </div>
                     </div>
@@ -663,252 +647,252 @@
                     <p style="margin-left: 30px;">Jakarta, Indonesia</p>
                     <p>
                     <div class="col-12">
-    <!-- Modal Detail-->
-    <div class="modal fade" id="popupDetailModal" tabindex="-1" role="dialog" aria-labelledby="popupDetailLabel" aria-hidden="true">
-        <div class="custom-modal-lg modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                        <img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                    </button>
-                </div>
-                <div class="modal-body border-0">
-                    <h5 style="margin-left: 30px;">PT. Telekomunikasi Indonesia, Tbk.</h5>
-                    <p style="margin-left: 30px;">Jakarta, Indonesia</p>
-                    <p>
-                    <div class="col-12">
-                        <div class="profile-container">
-                            <span><img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt=""></span>
-                            <h8 class="h8">Profil Singkat Perusahaan</h8>
-                        </div>
-                    </div>
-                    <p style="margin-left: 50px; margin-right: 40px; ">
-                        PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan dan berkantor pusat resmi di Bandung dan
-                        berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
-                    </p>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
-                                <h8 class="h8">NPWP</h8>
-                                <p class="justify-text">08.178.554.2-123.213</p>
-                            </div>
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
-                                <h8 class="h8">Alamat</h8>
-                                <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
-                            </div>
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
-                                <h8 class="h8">Riwayat Menang Tender</h8>
-                                <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)</p>
-                                <!-- <p class="bullets-text">Peralatan Maintenance Jaringan Pemerintah Kabupaten Malang</p> -->
-
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="contact-container">
-                                <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
-                                <h8 class="h8">Contact Person</h8>
-                                <div class="container text-left">
-                                    <div class="row">
-                                        <div class="col-6 col-sm-4">
-                                            <p>Office (NO.Telp Kantor)</p>
-                                            <p>Budi (HRD)</p>
-                                            <p>Susi Susanti (Purchasing)</p>
-                                            <p>Jokowi Santoso (Direktur Utama)</p>
+                        <!-- Modal Detail-->
+                        <div class="modal fade" id="popupDetailModal" tabindex="-1" role="dialog" aria-labelledby="popupDetailLabel" aria-hidden="true">
+                            <div class="custom-modal-lg modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <img src="<?= base_url('assets\img\foto_popup.svg') ?>" alt="">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                                            <img src="<?= base_url('assets\img\button-x-popup.png') ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body border-0">
+                                        <h5 style="margin-left: 30px;">PT. Telekomunikasi Indonesia, Tbk.</h5>
+                                        <p style="margin-left: 30px;">Jakarta, Indonesia</p>
+                                        <p>
+                                        <div class="col-12">
+                                            <div class="profile-container">
+                                                <span><img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt=""></span>
+                                                <h8 class="h8">Profil Singkat Perusahaan</h8>
+                                            </div>
                                         </div>
-                                        <div class="col-6 col-sm-6">
-                                            <p>(0274) 5980 3112 <br>office@telkom.id</p>
-                                            <p>0811 2332 1000 <br>budi@telkom.id</p>
-                                            <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
-                                            <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
+                                        <p style="margin-left: 50px; margin-right: 40px; ">
+                                            PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan dan berkantor pusat resmi di Bandung dan
+                                            berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="item">
+                                                    <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
+                                                    <h8 class="h8">NPWP</h8>
+                                                    <p class="justify-text">08.178.554.2-123.213</p>
+                                                </div>
+                                                <div class="item">
+                                                    <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
+                                                    <h8 class="h8">Alamat</h8>
+                                                    <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
+                                                </div>
+                                                <div class="item">
+                                                    <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
+                                                    <h8 class="h8">Riwayat Menang Tender</h8>
+                                                    <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)</p>
+                                                    <!-- <p class="bullets-text">Peralatan Maintenance Jaringan Pemerintah Kabupaten Malang</p> -->
+
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="contact-container">
+                                                    <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
+                                                    <h8 class="h8">Contact Person</h8>
+                                                    <div class="container text-left">
+                                                        <div class="row">
+                                                            <div class="col-6 col-sm-4">
+                                                                <p>Office (NO.Telp Kantor)</p>
+                                                                <p>Budi (HRD)</p>
+                                                                <p>Susi Susanti (Purchasing)</p>
+                                                                <p>Jokowi Santoso (Direktur Utama)</p>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6">
+                                                                <p>(0274) 5980 3112 <br>office@telkom.id</p>
+                                                                <p>0811 2332 1000 <br>budi@telkom.id</p>
+                                                                <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
+                                                                <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                                <p style="margin-left: 50px; margin-right: 40px; ">
+                                    PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan dan berkantor pusat resmi di Bandung dan
+                                    berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
+                                </p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="item">
+                                            <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
+                                            <h8 class="h8">NPWP</h8>
+                                            <p class="justify-text">08.178.554.2-123.213</p>
+                                        </div>
+                                        <div class="item">
+                                            <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
+                                            <h8 class="h8">Alamat</h8>
+                                            <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
+                                        </div>
+                                        <div class="item">
+                                            <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
+                                            <h8 class="h8">Riwayat Menang Tender</h8>
+                                            <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)</p>
+                                            <!-- <p class="bullets-text">Peralatan Maintenance Jaringan Pemerintah Kabupaten Malang</p> -->
 
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="contact-container">
+                                            <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
+                                            <h8 class="h8">Contact Person</h8>
+                                            <div class="container text-left">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-4">
+                                                        <p>Office (NO.Telp Kantor)</p>
+                                                        <p>Budi (HRD)</p>
+                                                        <p>Susi Susanti (Purchasing)</p>
+                                                        <p>Jokowi Santoso (Direktur Utama)</p>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6">
+                                                        <p>(0274) 5980 3112 <br>office@telkom.id</p>
+                                                        <p>0811 2332 1000 <br>budi@telkom.id</p>
+                                                        <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
+                                                        <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                    <p style="margin-left: 50px; margin-right: 40px; ">
-                        PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan dan berkantor pusat resmi di Bandung dan
-                        berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
-                    </p>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_npwp.svg') ?>" alt=""></span>
-                                <h8 class="h8">NPWP</h8>
-                                <p class="justify-text">08.178.554.2-123.213</p>
-                            </div>
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_alamat.svg') ?>" alt=""></span>
-                                <h8 class="h8">Alamat</h8>
-                                <p class="justify-text">Jl. Jenderal Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta, Indonesia 12710</p>
-                            </div>
-                            <div class="item">
-                                <span><img src="<?= base_url('assets\img\pu_riwayat.svg') ?>" alt=""></span>
-                                <h8 class="h8">Riwayat Menang Tender</h8>
-                                <p class="bullets-text">Jasa Konstruksi Rancang Bangun Pembangunan Budidaya Udang Terintegrasi (Integrated Shrimp Farming)</p>
-                                <!-- <p class="bullets-text">Peralatan Maintenance Jaringan Pemerintah Kabupaten Malang</p> -->
-
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="contact-container">
-                                <span><img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt=""></span>
-                                <h8 class="h8">Contact Person</h8>
-                                <div class="container text-left">
-                                    <div class="row">
-                                        <div class="col-6 col-sm-4">
-                                            <p>Office (NO.Telp Kantor)</p>
-                                            <p>Budi (HRD)</p>
-                                            <p>Susi Susanti (Purchasing)</p>
-                                            <p>Jokowi Santoso (Direktur Utama)</p>
-                                        </div>
-                                        <div class="col-6 col-sm-6">
-                                            <p>(0274) 5980 3112 <br>office@telkom.id</p>
-                                            <p>0811 2332 1000 <br>budi@telkom.id</p>
-                                            <p>0811 2332 1000 <br>susisusanti12@telkom.id</p>
-                                            <p>0811 2332 1000 <br>jokowisantoso@telkom.id</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
-    <!-- modal hapus -->
-    <div class="col-12 py-5">
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
-            <div class="modal-dialog custom-modal" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
-                    </div>
-                    <div class="modal-body border-0 text-center">
-                        <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
-                        <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
-                        <div class="input-popup align-items-center justify-content-center">
-                            <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
-                        </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
-                                        <i class="fas me-1"></i>Hapus
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
-                                        <i class="fas me-1"></i>Batal
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end modal hapus -->
-
-    <!-- modal lengkapi leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
-        <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
-            <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
-            <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
-                    </div>
-
-
-                    <div class="modal-body border-0">
-                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
-                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-                        <div class="input-popup align-items-center">
-                            <div class="input-popup justify-content-end">
-                                <form class="row g-2" method="post" id="formLengkapiLead">
-                                    <div class="col-12">
-                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                        <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
-                                        <textarea class="form-control" name="profil" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
-                                    </div>
-                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
-
-                                    <div class="col-6">
-                                        <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
-                                    </div>
-
-                                    <div class="col-6">
-                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                        <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                        <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
-                                    </div>
-
-                                    <div class="row g-2" id="container-kontak"></div>
-                                    <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                        Tambah Kontak
+                <!-- modal hapus -->
+                <div class="col-12 py-5">
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
+                        <div class="modal-dialog custom-modal" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header border-0">
+                                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                                     </button>
+                                </div>
+                                <div class="modal-body border-0 text-center">
+                                    <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
+                                    <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
+                                    <div class="input-popup align-items-center justify-content-center">
+                                        <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
+                                    </div>
+                                    <div class="d-flex justify-content-start mt-3 gap-2">
+                                        <div></div>
+                                        <div class="link flex-row align-items-center w-100">
+                                            <span>
+                                                <a id="deleteConfirmedBtn" class="btn-custom text-white text-center">
+                                                    <i class="fas me-1"></i>Hapus
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-start mt-3 gap-2">
+                                        <div></div>
+                                        <div class="link flex-row align-items-center w-100">
+                                            <span>
+                                                <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
+                                                    <i class="fas me-1"></i>Batal
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <button type="submit" class="btn-custom text-white text-center w-100 border-0">
-                                <button type="submit" class="btn-custom text-white text-center w-100 border-0">
-                                    <i class="fas me-1"></i>Tambahkan
-                                </button>
-                            </div>
-                        </div>
-                        </form>
-                        <div class="my-2 text-center">
-                            <p style="font-size: 15px;">
-                                Mari Kami bantu carikan informasi tentang perusahaan ini?
-                                <a href="#">
-                                    Klik Disini
-                                </a>
-                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- end modal lengkapi leads -->
+                <!-- end modal hapus -->
+
+                <!-- modal lengkapi leads  -->
+                <div class="col-12 py-5 align-content-center justify-content-center">
+                    <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+                        <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
+                            <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                                        </button>
+                                    </div>
+
+
+                                    <div class="modal-body border-0">
+                                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
+                                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                                        <div class="input-popup align-items-center">
+                                            <div class="input-popup justify-content-end">
+                                                <form class="row g-2" method="post" id="formLengkapiLead">
+                                                    <div class="col-12">
+                                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
+                                                        <input type="text" name="nama_perusahaan" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
+                                                        <textarea class="form-control" name="profil" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
+                                                    </div>
+                                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
+
+                                                    <div class="col-6">
+                                                        <label for="inputNama" class="form-label text-start">Nama</label>
+                                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                                        <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label for="inputEmail" class="form-label text-start">Email</label>
+                                                        <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                                        <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                                    </div>
+
+                                                    <div class="row g-2" id="container-kontak"></div>
+                                                    <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
+                                                        <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
+                                                        Tambah Kontak
+                                                    </button>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-start mt-3 gap-2">
+                                            <div></div>
+                                            <div class="link flex-row align-items-center w-100">
+                                                <button type="submit" class="btn-custom text-white text-center w-100 border-0">
+                                                    <button type="submit" class="btn-custom text-white text-center w-100 border-0">
+                                                        <i class="fas me-1"></i>Tambahkan
+                                                    </button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        <div class="my-2 text-center">
+                                            <p style="font-size: 15px;">
+                                                Mari Kami bantu carikan informasi tentang perusahaan ini?
+                                                <a href="#">
+                                                    Klik Disini
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end modal lengkapi leads -->
 </section>
 
 
@@ -1102,99 +1086,49 @@
     $(document).ready(function() {
         // Memuat data lead melalui AJAX
         $.ajax({
-  url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-  type: "GET",
-  dataType: "json",
-  success: function (data) {
-    var leads = "";
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var leads = "";
 
-    $.each(data, function (index, value) {
-      var rowNumber = index + 1;
-      var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden'; // Tambahkan ini
+                $.each(data, function(index, value) {
+                    var rowNumber = index + 1;
+                    var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
+                    leads +=
+                        `<tr>
+                        <td style="text-align:center">` + rowNumber + `</td>
+                        <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
+                        <td class="npwp">` + (value.npwp || '') + `</td>
+                        <td>` + (value.nama || '') + `</td>
+                        <td><a class="email" href="mailto:`+value.email+`">` + (value.email || '') + `</a></td>
+                        <td>` + (value.no_telp || '') + `<span class="icon" style="visibility:` + hasMultipleContacts + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></span> </td>
+                        <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+                        <td>
+                            <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
+                        </td>
+                    </tr>`;
+                });
 
-      // Tambahkan logika pemilihan kontak terlama
-      var oldestContact = findOldestContact(value.id_kontak);
+                $("#data-leads").html(leads);
 
-      leads +=
-        `<tr>
-          <td style="text-align:center">` + rowNumber + `</td>
-          <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-          <td class="npwp">` + (value.npwp || '') + `</td>
-          <td>` + (oldestContact ? oldestContact.nama : '') + `</td>
-          <td><a class="email" href="mailto:` + (oldestContact ? oldestContact.email : '') + `">` + (oldestContact ? oldestContact.email : '') + `</a></td>
-          <td>` + (oldestContact ? oldestContact.no_telp : '') + `<span class="icon" style="visibility:` + hasMultipleContacts + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></span> </td>
-          <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-          <td>
-            <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
-          </td>
-        </tr>`;
-    });
+                //delete lead action
+                $(".deleteBtnLead").click(function() {
+                    var id_lead = $(this).data("id");
 
-    $("#data-leads").html(leads);
-  },
-  error: function () {
-    alert("Terjadi kesalahan saat mengambil data.");
-  },
-});
+                    $("#deleteConfirmedBtn").click(function() {
+                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
+                    });
+                });
 
-// Fungsi untuk menemukan kontak dengan id_kontak terkecil
-function findOldestContact(kontak) {
-  if (kontak && kontak.length > 0) {
-    var oldest = kontak[0];
-    for (var i = 1; i < kontak.length; i++) {
-      if (kontak[i].id_kontak < oldest.id_kontak) {
-        oldest = kontak[i];
-      }
-    }
-    return oldest;
-  }
-  return null;
-}
+                //lengkapi lead action
+                $(".lengkapiBtn").click(function() {
+                    var id_lead = $(this).data("id");
 
-
-        // $.ajax({
-        //     url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-        //     type: "GET",
-        //     dataType: "json",
-        //     success: function(data) {
-        //         var leads = "";
-
-        //         $.each(data, function(index, value) {
-        //             var rowNumber = index + 1;
-        //             leads +=
-        //                 `<tr>
-        //                 <td style="text-align:center">` + rowNumber + `</td>
-        //                 <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-        //                 <td class="npwp">` + (value.npwp || '') + `</td>
-        //                 <td>` + (value.nama || '') + `</td>
-        //                 <td><a class="email" href="mailto:`+value.email+`">` + (value.email || '') + `</a></td>
-        //                 <td>` + (value.no_telp || '') + `<span class="icon"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></span> </td>
-        //                 <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-        //                 <td>
-        //                     <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
-        //                 </td>
-        //             </tr>`;
-        //         });
-
-        //         $("#data-leads").html(leads);
-
-        //         //delete lead action
-        //         $(".deleteBtnLead").click(function() {
-        //             var id_lead = $(this).data("id");
-
-        //             $("#deleteConfirmedBtn").click(function() {
-        //                 window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
-        //             });
-        //         });
-
-        //         //lengkapi lead action
-        //         $(".lengkapiBtn").click(function() {
-        //             var id_lead = $(this).data("id");
-
-        //             var form = document.getElementById("formLengkapiLead");
-        //             form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
-        //         });
-        //     }
-        // });
+                    var form = document.getElementById("formLengkapiLead");
+                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
+                });
+            }
+        });
     });
 </script>

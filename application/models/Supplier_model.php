@@ -345,13 +345,14 @@ class Supplier_model extends CI_Model
         data_leads.npwp,
         profil,
         pemenang.*,
+        kontak_lead.*,
         COUNT(kontak_lead.id_kontak) AS jumlah_kontak
         FROM
             data_leads
         LEFT JOIN
             pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
         LEFT JOIN
-            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+                kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
         GROUP BY
             data_leads.id_lead";
 
