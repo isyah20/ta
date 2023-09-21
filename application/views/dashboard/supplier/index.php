@@ -42,7 +42,7 @@
     }
 
     .select2-container--bootstrap-5 .select2-selection--single {
-        
+
         /* padding: 0.85rem 2.25rem .85rem 1rem; */
         background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
@@ -129,7 +129,7 @@
 
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
         /* width: 307px !important; */
-        left:-25px;
+        left: -25px;
         width: 180px !important;
     }
 
@@ -288,13 +288,7 @@
     }
 
     .card-body {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: 5px;
-        margin-right: 10px;
-        border-radius: 40%;
-        margin-top: 30px;
-        padding-bottom: 10px;
+        margin-top: 10px;
         padding-left: 10px;
     }
 
@@ -310,7 +304,7 @@
         color: #B89494;
         font-size: 0.75rem;
         font-weight: bold;
-        margin-top: 10px;
+        padding-top: 10px;
     }
 
     .card-text {
@@ -333,7 +327,7 @@
     }
 
     .form-select-custom {
-        /* width: 610px; */
+        width: 610px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
@@ -343,6 +337,7 @@
         border: 1px solid;
         background-color: white;
     }
+
 
     .form-input-custom {
         border-radius: 20px;
@@ -356,9 +351,11 @@
         padding: 0;
         /* Menghilangkan padding */
     }
+
     .col-65 {
         width: 65%;
     }
+
     .col-35 {
         width: 35%;
     }
@@ -377,7 +374,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-6 col-65">
                 <div class="card-select wow fadeInUp">
                     <div class="select-custom">
                         <div class="row">
@@ -440,7 +437,7 @@
 
                             <!-- Filtering -->
                             <div class="dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 0;padding-right: 7px;">
-                                <a class="form-select-custom w-300 d-flex" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="form-select-custom d-flex" style="width:42px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" alt="">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end my-2 py-2 rounded-3">
@@ -452,14 +449,15 @@
                             </div>
 
                             <!-- Search Nama -->
-                            <div class="form-select-custom" style="padding:5px;padding-left:30px; margin-right:50px width:610px;">
+                            <div class="form-select-custom" style="padding:5px; padding-left:30px; margin-right:20px;">
                                 <input id="keyword" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
                                 <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 justify-content d-flex">
+            </div>
+            <div class="col-6 d-flex col-35">
                 <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
                     <div class="shadow-sm bg-white">
                         <div class="card-body">
@@ -495,8 +493,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- <div class="col-md-3" style="width: 420px;">
+            <!-- <div class="col-md-3" style="width: 420px;">
             <div class="card-category pb-1 wow fadeInUp animation" data-wow-delay="0.2s">
             <div class="custom-container">
                 <h3 style="color: white;">Kategori</h3>
@@ -522,7 +519,7 @@
             </div>
             </div>
         </div> -->
-    </div>
+        </div>
 </section>
 
 <section>
