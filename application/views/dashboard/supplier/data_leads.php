@@ -81,8 +81,27 @@
         font-weight: bold;
     }
 
+    .card-select {
+        font-size: 10px;
+        margin-left: 28px;
+        margin-top: 20px;
+        display: flex;
+    }
+
+    .custom-select {
+        margin-bottom: 15px;
+    }
+
     .form-select-custom {
         color: #CCCCCC;
+        border-radius: 10px 10px 10px 10px;
+        font-size: 1rem;
+        margin-top: 8px;
+    }
+
+    .form-input-custom {
+        color: #CCC;
+        border-color: #CCC;
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
     }
@@ -420,28 +439,47 @@
 <section class="bg-white ">
     <div class="overflow">
         <div class="container">
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6 justify-content d-flex">
-                    <div class="card-select">
+            <div class="row ">
+                <div class="col-6">
+                    <div class="card-select wow fadeInUp">
                         <div class="select-custom">
-                            <div class="row"></div>
-                            <select class="form-select-custom" aria-label="Default select example" style="color: #E05151; border-color: #E05151;">
-                                <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
-                                <option selected>Wilayah : Jawa Barat</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="form-select-custom" aria-label="Default select example">
-                                <img src="<?= base_url('assets\img\icon_select_vector.svg') ?>" alt="" style="width: 10px; height: 10px;">
-                                <option selected>LPSE</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <div class="row">
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>
+                                        <span><img src="<?= base_url('assets\img\icon_filter.svg') ?>" alt="" style="width: 16px; height: 16px; margin-right: 5px;"></span>Wilayah :
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>LPSE : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-2 form-select-custom custom-select">
+                                    <option selected>HPS : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <select class="col-4 col-sm-3 form-select-custom custom-select">
+                                    <option selected>Jenis Pengadaan : </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+
+                                <div class="w-100"></div>
+                                
+                                <input type="text" class="col-9 form-input-custom" placeholder="Cari nama tender atau pemenang">
+
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-6 justify-content d-flex">
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
                         <div class="shadow-sm bg-white">
                             <div class="card-body">
@@ -452,7 +490,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px;">
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
                                     </p>
                                 </div>
@@ -469,32 +507,32 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px;">
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                    <div class="shadow-sm bg-white">
-                        <div class="card-body card-data">
-                            <div>
-                                <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                </p>
-                            </div>
-                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px;">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
-                                </p>
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                        <div class="shadow-sm bg-white">
+                            <div class="card-body card-data">
+                                <div>
+                                    <p>
+                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
+                                    </p>
+                                </div>
+                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                    <p>
+                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 
@@ -514,7 +552,7 @@
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <tr>
+                        <!-- <tr>
                             <th></th>
                             <td><span class="rounded">1</span></td>
                             <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -539,7 +577,7 @@
                                 <a href="#" class="btn btn-danger btn-custom">Edit Data</a>
                                 <a class="btn btn-outline-danger">Hapus</a>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -751,7 +789,10 @@
                                     <button type="submit" class="btn-custom text-white text-center w-100 border-0">
                                         <i class="fas me-1"></i>Tambahkan
                                     </button>
-                                </div>
+
+
+
+
                             </div>
                             </form>
                             <div class="my-2 text-center">
@@ -892,9 +933,60 @@
 </script>
 
 <script>
+    $(document).ready(function() {
+        // Memuat data lead melalui AJAX
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var leads = "";
+
+                $.each(data, function(index, value) {
+                    var rowNumber = index + 1;
+                    leads +=
+                        `<tr>
+                        <td><span class="rounded">` + rowNumber + `</span></td>
+                        <td>` + value.nama_perusahaan + `</td>
+                        <td>` + value.npwp + `</td>
+                        <td>` + value.email + `</td>
+                        <td>` + value.no_telp + `</td>
+                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
+                        <td>
+                                <button class="btn btn-outline-warning toggle-button-detail" onclick="toggleButton()">Detail</button>
+                                <button class="btn btn-danger lengkapiBtn" data-toggle="modal" data-target="#lengkapiLeadsModal" data-id="` + value.id_lead + `">Lengkapi Data</button>
+                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
+                        </td>
+                    </tr>`;
+                });
+
+                $("#data-leads").html(leads);
+
+                //delete lead action
+                $(".deleteBtnLead").click(function() {
+                    var id_lead = $(this).data("id");
+
+                    $("#deleteConfirmedBtn").click(function() {
+                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
+                    });
+                });
+
+                //lengkapi lead action
+                $(".lengkapiBtn").click(function() {
+                    var id_lead = $(this).data("id");
+
+                    var form = document.getElementById("formLengkapiLead");
+                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
+                });
+            }
+        });
+    });
+</script>
+
+<script>
     function openModal(id) {
         $.ajax({
-            url: "<?php echo site_url('suplier/getKontakNama/') ?>" + id,
+            url: "<?php echo site_url('suplier/getKontak/') ?>" + id,
             type: "GET",
             dataType: "JSON",
             // data: { id: id },
@@ -953,55 +1045,3 @@
         closeModal();
     });
 </script>
-
-<script>
-    $(document).ready(function() {
-        // Memuat data lead melalui AJAX
-        $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                var leads = "";
-
-                $.each(data, function(index, value) {
-                    var rowNumber = index + 1;
-                    leads +=
-                        `<tr>
-                        <td><span class="rounded">` + rowNumber + `</span></td>
-                        <td>` + value.nama_perusahaan + `</td>
-                        <td>` + value.npwp + `</td>
-                        <td>` + value.email + `</td>
-                        <td>` + value.no_telp + `</td>
-                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
-                        <td>
-                                <button class="btn btn-outline-warning lengkapiBtn" data-toggle="modal" data-target="#popupDetailModal" data-id="` + value.id_lead + `">Detail</button>
-                                <button class="btn btn-danger lengkapiBtn" data-toggle="modal" data-target="#lengkapiLeadsModal" data-id="` + value.id_lead + `">Lengkapi Data</button>
-                                <button class="btn btn-outline-danger deleteBtnLead" data-toggle="modal" data-target="#deleteModal" data-id="` + value.id_lead + `">Hapus</button>
-                        </td>
-                    </tr>`;
-                });
-
-                $("#data-leads").html(leads);
-
-                //delete lead action
-                $(".deleteBtnLead").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    $("#deleteConfirmedBtn").click(function() {
-                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
-                    });
-                });
-
-                //lengkapi lead action
-                $(".lengkapiBtn").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    var form = document.getElementById("formLengkapiLead");
-                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
-                });
-            }
-        });
-    });
-</script>
-
