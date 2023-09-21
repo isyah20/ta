@@ -1180,7 +1180,7 @@
             }
         });
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getProfile/1",
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getProfile/1",
             method: "GET",
             dataType: "json",
             success: function(data) {
@@ -1249,7 +1249,7 @@
                 });
 
                 $.ajax({
-                    url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getPemenangByNPWP/" + npwp,
+                    url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/" + npwp,
                     method: "GET",
                     dataType: "json",
                     success: function(data) {
@@ -1263,7 +1263,7 @@
 
         // Ajax to get data kontak
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getContact/1",
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getContact/1",
             method: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -1505,7 +1505,7 @@
             };
 
             // $.ajax({
-            //     url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getPemenangFilter",
+            //     url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangFilter",
             //     // url: "<?= base_url() ?>api/supplier/getPemenangFilter/" + npwp + "/" + loc + "/" + jenis_pengadaan + "/" + penwaran_awal + "/" + penwaran_akhir + "/" + tahun,
             //     type: "POST",
             //     dataType: "JSON",
@@ -1517,7 +1517,7 @@
             // });
             console.log(params);
             $.ajax({
-                url: "http://beetend:76oZ8XuILKys5@tenderplus.test/api/supplier/getPemenangFilter",
+                url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangFilter",
                 method: "POST",
                 dataType: "json",
                 data: params,

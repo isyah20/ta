@@ -959,7 +959,7 @@
             return markup;
         },
         ajax: {
-            url: "'http://beetend:76oZ8XuILKys5@tenderplus.test/api/getListLokasiPekerjaan'",
+            url: "'http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/getListLokasiPekerjaan'",
             // url: "<?= base_url('api/getListLokasiPekerjaan') ?>",
             dataType: 'json',
             delay: 250,
