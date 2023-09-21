@@ -93,7 +93,8 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function detailDataLead($id){
+    public function detailDataLead($id)
+    {
         $data = [
             'title' => 'Dashboard'
         ];
@@ -545,6 +546,37 @@ class DashboardUserSupplier extends CI_Controller
     //     }
 
 
+    public function getDataLeadFilter()
+    {
+        $keyword = $this->input->get('key');
+        $data = $this->Supplier_model->getDataLeadFilter($keyword);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+    public function getJumlahPemenangTender()
+    {
+        $response = $this->Supplier_model->getJumlahPemenangTender()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+    public function getJumlahPemenangTenderTerbaru()
+    {
+        $response = $this->Supplier_model->getJumlahPemenangTenderTerbaru()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
     public function getJumTender()
     {
         $response = $this->Supplier_model->getJumTender()->row();

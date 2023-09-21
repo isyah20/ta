@@ -313,6 +313,42 @@ class Supplier_model extends CI_Model
         return print_r(json_encode($option));
     }
 
+    public function getDataLeadFilter($nama_perusahaan)
+    {
+
+        $sql = "SELECT
+        data_leads.id_lead AS id,
+        nama_perusahaan,
+        data_leads.npwp,
+        profil,
+        pemenang.*,
+        kontak_lead.*,
+        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
+        FROM
+            data_leads
+        LEFT JOIN
+            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN
+                kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+        WHERE LOWER(nama_perusahaan) LIKE LOWER('%{$nama_perusahaan}%')
+        GROUP BY
+            data_leads.id_lead";
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
+    public function getJumlahPemenangTender()
+    {
+        $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang FROM pemenang";
+        // $query = $this->db->query($sql);
+        return $this->db->query($sql);
+    }
+    public function getJumlahPemenangTenderTerbaru()
+    {
+        $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang_terbaru FROM pemenang WHERE DATE(tgl_pemenang)=DATE(NOW());";
+
+        return $this->db->query($sql);
+    }
     public function getJumTender()
     {
         // $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru WHERE akhir_daftar>=CURRENT_TIMESTAMP";

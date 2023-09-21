@@ -469,7 +469,7 @@
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
                                     <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
+                                <h1 id="total-pemenang-tender" class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
                                 </p>
                             </div>
                         </div>
@@ -486,7 +486,7 @@
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
                                     <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
+                                <h1 id="total-pemenang-tender-terbaru" class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
                                 </p>
                             </div>
                         </div>
@@ -639,6 +639,26 @@
         jum_pemenang, timer;
 
     $(document).ready(function() {
+        $.ajax({
+            url: "<?= base_url() ?>api/supplier/jumlah-pemenang",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('#total-pemenang-tender').html(data.jumlah_pemenang);
+                console.log(data.jumlah_pemenang);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {}
+        });
+        $.ajax({
+            url: "<?= base_url() ?>api/supplier/jumlah-pemenang-terbaru",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('#total-pemenang-tender-terbaru').html(data.jumlah_pemenang_terbaru);
+                console.log(data.jumlah_pemenang_terbaru);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {}
+        });
         $.ajax({
             url: "<?= base_url() ?>api/getPreferensiPengguna/" + id_pengguna,
             type: "GET",
@@ -939,7 +959,8 @@
             return markup;
         },
         ajax: {
-            url: "<?= base_url('api/getListLokasiPekerjaan') ?>",
+            url: "'http://beetend:76oZ8XuILKys5@tenderplus.test/api/getListLokasiPekerjaan'",
+            // url: "<?= base_url('api/getListLokasiPekerjaan') ?>",
             dataType: 'json',
             delay: 250,
             data: function(params) {
