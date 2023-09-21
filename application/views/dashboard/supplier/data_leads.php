@@ -612,7 +612,7 @@
                             <td>
                                 <button class="btn btn-success toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
                             </td>
-                        </tr> -->
+                        </tr> 
                     </tbody>
                 </table>
             </div>
