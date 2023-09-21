@@ -95,8 +95,11 @@ class Supplier_api extends CI_Model
     public function getProfile($id)
     {
         $this->db->select(['*']);
-        $this->db->from('data_lead');
-        $this->db->where('id_lead', $id);
+        $this->db->from('data_leads');
+        // $this->db->where('id_lead', $id);
+        //join pemenang_tender to get alamat
+        $this->db->join('pemenang_tender', 'pemenang_tender.id_pemenang = data_leads.id_pemenang');
+        $this->db->where('data_leads.id_lead', $id);
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -104,14 +107,55 @@ class Supplier_api extends CI_Model
     // insert into field profile
     public function insertProfile($data, $id)
     {
-        $this->db->update('data_lead', $data, ['id_lead' => $id]);
+        $this->db->update('data_leads', $data, ['id_lead' => $id]);
         return $this->db->affected_rows();
     }
 
     // update field profile in data_lead
     public function updateProfile($data, $id)
     {
-        $this->db->update('data_lead', $data, ['id_lead' => $id]);
+        $this->db->update('data_leads', $data, ['id_lead' => $id]);
+        return $this->db->affected_rows();
+    }
+
+    // Get from kontak_lead by id_lead
+    public function getContact($id)
+    {
+        $this->db->select(['*']);
+        $this->db->from('kontak_lead');
+        $this->db->where('id_lead', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // Get from kontak_lead by id_kontak
+    public function getContactById($id)
+    {
+        $this->db->select(['*']);
+        $this->db->from('kontak_lead');
+        $this->db->where('id_kontak', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    // Insert into kontak_lead
+    public function insertContact($data)
+    {
+        $this->db->insert('kontak_lead', $data);
+        return $this->db->affected_rows();
+    }
+
+    // Update kontak_lead
+    public function updateContact($data, $id)
+    {
+        $this->db->update('kontak_lead', $data, ['id_kontak' => $id]);
+        return $this->db->affected_rows();
+    }
+
+    // Delete kontak_lead
+    public function deleteContact($id)
+    {
+        $this->db->delete('kontak_lead', ['id_kontak' => $id]);
         return $this->db->affected_rows();
     }
 

@@ -273,7 +273,7 @@ class ApiSupplier extends RestController
     {
         // $id = $this->post('id_lead');
         $data = [
-            'profile' => $this->post('profile') 
+            'profil' => $this->post('profil') 
         ];
 
         if ($id === null) {
@@ -294,11 +294,74 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function updateProfile_post($id)
+    public function getContact_get($id)
     {
-        // $id = $this->post('id_lead');
+        // $id = $this->get('id_lead');
+        $data = $this->Supplier_api->getContact($id);
+        
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getContactById_get($id)
+    {
+        // $id = $this->get('id_kontak');
+        $data = $this->Supplier_api->getContactById($id);
+        
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function insertContact_post()
+    {
         $data = [
-            'profile' => $this->post('profile')
+            'id_lead' => $this->post('id_lead'),
+            'nama' => $this->post('nama_tim'),
+            'posisi' => $this->post('posisi'),
+            'no_telp' => $this->post('no_telp'),
+            'email' => $this->post('email')
+        ];
+
+        if ($this->Supplier_api->insertContact($data) > 0) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil ditambahkan'
+            ], RestController::HTTP_CREATED);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal ditambahkan'
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function updateContact_post($id)
+    {
+        // $id = $this->post('id_kontak');
+        $data = [
+            // 'id_lead' => $this->post('id_lead'),
+            'nama' => $this->post('nama'),
+            'posisi' => $this->post('posisi'),
+            'no_telp' => $this->post('no_telp'),
+            'email' => $this->post('email')
         ];
 
         if ($id === null) {
@@ -306,7 +369,7 @@ class ApiSupplier extends RestController
                 'status' => false,
                 'message' => 'Berikan id'
             ], RestController::HTTP_BAD_REQUEST);
-        } else if ($this->Supplier_api->updateProfile($data, $id) > 0) {
+        } else if ($this->Supplier_api->updateContact($data, $id) > 0) {
             $this->response([
                 'status' => true,
                 'message' => 'Data berhasil diubah'
@@ -316,6 +379,30 @@ class ApiSupplier extends RestController
                 'status' => false,
                 'message' => 'Data gagal diubah'
             ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function deleteContact_delete($id)
+    {
+        // $id = $this->get('id_kontak');
+        if ($id === null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Berikan id'
+            ], RestController::HTTP_BAD_REQUEST);
+        } else {
+            if ($this->Supplier_api->deleteContact($id) > 0) {
+                $this->response([
+                    'status' => true,
+                    'id' => $id,
+                    'message' => 'Data berhasil dihapus'
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Data tidak ditemukan'
+                ], RestController::HTTP_NOT_FOUND);
+            }
         }
     }
 }
