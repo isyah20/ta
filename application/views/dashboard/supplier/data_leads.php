@@ -54,6 +54,7 @@
     }
 
     .email {
+        color: #000;
         text-decoration: underline;
     }
 
@@ -589,16 +590,16 @@
                         </tr>
                     </thead>
                     <tbody id="data-leads">
-                        <tr class="tbody-tr">
+                        <!-- <tr class="tbody-tr">
                             <td><span class="number">1</span></td>
                             <td class="perusahaan">PT. Telekomunikasi Indonesia, Tbk.</td>
                             <td class="npwp">08.178.554.2-123.213</td>
                             <td class="">Syaifuddin Jaelani</td>
                             <td class="email">office@telkom.co.id</td>
-                            <td>0274 7471 234 <span class="icon"><img src="<?= base_url('assets\img\icon_allcontact.svg') ?>" alt=""><span></span></img></span></td>
+                            <td>0274 7471 234 <span class="icon"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt=""><span></span></img></span></td>
                             <td>Jakarta, Indonesia</td>
                             <td>
-                                <button class="btn btn-success toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
+                                <button class="btn btn-success toggle-button-detail">Detail</button>
                             </td>
                         </tr>
                         <tr class="tbody-tr">
@@ -612,7 +613,7 @@
                             <td>
                                 <button class="btn btn-success toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
                             </td>
-                        </tr> 
+                        </tr>  -->
                     </tbody>
                 </table>
             </div>
@@ -1097,52 +1098,103 @@
     });
 </script>
 
-<!-- <script>
+<script>
     $(document).ready(function() {
         // Memuat data lead melalui AJAX
         $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                var leads = "";
+  url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+  type: "GET",
+  dataType: "json",
+  success: function (data) {
+    var leads = "";
 
-                $.each(data, function(index, value) {
-                    var rowNumber = index + 1;
-                    leads +=
-                        `<tr>
-                        <td>` + rowNumber + `</td>
-                        <td>` + value.nama_perusahaan + `</td>
-                        <td>` + value.npwp + `</td>
-                        <td>` + value.npwp + `</td>
-                        <td>` + value.email + `</td>
-                        <td>` + value.no_telp + `</td>
-                        <td> <button class="toggle-button">All Contact<i class="fas fa-eye"></i></button> </td>
-                        <td>
-                                <button class="btn btn-outline-warning lengkapiBtn" data-toggle="modal" data-target="#popupDetailModal" data-id="` + value.id_lead + `">Detail</button>
-                        </td>
-                    </tr>`;
-                });
+    $.each(data, function (index, value) {
+      var rowNumber = index + 1;
+      var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden'; // Tambahkan ini
 
-                $("#data-leads").html(leads);
+      // Tambahkan logika pemilihan kontak terlama
+      var oldestContact = findOldestContact(value.id_kontak);
 
-                //delete lead action
-                $(".deleteBtnLead").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    $("#deleteConfirmedBtn").click(function() {
-                        window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
-                    });
-                });
-
-                //lengkapi lead action
-                $(".lengkapiBtn").click(function() {
-                    var id_lead = $(this).data("id");
-
-                    var form = document.getElementById("formLengkapiLead");
-                    form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
-                });
-            }
-        });
+      leads +=
+        `<tr>
+          <td style="text-align:center">` + rowNumber + `</td>
+          <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
+          <td class="npwp">` + (value.npwp || '') + `</td>
+          <td>` + (oldestContact ? oldestContact.nama : '') + `</td>
+          <td><a class="email" href="mailto:` + (oldestContact ? oldestContact.email : '') + `">` + (oldestContact ? oldestContact.email : '') + `</a></td>
+          <td>` + (oldestContact ? oldestContact.no_telp : '') + `<span class="icon" style="visibility:` + hasMultipleContacts + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></span> </td>
+          <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+          <td>
+            <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
+          </td>
+        </tr>`;
     });
-</script> -->
+
+    $("#data-leads").html(leads);
+  },
+  error: function () {
+    alert("Terjadi kesalahan saat mengambil data.");
+  },
+});
+
+// Fungsi untuk menemukan kontak dengan id_kontak terkecil
+function findOldestContact(kontak) {
+  if (kontak && kontak.length > 0) {
+    var oldest = kontak[0];
+    for (var i = 1; i < kontak.length; i++) {
+      if (kontak[i].id_kontak < oldest.id_kontak) {
+        oldest = kontak[i];
+      }
+    }
+    return oldest;
+  }
+  return null;
+}
+
+
+        // $.ajax({
+        //     url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+        //     type: "GET",
+        //     dataType: "json",
+        //     success: function(data) {
+        //         var leads = "";
+
+        //         $.each(data, function(index, value) {
+        //             var rowNumber = index + 1;
+        //             leads +=
+        //                 `<tr>
+        //                 <td style="text-align:center">` + rowNumber + `</td>
+        //                 <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
+        //                 <td class="npwp">` + (value.npwp || '') + `</td>
+        //                 <td>` + (value.nama || '') + `</td>
+        //                 <td><a class="email" href="mailto:`+value.email+`">` + (value.email || '') + `</a></td>
+        //                 <td>` + (value.no_telp || '') + `<span class="icon"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></span> </td>
+        //                 <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+        //                 <td>
+        //                     <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
+        //                 </td>
+        //             </tr>`;
+        //         });
+
+        //         $("#data-leads").html(leads);
+
+        //         //delete lead action
+        //         $(".deleteBtnLead").click(function() {
+        //             var id_lead = $(this).data("id");
+
+        //             $("#deleteConfirmedBtn").click(function() {
+        //                 window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
+        //             });
+        //         });
+
+        //         //lengkapi lead action
+        //         $(".lengkapiBtn").click(function() {
+        //             var id_lead = $(this).data("id");
+
+        //             var form = document.getElementById("formLengkapiLead");
+        //             form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
+        //         });
+        //     }
+        // });
+    });
+</script>

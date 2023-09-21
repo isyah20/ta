@@ -340,29 +340,20 @@ class Supplier_model extends CI_Model
     public function getDataLeads()
     {
         $sql = "SELECT
-        data_leads.*,
-        IFNULL(kontak_lead.nama, '') AS nama_kontak,
-        IFNULL(kontak_lead.posisi, '') AS posisi,
-        IFNULL(kontak_lead.no_telp, '') AS no_telp,
-        IFNULL(kontak_lead.email, '') AS email,
-        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
-        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
-        IFNULL(wilayah.wilayah, '') AS wilayah
-    FROM data_leads
-    LEFT JOIN (
-        SELECT kontak_lead.*
-        FROM kontak_lead
-        INNER JOIN (
-            SELECT id_lead, MIN(id_kontak) AS oldest
-            FROM kontak_lead
-            GROUP BY id_lead
-        ) oldest_contacts ON kontak_lead.id_lead = oldest_contacts.id_lead
-        AND kontak_lead.id_kontak = oldest_contacts.oldest
-    ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
-    LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
-    LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
-    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah;
-    ";
+        data_leads.id_lead AS id,
+        nama_perusahaan,
+        data_leads.npwp,
+        profil,
+        pemenang.*,
+        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
+        FROM
+            data_leads
+        LEFT JOIN
+            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN
+            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+        GROUP BY
+            data_leads.id_lead";
 
         $query = $this->db->query($sql);
 

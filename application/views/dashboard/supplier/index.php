@@ -396,8 +396,8 @@
                             <div class="form-select-custom custom-select w-300 d-flex" style="width: 40px; padding:5px">
                                 <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" alt="">
                             </div>
-                            <div class="form-select-custom custom-select" style="padding:5px; margin-right:50px">
-                                <input type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                            <div class="form-select-custom custom-select">
+                                <input type="text" class="col-9 form-input-custom" style="border:none;margin-left:10px; margin-right:50px" placeholder="Cari nama tender atau pemenang">
                             <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20"  alt="">
                             </div>
                     </div>
