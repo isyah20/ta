@@ -405,4 +405,21 @@ class ApiSupplier extends RestController
             }
         }
     }
+
+    //Get pemenang by npwp
+    public function getPemenangByNPWP_get($npwp) {
+        $data = $this->Supplier_api->getPemenangByNPWP($npwp);
+        
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

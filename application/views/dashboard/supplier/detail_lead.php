@@ -104,11 +104,11 @@
 
     th.custom-padding,
     td.custom-padding {
-        max-width: 460px;
+        max-width: 350px;
         border: none;
         vertical-align: middle;
         height: 65px !important;
-        padding: 0px 7px 0px 30px !important;
+        padding: 0px 7px 0px 30px !important; 
     }
 
     th,
@@ -141,6 +141,7 @@
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+        margin-left: 25px;
     }
 
     .h4 {
@@ -382,6 +383,365 @@
     }
 
 </style>
+<style>
+    .animation {
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .badge {
+        font-size: var(--bs-body-font-size);
+        font-weight: var(--bs-body-font-weight);
+        padding: 6px 10px;
+        border-radius: 7px 0 7px 0;
+        white-space: break-spaces;
+    }
+
+    .badge-danger {
+        background: var(--bs-red-primary);
+    }
+
+    .badge-akhirdaftar {
+        background: #fff8ea;
+        color: #ee9d0a;
+        border-radius: 0 7px 7px 0;
+        border: 1px solid #d18c0b;
+        padding: 5px 8px 6px 5px;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .filter {
+        border-radius: 1rem;
+        margin-inline: 10px;
+    }
+
+    .filter-item a {
+        display: flex;
+        align-items: center;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection--single {
+
+        /* padding: 0.85rem 2.25rem .85rem 1rem; */
+        background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right .76rem center;
+        /* background-size: 18px 18px; */
+    }
+
+    .select2-container--bootstrap-5 .select2-selection {
+        width: 135px;
+        /* min-height: calc(2.3em + .75rem + 2px); */
+        /* min-height:10px; */
+        /* padding: .375rem .75rem; */
+        padding: 7px 0px 5px 5px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        /* color: #212529; */
+        /* background-color: #f0e2e2; */
+        background-color: transparent;
+        border: none;
+        border-radius: 5px;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .select2-container--bootstrap-5.select2-container--open.select2-container--below .select2-selection {
+        border-bottom: 0 solid transparent;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .select2-container--bootstrap-5.select2-container--focus .select2-selection,
+    .select2-container--bootstrap-5.select2-container--open .select2-selection {
+        /* width: 221.5px; */
+        border-color: #ffffff00;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown {
+        border-color: #f0e2e2;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered .select2-selection__placeholder {
+        color: #212529;
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
+        border: 1px solid var(--bs-border-color-translucent);
+        border-radius: 5px;
+        left: 10px;
+        top: 2px;
+        z-index: 1000;
+    }
+
+    .select2-container .select2-selection--single {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        /* height: 18px; */
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear,
+    .select2-container--bootstrap-5 .select2-selection--single .select2-selection__clear {
+        cursor: pointer;
+        /* width: 7px; */
+        right: 0px;
+        bottom: 10px;
+        background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
+    }
+
+    .select2-container--bootstrap-5 {
+        padding-right: 0;
+    }
+
+    .select2-sorting+.select2-container--bootstrap-5 {
+        /* padding-right: 6px; */
+        padding-left: 0;
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
+        /* width: 307px !important; */
+        left: -25px;
+        width: 180px !important;
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
+    .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option[aria-selected=true]:not(.select2-results__option--highlighted) {
+        color: #fff;
+        background-color: #c50000;
+    }
+
+    .dropdown-sorting .text-dropdown {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    .dropdown-sorting li:hover {
+        background: #c50000;
+        border-radius: 0;
+    }
+
+    .dropdown-sorting .dropdown-menu::after {
+        top: -20px;
+    }
+
+    .dropdown-sorting .nav-link,
+    .dropdown-sorting a.nav-link:focus,
+    .dropdown-sorting a.nav-link:hover {
+        padding: 12px 9px !important;
+    }
+
+    .dropdown-sorting .dropdown-toggle::after {
+        display: none;
+    }
+
+    .paket {
+        margin-block: 8px !important;
+    }
+
+    .rincian-paket tr {
+        line-height: 1.4;
+    }
+
+    #pagination-container {
+        margin-inline: 10px;
+        margin-top: 15px !important;
+    }
+
+    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav {
+        font-size: var(--bs-body-font-size) !important;
+    }
+
+    .paginationjs .paginationjs-pages {
+        margin-top: -5px;
+    }
+
+    .paginationjs .paginationjs-pages li {
+        border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    }
+
+    .shadow-sm {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-white {
+        background-color: #fff;
+    }
+
+    .rounded {
+        border-radius: 10px;
+    }
+
+    .white-row {
+        background-color: white;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .shadow-sm {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .bg-white {
+        background-color: #fff;
+    }
+
+    .rounded {
+        border-radius: 10px;
+    }
+
+    .card-category {
+        margin: 0 15px;
+        border-radius: 10px;
+        background: var(--shade-font-white, #FFF);
+        box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);
+    }
+
+    .custom-container {
+        display: flex;
+        padding: 20px;
+        height: 70px;
+        align-items: flex-start;
+        gap: 8px;
+        border-radius: 10px 10px 0px 0px;
+        background: var(--primary-red-300, #E05151);
+    }
+
+    .custom-table {
+        width: 100%;
+        border: 1px solid var(--neutral-100, #F0E2E2)
+    }
+
+    .custom-table-container {
+        margin: 15px;
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+
+    }
+
+    .custom-table td {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--neutral-100, #F0E2E2)
+    }
+
+    .custom-table tr td:first-child {
+        border-left: 1px solid var(--neutral-100, #F0E2E2);
+    }
+
+    .custom-table tr td:last-child {
+        border-right: 1px solid var(--neutral-100, #F0E2E2);
+    }
+
+    .red-text {
+        color: #E05151;
+    }
+
+    @media (max-width: 576px) {
+        .wide {
+            text-align: center;
+            margin: 4px 35px;
+            width: 320px !important;
+        }
+
+        .sec-pemenang-terbaru {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .card-data {
+        border-radius: 10px;
+        background: var(--shade-font-white, #FFF);
+    }
+
+    .card-body {
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+
+    .title {
+        color: #B89494;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .card-title {
+        color: #B89494;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding-top: 10px;
+    }
+
+    .card-text {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .content-above-navbar {
+        margin-top: 100px;
+        /* Increase the margin-top value as needed */
+        z-index: 999;
+        /* Adjust the z-index value as needed */
+    }
+
+    .card-select {
+        font-size: 10px;
+        margin-left: 28px;
+        margin-top: 20px;
+        display: flex;
+    }
+
+    .form-select-custom {
+        width: 610px;
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
+        /* margin-top: 8px; */
+        /* padding: 10px; */
+        margin-bottom: 15px;
+        border: 1px solid;
+        background-color: white;
+    }
+
+
+    .form-input-custom {
+        border-radius: 20px;
+        font-size: 1rem;
+        width: 520px;
+    }
+
+    .col-6.d-flex {
+        margin: 0;
+        /* Menghilangkan margin */
+        padding: 0;
+        /* Menghilangkan padding */
+    }
+
+    .col-65 {
+        width: 65%;
+    }
+
+    .col-35 {
+        width: 35%;
+    }
+</style>
 
 <section class="bg-white pt-3 my-5">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
@@ -491,13 +851,87 @@
                 </div>
             </div>
             <div class="container wow fadeInUp">
+            <h3 class="title-pemenang">Riwayat Menang Tender</h3>
+            <div class="col-8">
+                        <div class="card-select wow fadeInUp">
+                            <div class="select-custom">
+                                <div class="row">
+                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                        <select class="select2-wilayah" id="wilayah" style="border:none;">
+                                            <option selected style="border:1px;">
+                                                Lokasi Pekerjaan
+                                            </option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                        <select class="select2-jenis-pengadaan" style="border:none;">
+                                            <option selected style="border:1px;">
+                                                Jenis Pengadaan
+                                            </option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <!-- Select Trigger Filter Nilai Penawaran -->
+                                    <div id="dropdownHPS" class="form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                        <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
+                                    </div>
+                                    <!-- Tampilah Nilai Penawaran -->
+                                    <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
+                                        <div class="row m-0 formset-hps justify-content-center">
+                                            <div class="col-12 text-center" style="border-bottom: 1px solid #ddd;">
+                                                <div class="form-check p-0">
+                                                    <input class="form-check-input" style="float: none;" type="checkbox" id="checkallhps" name="checkallhps" checked>
+                                                    <label class="form-check-label ps-1" for="checkallhps">Semua</label>
+                                                    <div class="form-text mt-0 mb-2">Centang untuk menampilkan semua nilai penawaran</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 text-center">
+                                                <p class="my-3">Silakan atur rentang nilai penawaran pada kolom di bawah ini:</p>
+                                            </div>
+                                            <div class="col-sm-5 pe-sm-0">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">Nilai Awal (Rp)</span>
+                                                    <input class="form-control" type="text" name="nilai_hps_awal" id="nilai_hps_awal" value="0" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1 text-center py-1 px-0 d-none d-sm-block">-</div>
+                                            <div class="col-sm-5 ps-sm-0">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">Nilai Akhir (Rp)</span>
+                                                    <input class="form-control" type="text" name="nilai_hps_akhir" id="nilai_hps_akhir" value="0" disabled>
+                                                    <div class="invalid-feedback">Nilai penawaran akhir harus lebih besar!</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                    <div class="form-select-custom w-300 d-flex" style="width: 130px; margin-right:5px">
+                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                        <select class="select2-wilayah" id="wilayah" style="border:none;">
+                                            <option selected style="border:1px;">
+                                                Tahun
+                                            </option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div class="row">
                     <div class="col">
-                        <h3 class="title-pemenang">Riwayat Menang Tender</h3>
                         <table class="table custom-table-container">
                             <thead class="thead text-center">
                                 <tr>
-                                    <th></th>
                                     <th>No.</th>
                                     <th class="custom-padding">Tender Yang Dimanangkan</th>
                                     <th>Lokasi Pekerjaan</th>
@@ -506,8 +940,8 @@
                                     <th>Tahun Tender</th>
                                 </tr>
                             </thead>
-                            <tbody id="data-leads">
-                                <tr>
+                            <tbody id="riwayat-tender">
+                                <!-- <tr>
                                     <th></th>
                                     <td>1</td>
                                     <td class="custom-padding">Belanja Pemeliharaan Bangunan Gedung-Bangunan Gedung Tempat Tinggal-Asrama SLBN</td>
@@ -533,9 +967,10 @@
                                     <td>Pekerjaan Konstruksi</td>
                                     <td class="green-td">Rp 1.500.000.000</i></td>
                                     <td class="orange-td">2023</td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
+                        <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
                     </div>
                 </div>
             </div>
@@ -717,6 +1152,7 @@
             dataType: "json",
             success: function(data) {
                 var id_leads = data.data.id_lead;
+                var npwp = data.data.npwp;
                 console.log(id_leads);
                 $("#namaPerusahaan").html(data.data.nama_perusahaan);
                 $("#editableParagraph").html(data.data.profil);
@@ -775,7 +1211,31 @@
                             }
                         }
                     })
-                })
+                });
+
+                $.ajax({
+                    url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/01.329.929.2-092.000",
+                    method: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        var riwayatTender = "";
+
+                    $.each(data.data, function(index, value) {
+                        var rowNumber = index + 1;
+                        riwayatTender +=
+                        `<tr>
+                            <td style="text-align:center">` + rowNumber + `</td>
+                            <td class="custom-padding">` + (value.nama_tender || '') + `</td>
+                            <td>` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</td>
+                            <td>` + (value.jenis_pengadaan || '') + `</td>
+                            <td style="color:#10B981">` + formatRupiah(value.harga_penawaran, 'Rp. ' || '') + `</td>
+                            <td style="color:#EB650D">` + (value.tahun || '') + `</td>
+                        </tr>`;
+                    });
+
+                    $("#riwayat-tender").html(riwayatTender);
+                    }
+                });
             }
         });
 
