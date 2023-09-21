@@ -110,14 +110,14 @@
                     </li>
                 <?php endif; ?>
                 <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/marketing') ?>" id="nav_dashboard">Marketing</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link text-white link-danger text-center active fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Leads</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Data Leads</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">Plotting Tim</a>
+                        <a class="nav-link text-white link-danger text-center active fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">CRM</a>
                     </li>
 
                     
