@@ -84,7 +84,7 @@
         border-color: #f0e2e2;
     }
 
-    .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered .select2-selection__placeholder {
+    .select2-container--bootstrap-5 .select2-selection--single .select2-selection_rendered .select2-selection_placeholder {
         color: #212529;
     }
 
@@ -126,8 +126,8 @@
         width: 307px !important;
     }
 
-    .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
-    .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option[aria-selected=true]:not(.select2-results__option--highlighted) {
+    .select2-container--bootstrap-5 .select2-dropdown .select2-results_options .select2-resultsoption.select2-results_option--selected,
+    .select2-container--bootstrap-5 .select2-dropdown .select2-results_options .select2-resultsoption[aria-selected=true]:not(.select2-results_option--highlighted) {
         color: #fff;
         background-color: #c50000;
     }
@@ -320,20 +320,26 @@
 
     .custom-select {
         margin-bottom: 15px;
-    }
+        border: 1px solid;
+        background-color: white;
+    } 
 
     .form-select-custom {
+        /* width: 180px; */
         color: #CCCCCC;
-        border-radius: 10px 10px 10px 10px;
+        border-radius: 20px;
         font-size: 1rem;
         margin-top: 8px;
+        padding: 10px;
     }
 
     .form-input-custom {
-        color: #CCC;
-        border-color: #CCC;
-        border-radius: 10px 10px 10px 10px;
+        /* height: 40px; */
+        /* color: #CCC; */
+        /* border-color: #CCC; */
+        border-radius: 20px;
         font-size: 1rem;
+        width: 520px;
     }
 </style>
 
@@ -342,6 +348,7 @@
         <div class="row justify-content d-flex content-above-navbar">
             <div class="col-md-4 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
                 <img src="<?= base_url("assets/img/dashboard-hero.png") ?>" width="90" alt="">
+                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="10" alt="">
                 <h4 class="mb-0 ms-2 wow fadeInUp">Selamat Datang!<p>Yuk Lengkapi Data Calon Customermu</p>
                 </h4>
             </div>
@@ -353,38 +360,46 @@
                 <div class="card-select wow fadeInUp">
                     <div class="select-custom">
                         <div class="row">
-                            <select class="col-4 col-sm-2 form-select-custom custom-select">
-                                <option selected>
-                                    <span><img src="<?= base_url('assets\img\icon_filter.svg') ?>" alt="" style="width: 16px; height: 16px; margin-right: 5px;"></span>Wilayah :
-                                </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="col-4 col-sm-2 form-select-custom custom-select">
-                                <option selected>LPSE : </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="col-4 col-sm-2 form-select-custom custom-select">
-                                <option selected>HPS : </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <select class="col-4 col-sm-3 form-select-custom custom-select">
-                                <option selected>Jenis Pengadaan : </option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-
-                            <div class="w-100"></div>
-
-                            <input type="text" class="col-9 form-input-custom" placeholder="Cari nama tender atau pemenang">
-
-                        </div>
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                <select style="border:none;background-color:fff">
+                                    <option selected style="border:1px;">
+                                        Lokasi Pekerjaan
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                <select style="border:none;background-color:fff">
+                                    <option selected style="border:1px;">
+                                        Jenis Pengadaan
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 180px;">
+                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                <select style="border:none;background-color:fff">
+                                    <option selected style="border:1px;">
+                                        Nilai Penawaran
+                                    </option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-select-custom custom-select w-300 d-flex" style="width: 40px; padding:5px">
+                                <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" alt="">
+                            </div>
+                            <div class="form-select-custom custom-select" style="padding:5px; margin-right:50px">
+                                <input type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                            <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20"  alt="">
+                            </div>
                     </div>
                 </div>
             </div>
@@ -394,7 +409,7 @@
                         <div class="card-body">
                             <div>
                                 <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Pemenang Tender</h1>
                                 </p>
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
@@ -411,30 +426,13 @@
                         <div class="card-body">
                             <div>
                                 <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Pemenang Tender Terbaru</h1>
                                 </p>
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                 <p>
                                     <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                    <div class="shadow-sm bg-white">
-                        <div class="card-body card-data">
-                            <div>
-                                <p>
-                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                </p>
-                            </div>
-                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                <p>
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
                                 </p>
                             </div>
                         </div>
