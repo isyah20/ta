@@ -1154,6 +1154,7 @@
                 var id_leads = data.data.id_lead;
                 var npwp = data.data.npwp;
                 console.log(id_leads);
+                console.log(npwp);
                 $("#namaPerusahaan").html(data.data.nama_perusahaan);
                 $("#editableParagraph").html(data.data.profil);
                 $("#npwp").html(data.data.npwp);
@@ -1214,7 +1215,7 @@
                 });
 
                 $.ajax({
-                    url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/01.329.929.2-092.000",
+                    url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/"+ npwp,
                     method: "GET",
                     dataType: "json",
                     success: function(data){
