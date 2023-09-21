@@ -959,8 +959,11 @@
     const toggleButtonDetail = document.querySelector('.toggle-button-detail');
 
     toggleButtonDetail.addEventListener('click', () => {
-        popupDetail.style.display = 'block';
-        document.body.classList.add('modal-open-detail');
+        // popupDetail.style.display = 'block';
+        // document.body.classList.add('modal-open-detail');
+
+        // open new page
+        window.open("<?= base_url('suplier/leads/1') ?>");
         // console.log("Test Trigger");
     });
 

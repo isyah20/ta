@@ -365,20 +365,36 @@
         cursor: pointer;
 
     }
+
+    #imageButton {
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    }
+
+    #imageButton:hover {
+        opacity: 0.8;
+    }
+
+    #saveButton {
+        display: none;
+    }
+
 </style>
 
 <section class="bg-white pt-3 my-5">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-12 my-5">
-            <h2 class="mb-3 wow fadeInUp" style="order: 1;">
+            <h2 id="namaPerusahaan" class="mb-3 wow fadeInUp" style="order: 1;">
                 PT Telekomunikasi Indonesia, Tbk.
             </h2>
             <div class="row icon-text-container">
                 <div class="icon-text">
                     <img src="<?= base_url('assets\img\icon-npwp.svg') ?>" alt="">
-                    <p class="mb-0 ms-2 wow fadeInUp">08.178.554.2-123.213</p>
+                    <p id="npwp" class="mb-0 ms-2 wow fadeInUp">08.178.554.2-123.213</p>
                     <img src="<?= base_url('assets\img\icon-location.svg') ?>" alt="" style="margin-left: 30px; margin-bottom: 3px">
-                    <p class="mb-0 ms-2 wow fadeInUp">Jl. Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta</p>
+                    <p id="alamat" class="mb-0 ms-2 wow fadeInUp">Jl. Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta</p>
                 </div>
 
             </div>
@@ -397,13 +413,15 @@
                     <div class="card-detail-body">
                         <div class="profile-summary">
                             <h4 class="h4">Profil Singkat Perusahaan</h4>
-                            <img src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" alt="">
+                            <img id="imageButton" src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" alt="">
+                            <button id="saveButton" type="submit" class="btn btn-danger">
+                                    <i id="saveButton" class="fas me-1"></i>Tambahkan
+                            </button>
                         </div>
                         <div class="profile-info my-2">
                             <img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt="">
-                            <p>
-                                PT Telkom Indonesia Tbk adalah sebuah badan usaha milik negara Indonesia yang bergerak di bidang teknologi informasi dan komunikasi, berkedudukan dan berkantor pusat resmi di Bandung dan
-                                berkantor pusat operasional di Jakarta. Visi dari perusahaan ini yaitu Menjadi digital telco pilihan utama untuk memajukan masyarakat
+                            <p id="editableParagraph" contenteditable="false">
+                                -
                             </p>
                         </div>
 
@@ -424,7 +442,7 @@
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="data-contact">
                                     <tr>
                                         <th>1</th>
                                         <td>Office</td>
@@ -527,6 +545,60 @@
 
     <!-- modal lengkapi leads  -->
     <div class="col-12 py-5 align-content-center justify-content-center">
+        <div class="modal fade" id="tambahLeadsModal" tabindex="-1" role="dialog" aria-labelledby="tambahLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="tambahLeadsModalLabel">Tambah Kontak</h3>
+                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                        <div class="input-popup align-items-center">
+                            <div class="input-popup justify-content-end">
+                                <form class="row g-2" method="post" id="formTambahLead">
+
+                                    <div class="col-6">
+                                        <label for="inputNama" class="form-label text-start">Nama</label>
+                                        <input type="text" name="nama" class="form-control" id="inputNama" placeholder="Subandi">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                        <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputEmail" class="form-label text-start">Email</label>
+                                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                        <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3 gap-2">
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <button type="submit" class="btn-custom text-white text-center w-100 border-0">
+                                    <i class="fas me-1"></i>Tambahkan
+                                </button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal lengkapi leads -->
+
+    <!-- modal tambah leads  -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
         <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
                 <div class="modal-content">
@@ -546,7 +618,7 @@
 
                                     <div class="col-6">
                                         <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputEmail" placeholder="Subandi">
+                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputNama" placeholder="Subandi">
                                     </div>
 
                                     <div class="col-6">
@@ -555,24 +627,24 @@
                                     </div>
                                     <div class="col-6">
                                         <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="text" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                        <input type="email" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
                                     </div>
                                     <div class="col-6">
                                         <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
                                         <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
                                     </div>
 
-                                    <div class="row g-2" id="container-kontak"></div>
+                                    <!-- <div class="row g-2" id="container-kontak"></div>
                                     <button type="button" onclick="tambahkanKolomKontak()" class="custom-button justify-content-center">
                                         <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                         Tambah Kontak
-                                    </button>
+                                    </button> -->
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mt-3 gap-2">
                             <div></div>
                             <div class="link flex-row align-items-center w-100">
-                                <button type="submit" class="btn-custom text-white text-center w-100 border-0">
+                                <button id="submit-form" type="submit" class="btn-custom text-white text-center w-100 border-0">
                                     <i class="fas me-1"></i>Tambahkan
                                 </button>
                             </div>
@@ -583,7 +655,7 @@
             </div>
         </div>
     </div>
-    <!-- end modal lengkapi leads -->
+    <!-- end modal tambah leads -->
 
 
     <!-- modal hapus -->
@@ -637,6 +709,230 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- script tambahkan contact -->
 <script>
+    // Get nama perusahaan and profil from data_leads and set it to the frontend
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getProfile/1",
+            method: "GET",
+            dataType: "json",
+            success: function(data) {
+                var id_leads = data.data.id_lead;
+                console.log(id_leads);
+                $("#namaPerusahaan").html(data.data.nama_perusahaan);
+                $("#editableParagraph").html(data.data.profil);
+                $("#npwp").html(data.data.npwp);
+                $("#alamat").html(data.data.alamat);
+                
+                $("#imageButton").click(function() {
+                    $("#editableParagraph").attr("contenteditable", "true");
+                    $("#saveButton").css("display", "block");
+                });
+
+                $("#saveButton").click(function() {
+                    $("#editableParagraph").attr("contenteditable", "false");
+                    $("#saveButton").css("display", "none");
+                    var editedParagraph = $("#editableParagraph").html();
+                    $.ajax({
+                        url: "<?= base_url('api/supplier/insertProfile/') ?>" + id_leads,
+                        type: "POST",
+                        data: {
+                            profil: editedParagraph
+                        },
+                        success: function(response) {
+                            if (response.status == true) {
+                                alert("Berhasil mengubah profil");
+                            } else {
+                                alert("Gagal mengubah profil");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                });
+
+                $('#submit-input').click(function(event) {
+                    event.preventDefault();
+
+                    var form = {
+                        id_lead: id_leads,
+                        nama: $("#inputNama").val(),
+                        posisi: $("#inputPosisi").val(),
+                        email: $("#inputEmail").val(),
+                        no_telp: $("#inputNoHP").val()
+                    }
+
+                    $.ajax({
+                        url: "<?= base_url('api/supplier/insertContact/') ?>",
+                        type: "POST",
+                        data: form,
+                        success: function(response) {
+                            if (response.status == true) {
+                                alert('Data berhasil ditambahkan')
+                                window.location.href = "<?= base_url('suplier/leads/1') ?>";
+                            } else {
+                                alert('Data gagal ditambahkan')
+                            }
+                        }
+                    })
+                })
+            }
+        });
+
+        // Ajax to get data kontak
+        $.ajax({
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getContact/1",
+            method: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                let html = '';
+                let i;
+                for (i = 0; i < data.data.length; i++) {
+                    html += `
+                        <tr>
+                            <th>${i+1}</th>
+                            <td>${data.data[i].nama}</td>
+                            <td>${data.data[i].posisi}</td>
+                            <td>${data.data[i].no_telp}</td>
+                            <td>${data.data[i].email}</td>
+                            <td>
+                                <a href="#" class="btn btn-link edit-btn" data-toggle="modal" data-target="#tambahLeadsModal" data-dismiss="modal" data-id="` + data.data[i].id_kontak + `" >
+                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                </a>
+
+                                <a href="#" class="btn btn-link del-btn" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal" data-id="` + data.data[i].id_kontak + `">
+                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                }
+                $("#data-contact").html(html);
+
+                // Delete action
+                $(".del-btn").click(function() {
+                    var id = $(this).data("id");
+                    $("#deleteModal .btn-custom").attr("data-id", id);
+                    console.log(id);
+                });
+
+                $("#deleteModal .btn-custom").click(function() {
+                    var id = $(this).data("id");
+                    $.ajax({
+                        url: "<?= base_url('api/supplier/deleteContact/') ?>" + id,
+                        type: "DELETE",
+                        success: function(response) {
+                            if (response.status == true) {
+                                alert("Berhasil menghapus kontak");
+                            } else {
+                                alert("Gagal menghapus kontak");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                });
+
+                // Edit action
+                $(".edit-btn").click(function() {
+                    var id = $(this).data("id");
+                    var formData = {
+                        nama: $("#inputNama").val(),
+                        posisi: $("#inputPosisi").val(),
+                        email: $("#inputEmail").val(),
+                        no_telp: $("#inputNoHP").val()
+                    }
+                    $.ajax({
+                        url: "<?= base_url('api/supplier/getContactById/') ?>" + id,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function(data) {
+                            $("#inputNama").val(data.data.nama);
+                            $("#inputPosisi").val(data.data.posisi);
+                            $("#inputEmail").val(data.data.email);
+                            $("#inputNoHP").val(data.data.no_telp);
+                            // $("#formTambahLead").attr("action", "<?= base_url('api/supplier/updateContact/') ?>" + id);
+
+                            $("#formTambahLead").submit(function(e) {
+                                e.preventDefault();
+                                // var url = $(this).attr("action");
+                                // var data = $(this).serialize();
+                                var formData = {
+                                    nama: $("#inputNama").val(),
+                                    posisi: $("#inputPosisi").val(),
+                                    email: $("#inputEmail").val(),
+                                    no_telp: $("#inputNoHP").val()
+                                }
+                                $.ajax({
+                                    url: "<?= base_url('api/supplier/updateContact/') ?>" + id,
+                                    type: "POST",
+                                    data: formData,
+                                    success: function(response) {
+                                        if (response.status == true) {
+                                            alert("Berhasil mengubah kontak");
+                                            window.location.href = "<?= base_url('suplier/leads/1') ?>";
+                                        } else {
+                                            alert("Gagal mengubah kontak");
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error(error);
+                                    }
+                                });
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        })
+    });
+
+    // $(document).ready(function() {
+       
+    // })
+    
+    // saveButton.style.display = "none";
+
+    // var imageButton = document.getElementById("imageButton");
+    // var editableParagraph = document.getElementById("editableParagraph");
+    // var saveButton = document.getElementById("saveButton");
+
+    // function toggleEditing() {
+    //     if (editableParagraph.contentEditable === "true") {
+    //         editableParagraph.contentEditable = "false";
+    //         saveButton.style.display = "none";
+    //     } else {
+    //         editableParagraph.contentEditable = "true";
+    //         saveButton.style.display = "block";
+    //     }
+    // }
+
+    // function saveContent() {
+    //     var editedParagraph = editableParagraph.innerHTML;
+    //     $.ajax({
+    //         url: "save_paragraph.php", // Replace with the actual path to your PHP script
+    //         method: "POST",
+    //         data: { editedParagraph: editedParagraph },
+    //         success: function (response) {
+    //             alert(response); // You can replace this with any feedback to the user
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error(error);
+    //         }
+    //     });
+    // }
+
+    imageButton.addEventListener("click", toggleEditing);
+    saveButton.addEventListener("click", saveContent);
+
+    imageButton.addEventListener("click", toggleEditing);
     var kontakCounter = 1;
 
     function tambahkanKolomKontak() {

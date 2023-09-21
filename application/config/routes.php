@@ -387,7 +387,14 @@ $route['api/supplier/get'] = 'api/ApiSupplier';
 $route['api/supplier/create'] = 'api/ApiSupplier/create';
 $route['api/supplier/delete/(:num)'] = 'api/ApiSupplier/deleteTim/$1';
 $route['api/supplier/update/(:num)'] = 'api/ApiSupplier/editTimMarketing/$1';
-$route['api/supplier/getId'] = 'api/ApiSupplier/getbyId';
+$route['api/supplier/getId/(:num)'] = 'api/ApiSupplier/getbyId/$1';
+$route['api/supplier/getProfile/(:num)'] = 'api/ApiSupplier/getProfile/$1';
+$route['api/supplier/insertProfile/(:num)'] = 'api/ApiSupplier/insertProfile/$1';
+$route['api/supplier/getContact/(:num)'] = 'api/ApiSupplier/getContact/$1';
+$route['api/supplier/getContactById/(:num)'] = 'api/ApiSupplier/getContactById/$1';
+$route['api/supplier/insertContact'] = 'api/ApiSupplier/insertContact';
+$route['api/supplier/updateContact/(:num)'] = 'api/ApiSupplier/updateContact/$1';
+$route['api/supplier/deleteContact/(:num)'] = 'api/ApiSupplier/deleteContact/$1';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
