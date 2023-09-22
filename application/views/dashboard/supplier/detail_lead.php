@@ -378,6 +378,132 @@
         opacity: 0.8;
     }
 
+    .custom-table-container {
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+
+    }
+
+
+    /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
+    @media (max-width: 767px) {
+
+        /* Menghilangkan gambar */
+        .col-4 {
+            display: none;
+        }
+
+        /* Mengatur overflow-x dan whitespace pada tabel */
+
+
+    }
+
+    /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
+    @media (min-width: 768px) {
+        .col-8 {
+            padding-left: 3rem;
+        }
+    }
+
+    /* CSS untuk menghilangkan padding pada perangkat mobile (lebar layar kurang dari atau sama dengan 767px) */
+    @media (max-width: 767px) {
+        .col-8 {
+            padding-left: 0;
+            width: 100%;
+        }
+
+        .row.g-0 {
+            margin: 0;
+            /* Menghapus margin pada perangkat mobile */
+        }
+
+        .custom-card-detail .row {
+
+            padding: 10px;
+        }
+
+        .table-contact {
+            flex-grow: unset;
+            white-space: nowrap;
+            overflow-x: auto;
+            /* Mengaktifkan scroll horizontal */
+        }
+
+
+
+    }
+
+
+    /* CSS untuk mengatur modal di perangkat mobile */
+    /* CSS untuk mengatur modal di perangkat mobile */
+    @media (max-width: 767px) {
+        .modal-dialog {
+            max-width: 90%;
+            /* Mengatur lebar maksimum modal agar sesuai dengan layar */
+        }
+
+        .modal-content {
+            overflow-y: auto;
+            /* Menambahkan scrolling vertical jika kontennya melebihi layar */
+            max-height: 80vh;
+            /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
+        }
+
+        /* Mengurangi ukuran teks di dalam modal */
+        .modal-title {
+            font-size: 18px;
+        }
+
+        .modal-body p {
+            font-size: 14px;
+        }
+
+        .form-label {
+            font-size: 14px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        .input-popup img {
+            max-width: 75%;
+            /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
+            height: auto;
+            /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
+        }
+
+        /* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
+    }
+
+    /* CSS untuk mengatur modal di perangkat desktop */
+    @media (min-width: 768px) {
+        .modal-dialog {
+            max-width: 600px;
+            /* Atur lebar maksimum modal di layar desktop */
+        }
+    }
+
+
+
+    /* hapus icon kecil di mobile  */
+    /* Gaya CSS untuk desktop */
+    .profile-image,
+    .contact-image {
+        display: block;
+        /* Menampilkan gambar di desktop */
+    }
+
+    /* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
+    @media screen and (max-width: 768px) {
+
+        .profile-image,
+        .contact-image {
+            display: none;
+            /* Menyembunyikan gambar di mobile */
+        }
+    }
     #saveButton {
         display: none;
     }
@@ -740,6 +866,135 @@
     .col-35 {
         width: 35%;
     }
+
+
+
+/* Media query untuk perangkat mobile dengan lebar maksimal 767px */
+@media (max-width: 767px) {
+
+/* Menghilangkan gambar */
+.col-4 {
+    display: none;
+}
+
+/* Mengatur overflow-x dan whitespace pada tabel */
+
+/* CSS untuk mengatur padding pada perangkat mobile */
+.col-8 {
+    padding-left: 0;
+    width: 100%;
+}
+
+.row.g-0 {
+    margin: 0;
+    /* Menghapus margin pada perangkat mobile */
+}
+
+.custom-card-detail .row {
+    padding: 10px;
+}
+
+.table-contact {
+    flex-grow: unset;
+    white-space: nowrap;
+    overflow-x: auto;
+    /* Mengaktifkan scroll horizontal */
+}
+
+/* CSS untuk mengatur modal di perangkat mobile */
+.modal-dialog {
+    max-width: 90%;
+    /* Mengatur lebar maksimum modal agar sesuai dengan layar */
+}
+
+.modal-content {
+    overflow-y: auto;
+    /* Menambahkan scrolling vertical jika kontennya melebihi layar */
+    max-height: 80vh;
+    /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
+}
+
+/* Mengurangi ukuran teks di dalam modal */
+.modal-title {
+    font-size: 18px;
+}
+
+.modal-body p {
+    font-size: 14px;
+}
+
+.form-label {
+    font-size: 14px;
+}
+
+.form-control {
+    font-size: 14px;
+}
+
+.input-popup img {
+    max-width: 75%;
+    /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
+    height: auto;
+    /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
+}
+
+/* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
+
+/* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
+.profile-image,
+.contact-image {
+    display: none;
+    /* Menyembunyikan gambar di mobile */
+}
+
+.icon-text img {
+    display: none;
+}
+
+.icon-text {
+    flex-direction: column;
+    /* Mengatur tampilan menjadi satu kolom */
+    align-items: flex-start;
+    padding: auto;
+    /* Mengatur agar elemen berada di tengah-tengah kolom */
+}
+
+.title-desc {
+    margin-left: 10px;
+}
+}
+
+/* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
+@media (min-width: 768px) {
+.col-8 {
+    padding-left: 3rem;
+}
+
+/* CSS untuk mengatur modal di perangkat desktop */
+.modal-dialog {
+    max-width: 600px;
+    /* Atur lebar maksimum modal di layar desktop */
+}
+
+/* Gaya CSS untuk desktop */
+.profile-image,
+.contact-image {
+    display: block;
+    /* Menampilkan gambar di desktop */
+}
+
+.mobile-image {
+    margin-left: 30px;
+    margin-bottom: 3px;
+}
+}
+
+.table-responsive.custom-table-scroll {
+max-height: 300px;
+/* Atur tinggi maksimum sesuai kebutuhan */
+overflow-y: auto;
+/* Aktifkan overflow-y untuk scrolling vertikal jika diperlukan */
+}
 </style>
 
 <section class="bg-white pt-3 my-5">
@@ -768,8 +1023,8 @@
                 <div class="col-4 justify-content-center align-content-start ">
                     <img src="<?= base_url('assets\img\img-detail-leads.svg') ?>" class="img-fluid rounded-start" alt="">
                 </div>
-                <div class="col-8 justify-content-center align-content-center" style="padding-left: 3rem;">
-                    <div class="card-detail-body">
+                <div class="col-8 justify-content-center align-content-center">
+                    <div class="card-detail-body mobile-card">
                         <div class="profile-summary">
                             <h4 class="h4">Profil Singkat Perusahaan</h4>
                             <img id="imageButton" src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" alt="">
@@ -778,7 +1033,7 @@
                             </button>
                         </div>
                         <div class="profile-info my-2">
-                            <img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt="">
+                        <img class="profile-image" src="<?= base_url('assets\img\pu_profil.svg') ?>" alt="">
                             <p id="editableParagraph" contenteditable="false">
                                 -
                             </p>
@@ -789,55 +1044,56 @@
                         </div>
 
                         <div class="contact-info">
-                            <img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt="">
-                            <table class="table-contact table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Posisi</th>
-                                        <th>No. Telp / WA</th>
-                                        <th>Email</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="data-contact">
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Office</td>
-                                        <td>Nomor Kantor</td>
-                                        <td>(0274) 5980 3112</td>
-                                        <td>office@telkom.co.id</td>
-                                        <td>
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
+                        <img class="contact-image" src="<?= base_url('assets\img\pu_contact.svg') ?>" alt="">
+                            <div class="table-responsive">
+                                <table class="table-contact table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Posisi</th>
+                                            <th>No. Telp / WA</th>
+                                            <th>Email</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data-contact">
+                                        <tr>
+                                            <th>1</th>
+                                            <td>Office</td>
+                                            <td>Nomor Kantor</td>
+                                            <td>(0274) 5980 3112</td>
+                                            <td>office@telkom.co.id</td>
+                                            <td>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
 
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Office</td>
-                                        <td>Nomor Kantor</td>
-                                        <td>(0274) 5980 3112</td>
-                                        <td>office@telkom.co.id</td>
-                                        <td>
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>1</th>
+                                            <td>Office</td>
+                                            <td>Nomor Kantor</td>
+                                            <td>(0274) 5980 3112</td>
+                                            <td>office@telkom.co.id</td>
+                                            <td>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
 
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
-                                        </td>
-                                    </tr>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
+                                            </td>
+                                        </tr>
 
-                                </tbody>
-                            </table>
-
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="card-contact my-2">
                             <button type="button" class="custom-button justify-content-center" data-toggle="modal" data-target="#lengkapiLeadsModal">
@@ -923,9 +1179,11 @@
                 <div class="row">
                     <div class="col">
                         <div class="table-container">
+                        <div class="table-responsive custom-table-scroll">
                             <table class="table custom-table-container">
                                 <thead class="thead text-center">
                                     <tr>
+                                        <th></th>
                                         <th>No.</th>
                                         <th class="custom-padding">Tender Yang Dimanangkan</th>
                                         <th>Lokasi Pekerjaan</th>
@@ -965,6 +1223,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        </div>
                         <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
                     </div>
                 </div>
@@ -974,7 +1233,7 @@
 
 
     <!-- modal lengkapi leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+    <div class="col-12 align-content-center justify-content-center">
         <div class="modal fade" id="tambahLeadsModal" tabindex="-1" role="dialog" aria-labelledby="tambahLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
                 <div class="modal-content">
@@ -1028,7 +1287,7 @@
     <!-- end modal lengkapi leads -->
 
     <!-- modal tambah leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+    <div class="col-12 align-content-center justify-content-center">
         <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
                 <div class="modal-content">
@@ -1048,20 +1307,20 @@
 
                                     <div class="col-6">
                                         <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputNama" placeholder="Subandi">
+                                        <input type="text" name="nam" class="form-control" id="inputNama" placeholder="Subandi">
                                     </div>
 
                                     <div class="col-6">
                                         <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                        <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                        <input type="text" name="pos" class="form-control" id="inputPosisi" placeholder="Marketing">
                                     </div>
                                     <div class="col-6">
                                         <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="email" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                        <input type="email" name="em" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
                                     </div>
                                     <div class="col-6">
                                         <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                        <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                        <input type="text" name="no_tlp" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
                                     </div>
 
                                     <!-- <div class="row g-2" id="container-kontak"></div>
@@ -1089,7 +1348,7 @@
 
 
     <!-- modal hapus -->
-    <div class="col-12 py-5">
+    <div class="col-12">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal-delete" role="document">
                 <div class="modal-content">
@@ -1224,19 +1483,19 @@
                     });
                 });
 
-                $('#submit-input').click(function(event) {
+                $('#formLengkapiLead').click(function(event) {
                     event.preventDefault();
 
                     var form = {
                         id_lead: id_leads,
-                        nama: $("#inputNama").val(),
-                        posisi: $("#inputPosisi").val(),
-                        email: $("#inputEmail").val(),
-                        no_telp: $("#inputNoHP").val()
+                        nama: $('input[name=nam]').val(),
+                        posisi: $('input[name=pos]').val(),
+                        email: $('input[name=em]').val(),
+                        no_telp: $('input[name=no_tlp]').val()
                     }
 
                     $.ajax({
-                        url: "<?= base_url('api/supplier/insertContact/') ?>",
+                        url: "<?= base_url('api/supplier/insertContact') ?>",
                         type: "POST",
                         data: form,
                         success: function(response) {

@@ -195,4 +195,49 @@ class Supplier_api extends CI_Model
 
         return $query->result();
     }
+
+    public function getDataLeads($id)
+    {
+        $sql = "SELECT
+        data_leads.id_lead AS id,
+        id_pengguna,
+        nama_perusahaan,
+        data_leads.npwp,
+        profil,
+        pemenang.*,
+        kontak_lead.*,
+        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
+        FROM
+            data_leads
+        LEFT JOIN
+            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN
+            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+        WHERE
+            data_leads.id_pengguna = $id 
+        GROUP BY
+            data_leads.id_lead";
+
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+        // Get total data leads
+        public function getTotalDataLeads()
+        {
+            $this->db->select(['*']);
+            $this->db->from('data_leads');
+            $query = $this->db->get();
+            return $query->num_rows();
+        }
+    
+        public function getCountDataLeads()
+        {
+            $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+            $this->db->from('data_leads');
+            $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+            $this->db->where('kontak_lead.id_lead IS NULL');
+            $query = $this->db->get();
+            return $query->row_array();
+        }
 }

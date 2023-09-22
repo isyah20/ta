@@ -334,7 +334,7 @@ class ApiSupplier extends RestController
     {
         $data = [
             'id_lead' => $this->post('id_lead'),
-            'nama' => $this->post('nama_tim'),
+            'nama' => $this->post('nama'),
             'posisi' => $this->post('posisi'),
             'no_telp' => $this->post('no_telp'),
             'email' => $this->post('email')
@@ -447,4 +447,56 @@ class ApiSupplier extends RestController
             // ], RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function getLeads_get($id)
+    {
+        $data = $this->Supplier_api->getDataLeads($id);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getCountLeadNull_get()
+    {
+        $data = $this->Supplier_api->getCountDataLeads();
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getTotalLeads_get()
+    {
+        $data = $this->Supplier_api->getTotalDataLeads();
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
 }

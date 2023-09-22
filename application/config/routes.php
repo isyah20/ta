@@ -130,6 +130,7 @@ $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['api/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['api/getJumDataLeads'] = 'DashboardUserSupplier/getJumDataLeads';
 
+$route['suplier/getlead/(:num)'] = 'DashboardUserSupplier/getDataLeads/$1';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
 $route['suplier/getKontakNama/(:any)'] = 'DashboardUserSupplier/getKontakLeadByNama/$1';
 $route['suplier/leads/(:num)'] = 'DashboardUserSupplier/detailDataLead/$1';
@@ -406,6 +407,9 @@ $route['api/supplier/getPemenangByNPWP/(:any)'] = 'api/ApiSupplier/getPemenangBy
 // $route['api/supplier/getPemenangFilter/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'api/ApiSupplier/getPemenangFilter/$1/$2/$3/$4/$5/$6';
 // $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/getPemenangFilter';
 $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
+$route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
+$route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
+$route['api/supplier/getLead/(:num)'] = 'api/ApiSupplier/getLeads/$1';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
