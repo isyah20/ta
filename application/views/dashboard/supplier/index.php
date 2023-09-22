@@ -42,12 +42,12 @@
     }
 
     .select2-container--bootstrap-5 .select2-selection--single {
-        
+
         /* padding: 0.85rem 2.25rem .85rem 1rem; */
         background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
         background-position: right .76rem center;
-        /* background-size: 18px 18px; */
+        background-size: 18px 18px;
     }
 
     .select2-container--bootstrap-5 .select2-selection {
@@ -60,8 +60,8 @@
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
-        /* color: #212529; */
-        /* background-color: #f0e2e2; */
+        color: #212529;
+        background-color: #f0e2e2;
         background-color: transparent;
         border: none;
         border-radius: 5px;
@@ -112,7 +112,7 @@
     .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear,
     .select2-container--bootstrap-5 .select2-selection--single .select2-selection__clear {
         cursor: pointer;
-        /* width: 7px; */
+        width: 7px;
         right: 0px;
         bottom: 10px;
         background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
@@ -129,7 +129,7 @@
 
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
         /* width: 307px !important; */
-        left:-25px;
+        left: -25px;
         width: 180px !important;
     }
 
@@ -208,6 +208,7 @@
 
     .shadow-sm {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
     }
 
     .bg-white {
@@ -222,7 +223,6 @@
         margin: 0 15px;
         border-radius: 10px;
         background: var(--shade-font-white, #FFF);
-        box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);
     }
 
     .custom-container {
@@ -245,7 +245,6 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
-
     }
 
     .custom-table td {
@@ -288,80 +287,81 @@
 
     .card-body {
         margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: 5px;
-        margin-right: 10px;
-        border-radius: 40%;
+        padding-left: 10px;
+        padding-top: 5px;
+        border-radius: 10px;
     }
 
-    .title {
-        font-size: 20px;
+    .card-title p{
+        color: #B89494;
+        font-size: 0.75rem;
         font-weight: bold;
+        padding: 6px 0px 6px 4px;
     }
 
     .card-title {
         color: #B89494;
         font-size: 0.75rem;
         font-weight: bold;
-        margin-top: 10px;
+        /* padding-top: 10px; */
     }
 
     .card-text {
-        font-size: 1.75rem;
+        font-size: 2rem;
         font-weight: bold;
     }
 
     .content-above-navbar {
-        margin-top: 100px;
-        /* Increase the margin-top value as needed */
+        margin-top: 80px;
         z-index: 999;
-        /* Adjust the z-index value as needed */
     }
 
     .card-select {
         font-size: 10px;
-        margin-left: 28px;
+        margin-left: 8px;
         margin-top: 20px;
         display: flex;
     }
 
     .form-select-custom {
-        /* width: 610px; */
+        width: 615px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
-        /* margin-top: 8px; */
-        /* padding: 10px; */
         margin-bottom: 15px;
         border: 1px solid;
         background-color: white;
     }
 
+    .form-select-custom:hover{
+       border: 1.5px solid var(--primary-red-500, #D21B1B);
+    }
+
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 520px;
     }
 </style>
 
-<section class="pt-6 mt-6">
+<section class="mt-7 bg-white">
     <div class="container">
         <div class="row justify-content d-flex content-above-navbar">
-            <div class="col-md-4 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
-                <img src="<?= base_url("assets/img/dashboard-hero.png") ?>" width="90" alt="">
-                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="10" alt="">
-                <h4 class="mb-0 ms-2 wow fadeInUp">Selamat Datang!<p>Yuk Lengkapi Data Calon Customermu</p>
+            <div class="col-md-5 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
+                <h4 class="mb-0 ms-2 mt-4 wow fadeInUp w-660">
+                    Selamat Datang!<p class="pt-2">Yuk Lengkapi Data Calon Customermu<p>
                 </h4>
             </div>
         </div>
     </div>
-    <div class="container">
+</session>
+<session>
+    <div class="container bg-white">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-7">
                 <div class="card-select wow fadeInUp">
-                    <div class="select-custom">
+                    <div class="select-custom container-fluid">
                         <div class="row">
-                            <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                            <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                 <select class="select2-wilayah" id="wilayah" style="border:none;">
                                     <option selected style="border:1px;">
@@ -372,7 +372,7 @@
                                     <option value="3">Three</option>
                                 </select>
                             </div>
-                            <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                            <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                 <select class="select2-jenis-pengadaan" style="border:none;">
                                     <option selected style="border:1px;">
@@ -384,9 +384,9 @@
                                 </select>
                             </div>
                             <!-- Select Trigger Filter Nilai Penawaran -->
-                            <div id="dropdownHPS" class="form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <div id="dropdownHPS" class="col-sm-2 form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
+                                <button class="button-class" style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
                             </div>
                             <!-- Tampilah Nilai Penawaran -->
                             <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
@@ -419,9 +419,9 @@
                             </ul>
 
                             <!-- Filtering -->
-                            <div class="dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 0;padding-right: 7px;">
-                                <a class="form-select-custom w-300 d-flex" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" alt="">
+                            <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 0;padding-right: 7px;">
+                                <a class="form-select-custom d-flex" style="width:40px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" style="padding:5px" alt="">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end my-2 py-2 rounded-3">
                                     <li class="dropdown-item d-flex text-dropdown" data-sort="1">Nilai Penawaran Terendah</li>
@@ -432,52 +432,45 @@
                             </div>
 
                             <!-- Search Nama -->
-                            <div class="form-select-custom" style="padding:5px;padding-left:30px; margin-right:50px width:610px;">
-                                <input id="keyword" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
-                                <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 justify-content d-flex">
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-body">
-                                <div>
-                                    <p>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Pemenang Tender</h1>
-                                    </p>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-body">
-                                <div>
-                                    <p>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Pemenang Tender Terbaru</h1>
-                                    </p>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <p>
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
-                                    </p>
-                                </div>
+                            <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:20px;">
+                                <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                                <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- <div class="col-md-3" style="width: 420px;">
+            <div class="col-md-5 d-flex">
+                <div class="container-lg" style="width: 80px;" id="kosong"> 
+                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body">
+                            <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                <p class="card-title">Total Pemenang Tender</p>
+                            </div>
+                            <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px; margin-left:10px">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">1234</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body">
+                            <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                <p class="card-title">Total Pemenang Tender</p>
+                            </div>
+                            <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                            <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px; margin-left:10px">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">1234</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-3" style="width: 420px;">
             <div class="card-category pb-1 wow fadeInUp animation" data-wow-delay="0.2s">
             <div class="custom-container">
                 <h3 style="color: white;">Kategori</h3>
@@ -503,11 +496,11 @@
             </div>
             </div>
         </div> -->
-    </div>
+        </div>
 </section>
 
 <section>
-    <div class="container" x-data="newestTender" style="margin-top: -50px;">
+    <div class="container bg-white" x-data="newestTender" style="margin-top: -50px;">
         <div class="row align-items-center rounded-3 bg-white shadow mx-0 my-3 wow fadeInUp" id="sec-set-preferensi" data-wow-delay="0.7s" style="display: none;">
             <div class="col-md-2 p-3 text-center text-md-end">
                 <img src="<?= base_url("assets/img/rincian 2.png") ?>" width="140" alt="">
@@ -533,8 +526,6 @@
                 <a href="<?= base_url() ?>pricing_plan" class="btn btn-danger m-1">Upgrade</a>
             </div>
         </div>
-
-
     </div>
     </div>
     </div>
@@ -542,11 +533,11 @@
 </section>
 
 <section>
-    <div class="pt-5 pb-3 mt-5">
-        <div id="sec-pemenang-terbaru" style="display: none; margin-left: 85px; margin-right: 85px;">
-            <div class="text-center mb-3">
+    <div class="pt-3 pb-3 mt-5 bg-white">
+        <div id="sec-pemenang-terbaru" style="display: none; margin-left: 77px; margin-right: 80px;">
+            <!-- <div class="text-center mb-3">
                 <h3 class="tender-title text-center wow fadeInUp d-inline-block px-3 pb-2" data-wow-delay="0.5s">Pemenang Tender</h3>
-            </div>
+            </div> -->
 
             <!-- <div class="row wow fadeInUp justify-content-center px-1 filter" data-wow-delay="0.5s">
                 <input type="text" class="filter-item" id="keyword" placeholder="Nama Tender atau Nama Pemenang" style="padding: 0 14px;width: 30%;border: none;margin-left: 6px;">
@@ -797,7 +788,7 @@
 
             pemenang +=
                 `<div class="paket col-md-6 px-1 py-0">
-                        <div class="p-card bg-white p-3 p-lg-4 rounded-4 border hover-scale">
+                        <div class="p-card bg-white shadow p-3 p-lg-4 rounded-4 border hover-scale">
                             <div class="d-flex align-items-center border-bottom pb-3">
                                 <div class="d-flex flex-row align-items-center">
                                     <img class="rounded-circle me-1" src="<?= base_url("assets/img/img-profile-default.png") ?>" width="45">
