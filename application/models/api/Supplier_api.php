@@ -170,4 +170,22 @@ class Supplier_api extends CI_Model
 
     }
 
+    // Get total data leads
+    public function getTotalDataLeads()
+    {
+        $this->db->select(['*']);
+        $this->db->from('data_leads');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function getCountDataLeads()
+    {
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->where('kontak_lead.id_lead IS NULL');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

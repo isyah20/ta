@@ -382,6 +382,14 @@
         display: none;
     }
 
+    .table-container {
+        max-height: 300px; 
+        overflow-y: auto; 
+        overflow-x: hidden; 
+    }
+
+
+
 </style>
 <style>
     .animation {
@@ -929,47 +937,49 @@
                     </div>
                 <div class="row">
                     <div class="col">
-                        <table class="table custom-table-container">
-                            <thead class="thead text-center">
-                                <tr>
-                                    <th>No.</th>
-                                    <th class="custom-padding">Tender Yang Dimanangkan</th>
-                                    <th>Lokasi Pekerjaan</th>
-                                    <th>Jenis Pengadaan</th>
-                                    <th>Penawaran</th>
-                                    <th>Tahun Tender</th>
-                                </tr>
-                            </thead>
-                            <tbody id="riwayat-tender">
-                                <!-- <tr>
-                                    <th></th>
-                                    <td>1</td>
-                                    <td class="custom-padding">Belanja Pemeliharaan Bangunan Gedung-Bangunan Gedung Tempat Tinggal-Asrama SLBN</td>
-                                    <td>Kabupaten Bantul</td>
-                                    <td>Pekerjaan Konstruksi</td>
-                                    <td class="green-td">Rp 1.500.000.000</td>
-                                    <td class="orange-td">2023</td>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <td>2</td>
-                                    <td class="custom-padding">Jasa Konsultansi Perorangan Manajer Standar Kurikulum Merdeka</td>
-                                    <td>Kabupaten Bantul</td>
-                                    <td>Pekerjaan Konstruksi</td>
-                                    <td class="green-td">Rp 1.500.000.000</i></td>
-                                    <td class="orange-td">2023</td>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <td>2</td>
-                                    <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
-                                    <td>Kabupaten Bantul</td>
-                                    <td>Pekerjaan Konstruksi</td>
-                                    <td class="green-td">Rp 1.500.000.000</i></td>
-                                    <td class="orange-td">2023</td>
-                                </tr> -->
-                            </tbody>
-                        </table>
+                        <div class="table-container">
+                            <table class="table custom-table-container">
+                                <thead class="thead text-center">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th class="custom-padding">Tender Yang Dimanangkan</th>
+                                        <th>Lokasi Pekerjaan</th>
+                                        <th>Jenis Pengadaan</th>
+                                        <th>Penawaran</th>
+                                        <th>Tahun Tender</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="riwayat-tender">
+                                    <!-- <tr>
+                                        <th></th>
+                                        <td>1</td>
+                                        <td class="custom-padding">Belanja Pemeliharaan Bangunan Gedung-Bangunan Gedung Tempat Tinggal-Asrama SLBN</td>
+                                        <td>Kabupaten Bantul</td>
+                                        <td>Pekerjaan Konstruksi</td>
+                                        <td class="green-td">Rp 1.500.000.000</td>
+                                        <td class="orange-td">2023</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td>2</td>
+                                        <td class="custom-padding">Jasa Konsultansi Perorangan Manajer Standar Kurikulum Merdeka</td>
+                                        <td>Kabupaten Bantul</td>
+                                        <td>Pekerjaan Konstruksi</td>
+                                        <td class="green-td">Rp 1.500.000.000</i></td>
+                                        <td class="orange-td">2023</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td>2</td>
+                                        <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
+                                        <td>Kabupaten Bantul</td>
+                                        <td>Pekerjaan Konstruksi</td>
+                                        <td class="green-td">Rp 1.500.000.000</i></td>
+                                        <td class="orange-td">2023</td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
                     </div>
                 </div>
@@ -1215,7 +1225,7 @@
                 });
 
                 $.ajax({
-                    url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/"+ npwp,
+                    url: "<?= base_url() ?>api/supplier/getPemenangByNPWP/" + npwp,
                     method: "GET",
                     dataType: "json",
                     success: function(data){

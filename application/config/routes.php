@@ -127,6 +127,9 @@ $route['suplier/test-crm'] = 'DashboardUserSupplier/testCRM';
 $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
+$route['api/getleads'] = 'DashboardUserSupplier/getDataLeads';
+$route['api/getJumDataLeads'] = 'DashboardUserSupplier/getJumDataLeads';
+
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
 $route['suplier/getKontakNama/(:any)'] = 'DashboardUserSupplier/getKontakLeadByNama/$1';
 $route['suplier/leads/(:num)'] = 'DashboardUserSupplier/detailDataLead/$1';
@@ -396,6 +399,8 @@ $route['api/supplier/insertContact'] = 'api/ApiSupplier/insertContact';
 $route['api/supplier/updateContact/(:num)'] = 'api/ApiSupplier/updateContact/$1';
 $route['api/supplier/deleteContact/(:num)'] = 'api/ApiSupplier/deleteContact/$1';
 $route['api/supplier/getPemenangByNPWP/(:any)'] = 'api/ApiSupplier/getPemenangByNPWP/$1';
+$route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
+$route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';

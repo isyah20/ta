@@ -79,12 +79,49 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function getJumDataLeads()
+    {
+        $response = $this->Supplier_model->getJumDataLeads()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
+
     public function getDataLeads()
     {
+        // parse_str(file_get_contents('php://input'), $data);
+        // $response = $this->Supplier_model->getDataLeads($data)->result();
+
+        // $this->output
+        //     ->set_status_header(200)
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        //     ->_display();
+
+        // exit;
         $data = $this->Supplier_model->getDataLeads();
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
+
+    public function getTotalPages()
+{
+    $data = $this->Supplier_model->getDataLeads();
+    $totalPages = ceil(count($data) / 10); // 10 adalah jumlah item per halaman
+
+    $this->output
+        ->set_status_header(200)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($totalPages, JSON_PRETTY_PRINT))
+        ->_display();
+
+    exit;
+}
+
 
     public function getDataLeadsById($id)
     {

@@ -795,6 +795,7 @@
                             <th class="custom-padding">Nama Kontak</th>
                             <th class="custom-padding">Email</th>
                             <th class="custom-padding">No. Telp / WA</th>
+                            <th class="custom-padding"></th>
                             <th class="custom-padding">Alamat</th>
                             <th class="custom-padding">Aksi</th>
                         </tr>
@@ -828,6 +829,7 @@
                 </table>
             </div>
         </div>
+        <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
     </div>
 
 <!-- modal popup info kontak -->
@@ -841,8 +843,6 @@
                             <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                         </button>
                     </div>
-
-
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
                         <p class="text-center">PT Telekomunikasi Indonesia</p>
@@ -857,11 +857,11 @@
                                             <th>No. Telp</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-kontak">
-                                        <td>joko</td>
+                                    <tbody class="data-kontak">
+                                        <!-- <td>joko</td>
                                         <td>HRD</td>
                                         <td>hrd@telkom.co.id</td>
-                                        <td>0811-2345-6666</td>
+                                        <td>0811-2345-6666</td> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -876,7 +876,6 @@
                                 </span>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -888,106 +887,21 @@
 
 
 <!-- script popup -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-<script>
-    function openModal(id) {
-        $.ajax({
-            url: "<?php echo site_url('suplier/getKontakNama/') ?>" + id,
-            type: "GET",
-            dataType: "JSON",
-            // data: { id: id },
-            // data : id,
-            success: function(data) {
-                var kontak = "";
-                $.each(data, function(index, value) {
-                    kontak +=
-                        `<tr>
-                    <td>` + value.nama + `</td>
-                    <td>` + value.posisi + `</td>
-                    <td>` + value.email + `</td>
-                    <td>` + value.no_telp + `</td>
-                </tr>`
-                });
-                $("#data-kontak").html(kontak);
-                $("#popup-content").html(data);
-                $("#popup").show();
-            },
-            error: function() {
-                alert("Terjadi kesalahan saat mengambil data.");
-            },
-        });
-    }
-
-    function closeModal() {
-        $("#popup").hide();
-    }
-
-    $(document).on("click", ".toggle-button", function() {
-        // var id = $(this).data("id_lead");
-        // var id = value.id_lead;
-        let id = $(this).closest("tr").find("td:eq(2)").text();
-        let id = $(this).closest("tr").find("td:eq(2)").text();
-        openModal(id);
-    });
-
-
-    $(document).on("click", "#popup-close", function() {
-        closeModal();
-    });
-
-    // Detail pop up
-    function closeModal() {
-        $("#popup_detail").hide();
-    }
-
-    $(document).on("click", ".toggle_button_detail", function() {
-        var id = $(this).data("id");
-        openModal(id);
-        $("#popup_detail").show();
-
-    });
-
-
-    $(document).on("click", "#popup_close_detail", function() {
-        closeModal();
-    });
+<script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
 
 <script>
-    $(document).ready(function() {
-        // get data leads
-        $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                var leads = "";
 
-                $.each(data, function(index, value) {
-                    var rowNumber = index + 1;
-                    var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
-                    leads +=
-                        `<tr>
-                        <td style="text-align:center">` + rowNumber + `</td>
-                        <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-                        <td class="npwp">` + (value.npwp || '') + `</td>
-                        <td>` + (value.nama || '') + `</td>
-                        <td><a class="email" href="mailto:`+value.email+`">` + (value.email || '') + `</a></td>
-                        <td>` + (value.no_telp || '') + `<span><button class="allcontact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                        <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-                        <td>
-                            <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
-                        </td>
-                    </tr>`;
-                });
 
-                $("#data-leads").html(leads);
-            }
-        });
-    });
+
+
+
+
 </script>
+
