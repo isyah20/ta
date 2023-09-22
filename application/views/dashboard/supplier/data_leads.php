@@ -942,8 +942,33 @@
             }
         })
     })
+</script>
 
-
+<script>
+    // Get total leads
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('.belum-lengkap').html(data.data.jumlah);
+                // $('.belum-lengkap').html(data.data.belum_lengkap);
+                $.ajax({
+                url: "<?= base_url('api/supplier/getTotal') ?>",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    // $('.total-leads').html(data.total_leads);
+                    $('.total-leads').html(data.data);
+                }
+            })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        })
+    })
 </script>
 
 <script>
@@ -1101,7 +1126,7 @@
     $(document).on("click", ".toggle-button", function() {
         // var id = $(this).data("id_lead");
         // var id = value.id_lead;
-        let id = $(this).closest("tr").find("td:eq(2)").text();
+        // let id = $(this).closest("tr").find("td:eq(2)").text();
         let id = $(this).closest("tr").find("td:eq(2)").text();
         openModal(id);
     });
@@ -1129,17 +1154,19 @@
     });
 </script>
 
-<!-- <script>
+<script>
     $(document).ready(function() {
+        // Get id from cookies
+        id_pengguna = Cookies.get('id_pengguna');
         // Memuat data lead melalui AJAX
         $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getLead/" + id_pengguna,
             type: "GET",
             dataType: "json",
             success: function(data) {
                 var leads = "";
 
-                $.each(data, function(index, value) {
+                $.each(data.data, function(index, value) {
                     var rowNumber = index + 1;
                     leads +=
                         `<tr>
@@ -1177,4 +1204,4 @@
             }
         });
     });
-</script> -->
+</script>

@@ -79,9 +79,9 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function getDataLeads()
+    public function getDataLeads($id)
     {
-        $data = $this->Supplier_model->getDataLeads();
+        $data = $this->Supplier_model->getDataLeads($id);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }

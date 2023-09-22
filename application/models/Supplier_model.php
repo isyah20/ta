@@ -337,7 +337,7 @@ class Supplier_model extends CI_Model
         return $query->num_rows() > 0;
     }
 
-    public function getDataLeads()
+    public function getDataLeads($id)
     {
         $sql = "SELECT
         data_leads.*,
@@ -361,7 +361,8 @@ class Supplier_model extends CI_Model
     ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
     LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
     LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
-    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah;
+    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+    WHERE data_leads.id_pengguna = " . $id . ";
     ";
 
         $query = $this->db->query($sql);
