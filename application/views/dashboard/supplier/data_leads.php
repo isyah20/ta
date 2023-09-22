@@ -536,7 +536,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
+                                    <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">99</h1>
                                 </div>
                             </div>
                         </div>
@@ -562,7 +562,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
+                                    <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">37</h1>
                                 </div>
                             </div>
                         </div>
@@ -916,6 +916,35 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Get total leads
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('.belum-lengkap').html(data.data.jumlah);
+                // $('.belum-lengkap').html(data.data.belum_lengkap);
+                $.ajax({
+                url: "<?= base_url('api/supplier/getTotal') ?>",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    // $('.total-leads').html(data.total_leads);
+                    $('.total-leads').html(data.data);
+                }
+            })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        })
+    })
+
+
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
