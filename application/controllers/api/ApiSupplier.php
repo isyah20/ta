@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 // import the library
 require APPPATH . "libraries/Format.php";
@@ -33,7 +33,7 @@ class ApiSupplier extends RestController
     public function index_get()
     {
         $data = $this->Supplier_api->getTimMarketing();
-        
+
         if ($data) {
             $this->response([
                 'status' => true,
@@ -51,7 +51,7 @@ class ApiSupplier extends RestController
     {
         // $id = $this->get('id_tim');
         $data = $this->Supplier_api->getTimMarketingById($id);
-        
+
         if ($data) {
             $this->response([
                 'status' => true,
@@ -255,7 +255,7 @@ class ApiSupplier extends RestController
     {
         // $id = $this->get('id_lead');
         $data = $this->Supplier_api->getProfile($id);
-        
+
         if ($data) {
             $this->response([
                 'status' => true,
@@ -273,7 +273,7 @@ class ApiSupplier extends RestController
     {
         // $id = $this->post('id_lead');
         $data = [
-            'profil' => $this->post('profil') 
+            'profil' => $this->post('profil')
         ];
 
         if ($id === null) {
@@ -298,7 +298,7 @@ class ApiSupplier extends RestController
     {
         // $id = $this->get('id_lead');
         $data = $this->Supplier_api->getContact($id);
-        
+
         if ($data) {
             $this->response([
                 'status' => true,
@@ -316,7 +316,7 @@ class ApiSupplier extends RestController
     {
         // $id = $this->get('id_kontak');
         $data = $this->Supplier_api->getContactById($id);
-        
+
         if ($data) {
             $this->response([
                 'status' => true,
@@ -406,9 +406,11 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getPemenangByNPWP_get($npwp){
+    //Get pemenang by npwp
+    public function getPemenangByNPWP_get($npwp)
+    {
         $data = $this->Supplier_api->getPemenangByNPWP($npwp);
-        
+
         if ($data) {
             $this->response([
                 'status' => true,
@@ -421,11 +423,17 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
-
-    public function getCountLeadNull_get()
+    //Get pemenang filter
+    public function pemenangFiltered_post()
     {
-        $data = $this->Supplier_api->getCountDataLeads();
-        
+        $npwp               = $this->input->post('npwp');
+        $lokasi             = $this->input->post('lokasi');
+        $jenis              = $this->input->post('jenis_pengadaan');
+        $penawaran_awal     = $this->input->post('nilai_penawaran_awal');
+        $penawaran_akhir    = $this->input->post('nilai_penawaran_akhir');
+        $tahun              = $this->input->post('tahun');
+        $data = $this->Supplier_api->getPemenangFilter($npwp, $lokasi, $jenis, $penawaran_awal, $penawaran_akhir, $tahun);
+
         if ($data) {
             $this->response([
                 'status' => true,
@@ -435,24 +443,8 @@ class ApiSupplier extends RestController
             $this->response([
                 'status' => false,
                 'message' => 'Data tidak ditemukan'
-            ], RestController::HTTP_NOT_FOUND);
-        }
-    }
-
-    public function getTotalLeads_get()
-    {
-        $data = $this->Supplier_api->getTotalDataLeads();
-        
-        if ($data) {
-            $this->response([
-                'status' => true,
-                'data' => $data
-            ], RestController::HTTP_OK);
-        } else {
-            $this->response([
-                'status' => false,
-                'message' => 'Data tidak ditemukan'
-            ], RestController::HTTP_NOT_FOUND);
+            ], RestController::HTTP_BAD_REQUEST);
+            // ], RestController::HTTP_NOT_FOUND);
         }
     }
 }

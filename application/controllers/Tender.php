@@ -1069,8 +1069,8 @@ class Tender extends CI_Controller
     public function getJumKatalogTenderTerbaruByPengguna1()
     {
         parse_str(file_get_contents('php://input'), $data);
-        var_dump($data);
-        die;
+        // var_dump($data);
+        // die;
         $response = $this->Tender_model->getJumKatalogTenderTerbaruByPengguna1($data)->row();
 
         $this->output
@@ -1113,13 +1113,21 @@ class Tender extends CI_Controller
     {
         $response = array(
             // "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
-            "results" => $this->Tender_model->getListLokasiPekerjaanTenderTerbaru(
-                $this->input->get("q"),
-                $this->input->get("id_pengguna"),
-                $this->input->get("jenis"),
-                $this->input->get("page") * $this->input->get("page_limit"),
-                $this->input->get("page_limit")
-            )
+            // "results" => $this->Tender_model->getListLokasiPekerjaan(
+            "results" => [
+                '1' => 1,
+                '2' => $this->input->get("id_pengguna"),
+                '3' => $this->input->get("jenis"),
+                '4' => $this->input->get("page") * $this->input->get("page_limit"),
+                '5' => $this->input->get("page_limit")
+            ]
+            // "results" => $this->Tender_model->getListLokasiPekerjaanTenderTerbaru(
+            //     $this->input->get("q"),
+            //     $this->input->get("id_pengguna"),
+            //     $this->input->get("jenis"),
+            //     $this->input->get("page") * $this->input->get("page_limit"),
+            //     $this->input->get("page_limit")
+            // )
         );
 
         $this->output

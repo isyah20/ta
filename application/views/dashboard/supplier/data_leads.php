@@ -732,7 +732,7 @@
                     <div class="card-input wow fadeInUp">
                         <div class="row">
                             <div class="form-select-custom custom-select" style="padding:5px; margin-right:20px">
-                                <input type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                                <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
                                 <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
                             </div>
                         </div>
@@ -832,7 +832,7 @@
         <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
     </div>
 
-<!-- modal popup info kontak -->
+    <!-- modal popup info kontak -->
     <div class="col-12 py-5 align-content-center justify-content-center">
         <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal modal-lg" role="document">
@@ -881,7 +881,7 @@
             </div>
         </div>
     </div>
-<!-- end modal popup info kontak -->
+    <!-- end modal popup info kontak -->
 
 </section>
 
@@ -905,3 +905,65 @@
 
 </script>
 
+<script>
+    var filterElement = document.getElementById("input-cari-tender");
+    $(document).ready(function() {
+        // get data leads
+        $.ajax({
+            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                setTableLeads(data)
+            }
+        });
+
+    });
+
+    // filter data leads
+    filterElement.addEventListener("input", function(event) {
+        // Fungsi ini akan dipanggil setiap kali ada perubahan pada input
+        var filterValue = event.target.value;
+        filterLeads(filterValue);
+        console.log("Input yang diketik: " + filterValue);
+    });
+
+    function filterLeads(key) {
+        $.ajax({
+            url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
+            type: "GET",
+            data: {
+                key: key
+            },
+            dataType: "json",
+            success: function(data) {
+                console.log(data, 'data');
+                setTableLeads(data)
+            }
+        });
+    }
+
+    function setTableLeads(data) {
+        var leads = "";
+
+        $.each(data, function(index, value) {
+            var rowNumber = index + 1;
+            var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
+            leads +=
+                `<tr>
+                <td style="text-align:center">` + rowNumber + `</td>
+                <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
+                <td class="npwp">` + (value.npwp || '') + `</td>
+                <td>` + (value.nama || '') + `</td>
+                <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
+                <td>` + (value.no_telp || '') + `<span><button class="allcontact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+                <td>
+                    <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
+                </td>
+            </tr>`;
+        });
+
+        $("#data-leads").html(leads);
+    }
+</script>
