@@ -1010,55 +1010,55 @@
 
 <!-- modal popup info kontak -->
 <div class="col-12 py-5 align-content-center justify-content-center">
-            <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
-                <div class="modal-dialog custom-modal modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-0">
-                            <img class="image-modal" src="<?= base_url("assets/img/red-whatsapp.svg") ?>" alt="Image" style="width: 75px; height: 75px; padding: 0;">
-                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                            </button>
-                        </div>
-                        <div class="modal-body border-0">
-                            <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
-                            <p class="text-center">PT Telekomunikasi Indonesia</p>
-                            <div class="input-popup align-items-center">
-                                <div class="input-popup justify-content-end">
-                                    <table class="table table-striped popup-table">
-                                        <thead class="popup-thead">
-                                            <tr>
-                                                <th>Nama</th>
-                                                <th>Posisi</th>
-                                                <th>Email</th>
-                                                <th>No. Telp</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="data-kontak">
-                                            <!-- <td>joko</td>
-                                            <td>HRD</td>
-                                            <td>hrd@telkom.co.id</td>
-                                            <td>0811-2345-6666</td> -->
-                                        </tbody>
-                                    </table>
-                                </div>
+        <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <img class="image-modal" src="<?= base_url("assets/img/red-whatsapp.svg") ?>" alt="Image" style="width: 75px; height: 75px; padding: 0;">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
+                        <p class="text-center">PT Telekomunikasi Indonesia</p>
+                        <div class="input-popup align-items-center">
+                            <div class="input-popup justify-content-end">
+                                <table class="table table-striped popup-table">
+                                    <thead class="popup-thead">
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Posisi</th>
+                                            <th>Email</th>
+                                            <th>No. Telp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="data-kontak">
+                                        <!-- <td>joko</td>
+                                        <td>HRD</td>
+                                        <td>hrd@telkom.co.id</td>
+                                        <td>0811-2345-6666</td> -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-start mt-3 gap-2">
-                                <div></div>
-                                <div class="link flex-row align-items-center w-100">
-                                    <span>
-                                        <a class="btn-custom text-white text-center" data-toggle="modal" data-target="#inputKontakModal" data-dismiss="modal">
-                                            <i class="fas me-1"></i>Tutup
-                                        </a>
-                                    </span>
-                                </div>
+                            <div></div>
+                            <div class="link flex-row align-items-center w-100">
+                                <span>
+                                    <a class="btn-custom text-white text-center" data-toggle="modal" data-target="#inputKontakModal" data-dismiss="modal">
+                                        <i class="fas me-1"></i>Tutup
+                                    </a>
+                                </span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end modal popup info kontak -->
+<!-- end modal popup info kontak -->
+
 
 </section>
 
@@ -1073,7 +1073,8 @@
     // Get total leads
     $(document).ready(function() {
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
+            // url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
+            url: "<?php echo base_url('api/supplier/getCount'); ?>",
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -1136,7 +1137,8 @@
         $(document).ready(function() {
             // get data leads
             $.ajax({
-                url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getLead/" + id_pengguna,
+                // url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getLead/" + id_pengguna,
+                url: "<?php echo base_url('api/supplier/getLead/'); ?>" + id_pengguna,
                 type: "GET",
                     dataType: "json",
                     success: function(data) {

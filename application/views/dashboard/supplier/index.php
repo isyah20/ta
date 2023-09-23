@@ -466,7 +466,7 @@
                             </div>
                             <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
                                 <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px; margin-left:10px">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">1234</h1>
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-pemenang-tender">1234</h1>
                             </div>
                         </div>
                     </div>
@@ -475,11 +475,11 @@
                     <div class="shadow rounded-3 bg-white">
                         <div class="card-body">
                             <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                <p class="card-title">Total Pemenang Tender</p>
+                                <p class="card-title" >Pemenang Tender Terbaru</p>
                             </div>
                             <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
                             <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px; margin-left:10px">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">1234</h1>
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-pemenang-tender-terbaru">1234</h1>
                             </div>
                         </div>
                     </div>
@@ -949,7 +949,7 @@
             return markup;
         },
         ajax: {
-            url: "'http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/getListLokasiPekerjaan'",
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/getListLokasiPekerjaan",
             // url: "<?= base_url('api/getListLokasiPekerjaan') ?>",
             dataType: 'json',
             delay: 250,

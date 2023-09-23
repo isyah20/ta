@@ -990,7 +990,7 @@
 }
 
 .table-responsive.custom-table-scroll {
-max-height: 300px;
+max-height: 600px;
 /* Atur tinggi maksimum sesuai kebutuhan */
 overflow-y: auto;
 /* Aktifkan overflow-y untuk scrolling vertikal jika diperlukan */
@@ -1183,7 +1183,6 @@ overflow-y: auto;
                             <table class="table custom-table-container">
                                 <thead class="thead text-center">
                                     <tr>
-                                        <th></th>
                                         <th>No.</th>
                                         <th class="custom-padding">Tender Yang Dimanangkan</th>
                                         <th>Lokasi Pekerjaan</th>
