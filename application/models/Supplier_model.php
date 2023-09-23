@@ -313,7 +313,7 @@ class Supplier_model extends CI_Model
         return print_r(json_encode($option));
     }
 
-    public function getDataLeadFilter($id, $nama_perusahaan)
+    public function getDataLeadFilter($id_pengguna, $nama_perusahaan)
     {
         $sql = "SELECT
         data_leads.id_lead AS id,
@@ -330,11 +330,12 @@ class Supplier_model extends CI_Model
             pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
         LEFT JOIN
             kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
-        WHERE LOWER(nama_perusahaan) LIKE LOWER('%{$nama_perusahaan}%')
         WHERE
-            data_leads.id_pengguna = $id 
+            data_leads.id_pengguna = $id_pengguna
+            AND LOWER(nama_perusahaan) LIKE LOWER('%{$nama_perusahaan}%')
         GROUP BY
-            data_leads.id_lead";
+            data_leads.id_lead
+        ";
 
         $query = $this->db->query($sql);
 

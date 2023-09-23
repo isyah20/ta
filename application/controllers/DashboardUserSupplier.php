@@ -563,8 +563,9 @@ class DashboardUserSupplier extends CI_Controller
 
     public function getDataLeadFilter()
     {
+        $id_pengguna = $this->input->get('id_pengguna');
         $keyword = $this->input->get('key');
-        $data = $this->Supplier_model->getDataLeadFilter($keyword);
+        $data = $this->Supplier_model->getDataLeadFilter($id_pengguna, $keyword);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }

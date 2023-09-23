@@ -921,7 +921,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">99</h1>
+                                    <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">0</h1>
                                 </div>
                             </div>
                         </div>
@@ -934,7 +934,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp total" data-wow-delay="0.3s">62</h1>
+                                    <h1 class="card-text wow fadeInUp total" data-wow-delay="0.3s">0</h1>
                                 </div>
                             </div>
                         </div>
@@ -947,7 +947,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">37</h1>
+                                    <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">0</h1>
                                 </div>
                             </div>
                         </div>
@@ -1063,104 +1063,124 @@
 </section>
 
 
-<!-- script popup -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    // Get total leads
-    $(document).ready(function() {
-        $.ajax({
-            // url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
-            url: "<?php echo base_url('api/supplier/getCount'); ?>",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                $('.belum-lengkap').html(data.data.jumlah);
-                // $('.belum-lengkap').html(data.data.belum_lengkap);
-                var belum = data.data.jumlah
-                $.ajax({
-                url: "<?= base_url('api/supplier/getTotal') ?>",
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    // $('.total-leads').html(data.total_leads);
-                    $('.total-leads').html(data.data);
-                    var total = data.data
+    var filterElement = document.getElementById("input-cari-tender");
+    // Get id from cookies
+    var id_pengguna = Cookies.get('id_pengguna');
 
-                    var jumlah = total - belum
-                    $('.total').html(jumlah);
-                }
-            })
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        })
-    })
-</script>
-
-<!-- <script>
-    // Get total leads
-    $(document).ready(function() {
-        $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                $('.belum-lengkap').html(data.data.jumlah);
-                // $('.belum-lengkap').html(data.data.belum_lengkap);
-                $.ajax({
-                url: "<?= base_url('api/supplier/getTotal') ?>",
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    // $('.total-leads').html(data.total_leads);
-                    $('.total-leads').html(data.data);
-                }
-            })
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        })
-    })
-</script> -->
-
-<script>
-        var filterElement = document.getElementById("input-cari-tender");
-         // Get id from cookies
-        id_pengguna = Cookies.get('id_pengguna');
-        
+        // Get total leads
         $(document).ready(function() {
-            // get data leads
             $.ajax({
-                // url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getLead/" + id_pengguna,
-                url: "<?php echo base_url('api/supplier/getLead/'); ?>" + id_pengguna,
+                url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    id_pengguna: id_pengguna
+                },
+                success: function(data) {
+                    $('.belum-lengkap').html(data.data.jumlah);
+                    // $('.belum-lengkap').html(data.data.belum_lengkap);
+                    var belum = data.data.jumlah
+                    $.ajax({
+                    url: "<?= base_url('api/supplier/getTotal') ?>",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        id_pengguna: id_pengguna
+                    },
+                    success: function(data) {
+                        // $('.total-leads').html(data.total_leads);
+                        $('.total-leads').html(data.data);
+                        var total = data.data
+
+                        var jumlah = total - belum
+                        $('.total').html(jumlah);
+                    }
+                })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            })
+        })
+
+        // get data leads
+        $(document).ready(function() {
+            $.ajax({
+                url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getLead/" + id_pengguna,
                 type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        setTableLeads(data)
-                }
-                
-            });
+                        var leads = "";
+                        $.each(data.data, function(index, value) {
+                            var rowNumber = index + 1;
+                            var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
+                            leads +=
+                                `<tr>
+                                <td style="text-align:center">` + rowNumber + `</td>
+                                <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
+                                <td class="npwp">` + (value.npwp || '') + `</td>
+                                <td>` + (value.nama || '') + `</td>
+                                <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
+                                <td>` + (value.no_telp || '') + `</td>
+                                <td><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                                <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+                                <td>
+                                    <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
+                                </td>
+                            </tr>`;
+                        });
+
+                        $("#data-leads").html(leads);
+
+                        //get data kontak
+                        $("#data-leads").on("click", ".contact", function() {
+                            var id_lead = $(this).data("id");
+                            $.ajax({
+                                url: "<?= site_url('DashboardUserSupplier/getKontakLeadById/') ?>" + id_lead,
+                                type: "GET",
+                                dataType: "json",
+                                success: function(data) {
+                                    var kontak = "";
+
+                                    $.each(data, function(index, value) {
+                                        kontak +=
+                                            `<tr>
+                                                <td>` + value.nama + `</td>
+                                                <td>` + value.posisi + `</td>
+                                                <td>` + value.email + `</td>
+                                                <td>` + value.no_telp + `</td>
+                                            </tr>`;
+                                    });
+
+                                    $("#infoKontakModal .data-kontak").html(kontak);
+                                },
+                                error: function() {
+                                    alert("Terjadi kesalahan saat mengambil data kontak.");
+                                }
+                            });
+                        });
+                            }
+                            
+                        });
         });
 
         // filter data leads
         filterElement.addEventListener("input", function(event) {
             // Fungsi ini akan dipanggil setiap kali ada perubahan pada input
             var filterValue = event.target.value;
-            filterLeads(filterValue);
+            filterLeads(id_pengguna, filterValue);
             console.log("Input yang diketik: " + filterValue);
         });
 
-        function filterLeads(key) {
+        function filterLeads(id_pengguna, key) {
             $.ajax({
                 url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
                 type: "GET",
                 data: {
+                    id_pengguna: id_pengguna,
                     key: key
                 },
                 dataType: "json",
@@ -1174,7 +1194,7 @@
         function setTableLeads(data) {
             var leads = "";
 
-            $.each(data.data, function(index, value) {
+            $.each(data, function(index, value) {
                 var rowNumber = index + 1;
                 var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
                 leads +=
@@ -1223,55 +1243,4 @@
                 });
             });
         }
-    // $(document).ready(function() {
-    //     // Get id from cookies
-    //     id_pengguna = Cookies.get('id_pengguna');
-    //     // Memuat data lead melalui AJAX
-    //     $.ajax({
-    //         url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getLead/" + id_pengguna,
-    //         type: "GET",
-    //         dataType: "json",
-    //         success: function(data) {
-    //             var leads = "";
-
-    //             $.each(data.data, function(index, value) {
-    //                 var rowNumber = index + 1;
-    //                 var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
-    //                 leads +=
-    //                     `<tr>
-    //                     <td style="text-align:center">` + rowNumber + `</td>
-    //                     <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-    //                     <td class="npwp">` + (value.npwp || '') + `</td>
-    //                     <td>` + (value.nama || '') + `</td>
-    //                     <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
-    //                     <td>` + (value.no_telp || '') + `</td>
-    //                     <td><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></button></td>
-    //                     <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-    //                     <td>
-    //                         <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
-    //                     </td>
-    //                 </tr>`;
-    //             });
-
-    //             $("#data-leads").html(leads);
-
-    //             //delete lead action
-    //             $(".deleteBtnLead").click(function() {
-    //                 var id_lead = $(this).data("id");
-
-    //                 $("#deleteConfirmedBtn").click(function() {
-    //                     window.location.href = "<?php echo base_url('DashboardUserSupplier/deleteDataLeadById/'); ?>" + id_lead;
-    //                 });
-    //             });
-
-    //             //lengkapi lead action
-    //             $(".lengkapiBtn").click(function() {
-    //                 var id_lead = $(this).data("id");
-
-    //                 var form = document.getElementById("formLengkapiLead");
-    //                 form.action = "<?= site_url('DashboardUserSupplier/updateDataLeads/') ?>" + id_lead;
-    //             });
-    //         }
-    //     });
-    // });
 </script>

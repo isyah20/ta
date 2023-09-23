@@ -467,7 +467,8 @@ class ApiSupplier extends RestController
 
     public function getCountLeadNull_get()
     {
-        $data = $this->Supplier_api->getCountDataLeads();
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getCountDataLeads($id_pengguna);
 
         if ($data) {
             $this->response([
@@ -484,7 +485,8 @@ class ApiSupplier extends RestController
 
     public function getTotalLeads_get()
     {
-        $data = $this->Supplier_api->getTotalDataLeads();
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getTotalDataLeads($id_pengguna);
 
         if ($data) {
             $this->response([
