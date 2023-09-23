@@ -196,8 +196,9 @@ class Supplier_api extends CI_Model
         return $query->result();
     }
 
-    public function getDataLeads($id)
+    public function getDataLeads($id_pengguna,$page_size,$page_number)
     {
+
         $sql = "SELECT
         data_leads.id_lead AS id,
         id_pengguna,
@@ -214,12 +215,12 @@ class Supplier_api extends CI_Model
         LEFT JOIN
             kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
         WHERE
-            data_leads.id_pengguna = $id 
+            data_leads.id_pengguna = $id_pengguna
         GROUP BY
-            data_leads.id_lead";
+            data_leads.id_lead
+        LIMIT {$page_number},{$page_size}";
 
-        $query = $this->db->query($sql);
-        return $query->result_array();
+        return $this->db->query($sql);
     }
 
         // Get total data leads

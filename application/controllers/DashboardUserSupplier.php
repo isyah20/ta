@@ -79,27 +79,33 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function getDataLeads($id)
+    public function getJumDataLeads()
     {
-        $data = $this->Supplier_model->getDataLeads($id);
-        $json_data = json_encode($data);
-        $this->output->set_content_type('application/json')->set_output($json_data);
+        $response = $this->Supplier_model->getJumDataLeads()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
     }
 
-    public function getTotalPages()
-{
-    $data = $this->Supplier_model->getDataLeads();
-    $totalPages = ceil(count($data) / 10); // 10 adalah jumlah item per halaman
+    public function getDataLeads()
+    {
+        $page_size = $_GET['pageSize'];
+        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $response = $this->Supplier_model->getDataLeads($page_number, $page_size)->result();
 
-    $this->output
-        ->set_status_header(200)
-        ->set_content_type('application/json')
-        ->set_output(json_encode($totalPages, JSON_PRETTY_PRINT))
-        ->_display();
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
 
-    exit;
-}
-
+        exit;
+    }
 
     public function getDataLeadsById($id)
     {

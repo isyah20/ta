@@ -448,21 +448,20 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getLeads_get($id)
-    {
-        $data = $this->Supplier_api->getDataLeads($id);
+    public function getLeads_get()
+    {  
+        $id_pengguna = $this->input->get('id_pengguna');
+        $page_size = $_GET['pageSize'];
+        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $response = $this->Supplier_api->getDataLeads($id_pengguna,$page_size,$page_number)->result();
 
-        if ($data) {
-            $this->response([
-                'status' => true,
-                'data' => $data
-            ], RestController::HTTP_OK);
-        } else {
-            $this->response([
-                'status' => false,
-                'message' => 'Data tidak ditemukan'
-            ], RestController::HTTP_NOT_FOUND);
-        }
+        $this->output
+        ->set_status_header(200)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+
+        exit;
     }
 
     public function getCountLeadNull_get()

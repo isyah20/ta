@@ -378,11 +378,14 @@ class Supplier_model extends CI_Model
         return $query->num_rows() > 0;
     }
 
-    public function getDataLeads($id)
+    public function getJumDataLeads()
     {
-        
-        
+        $sql = "SELECT COUNT(*) AS total_leads FROM data_leads ";
+        return $this->db->query($sql);
+    }
 
+    public function getDataLeads($page_number, $page_size)
+    {
         $sql = "SELECT
         data_leads.*,
         IFNULL(kontak_lead.nama, '') AS nama_kontak,
@@ -406,12 +409,9 @@ class Supplier_model extends CI_Model
     LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
     LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
     LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
-    WHERE data_leads.id_pengguna = " . $id . ";
-    ";
+    LIMIT {$page_number},{$page_size}";
 
-        $query = $this->db->query($sql);
-
-        return $query->result_array();
+    return $this->db->query($sql);
     }
 
     public function getDataLeadByIdTim($id_tim)

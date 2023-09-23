@@ -3,6 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav { font-size: 1rem !important; }
+
     .animation {
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         -webkit-appearance: none;
@@ -1064,26 +1066,29 @@
 
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 
 <script>
-    var filterElement = document.getElementById("input-cari-tender");
-    // Get id from cookies
-    var id_pengguna = Cookies.get('id_pengguna');
+    $(document).ready(function() {
+		let id_pengguna = Cookies.get('id_pengguna');
+        var currentPage = 1;
+        var itemsPerPage = 10;
+        var total_leads;
+        var filterElement = document.getElementById("input-cari-tender");
 
         // Get total leads
-        $(document).ready(function() {
-            $.ajax({
-                url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
-                type: "GET",
-                dataType: "JSON",
-                data: {
-                    id_pengguna: id_pengguna
-                },
-                success: function(data) {
-                    $('.belum-lengkap').html(data.data.jumlah);
-                    // $('.belum-lengkap').html(data.data.belum_lengkap);
-                    var belum = data.data.jumlah
-                    $.ajax({
+        $.ajax({
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            success: function(data) {
+                $('.belum-lengkap').html(data.data.jumlah);
+                // $('.belum-lengkap').html(data.data.belum_lengkap);
+                var belum = data.data.jumlah
+                $.ajax({
                     url: "<?= base_url('api/supplier/getTotal') ?>",
                     type: "GET",
                     dataType: "JSON",
@@ -1103,99 +1108,67 @@
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
                 }
-            })
         })
 
-        // get data leads
-        $(document).ready(function() {
-            $.ajax({
-                url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getLead/" + id_pengguna,
-                type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        var leads = "";
-                        $.each(data.data, function(index, value) {
-                            var rowNumber = index + 1;
-                            var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
-                            leads +=
-                                `<tr>
-                                <td style="text-align:center">` + rowNumber + `</td>
-                                <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-                                <td class="npwp">` + (value.npwp || '') + `</td>
-                                <td>` + (value.nama || '') + `</td>
-                                <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
-                                <td>` + (value.no_telp || '') + `</td>
-                                <td><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                                <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-                                <td>
-                                    <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
-                                </td>
-                            </tr>`;
-                        });
-
-                        $("#data-leads").html(leads);
-
-                        //get data kontak
-                        $("#data-leads").on("click", ".contact", function() {
-                            var id_lead = $(this).data("id");
-                            $.ajax({
-                                url: "<?= site_url('DashboardUserSupplier/getKontakLeadById/') ?>" + id_lead,
-                                type: "GET",
-                                dataType: "json",
-                                success: function(data) {
-                                    var kontak = "";
-
-                                    $.each(data, function(index, value) {
-                                        kontak +=
-                                            `<tr>
-                                                <td>` + value.nama + `</td>
-                                                <td>` + value.posisi + `</td>
-                                                <td>` + value.email + `</td>
-                                                <td>` + value.no_telp + `</td>
-                                            </tr>`;
-                                    });
-
-                                    $("#infoKontakModal .data-kontak").html(kontak);
-                                },
-                                error: function() {
-                                    alert("Terjadi kesalahan saat mengambil data kontak.");
-                                }
-                            });
-                        });
+        //Get Leads with pagination
+        $.ajax({
+            url: "<?= base_url('api/supplier/getTotal') ?>",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        id_pengguna: id_pengguna
+                    },
+            success : function(data){
+                total_leads = data.data;
+                
+                $('#pagination-container').pagination({
+                    dataSource: "<?= base_url() ?>api/supplier/getLead",
+                    locator: '',
+                    totalNumber: total_leads,
+                    pageSize: 10,
+                    autoHidePrevious: true,
+                    autoHideNext: true,
+                    showNavigator: true,
+                    formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> data leads',
+                    position: 'bottom',
+                    className: 'paginationjs-theme-red paginationjs-big',
+                    ajax: {
+                        type: "GET",
+                        data: {
+                            id_pengguna: id_pengguna
+                        },
+                        beforeSend: function(xhr, settings) {
+                            const url = settings.url
+                            const params = new URLSearchParams(url)
+                            let currentPageNum = params.get('pageNumber')
+                            currentPageNum = parseInt(currentPageNum)
+                            if (currentPageNum >= 2 && id_pengguna == null) {
+                                window.location.href = `${base_url}login`
+                                return false
                             }
-                            
-                        });
+
+                            $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                        }
+                    },
+                    callback: function(data, pagination) {
+                        if (data != '') {
+                            currentPage = pagination.pageNumber;
+                            let html = setTableLeads(data);
+                            $('#data-leads').html(html);
+                        }
+                    }
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+            //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            }
         });
-
-        // filter data leads
-        filterElement.addEventListener("input", function(event) {
-            // Fungsi ini akan dipanggil setiap kali ada perubahan pada input
-            var filterValue = event.target.value;
-            filterLeads(id_pengguna, filterValue);
-            console.log("Input yang diketik: " + filterValue);
-        });
-
-        function filterLeads(id_pengguna, key) {
-            $.ajax({
-                url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
-                type: "GET",
-                data: {
-                    id_pengguna: id_pengguna,
-                    key: key
-                },
-                dataType: "json",
-                success: function(data) {
-                    console.log(data, 'data');
-                    setTableLeads(data)
-                }
-            });
-        }
-
+        
         function setTableLeads(data) {
             var leads = "";
-
+            
             $.each(data, function(index, value) {
-                var rowNumber = index + 1;
+                var rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
                 var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
                 leads +=
                     `<tr>
@@ -1242,5 +1215,32 @@
                     }
                 });
             });
+            
+            return leads;
         }
+
+        // filter data leads
+        filterElement.addEventListener("input", function(event) {
+            // Fungsi ini akan dipanggil setiap kali ada perubahan pada input
+            var filterValue = event.target.value;
+            filterLeads(id_pengguna, filterValue);
+            console.log("Input yang diketik: " + filterValue);
+        });
+
+        function filterLeads(id_pengguna, key) {
+            $.ajax({
+                url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
+                type: "GET",
+                data: {
+                    id_pengguna: id_pengguna,
+                    key: key
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data, 'data');
+                    setTableLeads(data)
+                }
+            });
+        }
+	});
 </script>
