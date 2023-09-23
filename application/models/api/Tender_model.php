@@ -2272,7 +2272,60 @@ class Tender_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function getPreferensiPengguna($id_pengguna)
+    {
+        $this->db->select("CASE WHEN REPLACE(id_lpse, '|', ',') <> '' THEN REPLACE(id_lpse, '|', ',') ELSE '0' END AS id_lpse");
+        $this->db->select("CASE WHEN jenis_pengadaan <> '' THEN jenis_pengadaan ELSE '0' END AS jenis_pengadaan");
+        $this->db->from("preferensi");
+        $this->db->where("id_pengguna", $id_pengguna);
 
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getListLokasiPekerjaanTenderTerbaru($keyword, $id_pengguna, $jenis, $page, $limit)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna)[0];
+
+        if ($jenis == '2') {
+            $sql = "SELECT id_wilayah AS id,wilayah AS text,kategori
+                    FROM
+                        (SELECT id_wilayah,wilayah,'1' AS kategori
+                        FROM wilayah,(SELECT CONCAT(LEFT(id_wilayah,2),'00') AS id_prov FROM wilayah,(SELECT CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1))) AS lokasi
+                        FROM preferensi,tender_terbaru,paket WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',tender_terbaru.nama_tender<>'',tender_terbaru.nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir)) GROUP BY lokasi) a
+                        WHERE wilayah=lokasi GROUP BY id_prov) a
+                        WHERE id_wilayah=id_prov
+                        
+                        -- UNION
+                        
+                        -- SELECT id_wilayah,wilayah,'2' AS kategori
+                        -- FROM wilayah,(SELECT CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1))) AS lokasi
+                        -- FROM preferensi,tender_terbaru,paket WHERE id_pengguna={$id_pengguna}  AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',tender_terbaru.nama_tender<>'',tender_terbaru.nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir)) GROUP BY lokasi) a
+                        -- WHERE wilayah=lokasi ORDER BY id_wilayah) a 
+                    -- WHERE wilayah LIKE '%{$keyword}%'
+                    LIMIT {$page},{$limit}";
+        } else if ($jenis == '4') {
+            $sql = "SELECT id_wilayah AS id,wilayah AS text,kategori
+                    FROM
+                        (SELECT id_wilayah,wilayah,'1' AS kategori
+                        FROM wilayah,(SELECT CONCAT(LEFT(id_wilayah,2),'00') AS id_prov FROM wilayah,(SELECT CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1))) AS lokasi
+                        FROM preferensi,pemenang WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir)) GROUP BY lokasi) a
+                        WHERE wilayah=lokasi GROUP BY id_prov) a
+                        WHERE id_wilayah=id_prov
+                        
+                        UNION
+                        
+                        SELECT id_wilayah,wilayah,'2' AS kategori
+                        FROM wilayah,(SELECT CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(tender_terbaru.lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1))) AS lokasi
+                        FROM preferensi,pemenang WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir)) GROUP BY lokasi) a
+                        WHERE wilayah=lokasi ORDER BY id_wilayah) a 
+                    WHERE wilayah LIKE '%{$keyword}%'
+                    LIMIT {$page},{$limit}";
+        }
+
+        return $this->db->query($sql)->result_array();
+        // return $preferensi;
+        // return $this->db->query($sql)->result_array();
+    }
     public function getTenderNotif()
     {
         $this->db->select([

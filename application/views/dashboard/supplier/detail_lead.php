@@ -104,7 +104,7 @@
 
     th.custom-padding,
     td.custom-padding {
-        max-width: 460px;
+        max-width: 350px;
         border: none;
         vertical-align: middle;
         height: 65px !important;
@@ -141,6 +141,7 @@
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+        margin-left: 25px;
     }
 
     .h4 {
@@ -366,20 +367,633 @@
     }
 
     #imageButton {
-    border: none;
-    padding: 0;
-    background: none;
-    cursor: pointer;
+        border: none;
+        padding: 0;
+        background: none;
+        cursor: pointer;
     }
 
     #imageButton:hover {
         opacity: 0.8;
     }
 
+    .custom-table-container {
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+
+    }
+
+
+    /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
+    @media (max-width: 767px) {
+
+        /* Menghilangkan gambar */
+        .col-4 {
+            display: none;
+        }
+
+        /* Mengatur overflow-x dan whitespace pada tabel */
+
+
+    }
+
+    /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
+    @media (min-width: 768px) {
+        .col-8 {
+            padding-left: 3rem;
+        }
+    }
+
+    /* CSS untuk menghilangkan padding pada perangkat mobile (lebar layar kurang dari atau sama dengan 767px) */
+    @media (max-width: 767px) {
+        .col-8 {
+            padding-left: 0;
+            width: 100%;
+        }
+
+        .row.g-0 {
+            margin: 0;
+            /* Menghapus margin pada perangkat mobile */
+        }
+
+        .custom-card-detail .row {
+
+            padding: 10px;
+        }
+
+        .table-contact {
+            flex-grow: unset;
+            white-space: nowrap;
+            overflow-x: auto;
+            /* Mengaktifkan scroll horizontal */
+        }
+
+
+
+    }
+
+
+    /* CSS untuk mengatur modal di perangkat mobile */
+    /* CSS untuk mengatur modal di perangkat mobile */
+    @media (max-width: 767px) {
+        .modal-dialog {
+            max-width: 90%;
+            /* Mengatur lebar maksimum modal agar sesuai dengan layar */
+        }
+
+        .modal-content {
+            overflow-y: auto;
+            /* Menambahkan scrolling vertical jika kontennya melebihi layar */
+            max-height: 80vh;
+            /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
+        }
+
+        /* Mengurangi ukuran teks di dalam modal */
+        .modal-title {
+            font-size: 18px;
+        }
+
+        .modal-body p {
+            font-size: 14px;
+        }
+
+        .form-label {
+            font-size: 14px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        .input-popup img {
+            max-width: 75%;
+            /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
+            height: auto;
+            /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
+        }
+
+        /* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
+    }
+
+    /* CSS untuk mengatur modal di perangkat desktop */
+    @media (min-width: 768px) {
+        .modal-dialog {
+            max-width: 600px;
+            /* Atur lebar maksimum modal di layar desktop */
+        }
+    }
+
+
+
+    /* hapus icon kecil di mobile  */
+    /* Gaya CSS untuk desktop */
+    .profile-image,
+    .contact-image {
+        display: block;
+        /* Menampilkan gambar di desktop */
+    }
+
+    /* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
+    @media screen and (max-width: 768px) {
+
+        .profile-image,
+        .contact-image {
+            display: none;
+            /* Menyembunyikan gambar di mobile */
+        }
+    }
     #saveButton {
         display: none;
     }
+</style>
+<style>
+    .animation {
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
 
+    .badge {
+        font-size: var(--bs-body-font-size);
+        font-weight: var(--bs-body-font-weight);
+        padding: 6px 10px;
+        border-radius: 7px 0 7px 0;
+        white-space: break-spaces;
+    }
+
+    .badge-danger {
+        background: var(--bs-red-primary);
+    }
+
+    .badge-akhirdaftar {
+        background: #fff8ea;
+        color: #ee9d0a;
+        border-radius: 0 7px 7px 0;
+        border: 1px solid #d18c0b;
+        padding: 5px 8px 6px 5px;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .filter {
+        border-radius: 1rem;
+        margin-inline: 10px;
+    }
+
+    .filter-item a {
+        display: flex;
+        align-items: center;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection--single {
+
+        /* padding: 0.85rem 2.25rem .85rem 1rem; */
+        background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right .76rem center;
+        /* background-size: 18px 18px; */
+    }
+
+    .select2-container--bootstrap-5 .select2-selection {
+        width: 135px;
+        /* min-height: calc(2.3em + .75rem + 2px); */
+        /* min-height:10px; */
+        /* padding: .375rem .75rem; */
+        padding: 7px 0px 5px 5px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        /* color: #212529; */
+        /* background-color: #f0e2e2; */
+        background-color: transparent;
+        border: none;
+        border-radius: 5px;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .select2-container--bootstrap-5.select2-container--open.select2-container--below .select2-selection {
+        border-bottom: 0 solid transparent;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .select2-container--bootstrap-5.select2-container--focus .select2-selection,
+    .select2-container--bootstrap-5.select2-container--open .select2-selection {
+        /* width: 221.5px; */
+        border-color: #ffffff00;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown {
+        border-color: #f0e2e2;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered .select2-selection__placeholder {
+        color: #212529;
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
+        border: 1px solid var(--bs-border-color-translucent);
+        border-radius: 5px;
+        left: 10px;
+        top: 2px;
+        z-index: 1000;
+    }
+
+    .select2-container .select2-selection--single {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        /* height: 18px; */
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear,
+    .select2-container--bootstrap-5 .select2-selection--single .select2-selection__clear {
+        cursor: pointer;
+        /* width: 7px; */
+        right: 0px;
+        bottom: 10px;
+        background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
+    }
+
+    .select2-container--bootstrap-5 {
+        padding-right: 0;
+    }
+
+    .select2-sorting+.select2-container--bootstrap-5 {
+        /* padding-right: 6px; */
+        padding-left: 0;
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
+        /* width: 307px !important; */
+        left: -25px;
+        width: 180px !important;
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
+    .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option[aria-selected=true]:not(.select2-results__option--highlighted) {
+        color: #fff;
+        background-color: #c50000;
+    }
+
+    .dropdown-sorting .text-dropdown {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    .dropdown-sorting li:hover {
+        background: #c50000;
+        border-radius: 0;
+    }
+
+    .dropdown-sorting .dropdown-menu::after {
+        top: -20px;
+    }
+
+    .dropdown-sorting .nav-link,
+    .dropdown-sorting a.nav-link:focus,
+    .dropdown-sorting a.nav-link:hover {
+        padding: 12px 9px !important;
+    }
+
+    .dropdown-sorting .dropdown-toggle::after {
+        display: none;
+    }
+
+    .paket {
+        margin-block: 8px !important;
+    }
+
+    .rincian-paket tr {
+        line-height: 1.4;
+    }
+
+    #pagination-container {
+        margin-inline: 10px;
+        margin-top: 15px !important;
+    }
+
+    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav {
+        font-size: var(--bs-body-font-size) !important;
+    }
+
+    .paginationjs .paginationjs-pages {
+        margin-top: -5px;
+    }
+
+    .paginationjs .paginationjs-pages li {
+        border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    }
+
+    .shadow-sm {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-white {
+        background-color: #fff;
+    }
+
+    .rounded {
+        border-radius: 10px;
+    }
+
+    .white-row {
+        background-color: white;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .shadow-sm {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .bg-white {
+        background-color: #fff;
+    }
+
+    .rounded {
+        border-radius: 10px;
+    }
+
+    .card-category {
+        margin: 0 15px;
+        border-radius: 10px;
+        background: var(--shade-font-white, #FFF);
+        box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);
+    }
+
+    .custom-container {
+        display: flex;
+        padding: 20px;
+        height: 70px;
+        align-items: flex-start;
+        gap: 8px;
+        border-radius: 10px 10px 0px 0px;
+        background: var(--primary-red-300, #E05151);
+    }
+
+    .custom-table {
+        width: 100%;
+        border: 1px solid var(--neutral-100, #F0E2E2)
+    }
+
+    .custom-table-container {
+        margin: 15px;
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+
+    }
+
+    .custom-table td {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--neutral-100, #F0E2E2)
+    }
+
+    .custom-table tr td:first-child {
+        border-left: 1px solid var(--neutral-100, #F0E2E2);
+    }
+
+    .custom-table tr td:last-child {
+        border-right: 1px solid var(--neutral-100, #F0E2E2);
+    }
+
+    .red-text {
+        color: #E05151;
+    }
+
+    @media (max-width: 576px) {
+        .wide {
+            text-align: center;
+            margin: 4px 35px;
+            width: 320px !important;
+        }
+
+        .sec-pemenang-terbaru {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .card-data {
+        border-radius: 10px;
+        background: var(--shade-font-white, #FFF);
+    }
+
+    .card-body {
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+
+    .title {
+        color: #B89494;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .card-title {
+        color: #B89494;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding-top: 10px;
+    }
+
+    .card-text {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .content-above-navbar {
+        margin-top: 100px;
+        /* Increase the margin-top value as needed */
+        z-index: 999;
+        /* Adjust the z-index value as needed */
+    }
+
+    .card-select {
+        font-size: 10px;
+        margin-left: 28px;
+        margin-top: 20px;
+        display: flex;
+    }
+
+    .form-select-custom {
+        width: 610px;
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
+        /* margin-top: 8px; */
+        /* padding: 10px; */
+        margin-bottom: 15px;
+        border: 1px solid;
+        background-color: white;
+    }
+
+
+    .form-input-custom {
+        border-radius: 20px;
+        font-size: 1rem;
+        width: 520px;
+    }
+
+    .col-6.d-flex {
+        margin: 0;
+        /* Menghilangkan margin */
+        padding: 0;
+        /* Menghilangkan padding */
+    }
+
+    .col-65 {
+        width: 65%;
+    }
+
+    .col-35 {
+        width: 35%;
+    }
+
+
+
+/* Media query untuk perangkat mobile dengan lebar maksimal 767px */
+@media (max-width: 767px) {
+
+/* Menghilangkan gambar */
+.col-4 {
+    display: none;
+}
+
+/* Mengatur overflow-x dan whitespace pada tabel */
+
+/* CSS untuk mengatur padding pada perangkat mobile */
+.col-8 {
+    padding-left: 0;
+    width: 100%;
+}
+
+.row.g-0 {
+    margin: 0;
+    /* Menghapus margin pada perangkat mobile */
+}
+
+.custom-card-detail .row {
+    padding: 10px;
+}
+
+.table-contact {
+    flex-grow: unset;
+    white-space: nowrap;
+    overflow-x: auto;
+    /* Mengaktifkan scroll horizontal */
+}
+
+/* CSS untuk mengatur modal di perangkat mobile */
+.modal-dialog {
+    max-width: 90%;
+    /* Mengatur lebar maksimum modal agar sesuai dengan layar */
+}
+
+.modal-content {
+    overflow-y: auto;
+    /* Menambahkan scrolling vertical jika kontennya melebihi layar */
+    max-height: 80vh;
+    /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
+}
+
+/* Mengurangi ukuran teks di dalam modal */
+.modal-title {
+    font-size: 18px;
+}
+
+.modal-body p {
+    font-size: 14px;
+}
+
+.form-label {
+    font-size: 14px;
+}
+
+.form-control {
+    font-size: 14px;
+}
+
+.input-popup img {
+    max-width: 75%;
+    /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
+    height: auto;
+    /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
+}
+
+/* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
+
+/* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
+.profile-image,
+.contact-image {
+    display: none;
+    /* Menyembunyikan gambar di mobile */
+}
+
+.icon-text img {
+    display: none;
+}
+
+.icon-text {
+    flex-direction: column;
+    /* Mengatur tampilan menjadi satu kolom */
+    align-items: flex-start;
+    padding: auto;
+    /* Mengatur agar elemen berada di tengah-tengah kolom */
+}
+
+.title-desc {
+    margin-left: 10px;
+}
+}
+
+/* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
+@media (min-width: 768px) {
+.col-8 {
+    padding-left: 3rem;
+}
+
+/* CSS untuk mengatur modal di perangkat desktop */
+.modal-dialog {
+    max-width: 600px;
+    /* Atur lebar maksimum modal di layar desktop */
+}
+
+/* Gaya CSS untuk desktop */
+.profile-image,
+.contact-image {
+    display: block;
+    /* Menampilkan gambar di desktop */
+}
+
+.mobile-image {
+    margin-left: 30px;
+    margin-bottom: 3px;
+}
+}
+
+.table-responsive.custom-table-scroll {
+max-height: 300px;
+/* Atur tinggi maksimum sesuai kebutuhan */
+overflow-y: auto;
+/* Aktifkan overflow-y untuk scrolling vertikal jika diperlukan */
+}
 </style>
 
 <section class="bg-white pt-3 my-5">
@@ -408,17 +1022,17 @@
                 <div class="col-4 justify-content-center align-content-start ">
                     <img src="<?= base_url('assets\img\img-detail-leads.svg') ?>" class="img-fluid rounded-start" alt="">
                 </div>
-                <div class="col-8 justify-content-center align-content-center" style="padding-left: 3rem;">
-                    <div class="card-detail-body">
+                <div class="col-8 justify-content-center align-content-center">
+                    <div class="card-detail-body mobile-card">
                         <div class="profile-summary">
                             <h4 class="h4">Profil Singkat Perusahaan</h4>
                             <img id="imageButton" src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" alt="">
                             <button id="saveButton" type="submit" class="btn btn-danger">
-                                    <i id="saveButton" class="fas me-1"></i>Tambahkan
+                                <i id="saveButton" class="fas me-1"></i>Tambahkan
                             </button>
                         </div>
                         <div class="profile-info my-2">
-                            <img src="<?= base_url('assets\img\pu_profil.svg') ?>" alt="">
+                        <img class="profile-image" src="<?= base_url('assets\img\pu_profil.svg') ?>" alt="">
                             <p id="editableParagraph" contenteditable="false">
                                 -
                             </p>
@@ -429,55 +1043,56 @@
                         </div>
 
                         <div class="contact-info">
-                            <img src="<?= base_url('assets\img\pu_contact.svg') ?>" alt="">
-                            <table class="table-contact table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Posisi</th>
-                                        <th>No. Telp / WA</th>
-                                        <th>Email</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="data-contact">
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Office</td>
-                                        <td>Nomor Kantor</td>
-                                        <td>(0274) 5980 3112</td>
-                                        <td>office@telkom.co.id</td>
-                                        <td>
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
+                        <img class="contact-image" src="<?= base_url('assets\img\pu_contact.svg') ?>" alt="">
+                            <div class="table-responsive">
+                                <table class="table-contact table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Posisi</th>
+                                            <th>No. Telp / WA</th>
+                                            <th>Email</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data-contact">
+                                        <tr>
+                                            <th>1</th>
+                                            <td>Office</td>
+                                            <td>Nomor Kantor</td>
+                                            <td>(0274) 5980 3112</td>
+                                            <td>office@telkom.co.id</td>
+                                            <td>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
 
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Office</td>
-                                        <td>Nomor Kantor</td>
-                                        <td>(0274) 5980 3112</td>
-                                        <td>office@telkom.co.id</td>
-                                        <td>
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>1</th>
+                                            <td>Office</td>
+                                            <td>Nomor Kantor</td>
+                                            <td>(0274) 5980 3112</td>
+                                            <td>office@telkom.co.id</td>
+                                            <td>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
 
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
-                                                <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                            </a>
-                                        </td>
-                                    </tr>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
+                                            </td>
+                                        </tr>
 
-                                </tbody>
-                            </table>
-
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="card-contact my-2">
                             <button type="button" class="custom-button justify-content-center" data-toggle="modal" data-target="#lengkapiLeadsModal">
@@ -490,51 +1105,125 @@
                 </div>
             </div>
             <div class="container wow fadeInUp">
+                <h3 class="title-pemenang">Riwayat Menang Tender</h3>
+                <div class="col-8">
+                    <div class="card-select wow fadeInUp">
+                        <div class="select-custom">
+                            <div class="row">
+                                <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <select class="select2-wilayah" style="border:none;">
+                                        <option></option>
+                                        <!-- <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
+                                    </select>
+                                </div>
+                                <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <select class="select2-jenis-pengadaan" style="border:none;">
+                                        <option></option>
+                                        <!-- <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
+                                    </select>
+                                </div>
+                                <!-- Select Trigger Filter Nilai Penawaran -->
+                                <div id="dropdownHPS" class="form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
+                                </div>
+                                <!-- Tampilah Nilai Penawaran -->
+                                <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
+                                    <div class="row m-0 formset-hps justify-content-center">
+                                        <div class="col-12 text-center" style="border-bottom: 1px solid #ddd;">
+                                            <div class="form-check p-0">
+                                                <input class="form-check-input" style="float: none;" type="checkbox" id="checkallhps" name="checkallhps" checked>
+                                                <label class="form-check-label ps-1" for="checkallhps">Semua</label>
+                                                <div class="form-text mt-0 mb-2">Centang untuk menampilkan semua nilai penawaran</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <p class="my-3">Silakan atur rentang nilai penawaran pada kolom di bawah ini:</p>
+                                        </div>
+                                        <div class="col-sm-5 pe-sm-0">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Nilai Awal (Rp)</span>
+                                                <input class="form-control" type="text" name="nilai_hps_awal" id="nilai_hps_awal" value="0" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 text-center py-1 px-0 d-none d-sm-block">-</div>
+                                        <div class="col-sm-5 ps-sm-0">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Nilai Akhir (Rp)</span>
+                                                <input class="form-control" type="text" name="nilai_hps_akhir" id="nilai_hps_akhir" value="0" disabled>
+                                                <div class="invalid-feedback">Nilai penawaran akhir harus lebih besar!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ul>
+                                <div class="form-select-custom w-300 d-flex" style="width: 130px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                    <select class="select2-tahun" id="wilayah" style="border:none;">
+                                        <option></option>
+                                        <!-- <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
-                        <h3 class="title-pemenang">Riwayat Menang Tender</h3>
-                        <table class="table custom-table-container">
-                            <thead class="thead text-center">
-                                <tr>
-                                    <th></th>
-                                    <th>No.</th>
-                                    <th class="custom-padding">Tender Yang Dimanangkan</th>
-                                    <th>Lokasi Pekerjaan</th>
-                                    <th>Jenis Pengadaan</th>
-                                    <th>Penawaran</th>
-                                    <th>Tahun Tender</th>
-                                </tr>
-                            </thead>
-                            <tbody id="data-leads">
-                                <tr>
-                                    <th></th>
-                                    <td>1</td>
-                                    <td class="custom-padding">Belanja Pemeliharaan Bangunan Gedung-Bangunan Gedung Tempat Tinggal-Asrama SLBN</td>
-                                    <td>Kabupaten Bantul</td>
-                                    <td>Pekerjaan Konstruksi</td>
-                                    <td class="green-td">Rp 1.500.000.000</td>
-                                    <td class="orange-td">2023</td>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <td>2</td>
-                                    <td class="custom-padding">Jasa Konsultansi Perorangan Manajer Standar Kurikulum Merdeka</td>
-                                    <td>Kabupaten Bantul</td>
-                                    <td>Pekerjaan Konstruksi</td>
-                                    <td class="green-td">Rp 1.500.000.000</i></td>
-                                    <td class="orange-td">2023</td>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <td>2</td>
-                                    <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
-                                    <td>Kabupaten Bantul</td>
-                                    <td>Pekerjaan Konstruksi</td>
-                                    <td class="green-td">Rp 1.500.000.000</i></td>
-                                    <td class="orange-td">2023</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-container">
+                        <div class="table-responsive custom-table-scroll">
+                            <table class="table custom-table-container">
+                                <thead class="thead text-center">
+                                    <tr>
+                                        <th></th>
+                                        <th>No.</th>
+                                        <th class="custom-padding">Tender Yang Dimanangkan</th>
+                                        <th>Lokasi Pekerjaan</th>
+                                        <th>Jenis Pengadaan</th>
+                                        <th>Penawaran</th>
+                                        <th>Tahun Tender</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="riwayat-tender">
+                                    <!-- <tr>
+                                        <th></th>
+                                        <td>1</td>
+                                        <td class="custom-padding">Belanja Pemeliharaan Bangunan Gedung-Bangunan Gedung Tempat Tinggal-Asrama SLBN</td>
+                                        <td>Kabupaten Bantul</td>
+                                        <td>Pekerjaan Konstruksi</td>
+                                        <td class="green-td">Rp 1.500.000.000</td>
+                                        <td class="orange-td">2023</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td>2</td>
+                                        <td class="custom-padding">Jasa Konsultansi Perorangan Manajer Standar Kurikulum Merdeka</td>
+                                        <td>Kabupaten Bantul</td>
+                                        <td>Pekerjaan Konstruksi</td>
+                                        <td class="green-td">Rp 1.500.000.000</i></td>
+                                        <td class="orange-td">2023</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td>2</td>
+                                        <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
+                                        <td>Kabupaten Bantul</td>
+                                        <td>Pekerjaan Konstruksi</td>
+                                        <td class="green-td">Rp 1.500.000.000</i></td>
+                                        <td class="orange-td">2023</td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                        <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
                     </div>
                 </div>
             </div>
@@ -543,7 +1232,7 @@
 
 
     <!-- modal lengkapi leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+    <div class="col-12 align-content-center justify-content-center">
         <div class="modal fade" id="tambahLeadsModal" tabindex="-1" role="dialog" aria-labelledby="tambahLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
                 <div class="modal-content">
@@ -597,7 +1286,7 @@
     <!-- end modal lengkapi leads -->
 
     <!-- modal tambah leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+    <div class="col-12 align-content-center justify-content-center">
         <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
                 <div class="modal-content">
@@ -658,7 +1347,7 @@
 
 
     <!-- modal hapus -->
-    <div class="col-12 py-5">
+    <div class="col-12">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal-delete" role="document">
                 <div class="modal-content">
@@ -701,6 +1390,7 @@
     <!-- end modal hapus -->
 </section>
 
+
 <!-- script popup -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -708,20 +1398,62 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- script tambahkan contact -->
 <script>
+    var global_npwp = '',
+        global_jenis_pengadaan = '',
+        global_penwaran_awal = 0,
+        global_penwaran_akhir = 0,
+        global_tahun = 0,
+        global_loc = '';
     // Get nama perusahaan and profil from data_leads and set it to the frontend
     $(document).ready(function() {
+        $('#checkallhps').on('click', function() {
+            let allhps = this.checked;
+            $('#nilai_hps_awal, #nilai_hps_akhir').prop('disabled', allhps);
+
+            if (allhps) hps_awal = hps_akhir = 0;
+            else {
+                $('#nilai_hps_awal').focus();
+                global_penwaran_awal = $('#nilai_hps_awal').val();
+                global_penwaran_akhir = $('#nilai_hps_akhir').val();
+            }
+
+            filterRiwayat();
+        });
+        $('#nilai_hps_awal, #nilai_hps_akhir').inputmask('decimal', {
+            'alias': 'numeric',
+            'groupSeparator': '.',
+            'autoGroup': true,
+            'digits': 0,
+            'digitsOptional': false,
+            'allowMinus': false,
+            'placeholder': '0',
+            'rightAlign': false,
+            'autoUnmask': true
+        }).on('keyup', function() {
+            global_penwaran_awal = $('#nilai_hps_awal').val();
+            global_penwaran_akhir = $('#nilai_hps_akhir').val();
+
+            if (parseInt(global_penwaran_akhir) < parseInt(global_penwaran_awal)) $('#nilai_hps_akhir').addClass('is-invalid');
+            else {
+                $('#nilai_hps_akhir').removeClass('is-invalid');
+                filterRiwayat();
+            }
+        });
         $.ajax({
             url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getProfile/1",
             method: "GET",
             dataType: "json",
             success: function(data) {
                 var id_leads = data.data.id_lead;
+                global_npwp = data.data.npwp;
+                var npwp = data.data.npwp;
                 console.log(id_leads);
+                console.log(npwp);
                 $("#namaPerusahaan").html(data.data.nama_perusahaan);
                 $("#editableParagraph").html(data.data.profil);
                 $("#npwp").html(data.data.npwp);
                 $("#alamat").html(data.data.alamat);
-                
+
                 $("#imageButton").click(function() {
                     $("#editableParagraph").attr("contenteditable", "true");
                     $("#saveButton").css("display", "block");
@@ -757,8 +1489,8 @@
                         id_lead: id_leads,
                         nama: $('input[name=nam]').val(),
                         posisi: $('input[name=pos]').val(),
-                        no_telp: $('input[name=no_tlp]').val(),
                         email: $('input[name=em]').val(),
+                        no_telp: $('input[name=no_tlp]').val()
                     }
 
                     $.ajax({
@@ -774,7 +1506,18 @@
                             }
                         }
                     })
-                })
+                });
+
+                $.ajax({
+                    url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/" + npwp,
+                    method: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data.data);
+                        initialSelect(data.data)
+                        setTabelRiwayat(data);
+                    }
+                });
             }
         });
 
@@ -891,12 +1634,189 @@
                 console.error(error);
             }
         })
+
+        function setTabelRiwayat(data) {
+            var riwayatTender = "";
+
+            $.each(data.data, function(index, value) {
+                var rowNumber = index + 1;
+                riwayatTender +=
+                    `<tr>
+    <td style="text-align:center">` + rowNumber + `</td>
+    <td class="custom-padding">` + (value.nama_tender || '') + `</td>
+    <td>` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</td>
+    <td>` + (value.jenis_pengadaan || '') + `</td>
+    <td style="color:#10B981">` + formatRupiah(value.harga_penawaran, 'Rp. ' || '') + `</td>
+    <td style="color:#EB650D">` + (value.tahun || '') + `</td>
+</tr>`;
+            });
+
+            $("#riwayat-tender").html(riwayatTender);
+        }
+
+        function initialSelect(data) {
+            let lokasi = [];
+            let jenis = [];
+            let tahun = [];
+
+            $.each(data, function(index, value) {
+                if (!lokasi.includes((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim())) {
+                    lokasi.push((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim());
+                }
+                if (!jenis.includes(value.jenis_pengadaan)) {
+                    jenis.push(value.jenis_pengadaan);
+                }
+                if (!tahun.includes(value.tahun)) {
+                    tahun.push(value.tahun);
+                }
+            });
+            console.log(lokasi, jenis, tahun, "UNIQ");
+
+            $('.select2-jenis-pengadaan').select2({
+                placeholder: "Jenis Pengadaan",
+                theme: 'bootstrap-5',
+                allowClear: true,
+                "language": {
+                    noResults: function() {
+                        return "<span>Tidak ada jenis pengadaan</span>";
+                    },
+                    loadingMore: function() {
+                        return "<span>Menampilkan lainnya...</span>";
+                    },
+                    searching: function() {
+                        return "<span>Mencari hasil...</span>";
+                    },
+                    errorLoading: function() {
+                        return "<span>Gagal menampilkan jenis pengadaan</span>";
+                    }
+                },
+                escapeMarkup: function(markup) {
+                    return markup;
+                },
+                data: jenis
+            }).on('change', function() {
+                global_jenis_pengadaan = $(this).val();
+                filterRiwayat();
+            });
+            $('.select2-wilayah').select2({
+                placeholder: "Lokasi Pekerjaan",
+                theme: 'bootstrap-5',
+                allowClear: true,
+                "language": {
+                    noResults: function() {
+                        return "<span>Tidak ada lokasi pekerjaan</span>";
+                    },
+                    loadingMore: function() {
+                        return "<span>Menampilkan lainnya...</span>";
+                    },
+                    searching: function() {
+                        return "<span>Mencari hasil...</span>";
+                    },
+                    errorLoading: function() {
+                        return "<span>Gagal menampilkan lokasi pekerjaan</span>";
+                    }
+                },
+                escapeMarkup: function(markup) {
+                    return markup;
+                },
+                data: lokasi
+            }).on('change', function() {
+                global_loc = $(this).val();
+                filterRiwayat();
+            });
+            $('.select2-tahun').select2({
+                placeholder: "Tahun",
+                theme: 'bootstrap-5',
+                allowClear: true,
+                "language": {
+                    noResults: function() {
+                        return "<span>Tidak ada tahun</span>";
+                    },
+                    loadingMore: function() {
+                        return "<span>Menampilkan lainnya...</span>";
+                    },
+                    searching: function() {
+                        return "<span>Mencari hasil...</span>";
+                    },
+                    errorLoading: function() {
+                        return "<span>Gagal menampilkan tahun</span>";
+                    }
+                },
+                escapeMarkup: function(markup) {
+                    return markup;
+                },
+                data: tahun
+            }).on('change', function() {
+                global_tahun = $(this).val();
+                console.log(tahun, "Value Tahun Select");
+                filterRiwayat();
+            });
+        }
+
+        function filterRiwayat() {
+            console.log(global_tahun);
+            let params = {
+                'npwp': global_npwp,
+                'jenis_pengadaan': global_jenis_pengadaan,
+                'nilai_penawaran_awal': global_penwaran_awal,
+                'nilai_penawaran_akhir': global_penwaran_akhir,
+                'lokasi': global_loc,
+                'tahun': global_tahun,
+            };
+
+            // $.ajax({
+            //     url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangFilter",
+            //     // url: "<?= base_url() ?>api/supplier/getPemenangFilter/" + npwp + "/" + loc + "/" + jenis_pengadaan + "/" + penwaran_awal + "/" + penwaran_akhir + "/" + tahun,
+            //     type: "POST",
+            //     dataType: "JSON",
+            //     data: params,
+            //     success: function(data) {
+            //         console.log(data, "data Filtered");
+            //     },
+            //     error: function(jqXHR, textStatus, errorThrown) {}
+            // });
+            console.log(params);
+            $.ajax({
+                url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangFilter",
+                method: "POST",
+                dataType: "json",
+                data: params,
+                success: function(data) {
+                    console.log(data);
+                    setTabelRiwayat(data);
+                    // initialSelect(data.data)
+                    // var riwayatTender = "";
+
+                    // $.each(data.data, function(index, value) {
+                    //     var rowNumber = index + 1;
+                    //     riwayatTender +=
+                    //         `<tr>
+                    //     <td style="text-align:center">` + rowNumber + `</td>
+                    //     <td class="custom-padding">` + (value.nama_tender || '') + `</td>
+                    //     <td>` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</td>
+                    //     <td>` + (value.jenis_pengadaan || '') + `</td>
+                    //     <td style="color:#10B981">` + formatRupiah(value.harga_penawaran, 'Rp. ' || '') + `</td>
+                    //     <td style="color:#EB650D">` + (value.tahun || '') + `</td>
+                    // </tr>`;
+                    // });
+
+                    // $("#riwayat-tender").html(riwayatTender);
+                },
+                error: function() {
+                    var data = [];
+                    setTabelRiwayat(data);
+                },
+            });
+
+        }
     });
 
+
+
     // $(document).ready(function() {
-       
+
     // })
-    
+
     // saveButton.style.display = "none";
 
     // var imageButton = document.getElementById("imageButton");

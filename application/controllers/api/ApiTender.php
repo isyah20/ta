@@ -176,6 +176,34 @@ class ApiTender extends RestController
         //     ], RestController::HTTP_NOT_FOUND);
         // }
     }
+    public function getListLokasiPekerjaan_post()
+    {
+        $response = array(
+            // "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+            // "results" => $this->Tender_model->getListLokasiPekerjaan(
+            // "results" => [
+            //     '1' => $this->input->post("q"),
+            //     '2' => $this->input->post("id_pengguna"),
+            //     '3' => $this->input->post("jenis"),
+            //     '4' => $this->input->post("page") * $this->input->post("page_limit"),
+            //     '5' => $this->input->post("page_limit")
+            // ]
+            "results" => $this->Tender_model->getListLokasiPekerjaanTenderTerbaru(
+                $this->input->post("q"),
+                $this->input->post("id_pengguna"),
+                $this->input->post("jenis"),
+                $this->input->post("page") * $this->input->post("page_limit"),
+                $this->input->post("page_limit")
+            )
+        );
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
 
     public function getId_get($id)
     {
