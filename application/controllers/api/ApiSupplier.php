@@ -334,7 +334,7 @@ class ApiSupplier extends RestController
     {
         $data = [
             'id_lead' => $this->post('id_lead'),
-            'nama' => $this->post('nama_tim'),
+            'nama' => $this->post('nama'),
             'posisi' => $this->post('posisi'),
             'no_telp' => $this->post('no_telp'),
             'email' => $this->post('email')

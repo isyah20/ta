@@ -363,7 +363,6 @@
         border-radius: 5px;
         text-decoration: none;
         cursor: pointer;
-
     }
 
     #imageButton {
@@ -618,20 +617,20 @@
 
                                     <div class="col-6">
                                         <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" name="kontak[${kontakCounter}][nama]" class="form-control" id="inputNama" placeholder="Subandi">
+                                        <input type="text" name="nam" class="form-control" id="inputNama" placeholder="Subandi">
                                     </div>
 
                                     <div class="col-6">
                                         <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                        <input type="text" name="kontak[${kontakCounter}][posisi]" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                        <input type="text" name="pos" class="form-control" id="inputPosisi" placeholder="Marketing">
                                     </div>
                                     <div class="col-6">
                                         <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="email" name="kontak[${kontakCounter}][email]" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                        <input type="email" name="em" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
                                     </div>
                                     <div class="col-6">
                                         <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                        <input type="text" name="kontak[${kontakCounter}][no_telp]" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                        <input type="text" name="no_tlp" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
                                     </div>
 
                                     <!-- <div class="row g-2" id="container-kontak"></div>
@@ -751,19 +750,19 @@
                     });
                 });
 
-                $('#submit-input').click(function(event) {
-                    event.preventDefault();
+                $("#formLengkapiLead").submit(function(e) {
+                    e.preventDefault();
 
                     var form = {
                         id_lead: id_leads,
-                        nama: $("#inputNama").val(),
-                        posisi: $("#inputPosisi").val(),
-                        email: $("#inputEmail").val(),
-                        no_telp: $("#inputNoHP").val()
+                        nama: $('input[name=nam]').val(),
+                        posisi: $('input[name=pos]').val(),
+                        no_telp: $('input[name=no_tlp]').val(),
+                        email: $('input[name=em]').val(),
                     }
 
                     $.ajax({
-                        url: "<?= base_url('api/supplier/insertContact/') ?>",
+                        url: "<?= base_url('api/supplier/insertContact') ?>",
                         type: "POST",
                         data: form,
                         success: function(response) {
