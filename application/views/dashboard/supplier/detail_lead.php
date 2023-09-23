@@ -1000,14 +1000,14 @@ overflow-y: auto;
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-12 my-5">
             <h2 id="namaPerusahaan" class="mb-3 wow fadeInUp" style="order: 1;">
-                PT Telekomunikasi Indonesia, Tbk.
+                -
             </h2>
             <div class="row icon-text-container">
                 <div class="icon-text">
                     <img src="<?= base_url('assets\img\icon-npwp.svg') ?>" alt="">
-                    <p id="npwp" class="mb-0 ms-2 wow fadeInUp">08.178.554.2-123.213</p>
+                    <p id="npwp" class="mb-0 ms-2 wow fadeInUp">-</p>
                     <img src="<?= base_url('assets\img\icon-location.svg') ?>" alt="" style="margin-left: 30px; margin-bottom: 3px">
-                    <p id="alamat" class="mb-0 ms-2 wow fadeInUp">Jl. Gatot Subroto Kav. 52, Kuningan Barat, Mampang Prapatan, Jakarta Selatan, Jakarta</p>
+                    <p id="alamat" class="mb-0 ms-2 wow fadeInUp">-</p>
                 </div>
 
             </div>
@@ -1058,6 +1058,22 @@ overflow-y: auto;
                                     </thead>
                                     <tbody id="data-contact">
                                         <tr>
+                                            <th>Data Kosong</th>
+                                            <td>Data Kosong</td>
+                                            <td>Data Kosong</td>
+                                            <td>Data Kosong</td>
+                                            <td>Data Kosong</td>
+                                            <td>
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
+
+                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr>
                                             <th>1</th>
                                             <td>Office</td>
                                             <td>Nomor Kantor</td>
@@ -1072,23 +1088,7 @@ overflow-y: auto;
                                                     <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
                                                 </a>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <th>1</th>
-                                            <td>Office</td>
-                                            <td>Nomor Kantor</td>
-                                            <td>(0274) 5980 3112</td>
-                                            <td>office@telkom.co.id</td>
-                                            <td>
-                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
-                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                                </a>
-
-                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
-                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        </tr> -->
 
                                     </tbody>
                                 </table>
@@ -1244,8 +1244,8 @@ overflow-y: auto;
 
 
                     <div class="modal-body border-0">
-                        <h3 class="modal-title" id="tambahLeadsModalLabel">Tambah Kontak</h3>
-                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+                        <h3 class="modal-title" id="tambahLeadsModalLabel">Edit Kontak</h3>
+                        <p class="text-center">Edit Data Kontak</p>
                         <div class="input-popup align-items-center">
                             <div class="input-popup justify-content-end">
                                 <form class="row g-2" method="post" id="formTambahLead">
@@ -1298,7 +1298,7 @@ overflow-y: auto;
 
 
                     <div class="modal-body border-0">
-                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Tambak Kontak</h3>
+                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Tambah Kontak</h3>
                         <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
                         <div class="input-popup align-items-center">
                             <div class="input-popup justify-content-end">
@@ -1306,20 +1306,20 @@ overflow-y: auto;
 
                                     <div class="col-6">
                                         <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" name="nam" class="form-control" id="inputNama" placeholder="Subandi">
+                                        <input type="text" name="nam" class="form-control" id="inputNama" placeholder="Subandi" required>
                                     </div>
 
                                     <div class="col-6">
                                         <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                        <input type="text" name="pos" class="form-control" id="inputPosisi" placeholder="Marketing">
+                                        <input type="text" name="pos" class="form-control" id="inputPosisi" placeholder="Marketing" required>
                                     </div>
                                     <div class="col-6">
                                         <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="email" name="em" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
+                                        <input type="email" name="em" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com" required>
                                     </div>
                                     <div class="col-6">
                                         <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                        <input type="text" name="no_tlp" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
+                                        <input type="text" name="no_tlp" class="form-control" id="inputNoHP" placeholder="0878 6463 0101" required>
                                     </div>
 
                                     <!-- <div class="row g-2" id="container-kontak"></div>
@@ -1404,6 +1404,10 @@ overflow-y: auto;
         global_penwaran_akhir = 0,
         global_tahun = 0,
         global_loc = '';
+
+        // Get id from url
+        var id_profile = window.location.pathname.split('/')[4];
+        console.log(id_profile);
     // Get nama perusahaan and profil from data_leads and set it to the frontend
     $(document).ready(function() {
         $('#checkallhps').on('click', function() {
@@ -1440,7 +1444,7 @@ overflow-y: auto;
             }
         });
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getProfile/1",
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getProfile/" + id_profile,
             method: "GET",
             dataType: "json",
             success: function(data) {
@@ -1500,7 +1504,7 @@ overflow-y: auto;
                         success: function(response) {
                             if (response.status == true) {
                                 alert('Data berhasil ditambahkan')
-                                window.location.href = "<?= base_url('suplier/leads/1') ?>";
+                                window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
                             } else {
                                 alert('Data gagal ditambahkan')
                             }
@@ -1523,7 +1527,7 @@ overflow-y: auto;
 
         // Ajax to get data kontak
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getContact/1",
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getContact/" + id_profile,
             method: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -1613,7 +1617,7 @@ overflow-y: auto;
                                     success: function(response) {
                                         if (response.status == true) {
                                             alert("Berhasil mengubah kontak");
-                                            window.location.href = "<?= base_url('suplier/leads/1') ?>";
+                                            window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
                                         } else {
                                             alert("Gagal mengubah kontak");
                                         }
