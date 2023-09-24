@@ -43,7 +43,7 @@
 
     .select2-container--bootstrap-5 .select2-selection--single {
 
-        /* padding: 0.85rem 2.25rem .85rem 1rem; */
+        padding: 0.85rem 2.25rem .85rem 1rem;
         background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
         background-position: right .76rem center;
@@ -52,9 +52,6 @@
 
     .select2-container--bootstrap-5 .select2-selection {
         width: 135px;
-        /* min-height: calc(2.3em + .75rem + 2px); */
-        /* min-height:10px; */
-        /* padding: .375rem .75rem; */
         padding: 7px 0px 5px 5px;
         font-family: inherit;
         font-size: 1rem;
@@ -104,16 +101,18 @@
         box-sizing: border-box;
         cursor: pointer;
         display: block;
-        /* height: 18px; */
         user-select: none;
         -webkit-user-select: none;
     }
+
+    .select2-container .select2-selection--single .select2-selection__rendered
 
     .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear,
     .select2-container--bootstrap-5 .select2-selection--single .select2-selection__clear {
         cursor: pointer;
         width: 7px;
         right: 0px;
+        left: 130px;
         bottom: 10px;
         background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
     }
@@ -123,12 +122,10 @@
     }
 
     .select2-sorting+.select2-container--bootstrap-5 {
-        /* padding-right: 6px; */
         padding-left: 0;
     }
 
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
-        /* width: 307px !important; */
         left: -25px;
         width: 180px !important;
     }
@@ -187,142 +184,51 @@
     .paginationjs .paginationjs-pages li {
         border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
     }
-
-    .shadow-sm {
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .bg-white {
-        background-color: #fff;
-    }
-
-    .rounded {
-        border-radius: 10px;
-    }
-
-    .white-row {
-        background-color: white;
-        text-align: center;
-        border-radius: 0 0 10px 10px;
-    }
-
-    .shadow-sm {
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-    }
-
-    .bg-white {
-        background-color: #fff;
-    }
-
-    .rounded {
-        border-radius: 10px;
-    }
-
-    .card-category {
-        margin: 0 15px;
-        border-radius: 10px;
-        background: var(--shade-font-white, #FFF);
-    }
-
-    .custom-container {
-        display: flex;
-        padding: 20px;
-        height: 70px;
-        align-items: flex-start;
-        gap: 8px;
-        border-radius: 10px 10px 0px 0px;
-        background: var(--primary-red-300, #E05151);
-    }
-
-    .custom-table {
-        width: 100%;
-        border: 1px solid var(--neutral-100, #F0E2E2)
-    }
-
-    .custom-table-container {
-        margin: 15px;
-        border-radius: 10px 10px 10px 10px;
-        overflow: hidden;
-        border: 1px solid var(--neutral-100, #F0E2E2);
-    }
-
-    .custom-table td {
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid var(--neutral-100, #F0E2E2)
-    }
-
-    .custom-table tr td:first-child {
-        border-left: 1px solid var(--neutral-100, #F0E2E2);
-    }
-
-    .custom-table tr td:last-child {
-        border-right: 1px solid var(--neutral-100, #F0E2E2);
-    }
-
-    .red-text {
-        color: #E05151;
-    }
-
-    @media (max-width: 576px) {
-        .wide {
-            text-align: center;
-            margin: 4px 35px;
-            width: 320px !important;
-        }
-
-        .sec-pemenang-terbaru {
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
-    .card-data {
-        border-radius: 10px;
-        background: var(--shade-font-white, #FFF);
-    }
-
+    
     .card-body {
-        margin-top: 20px;
-        padding-left: 10px;
-        padding-top: 5px;
-        border-radius: 10px;
+        margin-top: 10px;
+        padding-left: 4%;
+        border-radius: 30px;
     }
-
+    
     .card-title p{
         color: #B89494;
         font-size: 0.75rem;
         font-weight: bold;
-        padding: 6px 0px 6px 4px;
+        padding: 6% 0% 6% 3%;
     }
-
+    
     .card-title {
         color: #B89494;
-        font-size: 0.75rem;
+        font-size: 26px;
         font-weight: bold;
         padding-top: 10px;
     }
-
+    
     .card-text {
-        font-size: 2rem;
+        font-size: 28px;
         font-weight: bold;
+        padding-top:2%;
     }
-
+    .card-img {
+        width: 35px;
+        height: 40px;
+        margin-right:6%;
+        margin-left:6%
+    }
+    
     .content-above-navbar {
-        margin-top: 80px;
+        margin-top: 65px;
         z-index: 999;
     }
-
+    
     .card-select {
         font-size: 10px;
         margin-left: 8px;
         margin-top: 20px;
         display: flex;
     }
-
+    
     .form-select-custom {
         width: 615px;
         color: #CCCCCC;
@@ -332,37 +238,29 @@
         border: 1px solid;
         background-color: white;
     }
-
+    
     .form-select-custom:hover{
-       border: 1.5px solid var(--primary-red-500, #D21B1B);
+        border: 1.5px solid var(--primary-red-500, #D21B1B);
     }
-
+    
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
+        width: 92%;
     }
-
-    .col-6.d-flex {
-        margin: 0;
-        /* Menghilangkan margin */
-        padding: 0;
-        /* Menghilangkan padding */
+@media (max-width: 576px) {
+    .sec-pemenang-terbaru {
+        margin-left: auto;
+        margin-right: auto;
     }
-
-    .col-65 {
-        width: 65%;
-    }
-
-    .col-35 {
-        width: 35%;
-    }
+}
 </style>
 
 <section class="mt-7 bg-white">
     <div class="container">
         <div class="row justify-content d-flex content-above-navbar">
             <div class="col-md-5 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
-                <h4 class="mb-0 ms-2 mt-4 wow fadeInUp w-660">
+                <h4 class="mb-0 ms-2 mt-4 wow fadeInUp w-660" style="padding-top:8px;">
                     Selamat Datang!<p class="pt-2">Yuk Lengkapi Data Calon Customermu<p>
                 </h4>
             </div>
@@ -379,29 +277,17 @@
                             <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                 <select class="select2-wilayah" id="wilayah" style="border:none;">
-                                    <option selected style="border:1px;">
-                                        Lokasi Pekerjaan
-                                    </option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
                                 </select>
                             </div>
                             <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                 <select class="select2-jenis-pengadaan" style="border:none;">
-                                    <option selected style="border:1px;">
-                                        Jenis Pengadaan
-                                    </option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
                                 </select>
                             </div>
                             <!-- Select Trigger Filter Nilai Penawaran -->
-                            <div id="dropdownHPS" class="col-sm-2 form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <div id="dropdownHPS" class="col-sm-2 form-select-custom d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                <button class="button-class" style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
+                                <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
                             </div>
                             <!-- Tampilah Nilai Penawaran -->
                             <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
@@ -432,7 +318,6 @@
                                     </div>
                                 </div>
                             </ul>
-
                             <!-- Filtering -->
                             <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 0;padding-right: 7px;">
                                 <a class="form-select-custom d-flex" style="width:40px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -445,9 +330,8 @@
                                     <li class="dropdown-item d-flex text-dropdown" data-sort="4">Penetapan Pemenang Terlama</li>
                                 </ul>
                             </div>
-
                             <!-- Search Nama -->
-                            <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:20px;">
+                            <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
                                 <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
                                 <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
                             </div>
@@ -455,62 +339,49 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 d-flex">
-                <div class="container-lg" style="width: 80px;" id="kosong"> 
-                </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                    <div class="shadow rounded-3 bg-white">
-                        <div class="card-body">
-                            <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                <p class="card-title">Total Pemenang Tender</p>
+            <div class="col-md-5">
+            <div class="row">
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 180px;">
+                        <div class="shadow rounded-3 bg-white ">
+                            <div class="card-body ">
+                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                    <p class="card-title ">Pemenang Hari Ini</p>
+                                </div>
+                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" class="card-img" alt="" >
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-today">0</h1>
+                                </div>
                             </div>
-                            <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                                <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px; margin-left:10px">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-pemenang-tender">1234</h1>
+                        </div>
+                    </div>
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 180px;">
+                        <div class="shadow rounded-3 bg-white ">
+                            <div class="card-body ">
+                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                    <p class="card-title ">Pemenang Bulan Ini</p>
+                                </div>
+                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" class="card-img" alt="">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-month">0</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 180px;">
+                        <div class="shadow rounded-3 bg-white">
+                            <div class="card-body">
+                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                    <p class="card-title">Pemenang Tahun Ini</p>
+                                </div>
+                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" class="card-img m-sm-none" alt="">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                    <div class="shadow rounded-3 bg-white">
-                        <div class="card-body">
-                            <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                <p class="card-title" >Pemenang Tender Terbaru</p>
-                            </div>
-                            <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                            <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="width: 40px; height: 40px; margin-right: 10px; margin-left:10px">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-pemenang-tender-terbaru">1234</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <!-- <div class="col-md-3" style="width: 420px;">
-            <div class="card-category pb-1 wow fadeInUp animation" data-wow-delay="0.2s">
-            <div class="custom-container">
-                <h3 style="color: white;">Kategori</h3>
-            </div>
-            <div class="custom-table-container">
-                <table class="custom-table">
-                <tr>
-                    <td style="padding-left: 10px;">Jasa Konsultasi Badan Usaha Konstruksi<span class="red-text">10</span></td>
-                </tr>
-                <tr>
-                    <td style="padding-left: 10px;">Pengadaan Barang<span class="red-text">10</span></td>
-                </tr>
-                <tr>
-                    <td style="padding-left: 10px;">Jenis Lainnya<span class="red-text">10</span></td>
-                </tr>
-                <tr>
-                    <td style="padding-left: 10px;">Pekerjaan Konstruksi<span class="red-text">10</span></td>
-                </tr>
-                <tr>
-                    <td style="padding-left: 10px;">Jasa Konsultansi Badan Usaha Konstruksi<span class="red-text">10</span></td>
-                </tr>
-                </table>
-            </div>
-            </div>
-        </div> -->
         </div>
 </section>
 
@@ -549,7 +420,7 @@
 
 <section>
     <div class="pt-3 pb-3 mt-5 bg-white">
-        <div id="sec-pemenang-terbaru" style="display: none; margin-left: 7.5%; margin-right: 7.5%;">
+        <div id="sec-pemenang-terbaru" style="display: none; margin-left: 6%; margin-right: 6%;">
             <!-- <div class="text-center mb-3">
                 <h3 class="tender-title text-center wow fadeInUp d-inline-block px-3 pb-2" data-wow-delay="0.5s">Pemenang Tender</h3>
             </div> -->
@@ -634,21 +505,35 @@
             type: "GET",
             dataType: "JSON",
             success: function(data) {
-                $('#total-pemenang-tender').html(data.jumlah_pemenang);
-                console.log(data.jumlah_pemenang);
+                    $('#total-today').html(data.total_today);
+                    $('#total-month').html(data.total_month);
+                    $('#total-year').html(data.total_year);
+                    // console.log(data.total_today);
             },
             error: function(jqXHR, textStatus, errorThrown) {}
         });
-        $.ajax({
-            url: "<?= base_url() ?>api/supplier/jumlah-pemenang-terbaru",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                $('#total-pemenang-tender-terbaru').html(data.jumlah_pemenang_terbaru);
-                console.log(data.jumlah_pemenang_terbaru);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {}
-        });
+
+        // $.ajax({
+        //     url: "<?= base_url() ?>api/supplier/jumlah-pemenang",
+        //     type: "GET",
+        //     dataType: "JSON",
+        //     success: function(data) {
+        //         $('#total-pemenang-tender').html(data.jumlah_pemenang);
+        //         console.log(data.jumlah_pemenang);
+        //     },
+        //     error: function(jqXHR, textStatus, errorThrown) {}
+        // });
+        // $.ajax({
+        //     url: "<?= base_url() ?>api/supplier/jumlah-pemenang-terbaru",
+        //     type: "GET",
+        //     dataType: "JSON",
+        //     success: function(data) {
+        //         $('#total-pemenang-tender-terbaru').html(data.jumlah_pemenang_terbaru);
+        //         console.log(data.jumlah_pemenang_terbaru);
+        //     },
+        //     error: function(jqXHR, textStatus, errorThrown) {}
+        // });
+
         $.ajax({
             url: "<?= base_url() ?>api/getPreferensiPengguna/" + id_pengguna,
             type: "GET",

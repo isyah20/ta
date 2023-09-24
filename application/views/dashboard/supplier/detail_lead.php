@@ -1,3 +1,6 @@
+<link href="<?= base_url() ?>assets/css/home/pagination.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
 <style>
     .icon-text-container {
         display: flex;
@@ -32,7 +35,7 @@
         /* Untuk tengahkankan card-detail */
     }
 
-    .custom-card-detail .row {
+    .custom-card-detail {
         align-items: center;
         /* Agar konten di tengah */
         padding: 20px;
@@ -193,19 +196,11 @@
         /* Margin atas untuk div dengan class "profile-info" */
     }
 
-    .table {
-        margin-top: 20px;
-        /* Margin atas untuk tabel */
-    }
-
     .table th,
     .table td {
         padding: 10px;
         /* Padding untuk sel dalam tabel */
     }
-
-
-
 
     .profile-summary,
     .profile-info,
@@ -213,7 +208,7 @@
         display: flex;
         align-items: flex-start;
         /* Ikon akan sejajar dengan bagian atas teks */
-        gap: 10px;
+        gap: 15px;
         /* Jarak antara ikon dan teks */
     }
 
@@ -238,9 +233,6 @@
     .contact-info {
         display: flex;
         align-items: center;
-        /* Ikon akan sejajar dengan teks tabel */
-        gap: 10px;
-        /* Jarak antara ikon dan tabel */
     }
 
     .table-contact {
@@ -258,6 +250,7 @@
 
     .table-contact thead th {
         font-size: 14px;
+        padding-right:8px;
         /* Atur ukuran font sesuai dengan kebutuhan Anda */
     }
 
@@ -383,6 +376,9 @@
         border: 1px solid var(--neutral-100, #F0E2E2);
 
     }
+    .space {
+        margin-left:2%;
+    }
 
 
     /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
@@ -395,19 +391,22 @@
 
         /* Mengatur overflow-x dan whitespace pada tabel */
 
+        .space {
+            margin-left:0px;
+        }
 
     }
 
     /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
     @media (min-width: 768px) {
-        .col-8 {
+        .col-7 {
             padding-left: 3rem;
         }
     }
 
     /* CSS untuk menghilangkan padding pada perangkat mobile (lebar layar kurang dari atau sama dengan 767px) */
     @media (max-width: 767px) {
-        .col-8 {
+        .col-7 {
             padding-left: 0;
             width: 100%;
         }
@@ -418,7 +417,6 @@
         }
 
         .custom-card-detail .row {
-
             padding: 10px;
         }
 
@@ -549,11 +547,11 @@
 
     .select2-container--bootstrap-5 .select2-selection--single {
 
-        /* padding: 0.85rem 2.25rem .85rem 1rem; */
+        padding: 0.85rem 2.25rem .85rem 1rem;
         background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
         background-position: right .76rem center;
-        /* background-size: 18px 18px; */
+        background-size: 18px 18px;
     }
 
     .select2-container--bootstrap-5 .select2-selection {
@@ -566,8 +564,6 @@
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
-        /* color: #212529; */
-        /* background-color: #f0e2e2; */
         background-color: transparent;
         border: none;
         border-radius: 5px;
@@ -614,12 +610,14 @@
         user-select: none;
         -webkit-user-select: none;
     }
+    .select2-container .select2-selection--single .select2-selection__rendered
 
     .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear,
     .select2-container--bootstrap-5 .select2-selection--single .select2-selection__clear {
         cursor: pointer;
-        /* width: 7px; */
+        width: 7px;
         right: 0px;
+        left: 500%;
         bottom: 10px;
         background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
     }
@@ -747,14 +745,6 @@
         border: 1px solid var(--neutral-100, #F0E2E2)
     }
 
-    .custom-table-container {
-        margin: 15px;
-        border-radius: 10px 10px 10px 10px;
-        overflow: hidden;
-        border: 1px solid var(--neutral-100, #F0E2E2);
-
-    }
-
     .custom-table td {
         padding: 10px;
         display: flex;
@@ -832,54 +822,37 @@
         display: flex;
     }
 
+    .form-select-custom:hover{
+        border: 1.5px solid var(--primary-red-500, #D21B1B);
+    }
+
     .form-select-custom {
-        width: 610px;
+        width: 615px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
-        /* margin-top: 8px; */
-        /* padding: 10px; */
         margin-bottom: 15px;
         border: 1px solid;
         background-color: white;
     }
 
-
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 520px;
     }
-
-    .col-6.d-flex {
-        margin: 0;
-        /* Menghilangkan margin */
-        padding: 0;
-        /* Menghilangkan padding */
-    }
-
-    .col-65 {
-        width: 65%;
-    }
-
-    .col-35 {
-        width: 35%;
-    }
-
-
 
 /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
 @media (max-width: 767px) {
 
 /* Menghilangkan gambar */
-.col-4 {
+.col-5 {
     display: none;
 }
 
 /* Mengatur overflow-x dan whitespace pada tabel */
 
 /* CSS untuk mengatur padding pada perangkat mobile */
-.col-8 {
+.col-7 {
     padding-left: 0;
     width: 100%;
 }
@@ -890,7 +863,7 @@
 }
 
 .custom-card-detail .row {
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .table-contact {
@@ -965,7 +938,7 @@
 
 /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
 @media (min-width: 768px) {
-.col-8 {
+.col-7 {
     padding-left: 3rem;
 }
 
@@ -981,6 +954,7 @@
     display: block;
     /* Menampilkan gambar di desktop */
 }
+
 
 .mobile-image {
     margin-left: 30px;
@@ -1019,10 +993,10 @@ overflow-y: auto;
     <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
         <div class="card-detail custom-card-detail">
             <div class="row g-0">
-                <div class="col-4 justify-content-center align-content-start ">
-                    <img src="<?= base_url('assets\img\img-detail-leads.svg') ?>" class="img-fluid rounded-start" alt="">
+                <div class="col-5 justify-content-center align-content-start">
+                    <img src="<?= base_url('assets\img\img-detail-leads.svg') ?>" class="img-fluid rounded-start" style="padding-top:40px"alt="">
                 </div>
-                <div class="col-8 justify-content-center align-content-center">
+                <div class="col-7 justify-content-center align-content-center">
                     <div class="card-detail-body mobile-card">
                         <div class="profile-summary">
                             <h4 class="h4">Profil Singkat Perusahaan</h4>
@@ -1032,104 +1006,93 @@ overflow-y: auto;
                             </button>
                         </div>
                         <div class="profile-info my-2">
-                        <img class="profile-image" src="<?= base_url('assets\img\pu_profil.svg') ?>" alt="">
+                        <img class="profile-image" src="<?= base_url('assets\img\pu_profil.svg') ?>" style="margin-left:8px" alt="">
                             <p id="editableParagraph" contenteditable="false">
                                 -
                             </p>
                         </div>
-
                         <div class="profil-summary my-3">
                             <h4 class="h4">Contact Person</h4>
                         </div>
-
-                        <div class="contact-info">
-                        <img class="contact-image" src="<?= base_url('assets\img\pu_contact.svg') ?>" alt="">
-                            <div class="table-responsive">
-                                <table class="table-contact table-borderless">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Posisi</th>
-                                            <th>No. Telp / WA</th>
-                                            <th>Email</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="data-contact">
-                                        <tr>
-                                            <th>Data Kosong</th>
-                                            <td>Data Kosong</td>
-                                            <td>Data Kosong</td>
-                                            <td>Data Kosong</td>
-                                            <td>Data Kosong</td>
-                                            <td>
-                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
-                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                                </a>
-
-                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
-                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <!-- <tr>
-                                            <th>1</th>
-                                            <td>Office</td>
-                                            <td>Nomor Kantor</td>
-                                            <td>(0274) 5980 3112</td>
-                                            <td>office@telkom.co.id</td>
-                                            <td>
-                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
-                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                                </a>
-
-                                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
-                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
-                                                </a>
-                                            </td>
-                                        </tr> -->
-
-                                    </tbody>
-                                </table>
+                        <div class="row">
+                            <div class="col">
+                                <img class="contact-image" src="<?= base_url('assets\img\pu_contact.svg') ?>" style="margin-left:8px"alt="">
+                            </div>
+                            <div class="col-11">
+                                <div class="contact-info">
+                                    <div class=" table table-responsive">
+                                        <table class="table table-contact table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama</th>
+                                                    <th scope="col">Posisi</th>
+                                                    <th >No. Telp / WA</th>
+                                                    <th >Email</th>
+                                                    <th >Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data-contact">
+                                            <!-- id="data-contact" -->
+                                                <tr>
+                                                    <td><b>-</b></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>Office</td>
+                                                    <td>Nomor Kantor</td>
+                                                    <td>(0274) 5980 3112</td>
+                                                    <td>office@telkom.co.id</td>
+                                                    <td>
+                                                        <a href="#" data-toggle="modal" data-target="#lengkapiLeadsModal" data-dismiss="modal">
+                                                            <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px;">
+                                                        </a>
+                                                        <a href="#" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                                            <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px;">
+                                                        </a>
+                                                    </td>
+                                                </tr> -->
+        
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-contact my-2">
+                        <div class="card-contact">
                             <button type="button" class="custom-button justify-content-center" data-toggle="modal" data-target="#lengkapiLeadsModal">
                                 <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                 Tambah Kontak
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>
             <div class="container wow fadeInUp">
                 <h3 class="title-pemenang">Riwayat Menang Tender</h3>
-                <div class="col-8">
-                    <div class="card-select wow fadeInUp">
-                        <div class="select-custom">
+                <div class="row">
+                <div class="col-md-">
+                    <div class="wow fadeInUp">
+                        <div class=" container-fluid">
                             <div class="row">
-                                <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                <div class="col-sm-2 form-select-custom d-flex space" style="width: 190px; margin-right:1%;margin-top: 2%">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-wilayah" style="border:none;">
-                                        <option></option>
-                                        <!-- <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option> -->
+                                    <option></option>
                                     </select>
                                 </div>
-                                <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:5px">
+                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-jenis-pengadaan" style="border:none;">
-                                        <option></option>
-                                        <!-- <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option> -->
+                                    <option></option>
                                     </select>
                                 </div>
                                 <!-- Select Trigger Filter Nilai Penawaran -->
-                                <div id="dropdownHPS" class="form-select-custom w-300 d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                <div class="col-sm-2 form-select-custom d-flex" id="dropdownHPS" style="width: 180px;margin-right:1%;margin-top: 2%;padding:5px 5px 5px 11px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
                                 </div>
@@ -1162,13 +1125,10 @@ overflow-y: auto;
                                         </div>
                                     </div>
                                 </ul>
-                                <div class="form-select-custom w-300 d-flex" style="width: 130px; margin-right:5px">
+                                <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-tahun" id="wilayah" style="border:none;">
                                         <option></option>
-                                        <!-- <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -1177,7 +1137,7 @@ overflow-y: auto;
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="table-container">
+                        <div style="margin-left:1.5%; margin-top:2%">
                         <div class="table-responsive custom-table-scroll">
                             <table class="table custom-table-container">
                                 <thead class="thead text-center">
@@ -1535,17 +1495,16 @@ overflow-y: auto;
                 for (i = 0; i < data.data.length; i++) {
                     html += `
                         <tr>
-                            <th>${i+1}</th>
                             <td>${data.data[i].nama}</td>
                             <td>${data.data[i].posisi}</td>
                             <td>${data.data[i].no_telp}</td>
                             <td>${data.data[i].email}</td>
                             <td>
-                                <a href="#" class="btn btn-link edit-btn" data-toggle="modal" data-target="#tambahLeadsModal" data-dismiss="modal" data-id="` + data.data[i].id_kontak + `" >
+                                <a href="#" data-toggle="modal" data-target="#tambahLeadsModal" data-dismiss="modal" data-id="` + data.data[i].id_kontak + `" >
                                     <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
                                 </a>
 
-                                <a href="#" class="btn btn-link del-btn" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal" data-id="` + data.data[i].id_kontak + `">
+                                <a href="#" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal" data-id="` + data.data[i].id_kontak + `">
                                     <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Image" style="width: 24px; height: 24px; padding: 0;">
                                 </a>
                             </td>
