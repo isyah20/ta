@@ -334,7 +334,7 @@ class ApiSupplier extends RestController
     {
         $data = [
             'id_lead' => $this->post('id_lead'),
-            'nama' => $this->post('nama_tim'),
+            'nama' => $this->post('nama'),
             'posisi' => $this->post('posisi'),
             'no_telp' => $this->post('no_telp'),
             'email' => $this->post('email')
@@ -447,4 +447,57 @@ class ApiSupplier extends RestController
             // ], RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function getLeads_get()
+    {  
+        $id_pengguna = $this->input->get('id_pengguna');
+        $page_size = $_GET['pageSize'];
+        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $response = $this->Supplier_api->getDataLeads($id_pengguna,$page_size,$page_number)->result();
+
+        $this->output
+        ->set_status_header(200)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+
+        exit;
+    }
+
+    public function getCountLeadNull_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getCountDataLeads($id_pengguna);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getTotalLeads_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getTotalDataLeads($id_pengguna);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
 }

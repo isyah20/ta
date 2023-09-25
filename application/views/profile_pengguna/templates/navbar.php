@@ -68,7 +68,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
             <ul class="navbar-nav mb-3 mb-md-0  mt-2 mt-lg-0 pe-lg-4 gap-3">
                 <li class="nav-item">
-                    <a class="nav-link text-white link-danger text-center active fw-bold" href="" id="nav_dashboard">Dashboard</a>
+                    <a class="nav-link text-white link-danger text-center fw-bold" href="" id="nav_dashboard">Dashboard</a>
                 </li>
 
                 <?php 
@@ -110,15 +110,15 @@
                     </li>
                 <?php endif; ?>
                 <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/marketing') ?>" id="nav_dashboard">Marketing</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Data Leads</a>
+                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Leads</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">Plotting Tim</a>
-                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link text-white link-danger text-center active fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">CRM</a>
+                    </li> -->
 
                     
                     <!-- <li class="nav-item dropdown dropdown-profile">

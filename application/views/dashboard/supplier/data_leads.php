@@ -3,6 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav { font-size: 1rem !important; }
+
     .animation {
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         -webkit-appearance: none;
@@ -192,6 +194,180 @@
         border: none;
         margin-left: 15px;
     }
+
+    @media (max-width: 767px) {
+        .overflow {
+            flex-direction: column;
+            /* Pindah ke tata letak kolom di perangkat mobile */
+        }
+
+        .col-6 {
+            width: 100%;
+            /* Mengisi lebar penuh pada perangkat mobile */
+        }
+
+        .card-input {
+            margin-bottom: 20px;
+            /* Berikan jarak antara kolom pencarian dengan card */
+        }
+    }
+
+    @media (max-width: 767px) {
+        .form-input-custom {
+            width: calc(100% - 50px);
+            /* Lebar input diambil dari 100% minus 30px padding dan margin-right */
+            max-width: 100%;
+            /* Lebar input tidak boleh melebihi lebar parent (form-select-custom) */
+        }
+
+        .overflow {
+            overflow: hidden;
+        }
+    }
+
+    /* PINDAH 3 CARD KEBAWAH  */
+    @media (max-width: 768px) {
+        .col-6.justify-content.d-flex {
+            flex-direction: column;
+            /* Mengubah tata letak menjadi satu kolom */
+        }
+
+        .container-lg {
+            width: 100%;
+            /* Mengisi seluruh lebar layar */
+            margin-bottom: 20px;
+            /* Menambahkan jarak antara card-card */
+        }
+    }
+
+    .custom-table-container {
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+
+    }
+
+
+    /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
+    @media (max-width: 767px) {
+
+        /* Menghilangkan gambar */
+        .col-4 {
+            display: none;
+        }
+
+        /* Mengatur overflow-x dan whitespace pada tabel */
+
+
+    }
+
+    /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
+    @media (min-width: 768px) {
+        .col-8 {
+            padding-left: 3rem;
+        }
+    }
+
+    /* CSS untuk menghilangkan padding pada perangkat mobile (lebar layar kurang dari atau sama dengan 767px) */
+    @media (max-width: 767px) {
+        .col-8 {
+            padding-left: 0;
+            width: 100%;
+        }
+
+        .row.g-0 {
+            margin: 0;
+            /* Menghapus margin pada perangkat mobile */
+        }
+
+        .custom-card-detail .row {
+
+            padding: 10px;
+        }
+
+        .table-contact {
+            flex-grow: unset;
+            white-space: nowrap;
+            overflow-x: auto;
+            /* Mengaktifkan scroll horizontal */
+        }
+
+
+
+    }
+
+
+    /* CSS untuk mengatur modal di perangkat mobile */
+    /* CSS untuk mengatur modal di perangkat mobile */
+    @media (max-width: 767px) {
+        .modal-dialog {
+            max-width: 90%;
+            /* Mengatur lebar maksimum modal agar sesuai dengan layar */
+        }
+
+        .modal-content {
+            overflow-y: auto;
+            /* Menambahkan scrolling vertical jika kontennya melebihi layar */
+            max-height: 80vh;
+            /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
+        }
+
+        /* Mengurangi ukuran teks di dalam modal */
+        .modal-title {
+            font-size: 18px;
+        }
+
+        .modal-body p {
+            font-size: 14px;
+        }
+
+        .form-label {
+            font-size: 14px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        .input-popup img {
+            max-width: 75%;
+            /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
+            height: auto;
+            /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
+        }
+
+        /* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
+    }
+
+    /* CSS untuk mengatur modal di perangkat desktop */
+    @media (min-width: 768px) {
+        .modal-dialog {
+            max-width: 600px;
+            /* Atur lebar maksimum modal di layar desktop */
+        }
+    }
+
+
+
+    /* hapus icon kecil di mobile  */
+    /* Gaya CSS untuk desktop */
+    .profile-image,
+    .contact-image {
+        display: block;
+        /* Menampilkan gambar di desktop */
+    }
+
+    /* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
+    @media screen and (max-width: 768px) {
+
+        .profile-image,
+        .contact-image {
+            display: none;
+            /* Menyembunyikan gambar di mobile */
+        }
+    }
+
+    
 </style>
 
 <style>
@@ -733,7 +909,7 @@
                         <div class="row">
                             <div class="form-select-custom custom-select" style="padding:5px; margin-right:20px">
                                 <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
-                                <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
+                                <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
                             </div>
                         </div>
                     </div>
@@ -746,8 +922,8 @@
                                     <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">99</h1>
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                    <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">0</h1>
                                 </div>
                             </div>
                         </div>
@@ -759,8 +935,8 @@
                                     <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">62</h1>
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                    <h1 class="card-text wow fadeInUp total" data-wow-delay="0.3s">0</h1>
                                 </div>
                             </div>
                         </div>
@@ -773,7 +949,7 @@
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">37</h1>
+                                    <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">0</h1>
                                 </div>
                             </div>
                         </div>
@@ -786,20 +962,22 @@
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
-                <table class="table custom-table-leads">
-                    <thead class="thead">
-                        <tr>
-                            <th class="custom-padding">No.</th>
-                            <th class="custom-padding">Nama Perusahaan</th>
-                            <th class="custom-padding">NPWP</th>
-                            <th class="custom-padding">Nama Kontak</th>
-                            <th class="custom-padding">Email</th>
-                            <th class="custom-padding">No. Telp / WA</th>
-                            <th class="custom-padding">Alamat</th>
-                            <th class="custom-padding">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="data-leads">
+                <div class="table-responsive">
+                    <table class="table custom-table-leads">
+                        <thead class="thead">
+                            <tr>
+                                <th class="custom-padding">No.</th>
+                                <th class="custom-padding">Nama Perusahaan</th>
+                                <th class="custom-padding">NPWP</th>
+                                <th class="custom-padding">Nama Kontak</th>
+                                <th class="custom-padding">Email</th>
+                                <th class="custom-padding">No. Telp / WA</th>
+                                <th></th>
+                                <th class="custom-padding">Alamat</th>
+                                <th class="custom-padding">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-leads">
                         <!-- <tr class="tbody-tr">
                             <td><span class="number">1</span></td>
                             <td class="perusahaan">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -824,14 +1002,16 @@
                                 <button class="btn btn-success toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
                             </td>
                         </tr>  -->
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
     </div>
 
-    <!-- modal popup info kontak -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+<!-- modal popup info kontak -->
+<div class="col-12 py-5 align-content-center justify-content-center">
         <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal modal-lg" role="document">
                 <div class="modal-content">
@@ -841,8 +1021,6 @@
                             <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                         </button>
                     </div>
-
-
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
                         <p class="text-center">PT Telekomunikasi Indonesia</p>
@@ -857,11 +1035,11 @@
                                             <th>No. Telp</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-kontak">
-                                        <td>joko</td>
+                                    <tbody class="data-kontak">
+                                        <!-- <td>joko</td>
                                         <td>HRD</td>
                                         <td>hrd@telkom.co.id</td>
-                                        <td>0811-2345-6666</td>
+                                        <td>0811-2345-6666</td> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -876,147 +1054,193 @@
                                 </span>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end modal popup info kontak -->
+<!-- end modal popup info kontak -->
+
 
 </section>
 
 
-<!-- script popup -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 
 <script>
-    function openModal(id) {
+    $(document).ready(function() {
+		let id_pengguna = Cookies.get('id_pengguna');
+        var currentPage = 1;
+        var itemsPerPage = 10;
+        var total_leads;
+        var filterElement = document.getElementById("input-cari-tender");
+
+        // Get total leads
         $.ajax({
-            url: "<?php echo site_url('suplier/getKontakNama/') ?>" + id,
+            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
             type: "GET",
             dataType: "JSON",
-            // data: { id: id },
-            // data : id,
-            success: function(data) {
-                var kontak = "";
-                $.each(data, function(index, value) {
-                    kontak +=
-                        `<tr>
-                    <td>` + value.nama + `</td>
-                    <td>` + value.posisi + `</td>
-                    <td>` + value.email + `</td>
-                    <td>` + value.no_telp + `</td>
-                </tr>`
-                });
-                $("#data-kontak").html(kontak);
-                $("#popup-content").html(data);
-                $("#popup").show();
-            },
-            error: function() {
-                alert("Terjadi kesalahan saat mengambil data.");
-            },
-        });
-    }
-
-    function closeModal() {
-        $("#popup").hide();
-    }
-
-    $(document).on("click", ".toggle-button", function() {
-        // var id = $(this).data("id_lead");
-        // var id = value.id_lead;
-        let id = $(this).closest("tr").find("td:eq(2)").text();
-        let id = $(this).closest("tr").find("td:eq(2)").text();
-        openModal(id);
-    });
-
-
-    $(document).on("click", "#popup-close", function() {
-        closeModal();
-    });
-
-    // Detail pop up
-    function closeModal() {
-        $("#popup_detail").hide();
-    }
-
-    $(document).on("click", ".toggle_button_detail", function() {
-        var id = $(this).data("id");
-        openModal(id);
-        $("#popup_detail").show();
-
-    });
-
-
-    $(document).on("click", "#popup_close_detail", function() {
-        closeModal();
-    });
-</script>
-
-<script>
-    var filterElement = document.getElementById("input-cari-tender");
-    $(document).ready(function() {
-        // get data leads
-        $.ajax({
-            url: "<?php echo site_url('DashboardUserSupplier/getDataLeads'); ?>",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                setTableLeads(data)
-            }
-        });
-
-    });
-
-    // filter data leads
-    filterElement.addEventListener("input", function(event) {
-        // Fungsi ini akan dipanggil setiap kali ada perubahan pada input
-        var filterValue = event.target.value;
-        filterLeads(filterValue);
-        console.log("Input yang diketik: " + filterValue);
-    });
-
-    function filterLeads(key) {
-        $.ajax({
-            url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
-            type: "GET",
             data: {
-                key: key
+                id_pengguna: id_pengguna
             },
-            dataType: "json",
             success: function(data) {
-                console.log(data, 'data');
-                setTableLeads(data)
+                $('.belum-lengkap').html(data.data.jumlah);
+                // $('.belum-lengkap').html(data.data.belum_lengkap);
+                var belum = data.data.jumlah
+                $.ajax({
+                    url: "<?= base_url('api/supplier/getTotal') ?>",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        id_pengguna: id_pengguna
+                    },
+                    success: function(data) {
+                        // $('.total-leads').html(data.total_leads);
+                        $('.total-leads').html(data.data);
+                        var total = data.data
+
+                        var jumlah = total - belum
+                        $('.total').html(jumlah);
+                    }
+                })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+        })
+
+        //Get Leads with pagination
+        $.ajax({
+            url: "<?= base_url('api/supplier/getTotal') ?>",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        id_pengguna: id_pengguna
+                    },
+            success : function(data){
+                total_leads = data.data;
+                
+                $('#pagination-container').pagination({
+                    dataSource: "<?= base_url() ?>api/supplier/getLead",
+                    locator: '',
+                    totalNumber: total_leads,
+                    pageSize: 10,
+                    autoHidePrevious: true,
+                    autoHideNext: true,
+                    showNavigator: true,
+                    formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> data leads',
+                    position: 'bottom',
+                    className: 'paginationjs-theme-red paginationjs-big',
+                    ajax: {
+                        type: "GET",
+                        data: {
+                            id_pengguna: id_pengguna
+                        },
+                        beforeSend: function(xhr, settings) {
+                            const url = settings.url
+                            const params = new URLSearchParams(url)
+                            let currentPageNum = params.get('pageNumber')
+                            currentPageNum = parseInt(currentPageNum)
+                            if (currentPageNum >= 2 && id_pengguna == null) {
+                                window.location.href = `${base_url}login`
+                                return false
+                            }
+
+                            $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                        }
+                    },
+                    callback: function(data, pagination) {
+                        if (data != '') {
+                            currentPage = pagination.pageNumber;
+                            let html = setTableLeads(data);
+                            $('#data-leads').html(html);
+                        }
+                    }
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+            //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
             }
         });
-    }
+        
+        function setTableLeads(data) {
+            var leads = "";
+            
+            $.each(data, function(index, value) {
+                var rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
+                var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
+                leads +=
+                    `<tr>
+                    <td style="text-align:center">` + rowNumber + `</td>
+                    <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
+                    <td class="npwp">` + (value.npwp || '') + `</td>
+                    <td>` + (value.nama || '') + `</td>
+                    <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
+                    <td>` + (value.no_telp || '') + `</td>
+                    <td><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                    <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+                    <td>
+                        <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
+                    </td>
+                </tr>`;
+            });
 
-    function setTableLeads(data) {
-        var leads = "";
+            $("#data-leads").html(leads);
 
-        $.each(data, function(index, value) {
-            var rowNumber = index + 1;
-            var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
-            leads +=
-                `<tr>
-                <td style="text-align:center">` + rowNumber + `</td>
-                <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-                <td class="npwp">` + (value.npwp || '') + `</td>
-                <td>` + (value.nama || '') + `</td>
-                <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
-                <td>` + (value.no_telp || '') + `<span><button class="allcontact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-                <td>
-                    <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
-                </td>
-            </tr>`;
+            //get data kontak
+            $("#data-leads").on("click", ".contact", function() {
+                var id_lead = $(this).data("id");
+                $.ajax({
+                    url: "<?= site_url('DashboardUserSupplier/getKontakLeadById/') ?>" + id_lead,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var kontak = "";
+
+                        $.each(data, function(index, value) {
+                            kontak +=
+                                `<tr>
+                                    <td>` + value.nama + `</td>
+                                    <td>` + value.posisi + `</td>
+                                    <td>` + value.email + `</td>
+                                    <td>` + value.no_telp + `</td>
+                                </tr>`;
+                        });
+
+                        $("#infoKontakModal .data-kontak").html(kontak);
+                    },
+                    error: function() {
+                        alert("Terjadi kesalahan saat mengambil data kontak.");
+                    }
+                });
+            });
+            
+            return leads;
+        }
+
+        // filter data leads
+        filterElement.addEventListener("input", function(event) {
+            // Fungsi ini akan dipanggil setiap kali ada perubahan pada input
+            var filterValue = event.target.value;
+            filterLeads(id_pengguna, filterValue);
+            console.log("Input yang diketik: " + filterValue);
         });
 
-        $("#data-leads").html(leads);
-    }
+        function filterLeads(id_pengguna, key) {
+            $.ajax({
+                url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
+                type: "GET",
+                data: {
+                    id_pengguna: id_pengguna,
+                    key: key
+                },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data, 'data');
+                    setTableLeads(data)
+                }
+            });
+        }
+	});
 </script>
