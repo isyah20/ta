@@ -188,6 +188,12 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
     <script>
+      var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+      let global_id_pengguna = Cookies.get('id_pengguna');
+
+      function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+      }
       $(document).ready(function() {
 
 
@@ -195,6 +201,7 @@
         getDataTim();
         getLeadByTim();
         getPlotTim();
+
         console.log(getLeadByTim(1), 'return data lead tim');
       });
 
@@ -203,6 +210,7 @@
         $.ajax({
           url: "<?= base_url('api/supplier/plot-tim'); ?>",
           type: "GET",
+          beforeSend: addAuthorizationHeader,
           // data: {
           //   id_tim: id
           // },
@@ -217,8 +225,12 @@
 
       function getDataLead() {
         $.ajax({
-          url: "<?= base_url('suplier/getleads'); ?>",
+          url: "<?= base_url('api/supplier/getLead/all'); ?>",
           type: "GET",
+          beforeSend: addAuthorizationHeader,
+          data: {
+            id_pengguna: global_id_pengguna
+          },
           success: function(result) {
             console.log(result);
             var dataLeadPlotted = getPlotTim();
@@ -314,6 +326,9 @@
                 <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
                 </div>`;
             });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
           }
         });
         console.log(leads, "LEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAD");

@@ -196,7 +196,7 @@ class Supplier_api extends CI_Model
         return $query->result();
     }
 
-    public function getDataLeads($id_pengguna,$page_size,$page_number)
+    public function getDataLeads($id_pengguna, $page_size, $page_number)
     {
 
         $sql = "SELECT
@@ -222,25 +222,50 @@ class Supplier_api extends CI_Model
 
         return $this->db->query($sql);
     }
+    public function getAllDataLeads($id_pengguna)
+    {
 
-        // Get total data leads
-        public function getTotalDataLeads($id_pengguna)
-        {
-            $this->db->select('COUNT(*) as total');
-            $this->db->from('data_leads');
-            $this->db->where('id_pengguna', $id_pengguna);
-            $query = $this->db->get();
-            return $query->row()->total;
-        }
-    
-        public function getCountDataLeads($id_pengguna)
-        {
-            $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
-            $this->db->from('data_leads');
-            $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
-            $this->db->where('kontak_lead.id_lead IS NULL');
-            $this->db->where('data_leads.id_pengguna', $id_pengguna);
-            $query = $this->db->get();
-            return $query->row_array();
-        }
+        $sql = "SELECT
+        data_leads.id_lead AS id,
+        id_pengguna,
+        nama_perusahaan,
+        data_leads.npwp,
+        profil,
+        pemenang.*,
+        kontak_lead.*,
+        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
+        FROM
+            data_leads
+        LEFT JOIN
+            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN
+            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+        WHERE
+            data_leads.id_pengguna = $id_pengguna
+        GROUP BY
+            data_leads.id_lead";
+
+        return $this->db->query($sql);
+    }
+
+    // Get total data leads
+    public function getTotalDataLeads($id_pengguna)
+    {
+        $this->db->select('COUNT(*) as total');
+        $this->db->from('data_leads');
+        $this->db->where('id_pengguna', $id_pengguna);
+        $query = $this->db->get();
+        return $query->row()->total;
+    }
+
+    public function getCountDataLeads($id_pengguna)
+    {
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->where('kontak_lead.id_lead IS NULL');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

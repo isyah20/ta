@@ -576,7 +576,7 @@ class DashboardUserSupplier extends CI_Controller
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
-    
+
     public function getJumlahPemenangTender()
     {
         $response = $this->Supplier_model->getJumlahPemenangTender()->row();
