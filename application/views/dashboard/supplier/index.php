@@ -341,7 +341,7 @@
             </div>
             <div class="col-md-5">
             <div class="row">
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 180px;">
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 32%;">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -354,7 +354,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 180px;">
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 34%;">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -367,7 +367,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 180px;">
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 34%;">
                         <div class="shadow rounded-3 bg-white">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
