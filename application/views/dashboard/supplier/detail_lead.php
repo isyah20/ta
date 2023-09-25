@@ -1034,7 +1034,7 @@ overflow-y: auto;
                                             <tbody id="data-contact">
                                             <!-- id="data-contact" -->
                                                 <tr>
-                                                    <td><b>-</b></td>
+                                                    <td><b>-<b></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
