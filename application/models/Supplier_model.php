@@ -436,12 +436,12 @@ class Supplier_model extends CI_Model
         $this->db->select('*');
         $this->db->from('plot_tim');
         $this->db->where('id_lead', $id_lead);
-        // $this->db->where('id_tim', $id_tim);
 
         $query = $this->db->get();
         $isSet = $query->num_rows();
 
         if ($isSet > 0) {
+            $this->db->where('id_lead', $id_lead);
             return $this->db->update('plot_tim', ['id_tim' => $id_tim]);
         }
         return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);

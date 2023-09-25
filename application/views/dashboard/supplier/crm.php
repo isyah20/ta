@@ -189,6 +189,8 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
     <script>
       $(document).ready(function() {
+
+
         getDataLead();
         getDataTim();
         getLeadByTim();
@@ -275,7 +277,7 @@
               console.log(getLeadByTim(value.id_tim));
               var rowNumber = index + 1;
               leads +=
-                `<div class="col"><h4 class="green title" onclick="toggleCardVisibility('container` + index + 2 + `)">` + value.nama_tim + `</h4>
+                `<div class="col"><h4 class="green title" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `</h4>
           <div class="mx-3">
             <div id="container` + index + 2 + `" class="workspace box green" data-id="` + value.id_tim + `">` +
                 getLeadByTim(value.id_tim) +
@@ -607,6 +609,22 @@
 </section>
 
 <script>
+  // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
+  function toggleCardVisibility(containerId) {
+    console.log("CLICKED");
+    const container = document.getElementById(containerId);
+    const card = container.querySelector(".card");
+    console.log(container, containerId);
+
+    if (card.style.display === "none") {
+      card.style.display = "inline-block";
+      container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
+    } else {
+      card.style.display = "none";
+      container.style.display = "none"; // Menyembunyikan container jika card terlihat
+    }
+  }
+
   function control() {
 
     const containers = document.querySelectorAll(".box");
@@ -636,9 +654,9 @@
       container.addEventListener("drop", () => {
         if (isDragging) {
 
-          console.log(draggedCard);
           var leadId = draggedCard.getAttribute('data-id');
           var timId = container.getAttribute('data-id');
+          console.log(draggedCard, leadId, timId);
 
           // Kirim data ke server menggunakan Ajax
           $.ajax({
@@ -699,22 +717,6 @@
     // });
 
 
-  }
-
-
-  // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
-  function toggleCardVisibility(containerId) {
-    console.log("CLICKED");
-    const container = document.getElementById(containerId);
-    const card = container.querySelector(".card");
-
-    if (card.style.display === "none") {
-      card.style.display = "inline-block";
-      container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
-    } else {
-      card.style.display = "none";
-      container.style.display = "none"; // Menyembunyikan container jika card terlihat
-    }
   }
 </script>
 
