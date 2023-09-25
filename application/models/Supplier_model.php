@@ -342,15 +342,21 @@ class Supplier_model extends CI_Model
         return $query->result_array();
     }
     
+    // public function getJumlahPemenangTender()
+    // {
+    //     $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang FROM pemenang";
+    //     // $query = $this->db->query($sql);
+    //     return $this->db->query($sql);
+    // }
+    
     public function getJumlahPemenangTender()
     {
-        $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang FROM pemenang";
-        // $query = $this->db->query($sql);
-        return $this->db->query($sql);
-    }
-    public function getJumlahPemenangTenderTerbaru()
-    {
-        $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang_terbaru FROM pemenang WHERE DATE(tgl_pemenang)=DATE(NOW());";
+        // $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang_terbaru FROM pemenang WHERE DATE(tgl_pemenang)=DATE(NOW());";
+        $sql = "SELECT
+        COUNT(DISTINCT CASE WHEN DATE(tgl_pemenang) = DATE(NOW()) THEN npwp ELSE NULL END) AS total_today,
+        COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) AND MONTH(tgl_pemenang) = MONTH(NOW()) THEN npwp ELSE NULL END) AS total_month,
+        COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) THEN npwp ELSE NULL END) AS total_year
+        FROM pemenang";
 
         return $this->db->query($sql);
     }

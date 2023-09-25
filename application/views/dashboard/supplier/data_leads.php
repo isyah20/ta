@@ -31,22 +31,7 @@
     tbody {
         margin: 10px;
         text-align: left;
-        font-size: 14px;
-    }
-
-    /* .th {
-        vertical-align: middle;
-    } */
-
-    .green-text {
-        color: #139728;
-    }
-
-    .number {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #333;
+        font-size: 14.5px;
     }
 
     .perusahaan {
@@ -75,13 +60,6 @@
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
     }
-
-    /* .btn-custom {
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: #EB650D;
-        color: #fff;
-    } */
 
     .shadow-sm {
         border-radius: 10px;
@@ -116,7 +94,7 @@
 
     .card-input {
         font-size: 10px;
-        margin-left: 20px;
+        margin-left: 12px;
         margin-top: 2rem;
         display: flex;
         width: 500px;
@@ -126,34 +104,10 @@
         gap: 10px;
     }
 
-    .toggle-button {
-        padding: 5px;
-        background-color: #059669;
-        color: #fff;
-        border: none;
-        border-radius: 5rem;
-    }
-
-    /* Style untuk ikon visibility */
-    .toggle-button i {
-        margin-left: 5px;
-        padding: 2px;
-    }
-
-    .toggle-button-detail {
-        background-color: #059669;
-    }
-
-    .toggle-button-detail i {
-        margin: 5px;
-    }
-
     .btn.btn-success {
         border-color: #059669;
         border-radius: 5px;
-        /* Mengatur radius sudut tombol */
         padding: 5px 10px;
-        /* Mengatur padding tombol secara berurutan: atas, kanan, bawah, kiri */
         gap: 10px;
         font-size: 13px;
     }
@@ -175,16 +129,16 @@
     }
 
     .form-select-custom {
-        /* width: 180px; */
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
     }
 
+    .form-select-custom:hover {
+        border: 1.5px solid var(--primary-red-500, #D21B1B);
+    }
+
     .form-input-custom {
-        /* height: 40px; */
-        /* color: #CCC; */
-        /* border-color: #CCC; */
         border-radius: 20px;
         font-size: 1rem;
         width: 420px;
@@ -200,26 +154,21 @@
     @media (max-width: 767px) {
         .overflow {
             flex-direction: column;
-            /* Pindah ke tata letak kolom di perangkat mobile */
         }
 
         .col-6 {
             width: 100%;
-            /* Mengisi lebar penuh pada perangkat mobile */
         }
 
         .card-input {
             margin-bottom: 20px;
-            /* Berikan jarak antara kolom pencarian dengan card */
         }
     }
 
     @media (max-width: 767px) {
         .form-input-custom {
             width: calc(100% - 50px);
-            /* Lebar input diambil dari 100% minus 30px padding dan margin-right */
             max-width: 100%;
-            /* Lebar input tidak boleh melebihi lebar parent (form-select-custom) */
         }
 
         .overflow {
@@ -231,14 +180,11 @@
     @media (max-width: 768px) {
         .col-6.justify-content.d-flex {
             flex-direction: column;
-            /* Mengubah tata letak menjadi satu kolom */
         }
 
         .container-lg {
             width: 100%;
-            /* Mengisi seluruh lebar layar */
             margin-bottom: 20px;
-            /* Menambahkan jarak antara card-card */
         }
     }
 
@@ -249,28 +195,18 @@
 
     }
 
-
-    /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
     @media (max-width: 767px) {
-
-        /* Menghilangkan gambar */
         .col-4 {
             display: none;
         }
-
-        /* Mengatur overflow-x dan whitespace pada tabel */
-
-
     }
 
-    /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
     @media (min-width: 768px) {
         .col-8 {
             padding-left: 3rem;
         }
     }
 
-    /* CSS untuk menghilangkan padding pada perangkat mobile (lebar layar kurang dari atau sama dengan 767px) */
     @media (max-width: 767px) {
         .col-8 {
             padding-left: 0;
@@ -279,7 +215,6 @@
 
         .row.g-0 {
             margin: 0;
-            /* Menghapus margin pada perangkat mobile */
         }
 
         .custom-card-detail .row {
@@ -291,30 +226,22 @@
             flex-grow: unset;
             white-space: nowrap;
             overflow-x: auto;
-            /* Mengaktifkan scroll horizontal */
         }
 
 
 
     }
 
-
-    /* CSS untuk mengatur modal di perangkat mobile */
-    /* CSS untuk mengatur modal di perangkat mobile */
     @media (max-width: 767px) {
         .modal-dialog {
             max-width: 90%;
-            /* Mengatur lebar maksimum modal agar sesuai dengan layar */
         }
 
         .modal-content {
             overflow-y: auto;
-            /* Menambahkan scrolling vertical jika kontennya melebihi layar */
             max-height: 80vh;
-            /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
         }
 
-        /* Mengurangi ukuran teks di dalam modal */
         .modal-title {
             font-size: 18px;
         }
@@ -333,39 +260,55 @@
 
         .input-popup img {
             max-width: 75%;
-            /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
             height: auto;
-            /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
         }
-
-        /* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
     }
 
-    /* CSS untuk mengatur modal di perangkat desktop */
     @media (min-width: 768px) {
         .modal-dialog {
             max-width: 600px;
-            /* Atur lebar maksimum modal di layar desktop */
         }
     }
 
-
-
-    /* hapus icon kecil di mobile  */
-    /* Gaya CSS untuk desktop */
     .profile-image,
     .contact-image {
         display: block;
-        /* Menampilkan gambar di desktop */
     }
 
-    /* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
     @media screen and (max-width: 768px) {
 
         .profile-image,
         .contact-image {
             display: none;
-            /* Menyembunyikan gambar di mobile */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .modal-dialog.custom-modal {
+            max-width: 90%;
+        }
+
+        .modal-content {
+            padding: 15px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+        }
+
+        .table.popup-table th,
+        .table.popup-table td {
+            font-size: 14px;
+        }
+
+        .btn-custom {
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
         }
     }
 </style>
@@ -454,7 +397,6 @@
 
     }
 
-    /* button popup */
     .btn-custom {
         display: flex;
         padding: 15px 30px;
@@ -465,19 +407,6 @@
         border-radius: 5px;
         background: var(--primary-red-400, #DF3131);
         color: white;
-        text-decoration: none;
-        cursor: pointer;
-
-    }
-
-    .btn-batal {
-        display: flex;
-        padding: 15px 30px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        align-self: stretch;
-        border-radius: 5px;
         text-decoration: none;
         cursor: pointer;
 
@@ -500,195 +429,6 @@
 </style>
 
 <style>
-    .popupDetail {
-        display: none;
-        position: fixed;
-        top: 53%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(255, 255, 255, 1);
-        z-index: 999;
-        padding: 0px;
-        border-radius: 40px 40px 40px 40px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-        max-width: 100%;
-        flex-direction: row;
-        font-size: 12px;
-        margin-top: 10px;
-        overflow-y: auto;
-    }
-
-    .popup-content-detail {
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        justify-content: left;
-        max-height: 80vh;
-        overflow-y: scroll;
-    }
-
-    .popup-close-detail {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* .popup-button {
-        background-color: #E05151;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 20px;
-        cursor: pointer;
-    } */
-
-    .popup img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .popup h2 {
-        font-size: 15px;
-        margin-top: 5px;
-        margin-left: 20px;
-        color: #333;
-    }
-
-    .popup p {
-        font-size: 18px;
-        color: #555;
-    }
-
-    .profile-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        margin-left: 20px;
-    }
-
-    .profile-container img {
-        margin-right: 10px;
-    }
-
-    .justify-text {
-        /* text-align: justify; */
-        display: flex;
-        width: none;
-        margin-left: 30px;
-        margin-right: 50px;
-    }
-
-    .item {
-        margin-bottom: 20px;
-        margin-left: 20px;
-    }
-
-    .item img {
-        margin-right: 5px;
-    }
-
-    .contact-container {
-        margin-bottom: 20px;
-        margin-left: 20px;
-    }
-
-    .contact-container img {
-        margin-right: 5px;
-    }
-
-    .contact-text {
-        margin-left: 70;
-    }
-
-    .h8 {
-        font-size: 12px;
-        font-weight: bold;
-        color: #8B6464;
-    }
-
-    body.modal-open-detail {
-        overflow: hidden;
-        overflow-y: scroll;
-    }
-
-
-    .bullets-text {
-        /* text-align: justify; */
-        display: flex;
-        width: none;
-        margin-left: 30px;
-        margin-right: 50px;
-    }
-
-    .bullets-text::before {
-        content: "\2022";
-        margin-right: 8px;
-    }
-
-
-    .custom-modal-lg {
-        width: 950px !important;
-        display: flex;
-        height: auto;
-        padding: 20px 30px 30px 30px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        flex-shrink: 0;
-    }
-
-    .modal p {
-        font-size: 14px;
-    }
-
-
-    .custom-modal-lg {
-        width: 950px !important;
-        display: flex;
-        height: auto;
-        padding: 20px 30px 30px 30px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        flex-shrink: 0;
-    }
-
-    .modal p {
-        font-size: 14px;
-    }
-</style>
-
-<style>
-    .animation {
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
-
-    .thead {
-        color: #fff;
-        background-color: #E05151;
-        text-align: left;
-        font-size: 15px;
-    }
-
-    tbody {
-        text-align: left;
-        font-size: 15px;
-    }
-
-    .green-text {
-        color: #139728;
-    }
-
     .rounded {
         width: 25px;
         height: 25px;
@@ -718,64 +458,6 @@
     .underlined {
         border-collapse: collapse;
         width: 100%;
-    }
-
-    .animation {
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
-
-    .thead {
-        color: #fff;
-        background-color: #E05151;
-        text-align: left;
-        font-size: 15px;
-    }
-
-    tbody {
-        text-align: left;
-        font-size: 15px;
-    }
-
-    .green-text {
-        color: #139728;
-    }
-
-    .rounded {
-        width: 25px;
-        height: 25px;
-        background-color: #553333;
-        border-radius: 10px 10px 10px 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 15px;
-    }
-
-    .custom-table-container {
-        border-radius: 10px 10px 10px 10px;
-        overflow: hidden;
-        border: 1px solid var(--neutral-100, #F0E2E2);
-
-    }
-
-    .btn-custom {
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: #EB650D;
-        color: #fff;
-    }
-
-    .underlined {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    .toggle-button i {
-        margin-left: 5px;
     }
 
     .link .btn-simpan {
@@ -809,12 +491,6 @@
         gap: 40px;
     }
 
-    .custom-modal-delete {
-
-        height: 768px;
-
-    }
-
     .btn-custom {
         display: flex;
         padding: 15px 30px;
@@ -825,19 +501,6 @@
         border-radius: 5px;
         background: var(--primary-red-400, #DF3131);
         color: white;
-        text-decoration: none;
-        cursor: pointer;
-
-    }
-
-    .btn-batal {
-        display: flex;
-        padding: 15px 30px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        align-self: stretch;
-        border-radius: 5px;
         text-decoration: none;
         cursor: pointer;
 
@@ -855,7 +518,6 @@
 
     .modal-body p {
         font-size: 18px;
-        /* Ganti ukuran font sesuai dengan keinginan Anda */
     }
 
     .custom-button {
@@ -878,9 +540,7 @@
         top: 0%;
         left: 50%;
         transform: translate(-50%, -50%);
-        /* background-color: #fff; */
         padding: 20px;
-        /* border-radius: 10px; */
         max-width: 80%;
         display: flex;
         flex-direction: column;
@@ -895,7 +555,7 @@
 
 <section class="bg-white pt-5 mt-5">
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
-        <h4 class="mb-0 ms-2 wow fadeInUp">Selamat Datang! <p>Yuk Lengkapi Data Calon Customermu</p>
+        <h4 class="mb-0 wow fadeInUp">Selamat Datang! <p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
         </h4>
     </div>
 </section>
@@ -908,7 +568,7 @@
                     <div class="card-input wow fadeInUp">
                         <div class="row">
                             <div class="form-select-custom custom-select" style="padding:5px; margin-right:20px">
-                                <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                                <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                                 <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="">
                             </div>
                         </div>
@@ -916,7 +576,7 @@
                 </div>
                 <div class="col-6 justify-content d-flex">
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                        <div class="shadow-sm bg-white">
+                        <div class="shadow rounded-3 bg-white">
                             <div class="card-body">
                                 <div>
                                     <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
@@ -929,7 +589,7 @@
                         </div>
                     </div>
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                        <div class="shadow-sm bg-white">
+                        <div class="shadow rounded-3 bg-white">
                             <div class="card-body">
                                 <div>
                                     <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
@@ -942,7 +602,7 @@
                         </div>
                     </div>
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                        <div class="shadow-sm bg-white">
+                        <div class="shadow rounded-3 bg-white">
                             <div class="card-body card-data">
                                 <div>
                                     <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
@@ -958,8 +618,7 @@
             </div>
         </div>
     </div>
-
-    <div class="container wow fadeInUp">
+    <div class="container wow fadeInUp" style="margin-top:10px">
         <div class="row">
             <div class="col">
                 <div class="table-responsive">
@@ -972,7 +631,8 @@
                                 <th class="custom-padding">Nama Kontak</th>
                                 <th class="custom-padding">Email</th>
                                 <th class="custom-padding">No. Telp / WA</th>
-                                <th></th>
+                                <th class="custom-padding">No. Telp / WA</th>
+                                <th class="custom-padding"></th>
                                 <th class="custom-padding">Alamat</th>
                                 <th class="custom-padding">Aksi</th>
                             </tr>
@@ -987,7 +647,7 @@
                             <td>0274 7471 234 <span><button class="allcontact"><img src="<?= base_url('assets\img\icon_allcontact.svg') ?>" alt="" title="kontak lainnya"></img></button></span></td>
                             <td>Jakarta, Indonesia</td>
                             <td>
-                                <button class="btn btn-success toggle-button-detail">Detail</button>
+                                <button class="btn btn-success">Detail</button>
                             </td>
                         </tr>
                         <tr class="tbody-tr">
@@ -999,7 +659,7 @@
                             <td>0274 7471 234 <span><button class="allcontact"><img src="<?= base_url('assets\img\icon_allcontact.svg') ?>" alt="" title="kontak lainnya"></img></button></span></td>
                             <td>Jakarta, Indonesia</td>
                             <td>
-                                <button class="btn btn-success toggle-button-detail" onclick="toggleButtonDetail()">Detail</button>
+                                <button class="btn btn-success">Detail</button>
                             </td>
                         </tr>  -->
                         </tbody>
@@ -1026,22 +686,24 @@
                         <p class="text-center">PT Telekomunikasi Indonesia</p>
                         <div class="input-popup align-items-center">
                             <div class="input-popup justify-content-end">
-                                <table class="table table-striped popup-table">
-                                    <thead class="popup-thead">
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Posisi</th>
-                                            <th>Email</th>
-                                            <th>No. Telp</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="data-kontak">
-                                        <!-- <td>joko</td>
-                                        <td>HRD</td>
-                                        <td>hrd@telkom.co.id</td>
-                                        <td>0811-2345-6666</td> -->
-                                    </tbody>
-                                </table>
+                                <div class="table-container">
+                                    <table class="table table-striped popup-table">
+                                        <thead class="popup-thead">
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Posisi</th>
+                                                <th>Email</th>
+                                                <th>No. Telp</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="data-kontak">
+                                            <!-- <td>joko</td>
+                                            <td>HRD</td>
+                                            <td>hrd@telkom.co.id</td>
+                                            <td>0811-2345-6666</td> -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mt-3 gap-2">
@@ -1078,7 +740,7 @@
         console.log('<?= api_url(); ?>');
         // Get total leads
         $.ajax({
-            url: "<?= api_url() . '/tenderplus/api/supplier/getCount'; ?>",
+            url: "<?= api_url() . '/api/supplier/getCount'; ?>",
             type: "GET",
             dataType: "JSON",
             data: {
@@ -1178,10 +840,10 @@
                     <td>` + (value.nama || '') + `</td>
                     <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
                     <td>` + (value.no_telp || '') + `</td>
-                    <td><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                    <td><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
                     <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
                     <td>
-                        <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success toggle-button-detail">Detail</a>
+                        <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success">Detail</a>
                     </td>
                 </tr>`;
             });
