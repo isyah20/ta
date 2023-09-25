@@ -555,7 +555,7 @@
 
 <section class="bg-white pt-5 mt-5">
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
-        <h4 class="mb-0 wow fadeInUp">Selamat Datang! <p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
+        <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
         </h4>
     </div>
 </section>
@@ -630,7 +630,6 @@
                                 <th class="custom-padding">NPWP</th>
                                 <th class="custom-padding">Nama Kontak</th>
                                 <th class="custom-padding">Email</th>
-                                <th class="custom-padding">No. Telp / WA</th>
                                 <th class="custom-padding">No. Telp / WA</th>
                                 <th class="custom-padding"></th>
                                 <th class="custom-padding">Alamat</th>
@@ -737,15 +736,21 @@
         var itemsPerPage = 10;
         var total_leads;
         var filterElement = document.getElementById("input-cari-tender");
-        console.log('<?= api_url(); ?>');
+        var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+
+        function addAuthorizationHeader(xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+        }
+
         // Get total leads
         $.ajax({
-            url: "<?= api_url() . '/api/supplier/getCount'; ?>",
+            url: "<?= base_url('api/supplier/getCount') ?>",
             type: "GET",
             dataType: "JSON",
             data: {
                 id_pengguna: id_pengguna
             },
+            beforeSend: addAuthorizationHeader,
             success: function(data) {
                 $('.belum-lengkap').html(data.data.jumlah);
                 // $('.belum-lengkap').html(data.data.belum_lengkap);
@@ -757,6 +762,7 @@
                     data: {
                         id_pengguna: id_pengguna
                     },
+                    beforeSend: addAuthorizationHeader,
                     success: function(data) {
                         // $('.total-leads').html(data.total_leads);
                         $('.total-leads').html(data.data);
@@ -774,12 +780,13 @@
 
         //Get Leads with pagination
         $.ajax({
-            url: "<?= api_url() . '/api/supplier/getTotal' ?>",
+            url: "<?= base_url('api/supplier/getTotal') ?>",
             type: "GET",
             dataType: "JSON",
             data: {
                 id_pengguna: id_pengguna
             },
+            beforeSend: addAuthorizationHeader,
             success: function(data) {
                 total_leads = data.data;
 
@@ -799,7 +806,8 @@
                         data: {
                             id_pengguna: id_pengguna
                         },
-                        beforeSend: function(xhr, settings) {
+                        beforeSend: addAuthorizationHeader,
+                        function(xhr, settings) {
                             const url = settings.url
                             const params = new URLSearchParams(url)
                             let currentPageNum = params.get('pageNumber')
@@ -898,6 +906,7 @@
                     key: key
                 },
                 dataType: "json",
+                beforeSend: addAuthorizationHeader,
                 success: function(data) {
                     console.log(data, 'data');
                     setTableLeads(data)
