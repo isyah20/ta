@@ -35,7 +35,8 @@ class DashboardUserSupplier extends CI_Controller
         $data = [
             'title' => 'Dashboard'
         ];
-
+        // var_dump(api_url());
+        // die;
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/supplier/index');
