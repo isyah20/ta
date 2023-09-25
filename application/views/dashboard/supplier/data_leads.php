@@ -3,7 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav { font-size: 1rem !important; }
+    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav {
+        font-size: 1rem !important;
+    }
 
     .animation {
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -366,8 +368,6 @@
             /* Menyembunyikan gambar di mobile */
         }
     }
-
-    
 </style>
 
 <style>
@@ -978,7 +978,7 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
-                        <!-- <tr class="tbody-tr">
+                            <!-- <tr class="tbody-tr">
                             <td><span class="number">1</span></td>
                             <td class="perusahaan">PT. Telekomunikasi Indonesia, Tbk.</td>
                             <td class="npwp">08.178.554.2-123.213</td>
@@ -1010,8 +1010,8 @@
         <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
     </div>
 
-<!-- modal popup info kontak -->
-<div class="col-12 py-5 align-content-center justify-content-center">
+    <!-- modal popup info kontak -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
         <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal modal-lg" role="document">
                 <div class="modal-content">
@@ -1059,7 +1059,7 @@
             </div>
         </div>
     </div>
-<!-- end modal popup info kontak -->
+    <!-- end modal popup info kontak -->
 
 
 </section>
@@ -1070,15 +1070,15 @@
 
 <script>
     $(document).ready(function() {
-		let id_pengguna = Cookies.get('id_pengguna');
+        let id_pengguna = Cookies.get('id_pengguna');
         var currentPage = 1;
         var itemsPerPage = 10;
         var total_leads;
         var filterElement = document.getElementById("input-cari-tender");
-
+        console.log('<?= api_url(); ?>');
         // Get total leads
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getCount",
+            url: "<?= api_url() . '/tenderplus/api/supplier/getCount'; ?>",
             type: "GET",
             dataType: "JSON",
             data: {
@@ -1104,23 +1104,23 @@
                         $('.total').html(jumlah);
                     }
                 })
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
         })
 
         //Get Leads with pagination
         $.ajax({
-            url: "<?= base_url('api/supplier/getTotal') ?>",
-                    type: "GET",
-                    dataType: "JSON",
-                    data: {
-                        id_pengguna: id_pengguna
-                    },
-            success : function(data){
+            url: "<?= api_url() . '/api/supplier/getTotal' ?>",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            success: function(data) {
                 total_leads = data.data;
-                
+
                 $('#pagination-container').pagination({
                     dataSource: "<?= base_url() ?>api/supplier/getLead",
                     locator: '',
@@ -1159,14 +1159,14 @@
                     }
                 });
             },
-            error: function (jqXHR, textStatus, errorThrown){
-            //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            error: function(jqXHR, textStatus, errorThrown) {
+                //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
             }
         });
-        
+
         function setTableLeads(data) {
             var leads = "";
-            
+
             $.each(data, function(index, value) {
                 var rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
                 var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
@@ -1215,7 +1215,7 @@
                     }
                 });
             });
-            
+
             return leads;
         }
 
@@ -1242,5 +1242,5 @@
                 }
             });
         }
-	});
+    });
 </script>
