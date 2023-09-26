@@ -1718,14 +1718,6 @@
 
 
 
-        .custom-card-detail .row {
-
-            /* padding: 10px; */
-
-        }
-
-
-
         .table-contact {
 
             flex-grow: unset;
@@ -2912,10 +2904,21 @@
                         success: function (response) {
 
                             if (response.status == true) {
-                                swal("Berhasil mengubah profil!", "You clicked the button!", "success");
+                                swal({
+                                    title: "Berhasil mengubah profil!",
+                                    // text: "You clicked the button!",
+                                    icon: "success",
+                                    button: "Ok",
+                                }).then(function () {
+                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                });
                             } else {
-                                swal("Gagal mengubah profil!", "You clicked the button!", "error");
-
+                                swal({
+                                    title: "Profil gagal diubah",
+                                    // text: "You clicked the button!",
+                                    icon: "error",
+                                    button: "Ok",
+                                })
                             }
 
                         },
@@ -2967,10 +2970,21 @@
                         success: function (response) {
 
                             if (response.status == true) {
-                                window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                                swal("Data berhasil ditambahkan!", "You clicked the button!", "success");
+                                swal({
+                                    title: "Kontak berhasil ditambahkan!",
+                                    // text: "You clicked the button!",
+                                    icon: "success",
+                                    button: "Ok",
+                                }).then(function () {
+                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                });
                             } else {
-                                swal("Data gagal ditambahkan!", "You clicked the button!", "error");
+                                swal({
+                                    title: "Data kontak gagal ditambahkan!",
+                                    // text: "You clicked the button!",
+                                    icon: "error",
+                                    button: "Ok",
+                                })
                             }
                         }
                     })
@@ -3101,15 +3115,22 @@
                         success: function (response) {
 
                             if (response.status == true) {
-                                window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                                swal("Data berhasil dihapus!", "You clicked the button!", "success");
-                               
-
+                                swal({
+                                    title: "Data berhasil dihapus!",
+                                    // text: "You clicked the button!",
+                                    icon: "success",
+                                    button: "Ok",
+                                }).then(function () {
+                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                });
                             } else {
-                                swal("Data gagal dihapus!", "You clicked the button!", "error");
-
+                                swal({
+                                    title: "Data gagal dihapus!",
+                                    // text: "You clicked the button!",
+                                    icon: "error",
+                                    button: "Ok",
+                                })
                             }
-
                         },
 
                         error: function (xhr, status, error) {
@@ -3199,17 +3220,22 @@
                                     success: function (response) {
 
                                         if (response.status == true) {
-
-                                            window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                                            swal("Data berhasil diperbarui!", "You clicked the button!", "success");
-
-                                            
-
+                                            swal({
+                                                title: "Data berhasil diubah!",
+                                                // text: "You clicked the button!",
+                                                icon: "success",
+                                                button: "Ok",
+                                            }).then(function () {
+                                                window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                            });
                                         } else {
-                                            swal("Data gagal diperbarui!", "You clicked the button!", "error");
-
+                                            swal({
+                                                title: "Data gagal diubah!",
+                                                // text: "You clicked the button!",
+                                                icon: "error",
+                                                button: "Ok",
+                                            })
                                         }
-
                                     },
 
                                     error: function (xhr, status, error) {
