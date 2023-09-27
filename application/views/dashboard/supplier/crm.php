@@ -139,17 +139,13 @@
 
   /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
   .box::-webkit-scrollbar {
-  width: 8px; /* Lebar scrollbar */
+  width: 5px; /* Lebar scrollbar */
 }
 
 /* Untuk bagian badan (thumb) dari scrollbar */
 .box::-webkit-scrollbar-thumb {
   background:  var(--font-dark-grey, #333);
   border-radius: 5px; /* Bentuk border radius thumb */
-}
-
-.box::-webkit-scrollbar-thumb:hover{
-  background: #888; 
 }
 
 /* Untuk bagian track dari scrollbar */
@@ -162,6 +158,10 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
 }
 
+.title .card .rounded-3:hover{
+  background-color: grey;
+}
+
 .box .card:hover p{
 color: black;
 }
@@ -169,6 +169,9 @@ color: black;
   @media (max-width: 768px) {
   .container-fluid {
     flex-direction: column;
+  }
+  .workspace {
+    margin-left:0px;
   }
 
 }
@@ -310,7 +313,7 @@ color: black;
               var rowNumber = index + 1;
               leads +=
                 `<div class="col">
-                <div class="title bg-color" style="padding: 10px 15px; margin-top:15px; margin-left:15px">
+                <div class="title bg-color" style="padding: 10px; margin-top:15px">
                 <div class="card rounded-3" style="height: 40px;padding-top:2%">
                   <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `
                   <span ><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
@@ -318,8 +321,8 @@ color: black;
                   </h5>
                 </div>
                 </div>
-          <div class="mx-3">
-            <div id="container` + index + 2 + `" class="workspace box bg-color" data-id="` + value.id_tim + `">` +
+          <div class="">
+            <div id="container` + index + 2 + `" class="workspace box bg-color" style="margin-left:15px" data-id="` + value.id_tim + `">` +
                 getLeadByTim(value.id_tim) +
                 `</div>
           </div></div>`;
