@@ -4,108 +4,64 @@
   .container-fluid {
     justify-content: flex-start;
     display: flex;
-    /* Mengatur kontainer agar sejajar ke kiri */
     overflow-x: hidden;
-    /* Mengaktifkan overflow horizontal jika kontainer melebihi lebar layar */
   }
 
   .box {
     display: inline-block;
-    /* Menjadikan kotak inline block */
-    margin-right: 0;
-    /* Menghapus margin-right untuk menghapus jarak antara kontainer */
+    margin-top: 15px;
+    padding-top:10px;
     border: none;
-    /* Menghapus border */
     border-radius: 5px;
-    min-width: 250px;
-    /* Mengatur lebar minimum untuk mencegah kontainer terlalu kecil */
+    min-width: 270px;
     height: 400px;
     max-height: calc(100vh - 40px);
-    /* Mengatur tinggi maksimal untuk kontainer */
     overflow-y: auto;
     margin-bottom: 20px;
   }
 
   .box .card {
     width: 250px;
-    /* Mengatur lebar kartu 100% minus 50px untuk jarak 25px di setiap sisi kartu */
     height: 60px;
-    /* Anda dapat menyesuaikan tinggi kartu sesuai kebutuhan Anda */
     background-color: white;
     color: black;
     border-radius: 5px;
     cursor: grab;
-    margin: 10px;
+    margin: 0px 10px 10px 10px;
+  }
+
+  .card-title{
+    width: 250px;
+    height: 45px;
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    margin: 0px 10px 0px 10px;
   }
 
   .card p {
     margin: 0;
-    padding: 3px 3px 0px 3px;
+    padding: 3px 3px 0px 10px;
   }
 
   .title {
     margin-left: 15px;
     width: 270px;
     border-radius: 5px;
-    padding: 5px 15px 5px 15px;
-  }
-
-  .purple {
-    background-color: #ebcffc;
-  }
-
-  .red {
-    background-color: #fec1c1;
-  }
-
-  .green {
-    background-color: #f8f5bd;
-  }
-
-  .blue {
-    background-color: #d0e9f9;
-  }
-
-  .orange {
-    background-color: purple;
+    padding: 5px 10px 5px 15px;
   }
 
   .card.dragging {
-    opacity: 0.5;
     cursor: grab;
   }
 
-  .box .card:active {
-    background-color: #3498db;
-    /* Warna latar belakang tetap sama saat kartu di-drag */
-  }
-
-  /* Menambahkan titik berukuran lebih besar */
   .box h4 {
     position: relative;
-    /* Menjadikan posisi relatif untuk judul */
-    padding-left: 30px;
+    padding-left: 10px;
   }
 
-  /* Memberikan warna berbeda untuk setiap kontainer */
-  #container2 h4::before {
-    color: #e74c3c;
-  }
-
-  #container3 h4::before {
-    color: #27ae60;
-  }
-
-  #container4 h4::before {
-    color: #3498db;
-  }
-
-  #container5 h4::before {
-    color: #f39c12;
-  }
-
-  #container1 h4::before {
-    color: #8e44ad;
+  .bg-color{
+    background: var(--X, rgba(10, 10, 10, 0.15));
   }
 
   /* modal  */
@@ -154,25 +110,89 @@
     color: white;
     text-decoration: none;
     cursor: pointer;
-
   }
+  .btn-add {
+    padding: 7px 0px 2px 8%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border:none;
+    width: 272px;
+    margin-left: 3px;
+  }
+  
+  .badge {
+  background: var(--Red, #FEC1C1);
+  border-radius:50px;
+  float: right;
+  margin-right: 5px;
+  color: black;
+  padding-top:5px;
+}
+
+
+  body{
+    background-image:url('../assets/img/background-crm.png');
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
+  .box::-webkit-scrollbar {
+  width: 8px; /* Lebar scrollbar */
+}
+
+/* Untuk bagian badan (thumb) dari scrollbar */
+.box::-webkit-scrollbar-thumb {
+  background:  var(--font-dark-grey, #333);
+  border-radius: 5px; /* Bentuk border radius thumb */
+}
+
+.box::-webkit-scrollbar-thumb:hover{
+  background: #888; 
+}
+
+/* Untuk bagian track dari scrollbar */
+.box::-webkit-scrollbar-track {
+  /* background: #f1f1f1; Warna latar belakang track */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Memperbesar kartu saat hover */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.box .card:hover p{
+color: black;
+}
+
+  @media (max-width: 768px) {
+  .container-fluid {
+    flex-direction: column;
+  }
+
+}
+
 </style>
 
-<section class="py-5">
+<section class="pt-5 pb-3">
   <div class="mt-5 px-5">
     <h4>Selamat Datang!</h4>
     <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
   </div>
   <div class="col-md-3 pt-3 px-5">
-    <button class="btn btn-primary" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal" disabled>Tambahkan Anggota</button>
+    <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal" disabled>Tambahkan Anggota
+      <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
+    </button>
   </div>
 </section>
 <section>
   <div class="container-fluid pb-4 mx-4">
     <div class="row">
       <div class="col mx-3">
-        <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box red" data-id="0">
-          <h4 class="pt-2"> Daftar Perusahaan</h4>
+        <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0">
+          <!-- <h5 class="card-title pt-2"> Daftar Perusahaan</h5> -->
+          <!-- <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4> -->
           <!-- <div class="card drag-element" draggable="true">
             <p>PT Cahaya Asia Ya Putra Dewa</p>
             <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
@@ -234,7 +254,7 @@
           success: function(result) {
             console.log(result);
             var dataLeadPlotted = getPlotTim();
-            var leads = '<h4 class="pt-2"> Daftar Perusahaan</h4>';
+            var leads = '<h5 class="card-title pt-2" style="padding-left:10px; margin-bottom:30px"> Daftar Perusahaan<span class="badge" style="margin-top:3px">1</span></h5>';
             // console.log(dataLeadPlotted, "PLOTTEDDDDDD");
             // console.log(dataLeadPlotted);
             $.each(result, function(index, value) {
@@ -289,9 +309,17 @@
               console.log(getLeadByTim(value.id_tim));
               var rowNumber = index + 1;
               leads +=
-                `<div class="col"><h4 class="green title" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `</h4>
+                `<div class="col">
+                <div class="title bg-color" style="padding: 10px 15px; margin-top:15px; margin-left:15px">
+                <div class="card rounded-3" style="height: 40px;padding-top:2%">
+                  <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `
+                  <span ><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
+                  <span class="badge" style="margin-top:3px">1</span>
+                  </h5>
+                </div>
+                </div>
           <div class="mx-3">
-            <div id="container` + index + 2 + `" class="workspace box green" data-id="` + value.id_tim + `">` +
+            <div id="container` + index + 2 + `" class="workspace box bg-color" data-id="` + value.id_tim + `">` +
                 getLeadByTim(value.id_tim) +
                 `</div>
           </div></div>`;
@@ -359,58 +387,6 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
-          <div class="mx-3">
-            <div id="container4" class="workspace box orange">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
-          <div class="mx-3">
-            <div id="container5" class="workspace box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
-          <div class="mx-3">
-            <div id="container6" class="workspace box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
-          <div class="mx-3">
-            <div id="container7" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
-          <div class="mx-3">
-            <div id="container8" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col">
       <div class="row">
         <div class="col">
