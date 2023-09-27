@@ -39,6 +39,10 @@
     margin: 0px 10px 0px 10px;
   }
 
+  .box .card:hover p {
+    color: black;
+  }
+
   .card p {
     margin: 0;
     padding: 3px 3px 0px 10px;
@@ -245,7 +249,7 @@ color: black;
 
       function getDataLead() {
         $.ajax({
-          url: "<?= base_url('api/supplier/getLead/all'); ?>",
+          url: "<?= base_url('api/supplier/getCRMLeads'); ?>",
           type: "GET",
           beforeSend: addAuthorizationHeader,
           data: {

@@ -410,7 +410,7 @@ $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
 $route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
 $route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
-$route['api/supplier/getLead/all'] = 'api/ApiSupplier/getAllLeads';
+$route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
