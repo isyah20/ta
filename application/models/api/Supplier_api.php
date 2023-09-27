@@ -222,28 +222,36 @@ class Supplier_api extends CI_Model
 
         return $this->db->query($sql);
     }
-    public function getAllDataLeads($id_pengguna)
+    public function getCRMLeads($id_pengguna)
     {
 
         $sql = "SELECT
-        data_leads.id_lead AS id,
-        id_pengguna,
-        nama_perusahaan,
+        data_leads.id_lead,
+        data_leads.id_pengguna,
+        data_leads.nama_perusahaan,
         data_leads.npwp,
-        profil,
+        data_leads.profil,
         pemenang.*,
-        kontak_lead.*,
-        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
-        FROM
-            data_leads
-        LEFT JOIN
-            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
-        LEFT JOIN
-            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
-        WHERE
-            data_leads.id_pengguna = $id_pengguna
-        GROUP BY
-            data_leads.id_lead";
+        tim_marketing.id_tim,
+        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
+        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
+        IFNULL(wilayah.wilayah, '') AS wilayah
+    FROM
+        data_leads
+    LEFT JOIN
+        pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+    LEFT JOIN 
+        lpse ON pemenang.id_lpse = lpse.id_lpse
+    LEFT JOIN 
+        wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+    JOIN
+        tim_marketing ON tim_marketing.id_supplier = data_leads.id_pengguna
+    WHERE
+        data_leads.id_pengguna = {$id_pengguna}
+        AND data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim)
+    GROUP BY
+        data_leads.id_lead;
+    ";
 
         return $this->db->query($sql);
     }

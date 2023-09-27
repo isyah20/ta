@@ -463,10 +463,10 @@ class ApiSupplier extends RestController
 
         exit;
     }
-    public function getAllLeads_get()
+    public function getCRMLeads_get()
     {
         $id_pengguna = $this->input->get('id_pengguna');
-        $response = $this->Supplier_api->getAllDataLeads($id_pengguna)->result();
+        $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
 
         $this->output
             ->set_status_header(200)
