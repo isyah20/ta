@@ -467,6 +467,7 @@ class ApiSupplier extends RestController
     {
         $id_pengguna = $this->input->get('id_pengguna');
         $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
+        $response['jumlah'] = $this->Supplier_api->countCRMLeads($id_pengguna)->row('jumlah');
 
         $this->output
             ->set_status_header(200)

@@ -211,11 +211,11 @@ class DashboardUserSupplier extends CI_Controller
     {
         $id_lead = $this->input->post('id_lead');
         $id_tim = $this->input->post('id_tim');
-        if ($id_tim == 0) {
-            $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
-        } else {
-            $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
-        }
+        // if ($id_tim == 0) {
+        //     $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
+        // } else {
+        $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        // }
         // $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);

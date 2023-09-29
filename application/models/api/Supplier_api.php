@@ -248,10 +248,24 @@ class Supplier_api extends CI_Model
         tim_marketing ON tim_marketing.id_supplier = data_leads.id_pengguna
     WHERE
         data_leads.id_pengguna = {$id_pengguna}
-        AND data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim)
+AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_lead IN (SELECT id_lead FROM plot_tim WHERE id_tim = 0))
     GROUP BY
         data_leads.id_lead;
     ";
+
+        return $this->db->query($sql);
+    }
+    public function countCRMLeads($id_pengguna)
+    {
+
+        $sql = "SELECT COUNT(DISTINCT data_leads.id_lead) AS jumlah
+        FROM data_leads
+        LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+        LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+        JOIN tim_marketing ON tim_marketing.id_supplier = data_leads.id_pengguna
+        WHERE data_leads.id_pengguna = 51
+        AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_lead IN (SELECT id_lead FROM plot_tim WHERE id_tim = 0));";
 
         return $this->db->query($sql);
     }
