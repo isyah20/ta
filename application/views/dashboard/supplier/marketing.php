@@ -13,8 +13,9 @@
     .thead {
         color: #fff;
         background-color: #E05151;
-        text-align: left;
+        text-align: center;
         font-size: 15px;
+        width: 100px;
     }
 
     tbody {
@@ -22,11 +23,11 @@
         font-size: 15px;
     }
 
-    .green-text {
-        color: #139728;
+    .table {
+        padding: 1rem;
     }
 
-    .rounded {
+    /* .rounded {
         width: 25px;
         height: 25px;
         background-color: #553333;
@@ -36,13 +37,11 @@
         align-items: center;
         color: white;
         font-size: 15px;
-    }
-
+    }*/
     .custom-table-container {
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
-
     }
 
     .btn-custom {
@@ -76,19 +75,26 @@
         font-weight: bold;
     }
 
+    th.custom-padding,
+    td.custom-padding {
+        border: none;
+        vertical-align: middle;
+        height: 60px !important;
+    }
+
     .form-select-custom {
         color: #CCCCCC;
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
     }
 
-    .toggle-button {
+    /* .toggle-button {
         padding: 5px;
         background-color: #059669;
         color: #fff;
         border: none;
         border-radius: 5rem;
-    }
+    } */
 
     /* Style untuk ikon visibility */
     .toggle-button i {
@@ -96,13 +102,18 @@
     }
 
     .link .btn-simpan {
-        background-color: red;
+        background-color: #E05151;
         color: white;
         transition: background-color 0.3s;
+        height: 40px;
+        width: 150px;
+        font-size: 15px;
+        align-content: center;
+        padding-top: 8px;
     }
 
     .link .btn-simpan:hover {
-        background-color: orange;
+        background-color: #EB650D;
     }
 
     .modal-dialog {
@@ -118,9 +129,7 @@
     }
 
     .custom-modal {
-
         height: 768px;
-
     }
 
     .btn-custom {
@@ -131,7 +140,7 @@
         gap: 10px;
         align-self: stretch;
         border-radius: 5px;
-        background: var(--primary-red-400, #DF3131);
+        background: var(--primary-red-400, #E05151);
         color: white;
         text-decoration: none;
         cursor: pointer;
@@ -185,6 +194,39 @@
         margin-right: 8px;
     }
 
+    .nama {
+        font-weight: bold;
+    }
+
+    .posisi {
+        color: #694747;
+    }
+
+    .email {
+        text-decoration: underline;
+    }
+
+    .nohp {
+        text-decoration: underline;
+    }
+
+    .btn.btn-danger {
+        font-size: 13px;
+        width: 100px;
+        margin-right: 8px;
+        margin-bottom: 3px;
+        margin-top: 3px;
+    }
+
+    .btn.btn-outline-danger {
+        font-size: 13px;
+        width: 70px;
+    }
+
+    .container-lg img {
+        margin-bottom: 2px;
+    }
+
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -193,22 +235,98 @@
         .form-suplier {
             margin-top: 6rem !important;
         }
+
+        .table {
+            font-size: 14px;
+            align-items: center;
+        }
+
+        .custom-table-container {
+            overflow-x: auto;
+        }
+
+        .custom-padding {
+            width: auto;
+            white-space: nowrap;
+        }
+
+        .thead {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        tbody {
+            font-size: 12px;
+        }
+
+        .thead th,
+        .custom-padding {
+            width: auto !important;
+            white-space: nowrap;
+        }
+
+        .container-lg img {
+            width: 100%;
+            height: auto;
+        }
+
+        .link .btn-simpan {
+            font-size: 15px;
+            padding: 8px 10px;
+        }
+
+        .container-lg img {
+            width: 100%;
+            height: auto;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .modal-dialog {
+            width: 100%;
+            height: auto;
+            padding: 10px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+        }
+
+        .modal-body p {
+            font-size: 16px;
+        }
+
+        .col-md-6 {
+            text-align: center;
+        }
+
+        .d-flex {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .link {
+            margin-top: 1rem;
+        }
+
     }
 </style>
-<section class="bg-white pt-3 mt-4">
+<section class="bg-white pt-3 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <img src="<?= base_url('assets\img\image-marketing.png') ?>" alt="" style="width: 324.641px; height: 287.546px; order: 2;">
+        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 324.641px; height: 287.546px; order: 2;">
         <div class="col-6">
-            <h2 class="mb-0 ms-2 wow fadeInUp" style="order: 1;">
+            <h2 class="ms-0 wow fadeInUp" style="order: 1;">
                 Selamat Datang!
                 <p>Ini daftar tim kamu!</p>
             </h2>
-            <div class="d-flex justify-content-start mt-3 gap-2">
-                <div></div>
+            <div class="d-flex justify-content-start">
                 <div class="link d-flex flex-row align-items-center">
-                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Anggota</a></span>
+                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Tim</a></span>
                 </div>
-
             </div>
         </div>
     </div>
@@ -224,30 +342,33 @@
                             <th class="custom-padding">Nama</th>
                             <th class="custom-padding">Posisi</th>
                             <th class="custom-padding">Email</th>
-                            <th class="custom-padding">No.HP/WA</th>
-                            <th class="custom-padding">Action</th>
+                            <th class="custom-padding">No. HP/WA</th>
+                            <th class="custom-padding">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="data-leads">
                         <tr>
-                            <th></th>
-                            <td><span class="rounded">1</span></td>
-                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>office@telkom.co.id</td>
-                            <td>0274 7471 234 (Office)</i></button></td>
-                            <td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
-
+                            <td></td>
+                            <td>1</td>
+                            <td class="nama">PT. Telekomunikasi Indonesia, Tbk.</td>
+                            <td class="posisi">08.178.554.2-123.213</td>
+                            <td class="email">office@telkom.co.id</td>
+                            <td class="nohp">0274 7471 234 (Office)</i></button></td>
+                            <td>
+                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Detail</a>
+                                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                            </td>
                         </tr>
                         <tr>
-                            <th></th>
-                            <td><span class="rounded">2</span></td>
-                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>office@telkom.co.id</td>
-                            <td>0274 7471 234 (Office)</td>
+                            <td></td>
+                            <td>2</td>
+                            <td class="nama">PT. Telekomunikasi Indonesia, Tbk.</td>
+                            <td class="posisi">08.178.554.2-123.213</td>
+                            <td class="email">office@telkom.co.id</td>
+                            <td class="nohp">0274 7471 234 (Office)</i></button></td>
                             <td>
-                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Detail</a>
+                                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
                         </tr>
                     </tbody>
@@ -295,21 +416,21 @@
                                     <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-start mt-3 gap-2">
-                                <div class="link flex-row align-items-center w-100">
-                                    <span>
-                                        <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
-                                        <a href="#" id="submit-input" class="btn-custom text-white text-center">
-                                            <i class="fas me-1"></i>Klik Disini
-                                        </a>
-                                    </span>
-                                </div>
+                                    <div class="link flex-row align-items-center w-100">
+                                        <span>
+                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                            <a href="#" id="submit-input" class="btn-custom text-white text-center">
+                                                <i class="fas me-1"></i>Klik Disini
+                                            </a>
+                                        </span>
+                                    </div>
                             </form>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- end modal input marketing -->
 
@@ -503,7 +624,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
+<!-- <script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
 
     $(document).ready(function() {
@@ -523,11 +644,11 @@
                         '<td>' + data.data[i].email + '</td>' +
                         '<td>' + data.data[i].no_telp + '</td>' +
                         '<td>' +
-                            '<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
-                            '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
-                        '</td>' +
-                        // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
-                        '</tr>';
+                        '<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
+                        '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
+                    '</td>' +
+                    // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
+                    '</tr>';
 
                 }
                 $('#data-leads').html(html);
@@ -557,8 +678,8 @@
                         });
                     });
                 });
-                
-                
+
+
             }
         })
     });
@@ -596,5 +717,4 @@
         });
     })
     // Ajax for delete
-
-</script>
+</script> -->
