@@ -193,11 +193,37 @@
         .form-suplier {
             margin-top: 6rem !important;
         }
+
+        .modal-dialog {
+            max-width: 90%;
+        }
+
+        .modal-content {
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .modal-title {
+            font-size: 18px;
+        }
+
+        .modal-body p {
+            font-size: 14px;
+        }
+
+        .hero-marketing {
+            display: none;
+        }
+    }
+
+    td a {
+        margin-right: 10px;
+        /* Sesuaikan jarak sesuai dengan preferensi Anda */
     }
 </style>
-<section class="bg-white pt-3 mt-4">
+<section class="bg-white pt-5 mt-5">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <img src="<?= base_url('assets\img\image-marketing.png') ?>" alt="" style="width: 324.641px; height: 287.546px; order: 2;">
+        <img class="hero-marketing" src="<?= base_url('assets\img\image-marketing.png') ?>" alt="" style="width: 324.641px; height: 287.546px; order: 2;">
         <div class="col-6">
             <h2 class="mb-0 ms-2 wow fadeInUp" style="order: 1;">
                 Selamat Datang!
@@ -213,52 +239,58 @@
         </div>
     </div>
     <!-- tabel marketing -->
-    <div class="container wow fadeInUp">
+    <div class="container py-5 wow fadeInUp">
         <div class="row">
             <div class="col">
-                <table class="table table-striped custom-table-container">
-                    <thead class="thead">
-                        <tr>
-                            <th></th>
-                            <th class="custom-padding">No.</th>
-                            <th class="custom-padding">Nama</th>
-                            <th class="custom-padding">Posisi</th>
-                            <th class="custom-padding">Email</th>
-                            <th class="custom-padding">No.HP/WA</th>
-                            <th class="custom-padding">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="data-leads">
-                        <tr>
-                            <th></th>
-                            <td><span class="rounded">1</span></td>
-                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>office@telkom.co.id</td>
-                            <td>0274 7471 234 (Office)</i></button></td>
-                            <td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table-container">
+                        <thead class="thead">
+                            <tr>
+                                <th></th>
+                                <th class="custom-padding">No.</th>
+                                <th class="custom-padding">Nama</th>
+                                <th class="custom-padding">Posisi</th>
+                                <th class="custom-padding">Email</th>
+                                <th class="custom-padding">No.HP/WA</th>
+                                <th class="custom-padding">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-leads">
+                            <tr>
+                                <th></th>
+                                <td><span class="rounded">1</span></td>
+                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td style="font-weight: bold;">08.178.554.2-123.213</td>
+                                <td>office@telkom.co.id</td>
+                                <td>0274 7471 234 (Office)</i></button></td>
+                                <td>
+                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a>
+                                    <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <td><span class="rounded">2</span></td>
-                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>office@telkom.co.id</td>
-                            <td>0274 7471 234 (Office)</td>
-                            <td>
-                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><span class="rounded">2</span></td>
+                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td style="font-weight: bold;">08.178.554.2-123.213</td>
+                                <td>office@telkom.co.id</td>
+                                <td>0274 7471 234 (Office)</td>
+                                <td>
+                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
     <!-- end tabel marketing -->
 
     <!-- modal input marketing -->
-    <div class="col-12 py-5">
+    <div class="col-12">
         <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -295,26 +327,26 @@
                                     <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-start mt-3 gap-2">
-                                <div class="link flex-row align-items-center w-100">
-                                    <span>
-                                        <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
-                                        <a href="#" id="submit-input" class="btn-custom text-white text-center">
-                                            <i class="fas me-1"></i>Klik Disini
-                                        </a>
-                                    </span>
-                                </div>
+                                    <div class="link flex-row align-items-center w-100">
+                                        <span>
+                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                            <a href="#" id="submit-input" class="btn-custom text-white text-center">
+                                                <i class="fas me-1"></i>Klik Disini
+                                            </a>
+                                        </span>
+                                    </div>
                             </form>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <!-- end modal input marketing -->
 
     <!-- modal hapus -->
-    <div class="col-12 py-5">
+    <div class="col-12">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -357,7 +389,7 @@
     <!-- end modal hapus -->
 
     <!-- modal lengkapi leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+    <div class="col-12 align-content-center justify-content-center">
         <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -440,7 +472,7 @@
     <!-- end modal lengkapi leads -->
 
     <!-- modal popup info kontak -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
+    <div class="col-12 align-content-center justify-content-center">
         <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -523,11 +555,11 @@
                         '<td>' + data.data[i].email + '</td>' +
                         '<td>' + data.data[i].no_telp + '</td>' +
                         '<td>' +
-                            '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
-                            '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
-                        '</td>' +
-                        // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
-                        '</tr>';
+                        '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
+                        '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
+                    '</td>' +
+                    // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
+                    '</tr>';
 
                 }
                 $('#data-leads').html(html);
@@ -564,57 +596,57 @@
                     // $('#submit-input').click(function(event) {
                     //     event.preventDefault();
 
-                        // Get the form instance
-                        var formData = {
-                            nama_tim: $('input[name=nama_tim]').val(),
-                            posisi: $('input[name=posisi]').val(),
-                            email: $('input[name=email]').val(),
-                            no_telp: $('input[name=no_telp]').val(),
-                            alamat: $('textarea[name=alamat]').val(),
-                        };
+                    // Get the form instance
+                    var formData = {
+                        nama_tim: $('input[name=nama_tim]').val(),
+                        posisi: $('input[name=posisi]').val(),
+                        email: $('input[name=email]').val(),
+                        no_telp: $('input[name=no_telp]').val(),
+                        alamat: $('textarea[name=alamat]').val(),
+                    };
 
-                        // Get data from id
-                        $.ajax({
-                            url: "<?= base_url('api/supplier/getId/') ?>" + id_tim,
-                            type: 'GET',
-                            dataType: "json",
-                            success: function(data) {
-                                $('input[name=nama_tim]').val(data.data.nama_tim);
-                                $('input[name=posisi]').val(data.data.posisi);
-                                $('input[name=email]').val(data.data.email);
-                                $('input[name=no_telp]').val(data.data.no_telp);
-                                $('textarea[name=alamat]').val(data.data.alamat);
-                            },
-                            error: function(xhr, status, error) {
-                                console.log(xhr.responseText);
-                            }
-                        });
-
-                        // Make an AJAX request
-                        // $.ajax({
-                        //     url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
-                        //     type: 'POST',
-                        //     data: formData,
-                        //     success: function(response) {
-                        //         if (response.status == true) {
-                        //             alert('Data berhasil diubah');
-                        //             window.location.href = "<?= base_url('suplier/marketing') ?>";
-                        //         } else {
-                        //             alert('Data gagal diubah');
-                        //         }
-                        //     },
-                        //     error: function(xhr, status, error) {
-                        //         console.log(xhr.responseText);
-                        //     }
-                        // });
-                    
+                    // Get data from id
+                    $.ajax({
+                        url: "<?= base_url('api/supplier/getId/') ?>" + id_tim,
+                        type: 'GET',
+                        dataType: "json",
+                        success: function(data) {
+                            $('input[name=nama_tim]').val(data.data.nama_tim);
+                            $('input[name=posisi]').val(data.data.posisi);
+                            $('input[name=email]').val(data.data.email);
+                            $('input[name=no_telp]').val(data.data.no_telp);
+                            $('textarea[name=alamat]').val(data.data.alamat);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
                     });
 
-                    $(".btn-edt").click(function() {
+                    // Make an AJAX request
+                    // $.ajax({
+                    //     url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
+                    //     type: 'POST',
+                    //     data: formData,
+                    //     success: function(response) {
+                    //         if (response.status == true) {
+                    //             alert('Data berhasil diubah');
+                    //             window.location.href = "<?= base_url('suplier/marketing') ?>";
+                    //         } else {
+                    //             alert('Data gagal diubah');
+                    //         }
+                    //     },
+                    //     error: function(xhr, status, error) {
+                    //         console.log(xhr.responseText);
+                    //     }
+                    // });
+
+                });
+
+                $(".btn-edt").click(function() {
                     var id_tim = $(this).data("id");
 
-                        $('#submit-input').click(function(event) {
-                            event.preventDefault();
+                    $('#submit-input').click(function(event) {
+                        event.preventDefault();
 
                         // Get the form instance
                         var formData = {
@@ -643,7 +675,7 @@
                             }
                         });
                     });
-                }); 
+                });
             }
         })
     });
@@ -680,5 +712,4 @@
             });
         });
     });
-
 </script>
