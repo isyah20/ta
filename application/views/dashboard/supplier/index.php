@@ -250,7 +250,7 @@
     }
 @media (max-width: 576px) {
     .sec-pemenang-terbaru {
-        margin-left: auto;
+        margin-left: auto;  	 
         margin-right: auto;
     }
 }
