@@ -3,7 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav { font-size: 1rem !important; }
+    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav {
+        font-size: 1rem !important;
+    }
 
     .animation {
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -131,7 +133,8 @@
         border-radius: 20px;
         font-size: 1rem;
     }
-    .form-select-custom:hover{
+
+    .form-select-custom:hover {
         border: 1.5px solid var(--primary-red-500, #D21B1B);
     }
 
@@ -273,6 +276,7 @@
     }
 
     @media screen and (max-width: 768px) {
+
         .profile-image,
         .contact-image {
             display: none;
@@ -280,36 +284,33 @@
     }
 
     @media (max-width: 768px) {
-    .modal-dialog.custom-modal {
-        max-width: 90%;
+        .modal-dialog.custom-modal {
+            max-width: 90%;
+        }
+
+        .modal-content {
+            padding: 15px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+        }
+
+        .table.popup-table th,
+        .table.popup-table td {
+            font-size: 14px;
+        }
+
+        .btn-custom {
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+        }
     }
-
-    .modal-content {
-        padding: 15px;
-    }
-
-    .modal-title {
-        font-size: 18px;
-    }
-
-    .table.popup-table th,
-    .table.popup-table td {
-        font-size: 14px;
-    }
-
-    .btn-custom {
-        font-size: 14px;
-        padding: 5px 10px;
-    }
-
-    .table-container {
-    max-width: 100%; 
-    overflow-x: auto;
-    }
-}
-
-
-    
 </style>
 
 <style>
@@ -636,7 +637,7 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
-                        <!-- <tr class="tbody-tr">
+                            <!-- <tr class="tbody-tr">
                             <td><span class="number">1</span></td>
                             <td class="perusahaan">PT. Telekomunikasi Indonesia, Tbk.</td>
                             <td class="npwp">08.178.554.2-123.213</td>
@@ -668,8 +669,8 @@
         <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
     </div>
 
-<!-- modal popup info kontak -->
-<div class="col-12 py-5 align-content-center justify-content-center">
+    <!-- modal popup info kontak -->
+    <div class="col-12 py-5 align-content-center justify-content-center">
         <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal modal-lg" role="document">
                 <div class="modal-content">
@@ -719,7 +720,7 @@
             </div>
         </div>
     </div>
-<!-- end modal popup info kontak -->
+    <!-- end modal popup info kontak -->
 
 
 </section>
@@ -730,7 +731,7 @@
 
 <script>
     $(document).ready(function() {
-		let id_pengguna = Cookies.get('id_pengguna');
+        let id_pengguna = Cookies.get('id_pengguna');
         var currentPage = 1;
         var itemsPerPage = 10;
         var total_leads;
@@ -771,24 +772,24 @@
                         $('.total').html(jumlah);
                     }
                 })
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
         })
 
         //Get Leads with pagination
         $.ajax({
             url: "<?= base_url('api/supplier/getTotal') ?>",
-                    type: "GET",
-                    dataType: "JSON",
-                    data: {
-                        id_pengguna: id_pengguna
-                    },
-                    beforeSend: addAuthorizationHeader,
-            success : function(data){
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            beforeSend: addAuthorizationHeader,
+            success: function(data) {
                 total_leads = data.data;
-                
+
                 $('#pagination-container').pagination({
                     dataSource: "<?= base_url() ?>api/supplier/getLead",
                     locator: '',
@@ -805,7 +806,8 @@
                         data: {
                             id_pengguna: id_pengguna
                         },
-                        beforeSend: addAuthorizationHeader, function(xhr, settings) {
+                        beforeSend: addAuthorizationHeader,
+                        function(xhr, settings) {
                             const url = settings.url
                             const params = new URLSearchParams(url)
                             let currentPageNum = params.get('pageNumber')
@@ -827,14 +829,14 @@
                     }
                 });
             },
-            error: function (jqXHR, textStatus, errorThrown){
-            //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            error: function(jqXHR, textStatus, errorThrown) {
+                //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
             }
         });
-        
+
         function setTableLeads(data) {
             var leads = "";
-            
+
             $.each(data, function(index, value) {
                 var rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
                 var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
@@ -883,7 +885,7 @@
                     }
                 });
             });
-            
+
             return leads;
         }
 
@@ -911,5 +913,5 @@
                 }
             });
         }
-	});
+    });
 </script>
