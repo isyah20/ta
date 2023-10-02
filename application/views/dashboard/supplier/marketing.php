@@ -226,7 +226,9 @@
     .container-lg img {
         margin-bottom: 2px;
     }
-
+    .h2 {
+        margin-top: 50px;
+    }
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -315,11 +317,11 @@
 
     }
 </style>
-<section class="bg-white pt-3 mt-4 w-100">
+<section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 324.641px; height: 287.546px; order: 2;">
+        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 250.641px; height: 250.546px; order: 2;">
         <div class="col-6">
-            <h2 class="ms-0 wow fadeInUp" style="order: 1;">
+            <h2 class="mb-0 ms-0 wow fadeInUp" style="order: 1;">
                 Selamat Datang!
                 <p>Ini daftar tim kamu!</p>
             </h2>
