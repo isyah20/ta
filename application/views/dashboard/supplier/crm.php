@@ -2,8 +2,9 @@
 
 <style>
   body {
-  overflow-x: hidden; 
-}
+    overflow-x: hidden;
+  }
+
   .container-fluid {
     justify-content: flex-start;
     display: flex;
@@ -16,11 +17,11 @@
     opacity: 0;
     transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
-  
+
   .visible {
-  opacity: 1;
-  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
+    opacity: 1;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
 
   .box {
     display: inline-block;
@@ -213,23 +214,24 @@
     .box::-webkit-scrollbar-track {
       /* background: #f1f1f1; Warna latar belakang track */
     }
+  }
 
-    .card:hover {
-      transform: scale(1.05);
-      /* Memperbesar kartu saat hover */
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  .card:hover {
+    transform: scale(1.05);
+    /* Memperbesar kartu saat hover */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .box .card:hover p {
+    color: black;
+  }
+
+  @media (max-width: 768px) {
+    .container-fluid {
+      flex-direction: column;
     }
 
-    .box .card:hover p {
-      color: black;
-    }
-
-    @media (max-width: 768px) {
-      .container-fluid {
-        flex-direction: column;
-      }
-
-    }
+  }
 </style>
 
 <section class="pt-5 pb-3">
@@ -424,7 +426,7 @@
       }
     </script>
 
-  </div>
+    <!-- </div> -->
   </div>
   <!-- modal input marketing -->
   <div class="col-12 py-5">
@@ -478,7 +480,7 @@
         </div>
       </div>
     </div>
-  </div>
+    <!-- </div> -->
   </div>
   <!-- end modal input marketing -->
 </section>
@@ -489,14 +491,14 @@
     const card = container.querySelector(".card");
 
     if (container.classList.contains("hidden")) {
-    container.style.height = "400px";
-    container.classList.remove("hidden");
-    container.classList.add("visible");
-  } else {
-    container.style.height = 0;
-    container.classList.remove("visible");
-    container.classList.add("hidden");
-  }
+      container.style.height = "400px";
+      container.classList.remove("hidden");
+      container.classList.add("visible");
+    } else {
+      container.style.height = 0;
+      container.classList.remove("visible");
+      container.classList.add("hidden");
+    }
   }
 
   function control() {
