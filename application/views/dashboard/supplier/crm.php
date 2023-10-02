@@ -1,11 +1,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 <style>
+  body {
+  overflow-x: hidden; 
+}
   .container-fluid {
     justify-content: flex-start;
     display: flex;
-    overflow-x: hidden;
   }
+
+  .hidden {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  
+  .visible {
+  opacity: 1;
+  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
 
   .box {
     display: inline-block;
@@ -17,7 +32,7 @@
     height: 400px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .box .card {
@@ -469,18 +484,19 @@
 </section>
 
 <script>
-  // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
   function toggleCardVisibility(containerId) {
     const container = document.getElementById(containerId);
     const card = container.querySelector(".card");
 
-    if (card.style.display === "none") {
-      card.style.display = "inline-block";
-      container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
-    } else {
-      card.style.display = "none";
-      container.style.display = "none"; // Menyembunyikan container jika card terlihat
-    }
+    if (container.classList.contains("hidden")) {
+    container.style.height = "400px";
+    container.classList.remove("hidden");
+    container.classList.add("visible");
+  } else {
+    container.style.height = 0;
+    container.classList.remove("visible");
+    container.classList.add("hidden");
+  }
   }
 
   function control() {
