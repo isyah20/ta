@@ -226,7 +226,9 @@
     .container-lg img {
         margin-bottom: 2px;
     }
-
+    .h2 {
+        margin-top: 50px;
+    }
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -315,29 +317,29 @@
 
     }
 </style>
-<section class="bg-white pt-3 mt-4 w-100">
+<section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 324.641px; height: 287.546px; order: 2;">
         <div class="col-6">
-            <h2 class="ms-0 wow fadeInUp" style="order: 1;">
+            <h2 class="mb-0 ms-0 wow fadeInUp" style="order: 1;">
                 Selamat Datang!
                 <p>Ini daftar tim kamu!</p>
             </h2>
             <div class="d-flex justify-content-start">
-                <div class="link d-flex flex-row align-items-center">
+                <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
                     <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Tim</a></span>
                 </div>
             </div>
         </div>
+        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 270px; margin-top:25px; margin-bottom:10px">
     </div>
     <!-- tabel marketing -->
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
-                <table class="table table-striped custom-table-container">
+                <table class="table custom-table-container">
                     <thead class="thead">
                         <tr>
-                            <th></th>
+                            <th class="custom-padding"></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama</th>
                             <th class="custom-padding">Posisi</th>
@@ -346,7 +348,7 @@
                             <th class="custom-padding">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="data-leads">
+                    <tbody id="data-marketing">
                         <tr>
                             <td></td>
                             <td>1</td>
@@ -416,21 +418,21 @@
                                     <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-start mt-3 gap-2">
-                                    <div class="link flex-row align-items-center w-100">
-                                        <span>
-                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
-                                            <a href="#" id="submit-input" class="btn-custom text-white text-center">
-                                                <i class="fas me-1"></i>Klik Disini
-                                            </a>
-                                        </span>
-                                    </div>
+                                <div class="link flex-row align-items-center w-100">
+                                    <span>
+                                        <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                        <a href="#" id="submit-input" class="btn-custom text-white text-center">
+                                            <i class="fas me-1"></i>Klik Disini
+                                        </a>
+                                    </span>
+                                </div>
                             </form>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- end modal input marketing -->
 
@@ -624,7 +626,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- <script>
+<script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
 
     $(document).ready(function() {
@@ -638,20 +640,20 @@
                 for (i = 0; i < data.data.length; i++) {
                     html += '<tr>' +
                         '<th></th>' +
-                        '<td><span class="rounded">' + (i + 1) + '</span></td>' +
-                        '<td style="font-weight: bold;" class="">' + data.data[i].nama_tim + '</td>' +
-                        '<td style="font-weight: bold;">' + data.data[i].posisi + '</td>' +
-                        '<td>' + data.data[i].email + '</td>' +
-                        '<td>' + data.data[i].no_telp + '</td>' +
+                        '<td>' + (i + 1) + '</td>' +
+                        '<td class="nama">' + data.data[i].nama_tim + '</td>' +
+                        '<td class="posisi">' + data.data[i].posisi + '</td>' +
+                        '<td class="email">' + data.data[i].email + '</td>' +
+                        '<td class="nohp">' + data.data[i].no_telp + '</td>' +
                         '<td>' +
-                        '<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
+                        '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit</a>' +
                         '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
                     '</td>' +
                     // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
                     '</tr>';
 
                 }
-                $('#data-leads').html(html);
+                $('#data-marketing').html(html);
 
                 // Delete action
                 $(".btn-del").click(function() {
@@ -679,7 +681,92 @@
                     });
                 });
 
+                $(".btn-edt").click(function() {
+                    var id_tim = $(this).data("id");
 
+                    // $('#submit-input').click(function(event) {
+                    //     event.preventDefault();
+
+                        // Get the form instance
+                        var formData = {
+                            nama_tim: $('input[name=nama_tim]').val(),
+                            posisi: $('input[name=posisi]').val(),
+                            email: $('input[name=email]').val(),
+                            no_telp: $('input[name=no_telp]').val(),
+                            alamat: $('textarea[name=alamat]').val(),
+                        };
+
+                        // Get data from id
+                        $.ajax({
+                            url: "<?= base_url('api/supplier/getId/') ?>" + id_tim,
+                            type: 'GET',
+                            dataType: "json",
+                            success: function(data) {
+                                $('input[name=nama_tim]').val(data.data.nama_tim);
+                                $('input[name=posisi]').val(data.data.posisi);
+                                $('input[name=email]').val(data.data.email);
+                                $('input[name=no_telp]').val(data.data.no_telp);
+                                $('textarea[name=alamat]').val(data.data.alamat);
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr.responseText);
+                            }
+                        });
+
+                        // Make an AJAX request
+                        // $.ajax({
+                        //     url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
+                        //     type: 'POST',
+                        //     data: formData,
+                        //     success: function(response) {
+                        //         if (response.status == true) {
+                        //             alert('Data berhasil diubah');
+                        //             window.location.href = "<?= base_url('suplier/marketing') ?>";
+                        //         } else {
+                        //             alert('Data gagal diubah');
+                        //         }
+                        //     },
+                        //     error: function(xhr, status, error) {
+                        //         console.log(xhr.responseText);
+                        //     }
+                        // });
+                    
+                    });
+
+                    $(".btn-edt").click(function() {
+                    var id_tim = $(this).data("id");
+
+                        $('#submit-input').click(function(event) {
+                            event.preventDefault();
+
+                        // Get the form instance
+                        var formData = {
+                            nama_tim: $('input[name=nama_tim]').val(),
+                            posisi: $('input[name=posisi]').val(),
+                            email: $('input[name=email]').val(),
+                            no_telp: $('input[name=no_telp]').val(),
+                            alamat: $('textarea[name=alamat]').val(),
+                        };
+
+                        // Make an AJAX request
+                        $.ajax({
+                            url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
+                            type: 'POST',
+                            data: formData,
+                            success: function(response) {
+                                if (response.status == true) {
+                                    alert('Data berhasil diubah');
+                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                } else {
+                                    alert('Data gagal diubah');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    });
+                }); 
             }
         })
     });
@@ -715,6 +802,6 @@
                 }
             });
         });
-    })
-    // Ajax for delete
-</script> -->
+    });
+
+</script>

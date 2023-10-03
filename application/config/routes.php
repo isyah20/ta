@@ -173,6 +173,7 @@ $route['api/getTawaranRendah'] = 'Competitor/getTawaranRendah';
 
 //Market
 $route['market'] = 'Market';
+$route['user-dashboard/market'] = 'Market/indexMarket';
 $route['api/getListWilayah'] = 'Market/getListWilayah';
 
 //Tender
@@ -645,8 +646,8 @@ $route['api/preferensi/update/(:num)'] = 'api/ApiPreferensi/update/$1';
 $route['api/preferensi/s/(:num)'] = 'api/ApiPreferensi/tenderS/$1';
 
 // API Supplier
-// $route['api/supplier/tim'] = 'api/ApiSupplier';
-// $route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
+$route['api/supplier/tim'] = 'api/ApiSupplier';
+$route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
 
 //===========================================
 // Scrapping
