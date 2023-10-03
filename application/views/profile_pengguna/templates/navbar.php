@@ -89,7 +89,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end my-2 p-0 rounded-3">
                             <li>
-                                <a class="py-2 dropdown-item d-flex position-relative" href="<?= base_url('market') ?>">
+                                <a class="py-2 dropdown-item d-flex position-relative" href="<?= base_url('user-dashboard/market') ?>">
                                     <div class="shape-rounded">
                                         <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
                                     </div>
