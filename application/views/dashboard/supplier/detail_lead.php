@@ -411,9 +411,6 @@
             /* Menghapus margin pada perangkat mobile */
         }
 
-        .custom-card-detail .row {
-            padding: 10px;
-        }
 
         .table-contact {
             flex-grow: unset;
@@ -905,9 +902,21 @@
                         },
                         success: function(response) {
                             if (response.status == true) {
-                                alert("Berhasil mengubah profil");
+                                swal({
+                                    title: "Berhasil mengubah profil!",
+                                    // text: "You clicked the button!",
+                                    icon: "success",
+                                    button: "Ok",
+                                }).then(function() {
+                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                });
                             } else {
-                                alert("Gagal mengubah profil");
+                                swal({
+                                    title: "Profil gagal diubah",
+                                    // text: "You clicked the button!",
+                                    icon: "error",
+                                    button: "Ok",
+                                })
                             }
                         },
                         error: function(xhr, status, error) {
@@ -933,10 +942,21 @@
                         data: form,
                         success: function(response) {
                             if (response.status == true) {
-                                alert('Data berhasil ditambahkan')
-                                window.location.href = "<?= base_url('suplier/leads/1') ?>";
+                                swal({
+                                    title: "Kontak berhasil ditambahkan!",
+                                    // text: "You clicked the button!",
+                                    icon: "success",
+                                    button: "Ok",
+                                }).then(function() {
+                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                });
                             } else {
-                                alert('Data gagal ditambahkan')
+                                swal({
+                                    title: "Data kontak gagal ditambahkan!",
+                                    // text: "You clicked the button!",
+                                    icon: "error",
+                                    button: "Ok",
+                                })
                             }
                         }
                     })
@@ -988,9 +1008,21 @@
                         type: "DELETE",
                         success: function(response) {
                             if (response.status == true) {
-                                alert("Berhasil menghapus kontak");
+                                swal({
+                                    title: "Data berhasil dihapus!",
+                                    // text: "You clicked the button!",
+                                    icon: "success",
+                                    button: "Ok",
+                                }).then(function() {
+                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                });
                             } else {
-                                alert("Gagal menghapus kontak");
+                                swal({
+                                    title: "Data gagal dihapus!",
+                                    // text: "You clicked the button!",
+                                    icon: "error",
+                                    button: "Ok",
+                                })
                             }
                         },
                         error: function(xhr, status, error) {
@@ -1035,10 +1067,21 @@
                                     data: formData,
                                     success: function(response) {
                                         if (response.status == true) {
-                                            alert("Berhasil mengubah kontak");
-                                            window.location.href = "<?= base_url('suplier/leads/1') ?>";
+                                            swal({
+                                                title: "Data berhasil diubah!",
+                                                // text: "You clicked the button!",
+                                                icon: "success",
+                                                button: "Ok",
+                                            }).then(function() {
+                                                window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                            });
                                         } else {
-                                            alert("Gagal mengubah kontak");
+                                            swal({
+                                                title: "Data gagal diubah!",
+                                                // text: "You clicked the button!",
+                                                icon: "error",
+                                                button: "Ok",
+                                            })
                                         }
                                     },
                                     error: function(xhr, status, error) {

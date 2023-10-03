@@ -449,17 +449,31 @@ class ApiSupplier extends RestController
     }
 
     public function getLeads_get()
-    {  
+    {
         $id_pengguna = $this->input->get('id_pengguna');
         $page_size = $_GET['pageSize'];
         $page_number = ($_GET['pageNumber'] - 1) * $page_size;
-        $response = $this->Supplier_api->getDataLeads($id_pengguna,$page_size,$page_number)->result();
+        $response = $this->Supplier_api->getDataLeads($id_pengguna, $page_size, $page_number)->result();
 
         $this->output
-        ->set_status_header(200)
-        ->set_content_type('application/json')
-        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-        ->_display();
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+    public function getCRMLeads_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
+        $response['jumlah'] = $this->Supplier_api->countCRMLeads($id_pengguna)->row('jumlah');
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
 
         exit;
     }
@@ -499,5 +513,4 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
-
 }

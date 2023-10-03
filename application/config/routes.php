@@ -173,6 +173,7 @@ $route['api/getTawaranRendah'] = 'Competitor/getTawaranRendah';
 
 //Market
 $route['market'] = 'Market';
+$route['user-dashboard/market'] = 'Market/indexMarket';
 $route['api/getListWilayah'] = 'Market/getListWilayah';
 
 //Tender
@@ -390,6 +391,9 @@ $route['artikel'] = 'admin/artikel';
 
 $route['api/statistikhome'] = 'api/ApiTender/getdatastatistik';
 
+// restAPI route for Marketing
+$route['api/marketing/get/(:num)'] = 'api/ApiMarketing/show/$1';
+
 //restAPI route for Suplier 
 $route['api/supplier/get'] = 'api/ApiSupplier';
 $route['api/supplier/create'] = 'api/ApiSupplier/create';
@@ -410,6 +414,7 @@ $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
 $route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
 $route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
+$route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
@@ -641,8 +646,8 @@ $route['api/preferensi/update/(:num)'] = 'api/ApiPreferensi/update/$1';
 $route['api/preferensi/s/(:num)'] = 'api/ApiPreferensi/tenderS/$1';
 
 // API Supplier
-// $route['api/supplier/tim'] = 'api/ApiSupplier';
-// $route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
+$route['api/supplier/tim'] = 'api/ApiSupplier';
+$route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
 
 //===========================================
 // Scrapping

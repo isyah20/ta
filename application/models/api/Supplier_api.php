@@ -196,7 +196,7 @@ class Supplier_api extends CI_Model
         return $query->result();
     }
 
-    public function getDataLeads($id_pengguna,$page_size,$page_number)
+    public function getDataLeads($id_pengguna, $page_size, $page_number)
     {
 
         $sql = "SELECT
@@ -222,25 +222,72 @@ class Supplier_api extends CI_Model
 
         return $this->db->query($sql);
     }
+    public function getCRMLeads($id_pengguna)
+    {
 
-        // Get total data leads
-        public function getTotalDataLeads($id_pengguna)
-        {
-            $this->db->select('COUNT(*) as total');
-            $this->db->from('data_leads');
-            $this->db->where('id_pengguna', $id_pengguna);
-            $query = $this->db->get();
-            return $query->row()->total;
-        }
-    
-        public function getCountDataLeads($id_pengguna)
-        {
-            $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
-            $this->db->from('data_leads');
-            $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
-            $this->db->where('kontak_lead.id_lead IS NULL');
-            $this->db->where('data_leads.id_pengguna', $id_pengguna);
-            $query = $this->db->get();
-            return $query->row_array();
-        }
+        $sql = "SELECT
+        data_leads.id_lead,
+        data_leads.id_pengguna,
+        data_leads.nama_perusahaan,
+        data_leads.npwp,
+        data_leads.profil,
+        pemenang.*,
+        tim_marketing.id_tim,
+        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
+        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
+        IFNULL(wilayah.wilayah, '') AS wilayah
+    FROM
+        data_leads
+    LEFT JOIN
+        pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+    LEFT JOIN 
+        lpse ON pemenang.id_lpse = lpse.id_lpse
+    LEFT JOIN 
+        wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+    JOIN
+        tim_marketing ON tim_marketing.id_supplier = data_leads.id_pengguna
+    WHERE
+        data_leads.id_pengguna = {$id_pengguna}
+AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_lead IN (SELECT id_lead FROM plot_tim WHERE id_tim = 0))
+    GROUP BY
+        data_leads.id_lead;
+    ";
+
+        return $this->db->query($sql);
+    }
+    public function countCRMLeads($id_pengguna)
+    {
+
+        $sql = "SELECT COUNT(DISTINCT data_leads.id_lead) AS jumlah
+        FROM data_leads
+        LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+        LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+        JOIN tim_marketing ON tim_marketing.id_supplier = data_leads.id_pengguna
+        WHERE data_leads.id_pengguna = 51
+        AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_lead IN (SELECT id_lead FROM plot_tim WHERE id_tim = 0));";
+
+        return $this->db->query($sql);
+    }
+
+    // Get total data leads
+    public function getTotalDataLeads($id_pengguna)
+    {
+        $this->db->select('COUNT(*) as total');
+        $this->db->from('data_leads');
+        $this->db->where('id_pengguna', $id_pengguna);
+        $query = $this->db->get();
+        return $query->row()->total;
+    }
+
+    public function getCountDataLeads($id_pengguna)
+    {
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->where('kontak_lead.id_lead IS NULL');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

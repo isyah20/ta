@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-lg p-0 mx-1 my-1 d-flex align-items-center" style="height: 50px;">
                     <select id="lpse" class="form-select" style="width: 100% !important;"></select>
-                    <script>
+                    <!-- <script>
                         $("#lpse").select2({
                             // theme : 'bootstrap-5',
                             ajax: {
@@ -132,7 +132,7 @@
                             // templateResult: formatRepo,
                             // templateSelection: formatRepoSelection
                         });
-                    </script>
+                    </script> -->
                 </div>
                 <!-- Filter Jenis Pengadaan -->
                 <div class="col-lg filter-item mx-1 my-lg-2 my-1" id="dropdownJenisPengadaan" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" onclick="getJenisPengadaan()" style="width:235px;">
@@ -538,7 +538,7 @@
     </div>
 </section>
 <!-- </div> -->
-<script>
+<!-- <script>
     $('.select2.select2-container.select2-container--default').addClass("form-select d-flex align-items-center");
     $('.select2-selection__arrow').addClass("d-none");
     $('.select2.select2-container.select2-container--default').css("height", "52px");
@@ -1448,4 +1448,4 @@
             }
         });
     }
-</script>
+</script> -->

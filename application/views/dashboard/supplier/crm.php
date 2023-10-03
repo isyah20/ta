@@ -1,111 +1,86 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 <style>
+  body {
+  overflow-x: hidden; 
+}
   .container-fluid {
     justify-content: flex-start;
     display: flex;
-    /* Mengatur kontainer agar sejajar ke kiri */
-    overflow-x: hidden;
-    /* Mengaktifkan overflow horizontal jika kontainer melebihi lebar layar */
   }
+
+  .hidden {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  
+  .visible {
+  opacity: 1;
+  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
 
   .box {
     display: inline-block;
-    /* Menjadikan kotak inline block */
-    margin-right: 0;
-    /* Menghapus margin-right untuk menghapus jarak antara kontainer */
+    margin-top: 15px;
+    padding-top: 10px;
     border: none;
-    /* Menghapus border */
     border-radius: 5px;
-    min-width: 250px;
-    /* Mengatur lebar minimum untuk mencegah kontainer terlalu kecil */
+    min-width: 270px;
     height: 400px;
     max-height: calc(100vh - 40px);
-    /* Mengatur tinggi maksimal untuk kontainer */
     overflow-y: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .box .card {
     width: 250px;
-    /* Mengatur lebar kartu 100% minus 50px untuk jarak 25px di setiap sisi kartu */
     height: 60px;
-    /* Anda dapat menyesuaikan tinggi kartu sesuai kebutuhan Anda */
     background-color: white;
     color: black;
     border-radius: 5px;
     cursor: grab;
-    margin: 10px;
+    margin: 0px 10px 10px 10px;
+  }
+
+  .card-title {
+    width: 250px;
+    height: 45px;
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    margin: 0px 10px 0px 10px;
+  }
+
+  .box .card:hover p {
+    color: black;
   }
 
   .card p {
     margin: 0;
-    padding: 3px 3px 0px 3px;
+    padding: 3px 3px 0px 10px;
   }
 
   .title {
     margin-left: 15px;
     width: 270px;
     border-radius: 5px;
-    padding: 5px 15px 5px 15px;
-  }
-
-  .purple {
-    background-color: #ebcffc;
-  }
-
-  .red {
-    background-color: #fec1c1;
-  }
-
-  .green {
-    background-color: #f8f5bd;
-  }
-
-  .blue {
-    background-color: #d0e9f9;
-  }
-
-  .orange {
-    background-color: purple;
+    padding: 5px 10px 5px 15px;
   }
 
   .card.dragging {
-    opacity: 0.5;
     cursor: grab;
   }
 
-  .box .card:active {
-    background-color: #3498db;
-    /* Warna latar belakang tetap sama saat kartu di-drag */
-  }
-
-  /* Menambahkan titik berukuran lebih besar */
   .box h4 {
     position: relative;
-    /* Menjadikan posisi relatif untuk judul */
-    padding-left: 30px;
+    padding-left: 10px;
   }
 
-  /* Memberikan warna berbeda untuk setiap kontainer */
-  #container2 h4::before {
-    color: #e74c3c;
-  }
-
-  #container3 h4::before {
-    color: #27ae60;
-  }
-
-  #container4 h4::before {
-    color: #3498db;
-  }
-
-  #container5 h4::before {
-    color: #f39c12;
-  }
-
-  #container1 h4::before {
-    color: #8e44ad;
+  .bg-color {
+    background: var(--X, rgba(10, 10, 10, 0.15));
   }
 
   /* modal  */
@@ -154,32 +129,134 @@
     color: white;
     text-decoration: none;
     cursor: pointer;
-
   }
+
+  .btn-add {
+    padding: 7px 0px 2px 8%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    width: 272px;
+    margin-left: 3px;
+  }
+
+  .badge {
+    background: var(--Red, #FEC1C1);
+    border-radius: 50px;
+    float: right;
+    margin-right: 5px;
+    color: black;
+    padding-top: 5px;
+  }
+
+
+  body {
+    background-image: url('../assets/img/background-crm.png');
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
+  .box::-webkit-scrollbar {
+    width: 5px;
+    /* Lebar scrollbar */
+  }
+
+  /* Untuk bagian badan (thumb) dari scrollbar */
+  .box::-webkit-scrollbar-thumb {
+    background: var(--font-dark-grey, #333);
+    border-radius: 5px;
+    /* Bentuk border radius thumb */
+  }
+
+  /* Untuk bagian track dari scrollbar */
+  .box::-webkit-scrollbar-track {
+    /* background: #f1f1f1; Warna latar belakang track */
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+    /* Memperbesar kartu saat hover */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .title .card .rounded-3:hover {
+    background-color: grey;
+  }
+
+  .box .card:hover p {
+    color: black;
+  }
+
+  @media (max-width: 768px) {
+    .container-fluid {
+      flex-direction: column;
+    }
+
+    .workspace {
+      margin-left: 0px;
+    }
+
+    /* Untuk bagian badan (thumb) dari scrollbar */
+    .box::-webkit-scrollbar-thumb {
+      background: var(--font-dark-grey, #333);
+      border-radius: 5px;
+      /* Bentuk border radius thumb */
+    }
+
+    .box::-webkit-scrollbar-thumb:hover {
+      background: #888;
+    }
+
+    /* Untuk bagian track dari scrollbar */
+    .box::-webkit-scrollbar-track {
+      /* background: #f1f1f1; Warna latar belakang track */
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      /* Memperbesar kartu saat hover */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .box .card:hover p {
+      color: black;
+    }
+
+    @media (max-width: 768px) {
+      .container-fluid {
+        flex-direction: column;
+      }
+
+    }
 </style>
 
-<section class="py-5">
+<section class="pt-5 pb-3">
   <div class="mt-5 px-5">
     <h4>Selamat Datang!</h4>
     <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
   </div>
   <div class="col-md-3 pt-3 px-5">
-    <button class="btn btn-primary" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal" disabled>Tambahkan Anggota</button>
+    <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Anggota
+      <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
+    </button>
   </div>
 </section>
 <section>
   <div class="container-fluid pb-4 mx-4">
     <div class="row">
-      <div class="col mx-3">
-        <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box red" data-id="0">
-          <h4 class="pt-2"> Daftar Perusahaan</h4>
-          <!-- <div class="card drag-element" draggable="true">
+      <div id="side-container" class="col mx-3">
+        <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
+        <!-- <h5 class="card-title pt-2"> Daftar Perusahaan</h5> -->
+        <!-- <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4> -->
+        <!-- <div class="card drag-element" draggable="true">
             <p>PT Cahaya Asia Ya Putra Dewa</p>
             <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
           </div> -->
 
 
-        </div>
+        <!-- </div> -->
       </div>
     </div>
 
@@ -188,12 +265,51 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
     <script>
+      var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+      let global_id_pengguna = Cookies.get('id_pengguna');
+
+      function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+      }
       $(document).ready(function() {
         getDataLead();
         getDataTim();
         getLeadByTim();
         getPlotTim();
-        console.log(getLeadByTim(1), 'return data lead tim');
+        recounting();
+
+        // Handle form submission
+        $('#submit-input').click(function(event) {
+          event.preventDefault();
+
+          // Get the form instance
+          var formData = {
+            nama_tim: $('input[name=nama_tim]').val(),
+            posisi: $('input[name=posisi]').val(),
+            email: $('input[name=email]').val(),
+            no_telp: $('input[name=no_telp]').val(),
+            alamat: $('textarea[name=alamat]').val(),
+          };
+
+          // Make an AJAX request
+          $.ajax({
+            url: '<?= base_url("api/supplier/create") ?>',
+            type: 'POST',
+            beforeSend: addAuthorizationHeader,
+            data: formData,
+            success: function(response) {
+              if (response.status == true) {
+                alert('Data berhasil ditambahkan');
+                window.location.href = "<?= base_url('suplier/crm') ?>";
+              } else {
+                alert('Data gagal ditambahkan');
+              }
+            },
+            error: function(xhr, status, error) {
+              console.log(xhr.responseText);
+            }
+          });
+        });
       });
 
       function getPlotTim() {
@@ -201,12 +317,9 @@
         $.ajax({
           url: "<?= base_url('api/supplier/plot-tim'); ?>",
           type: "GET",
-          // data: {
-          //   id_tim: id
-          // },
+          beforeSend: addAuthorizationHeader,
           async: false,
           success: function(result) {
-            console.log(result, 'test DATA PLOT');
             data = result;
           }
         });
@@ -215,40 +328,28 @@
 
       function getDataLead() {
         $.ajax({
-          url: "<?= base_url('suplier/getleads'); ?>",
+          url: "<?= base_url('api/supplier/getCRMLeads'); ?>",
           type: "GET",
+          beforeSend: addAuthorizationHeader,
+          data: {
+            id_pengguna: global_id_pengguna
+          },
           success: function(result) {
-            console.log(result);
-            var dataLeadPlotted = getPlotTim();
-            var leads = '<h4 class="pt-2"> Daftar Perusahaan</h4>';
-            // console.log(dataLeadPlotted, "PLOTTEDDDDDD");
-            // console.log(dataLeadPlotted);
+            var leads = `<div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0">
+            <h5 class="card-title pt-2" style="padding-left:10px; margin-bottom:30px"> Daftar Perusahaan<span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></h5>`;
+
             $.each(result, function(index, value) {
-              var next = false;
-              if (dataLeadPlotted.length != 0) {
-                $.each(dataLeadPlotted, function(indexPlot, valuePlot) {
-                  // console.log(valuePlot, "DATA PLOTTED");
-                  if (value.id_lead == valuePlot.id_lead) {
-                    next = true;
-                    return false; //BREAK
-                  }
-                });
-                if (next) {
-                  console.log('CONTINUE?');
-                  return true; // CONTINUE
-                }
-              }
-
-              console.log(value, 'test_value');
               var rowNumber = index + 1;
-              leads +=
-                `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
-      <p>` + value.nama_perusahaan + `</p>
-      <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
-    </div>`;
+              if (typeof value === 'object') {
+                leads +=
+                  `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
+                <p>` + value.nama_perusahaan + `</p>
+                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+                </div>`;
+              }
             });
-
-            $("#container1").html(leads);
+            leads += `</div>`;
+            $("#side-container").html(leads);
             control();
           }
         });
@@ -259,25 +360,29 @@
           url: "<?= base_url('api/supplier/tim-suplier'); ?>",
           type: "GET",
           success: function(result) {
-            console.log(result);
             var leads = `<div class="col">
       <div class="row">`;
 
             $.each(result, function(index, value) {
-              console.log(value, 'test_value')
-              console.log((index + 1) % 4 == 0, "test INDEX");
               if ((index + 1) % 4 == 0) {
                 leads += `</div>
         </div> <div class="col">
       <div class="row">`;
               }
-              console.log(value.id_tim, "VALUE ID TIM");
-              console.log(getLeadByTim(value.id_tim));
+
               var rowNumber = index + 1;
               leads +=
-                `<div class="col"><h4 class="green title" onclick="toggleCardVisibility('container` + index + 2 + `)">` + value.nama_tim + `</h4>
-          <div class="mx-3">
-            <div id="container` + index + 2 + `" class="workspace box green" data-id="` + value.id_tim + `">` +
+                `<div class="col">
+                <div class="title bg-color" style="padding: 10px; margin-top:15px">
+                <div class="card rounded-3" style="height: 40px;padding-top:2%">
+                  <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `
+                  <span ><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
+                  <span id="card-count-container` + index + 2 + `" class="badge" style="margin-top:3px">` + value.jumlah + `</span>
+                  </h5>
+                </div>
+                </div>
+          <div class="">
+            <div id="container` + index + 2 + `" class="workspace box bg-color" style="margin-left:15px" data-id="` + value.id_tim + `">` +
                 getLeadByTim(value.id_tim) +
                 `</div>
           </div></div>`;
@@ -301,10 +406,8 @@
           },
           async: false,
           success: function(result) {
-            console.log(result, 'test lead tim');
             $.each(result, function(index, value) {
-              console.log(value, 'test_value LEad time jer js')
-              console.log(value.nama_perusahaan)
+
               var rowNumber = index + 1;
               leads +=
                 `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
@@ -312,240 +415,15 @@
                 <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
                 </div>`;
             });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
           }
         });
-        console.log(leads, "LEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAD");
         return leads;
       }
     </script>
-    <!-- <div class="col">
-      <div class="row">
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4>
-          <div class="mx-3">
-            <div id="container2" class="workspace box green" data-id="10101">
-              <div class="card" draggable="true">
-                <p>PT Cepogo Cheese Park</p>
-                <p style="font-size: 14px; color:#10B981;">Boyolali</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
-          <div class="mx-3">
-            <div id="container3" class="workspace box blue">
-              <div class="card drag-element" draggable="true">
-                <p>PT Cepogo Cheese Park DRag</p>
-                <p style="font-size: 14px; color:#10B981;">Boyolali</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
-          <div class="mx-3">
-            <div id="container4" class="workspace box orange">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
-          <div class="mx-3">
-            <div id="container5" class="workspace box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
-          <div class="mx-3">
-            <div id="container6" class="workspace box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
-          <div class="mx-3">
-            <div id="container7" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
-          <div class="mx-3">
-            <div id="container8" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="row">
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container9')">Container 2</h4>
-          <div class="mx-3">
-            <div id="container9" class="box green">
-              <div class="card" draggable="true">
-                <p>PT Cepogo Cheese Park</p>
-                <p style="font-size: 14px; color:#10B981;">Boyolali</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
-          <div class="mx-3">
-            <div id="container3" class="box blue">
-              <div class="card" draggable="true">
-                <p>PT Cepogo Cheese Park</p>
-                <p style="font-size: 14px; color:#10B981;">Boyolali</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
-          <div class="mx-3">
-            <div id="container4" class="box orange">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
-          <div class="mx-3">
-            <div id="container5" class="box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
-          <div class="mx-3">
-            <div id="container6" class="box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
-          <div class="mx-3">
-            <div id="container7" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
-          <div class="mx-3">
-            <div id="container8" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="row">
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container10')">Container 2</h4>
-          <div class="mx-3">
-            <div id="container10" class="box green">
-              <div class="card" draggable="true">
-                <p>PT Cepogo Cheese Park</p>
-                <p style="font-size: 14px; color:#10B981;">Boyolali</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container3')">Container 3</h4>
-          <div class="mx-3">
-            <div id="container3" class="box blue">
-              <div class="card" draggable="true">
-                <p>PT Cepogo Cheese Park</p>
-                <p style="font-size: 14px; color:#10B981;">Boyolali</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="orange title" onclick="toggleCardVisibility('container4')">Container 4</h4>
-          <div class="mx-3">
-            <div id="container4" class="box orange">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container5')">Container 5</h4>
-          <div class="mx-3">
-            <div id="container5" class="box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="green title" onclick="toggleCardVisibility('container6')">Container 6</h4>
-          <div class="mx-3">
-            <div id="container6" class="box green">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container7')">Container 7</h4>
-          <div class="mx-3">
-            <div id="container7" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <h4 class="blue title" onclick="toggleCardVisibility('container8')">Container 3</h4>
-          <div class="mx-3">
-            <div id="container8" class="box blue">
-              <div class="card" draggable="true">
-                <p>Card 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+
   </div>
   </div>
   <!-- modal input marketing -->
@@ -564,49 +442,63 @@
             <h3 class="modal-title" id="inputMarketingModalLabel">Input Marketing</h3>
             <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
             <div class="input-popup justify-content-end">
-              <form class="row g-2">
+              <form id="form-input" class="row g-2">
                 <div class="col-12">
                   <label for="inputNama" class="form-label text-start">Nama</label>
-                  <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
+                  <input type="text" name="nama_tim" class="form-control" id="inputNama" placeholder="Masukkan Nama" required>
                 </div>
                 <div class="col-12">
                   <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                  <input type="text" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi">
+                  <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi" required>
                 </div>
                 <div class="col-12">
                   <label for="inputEmail" class="form-label text-start">Email</label>
-                  <input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email">
+                  <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Masukkan Email" required>
                 </div>
                 <div class="col-12">
                   <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                  <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA">
+                  <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
                 </div>
                 <div class="col-12">
                   <label for="inputAlamat" class="form-label text-start">Alamat</label>
-                  <textarea class="form-control" id="inputAlamat" placeholder="Masukkan Alamat" rows="2"></textarea>
+                  <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
                 </div>
-
+                <div class="d-flex justify-content-start mt-3 gap-2">
+                  <div class="link flex-row align-items-center w-100">
+                    <span>
+                      <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                      <a href="#" id="submit-input" class="btn-custom text-white text-center">
+                        <i class="fas me-1"></i>Klik Disini
+                      </a>
+                    </span>
+                  </div>
               </form>
-            </div>
-            <div class="d-flex justify-content-start mt-3 gap-2">
-              <div></div>
-              <div class="link flex-row align-items-center w-100">
-                <span>
-                  <a class="btn-custom text-white text-center">
-                    <i class="fas me-1"></i>Klik Disini
-                  </a>
-                </span>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
   <!-- end modal input marketing -->
 </section>
 
 <script>
+  function toggleCardVisibility(containerId) {
+    const container = document.getElementById(containerId);
+    const card = container.querySelector(".card");
+
+    if (container.classList.contains("hidden")) {
+    container.style.height = "400px";
+    container.classList.remove("hidden");
+    container.classList.add("visible");
+  } else {
+    container.style.height = 0;
+    container.classList.remove("visible");
+    container.classList.add("hidden");
+  }
+  }
+
   function control() {
 
     const containers = document.querySelectorAll(".box");
@@ -625,6 +517,7 @@
         isDragging = false;
         draggedCard.classList.remove("dragging");
         draggedCard = null;
+
       });
     });
 
@@ -636,7 +529,6 @@
       container.addEventListener("drop", () => {
         if (isDragging) {
 
-          console.log(draggedCard);
           var leadId = draggedCard.getAttribute('data-id');
           var timId = container.getAttribute('data-id');
 
@@ -650,7 +542,6 @@
             },
             dataType: 'json',
             success: function(response) {
-              console.log(response);
               // if (response.success) {
               //   alert(response.message);
               // } else {
@@ -662,59 +553,22 @@
             }
 
           });
-
-
           container.appendChild(draggedCard);
+          recounting(); //Jumlah ulang jumlah card di container
+
         }
       });
+
     });
-
-    // $(".workspace").droppable({
-    //   accept: ".drag-element",
-    //   drop: function(event, ui) {
-    //     console.log("DROP");
-    //     var elementId = ui.draggable.data("id");
-
-    //     // Kirim data ke server menggunakan Ajax
-    //     $.ajax({
-    //       url: 'suplier/test-crm',
-    //       type: 'POST',
-    //       data: {
-    //         elementId: elementId
-    //       },
-    //       dataType: 'json',
-    //       success: function(response) {
-    //         console.log(response);
-    //         if (response.success) {
-    //           alert(response.message);
-    //         } else {
-    //           alert('Gagal menyimpan data.');
-    //         }
-    //       },
-    //       error: function() {
-    //         alert('Terjadi kesalahan dalam mengirim data.');
-    //       }
-    //     });
-    //   }
-    // });
-
-
   }
 
+  function recounting() {
+    const containers = document.querySelectorAll(".box");
+    containers.forEach((container) => {
 
-  // Fungsi untuk menampilkan atau menyembunyikan card dengan id tertentu
-  function toggleCardVisibility(containerId) {
-    console.log("CLICKED");
-    const container = document.getElementById(containerId);
-    const card = container.querySelector(".card");
-
-    if (card.style.display === "none") {
-      card.style.display = "inline-block";
-      container.style.display = "inline-block"; // Menampilkan container jika card tidak terlihat
-    } else {
-      card.style.display = "none";
-      container.style.display = "none"; // Menyembunyikan container jika card terlihat
-    }
+      var jumlah = container.getElementsByClassName('card').length;
+      document.getElementById('card-count-' + container.getAttribute('id')).innerHTML = jumlah; // Menggunakan innerHTML
+    });
   }
 </script>
 

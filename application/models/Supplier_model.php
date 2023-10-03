@@ -341,14 +341,14 @@ class Supplier_model extends CI_Model
 
         return $query->result_array();
     }
-    
+
     // public function getJumlahPemenangTender()
     // {
     //     $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang FROM pemenang";
     //     // $query = $this->db->query($sql);
     //     return $this->db->query($sql);
     // }
-    
+
     public function getJumlahPemenangTender()
     {
         // $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang_terbaru FROM pemenang WHERE DATE(tgl_pemenang)=DATE(NOW());";
@@ -417,7 +417,7 @@ class Supplier_model extends CI_Model
     LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
     LIMIT {$page_number},{$page_size}";
 
-    return $this->db->query($sql);
+        return $this->db->query($sql);
     }
 
     public function getDataLeadByIdTim($id_tim)
@@ -467,7 +467,7 @@ class Supplier_model extends CI_Model
         $this->db->select('*');
         $this->db->from('kontak_lead');
         $this->db->where('id_lead', $id);
-        $this->db->where('id_kontak != (SELECT MIN(id_kontak) FROM kontak_lead WHERE id_lead = '.$id.')');
+        $this->db->where('id_kontak != (SELECT MIN(id_kontak) FROM kontak_lead WHERE id_lead = ' . $id . ')');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -497,12 +497,12 @@ class Supplier_model extends CI_Model
         $this->db->select('*');
         $this->db->from('plot_tim');
         $this->db->where('id_lead', $id_lead);
-        // $this->db->where('id_tim', $id_tim);
 
         $query = $this->db->get();
         $isSet = $query->num_rows();
 
         if ($isSet > 0) {
+            $this->db->where('id_lead', $id_lead);
             return $this->db->update('plot_tim', ['id_tim' => $id_tim]);
         }
         return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
@@ -544,9 +544,9 @@ class Supplier_model extends CI_Model
     }
     public function getTimBySupplierId($id_supplier)
     {
-        $this->db->select(['*']);
-        $this->db->from('tim_marketing');
-        $this->db->where('id_supplier', $id_supplier);
+        $this->db->select('tm.*, (SELECT COUNT(*) FROM plot_tim pt WHERE pt.id_tim = tm.id_tim) AS jumlah');
+        $this->db->from('tim_marketing tm');
+        $this->db->where('tm.id_supplier', $id_supplier);
         $query = $this->db->get();
         return $query->result_array();
     }
