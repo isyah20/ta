@@ -668,7 +668,7 @@
 
         </div>
 </section>
-<section class="bg-white pb-5">
+<section class="bg-white py-3">
     <!-- table -->
     <div class="container wow fadeInUp">
         <div class="row">
