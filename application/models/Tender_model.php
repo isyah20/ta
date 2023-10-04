@@ -344,7 +344,16 @@ class Tender_model extends CI_Model
                 GROUP BY kode_tender,npwp
                 ORDER BY {$order}
                 LIMIT {$page_number},{$page_size}";
+        
+        $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna) 
+        SELECT id_pemenang, nama_pemenang, npwp, {$id_pengguna} FROM pemenang WHERE npwp NOT IN (SELECT npwp FROM data_leads) AND tgl_pemenang >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+            AND tgl_pemenang < NOW() 
+                GROUP BY nama_pemenang";
 
+        // Insert pemenang into data_leads and the data wich inserted only nama_pemenang as nama_perusahaan and npwp and not restricting duplicate the same nama perusahaan and add where clause where there are only new pemenang
+        // $sql_insert = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna) SELECT id_pemenang, nama_pemenang, npwp, {$id_pengguna} FROM pemenang WHERE nama_pemenang NOT IN (SELECT nama_perusahaan FROM data_leads) AND DATE(tgl_pemenang) = DATE_SUB(CURDATE(), INTERVAL 30 DAY) GROUP BY nama_pemenang";
+        // $sql_insert = "INSERT INTO data_leads (nama_perusahaan, npwp) SELECT kode_tender, nama_pemenang, npwp FROM pemenang WHERE kode_tender NOT IN (SELECT kode_tender FROM data_leads) GROUP BY kode_tender";
+        $this->db->query($sql2);
         return $this->db->query($sql);
     }
 

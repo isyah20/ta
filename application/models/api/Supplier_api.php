@@ -218,6 +218,8 @@ class Supplier_api extends CI_Model
             data_leads.id_pengguna = $id_pengguna
         GROUP BY
             data_leads.id_lead
+        ORDER BY
+            id DESC
         LIMIT {$page_number},{$page_size}";
 
         return $this->db->query($sql);
