@@ -389,7 +389,7 @@
               // }
               var rowNumber = index + 1;
               leads +=
-                `<div class="col-4">
+                `<div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="title bg-color" style="padding: 10px; margin-top:15px">
                 <div class="card rounded-3" style="height: 40px;padding-top:2%">
                   <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `
@@ -444,7 +444,7 @@
               leads +=
                 `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
                 <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+                <p style="font-size: 14px; color:#10B981;">` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</p>
                 </div>`;
             });
           },
