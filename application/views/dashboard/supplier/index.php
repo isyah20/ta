@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 <style>
+    body{
+        background-color:white;
+    }
     .animation {
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         -webkit-appearance: none;
@@ -230,7 +233,7 @@
     }
     
     .form-select-custom {
-        width: 615px;
+        width: 675px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
@@ -301,7 +304,7 @@
                                     </div>
                                     <div class="col-12 text-center">
                                         <p class="my-3">Silakan atur rentang nilai penawaran pada kolom di bawah ini:</p>
-                                    </div>
+                                    </div>fo
                                     <div class="col-sm-5 pe-sm-0">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">Nilai Awal (Rp)</span>
@@ -319,9 +322,9 @@
                                 </div>
                             </ul>
                             <!-- Filtering -->
-                            <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 0;padding-right: 7px;">
+                            <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 8px;">
                                 <a class="form-select-custom d-flex" style="width:40px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" style="padding:5px" alt="">
+                                    <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" style="padding:4px" alt="">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end my-2 py-2 rounded-3">
                                     <li class="dropdown-item d-flex text-dropdown" data-sort="1">Nilai Penawaran Terendah</li>
@@ -330,8 +333,13 @@
                                     <li class="dropdown-item d-flex text-dropdown" data-sort="4">Penetapan Pemenang Terlama</li>
                                 </ul>
                             </div>
+                            <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 20px">
+                                <a type="button" class="form-select-custom d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
+                                    <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
+                                </a>
+                            </div>
                             <!-- Search Nama -->
-                            <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
+                            <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:20px;">
                                 <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
                                 <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
                             </div>
@@ -341,7 +349,7 @@
             </div>
             <div class="col-md-5">
             <div class="row">
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 32%;">
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 30%;">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -354,7 +362,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 34%;">
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 31%;">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -367,7 +375,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 34%;">
+                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 31%;">
                         <div class="shadow rounded-3 bg-white">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -419,8 +427,9 @@
 </section>
 
 <section>
+    <div class="container">
     <div class="pt-3 pb-3 mt-5 bg-white">
-        <div id="sec-pemenang-terbaru" style="display: none; margin-left: 6%; margin-right: 6%;">
+        <div id="sec-pemenang-terbaru" style="display: none">
             <!-- <div class="text-center mb-3">
                 <h3 class="tender-title text-center wow fadeInUp d-inline-block px-3 pb-2" data-wow-delay="0.5s">Pemenang Tender</h3>
             </div> -->
@@ -480,8 +489,9 @@
                 </div>
             </div> -->
 
-            <div class="row wow fadeInUp mx-0 my-2" id="list-pemenang" data-wow-delay="0.5s"></div>
-            <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
+                <div class="row wow fadeInUp mx-0 my-2" id="list-pemenang" data-wow-delay="0.5s"></div>
+                <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
+            </div>
         </div>
     </div>
 </section>

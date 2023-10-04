@@ -43,7 +43,8 @@
 
   .box .card {
     width: 250px;
-    height: 60px;
+    min-height: 60px;
+    height: auto;
     background-color: white;
     color: black;
     border-radius: 5px;
@@ -67,7 +68,7 @@
 
   .card p {
     margin: 0;
-    padding: 3px 3px 0px 10px;
+    padding: 3px 3px 3px 10px;
   }
 
   .title {
@@ -122,7 +123,6 @@
 
   .modal-body p {
     font-size: 18px;
-    /* Ganti ukuran font sesuai dengan keinginan Anda */
   }
 
   .btn-custom {
