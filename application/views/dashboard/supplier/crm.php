@@ -24,15 +24,8 @@
   }
 
   .box-full {
-    display: inline-block;
-    margin-top: 15px;
-    padding-top: 10px;
-    border: none;
-    border-radius: 5px;
-    min-width: 270px;
-    height: 100%;
-    overflow-y: auto;
-    margin-bottom: 10px;
+    max-height: 100% !important;
+    height: 100% !important;
   }
 
   .box {
@@ -46,16 +39,6 @@
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     margin-bottom: 10px;
-  }
-
-  .box-full .card {
-    width: 250px;
-    height: 60px;
-    background-color: white;
-    color: black;
-    border-radius: 5px;
-    cursor: grab;
-    margin: 0px 10px 10px 10px;
   }
 
   .box .card {
@@ -77,9 +60,6 @@
     margin: 0px 10px 0px 10px;
   }
 
-  .box-full .card:hover p {
-    color: black;
-  }
 
   .box .card:hover p {
     color: black;
@@ -101,10 +81,6 @@
     cursor: grab;
   }
 
-  .box-full h4 {
-    position: relative;
-    padding-left: 10px;
-  }
 
   .box h4 {
     position: relative;
@@ -189,11 +165,6 @@
     background-attachment: fixed;
   }
 
-  /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
-  .box-full::-webkit-scrollbar {
-    width: 5px;
-    /* Lebar scrollbar */
-  }
 
   /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
   .box::-webkit-scrollbar {
@@ -201,12 +172,6 @@
     /* Lebar scrollbar */
   }
 
-  /* Untuk bagian badan (thumb) dari scrollbar */
-  .box-full::-webkit-scrollbar-thumb {
-    background: var(--font-dark-grey, #333);
-    border-radius: 5px;
-    /* Bentuk border radius thumb */
-  }
 
   /* Untuk bagian badan (thumb) dari scrollbar */
   .box::-webkit-scrollbar-thumb {
@@ -266,9 +231,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 
-  .box-full .card:hover p {
-    color: black;
-  }
+
 
   .box .card:hover p {
     color: black;
@@ -389,7 +352,7 @@
             id_pengguna: global_id_pengguna
           },
           success: function(result) {
-            var leads = `<div id="container1"  margin-right: 50px;" class="workspace box-full bg-color" data-id="0">
+            var leads = `<div id="container1"  margin-right: 50px;" class="workspace box box-full bg-color" data-id="0">
             <h5 class="card-title pt-2" style="padding-left:10px; margin-bottom:30px"> Daftar Perusahaan<span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></h5>`;
 
             $.each(result, function(index, value) {
@@ -421,12 +384,12 @@
               ++counter;
               console.log((counter), ((counter) % 3), "mod");
 
-              if ((counter) % 3 == 0) {
-                leads += `</div></div> <div class="col"><div class="row">`;
-              }
+              // if ((counter) % 3 == 0) {
+              //   leads += `</div></div> <div class="col"><div class="row">`;
+              // }
               var rowNumber = index + 1;
               leads +=
-                `<div class="col">
+                `<div class="col-4">
                 <div class="title bg-color" style="padding: 10px; margin-top:15px">
                 <div class="card rounded-3" style="height: 40px;padding-top:2%">
                   <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `

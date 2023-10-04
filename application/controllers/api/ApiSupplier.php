@@ -73,6 +73,7 @@ class ApiSupplier extends RestController
             'no_telp' => $this->post('no_telp'),
             'email' => $this->post('email'),
             'alamat' => $this->post('alamat'),
+            'id_supplier' => $_COOKIE['id_pengguna'],
         ];
 
         $token = random_string('alnum', 25);
