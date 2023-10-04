@@ -313,6 +313,53 @@ class Supplier_model extends CI_Model
         return print_r(json_encode($option));
     }
 
+    public function getDataLeadFilter($id_pengguna, $nama_perusahaan)
+    {
+        $sql = "SELECT
+        data_leads.id_lead AS id,
+        id_pengguna,
+        nama_perusahaan,
+        data_leads.npwp,
+        profil,
+        pemenang.*,
+        kontak_lead.*,
+        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
+        FROM
+            data_leads
+        LEFT JOIN
+            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN
+            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+        WHERE
+            data_leads.id_pengguna = $id_pengguna
+            AND LOWER(nama_perusahaan) LIKE LOWER('%{$nama_perusahaan}%')
+        GROUP BY
+            data_leads.id_lead
+        ";
+
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
+
+    // public function getJumlahPemenangTender()
+    // {
+    //     $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang FROM pemenang";
+    //     // $query = $this->db->query($sql);
+    //     return $this->db->query($sql);
+    // }
+
+    public function getJumlahPemenangTender()
+    {
+        // $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang_terbaru FROM pemenang WHERE DATE(tgl_pemenang)=DATE(NOW());";
+        $sql = "SELECT
+        COUNT(DISTINCT CASE WHEN DATE(tgl_pemenang) = DATE(NOW()) THEN npwp ELSE NULL END) AS total_today,
+        COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) AND MONTH(tgl_pemenang) = MONTH(NOW()) THEN npwp ELSE NULL END) AS total_month,
+        COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) THEN npwp ELSE NULL END) AS total_year
+        FROM pemenang";
+
+        return $this->db->query($sql);
+    }
     public function getJumTender()
     {
         // $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru WHERE akhir_daftar>=CURRENT_TIMESTAMP";
@@ -337,28 +384,40 @@ class Supplier_model extends CI_Model
         return $query->num_rows() > 0;
     }
 
-    public function getDataLeads()
+    public function getJumDataLeads()
+    {
+        $sql = "SELECT COUNT(*) AS total_leads FROM data_leads ";
+        return $this->db->query($sql);
+    }
+
+    public function getDataLeads($page_number, $page_size)
     {
         $sql = "SELECT
-        data_leads.id_lead AS id,
-        nama_perusahaan,
-        data_leads.npwp,
-        profil,
-        pemenang.*,
-        kontak_lead.*,
-        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
-        FROM
-            data_leads
-        LEFT JOIN
-            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
-        LEFT JOIN
-                kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
-        GROUP BY
-            data_leads.id_lead";
+        data_leads.*,
+        IFNULL(kontak_lead.nama, '') AS nama_kontak,
+        IFNULL(kontak_lead.posisi, '') AS posisi,
+        IFNULL(kontak_lead.no_telp, '') AS no_telp,
+        IFNULL(kontak_lead.email, '') AS email,
+        IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
+        IFNULL(lpse.nama_lpse, '') AS nama_lpse,
+        IFNULL(wilayah.wilayah, '') AS wilayah
+    FROM data_leads
+    LEFT JOIN (
+        SELECT kontak_lead.*
+        FROM kontak_lead
+        INNER JOIN (
+            SELECT id_lead, MIN(id_kontak) AS oldest
+            FROM kontak_lead
+            GROUP BY id_lead
+        ) oldest_contacts ON kontak_lead.id_lead = oldest_contacts.id_lead
+        AND kontak_lead.id_kontak = oldest_contacts.oldest
+    ) kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+    LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+    LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+    LIMIT {$page_number},{$page_size}";
 
-        $query = $this->db->query($sql);
-
-        return $query->result_array();
+        return $this->db->query($sql);
     }
 
     public function getDataLeadByIdTim($id_tim)
@@ -369,12 +428,12 @@ class Supplier_model extends CI_Model
         IFNULL(pemenang.lokasi_pekerjaan, '') AS lokasi_pekerjaan,
         IFNULL(lpse.nama_lpse, '') AS nama_lpse,
         IFNULL(wilayah.wilayah, '') AS wilayah
-    FROM plot_tim
-    JOIN data_leads ON plot_tim.id_lead = data_leads.id_lead 
-    LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
-    LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
-    LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
-    WHERE plot_tim.id_tim = " . $id_tim . ";
+            FROM plot_tim
+            JOIN data_leads ON plot_tim.id_lead = data_leads.id_lead 
+            LEFT JOIN pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+            LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
+            LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
+            WHERE plot_tim.id_tim = " . $id_tim . ";
         ";
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -390,15 +449,25 @@ class Supplier_model extends CI_Model
         return $query->row();
     }
 
+    // public function getKontakLeadById($id)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('kontak_lead');
+    //     // $this->db->where('id_lead', $id);
+    //     // join data lead to get id lead
+    //     $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
+    //     $this->db->where('kontak_lead.id_lead', $id);
+
+    //     $query = $this->db->get();
+    //     return $query->result_array();
+    // }
+
     public function getKontakLeadById($id)
     {
         $this->db->select('*');
         $this->db->from('kontak_lead');
-        // $this->db->where('id_lead', $id);
-        // join data lead to get id lead
-        $this->db->join('data_leads', 'kontak_lead.id_lead = data_leads.id_lead');
-        $this->db->where('kontak_lead.id_lead', $id);
-
+        $this->db->where('id_lead', $id);
+        $this->db->where('id_kontak != (SELECT MIN(id_kontak) FROM kontak_lead WHERE id_lead = ' . $id . ')');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -428,12 +497,12 @@ class Supplier_model extends CI_Model
         $this->db->select('*');
         $this->db->from('plot_tim');
         $this->db->where('id_lead', $id_lead);
-        // $this->db->where('id_tim', $id_tim);
 
         $query = $this->db->get();
         $isSet = $query->num_rows();
 
         if ($isSet > 0) {
+            $this->db->where('id_lead', $id_lead);
             return $this->db->update('plot_tim', ['id_tim' => $id_tim]);
         }
         return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
@@ -475,9 +544,9 @@ class Supplier_model extends CI_Model
     }
     public function getTimBySupplierId($id_supplier)
     {
-        $this->db->select(['*']);
-        $this->db->from('tim_marketing');
-        $this->db->where('id_supplier', $id_supplier);
+        $this->db->select('tm.*, (SELECT COUNT(*) FROM plot_tim pt WHERE pt.id_tim = tm.id_tim) AS jumlah');
+        $this->db->from('tim_marketing tm');
+        $this->db->where('tm.id_supplier', $id_supplier);
         $query = $this->db->get();
         return $query->result_array();
     }

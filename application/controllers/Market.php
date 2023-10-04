@@ -43,6 +43,17 @@ class Market extends CI_Controller
         $this->init();
     }
 
+    public function indexMarket(){
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/perusahaan/know_market');
+        $this->load->view('templates/footer');
+    }
+
     public function index()
     {
         $id = $this->session->userdata('user_data')['id_pengguna'];

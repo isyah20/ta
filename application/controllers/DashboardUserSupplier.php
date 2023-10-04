@@ -35,7 +35,8 @@ class DashboardUserSupplier extends CI_Controller
         $data = [
             'title' => 'Dashboard'
         ];
-
+        // var_dump(api_url());
+        // die;
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/supplier/index');
@@ -79,11 +80,32 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function getJumDataLeads()
+    {
+        $response = $this->Supplier_model->getJumDataLeads()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+
     public function getDataLeads()
     {
-        $data = $this->Supplier_model->getDataLeads();
-        $json_data = json_encode($data);
-        $this->output->set_content_type('application/json')->set_output($json_data);
+        $page_size = $_GET['pageSize'];
+        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $response = $this->Supplier_model->getDataLeads($page_number, $page_size)->result();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
     }
 
     public function getDataLeadsById($id)
@@ -93,7 +115,8 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function detailDataLead($id){
+    public function detailDataLead($id)
+    {
         $data = [
             'title' => 'Dashboard'
         ];
@@ -188,11 +211,11 @@ class DashboardUserSupplier extends CI_Controller
     {
         $id_lead = $this->input->post('id_lead');
         $id_tim = $this->input->post('id_tim');
-        if ($id_tim == 0) {
-            $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
-        } else {
-            $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
-        }
+        // if ($id_tim == 0) {
+        //     $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
+        // } else {
+        $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        // }
         // $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
@@ -545,6 +568,39 @@ class DashboardUserSupplier extends CI_Controller
     //     }
 
 
+    public function getDataLeadFilter()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $keyword = $this->input->get('key');
+        $data = $this->Supplier_model->getDataLeadFilter($id_pengguna, $keyword);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getJumlahPemenangTender()
+    {
+        $response = $this->Supplier_model->getJumlahPemenangTender()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+    public function getJumlahPemenangTenderTerbaru()
+    {
+        $response = $this->Supplier_model->getJumlahPemenangTenderTerbaru()->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
     public function getJumTender()
     {
         $response = $this->Supplier_model->getJumTender()->row();

@@ -68,7 +68,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
             <ul class="navbar-nav mb-3 mb-md-0  mt-2 mt-lg-0 pe-lg-4 gap-3">
                 <li class="nav-item">
-                    <a class="nav-link text-white link-danger text-center active fw-bold" href="" id="nav_dashboard">Dashboard</a>
+                    <a class="nav-link text-white link-danger text-center fw-bold" href="" id="nav_dashboard">Dashboard</a>
                 </li>
 
                 <?php 
@@ -89,7 +89,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end my-2 p-0 rounded-3">
                             <li>
-                                <a class="py-2 dropdown-item d-flex position-relative" href="<?= base_url('market') ?>">
+                                <a class="py-2 dropdown-item d-flex position-relative" href="<?= base_url('user-dashboard/market') ?>">
                                     <div class="shape-rounded">
                                         <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
                                     </div>
@@ -110,15 +110,38 @@
                     </li>
                 <?php endif; ?>
                 <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/marketing') ?>" id="nav_dashboard">Marketing</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Data Leads</a>
+                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Leads</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">Plotting Tim</a>
+                    <li class="nav-item dropdown dropdown-profile">
+                        <a class="nav-link dropdown-toggle text-white link-danger text-center" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <b>Marketing</b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end my-2 p-0 rounded-3">
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative rounded-bottom" href="<?= base_url('suplier/marketing') ?>">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Manage Marketing</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative rounded-bottom" href="<?= base_url('suplier/crm') ?>">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Plotting Tim</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link text-white link-danger text-center active fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">CRM</a>
+                    </li> -->
 
                     
                     <!-- <li class="nav-item dropdown dropdown-profile">
