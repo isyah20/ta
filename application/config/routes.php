@@ -130,6 +130,7 @@ $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['api/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['api/getJumDataLeads'] = 'DashboardUserSupplier/getJumDataLeads';
 $route['suplier/leads/export'] = 'DashboardUserSupplier/exportLeads';
+$route['suplier/tender/export'] = 'DashboardUserSupplier/exportTenderTerbaru';
 
 $route['suplier/getlead/(:num)'] = 'DashboardUserSupplier/getDataLeads/$1';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
