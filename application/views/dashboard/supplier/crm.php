@@ -23,6 +23,18 @@
     transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
 
+  .box-full {
+    display: inline-block;
+    margin-top: 15px;
+    padding-top: 10px;
+    border: none;
+    border-radius: 5px;
+    min-width: 270px;
+    height: 100%;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
   .box {
     display: inline-block;
     margin-top: 15px;
@@ -34,6 +46,16 @@
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     margin-bottom: 10px;
+  }
+
+  .box-full .card {
+    width: 250px;
+    height: 60px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    cursor: grab;
+    margin: 0px 10px 10px 10px;
   }
 
   .box .card {
@@ -55,6 +77,10 @@
     margin: 0px 10px 0px 10px;
   }
 
+  .box-full .card:hover p {
+    color: black;
+  }
+
   .box .card:hover p {
     color: black;
   }
@@ -73,6 +99,11 @@
 
   .card.dragging {
     cursor: grab;
+  }
+
+  .box-full h4 {
+    position: relative;
+    padding-left: 10px;
   }
 
   .box h4 {
@@ -159,9 +190,22 @@
   }
 
   /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
+  .box-full::-webkit-scrollbar {
+    width: 5px;
+    /* Lebar scrollbar */
+  }
+
+  /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
   .box::-webkit-scrollbar {
     width: 5px;
     /* Lebar scrollbar */
+  }
+
+  /* Untuk bagian badan (thumb) dari scrollbar */
+  .box-full::-webkit-scrollbar-thumb {
+    background: var(--font-dark-grey, #333);
+    border-radius: 5px;
+    /* Bentuk border radius thumb */
   }
 
   /* Untuk bagian badan (thumb) dari scrollbar */
@@ -222,6 +266,10 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 
+  .box-full .card:hover p {
+    color: black;
+  }
+
   .box .card:hover p {
     color: black;
   }
@@ -247,8 +295,8 @@
 </section>
 <section>
   <div class="container-fluid pb-4 mx-4">
-    <div class="row">
-      <div id="side-container" class="col mx-3">
+    <div class="">
+      <div id="side-container" class="col col-sm-12 mx-3">
         <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
         <!-- <h5 class="card-title pt-2"> Daftar Perusahaan</h5> -->
         <!-- <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4> -->
@@ -261,8 +309,10 @@
         <!-- </div> -->
       </div>
     </div>
+    <div class="col">
 
-    <div id="big-container"></div>
+      <div id="big-container" class="row"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
@@ -337,7 +387,7 @@
             id_pengguna: global_id_pengguna
           },
           success: function(result) {
-            var leads = `<div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0">
+            var leads = `<div id="container1"  margin-right: 50px;" class="workspace box-full bg-color" data-id="0">
             <h5 class="card-title pt-2" style="padding-left:10px; margin-bottom:30px"> Daftar Perusahaan<span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></h5>`;
 
             $.each(result, function(index, value) {
@@ -364,14 +414,14 @@
           success: function(result) {
             var leads = `<div class="col">
       <div class="row">`;
-
+            var counter = 0;
             $.each(result, function(index, value) {
-              if ((index + 1) % 4 == 0) {
-                leads += `</div>
-        </div> <div class="col">
-      <div class="row">`;
-              }
+              ++counter;
+              console.log((counter), ((counter) % 3), "mod");
 
+              if ((counter) % 3 == 0) {
+                leads += `</div></div> <div class="col"><div class="row">`;
+              }
               var rowNumber = index + 1;
               leads +=
                 `<div class="col">
@@ -388,7 +438,22 @@
                 getLeadByTim(value.id_tim) +
                 `</div>
           </div></div>`;
+
+              // if (counter != 1) {
+
+              //   if ((counter) % 3 == 2) {
+              //     leads += `</div></div>`;
+              //   }
+              // }
+
+
             });
+
+            // console.log(counter);
+            // if ((counter) % 3 != 0) {
+            //   console.log('IIINNN');
+            //   leads += `<div class="col"></div>`;
+            // }
             leads +=
               ` </div>
         </div>`
