@@ -19,6 +19,12 @@ class Paket_model extends CI_Model
         $data = $this->client->request('GET', 'paket', $this->client->getConfig('headers'));
         $data = json_decode($data->getBody()->getContents(), true);
         return $data;
+
+        // Get from table paket
+        // $this->db->select(['*']);
+        // $this->db->from('paket');
+        // $query = $this->db->get();
+        // return $query->result_array();
     }
 
     public function getPaketById($id)

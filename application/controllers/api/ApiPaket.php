@@ -15,7 +15,7 @@ class ApiPaket extends RestController
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('api/Paket_model');
+        $this->load->model('Paket_model');
     }
 
     // method must name between _get to using get request

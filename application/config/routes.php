@@ -580,7 +580,7 @@ $route['api/peserta/update/(:num)'] = 'api/ApiPeserta/update/$1';
 $route['api/peserta/delete/(:num)'] = 'api/ApiPeserta/destroy/$1';
 
 //restApi route for Paket
-$route['api/paket'] = 'api/ApiPaket/index';
+$route['api/paket'] = 'api/ApiPaket';
 $route['api/paket/s-getHpsPerMonth'] = 'api/ApiPaket/searchHpsPerMonth';
 
 // restAPI route for wilayah
