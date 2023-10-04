@@ -98,7 +98,7 @@ class Supplier_api extends CI_Model
         $this->db->from('data_leads');
         // $this->db->where('id_lead', $id);
         //join pemenang_tender to get alamat
-        $this->db->join('pemenang_tender', 'pemenang_tender.id_pemenang = data_leads.id_pemenang');
+        $this->db->join('pemenang', 'pemenang.id_pemenang = data_leads.id_pemenang');
         $this->db->where('data_leads.id_lead', $id);
         $query = $this->db->get();
         return $query->row_array();
