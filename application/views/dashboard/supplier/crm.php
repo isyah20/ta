@@ -351,10 +351,12 @@
             data: formData,
             success: function(response) {
               if (response.status == true) {
-                alert('Data berhasil ditambahkan');
+                // alert('Data berhasil ditambahkan');
+                console.log('Data berhasil ditambahkan');
                 window.location.href = "<?= base_url('suplier/crm') ?>";
               } else {
-                alert('Data gagal ditambahkan');
+                // alert('Data gagal ditambahkan');
+                console.log('Data gagal ditambahkan');
               }
             },
             error: function(xhr, status, error) {
