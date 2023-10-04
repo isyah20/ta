@@ -113,7 +113,7 @@ class DashboardUserSupplier extends CI_Controller
     public function exportLeads()
     {
         // require_once __DIR__ . '...\vendor\autoload.php';
-        require_once '.../vendor/autoload.php';
+        require_once 'vendor\autoload.php';
         $spreadsheet = new Spreadsheet();
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $activeSheet = $spreadsheet->getActiveSheet();
@@ -193,10 +193,10 @@ class DashboardUserSupplier extends CI_Controller
             12 => 'Desember',
         ];
         //judul
-        $title = $tipe == 1 ? 'Rekap Pelatihan ' . $bulan[date('n')] . ' Tahun ' . date('Y') : 'Rekap Pelatihan Tahun ' . date('Y');
-        $activeSheet->setCellValue('A2', $title); // Set kolom A1 dengan tulisan "DATA SISWA"
+        // $title = $tipe == 1 ? 'Rekap Pelatihan ' . $bulan[date('n')] . ' Tahun ' . date('Y') : 'Rekap Pelatihan Tahun ' . date('Y');
+        // $activeSheet->setCellValue('A2', $title); // Set kolom A1 dengan tulisan "DATA SISWA"
         $activeSheet->mergeCells('A2:N2'); // Set Merge Cell pada kolom A1 sampai F1
-        $activeSheet->getStyle('A2')->applyFromArray($style_title);
+        // $activeSheet->getStyle('A2')->applyFromArray($style_title);
 
         $activeSheet->setCellValue('A4', 'No');
         $activeSheet->mergeCells('A4:A5');
@@ -245,48 +245,48 @@ class DashboardUserSupplier extends CI_Controller
             $activeSheet->getStyle('N' . $i)->applyFromArray($style_col);
         }
 
-        // DATA
-        if ($tipe == 1) {
-            $data = model(CourseModel::class)->getDataCourseMonth();
-        } else {
-            $data = model(CourseModel::class)->getDataCourseYear();
-        }
-        $index = 6;
-        foreach ($data as $dt => $value) {
-            // DATA BEST
-            $dataBest = $this->controlAPI($this->moodleUrlAPI('&wsfunction=core_course_get_courses_by_field&field=id&value=' . $value['id'] . ''));
+        // // DATA
+        // if ($tipe == 1) {
+        //     $data = model(CourseModel::class)->getDataCourseMonth();
+        // } else {
+        //     $data = model(CourseModel::class)->getDataCourseYear();
+        // }
+        // $index = 6;
+        // foreach ($data as $dt => $value) {
+        //     // DATA BEST
+        //     $dataBest = $this->controlAPI($this->moodleUrlAPI('&wsfunction=core_course_get_courses_by_field&field=id&value=' . $value['id'] . ''));
 
-            $activeSheet->setCellValue('A' . $index, $index - 5);
-            $activeSheet->setCellValue('B' . $index, $dataBest->courses[0]->fullname);
-            $activeSheet->setCellValue('C' . $index, $dataBest->courses[0]->categoryname);
-            $activeSheet->setCellValue('D' . $index, date('Y-m-d', strtotime($value['start_registration'])));
-            $activeSheet->setCellValue('E' . $index, date('Y-m-d', strtotime($value['end_registration'])));
-            $activeSheet->setCellValue('F' . $index, $this->toDMY($dataBest->courses[0]->startdate));
-            $activeSheet->setCellValue('G' . $index, $this->toDMY($dataBest->courses[0]->enddate));
-            $activeSheet->setCellValue('H' . $index, $value['batch']);
-            $activeSheet->setCellValue('I' . $index, $value['target_participant']);
-            $activeSheet->setCellValue('J' . $index, $value['place']);
-            $activeSheet->setCellValue('K' . $index, $value['contact_person']);
-            $activeSheet->setCellValue('L' . $index, $value['quota']);
-            $activeSheet->setCellValue('M' . $index, $value['method']);
-            $activeSheet->setCellValue('N' . $index, $value['source_funds']);
+        //     $activeSheet->setCellValue('A' . $index, $index - 5);
+        //     $activeSheet->setCellValue('B' . $index, $dataBest->courses[0]->fullname);
+        //     $activeSheet->setCellValue('C' . $index, $dataBest->courses[0]->categoryname);
+        //     $activeSheet->setCellValue('D' . $index, date('Y-m-d', strtotime($value['start_registration'])));
+        //     $activeSheet->setCellValue('E' . $index, date('Y-m-d', strtotime($value['end_registration'])));
+        //     $activeSheet->setCellValue('F' . $index, $this->toDMY($dataBest->courses[0]->startdate));
+        //     $activeSheet->setCellValue('G' . $index, $this->toDMY($dataBest->courses[0]->enddate));
+        //     $activeSheet->setCellValue('H' . $index, $value['batch']);
+        //     $activeSheet->setCellValue('I' . $index, $value['target_participant']);
+        //     $activeSheet->setCellValue('J' . $index, $value['place']);
+        //     $activeSheet->setCellValue('K' . $index, $value['contact_person']);
+        //     $activeSheet->setCellValue('L' . $index, $value['quota']);
+        //     $activeSheet->setCellValue('M' . $index, $value['method']);
+        //     $activeSheet->setCellValue('N' . $index, $value['source_funds']);
 
-            $activeSheet->getStyle('A' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('B' . $index)->applyFromArray($style_row_left);
-            $activeSheet->getStyle('C' . $index)->applyFromArray($style_row_left);
-            $activeSheet->getStyle('D' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('E' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('F' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('G' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('H' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('I' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('J' . $index)->applyFromArray($style_row_left);
-            $activeSheet->getStyle('K' . $index)->applyFromArray($style_row_left);
-            $activeSheet->getStyle('L' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('M' . $index)->applyFromArray($style_row_center);
-            $activeSheet->getStyle('N' . $index)->applyFromArray($style_row_center);
-            $index++;
-        }
+        //     $activeSheet->getStyle('A' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('B' . $index)->applyFromArray($style_row_left);
+        //     $activeSheet->getStyle('C' . $index)->applyFromArray($style_row_left);
+        //     $activeSheet->getStyle('D' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('E' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('F' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('G' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('H' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('I' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('J' . $index)->applyFromArray($style_row_left);
+        //     $activeSheet->getStyle('K' . $index)->applyFromArray($style_row_left);
+        //     $activeSheet->getStyle('L' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('M' . $index)->applyFromArray($style_row_center);
+        //     $activeSheet->getStyle('N' . $index)->applyFromArray($style_row_center);
+        //     $index++;
+        // }
 
         //mengatur warptext disetiap kolom
         foreach (range('A', $activeSheet->getHighestDataColumn()) as $col) {
@@ -306,7 +306,7 @@ class DashboardUserSupplier extends CI_Controller
         $activeSheet->getColumnDimension('L')->setWidth(15);
         $activeSheet->getColumnDimension('M')->setWidth(15);
         $activeSheet->getColumnDimension('N')->setWidth(15);
-
+        $title = "test";
         $filename = $title . '.xlsx';
 
         header('Content-Type: application/vnd.ms-excel');
