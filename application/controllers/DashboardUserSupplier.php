@@ -2,6 +2,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 use App\components\traits\ClientApi;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class DashboardUserSupplier extends CI_Controller
 {
@@ -20,6 +22,8 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->model('Lpse_model');
         $this->load->model('Pemenang_model');
         $this->load->model('Supplier_model');
+        $this->load->model('Tender_model');
+        $this->load->model('api/Supplier_api');
         $this->load->model('api/Pemenang_model', 'pemenang');
         $this->init();
     }
@@ -106,6 +110,326 @@ class DashboardUserSupplier extends CI_Controller
             ->_display();
 
         exit;
+    }
+
+    public function exportLeads()
+    {
+        require_once 'vendor\autoload.php';
+        $spreadsheet = new Spreadsheet();
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $activeSheet = $spreadsheet->getActiveSheet();
+
+
+        // Buat sebuah variabel untuk menampung pengaturan style judul
+        $style_title = [
+            'font' => [
+                'bold'  => true,
+                'size'  => 15,
+                'name'  => 'Calibri'
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ]
+        ];
+        // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
+        $style_col = [
+            'font' => [
+                'bold' => true,
+                'color' => [
+                    'argb' => 'FFFFFF',
+                ],
+            ], // Set font nya jadi bold
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ],
+            'borders' => [
+                'outline' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border top dengan garis tipis
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'E05151',
+                ],
+                'endColor' => [
+                    'argb' => 'E05151',
+                ],
+            ]
+        ];
+        // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+        $style_row_center = [
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ],
+            'borders' => [
+                'outline' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+            ]
+        ];
+
+        $style_row_left = [
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ],
+            'borders' => [
+                'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border top dengan garis tipis
+                'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],  // Set border right dengan garis tipis
+                'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border bottom dengan garis tipis
+                'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border left dengan garis tipis
+            ]
+        ];
+
+        //judul
+        $title = 'Data Leads Tenderplus';
+        $activeSheet->setCellValue('A1', $title); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $activeSheet->mergeCells('A1:H1'); // Set Merge Cell pada kolom A1 sampai F1
+        $activeSheet->getStyle('A1')->applyFromArray($style_title);
+        $activeSheet->setCellValue('A2', 'Update:' . date('Y-m-d')); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $activeSheet->mergeCells('A2:H2'); // Set Merge Cell pada kolom A1 sampai F1
+        // $activeSheet->getStyle('A2')->applyFromArray($style_col);
+
+        $activeSheet->setCellValue('A3', 'No');
+        $activeSheet->setCellValue('B3', 'Nama Perusahaan');
+        $activeSheet->setCellValue('C3', 'NPWP');;
+        $activeSheet->setCellValue('D3', 'Nama Kontak');
+        $activeSheet->setCellValue('E3', 'Posisi');
+        $activeSheet->setCellValue('F3', 'Email');
+        $activeSheet->setCellValue('G3', 'No Telp/WA');
+        $activeSheet->setCellValue('H3', 'Alamat');
+
+        for ($i = 3; $i <= 3; $i++) {
+            $activeSheet->getStyle('A' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('B' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('C' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('D' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('E' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('F' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('G' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('H' . $i)->applyFromArray($style_col);
+        }
+
+        // // DATA
+        $data = $this->Supplier_model->getAllDataLeads($_COOKIE['id_pengguna'])->result_array();
+        $index = 4;
+        $number = 1;
+        foreach ($data as $key => $value) {
+            $kontak = $this->Supplier_api->getContact($value['id_lead']);
+            $activeSheet->setCellValue('A' . $index, $number);
+            $activeSheet->setCellValue('B' . $index, $value['nama_perusahaan']);
+            $activeSheet->setCellValue('C' . $index, $value['npwp']);
+            $activeSheet->setCellValue('H' . $index, $value['kabupaten'] . ', ' . $value['provinsi']);
+            $indexStart = $index;
+            $indexEnd = $index;
+
+            if (!empty($kontak)) {
+                foreach ($kontak as $keyKontak => $valueKontak) {
+                    $indexEnd = $index;
+                    $activeSheet->setCellValue('D' . $index, $valueKontak['nama']);
+                    $activeSheet->setCellValue('E' . $index, $valueKontak['posisi']);
+                    $activeSheet->setCellValue('F' . $index, $valueKontak['email']);
+                    $activeSheet->setCellValue('G' . $index, $valueKontak['no_telp']);
+
+                    $activeSheet->getStyle('A' . $index)->applyFromArray($style_row_center);
+                    $activeSheet->getStyle('B' . $index)->applyFromArray($style_row_left);
+                    $activeSheet->getStyle('C' . $index)->applyFromArray($style_row_left);
+                    $activeSheet->getStyle('D' . $index)->applyFromArray($style_row_left);
+                    $activeSheet->getStyle('E' . $index)->applyFromArray($style_row_left);
+                    $activeSheet->getStyle('F' . $index)->applyFromArray($style_row_left);
+                    $activeSheet->getStyle('G' . $index)->applyFromArray($style_row_left);
+                    $activeSheet->getStyle('H' . $index)->applyFromArray($style_row_left);
+                    $index++;
+                }
+            } else {
+                $activeSheet->getStyle('A' . $index)->applyFromArray($style_row_center);
+                $activeSheet->getStyle('B' . $index)->applyFromArray($style_row_left);
+                $activeSheet->getStyle('C' . $index)->applyFromArray($style_row_left);
+                $activeSheet->getStyle('D' . $index)->applyFromArray($style_row_left);
+                $activeSheet->getStyle('E' . $index)->applyFromArray($style_row_left);
+                $activeSheet->getStyle('F' . $index)->applyFromArray($style_row_left);
+                $activeSheet->getStyle('G' . $index)->applyFromArray($style_row_left);
+                $activeSheet->getStyle('H' . $index)->applyFromArray($style_row_left);
+                $index++;
+            }
+
+
+            $activeSheet->mergeCells('A' . $indexStart . ':A' . $indexEnd);
+            $activeSheet->mergeCells('B' . $indexStart . ':B' . $indexEnd);
+            $activeSheet->mergeCells('C' . $indexStart . ':C' . $indexEnd);
+            $activeSheet->mergeCells('H' . $indexStart . ':H' . $indexEnd);
+
+            $number++;
+        }
+
+        //mengatur warptext disetiap kolom
+        foreach (range('A', $activeSheet->getHighestDataColumn()) as $col) {
+            $activeSheet->getStyle($col)->getAlignment()->setWrapText(true);
+        }
+
+        //mengatur weight pada cell
+        $activeSheet->getColumnDimension('B')->setWidth(25);
+        $activeSheet->getColumnDimension('C')->setWidth(25);
+        $activeSheet->getColumnDimension('D')->setWidth(25);
+        $activeSheet->getColumnDimension('E')->setWidth(25);
+        $activeSheet->getColumnDimension('F')->setWidth(25);
+        $activeSheet->getColumnDimension('G')->setWidth(25);
+        $activeSheet->getColumnDimension('H')->setWidth(50);
+
+        $filename = $title . '.xlsx';
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename=' . $filename);
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        die;
+    }
+    public function exportTenderTerbaru()
+    {
+        require_once 'vendor\autoload.php';
+        $spreadsheet = new Spreadsheet();
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $activeSheet = $spreadsheet->getActiveSheet();
+
+
+        // Buat sebuah variabel untuk menampung pengaturan style judul
+        $style_title = [
+            'font' => [
+                'bold'  => true,
+                'size'  => 15,
+                'name'  => 'Calibri'
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ]
+        ];
+        // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
+        $style_col = [
+            'font' => [
+                'bold' => true,
+                'color' => [
+                    'argb' => 'FFFFFF',
+                ],
+            ], // Set font nya jadi bold
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ],
+            'borders' => [
+                'outline' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border top dengan garis tipis
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'E05151',
+                ],
+                'endColor' => [
+                    'argb' => 'E05151',
+                ],
+            ]
+        ];
+        // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+        $style_row_center = [
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ],
+            'borders' => [
+                'outline' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+            ]
+        ];
+
+        $style_row_left = [
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ],
+            'borders' => [
+                'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border top dengan garis tipis
+                'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],  // Set border right dengan garis tipis
+                'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border bottom dengan garis tipis
+                'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border left dengan garis tipis
+            ]
+        ];
+
+        //judul
+        $title = 'Data Pemenang Tender Tenderplus';
+        $activeSheet->setCellValue('A1', $title); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $activeSheet->mergeCells('A1:H1'); // Set Merge Cell pada kolom A1 sampai F1
+        $activeSheet->getStyle('A1')->applyFromArray($style_title);
+        $activeSheet->setCellValue('A2', 'Update:' . date('Y-m-d')); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $activeSheet->mergeCells('A2:H2'); // Set Merge Cell pada kolom A1 sampai F1
+
+        $activeSheet->setCellValue('A3', 'No');
+        $activeSheet->setCellValue('B3', 'Nama Pemenang');
+        $activeSheet->setCellValue('C3', 'NPWP');;
+        $activeSheet->setCellValue('D3', 'Nama Tender');
+        $activeSheet->setCellValue('E3', 'Kode Tender');
+        $activeSheet->setCellValue('F3', 'Jenis Tender');
+        $activeSheet->setCellValue('G3', 'Harga Penawaran');
+        $activeSheet->setCellValue('H3', 'Tanggal Pemenang');
+
+        for ($i = 3; $i <= 3; $i++) {
+            $activeSheet->getStyle('A' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('B' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('C' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('D' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('E' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('F' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('G' . $i)->applyFromArray($style_col);
+            $activeSheet->getStyle('H' . $i)->applyFromArray($style_col);
+        }
+
+        // // DATA
+        $data = $this->Tender_model->getAllKatalogPemenangTerbaruByPengguna1($_COOKIE['id_pengguna'])->result_array();
+
+        $index = 4;
+        $number = 1;
+        foreach ($data as $key => $value) {
+            $activeSheet->setCellValue('A' . $index, $number);
+            $activeSheet->setCellValue('B' . $index, $value['nama_pemenang']);
+            $activeSheet->setCellValue('C' . $index, $value['npwp']);
+            $activeSheet->setCellValue('D' . $index, $value['nama_tender']);
+            $activeSheet->setCellValue('E' . $index, $value['kode_tender']);
+            $activeSheet->setCellValue('F' . $index, $value['jenis_tender']);
+            $activeSheet->setCellValue('G' . $index, $value['harga_penawaran']);
+            $activeSheet->setCellValue('H' . $index, $value['tgl_pemenang']);
+
+            $activeSheet->getStyle('A' . $index)->applyFromArray($style_row_center);
+            $activeSheet->getStyle('B' . $index)->applyFromArray($style_row_left);
+            $activeSheet->getStyle('C' . $index)->applyFromArray($style_row_left);
+            $activeSheet->getStyle('D' . $index)->applyFromArray($style_row_left);
+            $activeSheet->getStyle('E' . $index)->applyFromArray($style_row_left);
+            $activeSheet->getStyle('F' . $index)->applyFromArray($style_row_left);
+            $activeSheet->getStyle('G' . $index)->applyFromArray($style_row_left);
+            $activeSheet->getStyle('H' . $index)->applyFromArray($style_row_left);
+
+            $index++;
+            $number++;
+        }
+
+        //mengatur warptext disetiap kolom
+        foreach (range('A', $activeSheet->getHighestDataColumn()) as $col) {
+            $activeSheet->getStyle($col)->getAlignment()->setWrapText(true);
+        }
+
+        //mengatur weight pada cell
+        $activeSheet->getColumnDimension('B')->setWidth(25);
+        $activeSheet->getColumnDimension('C')->setWidth(25);
+        $activeSheet->getColumnDimension('D')->setWidth(35);
+        $activeSheet->getColumnDimension('E')->setWidth(25);
+        $activeSheet->getColumnDimension('F')->setWidth(25);
+        $activeSheet->getColumnDimension('G')->setWidth(25);
+        $activeSheet->getColumnDimension('H')->setWidth(25);
+
+        $filename = $title . '.xlsx';
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename=' . $filename);
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        die;
     }
 
     public function getDataLeadsById($id)

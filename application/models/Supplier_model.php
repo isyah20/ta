@@ -419,6 +419,31 @@ class Supplier_model extends CI_Model
 
         return $this->db->query($sql);
     }
+    public function getAllDataLeads($id_pengguna)
+    {
+        $sql = "SELECT
+        data_leads.id_lead AS id,
+        id_pengguna,
+        nama_perusahaan,
+        data_leads.npwp,
+        profil,
+        pemenang.*,
+        kontak_lead.*,
+        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
+        FROM
+            data_leads
+        LEFT JOIN
+            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN
+            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+        WHERE
+            data_leads.id_pengguna = $id_pengguna
+        GROUP BY
+            data_leads.id_lead;
+   ";
+
+        return $this->db->query($sql);
+    }
 
     public function getDataLeadByIdTim($id_tim)
     {

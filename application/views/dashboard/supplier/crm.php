@@ -2,8 +2,9 @@
 
 <style>
   body {
-  overflow-x: hidden; 
-}
+    overflow-x: hidden;
+  }
+
   .container-fluid {
     justify-content: flex-start;
     display: flex;
@@ -16,11 +17,11 @@
     opacity: 0;
     transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
-  
+
   .visible {
-  opacity: 1;
-  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
+    opacity: 1;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
 
   .box {
     display: inline-block;
@@ -489,14 +490,14 @@
     const card = container.querySelector(".card");
 
     if (container.classList.contains("hidden")) {
-    container.style.height = "400px";
-    container.classList.remove("hidden");
-    container.classList.add("visible");
-  } else {
-    container.style.height = 0;
-    container.classList.remove("visible");
-    container.classList.add("hidden");
-  }
+      container.style.height = "400px";
+      container.classList.remove("hidden");
+      container.classList.add("visible");
+    } else {
+      container.style.height = 0;
+      container.classList.remove("visible");
+      container.classList.add("hidden");
+    }
   }
 
   function control() {
