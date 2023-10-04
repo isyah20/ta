@@ -22,6 +22,7 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->model('Lpse_model');
         $this->load->model('Pemenang_model');
         $this->load->model('Supplier_model');
+        $this->load->model('api/Supplier_api');
         $this->load->model('api/Pemenang_model', 'pemenang');
         $this->init();
     }
@@ -118,6 +119,7 @@ class DashboardUserSupplier extends CI_Controller
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $activeSheet = $spreadsheet->getActiveSheet();
 
+
         // Buat sebuah variabel untuk menampung pengaturan style judul
         $style_title = [
             'font' => [
@@ -148,10 +150,10 @@ class DashboardUserSupplier extends CI_Controller
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                 'startColor' => [
-                    'argb' => '00985B',
+                    'argb' => 'E05151',
                 ],
                 'endColor' => [
-                    'argb' => '00985B',
+                    'argb' => 'E05151',
                 ],
             ]
         ];
@@ -199,36 +201,17 @@ class DashboardUserSupplier extends CI_Controller
         // $activeSheet->getStyle('A2')->applyFromArray($style_title);
 
         $activeSheet->setCellValue('A4', 'No');
-        $activeSheet->mergeCells('A4:A5');
-        $activeSheet->setCellValue('B4', 'Nama Pelatihan');
-        $activeSheet->mergeCells('B4:B5');
-        $activeSheet->setCellValue('C4', 'Jenis Pelatihan');
-        $activeSheet->mergeCells('C4:C5');
-        $activeSheet->setCellValue('D4', 'Periode Pendaftaran');
-        $activeSheet->mergeCells('D4:E4');
-        $activeSheet->setCellValue('D5', 'Mulai Pendaftaran');
-        $activeSheet->setCellValue('E5', 'Akhir Pendaftaran');
-        $activeSheet->setCellValue('F4', 'Periode Pelatihan');
-        $activeSheet->mergeCells('F4:G4');
-        $activeSheet->setCellValue('F5', 'Mulai Pelatihan');
-        $activeSheet->setCellValue('G5', 'Akhir Pelatihan');
-        $activeSheet->setCellValue('H4', 'Angkatan');
-        $activeSheet->mergeCells('H4:H5');
-        $activeSheet->setCellValue('I4', 'Sasaran Pelatihan');
-        $activeSheet->mergeCells('I4:I5');
-        $activeSheet->setCellValue('J4', 'Tempat Pelaksanaan');
-        $activeSheet->mergeCells('J4:J5');
-        $activeSheet->setCellValue('K4', 'Kontak Person');
-        $activeSheet->mergeCells('K4:K5');
-        $activeSheet->setCellValue('L4', 'Kuota');
-        $activeSheet->mergeCells('L4:L5');
-        $activeSheet->setCellValue('M4', 'Metode');
-        $activeSheet->mergeCells('M4:M5');
-        $activeSheet->setCellValue('N4', 'Sumber Dana');
-        $activeSheet->mergeCells('N4:N5');
+        $activeSheet->setCellValue('B4', 'Nama Perusahaan');
+        $activeSheet->setCellValue('C4', 'NPWP');;
+        $activeSheet->setCellValue('D4', 'Nama Kontak');
+        $activeSheet->setCellValue('E4', 'Posisi');
+        $activeSheet->setCellValue('F4', 'Email');
+        $activeSheet->setCellValue('G4', 'No Telp/WA');
+        $activeSheet->setCellValue('H4', 'Alamat');
 
 
-        for ($i = 4; $i <= 5; $i++) {
+
+        for ($i = 4; $i <= 4; $i++) {
             $activeSheet->getStyle('A' . $i)->applyFromArray($style_col);
             $activeSheet->getStyle('B' . $i)->applyFromArray($style_col);
             $activeSheet->getStyle('C' . $i)->applyFromArray($style_col);
@@ -237,21 +220,37 @@ class DashboardUserSupplier extends CI_Controller
             $activeSheet->getStyle('F' . $i)->applyFromArray($style_col);
             $activeSheet->getStyle('G' . $i)->applyFromArray($style_col);
             $activeSheet->getStyle('H' . $i)->applyFromArray($style_col);
-            $activeSheet->getStyle('I' . $i)->applyFromArray($style_col);
-            $activeSheet->getStyle('J' . $i)->applyFromArray($style_col);
-            $activeSheet->getStyle('K' . $i)->applyFromArray($style_col);
-            $activeSheet->getStyle('L' . $i)->applyFromArray($style_col);
-            $activeSheet->getStyle('M' . $i)->applyFromArray($style_col);
-            $activeSheet->getStyle('N' . $i)->applyFromArray($style_col);
         }
 
         // // DATA
-        // if ($tipe == 1) {
-        //     $data = model(CourseModel::class)->getDataCourseMonth();
-        // } else {
-        //     $data = model(CourseModel::class)->getDataCourseYear();
-        // }
-        // $index = 6;
+        $data = $this->Supplier_model->getAllDataLeads()->result_array();
+        $index = 5;
+        $temp = "";
+        $kontak_merged = [];
+        foreach ($data as $key => $value) {
+            var_dump($data);
+            // die;
+
+            $kontak = $this->Supplier_api->getContact($value['id_lead']);
+            $kontak_merged[$key] = '';
+            $activeSheet->setCellValue('A' . $index, $index - 4);
+            $activeSheet->setCellValue('B' . $index, $value['nama_perusahaan']);
+            $activeSheet->setCellValue('C' . $index, $value['npwp']);
+            $activeSheet->setCellValue('D' . $index, '');
+            $activeSheet->setCellValue('E' . $index, '');
+            $activeSheet->setCellValue('F' . $index, '');
+            $activeSheet->setCellValue('G' . $index, '');
+            $activeSheet->setCellValue('H' . $index, $value['kabupaten'] . ', ' . $value['provinsi']);
+            foreach ($kontak as $keyKontak => $valueKontak) {
+                // var_dump($valueKontak['nama']);
+                // die;
+                $kontak_merged[$key] = $kontak_merged[$key] . $valueKontak['nama'];
+            }
+            var_dump($kontak_merged);
+            die;
+        }
+        var_dump($kontak_merged);
+        die;
         // foreach ($data as $dt => $value) {
         //     // DATA BEST
         //     $dataBest = $this->controlAPI($this->moodleUrlAPI('&wsfunction=core_course_get_courses_by_field&field=id&value=' . $value['id'] . ''));
@@ -300,12 +299,13 @@ class DashboardUserSupplier extends CI_Controller
         $activeSheet->getColumnDimension('E')->setWidth(25);
         $activeSheet->getColumnDimension('F')->setWidth(25);
         $activeSheet->getColumnDimension('G')->setWidth(25);
-        $activeSheet->getColumnDimension('I')->setWidth(20);
-        $activeSheet->getColumnDimension('J')->setWidth(25);
-        $activeSheet->getColumnDimension('K')->setWidth(25);
-        $activeSheet->getColumnDimension('L')->setWidth(15);
-        $activeSheet->getColumnDimension('M')->setWidth(15);
-        $activeSheet->getColumnDimension('N')->setWidth(15);
+        $activeSheet->getColumnDimension('H')->setWidth(50);
+        // $activeSheet->getColumnDimension('I')->setWidth(20);
+        // $activeSheet->getColumnDimension('J')->setWidth(25);
+        // $activeSheet->getColumnDimension('K')->setWidth(25);
+        // $activeSheet->getColumnDimension('L')->setWidth(15);
+        // $activeSheet->getColumnDimension('M')->setWidth(15);
+        // $activeSheet->getColumnDimension('N')->setWidth(15);
         $title = "test";
         $filename = $title . '.xlsx';
 
