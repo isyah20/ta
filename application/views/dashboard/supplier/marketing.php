@@ -13,8 +13,9 @@
     .thead {
         color: #fff;
         background-color: #E05151;
-        text-align: left;
+        text-align: center;
         font-size: 15px;
+        width: 100px;
     }
 
     tbody {
@@ -22,11 +23,11 @@
         font-size: 15px;
     }
 
-    .green-text {
-        color: #139728;
+    .table {
+        padding: 1rem;
     }
 
-    .rounded {
+    /* .rounded {
         width: 25px;
         height: 25px;
         background-color: #553333;
@@ -36,13 +37,11 @@
         align-items: center;
         color: white;
         font-size: 15px;
-    }
-
+    }*/
     .custom-table-container {
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
-
     }
 
     .btn-custom {
@@ -76,19 +75,26 @@
         font-weight: bold;
     }
 
+    th.custom-padding,
+    td.custom-padding {
+        border: none;
+        vertical-align: middle;
+        height: 60px !important;
+    }
+
     .form-select-custom {
         color: #CCCCCC;
         border-radius: 10px 10px 10px 10px;
         font-size: 1rem;
     }
 
-    .toggle-button {
+    /* .toggle-button {
         padding: 5px;
         background-color: #059669;
         color: #fff;
         border: none;
         border-radius: 5rem;
-    }
+    } */
 
     /* Style untuk ikon visibility */
     .toggle-button i {
@@ -96,13 +102,18 @@
     }
 
     .link .btn-simpan {
-        background-color: red;
+        background-color: #E05151;
         color: white;
         transition: background-color 0.3s;
+        height: 40px;
+        width: 150px;
+        font-size: 15px;
+        align-content: center;
+        padding-top: 8px;
     }
 
     .link .btn-simpan:hover {
-        background-color: orange;
+        background-color: #EB650D;
     }
 
     .modal-dialog {
@@ -118,9 +129,7 @@
     }
 
     .custom-modal {
-
         height: 768px;
-
     }
 
     .btn-custom {
@@ -131,7 +140,7 @@
         gap: 10px;
         align-self: stretch;
         border-radius: 5px;
-        background: var(--primary-red-400, #DF3131);
+        background: var(--primary-red-400, #E05151);
         color: white;
         text-decoration: none;
         cursor: pointer;
@@ -185,6 +194,41 @@
         margin-right: 8px;
     }
 
+    .nama {
+        font-weight: bold;
+    }
+
+    .posisi {
+        color: #694747;
+    }
+
+    .email {
+        text-decoration: underline;
+    }
+
+    .nohp {
+        text-decoration: underline;
+    }
+
+    .btn.btn-danger {
+        font-size: 13px;
+        width: 100px;
+        margin-right: 8px;
+        margin-bottom: 3px;
+        margin-top: 3px;
+    }
+
+    .btn.btn-outline-danger {
+        font-size: 13px;
+        width: 70px;
+    }
+
+    .container-lg img {
+        margin-bottom: 2px;
+    }
+    .h2 {
+        margin-top: 50px;
+    }
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -193,61 +237,140 @@
         .form-suplier {
             margin-top: 6rem !important;
         }
+
+        .table {
+            font-size: 14px;
+            align-items: center;
+        }
+
+        .custom-table-container {
+            overflow-x: auto;
+        }
+
+        .custom-padding {
+            width: auto;
+            white-space: nowrap;
+        }
+
+        .thead {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        tbody {
+            font-size: 12px;
+        }
+
+        .thead th,
+        .custom-padding {
+            width: auto !important;
+            white-space: nowrap;
+        }
+
+        .container-lg img {
+            width: 100%;
+            height: auto;
+        }
+
+        .link .btn-simpan {
+            font-size: 15px;
+            padding: 8px 10px;
+        }
+
+        .container-lg img {
+            width: 100%;
+            height: auto;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .modal-dialog {
+            width: 100%;
+            height: auto;
+            padding: 10px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+        }
+
+        .modal-body p {
+            font-size: 16px;
+        }
+
+        .col-md-6 {
+            text-align: center;
+        }
+
+        .d-flex {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .link {
+            margin-top: 1rem;
+        }
+
     }
 </style>
-<section class="bg-white pt-3 mt-4">
+<section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <img src="<?= base_url('assets\img\image-marketing.png') ?>" alt="" style="width: 324.641px; height: 287.546px; order: 2;">
         <div class="col-6">
-            <h2 class="mb-0 ms-2 wow fadeInUp" style="order: 1;">
+            <h2 class="mb-0 ms-0 wow fadeInUp" style="order: 1;">
                 Selamat Datang!
                 <p>Ini daftar tim kamu!</p>
             </h2>
-            <div class="d-flex justify-content-start mt-3 gap-2">
-                <div></div>
-                <div class="link d-flex flex-row align-items-center">
-                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Anggota</a></span>
+            <div class="d-flex justify-content-start">
+                <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
+                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Tim</a></span>
                 </div>
-
             </div>
         </div>
+        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 270px; margin-top:25px; margin-bottom:10px">
     </div>
     <!-- tabel marketing -->
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
-                <table class="table table-striped custom-table-container">
+                <table class="table custom-table-container">
                     <thead class="thead">
                         <tr>
-                            <th></th>
+                            <th class="custom-padding"></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama</th>
                             <th class="custom-padding">Posisi</th>
                             <th class="custom-padding">Email</th>
-                            <th class="custom-padding">No.HP/WA</th>
-                            <th class="custom-padding">Action</th>
+                            <th class="custom-padding">No. HP/WA</th>
+                            <th class="custom-padding">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="data-leads">
+                    <tbody id="data-marketing">
                         <tr>
-                            <th></th>
-                            <td><span class="rounded">1</span></td>
-                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>office@telkom.co.id</td>
-                            <td>0274 7471 234 (Office)</i></button></td>
-                            <td> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a></td>
-
+                            <td></td>
+                            <td>1</td>
+                            <td class="nama">PT. Telekomunikasi Indonesia, Tbk.</td>
+                            <td class="posisi">08.178.554.2-123.213</td>
+                            <td class="email">office@telkom.co.id</td>
+                            <td class="nohp">0274 7471 234 (Office)</i></button></td>
+                            <td>
+                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Detail</a>
+                                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                            </td>
                         </tr>
                         <tr>
-                            <th></th>
-                            <td><span class="rounded">2</span></td>
-                            <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                            <td style="font-weight: bold;">08.178.554.2-123.213</td>
-                            <td>office@telkom.co.id</td>
-                            <td>0274 7471 234 (Office)</td>
+                            <td></td>
+                            <td>2</td>
+                            <td class="nama">PT. Telekomunikasi Indonesia, Tbk.</td>
+                            <td class="posisi">08.178.554.2-123.213</td>
+                            <td class="email">office@telkom.co.id</td>
+                            <td class="nohp">0274 7471 234 (Office)</i></button></td>
                             <td>
-                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
+                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Detail</a>
+                                <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
                         </tr>
                     </tbody>
@@ -299,7 +422,7 @@
                                     <span>
                                         <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
                                         <a href="#" id="submit-input" class="btn-custom text-white text-center">
-                                            <i class="fas me-1"></i>Klik Disini
+                                            <i class="fas me-1"></i>Tambahkan
                                         </a>
                                     </span>
                                 </div>
@@ -356,9 +479,9 @@
     </div>
     <!-- end modal hapus -->
 
-    <!-- modal lengkapi leads  -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
-        <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+    <!-- modal edit marketing -->
+    <div class="col-12 py-5">
+        <div class="modal fade" id="editMarketingModal" tabindex="-1" role="dialog" aria-labelledby="editMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-0">
@@ -369,133 +492,48 @@
 
 
                     <div class="modal-body border-0">
-                        <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
+                        <h3 class="modal-title" id="editMarketingModalLabel">Edit Marketing</h3>
                         <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-                        <div class="input-popup align-items-center">
-                            <div class="input-popup justify-content-end">
-                                <form class="row g-2">
-                                    <div class="col-12">
-                                        <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                        <input type="text" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
-                                        <textarea class="form-control" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
-                                    </div>
-                                    <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
-
-                                    <div class="col-6">
-                                        <label for="inputNama" class="form-label text-start">Nama</label>
-                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
-                                    </div>
-
-                                    <div class="col-6">
-                                        <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                        <input type="text" class="form-control" id="inputPosisi" placeholder="Marketing">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="inputEmail" class="form-label text-start">Email</label>
-                                        <input type="text" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                        <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
-                                    </div>
-
-
-                                    <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/revome-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                        Tambah Kontak
-                                    </button>
-                                    <!-- <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/add-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                        Hapus Kontak
-                                    </button> -->
-                                </form>
-                            </div>
+                        <div class="input-popup justify-content-end">
+                            <form id="form-input1" class="row g-2">
+                                <div class="col-12">
+                                    <label for="inputNama" class="form-label text-start">Nama</label>
+                                    <input type="text" name="nama_tim" class="form-control" id="inputNama" placeholder="Masukkan Nama" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                                    <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputEmail" class="form-label text-start">Email</label>
+                                    <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Masukkan Email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                                    <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAlamat" class="form-label text-start">Alamat</label>
+                                    <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
+                                </div>
+                                <div class="d-flex justify-content-start mt-3 gap-2">
+                                <div class="link flex-row align-items-center w-100">
+                                    <span>
+                                        <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                        <a href="#" id="submit-edit" class="btn-custom text-white text-center">
+                                            <i class="fas me-1"></i>Perbarui
+                                        </a>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a class="btn-custom text-white text-center">
-                                        <i class="fas me-1"></i>Tambahkan
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="my-2 text-center">
-                            <p style="font-size: 15px;">
-                                Mari Kami bantu carikan informasi tentang perusahaan ini?
-                                <a href="#">
-                                    Klik Disini
-                                </a>
-                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end modal lengkapi leads -->
-
-    <!-- modal popup info kontak -->
-    <div class="col-12 py-5 align-content-center justify-content-center">
-        <div class="modal fade" id="infoKontakModal" tabindex="-1" role="dialog" aria-labelledby="infoKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
-            <div class="modal-dialog custom-modal" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <img src="<?= base_url("assets/img/red-whatsapp.svg") ?>" alt="Image" style="width: 75px; height: 75px; padding: 0;">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
-                    </div>
-
-
-                    <div class="modal-body border-0">
-                        <h3 class="modal-title" id="infoKontakModalLabel">Lengkapi Leads</h3>
-                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-                        <div class="input-popup align-items-center">
-                            <div class="input-popup justify-content-end">
-                                <h2>Contact Person</h2>
-                                <p>PT Telekomunikasi Indonesia</p>
-                                <table class="table table-striped popup-table">
-                                    <thead class="popup-thead">
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Posisi</th>
-                                            <th>Email</th>
-                                            <th>No. Telp</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="data-kontak">
-                                        <td>joko</td>
-                                        <td>HRD</td>
-                                        <td>hrd@telkom.co.id</td>
-                                        <td>0811-2345-6666</td>
-                                        <td>aisdiau</td>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mt-3 gap-2">
-                            <div></div>
-                            <div class="link flex-row align-items-center w-100">
-                                <span>
-                                    <a class="btn-custom text-white text-center">
-                                        <i class="fas me-1"></i>Tambahkan Kontak
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end modal popup info kontak -->
+    <!-- end modal edit marketing -->
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -517,20 +555,20 @@
                 for (i = 0; i < data.data.length; i++) {
                     html += '<tr>' +
                         '<th></th>' +
-                        '<td><span class="rounded">' + (i + 1) + '</span></td>' +
-                        '<td style="font-weight: bold;" class="">' + data.data[i].nama_tim + '</td>' +
-                        '<td style="font-weight: bold;">' + data.data[i].posisi + '</td>' +
-                        '<td>' + data.data[i].email + '</td>' +
-                        '<td>' + data.data[i].no_telp + '</td>' +
+                        '<td>' + (i + 1) + '</td>' +
+                        '<td class="nama">' + data.data[i].nama_tim + '</td>' +
+                        '<td class="posisi">' + data.data[i].posisi + '</td>' +
+                        '<td class="email">' + data.data[i].email + '</td>' +
+                        '<td class="nohp">' + data.data[i].no_telp + '</td>' +
                         '<td>' +
-                            '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
-                            '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
-                        '</td>' +
-                        // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
-                        '</tr>';
+                        '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '">Edit</a>' +
+                        '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
+                    '</td>' +
+                    // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
+                    '</tr>';
 
                 }
-                $('#data-leads').html(html);
+                $('#data-marketing').html(html);
 
                 // Delete action
                 $(".btn-del").click(function() {
@@ -613,7 +651,7 @@
                     $(".btn-edt").click(function() {
                     var id_tim = $(this).data("id");
 
-                        $('#submit-input').click(function(event) {
+                        $('#submit-edit').click(function(event) {
                             event.preventDefault();
 
                         // Get the form instance
