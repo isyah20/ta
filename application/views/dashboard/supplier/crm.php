@@ -61,7 +61,6 @@
     margin: 0px 10px 0px 10px;
   }
 
-
   .box .card:hover p {
     color: black;
   }
@@ -361,7 +360,7 @@
                 leads +=
                   `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
                 <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+                <p style="font-size: 14px; color:#10B981; font-weight:500;">` + value.wilayah + `</p>
                 </div>`;
               }
             });
@@ -444,7 +443,7 @@
               leads +=
                 `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
                 <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+                <p style="font-size: 14px; color:#10B981; font-weight:500">` + value.wilayah + `</p>
                 </div>`;
             });
           },
