@@ -302,6 +302,31 @@ class Tender_model extends CI_Model
         return $this->db->query($sql);
     }
 
+    public function updateKatalogPemenangTerbaruByIdPengguna($id_pengguna)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $sql = "SELECT kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
+                FROM preferensi,pemenang
+                INNER JOIN lpse ON pemenang.id_lpse=lpse.id_lpse
+                INNER JOIN jenis_tender ON pemenang.jenis_tender=jenis_tender.id_jenis
+                LEFT JOIN wilayah ON CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1)))=wilayah
+                WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+                GROUP BY kode_tender,npwp
+                ORDER BY tgl_pemenang ASC";
+
+        $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna)
+        SELECT p.id_pemenang, p.nama_pemenang, p.npwp, {$id_pengguna}
+        FROM pemenang p
+        LEFT JOIN data_leads dl ON p.npwp = dl.npwp AND {$id_pengguna} = dl.id_pengguna
+        WHERE p.tgl_pemenang >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+        AND p.tgl_pemenang < NOW()
+        AND (dl.npwp IS NULL OR dl.id_pengguna IS NULL)
+        GROUP BY p.npwp;";
+
+        $this->db->query($sql2);
+        return $this->db->query($sql);
+    }
     public function getKatalogPemenangTerbaruByPengguna1($data)
     {
         $id_pengguna = $data['id_pengguna'];
