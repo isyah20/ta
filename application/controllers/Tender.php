@@ -1014,6 +1014,7 @@ class Tender extends CI_Controller
     public function getKatalogPemenangTerbaruByPengguna1()
     {
         parse_str(file_get_contents('php://input'), $data);
+        // $id = $this->input->get('id_pengguna');
         $response = $this->Tender_model->getKatalogPemenangTerbaruByPengguna1($data)->result();
 
         $this->output
