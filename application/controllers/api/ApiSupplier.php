@@ -32,7 +32,8 @@ class ApiSupplier extends RestController
 
     public function index_get()
     {
-        $data = $this->Supplier_api->getTimMarketing();
+        $id_supplier = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getTimMarketing($id_supplier);
 
         if ($data) {
             $this->response([

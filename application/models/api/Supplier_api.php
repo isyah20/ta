@@ -22,10 +22,11 @@ class Supplier_api extends CI_Model
         ]);
     }
 
-    public function getTimMarketing()
+    public function getTimMarketing($id_supplier)
     {
         $this->db->select(['*']);
         $this->db->from('tim_marketing');
+        $this->db->where('id_supplier', $id_supplier);
         $query = $this->db->get();
         return $query->result_array();
     }

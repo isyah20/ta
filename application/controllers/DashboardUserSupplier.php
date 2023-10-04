@@ -915,7 +915,7 @@ class DashboardUserSupplier extends CI_Controller
 
     public function getJumlahPemenangTender()
     {
-        $response = $this->Supplier_model->getJumlahPemenangTender()->row();
+        $response = $this->Supplier_model->getJumlahPemenangTender($_COOKIE['id_pengguna'])->row();
 
         $this->output
             ->set_status_header(200)

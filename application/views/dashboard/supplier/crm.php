@@ -259,7 +259,7 @@
 </section>
 <section>
   <div class="container">
-  <div class="container-fluid pb-4">
+  <div class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
     <div class="">
       <div id="side-container" class="col col-sm-12">
         <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
@@ -269,12 +269,10 @@
             <p>PT Cahaya Asia Ya Putra Dewa</p>
             <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
           </div> -->
-
-
         <!-- </div> -->
       </div>
     </div>
-    <div class="col">
+    <div class="col" style="margin-left:4%">
 
       <div id="big-container" class="row"></div>
     </div>

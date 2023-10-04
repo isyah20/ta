@@ -513,7 +513,7 @@
 
 
     $(document).ready(function() {
-        setInterval(syncDataLead, 300000);
+        setInterval(syncDataLead, 150000);
 
         $.ajax({
             url: "<?= base_url() ?>api/supplier/jumlah-pemenang",
@@ -665,7 +665,7 @@
         };
 
         $.ajax({
-            url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna/" + id_pengguna,
+            url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna1/",
             type: "POST",
             dataType: "JSON",
             data: params,

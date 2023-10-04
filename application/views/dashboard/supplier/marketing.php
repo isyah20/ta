@@ -555,6 +555,9 @@
             url: "<?= base_url('api/supplier/get') ?>",
             type: "GET",
             dataType: "json",
+            data: {
+                id_pengguna: id_pengguna
+            },
             beforeSend: addAuthorizationHeader,
             success: function(data) {
                 let html = '';
