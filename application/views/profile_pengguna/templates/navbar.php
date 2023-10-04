@@ -109,14 +109,14 @@
                         </ul>
                     </li>
                 <?php endif; ?>
-                <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
+                <?php if($userCat == UserCategory::SUPPLIER && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
                     <!-- <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/marketing') ?>" id="nav_dashboard">Marketing</a>
                     </li> -->
                     <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Leads</a>
                     </li>
-                    <li class="nav-item dropdown dropdown-profile">
+                    <!-- <li class="nav-item dropdown dropdown-profile">
                         <a class="nav-link dropdown-toggle text-white link-danger text-center" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <b>Marketing</b>
                         </a>
@@ -138,9 +138,6 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center active fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">CRM</a>
                     </li> -->
 
                     
