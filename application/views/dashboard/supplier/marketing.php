@@ -204,6 +204,7 @@
 
     .email {
         text-decoration: underline;
+        color: #000;
     }
 
     .nohp {
@@ -568,7 +569,7 @@
                         '<td>' + (i + 1) + '</td>' +
                         '<td class="nama">' + data.data[i].nama_tim + '</td>' +
                         '<td class="posisi">' + data.data[i].posisi + '</td>' +
-                        '<td class="email">' + data.data[i].email + '</td>' +
+                        '<td class="email"><a href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
                         '<td class="nohp">' + data.data[i].no_telp + '</td>' +
                         '<td>' +
                         '<a href="#" class="btn btn-danger btn-edt disabled" data-toggle="modal" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '">Edit</a>' +

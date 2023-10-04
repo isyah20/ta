@@ -77,6 +77,13 @@
     padding: 5px 10px 5px 15px;
   }
 
+  .text-limited {
+      width: 200px; 
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+}
+
   .card.dragging {
     cursor: grab;
   }
@@ -165,28 +172,20 @@
   }
 
 
-  /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
   .box::-webkit-scrollbar {
     width: 5px;
-    /* Lebar scrollbar */
   }
 
-
-  /* Untuk bagian badan (thumb) dari scrollbar */
   .box::-webkit-scrollbar-thumb {
     background: var(--font-dark-grey, #333);
     border-radius: 5px;
-    /* Bentuk border radius thumb */
   }
 
-  /* Untuk bagian track dari scrollbar */
   .box::-webkit-scrollbar-track {
-    /* background: #f1f1f1; Warna latar belakang track */
   }
 
   .card:hover {
     transform: scale(1.05);
-    /* Memperbesar kartu saat hover */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 
@@ -207,18 +206,15 @@
       margin-left: 0px;
     }
 
-    /* Untuk bagian badan (thumb) dari scrollbar */
     .box::-webkit-scrollbar-thumb {
       background: var(--font-dark-grey, #333);
       border-radius: 5px;
-      /* Bentuk border radius thumb */
     }
 
     .box::-webkit-scrollbar-thumb:hover {
       background: #888;
     }
 
-    /* Untuk bagian track dari scrollbar */
     .box::-webkit-scrollbar-track {
       /* background: #f1f1f1; Warna latar belakang track */
     }
@@ -226,7 +222,6 @@
 
   .card:hover {
     transform: scale(1.05);
-    /* Memperbesar kartu saat hover */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 

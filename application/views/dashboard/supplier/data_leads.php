@@ -36,7 +36,7 @@
 
     .perusahaan {
         font-weight: bold;
-        max-width: 200px;
+        max-width: 250px;
     }
 
     .npwp {

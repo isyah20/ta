@@ -513,7 +513,7 @@
 
 
     $(document).ready(function() {
-        setInterval(syncDataLead, 150000);
+        setInterval(syncDataLead, 180000);
 
         $.ajax({
             url: "<?= base_url() ?>api/supplier/jumlah-pemenang",

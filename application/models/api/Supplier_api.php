@@ -225,6 +225,7 @@ class Supplier_api extends CI_Model
 
         return $this->db->query($sql);
     }
+    
     public function getCRMLeads($id_pengguna)
     {
 
