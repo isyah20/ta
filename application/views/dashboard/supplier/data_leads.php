@@ -132,6 +132,7 @@
         border-radius: 20px;
         font-size: 1rem;
     }
+
     .form-select-custom {
         color: #CCCCCC;
         border-radius: 20px;
@@ -573,15 +574,15 @@
             <div class="row">
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
-                            <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px">
-                                <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
-                                <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
-                            </div>
-                            <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
-                                <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
-                                    <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
-                                </a>
-                            </div>
+                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px">
+                            <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
+                            <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
+                        </div>
+                        <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
+                            <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
+                                <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6 justify-content d-flex">
