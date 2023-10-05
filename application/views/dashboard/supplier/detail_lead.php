@@ -412,6 +412,15 @@
         }
 
 
+
+        .custom-card-detail .row {
+
+            /* padding: 10px; */
+
+        }
+
+
+
         .table-contact {
             flex-grow: unset;
             white-space: nowrap;
@@ -890,7 +899,9 @@
                     $("#saveButton").css("display", "block");
                 });
 
+
                 $("#saveButton").click(function() {
+
                     $("#editableParagraph").attr("contenteditable", "false");
                     $("#saveButton").css("display", "none");
                     var editedParagraph = $("#editableParagraph").html();
@@ -958,9 +969,39 @@
                                     button: "Ok",
                                 })
                             }
+
                         }
+
                     })
-                })
+
+                });
+
+
+
+                $.ajax({
+
+                    //url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/" + npwp,
+
+                    url: "<?= base_url('api/supplier/getPemenangByNPWP/') ?>" + npwp,
+
+                    method: "GET",
+
+                    dataType: "json",
+
+                    beforeSend: addAuthorizationHeader,
+
+                    success: function(data) {
+
+                        console.log(data.data);
+
+                        initialSelect(data.data)
+
+                        setTabelRiwayat(data);
+
+                    }
+
+                });
+
             }
         });
 
@@ -1024,6 +1065,7 @@
                                     button: "Ok",
                                 })
                             }
+
                         },
                         error: function(xhr, status, error) {
                             console.error(error);
@@ -1083,6 +1125,7 @@
                                                 button: "Ok",
                                             })
                                         }
+
                                     },
                                     error: function(xhr, status, error) {
                                         console.error(error);

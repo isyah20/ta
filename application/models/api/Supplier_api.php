@@ -22,10 +22,11 @@ class Supplier_api extends CI_Model
         ]);
     }
 
-    public function getTimMarketing()
+    public function getTimMarketing($id_supplier)
     {
         $this->db->select(['*']);
         $this->db->from('tim_marketing');
+        $this->db->where('id_supplier', $id_supplier);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -98,7 +99,7 @@ class Supplier_api extends CI_Model
         $this->db->from('data_leads');
         // $this->db->where('id_lead', $id);
         //join pemenang_tender to get alamat
-        $this->db->join('pemenang_tender', 'pemenang_tender.id_pemenang = data_leads.id_pemenang');
+        $this->db->join('pemenang', 'pemenang.id_pemenang = data_leads.id_pemenang');
         $this->db->where('data_leads.id_lead', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -218,10 +219,13 @@ class Supplier_api extends CI_Model
             data_leads.id_pengguna = $id_pengguna
         GROUP BY
             data_leads.id_lead
+        ORDER BY
+            id DESC
         LIMIT {$page_number},{$page_size}";
 
         return $this->db->query($sql);
     }
+    
     public function getCRMLeads($id_pengguna)
     {
 

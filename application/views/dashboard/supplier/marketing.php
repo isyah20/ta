@@ -204,6 +204,7 @@
 
     .email {
         text-decoration: underline;
+        color: #000;
     }
 
     .nohp {
@@ -351,7 +352,7 @@
                         </tr>
                     </thead>
                     <tbody id="data-marketing">
-                        <tr>
+                        <!-- <tr>
                             <td></td>
                             <td>1</td>
                             <td class="nama">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -374,7 +375,7 @@
                                 <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#inputMarketingModal">Detail</a>
                                 <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -423,8 +424,8 @@
                                     <div class="link flex-row align-items-center w-100">
                                         <span>
                                             <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
-                                            <a href="#" id="submit-input" class="btn-custom text-white text-center">
-                                                <i class="fas me-1"></i>Klik Disini
+                                            <a id="submit-input" class="btn-custom text-white text-center">
+                                                <i class="fas me-1"></i>Tambahkan
                                             </a>
                                         </span>
                                     </div>
@@ -542,15 +543,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- <script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
+    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+
+    function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+    }
 
     $(document).ready(function() {
         $.ajax({
-            url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/get",
+            url: "<?= base_url('api/supplier/get') ?>",
             type: "GET",
             dataType: "json",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            beforeSend: addAuthorizationHeader,
             success: function(data) {
                 let html = '';
                 let i;
@@ -560,10 +571,10 @@
                         '<td>' + (i + 1) + '</td>' +
                         '<td class="nama">' + data.data[i].nama_tim + '</td>' +
                         '<td class="posisi">' + data.data[i].posisi + '</td>' +
-                        '<td class="email">' + data.data[i].email + '</td>' +
+                        '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
                         '<td class="nohp">' + data.data[i].no_telp + '</td>' +
                         '<td>' +
-                        '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '">Edit</a>' +
+                        '<a href="#" class="btn btn-danger btn-edt disabled" data-toggle="modal" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '">Edit</a>' +
                         '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
                     '</td>' +
                     // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
@@ -583,12 +594,22 @@
                             url: "<?= base_url('api/supplier/delete/') ?>" + id_tim,
                             type: 'DELETE',
                             // data: formData,
+                            beforeSend: addAuthorizationHeader,
                             success: function(response) {
                                 if (response.status == true) {
-                                    alert('Data berhasil dihapus');
-                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                    swal({
+                                        title: "Data berhasil dihapus!",
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then(function () {
+                                        window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                    });
                                 } else {
-                                    alert('Data gagal dihapus');
+                                    swal({
+                                        title: "Data gagal dihapus",
+                                        icon: "error",
+                                        button: "Ok",
+                                    })
                                 }
                             },
                             error: function(xhr, status, error) {
@@ -706,12 +727,22 @@
                 url: '<?= base_url("api/supplier/create") ?>',
                 type: 'POST',
                 data: formData,
+                beforeSend: addAuthorizationHeader,
                 success: function(response) {
                     if (response.status == true) {
-                        alert('Data berhasil ditambahkan');
-                        window.location.href = "<?= base_url('suplier/marketing') ?>";
+                        swal({
+                            title: "Data berhasil ditambahkan!",
+                            icon: "success",
+                            button: "Ok",
+                        }).then(function () {
+                            window.location.href = "<?= base_url('suplier/marketing') ?>";
+                        });
                     } else {
-                        alert('Data gagal ditambahkan');
+                        swal({
+                            title: "Data gagal ditambahkan!",
+                            icon: "error",
+                            button: "Ok",
+                        })
                     }
                 },
                 error: function(xhr, status, error) {
@@ -720,5 +751,4 @@
             });
         });
     });
-
 </script>

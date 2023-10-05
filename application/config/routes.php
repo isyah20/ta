@@ -128,7 +128,10 @@ $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['api/getleads'] = 'DashboardUserSupplier/getDataLeads';
+$route['api/syncDataLead'] = 'DashboardUserSupplier/syncDataLead';
 $route['api/getJumDataLeads'] = 'DashboardUserSupplier/getJumDataLeads';
+$route['suplier/leads/export'] = 'DashboardUserSupplier/exportLeads';
+$route['suplier/tender/export'] = 'DashboardUserSupplier/exportTenderTerbaru';
 
 $route['suplier/getlead/(:num)'] = 'DashboardUserSupplier/getDataLeads/$1';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
@@ -249,8 +252,8 @@ $route['api/getJumKatalogTenderTerbaruByPengguna1'] = 'Tender/getJumKatalogTende
 $route['api/getJumKatalogTenderTerbaruByPengguna/(:num)/(:num)'] = 'Tender/getJumKatalogTenderTerbaruByPengguna/$1/$2';
 $route['api/getJumKatalogPemenangTerbaruByPengguna/(:num)'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna/$1';
 $route['api/getJumKatalogPemenangTerbaruByPengguna1'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna1';
-$route['api/getListLokasiPekerjaan'] = 'api/ApiTender/getListLokasiPekerjaan';
-// $route['api/getListLokasiPekerjaan'] = 'Tender/getListLokasiPekerjaan';
+// $route['api/getListLokasiPekerjaan'] = 'api/ApiTender/getListLokasiPekerjaan';
+$route['api/getListLokasiPekerjaan'] = 'Tender/getListLokasiPekerjaan';
 $route['api/getListJenisPengadaan'] = 'Tender/getListJenisPengadaan';
 // $route['tender/(:num)'] = 'Tender/index/$1';
 // $route['open-link'] = 'Tender/openLink';
@@ -579,7 +582,7 @@ $route['api/peserta/update/(:num)'] = 'api/ApiPeserta/update/$1';
 $route['api/peserta/delete/(:num)'] = 'api/ApiPeserta/destroy/$1';
 
 //restApi route for Paket
-$route['api/paket'] = 'api/ApiPaket/index';
+$route['api/paket'] = 'api/ApiPaket';
 $route['api/paket/s-getHpsPerMonth'] = 'api/ApiPaket/searchHpsPerMonth';
 
 // restAPI route for wilayah
