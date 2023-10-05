@@ -424,7 +424,7 @@
                                         <span>
                                             <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
                                             <a href="#" id="submit-input" class="btn-custom text-white text-center">
-                                                <i class="fas me-1"></i>Tambahkan
+                                                <i class="fas me-1"></i>Klik Disini
                                             </a>
                                         </span>
                                     </div>
@@ -543,7 +543,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
+<!-- <script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
 
     $(document).ready(function() {
@@ -720,4 +720,5 @@
             });
         });
     });
+
 </script>
