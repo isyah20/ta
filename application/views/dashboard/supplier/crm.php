@@ -246,7 +246,7 @@
     <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
   </div>
   <div class="col-md-3 pt-3">
-    <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Anggota
+    <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
       <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
     </button>
   </div>

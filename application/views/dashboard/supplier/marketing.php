@@ -422,7 +422,7 @@
                                 <div class="link flex-row align-items-center w-100">
                                     <span>
                                         <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
-                                        <a href="#" id="submit-input" class="btn-custom text-white text-center">
+                                        <a id="submit-input" class="btn-custom text-white text-center">
                                             <i class="fas me-1"></i>Tambahkan
                                         </a>
                                     </span>
@@ -569,7 +569,7 @@
                         '<td>' + (i + 1) + '</td>' +
                         '<td class="nama">' + data.data[i].nama_tim + '</td>' +
                         '<td class="posisi">' + data.data[i].posisi + '</td>' +
-                        '<td class="email"><a href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
+                        '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
                         '<td class="nohp">' + data.data[i].no_telp + '</td>' +
                         '<td>' +
                         '<a href="#" class="btn btn-danger btn-edt disabled" data-toggle="modal" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '">Edit</a>' +
@@ -617,92 +617,92 @@
                     });
                 });
 
-                // $(".btn-edt").click(function() {
-                //     var id_tim = $(this).data("id");
+                $(".btn-edt").click(function() {
+                    var id_tim = $(this).data("id");
 
-                //     // $('#submit-input').click(function(event) {
-                //     //     event.preventDefault();
+                    // $('#submit-input').click(function(event) {
+                    //     event.preventDefault();
 
-                //         // Get the form instance
-                //         var formData = {
-                //             nama_tim: $('input[name=nama_tim]').val(),
-                //             posisi: $('input[name=posisi]').val(),
-                //             email: $('input[name=email]').val(),
-                //             no_telp: $('input[name=no_telp]').val(),
-                //             alamat: $('textarea[name=alamat]').val(),
-                //         };
+                        // Get the form instance
+                        var formData = {
+                            nama_tim: $('input[name=nama_tim]').val(),
+                            posisi: $('input[name=posisi]').val(),
+                            email: $('input[name=email]').val(),
+                            no_telp: $('input[name=no_telp]').val(),
+                            alamat: $('textarea[name=alamat]').val(),
+                        };
 
-                //         // Get data from id
-                //         $.ajax({
-                //             url: "<?= base_url('api/supplier/getId/') ?>" + id_tim,
-                //             type: 'GET',
-                //             dataType: "json",
-                //             success: function(data) {
-                //                 $('input[name=nama_tim]').val(data.data.nama_tim);
-                //                 $('input[name=posisi]').val(data.data.posisi);
-                //                 $('input[name=email]').val(data.data.email);
-                //                 $('input[name=no_telp]').val(data.data.no_telp);
-                //                 $('textarea[name=alamat]').val(data.data.alamat);
-                //             },
-                //             error: function(xhr, status, error) {
-                //                 console.log(xhr.responseText);
-                //             }
-                //         });
+                        // Get data from id
+                        $.ajax({
+                            url: "<?= base_url('api/supplier/getId/') ?>" + id_tim,
+                            type: 'GET',
+                            dataType: "json",
+                            success: function(data) {
+                                $('input[name=nama_tim]').val(data.data.nama_tim);
+                                $('input[name=posisi]').val(data.data.posisi);
+                                $('input[name=email]').val(data.data.email);
+                                $('input[name=no_telp]').val(data.data.no_telp);
+                                $('textarea[name=alamat]').val(data.data.alamat);
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr.responseText);
+                            }
+                        });
 
-                //         // Make an AJAX request
-                //         // $.ajax({
-                //         //     url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
-                //         //     type: 'POST',
-                //         //     data: formData,
-                //         //     success: function(response) {
-                //         //         if (response.status == true) {
-                //         //             alert('Data berhasil diubah');
-                //         //             window.location.href = "<?= base_url('suplier/marketing') ?>";
-                //         //         } else {
-                //         //             alert('Data gagal diubah');
-                //         //         }
-                //         //     },
-                //         //     error: function(xhr, status, error) {
-                //         //         console.log(xhr.responseText);
-                //         //     }
-                //         // });
+                        // Make an AJAX request
+                        // $.ajax({
+                        //     url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
+                        //     type: 'POST',
+                        //     data: formData,
+                        //     success: function(response) {
+                        //         if (response.status == true) {
+                        //             alert('Data berhasil diubah');
+                        //             window.location.href = "<?= base_url('suplier/marketing') ?>";
+                        //         } else {
+                        //             alert('Data gagal diubah');
+                        //         }
+                        //     },
+                        //     error: function(xhr, status, error) {
+                        //         console.log(xhr.responseText);
+                        //     }
+                        // });
                     
-                //     });
+                    });
 
-                //     $(".btn-edt").click(function() {
-                //     var id_tim = $(this).data("id");
+                    $(".btn-edt").click(function() {
+                    var id_tim = $(this).data("id");
 
-                //         $('#submit-edit').click(function(event) {
-                //             event.preventDefault();
+                        $('#submit-edit').click(function(event) {
+                            event.preventDefault();
 
-                //         // Get the form instance
-                //         var formData = {
-                //             nama_tim: $('input[name=nama_tim]').val(),
-                //             posisi: $('input[name=posisi]').val(),
-                //             email: $('input[name=email]').val(),
-                //             no_telp: $('input[name=no_telp]').val(),
-                //             alamat: $('textarea[name=alamat]').val(),
-                //         };
+                        // Get the form instance
+                        var formData = {
+                            nama_tim: $('input[name=nama_tim]').val(),
+                            posisi: $('input[name=posisi]').val(),
+                            email: $('input[name=email]').val(),
+                            no_telp: $('input[name=no_telp]').val(),
+                            alamat: $('textarea[name=alamat]').val(),
+                        };
 
-                //         // Make an AJAX request
-                //         $.ajax({
-                //             url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
-                //             type: 'POST',
-                //             data: formData,
-                //             success: function(response) {
-                //                 if (response.status == true) {
-                //                     alert('Data berhasil diubah');
-                //                     window.location.href = "<?= base_url('suplier/marketing') ?>";
-                //                 } else {
-                //                     alert('Data gagal diubah');
-                //                 }
-                //             },
-                //             error: function(xhr, status, error) {
-                //                 console.log(xhr.responseText);
-                //             }
-                //         });
-                //     });
-                // }); 
+                        // Make an AJAX request
+                        $.ajax({
+                            url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
+                            type: 'POST',
+                            data: formData,
+                            success: function(response) {
+                                if (response.status == true) {
+                                    alert('Data berhasil diubah');
+                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                } else {
+                                    alert('Data gagal diubah');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    });
+                }); 
             }
         })
     });
@@ -737,7 +737,7 @@
                         });
                     } else {
                         swal({
-                            title: "Data gagal ditambahkan",
+                            title: "Data gagal ditambahkan!",
                             icon: "error",
                             button: "Ok",
                         })
@@ -749,5 +749,5 @@
             });
         });
     });
-
 </script>
+
