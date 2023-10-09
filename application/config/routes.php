@@ -128,7 +128,10 @@ $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['api/getleads'] = 'DashboardUserSupplier/getDataLeads';
+$route['api/syncDataLead'] = 'DashboardUserSupplier/syncDataLead';
 $route['api/getJumDataLeads'] = 'DashboardUserSupplier/getJumDataLeads';
+$route['suplier/leads/export'] = 'DashboardUserSupplier/exportLeads';
+$route['suplier/tender/export'] = 'DashboardUserSupplier/exportTenderTerbaru';
 
 $route['suplier/getlead/(:num)'] = 'DashboardUserSupplier/getDataLeads/$1';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
@@ -173,6 +176,7 @@ $route['api/getTawaranRendah'] = 'Competitor/getTawaranRendah';
 
 //Market
 $route['market'] = 'Market';
+$route['user-dashboard/market'] = 'Market/indexMarket';
 $route['api/getListWilayah'] = 'Market/getListWilayah';
 
 //Tender
@@ -248,8 +252,8 @@ $route['api/getJumKatalogTenderTerbaruByPengguna1'] = 'Tender/getJumKatalogTende
 $route['api/getJumKatalogTenderTerbaruByPengguna/(:num)/(:num)'] = 'Tender/getJumKatalogTenderTerbaruByPengguna/$1/$2';
 $route['api/getJumKatalogPemenangTerbaruByPengguna/(:num)'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna/$1';
 $route['api/getJumKatalogPemenangTerbaruByPengguna1'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna1';
-$route['api/getListLokasiPekerjaan'] = 'api/ApiTender/getListLokasiPekerjaan';
-// $route['api/getListLokasiPekerjaan'] = 'Tender/getListLokasiPekerjaan';
+// $route['api/getListLokasiPekerjaan'] = 'api/ApiTender/getListLokasiPekerjaan';
+$route['api/getListLokasiPekerjaan'] = 'Tender/getListLokasiPekerjaan';
 $route['api/getListJenisPengadaan'] = 'Tender/getListJenisPengadaan';
 // $route['tender/(:num)'] = 'Tender/index/$1';
 // $route['open-link'] = 'Tender/openLink';
@@ -413,6 +417,7 @@ $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
 $route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
 $route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
+$route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
@@ -644,8 +649,8 @@ $route['api/preferensi/update/(:num)'] = 'api/ApiPreferensi/update/$1';
 $route['api/preferensi/s/(:num)'] = 'api/ApiPreferensi/tenderS/$1';
 
 // API Supplier
-// $route['api/supplier/tim'] = 'api/ApiSupplier';
-// $route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
+$route['api/supplier/tim'] = 'api/ApiSupplier';
+$route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
 
 //===========================================
 // Scrapping

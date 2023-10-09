@@ -1718,6 +1718,14 @@
 
 
 
+        .custom-card-detail .row {
+
+            /* padding: 10px; */
+
+        }
+
+
+
         .table-contact {
 
             flex-grow: unset;
@@ -2876,8 +2884,7 @@
                     $("#saveButton").css("display", "block");
 
                 });
-
-
+                
 
                 $("#saveButton").click(function () {
 
@@ -2986,8 +2993,11 @@
                                     button: "Ok",
                                 })
                             }
+
                         }
+
                     })
+
                 });
 
 
@@ -3131,6 +3141,7 @@
                                     button: "Ok",
                                 })
                             }
+
                         },
 
                         error: function (xhr, status, error) {
@@ -3236,6 +3247,7 @@
                                                 button: "Ok",
                                             })
                                         }
+
                                     },
 
                                     error: function (xhr, status, error) {

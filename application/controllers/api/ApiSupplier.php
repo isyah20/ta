@@ -32,7 +32,8 @@ class ApiSupplier extends RestController
 
     public function index_get()
     {
-        $data = $this->Supplier_api->getTimMarketing();
+        $id_supplier = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getTimMarketing($id_supplier);
 
         if ($data) {
             $this->response([
@@ -73,6 +74,7 @@ class ApiSupplier extends RestController
             'no_telp' => $this->post('no_telp'),
             'email' => $this->post('email'),
             'alamat' => $this->post('alamat'),
+            'id_supplier' => $_COOKIE['id_pengguna'],
         ];
 
         $token = random_string('alnum', 25);
@@ -83,7 +85,7 @@ class ApiSupplier extends RestController
             'alamat' => $this->post('alamat'),
             'no_telp' => $this->post('no_telp'),
             'kategori' => UserCategory::MARKETING,
-            'password' => md5($this->post('password')),
+            // 'password' => md5($this->post('password')),
             'token' => $token,
             'is_active' => 1,
             'tgl_update' => date('Y-m-d H:i:s'),
@@ -449,17 +451,31 @@ class ApiSupplier extends RestController
     }
 
     public function getLeads_get()
-    {  
+    {
         $id_pengguna = $this->input->get('id_pengguna');
         $page_size = $_GET['pageSize'];
         $page_number = ($_GET['pageNumber'] - 1) * $page_size;
-        $response = $this->Supplier_api->getDataLeads($id_pengguna,$page_size,$page_number)->result();
+        $response = $this->Supplier_api->getDataLeads($id_pengguna, $page_size, $page_number)->result();
 
         $this->output
-        ->set_status_header(200)
-        ->set_content_type('application/json')
-        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-        ->_display();
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+    public function getCRMLeads_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
+        $response['jumlah'] = $this->Supplier_api->countCRMLeads($id_pengguna)->row('jumlah');
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
 
         exit;
     }
@@ -499,5 +515,4 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
-
 }
