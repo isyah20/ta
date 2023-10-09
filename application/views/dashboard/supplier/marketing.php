@@ -523,7 +523,7 @@
                         '<td>' + data.data[i].email + '</td>' +
                         '<td>' + data.data[i].no_telp + '</td>' +
                         '<td>' +
-                            '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
+                            '<a href="#" class="btn btn-danger btn-edt disabled" data-toggle="modal" data-target="#inputMarketingModal" data-id="' + data.data[i].id_tim + '">Edit Data</a>' +
                             '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
                         '</td>' +
                         // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
