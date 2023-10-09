@@ -336,7 +336,7 @@
                                     </ul>
                                 </div>
                                 <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 20px">
-                                    <a href="<?= base_url() ?>/suplier/tender/export" type="button" class="form-select-custom d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
+                                    <a href="<?= base_url() ?>suplier/tender/export" type="button" class="form-select-custom d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
                                         <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
                                     </a>
                                 </div>

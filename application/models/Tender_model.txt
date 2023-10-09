@@ -494,13 +494,13 @@ class Tender_model extends CI_Model
                 WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir)) {$kriteria}
                 GROUP BY kode_tender,npwp) a";
 
-        // $sql3 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp) 
-        // SELECT id_pemenang, nama_pemenang, npwp
-        // FROM pemenang_tender
-        // WHERE npwp NOT IN (SELECT npwp FROM data_leads)
-        // AND DATE(tgl_pemenang) = CURRENT_DATE";
+        $sql3 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp) 
+        SELECT id_pemenang, nama_pemenang, npwp
+        FROM pemenang_tender
+        WHERE npwp NOT IN (SELECT npwp FROM data_leads)
+        AND DATE(tgl_pemenang) = CURRENT_DATE";
 
-        // $this->db->query($sql3);
+        $this->db->query($sql3);
 
         return $this->db->query($sql);
     }
