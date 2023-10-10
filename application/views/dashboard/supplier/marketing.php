@@ -649,29 +649,6 @@
                             }
                         });
 
-                        // Make an AJAX request
-                        // $.ajax({
-                        //     url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
-                        //     type: 'POST',
-                        //     data: formData,
-                        //     success: function(response) {
-                        //         if (response.status == true) {
-                        //             alert('Data berhasil diubah');
-                        //             window.location.href = "<?= base_url('suplier/marketing') ?>";
-                        //         } else {
-                        //             alert('Data gagal diubah');
-                        //         }
-                        //     },
-                        //     error: function(xhr, status, error) {
-                        //         console.log(xhr.responseText);
-                        //     }
-                        // });
-                    
-                    });
-
-                    $(".btn-edt").click(function() {
-                    var id_tim = $(this).data("id");
-
                         $('#submit-edit').click(function(event) {
                             event.preventDefault();
 
@@ -702,7 +679,30 @@
                             }
                         });
                     });
-                }); 
+
+                        // Make an AJAX request
+                        // $.ajax({
+                        //     url: '<?= base_url("api/supplier/update/") ?>' + id_tim,
+                        //     type: 'POST',
+                        //     data: formData,
+                        //     success: function(response) {
+                        //         if (response.status == true) {
+                        //             alert('Data berhasil diubah');
+                        //             window.location.href = "<?= base_url('suplier/marketing') ?>";
+                        //         } else {
+                        //             alert('Data gagal diubah');
+                        //         }
+                        //     },
+                        //     error: function(xhr, status, error) {
+                        //         console.log(xhr.responseText);
+                        //     }
+                        // });
+                    
+                    });
+
+                    // $(".btn-edt").click(function() {
+                    // var id_tim = $(this).data("id");
+                // }); 
             }
         })
     });
