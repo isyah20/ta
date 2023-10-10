@@ -502,6 +502,14 @@ class Supplier_model extends CI_Model
         return $query->result_array();
     }
 
+    public function getNamaPerusahaanById($id){
+        $this->db->select('nama_perusahaan');
+        $this->db->from('data_leads');
+        $this->db->where('id_lead', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     public function getKontakLeadByName($name)
     {
         $this->db->select('*');

@@ -268,7 +268,7 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
         LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
         JOIN tim_marketing ON tim_marketing.id_supplier = data_leads.id_pengguna
-        WHERE data_leads.id_pengguna = 51
+        WHERE data_leads.id_pengguna = {$id_pengguna}
         AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_lead IN (SELECT id_lead FROM plot_tim WHERE id_tim = 0));";
 
         return $this->db->query($sql);

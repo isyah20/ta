@@ -24,7 +24,8 @@
   }
 
   .box-full {
-    max-height: 100% !important;
+    /* min-height: none !important; */
+    max-height: inherit !important;
     height: 100% !important;
   }
 
@@ -78,11 +79,11 @@
   }
 
   .text-limited {
-      width: 200px; 
-      white-space: nowrap; 
-      overflow: hidden; 
-      text-overflow: ellipsis; 
-}
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .card.dragging {
     cursor: grab;
@@ -181,8 +182,7 @@
     border-radius: 5px;
   }
 
-  .box::-webkit-scrollbar-track {
-  }
+  .box::-webkit-scrollbar-track {}
 
   .card:hover {
     transform: scale(1.05);
@@ -240,151 +240,152 @@
 </style>
 
 <section class="pt-5 pb-3">
-<div class="container">
-  <div class="mt-5">
-    <h4>Selamat Datang!</h4>
-    <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
-  </div>
-  <div class="col-md-3 pt-3">
-    <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
-      <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
-    </button>
-  </div>
+  <div class="container">
+    <div class="mt-5">
+      <h4>Selamat Datang!</h4>
+      <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
+    </div>
+    <div class="col-md-3 pt-3">
+      <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
+        <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
+      </button>
+    </div>
   </div>
 </section>
 <section>
   <div class="container">
-  <div class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
-    <div class="">
-      <div id="side-container" class="col col-sm-12">
-        <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
-        <!-- <h5 class="card-title pt-2"> Daftar Perusahaan</h5> -->
-        <!-- <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4> -->
-        <!-- <div class="card drag-element" draggable="true">
+    <div class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
+      <div class="">
+        <div id="side-container" class="col col-sm-12">
+          <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
+          <!-- <h5 class="card-title pt-2"> Daftar Perusahaan</h5> -->
+          <!-- <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4> -->
+          <!-- <div class="card drag-element" draggable="true">
             <p>PT Cahaya Asia Ya Putra Dewa</p>
             <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
           </div> -->
-        <!-- </div> -->
+          <!-- </div> -->
+        </div>
       </div>
-    </div>
-    <div class="col" style="margin-left:4%">
+      <div class="col" style="margin-left:4%">
 
-      <div id="big-container" class="row"></div>
-    </div>
+        <div id="big-container" class="row"></div>
+      </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
-    <script>
-      var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
-      let global_id_pengguna = Cookies.get('id_pengguna');
+      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+      <script>
+        var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+        let global_id_pengguna = Cookies.get('id_pengguna');
 
-      function addAuthorizationHeader(xhr) {
-        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
-      }
-      $(document).ready(function() {
-        getDataLead();
-        getDataTim();
-        getLeadByTim();
-        getPlotTim();
-        recounting();
+        function addAuthorizationHeader(xhr) {
+          xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+        }
+        $(document).ready(function() {
+          getDataLead();
+          getDataTim();
+          getLeadByTim();
+          getPlotTim();
+          recounting();
 
-        // Handle form submission
-        $('#submit-input').click(function(event) {
-          event.preventDefault();
+          // Handle form submission
+          $('#submit-input').click(function(event) {
+            event.preventDefault();
 
-          // Get the form instance
-          var formData = {
-            nama_tim: $('input[name=nama_tim]').val(),
-            posisi: $('input[name=posisi]').val(),
-            email: $('input[name=email]').val(),
-            no_telp: $('input[name=no_telp]').val(),
-            alamat: $('textarea[name=alamat]').val(),
-          };
+            // Get the form instance
+            var formData = {
+              nama_tim: $('input[name=nama_tim]').val(),
+              posisi: $('input[name=posisi]').val(),
+              email: $('input[name=email]').val(),
+              no_telp: $('input[name=no_telp]').val(),
+              alamat: $('textarea[name=alamat]').val(),
+            };
 
-          // Make an AJAX request
-          $.ajax({
-            url: '<?= base_url("api/supplier/create") ?>',
-            type: 'POST',
-            beforeSend: addAuthorizationHeader,
-            data: formData,
-            success: function(response) {
-              if (response.status == true) {
-                // alert('Data berhasil ditambahkan');
-                console.log('Data berhasil ditambahkan');
-                window.location.href = "<?= base_url('suplier/crm') ?>";
-              } else {
-                // alert('Data gagal ditambahkan');
-                console.log('Data gagal ditambahkan');
+            // Make an AJAX request
+            $.ajax({
+              url: '<?= base_url("api/supplier/create") ?>',
+              type: 'POST',
+              beforeSend: addAuthorizationHeader,
+              data: formData,
+              success: function(response) {
+                if (response.status == true) {
+                  // alert('Data berhasil ditambahkan');
+                  console.log('Data berhasil ditambahkan');
+                  window.location.href = "<?= base_url('suplier/crm') ?>";
+                } else {
+                  // alert('Data gagal ditambahkan');
+                  console.log('Data gagal ditambahkan');
+                }
+              },
+              error: function(xhr, status, error) {
+                console.log(xhr.responseText);
               }
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
+            });
           });
         });
-      });
 
-      function getPlotTim() {
-        var data = [];
-        $.ajax({
-          url: "<?= base_url('api/supplier/plot-tim'); ?>",
-          type: "GET",
-          beforeSend: addAuthorizationHeader,
-          async: false,
-          success: function(result) {
-            data = result;
-          }
-        });
-        return data;
-      }
+        function getPlotTim() {
+          var data = [];
+          $.ajax({
+            url: "<?= base_url('api/supplier/plot-tim'); ?>",
+            type: "GET",
+            beforeSend: addAuthorizationHeader,
+            async: false,
+            success: function(result) {
+              data = result;
+            }
+          });
+          return data;
+        }
 
-      function getDataLead() {
-        $.ajax({
-          url: "<?= base_url('api/supplier/getCRMLeads'); ?>",
-          type: "GET",
-          beforeSend: addAuthorizationHeader,
-          data: {
-            id_pengguna: global_id_pengguna
-          },
-          success: function(result) {
-            var leads = `<div id="container1"  margin-right: 50px;" class="workspace box box-full bg-color" data-id="0">
+        function getDataLead() {
+          $.ajax({
+            url: "<?= base_url('api/supplier/getCRMLeads'); ?>",
+            type: "GET",
+            beforeSend: addAuthorizationHeader,
+            data: {
+              id_pengguna: global_id_pengguna
+            },
+            success: function(result) {
+              console.log(result);
+              var leads = `<div id="container1"  margin-right: 50px;" class="workspace box box-full bg-color" data-id="0">
             <h5 class="card-title pt-2" style="padding-left:10px; margin-bottom:30px"> Daftar Perusahaan<span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></h5>`;
 
-            $.each(result, function(index, value) {
-              var rowNumber = index + 1;
-              if (typeof value === 'object') {
-                leads +=
-                  `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
+              $.each(result, function(index, value) {
+                var rowNumber = index + 1;
+                if (typeof value === 'object') {
+                  leads +=
+                    `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
                 <p>` + value.nama_perusahaan + `</p>
                 <p style="font-size: 14px; color:#10B981; font-weight:500;">` + value.wilayah + `</p>
                 </div>`;
-              }
-            });
-            leads += `</div>`;
-            $("#side-container").html(leads);
-            control();
-          }
-        });
-      }
+                }
+              });
+              leads += `</div>`;
+              $("#side-container").html(leads);
+              control();
+            }
+          });
+        }
 
-      function getDataTim() {
-        $.ajax({
-          url: "<?= base_url('api/supplier/tim-suplier'); ?>",
-          type: "GET",
-          success: function(result) {
-            var leads = `<div class="col">
+        function getDataTim() {
+          $.ajax({
+            url: "<?= base_url('api/supplier/tim-suplier'); ?>",
+            type: "GET",
+            success: function(result) {
+              var leads = `<div class="col">
       <div class="row">`;
-            var counter = 0;
-            $.each(result, function(index, value) {
-              ++counter;
-              console.log((counter), ((counter) % 3), "mod");
+              var counter = 0;
+              $.each(result, function(index, value) {
+                ++counter;
+                console.log((counter), ((counter) % 3), "mod");
 
-              // if ((counter) % 3 == 0) {
-              //   leads += `</div></div> <div class="col"><div class="row">`;
-              // }
-              var rowNumber = index + 1;
-              leads +=
-                `<div class="col-lg-4 col-md-6 col-sm-12">
+                // if ((counter) % 3 == 0) {
+                //   leads += `</div></div> <div class="col"><div class="row">`;
+                // }
+                var rowNumber = index + 1;
+                leads +=
+                  `<div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="title bg-color" style="padding: 10px; margin-top:15px">
                 <div class="card rounded-3" style="height: 40px;padding-top:2%">
                   <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `
@@ -395,118 +396,118 @@
                 </div>
           <div class="">
             <div id="container` + index + 2 + `" class="workspace box bg-color" style="margin-left:15px" data-id="` + value.id_tim + `">` +
-                getLeadByTim(value.id_tim) +
-                `</div>
+                  getLeadByTim(value.id_tim) +
+                  `</div>
           </div></div>`;
 
-              // if (counter != 1) {
+                // if (counter != 1) {
 
-              //   if ((counter) % 3 == 2) {
-              //     leads += `</div></div>`;
-              //   }
+                //   if ((counter) % 3 == 2) {
+                //     leads += `</div></div>`;
+                //   }
+                // }
+
+
+              });
+
+              // console.log(counter);
+              // if ((counter) % 3 != 0) {
+              //   console.log('IIINNN');
+              //   leads += `<div class="col"></div>`;
               // }
-
-
-            });
-
-            // console.log(counter);
-            // if ((counter) % 3 != 0) {
-            //   console.log('IIINNN');
-            //   leads += `<div class="col"></div>`;
-            // }
-            leads +=
-              ` </div>
-        </div>`
-            $("#big-container").html(leads);
-            control();
-          }
-        });
-      }
-
-      function getLeadByTim(id) {
-        var leads = '';
-        $.ajax({
-          url: "<?= base_url('api/supplier/lead/tim'); ?>",
-          type: "GET",
-          data: {
-            id_tim: id
-          },
-          async: false,
-          success: function(result) {
-            $.each(result, function(index, value) {
-
-              var rowNumber = index + 1;
               leads +=
-                `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
+                ` </div>
+        </div>`
+              $("#big-container").html(leads);
+              control();
+            }
+          });
+        }
+
+        function getLeadByTim(id) {
+          var leads = '';
+          $.ajax({
+            url: "<?= base_url('api/supplier/lead/tim'); ?>",
+            type: "GET",
+            data: {
+              id_tim: id
+            },
+            async: false,
+            success: function(result) {
+              $.each(result, function(index, value) {
+
+                var rowNumber = index + 1;
+                leads +=
+                  `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
                 <p>` + value.nama_perusahaan + `</p>
                 <p style="font-size: 14px; color:#10B981;">` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</p>
                 </div>`;
-            });
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
-          }
-        });
-        return leads;
-      }
-    </script>
+              });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            }
+          });
+          return leads;
+        }
+      </script>
 
-    <!-- </div> -->
-  </div>
-  <!-- modal input marketing -->
-  <div class="col-12 py-5">
-    <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
-      <div class="modal-dialog custom-modal" role="document">
-        <div class="modal-content">
-          <div class="modal-header border-0">
-            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-              <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-            </button>
-          </div>
+      <!-- </div> -->
+    </div>
+    <!-- modal input marketing -->
+    <div class="col-12 py-5">
+      <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
+        <div class="modal-dialog custom-modal" role="document">
+          <div class="modal-content">
+            <div class="modal-header border-0">
+              <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+              </button>
+            </div>
 
 
-          <div class="modal-body border-0">
-            <h3 class="modal-title" id="inputMarketingModalLabel">Input Marketing</h3>
-            <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-            <div class="input-popup justify-content-end">
-              <form id="form-input" class="row g-2">
-                <div class="col-12">
-                  <label for="inputNama" class="form-label text-start">Nama</label>
-                  <input type="text" name="nama_tim" class="form-control" id="inputNama" placeholder="Masukkan Nama" required>
-                </div>
-                <div class="col-12">
-                  <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                  <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi" required>
-                </div>
-                <div class="col-12">
-                  <label for="inputEmail" class="form-label text-start">Email</label>
-                  <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Masukkan Email" required>
-                </div>
-                <div class="col-12">
-                  <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                  <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
-                </div>
-                <div class="col-12">
-                  <label for="inputAlamat" class="form-label text-start">Alamat</label>
-                  <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
-                </div>
-                <div class="d-flex justify-content-start mt-3 gap-2">
-                  <div class="link flex-row align-items-center w-100">
-                    <span>
-                      <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
-                      <a href="#" id="submit-input" class="btn-custom text-white text-center">
-                        <i class="fas me-1"></i>Klik Disini
-                      </a>
-                    </span>
+            <div class="modal-body border-0">
+              <h3 class="modal-title" id="inputMarketingModalLabel">Input Marketing</h3>
+              <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
+              <div class="input-popup justify-content-end">
+                <form id="form-input" class="row g-2">
+                  <div class="col-12">
+                    <label for="inputNama" class="form-label text-start">Nama</label>
+                    <input type="text" name="nama_tim" class="form-control" id="inputNama" placeholder="Masukkan Nama" required>
                   </div>
-              </form>
+                  <div class="col-12">
+                    <label for="inputPosisi" class="form-label text-start">Posisi</label>
+                    <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi" required>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputEmail" class="form-label text-start">Email</label>
+                    <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Masukkan Email" required>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
+                    <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAlamat" class="form-label text-start">Alamat</label>
+                    <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
+                  </div>
+                  <div class="d-flex justify-content-start mt-3 gap-2">
+                    <div class="link flex-row align-items-center w-100">
+                      <span>
+                        <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                        <a href="#" id="submit-input" class="btn-custom text-white text-center">
+                          <i class="fas me-1"></i>Klik Disini
+                        </a>
+                      </span>
+                    </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- </div> -->
     </div>
-    <!-- </div> -->
-  </div>
   </div>
   <!-- end modal input marketing -->
 </section>
