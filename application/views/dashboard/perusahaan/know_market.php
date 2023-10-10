@@ -85,6 +85,20 @@
     .col-4 {
         margin-top: 6rem;
     }
+
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before {
+        bottom: .5em;
+    }
 </style>
 
 <section class="bg-white">
@@ -207,11 +221,17 @@
 <section class="bg-white align-content-center">
     <div class="col-12 container">
         <div class="row">
-            <div class="col-12">
-                <canvas id="stackedBarChart"></canvas>
+            <div class="chart-bg  mt-4 mb-2" style="height:92%">
+                <div style="padding:0">
+                    <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700"> PROYEK LPSE XXXX</h3>
+                    <div class="chart3" style="margin:0; padding:0">
+                        <canvas id="stackedBarChart"></canvas>
+                    </div>
+                </div>
+                <h5 style="color:#000000; margin:10px; margin-top:0; font-size:14px; font-weight:600"> Summary nilai HPS</h5>
+
             </div>
             <div class="card-graf shadow-sm">
-
                 <div class="col-12">
                     <div class="container">
                         <div class="wow fadeInUp animation" data-wow-delay="0.2s">
@@ -284,7 +304,87 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
+<!-- <section class="bg-white mx-3">
+    <div class="col-lg-6">
+        <div class="overflow-auto chart-bg mt-4" style="height:92%">
+            <h5 style="color:#000000; margin:20px; font-weight:600"> TIME SERIES IKUT TENDER</h5>
+            <div class="chart1" style="margin:0; padding:0"><canvas id="timeSeries-user"></canvas></div>
+        </div>
+    </div>
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">No
+                </th>
+                <th class="th-sm">Nama Perusahaan
+                </th>
+                <th class="th-sm">Jumlah Tender Yang Diikuti
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>System Architect</td>
+                <td>61</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Accountant</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Junior Technical Author</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Senior Javascript Developer</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Integration Specialist</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Sales Assistant</td>
+                <td>32</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Integration Specialist</td>
+                <td>65</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Javascript Developer</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Software Engineer</td>
+                <td>98</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Office Manager</td>
+                <td>12</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</section> -->
+
 
 <script>
     // Data untuk grafik
@@ -347,7 +447,7 @@
         options: {
             plugins: {
                 title: {
-                    display: true,
+                    display: false,
                     text: 'PROYEK  LPSE XXXX'
                 }
             },
@@ -365,4 +465,11 @@
 
     var ctxStackedBar = document.getElementById('stackedBarChart').getContext('2d');
     var stackedBarChart = new Chart(ctxStackedBar, config);
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>

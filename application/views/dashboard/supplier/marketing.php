@@ -88,14 +88,6 @@
         font-size: 1rem;
     }
 
-    /* .toggle-button {
-        padding: 5px;
-        background-color: #059669;
-        color: #fff;
-        border: none;
-        border-radius: 5rem;
-    } */
-
     /* Style untuk ikon visibility */
     .toggle-button i {
         margin-left: 5px;
