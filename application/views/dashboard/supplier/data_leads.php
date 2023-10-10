@@ -36,6 +36,7 @@
 
     .perusahaan {
         font-weight: bold;
+        max-width: 250px;
     }
 
     .npwp {
@@ -693,7 +694,7 @@
                     </div>
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
-                        <p class="text-center">PT Telekomunikasi Indonesia</p>
+                        <p class="text-center" id="nama-perusahaan">PT Telekomunikasi Indonesia</p>
                         <div class="input-popup align-items-center">
                             <div class="input-popup justify-content-end">
                                 <div class="table-container">
@@ -894,6 +895,17 @@
                     error: function() {
                         alert("Terjadi kesalahan saat mengambil data kontak.");
                     }
+                });
+
+                $.ajax({
+                    url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
+                    type: "GET",
+                    dataType: "JSON",
+                    success: function(data) {
+                        $('#nama-perusahaan').html(data.nama_perusahaan);
+                        console.log(data.nama_perusahaan);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {}
                 });
             });
 

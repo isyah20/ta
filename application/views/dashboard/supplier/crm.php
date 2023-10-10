@@ -78,6 +78,13 @@
     padding: 5px 10px 5px 15px;
   }
 
+  .text-limited {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .card.dragging {
     cursor: grab;
   }
@@ -166,28 +173,19 @@
   }
 
 
-  /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
   .box::-webkit-scrollbar {
     width: 5px;
-    /* Lebar scrollbar */
   }
 
-
-  /* Untuk bagian badan (thumb) dari scrollbar */
   .box::-webkit-scrollbar-thumb {
     background: var(--font-dark-grey, #333);
     border-radius: 5px;
-    /* Bentuk border radius thumb */
   }
 
-  /* Untuk bagian track dari scrollbar */
-  .box::-webkit-scrollbar-track {
-    /* background: #f1f1f1; Warna latar belakang track */
-  }
+  .box::-webkit-scrollbar-track {}
 
   .card:hover {
     transform: scale(1.05);
-    /* Memperbesar kartu saat hover */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 
@@ -208,18 +206,15 @@
       margin-left: 0px;
     }
 
-    /* Untuk bagian badan (thumb) dari scrollbar */
     .box::-webkit-scrollbar-thumb {
       background: var(--font-dark-grey, #333);
       border-radius: 5px;
-      /* Bentuk border radius thumb */
     }
 
     .box::-webkit-scrollbar-thumb:hover {
       background: #888;
     }
 
-    /* Untuk bagian track dari scrollbar */
     .box::-webkit-scrollbar-track {
       /* background: #f1f1f1; Warna latar belakang track */
     }
@@ -227,7 +222,6 @@
 
   .card:hover {
     transform: scale(1.05);
-    /* Memperbesar kartu saat hover */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 
@@ -252,7 +246,7 @@
       <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
     </div>
     <div class="col-md-3 pt-3">
-      <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Anggota
+      <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
         <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
       </button>
     </div>
@@ -260,7 +254,7 @@
 </section>
 <section>
   <div class="container">
-    <div class="container-fluid pb-4" style="max-height: inherit;">
+    <div class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
       <div class="">
         <div id="side-container" class="col col-sm-12">
           <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
@@ -270,12 +264,10 @@
             <p>PT Cahaya Asia Ya Putra Dewa</p>
             <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
           </div> -->
-
-
           <!-- </div> -->
         </div>
       </div>
-      <div class="col">
+      <div class="col" style="margin-left:4%">
 
         <div id="big-container" class="row"></div>
       </div>

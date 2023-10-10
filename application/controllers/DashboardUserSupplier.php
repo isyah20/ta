@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 use App\components\traits\ClientApi;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\ColumnIterator;
 
 class DashboardUserSupplier extends CI_Controller
 {
@@ -126,7 +127,7 @@ class DashboardUserSupplier extends CI_Controller
 
     public function exportLeads()
     {
-        require_once 'vendor\autoload.php';
+        require_once 'vendor/autoload.php';
         $spreadsheet = new Spreadsheet();
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $activeSheet = $spreadsheet->getActiveSheet();
@@ -298,7 +299,7 @@ class DashboardUserSupplier extends CI_Controller
     }
     public function exportTenderTerbaru()
     {
-        require_once 'vendor\autoload.php';
+        require_once 'vendor/autoload.php';
         $spreadsheet = new Spreadsheet();
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $activeSheet = $spreadsheet->getActiveSheet();
@@ -466,6 +467,12 @@ class DashboardUserSupplier extends CI_Controller
     public function getKontakLeadById($id)
     {
         $data = $this->Supplier_model->getKontakLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getNamaPerusahaanById($id){
+        $data = $this->Supplier_model->getNamaPerusahaanById($id);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
@@ -915,7 +922,7 @@ class DashboardUserSupplier extends CI_Controller
 
     public function getJumlahPemenangTender()
     {
-        $response = $this->Supplier_model->getJumlahPemenangTender()->row();
+        $response = $this->Supplier_model->getJumlahPemenangTender($_COOKIE['id_pengguna'])->row();
 
         $this->output
             ->set_status_header(200)
