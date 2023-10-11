@@ -683,6 +683,10 @@
                                     Nama Perusahaan
                                 </th>
                                 <th class="custom-padding">
+                                    <img src="<?= base_url("assets/img/icon-cp.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Kontak
+                                </th>
+                                <th class="custom-padding">
                                     <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                     Status
                                 </th>
@@ -690,10 +694,7 @@
                                     <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                     Jadwal
                                 </th>
-                                <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-cp.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
-                                    Kontak
-                                </th>
+                                
                                 <th></th>
                                 <th class="custom-padding">
                                     <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
@@ -708,28 +709,43 @@
                             <tr class="my-2">
                                 <td>1</td>
                                 <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td>Negotiation</td>
-                                <td>02/12/2024</td>
                                 <td>0811-2345-6666 (Office)</td>
-
                                 <td>
                                     <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
-                                <td>Lancarr Semua Gess</td>
-                                <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td>
+                                <td class="editable">Negotiation</td>
+                                <td class="editable">02/12/2024</td>
+                                
+                                <td class="editable">Lancarr Semua Gess</td>
+                                <td>
+                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
+                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                    </a>
+                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                    </a>
+                </td>
+                                <!-- <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td> -->
                             </tr>
                             <tr class="my-2">
                                 <td>2</td>
                                 <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td>Done</td>
-                                <td>02/10/2024</td>
                                 <td>0811-2345-6666 (Office)</td>
-
                                 <td>
                                     <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
-                                <td>Sudah selesai tinggal promosi</td>
-                                <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td>
+                                <td class="editable">Done</td>
+                                <td class="editable">02/10/2024</td>
+                                <td class="editable">Sudah selesai tinggal promosi</td>
+                                <td>
+                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
+                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                    </a>
+                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                    </a>
+                                </td>
+                                <!-- <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -1559,3 +1575,44 @@
 <script>
     new Choices(document.querySelector(".choices-multiple"));
 </script>
+
+<script>
+        function editRow(button) {
+            var row = button.parentNode.parentNode;
+            row.classList.add("editing");
+
+            var editableCells = row.getElementsByClassName("editable");
+            for (var i = 0; i < editableCells.length; i++) {
+                var cell = editableCells[i];
+                var field = cell.getAttribute("data-field");
+                var currentValue = cell.textContent;
+                var input = document.createElement("input");
+                input.value = currentValue;
+                cell.textContent = "";
+                cell.appendChild(input);
+                cell.setAttribute("data-orig-value", currentValue);
+            }
+
+            button.style.display = "none";
+            row.querySelector(".save-button").style.display = "inline";
+        }
+
+        function saveRow(button) {
+            var row = button.parentNode.parentNode;
+            row.classList.remove("editing");
+
+            var editableCells = row.getElementsByClassName("editable");
+            for (var i = 0; i < editableCells.length; i++) {
+                var cell = editableCells[i];
+                var input = cell.querySelector("input");
+                var origValue = cell.getAttribute("data-orig-value");
+                var newValue = input.value;
+                cell.textContent = newValue;
+
+                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
+            }
+
+            button.style.display = "none";
+            row.querySelector(".edit-button").style.display = "inline";
+        }
+    </script>
