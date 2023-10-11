@@ -25,6 +25,9 @@ class ApiSupplier extends RestController
         parent::__construct();
         $this->load->model('api/Supplier_api');
         $this->load->model('api/Pengguna_model');
+        $this->load->model('Supplier_model');
+        $this->load->model('Tender_model');
+        $this->load->model('Preferensi_model', 'preferensi');
         $this->load->library('form_validation', 'google');
         $this->load->helper('form');
         $this->init();
@@ -74,7 +77,7 @@ class ApiSupplier extends RestController
             'no_telp' => $this->post('no_telp'),
             'email' => $this->post('email'),
             'alamat' => $this->post('alamat'),
-            'id_supplier' => $_COOKIE['id_pengguna'],
+            'id_supplier' => $_SESSION['id_pengguna'],
         ];
 
         $token = random_string('alnum', 25);
@@ -169,17 +172,6 @@ class ApiSupplier extends RestController
                 'message' => 'Data gagal diubah'
             ], RestController::HTTP_BAD_REQUEST);
         }
-        // if ($this->Supplier_api->updateTimMarketing($data, $id) > 0) {
-        //     $this->response([
-        //         'status' => true,
-        //         'message' => 'Data berhasil diubah'
-        //     ], RestController::HTTP_OK);
-        // } else {
-        //     $this->response([
-        //         'status' => false,
-        //         'message' => 'Data gagal diubah'
-        //     ], RestController::HTTP_BAD_REQUEST);
-        // }
     }
 
     // Function Plotting
@@ -457,13 +449,25 @@ class ApiSupplier extends RestController
         $page_number = ($_GET['pageNumber'] - 1) * $page_size;
         $response = $this->Supplier_api->getDataLeads($id_pengguna, $page_size, $page_number)->result();
 
-        $this->output
-            ->set_status_header(200)
-            ->set_content_type('application/json')
-            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-            ->_display();
+        // $this->output
+        //     ->set_status_header(200)
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        //     ->_display();
+        // exit;
 
-        exit;
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+                // 'jumlah' => $this->Supplier_api->countDataLeads($id_pengguna)->row('jumlah')
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
     }
     public function getCRMLeads_get()
     {
@@ -512,6 +516,44 @@ class ApiSupplier extends RestController
             $this->response([
                 'status' => false,
                 'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getJumlahPemenang_get()
+    {
+        $id = $this->input->get('id_pengguna');
+        $res = $this->Supplier_model->getJumlahPemenangTender($id)->row();
+
+        // $this -> response($res);
+
+        if ($res) {
+            $this->response([
+                'status' => true,
+                'data' => $res
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getJumKatalogPemenang_get()
+    {
+        parse_str(file_get_contents('php://input'), $data);
+        $response = $this->Tender_model->getJumKatalogPemenangTerbaruByPengguna1($data)->row();
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0
             ], RestController::HTTP_NOT_FOUND);
         }
     }
