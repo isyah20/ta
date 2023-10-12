@@ -720,7 +720,7 @@
                                 <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
                                 <td class="editable-select">Negotiation</td>
-                                <td class="editable-date">02/12/2024</td>
+                                <td class="editable">02/12/2024</td>
                                 
                                 <td class="editable" colspan="2">Lancarr Semua Gess</td>
                                 <td>
@@ -769,7 +769,7 @@
                                 <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
                                 <td class="editable-select">Negotiation</td>
-                                <td class="editable-date">02/12/2024</td>
+                                <td class="editable">02/12/2024</td>
                                 <td class="editable" colspan="2" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
                                 <td>
                                     <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
@@ -1673,20 +1673,6 @@ $(function() {
                 cell.setAttribute("data-orig-value", currentValue);
             }
 
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var input = document.createElement("input");
-                input.type = "date";
-                input.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(input);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-
             button.style.display = "none";
             row.querySelector(".save-button").style.display = "inline";
         }
@@ -1714,17 +1700,6 @@ $(function() {
                 cell.textContent = newValue;
                 // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
             }
-
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var input = cell.querySelector("input");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = input.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
 
             button.style.display = "none";
             row.querySelector(".edit-button").style.display = "inline";
