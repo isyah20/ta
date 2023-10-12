@@ -128,10 +128,7 @@ $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
 $route['api/getleads'] = 'DashboardUserSupplier/getDataLeads';
-$route['api/syncDataLead'] = 'DashboardUserSupplier/syncDataLead';
 $route['api/getJumDataLeads'] = 'DashboardUserSupplier/getJumDataLeads';
-$route['suplier/leads/export'] = 'DashboardUserSupplier/exportLeads';
-$route['suplier/tender/export'] = 'DashboardUserSupplier/exportTenderTerbaru';
 
 $route['suplier/getlead/(:num)'] = 'DashboardUserSupplier/getDataLeads/$1';
 $route['suplier/getKontak/(:num)'] = 'DashboardUserSupplier/getKontakLeadById/$1';
@@ -176,7 +173,6 @@ $route['api/getTawaranRendah'] = 'Competitor/getTawaranRendah';
 
 //Market
 $route['market'] = 'Market';
-$route['user-dashboard/market'] = 'Market/indexMarket';
 $route['api/getListWilayah'] = 'Market/getListWilayah';
 
 //Tender
@@ -252,8 +248,8 @@ $route['api/getJumKatalogTenderTerbaruByPengguna1'] = 'Tender/getJumKatalogTende
 $route['api/getJumKatalogTenderTerbaruByPengguna/(:num)/(:num)'] = 'Tender/getJumKatalogTenderTerbaruByPengguna/$1/$2';
 $route['api/getJumKatalogPemenangTerbaruByPengguna/(:num)'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna/$1';
 $route['api/getJumKatalogPemenangTerbaruByPengguna1'] = 'Tender/getJumKatalogPemenangTerbaruByPengguna1';
-// $route['api/getListLokasiPekerjaan'] = 'api/ApiTender/getListLokasiPekerjaan';
-$route['api/getListLokasiPekerjaan'] = 'Tender/getListLokasiPekerjaan';
+$route['api/getListLokasiPekerjaan'] = 'api/ApiTender/getListLokasiPekerjaan';
+// $route['api/getListLokasiPekerjaan'] = 'Tender/getListLokasiPekerjaan';
 $route['api/getListJenisPengadaan'] = 'Tender/getListJenisPengadaan';
 // $route['tender/(:num)'] = 'Tender/index/$1';
 // $route['open-link'] = 'Tender/openLink';
@@ -417,7 +413,6 @@ $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
 $route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
 $route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
-$route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
@@ -649,8 +644,8 @@ $route['api/preferensi/update/(:num)'] = 'api/ApiPreferensi/update/$1';
 $route['api/preferensi/s/(:num)'] = 'api/ApiPreferensi/tenderS/$1';
 
 // API Supplier
-$route['api/supplier/tim'] = 'api/ApiSupplier';
-$route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
+// $route['api/supplier/tim'] = 'api/ApiSupplier';
+// $route['api/supplier/tim/create'] = 'api/ApiSupplier/create';
 
 //===========================================
 // Scrapping
@@ -712,45 +707,6 @@ $route['api-mobile/pengguna/create'] = 'api-mobile/ApiPengguna/create';
 $route['api-mobile/pengguna/update/(:num)'] = 'api-mobile/ApiPengguna/update/$1';
 $route['api-mobile/pengguna/delete/(:num)'] = 'api-mobile/ApiPengguna/destroy/$1';
 $route['api-mobile/pengguna/check-user-trial'] = 'api-mobile/ApiPengguna/checkAndUpdateUserType';
-
-// mobile restAPI route for Supplier
-$route['api-mobile/supplier/getJumlah'] = 'api-mobile/ApiSupplier/getJumlahPemenang';
-$route['api-mobile/supplier/getJumlahPemenang'] = 'api-mobile/ApiSupplier/getJumKatalogPemenang';
-$route['api-mobile/supplier/getPemenangFilter'] = 'api-mobile/ApiSupplier/pemenangFiltered';
-
-// Leads
-$route['api-mobile/supplier/getCount'] = 'api-mobile/ApiSupplier/getCountLeadNull';
-$route['api-mobile/supplier/getTotal'] = 'api-mobile/ApiSupplier/getTotalLeads';
-$route['api-mobile/supplier/getLead'] = 'api-mobile/ApiSupplier/getLeads';
-$route['api-mobile/supplier/getProfile/(:num)'] = 'api-mobile/ApiSupplier/getProfile/$1';
-$route['api-mobile/supplier/insertProfile/(:num)'] = 'api-mobile/ApiSupplier/insertProfile/$1';
-$route['api-mobile/supplier/getContact/(:num)'] = 'api-mobile/ApiSupplier/getContact/$1';
-$route['api-mobile/supplier/getContactById/(:num)'] = 'api-mobile/ApiSupplier/getContactById/$1';
-$route['api-mobile/supplier/insertContact'] = 'api-mobile/ApiSupplier/insertContact';
-$route['api-mobile/supplier/updateContact/(:num)'] = 'api-mobile/ApiSupplier/updateContact/$1';
-$route['api-mobile/supplier/deleteContact/(:num)'] = 'api-mobile/ApiSupplier/deleteContact/$1';
-
-// Tim Marketing
-$route['api-mobile/supplier/getTim'] = 'api-mobile/ApiSupplier';
-$route['api-mobile/supplier/createTim'] = 'api-mobile/ApiSupplier/create';
-$route['api-mobile/supplier/deleteTim/(:num)'] = 'api-mobile/ApiSupplier/deleteTim/$1';
-$route['api-mobile/supplier/updateTim/(:num)'] = 'api-mobile/ApiSupplier/editTimMarketing/$1';
-$route['api-mobile/supplier/getTimById/(:num)'] = 'api-mobile/ApiSupplier/getbyId/$1';
-
-// Not Fixed
-$route['api-mobile/supplier/getPemenangByNPWP/(:any)'] = 'api-mobile/ApiSupplier/getPemenangByNPWP/$1';
-// $route['api/supplier/getPemenangFilter/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'api/ApiSupplier/getPemenangFilter/$1/$2/$3/$4/$5/$6';
-// $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/getPemenangFilter';
-$route['api/supplier/getPemenangFilter'] = 'api-mobile/ApiSupplier/pemenangFiltered';
-$route['api-mobile/supplier/getCRMLeads'] = 'api-mobile/ApiSupplier/getCRMLeads';
-
-
-// mobile restAPI route for Preferensi
-$route['api-mobile/preferensi/getPreferensiPengguna/(:num)'] = 'api-mobile/ApiPreferensi/getPreferensiPengguna/$1';
-$route['api-mobile/preferensi/getPreferensiListJenisTender/(:num)'] = 'api-mobile/ApiPreferensi/getPreferensiListJenisTender/$1';
-$route['api-mobile/preferensi/getPreferensiJenisTender/(:num)'] = 'api-mobile/ApiPreferensi/getPreferensiJenisTender/$1';
-$route['api-mobile/preferensi/getPreferensiListLPSE'] = 'api-mobile/ApiPreferensi/getPreferensiListLPSE';
-$route['api-mobile/preferensi/simpanPreferensi'] = 'api-mobile/ApiPreferensi/simpanPreferensi';
 
 
 //Admin

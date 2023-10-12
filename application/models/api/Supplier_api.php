@@ -294,4 +294,45 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    // public function getJumlahPemenangTender($id_pengguna)
+    // {
+    //     $this->db->select(['COUNT(pemenang.id_pemenang) AS jumlah']);
+    //     $this->db->from('pemenang');
+    //     $this->db->join('data_leads', 'pemenang.id_pemenang = data_leads.id_pemenang', 'left');
+    //     $this->db->where('data_leads.id_pengguna', $id_pengguna);
+    //     $query = $this->db->get();
+    //     return $query->row_array();
+    // }
+
+    public function getJumlahPemenangTender($id_pengguna)
+    {
+        $preferensi = $this->Tender_model->getPreferensiPengguna($id_pengguna);
+        // $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang_terbaru FROM pemenang WHERE DATE(tgl_pemenang)=DATE(NOW());";
+        // $sql = "SELECT 
+        // COUNT(DISTINCT CASE WHEN DATE(tgl_pemenang) = DATE(NOW()) THEN npwp ELSE NULL END) AS total_today,
+        // COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) AND MONTH(tgl_pemenang) = MONTH(NOW()) THEN npwp ELSE NULL END) AS total_month,
+        // COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) THEN npwp ELSE NULL END) AS total_year
+        // FROM preferensi, pemenang p
+        // WHERE preferensi.id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',p.id_lpse<>'',p.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',p.jenis_tender<>'',p.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+        // ";
+        
+        $this->db->select('
+        COUNT(DISTINCT CASE WHEN DATE(tgl_pemenang) = DATE(NOW()) THEN npwp ELSE NULL END) AS total_today,
+        COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) AND MONTH(tgl_pemenang) = MONTH(NOW()) THEN npwp ELSE NULL END) AS total_month,
+        COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) THEN npwp ELSE NULL END) AS total_year
+        ');
+        
+        $this->db->from('preferensi');
+        $this->db->join('pemenang p', 'preferensi.id_pengguna = p.id_pengguna', 'INNER');
+        $this->db->where('DATEDIFF(CURRENT_DATE, tgl_pemenang) <=', $this->interval_pemenang);
+        $this->db->where('preferensi.status', '1');
+        $this->db->where('IF(preferensi.id_lpse = "", p.id_lpse <> "", p.id_lpse IN (' . $preferensi->id_lpse . '))');
+        $this->db->where('IF(preferensi.jenis_pengadaan = "", p.jenis_tender <> "", p.jenis_tender IN (' . $preferensi->jenis_pengadaan . '))');
+        $this->db->where('IF(keyword = "", nama_tender <> "", nama_tender REGEXP keyword)');
+        $this->db->where('IF(nilai_hps_awal = 0 AND nilai_hps_akhir = 0, harga_penawaran <> "", harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir)');
+
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }
