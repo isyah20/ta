@@ -610,9 +610,23 @@
     /* CSS untuk menjaga elemen-elemen di baris yang sama */
     .btn-cell {
         display: flex;
-        /* Menggunakan flexbox untuk menjaga elemen sejajar */
         align-items: center;
-        /* Mengatur pemusatan vertikal elemen-elemen */
+    }
+
+    .expandChildTable:before {
+    /* content: "+"; */
+    display: block;
+    cursor: pointer;
+    }
+    .expandChildTable.selected:before {
+        /* content: "-"; */
+    }
+    .childTableRow {
+        display: none;
+    }
+    .childTableRow table {
+        border: 2px solid #555;
+        margin-left:40%;
     }
 
     /* CSS untuk mengatur tampilan saat tampilan diubah menjadi mobile */
@@ -675,77 +689,112 @@
             <div class="col">
                 <div class="table-responsive">
                     <table class="table custom-table-container">
-                        <thead class="thead">
+                        <thead class="thead text-center">
                             <tr>
                                 <th class="custom-padding">No.</th>
                                 <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-apartment.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                     Nama Perusahaan
                                 </th>
                                 <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-cp.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
-                                    Kontak
-                                </th>
-                                <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                     Status
                                 </th>
                                 <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                     Jadwal
                                 </th>
-                                
-                                <th></th>
                                 <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Kontak
+                                </th>
+                                <th colspan="2" class="custom-padding">
                                     Catatan
                                 </th>
                                 <th class="custom-padding">
                                     Aksi
                                 </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="data-leads">
-                            <tr class="my-2">
+                            <tr>
                                 <td>1</td>
                                 <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td>0811-2345-6666 (Office)</td>
-                                <td>
-                                    <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
+                                <td>Negotiation</td>
+                                <td>02/12/2024</td>
+                                <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
-                                <td class="editable">Negotiation</td>
-                                <td class="editable">02/12/2024</td>
-                                
-                                <td class="editable">Lancarr Semua Gess</td>
-                                <td>
-                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
-                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-                                    </a>
-                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
-                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-                                    </a>
-                </td>
-                                <!-- <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td> -->
+                                <td colspan="2">Lancarr Semua Gess</td>
+                                <td><span> <img src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" width="30px" data-toggle="modal" data-target="#editDataModal"></span>
+                                <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
                             </tr>
-                            <tr class="my-2">
+                            <tr class="childTableRow">
+                                <td colspan="5">
+                                    <table class="table custom-table-container">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Status
+                                                </th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Jadwal
+                                                </th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Catatan
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data-leads">
+                                            <tr class="">
+                                                <td>Negotiation</td>
+                                                <td>02/12/2024</td>
+                                                <td colspan="2">Lancarr Semua Gess</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="data-leads">
+                            <tr>
                                 <td>2</td>
-                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td>0811-2345-6666 (Office)</td>
-                                <td>
-                                    <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
+                                <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td>Negotiation</td>
+                                <td>02/12/2024</td>
+                                <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
-                                <td class="editable">Done</td>
-                                <td class="editable">02/10/2024</td>
-                                <td class="editable">Sudah selesai tinggal promosi</td>
-                                <td>
-                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
-                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-                                    </a>
-                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
-                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-                                    </a>
+                                <td colspan="2" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
+                                <td><span> <img src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" width="30px" data-toggle="modal" data-target="#editDataModal"></span>
+                                <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
+                            </tr>
+                            <tr class="childTableRow">
+                                <td colspan="5">
+                                    <table class="table custom-table-container">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Status
+                                                </th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Jadwal
+                                                </th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Catatan
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data-leads">
+                                            <tr>
+                                                <td class="custom-padding">Negotiation</td>
+                                                <td class="custom-padding">02/12/2024</td>
+                                                <td class="custom-padding" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </td>
-                                <!-- <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -766,8 +815,6 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
-
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
                     <p class="text-center">PT Telekomunikasi Indonesia</p>
@@ -890,8 +937,6 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
-
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="editKontakModalLabel">Edit Contact</h3>
                     <p class="text-center"> Sesuaikan lagi kontak yang bisa dihubungi</p>
@@ -985,8 +1030,6 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
-
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
                     <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
@@ -1068,8 +1111,6 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
-
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="editDataModalLabel">Edit </h3>
                     <p class="text-center"></p>
@@ -1133,6 +1174,13 @@
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
+<script>
+$(function() {
+    $('.expandChildTable').on('click', function() {
+        $(this).toggleClass('selected').closest('tr').next().toggle();
+    })
+});
 </script>
 <!-- 
 <script>
