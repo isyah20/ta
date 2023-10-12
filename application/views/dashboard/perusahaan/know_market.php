@@ -119,7 +119,7 @@
     }
 
     th button {
-        background-color: #eee;
+        background-color: #D21B1B;
         border: none;
         cursor: pointer;
         display: block;
@@ -159,13 +159,13 @@
     .data-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
     }
 
     .data-table th {
-        background-color: #f2f2f2;
+        background-color: #D21B1B;
         border: 1px solid #dddddd;
         text-align: left;
+
     }
 
     .data-table th button {
@@ -173,6 +173,7 @@
         border: none;
         cursor: pointer;
         font-weight: bold;
+        color: white;
     }
 
     .data-table td {
@@ -200,14 +201,16 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
-
+        overflow-y: scroll;
+        max-height: 450px;
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
     }
 
-    .thead {
-        color: #fff;
-        background-color: #E05151;
-        text-align: left;
-        font-size: 15px;
+
+    .data-table {
+        text-align: center;
     }
 
     tbody {
@@ -215,17 +218,14 @@
         font-size: 15px;
     }
 
-    .custom-table-container table.data-table thead {
-        background-color: #D21B1B;
-        color: #fff;
-    }
+
 
     .custom-table-container table.data-table tbody {
-        background-color: transparent;
+        background-color: white;
     }
 
     .custom-table-container table.data-table tbody tr:nth-child(even) {
-        background-color: transparent;
+        background-color: white;
     }
 
     .custom-table-container table.data-table tbody tr:hover {
@@ -353,7 +353,7 @@
 
 <!-- chart stacked -->
 <section class="bg-white">
-    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container-lg wow chart-bg fadeInUp" data-wow-delay="0.1s">
         <div style="padding:0">
             <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700"> PROYEK LPSE XXXX</h3>
             <div class="chart3" style="margin:0; padding:0">
@@ -361,7 +361,7 @@
             </div>
         </div>
         <hr class="chart-line">
-        <h5 style="color:#000000; margin:10px; margin-top:10px; font-size:20px; font-weight:600"> Summary</h5>
+        <h5 style="color:#000000; margin-top:10px; font-size:20px; font-weight:600"> Summary</h5>
         <div class="container">
             <div class="wow fadeInUp animation" data-wow-delay="0.2s">
                 <div class="shadow-sm bg-white">
@@ -450,10 +450,12 @@
     <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
         <div class="row">
             <div class="col-lg-4">
-                <div class="custom-table-container">
+                <div class="custom-table-container shadow-sm">
                     <table class="data-table">
-                        <thead>
-                            <tr>
+                        <thead class="thead">
+                            <tr style="color: white;">
+                                <!-- <th>No.</th> -->
+                                <th><button id="no">No.</button></th>
                                 <th><button id="name">Name</button></th>
                                 <th><button id="hp">HP</button></th>
                             </tr>
@@ -463,84 +465,52 @@
                 </div>
             </div>
             <div class="col-lg-8">
-                <div style="padding:0">
-                    <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700"> PESERTA LPSE</h3>
+                <div class="chart-bg">
+                    <div style="padding:0">
+                        <h3 style="color:#000000; margin:10px; font-size:18px; font-weight:700"> PESERTA LPSE</h3>
+                        <div class="chart-peserta" style="margin:0; padding:0">
+                            <canvas id="chartpeserta"></canvas>
+                        </div>
+                    </div>
+                    <h5 style="color:#000000; margin:10px; font-size:18px; font-weight:600"> Summary</h5>
+                    <center>
+                        <div class="row d-flex justify-content-center" style="padding:5px; margin:auto">
+                            <div class="col-lg-auto summary-box-2">
+                                <p>Kurang dai 500 juta</p>
+                                <h4 id="sum1">10 <span><img src="<?= base_url('assets/img/under-500.png') ?>" width="20px" alt=""></span></h4>
+                                <!--<?= $total['2'] ?>-->
+                            </div>
+                            <div class="col-lg-auto summary-box-2">
+                                <p>500Jt - 1M</p>
+                                <h4 id="sum2">20 <span><img src="<?= base_url('assets/img/500-1m.png') ?>" width="20px" alt=""></span></h4>
+                                <!--<?= $summary->range2 ?>-->
+                            </div>
+                            <div class="col-lg-auto summary-box-2">
+                                <p>1M -10M</p>
+                                <h4 id="sum3">30 <span><img src="<?= base_url('assets/img/1-10m.png') ?>" width="20px" alt=""></span></h4>
+                                <!--<?= $summary->range3 ?>-->
+                            </div>
+                            <div class="col-lg-auto summary-box-2">
+                                <p>10M - 100M</p>
+                                <h4 id="sum4">40 <span><img src="<?= base_url('assets/img/10-100m.png') ?>" width="20px" alt=""></span></h4>
+                                <!--<?= $summary->range4 ?>-->
+                            </div>
+                            <div class="col-lg-auto summary-box-2">
+                                <p>Lebih dari 100M</p>
+                                <h4 id="sum5">50 <span><img src="<?= base_url('assets/img/over-100m.png') ?>" width="20px" alt=""></span></h4>
+                                <!--<?= $summary->range5 ?>-->
+                            </div>
+                        </div>
+                    </center>
+                </div>
+                <!-- <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700"> PESERTA LPSE</h3>
                     <div class="chart-peserta" style="margin:0; padding:0">
                         <canvas id="chartpeserta"></canvas>
-                    </div>
-                </div>
-                <hr class="chart-line">
-                <h5 style="color:#000000; margin:10px; margin-top:10px; font-size:20px; font-weight:600"> Summary</h5>
-                <div class="container">
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-sum">
-                                <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">
-                                        < 500 Juta</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">10</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps1.svg') ?>" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-sum">
-                                <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">500 Jt - 1M</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">20</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps2.svg') ?>" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-sum">
-                                <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">1M - 10M</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">12</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps3.svg') ?>" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s">
-                        <div class="shadow-sm bg-white align-content-center">
-                            <div class="card-sum">
-                                <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">10M - 100M</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps4.svg') ?>" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-sum">
-                                <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">> 100M</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps5.svg') ?>" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </div> -->
+                <!-- <hr class="chart-line"> -->
 
+
+            </div>
         </div>
     </div>
 </section>
@@ -730,44 +700,79 @@
 <script>
     const response = {
         "pokedata": [{
+                "no": 1,
                 "name": "Bulbasaur",
                 "hp": 45
             },
             {
+                "no": 2,
                 "name": "Ivysaur",
                 "hp": 60
             },
             {
+                "no": 3,
                 "name": "Venusaur",
                 "hp": 80
             },
             {
+                "no": 4,
                 "name": "Charmander",
                 "hp": 39
             },
             {
+                "no": 5,
                 "name": "Charmeleon",
                 "hp": 58
             },
             {
+                "no": 6,
                 "name": "Charizard",
                 "hp": 78
             },
             {
+                "no": 7,
                 "name": "Squirtle",
                 "hp": 44
             },
             {
+                "no": 8,
                 "name": "Wartortle",
                 "hp": 59
             },
             {
+                "no": 9,
                 "name": "Blastoise",
                 "hp": 79
             },
             {
+                "no": 10,
                 "name": "Caterpie",
                 "hp": 45
+            },
+            {
+                "no": 11,
+                "name": "YourPokemon",
+                "hp": 100
+            },
+            {
+                "no": 12,
+                "name": "AnotherPokemon",
+                "hp": 85
+            },
+            {
+                "no": 13,
+                "name": "YetAnotherPokemon",
+                "hp": 70
+            },
+            {
+                "no": 14,
+                "name": "OneMorePokemon",
+                "hp": 55
+            },
+            {
+                "no": 15,
+                "name": "TheLastPokemon",
+                "hp": 90
             }
         ]
     }

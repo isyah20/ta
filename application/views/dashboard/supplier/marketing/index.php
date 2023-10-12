@@ -69,7 +69,7 @@
         font-size: 15px;
     }
 
-    tbody {
+    .tbody {
         text-align: left;
         font-size: 15px;
     }
