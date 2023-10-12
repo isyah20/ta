@@ -37,6 +37,7 @@
     border: none;
     border-radius: 5px;
     min-width: -webkit-fill-available;
+    min-width: -moz-available;
     /* width: 250px; */
     max-width: 250px;
     /* min-width: 270px; */
@@ -49,6 +50,7 @@
   .box .card {
     width: inherit;
     min-width: -webkit-fill-available;
+    min-width: -moz-available;
     max-width: 250px;
     /* max-width: 250px; */
     /* width: 250px; */
@@ -63,6 +65,7 @@
 
   .card-title {
     min-width: -webkit-fill-available;
+    min-width: -moz-available;
     /* width: 250px; */
     max-width: 250px;
     height: 45px;
@@ -99,6 +102,7 @@
     margin-left: 15px;
     /* width: 270px; */
     min-width: -webkit-fill-available;
+    min-width: -moz-available;
     /* width: 250px; */
     max-width: 250px;
     /* width: var(--webkit-fill-available - 100); */
@@ -339,7 +343,7 @@
   </div>
 </section>
 <section>
-  <div class="container">
+  <div class="container mb-5">
     <div id="outer-container" class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
       <div class="row w-100">
         <div id="side-container" class="col-lg-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
