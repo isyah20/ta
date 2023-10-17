@@ -238,8 +238,15 @@ if (!$npwpComplete) : ?>
         </div>
 
         <div class="row">
+            <!-- Time Series Ikut Tender -->
+            <div class="col-lg-6">
+                <div class="overflow-auto chart-bg mt-4" style="height:92%; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
+                    <h5 style="color:#000000; margin:20px; font-weight:600"> TIME SERIES IKUT TENDER</h5>
+                    <div class="chart1" style="margin:0; padding:0"><canvas id="timeSeries-user"></canvas></div>
+                </div>
+            </div>
             <!-- Riwayat ikut tender HPS -->
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="chart-bg  mt-4 mb-2" style="height:92%; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
                     <div style="padding:0">
                         <h5 style="color:#000000;margin:10px; font-size:14px; font-weight:600"> Riwayat Ikut Tender Berdasarkan HPS</h5>
@@ -247,7 +254,6 @@ if (!$npwpComplete) : ?>
                             <canvas id="riwayatHPS"></canvas>
                         </div>
                     </div>
-                    <h5 style="color:#000000; margin:10px; margin-top:0; font-size:14px; font-weight:600"> Summary nilai HPS</h5>
                     <center>
                         <div class="row d-flex justify-content-center" style="padding:5px; margin:auto; gap: 30px;">
                             <div class="col-lg-auto summary-box-2">
@@ -292,16 +298,9 @@ if (!$npwpComplete) : ?>
                                                                                         }  ?> <span><img src="<?= base_url('assets/img/over-100m.png') ?>" width="20px" alt=""></span></h4>
                             </div>
                         </div>
+                        <h5 style="color:#000000; margin:10px; margin-top:0; font-size:14px; font-weight:600"> Summary nilai HPS</h5>
+
                     </center>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <!-- Time Series Ikut Tender -->
-            <div class="col-lg-6">
-                <div class="overflow-auto chart-bg mt-4" style="height:92%; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
-                    <h5 style="color:#000000; margin:20px; font-weight:600"> TIME SERIES IKUT TENDER</h5>
-                    <div class="chart1" style="margin:0; padding:0"><canvas id="timeSeries-user"></canvas></div>
                 </div>
             </div>
         </div>
