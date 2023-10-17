@@ -340,13 +340,13 @@
                 <table class="table custom-table-container">
                     <thead class="thead">
                         <tr>
-                            <th class="custom-padding"></th>
                             <th class="custom-padding">No.</th>
                             <th class="custom-padding">Nama</th>
                             <th class="custom-padding">Posisi</th>
                             <th class="custom-padding">Email</th>
                             <th class="custom-padding">No. HP/WA</th>
-                            <th class="custom-padding">Aksi</th>
+                            <th class="custom-padding">Alamat</th>
+                            <th class="custom-padding" style="width:11%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="data-marketing">
@@ -418,14 +418,15 @@
                                     <label for="inputAlamat" class="form-label text-start">Alamat</label>
                                     <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
                                 </div>
-                                <div class="d-flex justify-content-start mt-3 gap-2">
+                                <div class="justify-content-start mt-3 gap-2">
                                 <div class="link flex-row align-items-center w-100">
                                     <span>
                                         <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
-                                        <a id="submit-input" class="btn-custom text-white text-center">
+                                        <a id="submit-input" class="text-white text-center">
                                             <i class="fas me-1"></i>Tambahkan
                                         </a>
                                     </span>
+                                </div>
                                 </div>
                             </form>
                         </div>
@@ -521,7 +522,7 @@
                                 <div class="link flex-row align-items-center w-100">
                                     <span>
                                         <button type="submit" id="submit-edit" class="btn-custom text-white text-center">
-                                            <i class="fas me-1"></i>Perbarui
+                                            Perbarui
                                         </button>
                                     </span>
                                     <!-- <button type="submit" class="btn-custom text-white text-center">Submit</button> -->
@@ -565,17 +566,17 @@
                 let i;
                 for (i = 0; i < data.data.length; i++) {
                     html += '<tr>' +
-                        '<th></th>' +
-                        '<td>' + (i + 1) + '</td>' +
+                        '<td class="text-center">' + (i + 1) + '</td>' +
                         '<td class="nama">' + data.data[i].nama_tim + '</td>' +
                         '<td class="posisi">' + data.data[i].posisi + '</td>' +
                         '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
                         '<td class="nohp">' + data.data[i].no_telp + '</td>' +
+                        '<td style="width: 450px">' + data.data[i].no_telp + '</td>' +
                         '<td>' +
-                        '<a href="#" class="btn btn-danger btn-edt" data-toggle="modal" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '">Edit</a>' +
-                        '<a class="btn btn-outline-danger btn-del" data-toggle="modal" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '">Hapus</a>'
+                        '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
+                        '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>'+
+                        '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Kirim Pemberitahuan Akun" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pesawat.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>'+
                     '</td>' +
-                    // '<td> <a href="#" class="btn btn-danger">Edit Data</a> <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a><a class="btn btn-outline-danger" data-toggle="modal" data-target="#lengkapiLeadsModal">Lengkapi</a></td>' +
                     '</tr>';
 
                 }
