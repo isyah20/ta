@@ -614,22 +614,19 @@
     }
 
     .expandChildTable:before {
+    /* content: "+"; */
     display: block;
     cursor: pointer;
+    }
+    .expandChildTable.selected:before {
+        /* content: "-"; */
     }
     .childTableRow {
         display: none;
     }
     .childTableRow table {
-        border: 1px solid #E1CBCB;
-        margin-left:35%;
-    }
-
-    .status {
-        margin-left:117%;
-        margin-bottom: 5px; 
-        margin-top:5px;
-        width:140px;
+        /* border: 2px solid #555; */
+        margin-left:40%;
     }
 
     /* CSS untuk mengatur tampilan saat tampilan diubah menjadi mobile */
@@ -640,13 +637,6 @@
             height: 24px;
             margin-right: 10px;
             /* Menambahkan ruang antara gambar-gambar */
-        }
-        .childTableRow table {
-        border: 1px solid #E1CBCB;
-        margin-left:25%;
-        }
-        .status {
-            margin-left:90%;
         }
     }
 </style>
@@ -725,65 +715,95 @@
                         </thead>
                         <tbody id="data-leads">
                             <tr>
+                                <td>1</td>
+                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
+                                </td>
+                                <td class="editable-select">Negotiation</td>
+                                <td class="editable">02/12/2024</td>
+                                
+                                <td class="editable" colspan="2">Lancarr Semua Gess</td>
+                                <td>
+                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
+                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
+                                    </a>
+                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
+                                    </a>
+                                    <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
+                            </tr>
+                            <tr class="childTableRow">
+                                <td colspan="5">
+                                    <table class="table custom-table-container">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Status
+                                                </th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Jadwal
+                                                </th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                    Catatan
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data-leads">
+                                            <tr class="">
+                                                <td>Negotiation</td>
+                                                <td>02/12/2024</td>
+                                                <td colspan="2">Lancarr Semua Gess</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="data-leads">
+                            <tr>
                                 <td>2</td>
                                 <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
                                 <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
                                 <td class="editable-select">Negotiation</td>
-                                <td class="editable-date">02/12/2024</td>
+                                <td class="editable">02/12/2024</td>
                                 <td class="editable" colspan="2" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
-                                <td><span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
+                                <td>
+                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
+                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
+                                    </a>
+                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
+                                    </a>
+                                <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
                             </tr>
                             <tr class="childTableRow">
                                 <td colspan="5">
-                                    <div class="status">
-                                        <button type="button" class="btn btn-danger" style="height:35px;">
-                                            Perbarui Status
-                                        </button>
-                                    </div>
                                     <table class="table custom-table-container">
-                                        <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> 
+                                        <thead class="thead">
                                             <tr>
-                                                <th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                                     Status
                                                 </th>
-                                                <th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                                     Jadwal
                                                 </th>
-                                                <th>
+                                                <th class="custom-padding">
+                                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                                     Catatan
-                                                </th>
-                                                <th>
-                                                    Aksi
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody id="data-leads">
                                             <tr>
-                                                <td class="editable-select">Negotiation</td>
-                                                <td class="editable-date">02/12/2024</td>
-                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
-                                                <td>
-                                                <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
-                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
-                                                </a>
-                                                <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
-                                                    <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
-                                                </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="editable-select">Negotiation</td>
-                                                <td class="editable-date">02/12/2024</td>
-                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
-                                                <td>
-                                                <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
-                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
-                                                </a>
-                                                <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
-                                                    <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
-                                                </a>
-                                                </td>
+                                                <td class="custom-padding">Negotiation</td>
+                                                <td class="custom-padding">02/12/2024</td>
+                                                <td class="custom-padding" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1653,20 +1673,6 @@ $(function() {
                 cell.setAttribute("data-orig-value", currentValue);
             }
 
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var input = document.createElement("input");
-                input.type = "date";
-                input.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(input);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-
             button.style.display = "none";
             row.querySelector(".save-button").style.display = "inline";
         }
@@ -1694,17 +1700,6 @@ $(function() {
                 cell.textContent = newValue;
                 // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
             }
-
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var input = cell.querySelector("input");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = input.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
 
             button.style.display = "none";
             row.querySelector(".edit-button").style.display = "inline";

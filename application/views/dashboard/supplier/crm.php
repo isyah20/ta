@@ -27,6 +27,7 @@
     /* min-height: none !important; */
     max-height: inherit !important;
     height: 100% !important;
+    padding-bottom: 0px;
   }
 
   .box {
@@ -35,15 +36,24 @@
     padding-top: 10px;
     border: none;
     border-radius: 5px;
-    min-width: 270px;
+    min-width: -webkit-fill-available;
+    min-width: -moz-available;
+    /* width: 250px; */
+    max-width: 250px;
+    /* min-width: 270px; */
     height: 400px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
-    margin-bottom: 10px;
+    /* margin-bottom: 20px; */
   }
 
   .box .card {
-    width: 250px;
+    width: inherit;
+    min-width: -webkit-fill-available;
+    min-width: -moz-available;
+    max-width: 250px;
+    /* max-width: 250px; */
+    /* width: 250px; */
     min-height: 60px;
     height: auto;
     background-color: white;
@@ -54,7 +64,10 @@
   }
 
   .card-title {
-    width: 250px;
+    min-width: -webkit-fill-available;
+    min-width: -moz-available;
+    /* width: 250px; */
+    max-width: 250px;
     height: 45px;
     background-color: white;
     color: black;
@@ -71,12 +84,96 @@
     padding: 3px 3px 3px 10px;
   }
 
+  .card-name-company {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+  }
+
+  .card-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+  }
+
   .title {
     margin-left: 15px;
-    width: 270px;
+    /* width: 270px; */
+    min-width: -webkit-fill-available;
+    min-width: -moz-available;
+    /* width: 250px; */
+    max-width: 250px;
+    /* width: var(--webkit-fill-available - 100); */
+    /* width: -webkit-fill-available; */
     border-radius: 5px;
     padding: 5px 10px 5px 15px;
   }
+
+  .title-company {
+    width: calc(100% - 60px);
+    /* margin-left: 15px; */
+    /* width: 270px; */
+    /* min-width: -webkit-fill-available; */
+    /* width: 250px; */
+    /* max-width: 250px; */
+    /* width: var(--webkit-fill-available - 100); */
+    /* width: -webkit-fill-available; */
+    /* border-radius: 5px; */
+    /* padding: 5px 10px 5px 15px; */
+  }
+
+  /* .title-text {
+    width: calc(100% - 100px);
+  }
+
+  .arrow-icon {
+    width: 32px;
+    float: right;
+  }
+
+  .badge {
+    background: var(--Red, #FEC1C1);
+    border-radius: 50px;
+    color: black;
+    padding: 5px 10px;
+  } */
+
+  .card-name {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+  }
+
+  .title-text {
+    width: calc(100% - 60px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .badge {
+    background: var(--Red, #FEC1C1);
+    border-radius: 50px;
+    color: black;
+    padding: 5px 10px;
+  }
+
+
+
+  /* .badge {
+    background: var(--Red, #FEC1C1);
+    border-radius: 50px;
+    float: right;
+    margin-right: 5px;
+    color: black;
+    padding-top: 5px;
+    width: min-content;
+    float: right;
+  } */
 
   .text-limited {
     width: 200px;
@@ -156,18 +253,11 @@
     margin-left: 3px;
   }
 
-  .badge {
-    background: var(--Red, #FEC1C1);
-    border-radius: 50px;
-    float: right;
-    margin-right: 5px;
-    color: black;
-    padding-top: 5px;
-  }
+
 
 
   body {
-    background-image: url('../assets/img/background-crm.png');
+    background-image: url('../assets/img/background-crm.jpg');
     background-size: cover;
     background-attachment: fixed;
   }
@@ -240,23 +330,23 @@
 </style>
 
 <section class="pt-5 pb-3">
-  <div class="container">
+  <div class="container wow fadeInUp" data-wow-delay="0.1s">
     <div class="mt-5">
       <h4>Selamat Datang!</h4>
       <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
     </div>
-    <div class="col-md-3 pt-3">
-      <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
+    <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pe-4">
+      <button class="btn-add bg-color text-light w-100 wow fadeInUp" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal" data-wow-delay="0.1s">Tambahkan Tim
         <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
       </button>
     </div>
   </div>
 </section>
 <section>
-  <div class="container">
-    <div class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
-      <div class="">
-        <div id="side-container" class="col col-sm-12">
+  <div class="container mb-5">
+    <div id="outer-container" class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
+      <div class="row w-100">
+        <div id="side-container" class="col-lg-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
           <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
           <!-- <h5 class="card-title pt-2"> Daftar Perusahaan</h5> -->
           <!-- <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4> -->
@@ -266,14 +356,15 @@
           </div> -->
           <!-- </div> -->
         </div>
-      </div>
-      <div class="col" style="margin-left:4%">
+        <div class="col-lg-9 col-md-8 col-sm-6" style="padding-left:2%">
 
-        <div id="big-container" class="row"></div>
+          <div id="big-container" class="row"></div>
+        </div>
       </div>
 
       <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <script>
         var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
         let global_id_pengguna = Cookies.get('id_pengguna');
@@ -316,6 +407,23 @@
                   // alert('Data gagal ditambahkan');
                   console.log('Data gagal ditambahkan');
                 }
+
+                if (response.status == true) {
+                  swal({
+                    title: "Data berhasil ditambahkan!",
+                    icon: "success",
+                    button: "Ok",
+                  }).then(function() {
+                    window.location.href = "<?= base_url('suplier/marketing') ?>";
+                  });
+                } else {
+                  swal({
+                    title: "Data gagal ditambahkan",
+                    icon: "error",
+                    button: "Ok",
+                  })
+                }
+
               },
               error: function(xhr, status, error) {
                 console.log(xhr.responseText);
@@ -348,8 +456,10 @@
             },
             success: function(result) {
               console.log(result);
-              var leads = `<div id="container1"  margin-right: 50px;" class="workspace box box-full bg-color" data-id="0">
-            <h5 class="card-title pt-2" style="padding-left:10px; margin-bottom:30px"> Daftar Perusahaan<span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></h5>`;
+              var leads = `<div id="container1"  margin-right: 50px;" class="workspace box wow fadeInUp box-full bg-color" data-id="0" data-wow-delay="0.1s">
+              <div class=" card-title card-name-company" style="padding-left:10px; margin-bottom:30px">
+            <h5 class=" title-company" > Daftar Perusahaan</h5>
+            <span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></div>`;
 
               $.each(result, function(index, value) {
                 var rowNumber = index + 1;
@@ -373,38 +483,50 @@
             url: "<?= base_url('api/supplier/tim-suplier'); ?>",
             type: "GET",
             success: function(result) {
-              var leads = `<div class="col">
-      <div class="row">`;
+              var leads = ``;
+              // <div class="row">`;
+              var leads = ``;
               var counter = 0;
+              var total = result.length;
+              var numrows = Math.floor(total / 3);
+              var mod = 3;
+              console.log(result.length);
               $.each(result, function(index, value) {
                 ++counter;
                 console.log((counter), ((counter) % 3), "mod");
+                console.log((counter % (numrows + (numrows % 3))), numrows + (numrows % 3), Math.floor(total / 3));
 
-                // if ((counter) % 3 == 0) {
-                //   leads += `</div></div> <div class="col"><div class="row">`;
+                // if ((counter % mod) == 1) {
+                leads += `<div class="col-lg-4 col-md-6 col-sm-12">`;
                 // }
                 var rowNumber = index + 1;
                 leads +=
-                  `<div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="title bg-color" style="padding: 10px; margin-top:15px">
-                <div class="card rounded-3" style="height: 40px;padding-top:2%">
-                  <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `
-                  <span ><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
-                  <span id="card-count-container` + index + 2 + `" class="badge" style="margin-top:3px">` + value.jumlah + `</span>
+                  `<div class="row"><div class="col-12">
+                <div class="title bg-color wow fadeInUp" data-wow-delay="0.2s" style="padding: 10px; margin-top:15px">
+                <div class="card card-name rounded-3" style="height: 40px;padding-top:2%"  onclick="toggleCardVisibility(this,'container` + index + 2 + `')">
+                  <h5 class="title-text" style="margin-left:10px">` + value.nama_tim + `
                   </h5>
+                  <span class="arrow-icon"><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
+                  <span id="card-count-container` + index + 2 + `" class="badge" style="margin-top:3px">` + value.jumlah + `</span>
+                  
                 </div>
                 </div>
           <div class="">
-            <div id="container` + index + 2 + `" class="workspace box bg-color" style="margin-left:15px" data-id="` + value.id_tim + `">` +
+            <div id="container` + index + 2 + `" class="workspace box bg-color wow fadeInUp" data-wow-delay="0.1s" style="margin-left:15px" data-id="` + value.id_tim + `">` +
                   getLeadByTim(value.id_tim) +
                   `</div>
-          </div></div>`;
+          </div></div></div>`;
 
+
+                // if ((counter % mod) == 0) {
+                leads += `</div>`;
+                // }
                 // if (counter != 1) {
 
-                //   if ((counter) % 3 == 2) {
-                //     leads += `</div></div>`;
-                //   }
+                //           if ((counter) % 3 == 1) {
+                // leads += `</div>
+                // `;
+                //           }
                 // }
 
 
@@ -415,9 +537,9 @@
               //   console.log('IIINNN');
               //   leads += `<div class="col"></div>`;
               // }
-              leads +=
-                ` </div>
-        </div>`
+              // leads +=
+              //   ` </div>`;
+              // </div>`;
               $("#big-container").html(leads);
               control();
             }
@@ -454,8 +576,9 @@
 
       <!-- </div> -->
     </div>
+
     <!-- modal input marketing -->
-    <div class="col-12 py-5">
+    <div class="col-12">
       <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
         <div class="modal-dialog custom-modal" role="document">
           <div class="modal-content">
@@ -513,18 +636,24 @@
 </section>
 
 <script>
-  function toggleCardVisibility(containerId) {
+  function toggleCardVisibility(e, containerId) {
     const container = document.getElementById(containerId);
     const card = container.querySelector(".card");
+    const arrow = e.querySelector('.arrow-icon');
+    // console.log(e, arrow, container);
 
     if (container.classList.contains("hidden")) {
       container.style.height = "400px";
       container.classList.remove("hidden");
       container.classList.add("visible");
+      arrow.style.transform = `rotate(360deg)`;
+      arrow.dataset.rotation = 360;
     } else {
       container.style.height = 0;
       container.classList.remove("visible");
       container.classList.add("hidden");
+      arrow.style.transform = `rotate(180deg)`;
+      arrow.dataset.rotation = 180;
     }
   }
 
@@ -589,6 +718,20 @@
       });
 
     });
+
+
+
+    var outer = document.getElementById('big-container');
+    var container = document.getElementById('container1');
+
+    console.log(outer.offsetHeight, container.offsetHeight);
+
+    // Mengatur max-height dengan nilai yang penting (important)
+    container.style.setProperty('max-height', (outer.offsetHeight - 15) + 'px', 'important');
+
+    console.log(outer.offsetHeight, container.offsetHeight);
+
+
   }
 
   function recounting() {
