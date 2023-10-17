@@ -717,10 +717,14 @@ $route['api-mobile/pengguna/check-user-trial'] = 'api-mobile/ApiPengguna/checkAn
 $route['api-mobile/supplier/getJumlah'] = 'api-mobile/ApiSupplier/getJumlahPemenang';
 $route['api-mobile/supplier/getJumlahPemenang'] = 'api-mobile/ApiSupplier/getJumKatalogPemenang';
 $route['api-mobile/supplier/getPemenangFilter'] = 'api-mobile/ApiSupplier/pemenangFiltered';
+$route['api-mobile/supplier/getJumKatalogPemenang'] = 'api-mobile/ApiSupplier/getJumKatalogPemenang';
+$route['api-mobile/supplier/getKatalogPemenang'] = 'api-mobile/ApiSupplier/getKatalogPemenang';
+$route['api-mobile/supplier/getPemenangTender'] = 'api-mobile/ApiSupplier/getPemenangTender';
 
 // Leads
 $route['api-mobile/supplier/getCount'] = 'api-mobile/ApiSupplier/getCountLeadNull';
 $route['api-mobile/supplier/getTotal'] = 'api-mobile/ApiSupplier/getTotalLeads';
+$route['api-mobile/supplier/getDataLeadsLengkap'] = 'api-mobile/ApiSupplier/getDataLeadsLengkap';
 $route['api-mobile/supplier/getLead'] = 'api-mobile/ApiSupplier/getLeads';
 $route['api-mobile/supplier/getProfile/(:num)'] = 'api-mobile/ApiSupplier/getProfile/$1';
 $route['api-mobile/supplier/insertProfile/(:num)'] = 'api-mobile/ApiSupplier/insertProfile/$1';
@@ -729,6 +733,7 @@ $route['api-mobile/supplier/getContactById/(:num)'] = 'api-mobile/ApiSupplier/ge
 $route['api-mobile/supplier/insertContact'] = 'api-mobile/ApiSupplier/insertContact';
 $route['api-mobile/supplier/updateContact/(:num)'] = 'api-mobile/ApiSupplier/updateContact/$1';
 $route['api-mobile/supplier/deleteContact/(:num)'] = 'api-mobile/ApiSupplier/deleteContact/$1';
+$route['api-mobile/supplier/getRiwayatPemenang'] = 'api-mobile/ApiSupplier/getRiwayatPemenang';
 
 // Tim Marketing
 $route['api-mobile/supplier/getTim'] = 'api-mobile/ApiSupplier';
