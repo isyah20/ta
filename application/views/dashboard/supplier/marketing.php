@@ -521,7 +521,7 @@
                                 <div class="d-flex justify-content-start mt-3 gap-2">
                                 <div class="link flex-row align-items-center w-100">
                                     <span>
-                                        <button type="submit" id="submit-edit" class="btn-custom text-white text-center">
+                                        <button type="submit" id="submit-edit" class="btn-custom text-white text-center" style="width:407px;border:none">
                                             Perbarui
                                         </button>
                                     </span>
