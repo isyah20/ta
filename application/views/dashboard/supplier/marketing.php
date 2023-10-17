@@ -571,7 +571,7 @@
                         '<td class="posisi">' + data.data[i].posisi + '</td>' +
                         '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
                         '<td class="nohp">' + data.data[i].no_telp + '</td>' +
-                        '<td style="width: 450px">' + data.data[i].no_telp + '</td>' +
+                        '<td style="width: 450px">' + data.data[i].alamat + '</td>' +
                         '<td>' +
                         '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
                         '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>'+
