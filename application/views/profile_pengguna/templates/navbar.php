@@ -109,7 +109,7 @@
                         </ul>
                     </li>
                 <?php endif; ?>
-                <?php if($userCat == UserCategory::SUPPLIER && $isProfileComplete && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
+                <?php if($userCat == UserCategory::SUPPLIER && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
                     <!-- <li class="nav-item">
                         <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/marketing') ?>" id="nav_dashboard">Marketing</a>
                     </li> -->
@@ -139,9 +139,6 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link text-white link-danger text-center active fw-bold" href="<?= base_url('suplier/crm') ?>" id="nav_dashboard">CRM</a>
-                    </li> -->
 
                     
                     <!-- <li class="nav-item dropdown dropdown-profile">

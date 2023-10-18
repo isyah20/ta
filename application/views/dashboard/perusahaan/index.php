@@ -1,23 +1,25 @@
 <style>
-.select2-container--bootstrap .select2-selection {
-    background-color: #dc3545;
-}
+    .select2-container--bootstrap .select2-selection {
+        background-color: #dc3545;
+    }
 
-.select2-container--bootstrap .select2-selection--single .select2-selection__placeholder, .select2-container--bootstrap .select2-selection--single .select2-selection__rendered {
-    color: #fff;
-}
+    .select2-container--bootstrap .select2-selection--single .select2-selection__placeholder,
+    .select2-container--bootstrap .select2-selection--single .select2-selection__rendered {
+        color: #fff;
+    }
 
-.select2-container--bootstrap .select2-selection__clear, .select2-container--bootstrap .select2-selection__clear:hover {
-    color: #fff;
-}
+    .select2-container--bootstrap .select2-selection__clear,
+    .select2-container--bootstrap .select2-selection__clear:hover {
+        color: #fff;
+    }
 
-.select2-container--bootstrap .select2-selection--single .select2-selection__arrow b {
-    border-color: #ffffff transparent transparent;
-}
+    .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b {
+        border-color: #ffffff transparent transparent;
+    }
 
-.select2-container--bootstrap.select2-container--open .select2-selection .select2-selection__arrow b {
-    border-color: transparent transparent #ffffff;
-}
+    .select2-container--bootstrap.select2-container--open .select2-selection .select2-selection__arrow b {
+        border-color: transparent transparent #ffffff;
+    }
 </style>
 
 <div class="d-none" id="dataChart">
@@ -27,11 +29,11 @@
 </div>
 
 <?php
-    if ($npwp != '') {
-        $total = json_decode($akumulasi);
-        $summary = json_decode($range);
-    }
-    ?>
+if ($npwp != '') {
+    $total = json_decode($akumulasi);
+    $summary = json_decode($range);
+}
+?>
 <div class="modal fade" id="npwpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable rincian-modal" style="width:500px">
         <div class="modal-content">
@@ -72,54 +74,54 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="row mt-2">
-                            <div class="col-lg-2" style="padding:0">
-                                <div>
-                                    <center>
-                                        <div class="chart2" style="margin:0; padding:0">
-                                            <canvas id="ikut-tender" width="160px" height="160px"></canvas>
-                                        </div>
-                                    </center>
+                        <div class="col-lg-2" style="padding:0">
+                            <div>
+                                <center>
+                                    <div class="chart2" style="margin:0; padding:0">
+                                        <canvas id="ikut-tender" width="160px" height="160px"></canvas>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="col text-center mt-4 mb-4" style="padding:0">
+                            <h6 style="font-size:12px; margin-top:10%; "><b>Tender yang sedang diikuti</b></h6>
+                            <h5 style="font-size:30px" id="ikut"><b>10</b></h5>
+                            <!-- <?= $total['3'] ?> -->
+                        </div>
+                        <div class="col mt-4 mb-4">
+                            <div class="row">
+                                <div class="col-1" style="padding:0">
+                                    <div style=" border-left: 3px solid #F9845F; height: 100px; opacity:1"></div>
+                                </div>
+                                <div class="col" style="margin-top:5%; padding:0">
+                                    <h5 id="total"><span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>10 Total Tender</h5>
+                                    <!--<?= $total['0'] ?>-->
+                                    <h5 id="menang"><span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>10 Menang</h5>
+                                    <!--<?= $total['1'] ?>-->
+                                    <h5 id="kalah"><span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>5 Kalah</h5>
+                                    <!--<?= $total['2'] ?>-->
                                 </div>
                             </div>
-                            <div class="col text-center mt-4 mb-4" style="padding:0">
-                                <h6 style="font-size:12px; margin-top:10%; "><b>Tender yang sedang diikuti</b></h6>
-                                <h5 style="font-size:30px" id="ikut"><b>10</b></h5>
-                                <!--<?= $total['3'] ?>-->
-                            </div>
-                            <div class="col mt-4 mb-4">
-                                <div class="row">
-                                    <div class="col-1" style="padding:0">
-                                        <div style=" border-left: 3px solid #F9845F; height: 100px; opacity:1"></div>
-                                    </div>
-                                    <div class="col" style="margin-top:5%; padding:0">
-                                        <h5 id="total"><span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>10 Total Tender</h5>
-                                        <!--<?= $total['0'] ?>-->
-                                        <h5 id="menang"><span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>10 Menang</h5>
-                                        <!--<?= $total['1'] ?>-->
-                                        <h5 id="kalah"><span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>5 Kalah</h5>
-                                        <!--<?= $total['2'] ?>-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <center><img src="<?= base_url('assets/img/dashboard-hero.png') ?>" class="dh-img" alt=""></center>
-                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <center><img src="<?= base_url('assets/img/dashboard-hero.png') ?>" class="dh-img" alt=""></center>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-4 ">
                 <h4 style="font-weight:510">Notifikasi</h4>
                 <div class="row summary-box d-flex align-content-center mb-2" style="height:auto">
-                        <div class="col">
-                            <h6 style="font-weight:600; font-size:12px">NOTIFIKASI TENDER</h6>
-                            <h5 style="font-weight:600; font-size:14px">LPSE X Baru Saja Merilis Tender Baru</h5>
-                        </div>
-                        <div class="col-2">
-                            <img src="<?= base_url('assets/img/notif-tender.png') ?>" style="margin-top:30%; width:45px" alt="">
-                        </div>
+                    <div class="col">
+                        <h6 style="font-weight:600; font-size:12px">NOTIFIKASI TENDER</h6>
+                        <h5 style="font-weight:600; font-size:14px">LPSE X Baru Saja Merilis Tender Baru</h5>
+                    </div>
+                    <div class="col-2">
+                        <img src="<?= base_url('assets/img/notif-tender.png') ?>" style="margin-top:30%; width:45px" alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,94 +181,94 @@
         let npwp = "<?= $npwp ?>";
         if (npwp == '') $('#npwpModal').modal('show');
     });
-    
+
     $(".select2-lpse").select2({
         theme: "bootstrap",
         placeholder: "LPSE",
         allowClear: true,
         "language": {
             "noResults": function() {
-              return "<center><img src='<?php echo base_url() ?>assets/img/not-found.png' width='65' /><br><span>Tidak ada LPSE</span></center>";
+                return "<center><img src='<?php echo base_url() ?>assets/img/not-found.png' width='65' /><br><span>Tidak ada LPSE</span></center>";
             },
-            searching: function () {
-              return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
+            searching: function() {
+                return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
             },
-            loadingMore: function () {
-              return "<center><img src='<?php echo base_url() ?>assets/img/ajax-loader.gif' width='30'/></center>";
+            loadingMore: function() {
+                return "<center><img src='<?php echo base_url() ?>assets/img/ajax-loader.gif' width='30'/></center>";
             },
             errorLoading: function() {
-              return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
+                return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
             }
         },
-        escapeMarkup: function (markup) {
+        escapeMarkup: function(markup) {
             return markup;
         },
         ajax: {
             url: "<?= base_url('api/getListLpse') ?>",
             dataType: 'json',
             delay: 250,
-            data: function (params) {
-              return {
-                q: params.term,
-                page_limit: 10,
-                page: (params.page > 1 ? params.page - 1 : params.page)
-              };
+            data: function(params) {
+                return {
+                    q: params.term,
+                    page_limit: 10,
+                    page: (params.page > 1 ? params.page - 1 : params.page)
+                };
             },
-            processResults: function (data, params) {
-              params.page = params.page || 1;
-    
-              return {
-                results: data.results,
-                pagination: {
-                  more: (params.page * 10) < data.total_count
-                }
-              };
+            processResults: function(data, params) {
+                params.page = params.page || 1;
+
+                return {
+                    results: data.results,
+                    pagination: {
+                        more: (params.page * 10) < data.total_count
+                    }
+                };
             },
             cache: true
         },
     });
-    
+
     $(".select2-tahun").select2({
         theme: "bootstrap",
         placeholder: "Tahun",
         allowClear: true,
         "language": {
             "noResults": function() {
-              return "<center><img src='<?php echo base_url() ?>assets/img/not-found.png' width='65' /><br><span>Tidak ada tahun</span></center>";
+                return "<center><img src='<?php echo base_url() ?>assets/img/not-found.png' width='65' /><br><span>Tidak ada tahun</span></center>";
             },
-            searching: function () {
-              return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
+            searching: function() {
+                return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
             },
-            loadingMore: function () {
-              return "<center><img src='<?php echo base_url() ?>assets/img/ajax-loader.gif' width='30'/></center>";
+            loadingMore: function() {
+                return "<center><img src='<?php echo base_url() ?>assets/img/ajax-loader.gif' width='30'/></center>";
             },
             errorLoading: function() {
-              return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
+                return "<center><img src='<?php echo base_url() ?>assets/img/search-loader.gif' width='30' /></center>";
             }
         },
-        escapeMarkup: function (markup) {
+        escapeMarkup: function(markup) {
             return markup;
         },
         ajax: {
             url: "",
             dataType: 'json',
             delay: 250,
-            data: function (params) {
-              return {
-                q: params.term,
-                page_limit: 10,
-                page: (params.page > 1 ? params.page - 1 : params.page)
-              };
+            data: function(params) {
+                return {
+                    q: params.term,
+                    page_limit: 10,
+                    page: (params.page > 1 ? params.page - 1 : params.page)
+                };
             },
-            processResults: function (data, params) {
-              params.page = params.page || 1;
-    
-              return {
-                results: data.results,
-                pagination: {
-                  more: (params.page * 10) < data.total_count
-                }
-              };
+            processResults: function(data, params) {
+                params.page = params.page || 1;
+
+                return {
+                    results: data.results,
+                    pagination: {
+                        more: (params.page * 10) < data.total_count
+                    }
+                };
             },
             cache: true
         },

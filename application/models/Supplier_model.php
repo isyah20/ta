@@ -19,6 +19,8 @@ class Supplier_model extends CI_Model
         ]);
     }
 
+    public $interval_pemenang = 30;
+
     public function getPemenangTotal($search, int $pageSize = 20, int $pageNumber = 0)
     {
         // 1. Jumlah tender
@@ -349,14 +351,17 @@ class Supplier_model extends CI_Model
     //     return $this->db->query($sql);
     // }
 
-    public function getJumlahPemenangTender()
+    public function getJumlahPemenangTender($id_pengguna)
     {
+        $preferensi = $this->Tender_model->getPreferensiPengguna($id_pengguna);
         // $sql = "SELECT COUNT(DISTINCT npwp) as jumlah_pemenang_terbaru FROM pemenang WHERE DATE(tgl_pemenang)=DATE(NOW());";
-        $sql = "SELECT
+        $sql = "SELECT 
         COUNT(DISTINCT CASE WHEN DATE(tgl_pemenang) = DATE(NOW()) THEN npwp ELSE NULL END) AS total_today,
         COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) AND MONTH(tgl_pemenang) = MONTH(NOW()) THEN npwp ELSE NULL END) AS total_month,
         COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) THEN npwp ELSE NULL END) AS total_year
-        FROM pemenang";
+        FROM preferensi, pemenang p
+        WHERE preferensi.id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',p.id_lpse<>'',p.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',p.jenis_tender<>'',p.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+        ";
 
         return $this->db->query($sql);
     }
@@ -416,6 +421,31 @@ class Supplier_model extends CI_Model
     LEFT JOIN lpse ON pemenang.id_lpse = lpse.id_lpse
     LEFT JOIN wilayah ON lpse.id_wilayah = wilayah.id_wilayah
     LIMIT {$page_number},{$page_size}";
+
+        return $this->db->query($sql);
+    }
+    public function getAllDataLeads($id_pengguna)
+    {
+        $sql = "SELECT
+        data_leads.id_lead AS id,
+        id_pengguna,
+        nama_perusahaan,
+        data_leads.npwp,
+        profil,
+        pemenang.*,
+        kontak_lead.*,
+        COUNT(kontak_lead.id_kontak) AS jumlah_kontak
+        FROM
+            data_leads
+        LEFT JOIN
+            pemenang ON data_leads.id_pemenang = pemenang.id_pemenang
+        LEFT JOIN
+            kontak_lead ON data_leads.id_lead = kontak_lead.id_lead
+        WHERE
+            data_leads.id_pengguna = $id_pengguna
+        GROUP BY
+            data_leads.id_lead;
+   ";
 
         return $this->db->query($sql);
     }

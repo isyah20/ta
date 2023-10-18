@@ -32,7 +32,8 @@ class ApiSupplier extends RestController
 
     public function index_get()
     {
-        $data = $this->Supplier_api->getTimMarketing();
+        $id_supplier = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getTimMarketing($id_supplier);
 
         if ($data) {
             $this->response([
@@ -73,6 +74,7 @@ class ApiSupplier extends RestController
             'no_telp' => $this->post('no_telp'),
             'email' => $this->post('email'),
             'alamat' => $this->post('alamat'),
+            'id_supplier' => $_COOKIE['id_pengguna'],
         ];
 
         $token = random_string('alnum', 25);
@@ -83,7 +85,7 @@ class ApiSupplier extends RestController
             'alamat' => $this->post('alamat'),
             'no_telp' => $this->post('no_telp'),
             'kategori' => UserCategory::MARKETING,
-            'password' => md5($this->post('password')),
+            // 'password' => md5($this->post('password')),
             'token' => $token,
             'is_active' => 1,
             'tgl_update' => date('Y-m-d H:i:s'),

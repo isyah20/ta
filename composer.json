@@ -26,7 +26,8 @@
 		"symfony/filesystem": "^5.4",
 		"midtrans/midtrans-php": "^2.5",
 		"amphp/mysql": "^2.1",
-		"amphp/parallel": "^1.4"
+		"amphp/parallel": "^1.4",
+		"phpoffice/phpspreadsheet": "1.16"
 	},
 	"extra": {
 		"google/apiclient-services": [

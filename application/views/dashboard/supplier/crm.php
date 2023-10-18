@@ -2,8 +2,9 @@
 
 <style>
   body {
-  overflow-x: hidden; 
-}
+    overflow-x: hidden;
+  }
+
   .container-fluid {
     justify-content: flex-start;
     display: flex;
@@ -16,11 +17,16 @@
     opacity: 0;
     transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
-  
+
   .visible {
-  opacity: 1;
-  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
+    opacity: 1;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .box-full {
+    max-height: 100% !important;
+    height: 100% !important;
+  }
 
   .box {
     display: inline-block;
@@ -37,7 +43,8 @@
 
   .box .card {
     width: 250px;
-    height: 60px;
+    min-height: 60px;
+    height: auto;
     background-color: white;
     color: black;
     border-radius: 5px;
@@ -60,7 +67,7 @@
 
   .card p {
     margin: 0;
-    padding: 3px 3px 0px 10px;
+    padding: 3px 3px 3px 10px;
   }
 
   .title {
@@ -70,9 +77,17 @@
     padding: 5px 10px 5px 15px;
   }
 
+  .text-limited {
+      width: 200px; 
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+}
+
   .card.dragging {
     cursor: grab;
   }
+
 
   .box h4 {
     position: relative;
@@ -114,7 +129,6 @@
 
   .modal-body p {
     font-size: 18px;
-    /* Ganti ukuran font sesuai dengan keinginan Anda */
   }
 
   .btn-custom {
@@ -157,27 +171,21 @@
     background-attachment: fixed;
   }
 
-  /* Untuk scrollbar di browser WebKit (seperti Chrome dan Safari) */
+
   .box::-webkit-scrollbar {
     width: 5px;
-    /* Lebar scrollbar */
   }
 
-  /* Untuk bagian badan (thumb) dari scrollbar */
   .box::-webkit-scrollbar-thumb {
     background: var(--font-dark-grey, #333);
     border-radius: 5px;
-    /* Bentuk border radius thumb */
   }
 
-  /* Untuk bagian track dari scrollbar */
   .box::-webkit-scrollbar-track {
-    /* background: #f1f1f1; Warna latar belakang track */
   }
 
   .card:hover {
     transform: scale(1.05);
-    /* Memperbesar kartu saat hover */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 
@@ -198,55 +206,57 @@
       margin-left: 0px;
     }
 
-    /* Untuk bagian badan (thumb) dari scrollbar */
     .box::-webkit-scrollbar-thumb {
       background: var(--font-dark-grey, #333);
       border-radius: 5px;
-      /* Bentuk border radius thumb */
     }
 
     .box::-webkit-scrollbar-thumb:hover {
       background: #888;
     }
 
-    /* Untuk bagian track dari scrollbar */
     .box::-webkit-scrollbar-track {
       /* background: #f1f1f1; Warna latar belakang track */
     }
+  }
 
-    .card:hover {
-      transform: scale(1.05);
-      /* Memperbesar kartu saat hover */
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+
+
+  .box .card:hover p {
+    color: black;
+  }
+
+  @media (max-width: 768px) {
+    .container-fluid {
+      flex-direction: column;
     }
 
-    .box .card:hover p {
-      color: black;
-    }
-
-    @media (max-width: 768px) {
-      .container-fluid {
-        flex-direction: column;
-      }
-
-    }
+  }
 </style>
 
 <section class="pt-5 pb-3">
-  <div class="mt-5 px-5">
+<div class="container">
+  <div class="mt-5">
     <h4>Selamat Datang!</h4>
     <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
   </div>
-  <div class="col-md-3 pt-3 px-5">
-    <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Anggota
+  <div class="col-md-3 pt-3">
+    <button class="btn-add bg-color text-light" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
       <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
     </button>
   </div>
+  </div>
 </section>
 <section>
-  <div class="container-fluid pb-4 mx-4">
-    <div class="row">
-      <div id="side-container" class="col mx-3">
+  <div class="container">
+  <div class="container-fluid pb-4" style="padding-right:0px; padding-left:0px">
+    <div class="">
+      <div id="side-container" class="col col-sm-12">
         <!-- <div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0"> -->
         <!-- <h5 class="card-title pt-2"> Daftar Perusahaan</h5> -->
         <!-- <h4 class="green title" onclick="toggleCardVisibility('container2')">Fitri TEst</h4> -->
@@ -254,13 +264,13 @@
             <p>PT Cahaya Asia Ya Putra Dewa</p>
             <p style="font-size: 14px; color:#10B981;">D.I Yogyakarta</p>
           </div> -->
-
-
         <!-- </div> -->
       </div>
     </div>
+    <div class="col" style="margin-left:4%">
 
-    <div id="big-container"></div>
+      <div id="big-container" class="row"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
@@ -299,10 +309,12 @@
             data: formData,
             success: function(response) {
               if (response.status == true) {
-                alert('Data berhasil ditambahkan');
+                // alert('Data berhasil ditambahkan');
+                console.log('Data berhasil ditambahkan');
                 window.location.href = "<?= base_url('suplier/crm') ?>";
               } else {
-                alert('Data gagal ditambahkan');
+                // alert('Data gagal ditambahkan');
+                console.log('Data gagal ditambahkan');
               }
             },
             error: function(xhr, status, error) {
@@ -335,7 +347,7 @@
             id_pengguna: global_id_pengguna
           },
           success: function(result) {
-            var leads = `<div id="container1" style="height:1200px; margin-right: 50px;" class="workspace box bg-color" data-id="0">
+            var leads = `<div id="container1"  margin-right: 50px;" class="workspace box box-full bg-color" data-id="0">
             <h5 class="card-title pt-2" style="padding-left:10px; margin-bottom:30px"> Daftar Perusahaan<span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></h5>`;
 
             $.each(result, function(index, value) {
@@ -344,7 +356,7 @@
                 leads +=
                   `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
                 <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+                <p style="font-size: 14px; color:#10B981; font-weight:500;">` + value.wilayah + `</p>
                 </div>`;
               }
             });
@@ -362,17 +374,17 @@
           success: function(result) {
             var leads = `<div class="col">
       <div class="row">`;
-
+            var counter = 0;
             $.each(result, function(index, value) {
-              if ((index + 1) % 4 == 0) {
-                leads += `</div>
-        </div> <div class="col">
-      <div class="row">`;
-              }
+              ++counter;
+              console.log((counter), ((counter) % 3), "mod");
 
+              // if ((counter) % 3 == 0) {
+              //   leads += `</div></div> <div class="col"><div class="row">`;
+              // }
               var rowNumber = index + 1;
               leads +=
-                `<div class="col">
+                `<div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="title bg-color" style="padding: 10px; margin-top:15px">
                 <div class="card rounded-3" style="height: 40px;padding-top:2%">
                   <h5 style="margin-left:10px" onclick="toggleCardVisibility('container` + index + 2 + `')">` + value.nama_tim + `
@@ -386,7 +398,22 @@
                 getLeadByTim(value.id_tim) +
                 `</div>
           </div></div>`;
+
+              // if (counter != 1) {
+
+              //   if ((counter) % 3 == 2) {
+              //     leads += `</div></div>`;
+              //   }
+              // }
+
+
             });
+
+            // console.log(counter);
+            // if ((counter) % 3 != 0) {
+            //   console.log('IIINNN');
+            //   leads += `<div class="col"></div>`;
+            // }
             leads +=
               ` </div>
         </div>`
@@ -412,7 +439,7 @@
               leads +=
                 `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
                 <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981;">` + value.wilayah + `</p>
+                <p style="font-size: 14px; color:#10B981;">` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</p>
                 </div>`;
             });
           },
@@ -424,7 +451,7 @@
       }
     </script>
 
-  </div>
+    <!-- </div> -->
   </div>
   <!-- modal input marketing -->
   <div class="col-12 py-5">
@@ -478,6 +505,7 @@
         </div>
       </div>
     </div>
+    <!-- </div> -->
   </div>
   </div>
   <!-- end modal input marketing -->
@@ -489,14 +517,14 @@
     const card = container.querySelector(".card");
 
     if (container.classList.contains("hidden")) {
-    container.style.height = "400px";
-    container.classList.remove("hidden");
-    container.classList.add("visible");
-  } else {
-    container.style.height = 0;
-    container.classList.remove("visible");
-    container.classList.add("hidden");
-  }
+      container.style.height = "400px";
+      container.classList.remove("hidden");
+      container.classList.add("visible");
+    } else {
+      container.style.height = 0;
+      container.classList.remove("visible");
+      container.classList.add("hidden");
+    }
   }
 
   function control() {

@@ -26,10 +26,10 @@ class Tender_model extends CI_Model
             ],
         ]);
     }
-    
+
     public $interval_pemenang = 30;
     public $limit_notifikasi = 25;
-    
+
     public function getStatistik()
     {
         $penyedia = $this->db->select('COUNT(*) AS total')->get('peserta')->row();
@@ -41,10 +41,10 @@ class Tender_model extends CI_Model
             'total_lpse' => $lpse->total,
             'total_tender' => $tender->total
         ];
-        
+
         return $data;
     }
-    
+
     public function getTenderById($id)
     {
         $sql = "SELECT tender_terbaru.kode_tender,tender_terbaru.nama_tender,jenis_tender,nama_lpse,satuan_kerja,paket.lokasi_pekerjaan,tanggal_pembuatan,tahun_anggaran,ROUND(nilai_pagu_paket,0) AS nilai_pagu,ROUND(hps,0) AS nilai_hps,nama_tahap AS tahap_tender,peserta_tender,akhir_daftar,CONCAT(url,'/lelang/',tender_terbaru.kode_tender,'/pengumumanlelang') AS link_sumber
@@ -54,9 +54,9 @@ class Tender_model extends CI_Model
                 LEFT JOIN paket ON tender_terbaru.kode_tender=paket.kode_tender
                 LEFT JOIN tahap ON paket.tahap_tender_saat_ini=tahap.id_tahap
                 WHERE tender_terbaru.kode_tender={$id}";
-        
+
         return $this->db->query($sql);
-        
+
         /*$select = "tender_terbaru.kode_tender, tender_terbaru.nama_tender, jenis_tender, ROUND(hps,0) AS hps, akhir_daftar, nama_lpse, foto, url, CONCAT(url, '/lelang/', tender_terbaru.kode_tender, '/pengumumanlelang') AS link_sumber, ";
         $select .= "DATEDIFF(CURRENT_DATE, tgl_update) AS update_hari, satuan_kerja, tanggal_pembuatan, tahun_anggaran, nilai_pagu_paket, peserta_tender, lokasi_pekerjaan, ";
         $select .= "nama_tahap AS current_step";
@@ -70,8 +70,8 @@ class Tender_model extends CI_Model
             ->get();
         return $query->row();*/
     }
-	
-	public function getWinnerById($id)
+
+    public function getWinnerById($id)
     {
         $sql = "SELECT pemenang.kode_tender,npwp,nama_pemenang,CONCAT(pemenang.alamat,' ',kabupaten,' ',provinsi) AS alamat,pemenang.nama_tender,jenis_tender.jenis_tender,nama_lpse,satuan_kerja,pemenang.lokasi_pekerjaan,tanggal_pembuatan,tahun_anggaran,ROUND(nilai_hps,0) AS nilai_hps,ROUND(harga_penawaran,0) AS harga_penawaran,tgl_pemenang,CONCAT(url,'/evaluasi/',pemenang.kode_tender,'/pemenang') AS link_sumber
                 FROM pemenang
@@ -80,87 +80,87 @@ class Tender_model extends CI_Model
                 LEFT JOIN paket ON pemenang.kode_tender=paket.kode_tender
                 WHERE pemenang.kode_tender={$id}
                 GROUP BY kode_tender";
-        
+
         return $this->db->query($sql);
     }
-    
+
     public function getPreferensiPengguna($id_pengguna)
     {
         return $this->db->query("SELECT IF(REPLACE(id_lpse,'|',',')<>'',REPLACE(id_lpse,'|',','),'0') AS id_lpse,IF(jenis_pengadaan<>'',jenis_pengadaan,'0') AS jenis_pengadaan FROM preferensi WHERE id_pengguna={$id_pengguna}")->row();
     }
-    
+
     public function getPenggunaNotif()
-	{
-		$sql = "SELECT pengguna.id_pengguna,nama,no_telp,email,pengguna.status AS user_status,whatsapp_status FROM pengguna,preferensi,tender_terbaru
+    {
+        $sql = "SELECT pengguna.id_pengguna,nama,no_telp,email,pengguna.status AS user_status,whatsapp_status FROM pengguna,preferensi,tender_terbaru
 		        WHERE pengguna.kategori='2' AND pengguna.id_pengguna=preferensi.id_pengguna AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        GROUP BY id_pengguna ORDER BY id_pengguna";
-		
-		return $this->db->query($sql);
-	}
-	
-	public function getPenggunaSuplierNotif()
-	{
-		$sql = "SELECT pengguna.id_pengguna,nama,no_telp,email,pengguna.status AS user_status,whatsapp_status FROM pengguna,preferensi,pemenang
+
+        return $this->db->query($sql);
+    }
+
+    public function getPenggunaSuplierNotif()
+    {
+        $sql = "SELECT pengguna.id_pengguna,nama,no_telp,email,pengguna.status AS user_status,whatsapp_status FROM pengguna,preferensi,pemenang
 		        WHERE pengguna.kategori='4' AND pengguna.id_pengguna=preferensi.id_pengguna AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        GROUP BY id_pengguna ORDER BY id_pengguna";
-		
-		return $this->db->query($sql);
-	}
-	
-	public function getPenggunaNotifByID($id_pengguna)
-	{
-		$sql = "SELECT id_pengguna,nama,no_telp,email,status AS user_status,whatsapp_status FROM pengguna WHERE id_pengguna={$id_pengguna}";
-		
-		return $this->db->query($sql);
-	}
-	
-	public function getTenderTerbaru($id_pengguna, $jum_tender)
-	{
-		$preferensi = $this->getPreferensiPengguna($id_pengguna);
-		
-		$limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
-		
-		$sql = "SELECT kode_tender,nama_tender,ROUND(hps,0) AS hps,akhir_daftar,tender_terbaru.id_lpse,nama_lpse,url
+
+        return $this->db->query($sql);
+    }
+
+    public function getPenggunaNotifByID($id_pengguna)
+    {
+        $sql = "SELECT id_pengguna,nama,no_telp,email,status AS user_status,whatsapp_status FROM pengguna WHERE id_pengguna={$id_pengguna}";
+
+        return $this->db->query($sql);
+    }
+
+    public function getTenderTerbaru($id_pengguna, $jum_tender)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
+
+        $sql = "SELECT kode_tender,nama_tender,ROUND(hps,0) AS hps,akhir_daftar,tender_terbaru.id_lpse,nama_lpse,url
                 FROM preferensi,tender_terbaru,lpse
                 WHERE id_pengguna={$id_pengguna} AND tender_terbaru.id_lpse=lpse.id_lpse AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender
                 ORDER BY id_lpse,akhir_daftar
                 {$limit}";
-		
-		/*$sql = "SELECT kode_tender,nama_tender,hps,akhir_daftar,tender_terbaru.id_lpse,nama_lpse,url
+
+        /*$sql = "SELECT kode_tender,nama_tender,hps,akhir_daftar,tender_terbaru.id_lpse,nama_lpse,url
                 FROM preferensi,tender_terbaru,lpse
                 WHERE id_pengguna={$id_pengguna} AND tender_terbaru.id_lpse=lpse.id_lpse AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender
                 ORDER BY id_lpse,akhir_daftar
                 LIMIT {$this->limit_notifikasi}";*/
-		
-		return $this->db->query($sql);
-	}
-	
-	public function getPemenangTerbaru($id_pengguna, $jum_tender)
-	{
-		$preferensi = $this->getPreferensiPengguna($id_pengguna);
-		
-		$limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
-		
-		$sql = "SELECT kode_tender,nama_pemenang,nama_tender,ROUND(harga_penawaran,0) AS harga_penawaran,pemenang.id_lpse,nama_lpse,url
+
+        return $this->db->query($sql);
+    }
+
+    public function getPemenangTerbaru($id_pengguna, $jum_tender)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
+
+        $sql = "SELECT kode_tender,nama_pemenang,nama_tender,ROUND(harga_penawaran,0) AS harga_penawaran,pemenang.id_lpse,nama_lpse,url
                 FROM preferensi,pemenang,lpse
                 WHERE id_pengguna={$id_pengguna} AND pemenang.id_lpse=lpse.id_lpse AND preferensi.status='1' AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender
                 ORDER BY id_lpse,tgl_pemenang DESC
                 {$limit}";
-		
-		/*$sql = "SELECT kode_tender,nama_pemenang,nama_tender,harga_penawaran,pemenang.id_lpse,nama_lpse,url
+
+        /*$sql = "SELECT kode_tender,nama_pemenang,nama_tender,harga_penawaran,pemenang.id_lpse,nama_lpse,url
                 FROM preferensi,pemenang,lpse
                 WHERE id_pengguna={$id_pengguna} AND pemenang.id_lpse=lpse.id_lpse AND preferensi.status='1' AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender
                 ORDER BY id_lpse,tgl_pemenang DESC
                 LIMIT {$this->limit_notifikasi}";*/
-		
-		return $this->db->query($sql);
-	}
-	
-	/*public function getTenderTerbaru($id_pengguna = 0, $limit = 0)
+
+        return $this->db->query($sql);
+    }
+
+    /*public function getTenderTerbaru($id_pengguna = 0, $limit = 0)
     {
         $sql = "SELECT kode_tender, nama_tender, hps, akhir_daftar, tender_terbaru.id_lpse, nama_lpse, url, email
 		        FROM pengguna,preferensi,tender_terbaru,lpse
@@ -172,37 +172,37 @@ class Tender_model extends CI_Model
 
         return $this->db->query($sql);
     }*/
-	
-	public function getJumlahTenderTerbaru($id_pengguna)
-	{
-		$preferensi = $this->getPreferensiPengguna($id_pengguna);
-		
-		$sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,tender_terbaru
+
+    public function getJumlahTenderTerbaru($id_pengguna)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,tender_terbaru
 		        WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))) a";
-		
-		/*$sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,tender_terbaru
+
+        /*$sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,tender_terbaru
 		        WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        LIMIT {$this->limit_notifikasi}) a";*/
-		
-		return $this->db->query($sql);
-	}
-	
-	public function getJumlahPemenangTerbaru($id_pengguna)
-	{
-		$preferensi = $this->getPreferensiPengguna($id_pengguna);
-		
-		$sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,pemenang
+
+        return $this->db->query($sql);
+    }
+
+    public function getJumlahPemenangTerbaru($id_pengguna)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,pemenang
                 WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))) a";
-		
-		/*$sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,pemenang
+
+        /*$sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,pemenang
                 WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 LIMIT {$this->limit_notifikasi}) a";*/
-		
-		return $this->db->query($sql);
-	}
-	
-	//katalog homepage
-	public function getKatalogTenderTerbaru($page_number, $page_size)
+
+        return $this->db->query($sql);
+    }
+
+    //katalog homepage
+    public function getKatalogTenderTerbaru($page_number, $page_size)
     {
         $sql = "SELECT kode_tender,nama_tender,jenis_tender,ROUND(hps,0) AS hps,akhir_daftar,nama_lpse,foto,url,CONCAT(url,'/lelang/',kode_tender,'/pengumumanlelang') AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pembuatan),DATEDIFF(CURRENT_DATE,tgl_update)) AS update_hari
 		        FROM tender_terbaru,lpse,jenis_tender
@@ -212,63 +212,63 @@ class Tender_model extends CI_Model
 
         return $this->db->query($sql);
     }
-    
+
     public function getKatalogTenderTerbaruByPengguna($id_pengguna, $jum_tender, $page_number, $page_size)
     {
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
         $limit = $jum_tender > 10 ? "LIMIT {$page_number},{$page_size}" : "";
-        
+
         $sql = "SELECT kode_tender,nama_tender,jenis_tender,ROUND(hps,0) AS hps,akhir_daftar,nama_lpse,lpse.foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pembuatan),DATEDIFF(CURRENT_DATE,tender_terbaru.tgl_update)) AS update_hari
                 FROM preferensi,tender_terbaru,lpse,jenis_tender
                 WHERE id_pengguna={$id_pengguna} AND tender_terbaru.id_lpse=lpse.id_lpse AND tender_terbaru.jenis_pengadaan=jenis_tender.id_jenis AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender
                 ORDER BY akhir_daftar
                 {$limit}";
-        
+
         /*$sql = "SELECT kode_tender,nama_tender,jenis_tender,hps,akhir_daftar,nama_lpse,lpse.foto,url,'' AS link_sumber,DATEDIFF(CURRENT_DATE,tender_terbaru.tgl_update) AS update_hari
                 FROM pengguna,preferensi,tender_terbaru,lpse,jenis_tender
                 WHERE pengguna.id_pengguna=preferensi.id_pengguna AND pengguna.id_pengguna={$id_pengguna} AND tender_terbaru.id_lpse=lpse.id_lpse AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender
                 ORDER BY akhir_daftar
                 LIMIT {$page_number},{$page_size}";*/
-                // CONCAT(url,'/lelang/',kode_tender,'/pengumumanlelang')
+        // CONCAT(url,'/lelang/',kode_tender,'/pengumumanlelang')
 
         return $this->db->query($sql);
     }
-    
+
     public function getKatalogTenderTerbaruByPengguna1($data)
     {
         $id_pengguna = $data['id_pengguna'];
         $page_size = $data['pageSize'];
         $page_number = ($data['pageNumber'] - 1) * $page_size;
-        
+
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
         // $jum_tender = $data['jum_tender'];
         // $limit = $jum_tender > 10 ? "LIMIT {$page_number},{$page_size}" : "";
-        
+
         $kriteria = $order = '';
         $keyword = $data['keyword'];
         if ($keyword != '') $kriteria .= " AND (tender_terbaru.nama_tender LIKE '%{$keyword}%' OR tender_terbaru.kode_tender LIKE '%{$keyword}%')";
-        
+
         $jenis_pengadaan = $data['jenis_pengadaan'];
         if ($jenis_pengadaan != '') $kriteria .= " AND tender_terbaru.jenis_pengadaan='{$jenis_pengadaan}'";
-        
+
         $nilai_hps_awal = $data['nilai_hps_awal'];
         $nilai_hps_akhir = $data['nilai_hps_akhir'];
         if ($nilai_hps_akhir > 0) $kriteria .= " AND hps BETWEEN {$nilai_hps_awal} AND {$nilai_hps_akhir}";
-        
+
         $prov = $data['prov'];
         if ($prov != '') $kriteria .= " AND CONCAT(LEFT(wilayah.id_wilayah,2),'00')={$prov}";
-        
+
         $kab = $data['kab'];
         if ($kab != '') $kriteria .= " AND wilayah.id_wilayah={$kab}";
-        
+
         $sort = $data['sort'];
         if ($sort == '1') $order = "hps ASC";
         else if ($sort == '2') $order = "hps DESC";
         else if ($sort == '3') $order = "akhir_daftar ASC";
         else if ($sort == '4') $order = "akhir_daftar DESC";
-        
+
         $sql = "SELECT tender_terbaru.kode_tender,tender_terbaru.nama_tender,jenis_tender,ROUND(hps,0) AS hps,akhir_daftar,nama_lpse,lpse.foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pembuatan),DATEDIFF(CURRENT_DATE,tender_terbaru.tgl_update)) AS update_hari
                 FROM preferensi,tender_terbaru,lpse,jenis_tender,paket,wilayah
                 WHERE id_pengguna={$id_pengguna} AND tender_terbaru.id_lpse=lpse.id_lpse AND tender_terbaru.jenis_pengadaan=jenis_tender.id_jenis AND tender_terbaru.kode_tender=paket.kode_tender AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',tender_terbaru.nama_tender<>'',tender_terbaru.nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir)) AND CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1)))=wilayah {$kriteria}
@@ -278,63 +278,89 @@ class Tender_model extends CI_Model
 
         return $this->db->query($sql);
     }
-    
+
     public function getKatalogPemenangTerbaruByPengguna($id_pengguna, $jum_pemenang, $page_number, $page_size)
     {
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
         $limit = $jum_pemenang > 10 ? "LIMIT {$page_number},{$page_size}" : "";
-        
+
         $sql = "SELECT kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
                 FROM preferensi,lpse,jenis_tender,pemenang
                 WHERE id_pengguna={$id_pengguna} AND pemenang.id_lpse=lpse.id_lpse AND pemenang.jenis_tender=jenis_tender.id_jenis AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender,npwp
                 ORDER BY tgl_pemenang DESC
                 {$limit}";
-        
+
         /*$sql = "SELECT kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,DATEDIFF(CURRENT_DATE,tgl_pemenang) AS update_hari
                 FROM preferensi,lpse,jenis_tender,pemenang
                 WHERE id_pengguna={$id_pengguna} AND pemenang.id_lpse=lpse.id_lpse AND pemenang.jenis_tender=jenis_tender.id_jenis AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender,npwp
                 ORDER BY tgl_pemenang DESC
                 LIMIT {$page_number},{$page_size}";*/
-                // CONCAT(url,'/evaluasi/',pemenang.kode_tender,'/pemenangberkontrak')
+        // CONCAT(url,'/evaluasi/',pemenang.kode_tender,'/pemenangberkontrak')
 
         return $this->db->query($sql);
     }
-    
+
+    public function updateKatalogPemenangTerbaruByIdPengguna($id_pengguna)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $sql = "SELECT kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
+                FROM preferensi,pemenang
+                INNER JOIN lpse ON pemenang.id_lpse=lpse.id_lpse
+                INNER JOIN jenis_tender ON pemenang.jenis_tender=jenis_tender.id_jenis
+                LEFT JOIN wilayah ON CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1)))=wilayah
+                WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+                GROUP BY kode_tender,npwp
+                ORDER BY tgl_pemenang ASC";
+
+        $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna)
+                SELECT p.id_pemenang, p.nama_pemenang, p.npwp, {$id_pengguna}
+                FROM preferensi, pemenang p
+                LEFT JOIN data_leads dl ON p.npwp = dl.npwp AND {$id_pengguna} = dl.id_pengguna
+                WHERE preferensi.id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',p.id_lpse<>'',p.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',p.jenis_tender<>'',p.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+                AND p.tgl_pemenang >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+                AND p.tgl_pemenang < NOW()
+                AND (dl.npwp IS NULL OR dl.id_pengguna IS NULL)
+                GROUP BY p.npwp;";
+
+        $this->db->query($sql2);
+        return $this->db->query($sql);
+    }
     public function getKatalogPemenangTerbaruByPengguna1($data)
     {
         $id_pengguna = $data['id_pengguna'];
         $page_size = $data['pageSize'];
         $page_number = ($data['pageNumber'] - 1) * $page_size;
-        
+
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
         // $jum_pemenang = $data['jum_pemenang'];
         // $limit = $jum_pemenang > 10 ? "LIMIT {$page_number},{$page_size}" : "";
-        
+
         $kriteria = $order = '';
         $keyword = $data['keyword'];
         if ($keyword != '') $kriteria .= " AND (nama_tender LIKE '%{$keyword}%' OR nama_pemenang LIKE '%{$keyword}%')";
-        
+
         $jenis_pengadaan = $data['jenis_pengadaan'];
         if ($jenis_pengadaan != '') $kriteria .= " AND pemenang.jenis_tender='{$jenis_pengadaan}'";
-        
+
         $nilai_hps_awal = $data['nilai_hps_awal'];
         $nilai_hps_akhir = $data['nilai_hps_akhir'];
         if ($nilai_hps_akhir > 0) $kriteria .= " AND harga_penawaran BETWEEN {$nilai_hps_awal} AND {$nilai_hps_akhir}";
-        
+
         $prov = $data['prov'];
         if ($prov != '') $kriteria .= " AND CONCAT(LEFT(wilayah.id_wilayah,2),'00')={$prov}";
-        
+
         $kab = $data['kab'];
         if ($kab != '') $kriteria .= " AND wilayah.id_wilayah={$kab}";
-        
+
         $sort = $data['sort'];
         if ($sort == '1') $order = "harga_penawaran ASC";
         else if ($sort == '2') $order = "harga_penawaran DESC";
         else if ($sort == '3') $order = "tgl_pemenang DESC";
         else if ($sort == '4') $order = "tgl_pemenang ASC";
-        
+
         $sql = "SELECT kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
                 FROM preferensi,pemenang
                 INNER JOIN lpse ON pemenang.id_lpse=lpse.id_lpse
@@ -345,6 +371,34 @@ class Tender_model extends CI_Model
                 ORDER BY {$order}
                 LIMIT {$page_number},{$page_size}";
 
+                $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna)
+                SELECT p.id_pemenang, p.nama_pemenang, p.npwp, {$id_pengguna}
+                FROM preferensi, pemenang p
+                LEFT JOIN data_leads dl ON p.npwp = dl.npwp AND {$id_pengguna} = dl.id_pengguna
+                WHERE preferensi.id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',p.id_lpse<>'',p.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',p.jenis_tender<>'',p.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+                AND p.tgl_pemenang >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+                AND p.tgl_pemenang < NOW()
+                AND (dl.npwp IS NULL OR dl.id_pengguna IS NULL)
+                GROUP BY p.npwp;";
+
+                $this->db->query($sql2);
+                return $this->db->query($sql);
+    }
+
+    // Get Semua Tender 
+    public function getAllKatalogPemenangTerbaruByPengguna1($id_pengguna)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+        $sql = "SELECT kode_tender,tgl_pemenang, nama_pemenang,npwp,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
+                FROM preferensi,pemenang
+                INNER JOIN lpse ON pemenang.id_lpse=lpse.id_lpse
+                INNER JOIN jenis_tender ON pemenang.jenis_tender=jenis_tender.id_jenis
+                LEFT JOIN wilayah ON CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1)))=wilayah
+                WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+                GROUP BY kode_tender,npwp
+                ORDER BY tgl_pemenang";
+
+
         return $this->db->query($sql);
     }
 
@@ -354,86 +408,86 @@ class Tender_model extends CI_Model
 
         return $this->db->query($sql);
     }
-    
+
     public function getJumKatalogTenderTerbaruByPengguna($id_pengguna)
     {
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+
         $sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,tender_terbaru
 		        WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        GROUP BY kode_tender) a";
-        
+
         /*$sql = "SELECT COUNT(kode_tender) AS jumlah FROM pengguna,preferensi,tender_terbaru
 		        WHERE pengguna.id_pengguna=preferensi.id_pengguna AND pengguna.id_pengguna={$id_pengguna} AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))";*/
 
         return $this->db->query($sql);
     }
-    
+
     public function getJumKatalogTenderTerbaruByPengguna1($data)
     {
         $id_pengguna = $data['id_pengguna'];
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+
         $kriteria = '';
         $keyword = $data['keyword'];
         if ($keyword != '') $kriteria .= " AND (tender_terbaru.nama_tender LIKE '%{$keyword}%' OR tender_terbaru.kode_tender LIKE '%{$keyword}%')";
-        
+
         $jenis_pengadaan = $data['jenis_pengadaan'];
         if ($jenis_pengadaan != '') $kriteria .= " AND tender_terbaru.jenis_pengadaan='{$jenis_pengadaan}'";
-        
+
         $nilai_hps_awal = $data['nilai_hps_awal'];
         $nilai_hps_akhir = $data['nilai_hps_akhir'];
         if ($nilai_hps_akhir > 0) $kriteria .= " AND hps BETWEEN {$nilai_hps_awal} AND {$nilai_hps_akhir}";
-        
+
         $prov = $data['prov'];
         if ($prov != '') $kriteria .= " AND CONCAT(LEFT(id_wilayah,2),'00')={$prov}";
-        
+
         $kab = $data['kab'];
         if ($kab != '') $kriteria .= " AND id_wilayah={$kab}";
-        
+
         $sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT tender_terbaru.kode_tender FROM preferensi,tender_terbaru,paket,wilayah
 		        WHERE id_pengguna={$id_pengguna} AND tender_terbaru.kode_tender=paket.kode_tender AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',tender_terbaru.nama_tender<>'',tender_terbaru.nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir)) AND CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1)))=wilayah {$kriteria}
 		        GROUP BY tender_terbaru.kode_tender) a";
 
         return $this->db->query($sql);
     }
-    
+
     public function getJumKatalogPemenangTerbaruByPengguna($id_pengguna)
     {
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+
         $sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender FROM preferensi,pemenang
                 WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
                 GROUP BY kode_tender,npwp) a";
-        
+
         /*$sql = "SELECT COUNT(kode_tender) AS jumlah FROM preferensi,pemenang
                 WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))";*/
 
         return $this->db->query($sql);
     }
-    
+
     public function getJumKatalogPemenangTerbaruByPengguna1($data)
     {
         $id_pengguna = $data['id_pengguna'];
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+
         $kriteria = '';
         $keyword = $data['keyword'];
         if ($keyword != '') $kriteria .= " AND (nama_tender LIKE '%{$keyword}%' OR nama_pemenang LIKE '%{$keyword}%')";
-        
+
         $jenis_pengadaan = $data['jenis_pengadaan'];
         if ($jenis_pengadaan != '') $kriteria .= " AND pemenang.jenis_tender='{$jenis_pengadaan}'";
-        
+
         $nilai_hps_awal = $data['nilai_hps_awal'];
         $nilai_hps_akhir = $data['nilai_hps_akhir'];
         if ($nilai_hps_akhir > 0) $kriteria .= " AND harga_penawaran BETWEEN {$nilai_hps_awal} AND {$nilai_hps_akhir}";
-        
+
         $prov = $data['prov'];
         if ($prov != '') $kriteria .= " AND CONCAT(LEFT(id_wilayah,2),'00')={$prov}";
-        
+
         $kab = $data['kab'];
         if ($kab != '') $kriteria .= " AND id_wilayah={$kab}";
-        
+
         $sql = "SELECT COUNT(kode_tender) AS jumlah FROM (SELECT kode_tender,id_wilayah
                 FROM preferensi,pemenang
                 LEFT JOIN wilayah ON CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1)))=wilayah
@@ -450,48 +504,48 @@ class Tender_model extends CI_Model
 
         return $this->db->query($sql);
     }
-    
+
     public function simpanKirimNotif($id_pengguna, $jum_tender)
-	{
-		$preferensi = $this->getPreferensiPengguna($id_pengguna);
-		
-		$limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
-		
-		$sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
+
+        $sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
 		        FROM preferensi,tender_terbaru
 		        WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        ORDER BY tender_terbaru.id_lpse,akhir_daftar
 		        {$limit}";
-		
-		/*$sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
+
+        /*$sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
 		        FROM preferensi,tender_terbaru
 		        WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        ORDER BY tender_terbaru.id_lpse,akhir_daftar
 		        LIMIT {$this->limit_notifikasi}";*/
-		
-		return $this->db->query($sql);
-	}
-	
-	public function simpanKirimNotifPemenang($id_pengguna, $jum_tender)
-	{
-		$preferensi = $this->getPreferensiPengguna($id_pengguna);
-		
-		$limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
-		
-		$sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
+
+        return $this->db->query($sql);
+    }
+
+    public function simpanKirimNotifPemenang($id_pengguna, $jum_tender)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
+        $limit = $jum_tender > $this->limit_notifikasi ? "LIMIT {$this->limit_notifikasi}" : "";
+
+        $sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
 		        FROM preferensi,pemenang
 		        WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        ORDER BY pemenang.id_lpse,tgl_pemenang DESC
 		        {$limit}";
-		
-		/*$sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
+
+        /*$sql = "INSERT INTO notifikasi_tender SELECT NULL,id_pengguna,kode_tender,CURRENT_TIMESTAMP
 		        FROM preferensi,pemenang
 		        WHERE id_pengguna={$id_pengguna} AND preferensi.status='1' AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND kode_tender NOT IN (SELECT kode_tender FROM notifikasi_tender WHERE id_pengguna={$id_pengguna} GROUP BY kode_tender) AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse REGEXP preferensi.id_lpse) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender REGEXP REPLACE(preferensi.jenis_pengadaan,',','|')) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
 		        ORDER BY pemenang.id_lpse,tgl_pemenang DESC
 		        LIMIT {$this->limit_notifikasi}";*/
-		
-		return $this->db->query($sql);
-	}
+
+        return $this->db->query($sql);
+    }
 
     /*public function getJumlahTenderTerbaru($id_pengguna)
     {
@@ -500,10 +554,11 @@ class Tender_model extends CI_Model
 
         return $this->db->query($sql);
     }*/
-    
-    public function getListLokasiPekerjaan($keyword, $id_pengguna, $jenis, $page, $limit){
+
+    public function getListLokasiPekerjaan($keyword, $id_pengguna, $jenis, $page, $limit)
+    {
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+
         if ($jenis == '2') {
             $sql = "SELECT id_wilayah AS id,wilayah AS text,kategori
                     FROM
@@ -539,13 +594,14 @@ class Tender_model extends CI_Model
                     WHERE wilayah LIKE '%{$keyword}%'
                     LIMIT {$page},{$limit}";
         }
-        
+
         return $this->db->query($sql)->result_array();
-	}
-  	
-  	public function getJumlahListLokasiPekerjaan($keyword, $id_pengguna, $jenis){
-  	    $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+    }
+
+    public function getJumlahListLokasiPekerjaan($keyword, $id_pengguna, $jenis)
+    {
+        $preferensi = $this->getPreferensiPengguna($id_pengguna);
+
         if ($jenis == '2') {
             $sql = "SELECT wilayah
                     FROM
@@ -579,13 +635,14 @@ class Tender_model extends CI_Model
                         WHERE wilayah=lokasi ORDER BY id_wilayah) a 
                     WHERE wilayah LIKE '%{$keyword}%'";
         }
-		
-		return $this->db->query($sql)->num_rows();
-  	}
-  	
-  	public function getListJenisPengadaan($keyword, $id_pengguna, $jenis, $page, $limit){
+
+        return $this->db->query($sql)->num_rows();
+    }
+
+    public function getListJenisPengadaan($keyword, $id_pengguna, $jenis, $page, $limit)
+    {
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+
         if ($jenis == '2') {
             $sql = "SELECT id_jenis AS id,jenis_tender AS text FROM preferensi,tender_terbaru,jenis_tender
                     WHERE id_pengguna={$id_pengguna} AND tender_terbaru.jenis_pengadaan=jenis_tender.id_jenis AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir)) AND jenis_tender LIKE '%{$keyword}%'
@@ -597,13 +654,14 @@ class Tender_model extends CI_Model
                     GROUP BY id_jenis
                     LIMIT {$page},{$limit}";
         }
-        
+
         return $this->db->query($sql)->result_array();
-	}
-	
-	public function getJumlahListJenisPengadaan($keyword, $id_pengguna, $jenis){
+    }
+
+    public function getJumlahListJenisPengadaan($keyword, $id_pengguna, $jenis)
+    {
         $preferensi = $this->getPreferensiPengguna($id_pengguna);
-        
+
         if ($jenis == '2') {
             $sql = "SELECT id_jenis FROM preferensi,tender_terbaru,jenis_tender
                     WHERE id_pengguna={$id_pengguna} AND tender_terbaru.jenis_pengadaan=jenis_tender.id_jenis AND preferensi.status='1' AND akhir_daftar>=CURRENT_TIMESTAMP AND (IF(preferensi.id_lpse='',tender_terbaru.id_lpse<>'',tender_terbaru.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',tender_terbaru.jenis_pengadaan<>'',tender_terbaru.jenis_pengadaan IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,hps<>'',hps BETWEEN nilai_hps_awal AND nilai_hps_akhir)) AND jenis_tender LIKE '%{$keyword}%'
@@ -613,11 +671,11 @@ class Tender_model extends CI_Model
                     WHERE id_pengguna={$id_pengguna} AND pemenang.jenis_tender=jenis_tender.id_jenis AND preferensi.status='1' AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir)) AND jenis_tender.jenis_tender LIKE '%{$keyword}%'
                     GROUP BY id_jenis";
         }
-        
+
         return $this->db->query($sql)->num_rows();
-	}
-  	
-  	//----------
+    }
+
+    //----------
 
     public function getAllTender()
     {
@@ -1352,15 +1410,15 @@ class Tender_model extends CI_Model
             if ($orderby[0] == 1) {
                 $this->db->order_by('tender.nama_tender', 'asc');
 
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[0] == 2) {
                 $this->db->order_by('tender.nama_tender', 'desc');
 
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[3] == 1) {
                 $this->db->order_by('nilai_hps', 'asc');
 
-            // return print_r(json_encode($query->result_array()));
+                // return print_r(json_encode($query->result_array()));
             } elseif ($orderby[3] == 2) {
                 $this->db->order_by('nilai_hps', 'desc');
 
