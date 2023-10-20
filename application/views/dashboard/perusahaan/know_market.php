@@ -42,9 +42,9 @@
 
     .card-sum {
         flex: 1;
-        padding: 10px;
-        margin: 10px;
-        width: 100px;
+        padding: 5px;
+        margin: 3px;
+        width: 80px;
     }
 
     .sum-title {
@@ -55,11 +55,12 @@
     .sum-text {
         font-size: 20px;
         margin-right: 8px;
+        font-weight: bold;
     }
 
     .custom-img {
-        width: 30px;
-        height: 30px;
+        width: 25x;
+        height: 25px;
     }
 
     .tren-card {
@@ -415,11 +416,11 @@
                                 <div class="card-sum">
                                     <div>
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">
-                                            < 500 Juta</h1>
+                                            < 100Jt</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                         <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">10</h1>
-                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hps1.svg') ?>" alt="">
+                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hpshijau.svg') ?>" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -428,11 +429,11 @@
                             <div class="shadow-sm bg-white">
                                 <div class="card-sum">
                                     <div>
-                                        <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">500 Jt - 1M</h1>
+                                        <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">100 - 500Jt</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                         <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">20</h1>
-                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hps2.svg') ?>" alt="">
+                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hpsorange.svg') ?>" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -441,11 +442,11 @@
                             <div class="shadow-sm bg-white">
                                 <div class="card-sum">
                                     <div>
-                                        <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">1M - 10M</h1>
+                                        <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">500Jt - 1 M</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                         <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">12</h1>
-                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hps3.svg') ?>" alt="">
+                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hpsmerah.svg') ?>" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -454,24 +455,11 @@
                             <div class="shadow-sm bg-white align-content-center">
                                 <div class="card-sum">
                                     <div>
-                                        <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">10M - 100M</h1>
+                                        <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">1 - 10 M</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                         <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
-                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hps4.svg') ?>" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wow fadeInUp animation" data-wow-delay="0.2s">
-                            <div class="shadow-sm bg-white">
-                                <div class="card-sum">
-                                    <div>
-                                        <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">> 100M</h1>
-                                    </div>
-                                    <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
-                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hps5.svg') ?>" alt="">
+                                        <img class="custom-img" src="<?= base_url('assets\img\icon_hpsabu.svg') ?>" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -497,11 +485,11 @@
                             <div class="card-sum">
                                 <div>
                                     <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">
-                                        < 500 Juta</h1>
+                                        < 100Jt</h1>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">10</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps1.svg') ?>" alt="">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hpshijau.svg') ?>" alt="">
                                 </div>
                             </div>
                         </div>
@@ -510,11 +498,11 @@
                         <div class="shadow-sm bg-white">
                             <div class="card-sum">
                                 <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">500 Jt - 1M</h1>
+                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">100 - 500Jt</h1>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">20</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps2.svg') ?>" alt="">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hpsorange.svg') ?>" alt="">
                                 </div>
                             </div>
                         </div>
@@ -523,11 +511,11 @@
                         <div class="shadow-sm bg-white">
                             <div class="card-sum">
                                 <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">1M - 10M</h1>
+                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">500Jt - 1 M</h1>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">12</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps3.svg') ?>" alt="">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hpsmerah.svg') ?>" alt="">
                                 </div>
                             </div>
                         </div>
@@ -536,24 +524,11 @@
                         <div class="shadow-sm bg-white align-content-center">
                             <div class="card-sum">
                                 <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">10M - 100M</h1>
+                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">1 - 10 M</h1>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps4.svg') ?>" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s">
-                        <div class="shadow-sm bg-white">
-                            <div class="card-sum">
-                                <div>
-                                    <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">> 100M</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hps5.svg') ?>" alt="">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_hpsabu.svg') ?>" alt="">
                                 </div>
                             </div>
                         </div>
