@@ -101,7 +101,7 @@
     }
 
     .form-select-custom {
-        width: 100%;
+        width: 500px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
@@ -287,9 +287,7 @@
     .mb-0 {
         margin-top: 10px;
     }
-    .col-sm-2 {
-        
-    }
+
 
     @media (max-width: 768px) {
         .justify-content-start {
@@ -336,7 +334,14 @@
         .tren-card {
             width: 100%;
         }
-        
+
+        .card-select {
+            padding: 20px;
+        }
+
+        .form-select-custom {
+            flex-basis: calc(50% - 10px);
+        }
     }
 </style>
 
@@ -358,27 +363,27 @@
             <div class="card-select shadow-sm">
                 <div class="select-custom container-fluid">
                     <div class="row">
-                        <div class="col-2 form-select-custom d-flex" style="width: 250px; margin-right:10px">
+                        <div class="col form-select-custom d-flex" style="width: 250px; margin-right:10px">
                             <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                             <select class="" style="border:none;">
                             </select>
                         </div>
-                        <div class="col-2 form-select-custom d-flex" style="width: 250px; margin-right:10px">
+                        <div class="col form-select-custom d-flex" style="width: 250px; margin-right:10px">
                             <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                             <select class="" style="border:none;">
                             </select>
                         </div>
-                        <div class="col-2 form-select-custom d-flex" style="width: 250px; margin-right:10px">
+                        <div class="col form-select-custom d-flex" style="width: 250px; margin-right:10px">
                             <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                             <select class="" style="border:none;">
                             </select>
                         </div>
-                        <div class="col-2 form-select-custom d-flex" style="width: 250px; margin-right:10px">
+                        <div class="col form-select-custom d-flex" style="width: 250px; margin-right:10px">
                             <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                             <select class="" style="border:none;">
                             </select>
                         </div>
-                        <div class="col-2 form-select-custom d-flex" style="width: 250px; margin-right:10px">
+                        <div class="col form-select-custom d-flex" style="width: 250px; margin-right:10px">
                             <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                             <select class="" style="border:none;">
                             </select>
@@ -925,7 +930,7 @@
                 },
                 y: {
                     display: true,
-                    
+
                     suggestedMin: 0,
                     suggestedMax: 100
                 }
