@@ -575,7 +575,7 @@
                         '<td>' +
                         '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
                         '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>'+
-                        '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Kirim Pemberitahuan Akun" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pesawat.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>'+
+                        '<a href="#" class="" data-toggle="modal" data-bs-placement="top" title="Kirim Pemberitahuan Akun" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pesawat.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>'+
                     '</td>' +
                     '</tr>';
 

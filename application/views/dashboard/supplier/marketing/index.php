@@ -190,7 +190,6 @@
 
     .modal-body p {
         font-size: 18px;
-        /* Ganti ukuran font sesuai dengan keinginan Anda */
     }
 
     .custom-button {
@@ -604,7 +603,6 @@
     .form-select {
         background-color: white;
         height: fit-content;
-        /* Mengatur warna latar belakang menjadi putih */
     }
 
     /* CSS untuk menjaga elemen-elemen di baris yang sama */
@@ -632,14 +630,11 @@
         width:140px;
     }
 
-    /* CSS untuk mengatur tampilan saat tampilan diubah menjadi mobile */
     @media (max-width: 768px) {
         .btn-img {
             width: 24px;
-            /* Mengatur ukuran gambar */
             height: 24px;
             margin-right: 10px;
-            /* Menambahkan ruang antara gambar-gambar */
         }
         .childTableRow table {
         border: 1px solid #E1CBCB;
@@ -725,7 +720,137 @@
                         </thead>
                         <tbody id="data-leads">
                             <tr>
+                                <td>1</td>
+                                <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
+                                </td>
+                                <td class="editable-select">Negotiation</td>
+                                <td class="editable-date">02/12/2024</td>
+                                <td class="editable" colspan="2" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
+                                <td><span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
+                            </tr>
+                            <tr class="childTableRow">
+                                <td colspan="5">
+                                    <div class="status">
+                                        <button type="button" class="btn btn-danger" style="height:35px;">
+                                            Perbarui Status
+                                        </button>
+                                    </div>
+                                    <table class="table custom-table-container">
+                                        <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> 
+                                            <tr>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Jadwal
+                                                </th>
+                                                <th>
+                                                    Catatan
+                                                </th>
+                                                <th>
+                                                    Aksi
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data-leads">
+                                            <tr>
+                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                                <td>
+                                                <a href="#" class="btn-link edit-button" onclick="editRow(this)">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
+                                                </a>
+                                                <a href="#" class="btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                                    <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
+                                                </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                                <td>
+                                                <a href="#" class="btn-link edit-button" onclick="editRow(this)">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
+                                                </a>
+                                                <a href="#" class="btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                                    <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
+                                                </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>2</td>
+                                <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
+                                </td>
+                                <td class="editable-select">Negotiation</td>
+                                <td class="editable-date">02/12/2024</td>
+                                <td class="editable" colspan="2" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
+                                <td><span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
+                            </tr>
+                            <tr class="childTableRow">
+                                <td colspan="5">
+                                    <div class="status">
+                                        <button type="button" class="btn btn-danger" style="height:35px;">
+                                            Perbarui Status
+                                        </button>
+                                    </div>
+                                    <table class="table custom-table-container">
+                                        <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> 
+                                            <tr>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Jadwal
+                                                </th>
+                                                <th>
+                                                    Catatan
+                                                </th>
+                                                <th>
+                                                    Aksi
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data-leads">
+                                            <tr>
+                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                                <td>
+                                                <a href="#" class="btn-link edit-button" onclick="editRow(this)">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
+                                                </a>
+                                                <a href="#" class="btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                                    <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
+                                                </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                                <td>
+                                                <a href="#" class="btn-link edit-button" onclick="editRow(this)">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
+                                                </a>
+                                                <a href="#" class="btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                                    <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
+                                                </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
                                 <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
                                 <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
@@ -824,17 +949,17 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-kontak">
+                                    <tbody id="data-contact">
                                         <td>joko</td>
                                         <td>HRD</td>
                                         <td>hrd@telkom.co.id</td>
                                         <td>081123456666</td>
                                         <td class="btn-cell">
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#editKontakModal" data-dismiss="modal">
+                                            <a href="#" class="btn btn-link" onclick="editRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
 
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                            <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
                                         </td>
@@ -849,8 +974,8 @@
                         <div></div>
                         <div class="link flex-row align-items-center w-100">
                             <span>
-                                <a class="btn-custom text-white text-center" data-toggle="modal" data-target="#inputKontakModal" data-dismiss="modal">
-                                    <i class="fas me-1"></i>Tambahkan Kontak
+                                <a class="btn-custom text-white text-center" id="addRow" onclick="addRowContact()">
+                                    Tambahkan Kontak
                                 </a>
                             </span>
                         </div>
@@ -1166,8 +1291,8 @@
 
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
 $(function() {
     $('.expandChildTable').on('click', function() {
@@ -1176,97 +1301,156 @@ $(function() {
 });
 </script>
 
+<!-- Script add row kontak -->
+<script>
+        // Fungsi untuk menambahkan baris ke dalam tabel
+        function addRowContact() {
+            var table = document.getElementById("data-contact");
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+
+            cell1.contentEditable = true;
+            cell2.contentEditable = true;
+            cell3.contentEditable = true;
+            cell4.contentEditable = true;
+            cell5.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveRowContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                            '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        // Fungsi untuk menyimpan perubahan pada baris
+        function saveRowContact(button) {
+            var row = button.parentNode.parentNode;
+            var email = row.cells[2].textContent.trim();
+            var noTelp = row.cells[3].textContent.trim();
+            
+            if (email === "" || noTelp === "") {
+                alert("Email dan No Telp harus diisi sebelum menyimpan.");
+                return;
+            }
+
+            for (var i = 0; i < 4; i++) {
+                row.cells[i].removeAttribute("contenteditable");
+            }
+
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn btn-link" onclick="editRowContact(this)"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                                    '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        // Fungsi untuk mengubah baris menjadi mode edit
+        function editRowContact(button) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+            for (var i = 0; i < 4; i++) {
+                cells[i].setAttribute("contenteditable", "true");
+            }
+            
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveRowContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        // Fungsi untuk menghapus baris
+        function deleteRowContact(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+</script>
 
 <script>
-        function editRow(button) {
-            var row = button.parentNode.parentNode;
-            row.classList.add("editing");
+    function editRow(button) {
+        var row = button.parentNode.parentNode;
+        row.classList.add("editing");
 
-            var editableCells = row.getElementsByClassName("editable");
-            for (var i = 0; i < editableCells.length; i++) {
-                var cell = editableCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var input = document.createElement("input");
-                input.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(input);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-            var editableSelectCells = row.getElementsByClassName("editable-select");
-            for (var i = 0; i < editableSelectCells.length; i++) {
-                var cell = editableSelectCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var select = document.createElement("select");
-                select.innerHTML = `<select id="status-select">
-                    <option value="menunggu-jawaban" data-imagesrc="menunggu-jawaban.png">Menunggu Jawaban</option>
-                    <option value="negosiasi" data-imagesrc="negosiasi.png">Negosiasi</option>
-                    <option value="menunggu-hasil-akhir" data-imagesrc="menunggu-hasil-akhir.png">Menunggu Hasil Akhir</option>
-                    <option value="deal" data-imagesrc="deal.png">Deal</option>
-                    <option value="dibatalkan" data-imagesrc="dibatalkan.png">Dibatalkan</option>
-                    </select>`;
-                select.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(select);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var input = document.createElement("input");
-                input.type = "date";
-                input.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(input);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-
-            button.style.display = "none";
-            row.querySelector(".save-button").style.display = "inline";
+        var editableCells = row.getElementsByClassName("editable");
+        for (var i = 0; i < editableCells.length; i++) {
+            var cell = editableCells[i];
+            var field = cell.getAttribute("data-field");
+            var currentValue = cell.textContent;
+            var input = document.createElement("input");
+            input.value = currentValue;
+            input.style.width = (currentValue.length + 1) + "ch"; // Sesuaikan lebar input
+            cell.textContent = "";
+            cell.appendChild(input);
+            cell.setAttribute("data-orig-value", currentValue);
         }
 
-        function saveRow(button) {
-            var row = button.parentNode.parentNode;
-            row.classList.remove("editing");
-
-            var editableCells = row.getElementsByClassName("editable");
-            for (var i = 0; i < editableCells.length; i++) {
-                var cell = editableCells[i];
-                var input = cell.querySelector("input");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = input.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
-            var editableSelectCells = row.getElementsByClassName("editable-select");
-            for (var i = 0; i < editableSelectCells.length; i++) {
-                var cell = editableSelectCells[i];
-                var select = cell.querySelector("select");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = select.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var input = cell.querySelector("input");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = input.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
-
-            button.style.display = "none";
-            row.querySelector(".edit-button").style.display = "inline";
+        var editableSelectCells = row.getElementsByClassName("editable-select");
+        for (var i = 0; i < editableSelectCells.length; i++) {
+            var cell = editableSelectCells[i];
+            var field = cell.getAttribute("data-field");
+            var currentValue = cell.textContent;
+            var select = document.createElement("select");
+            select.innerHTML = `<select id="status-select">
+                <option value="menunggu-jawaban" data-imagesrc="menunggu-jawaban.png">Menunggu Jawaban</option>
+                <option value="negosiasi" data-imagesrc="negosiasi.png">Negosiasi</option>
+                <option value="menunggu-hasil-akhir" data-imagesrc="menunggu-hasil-akhir.png">Menunggu Hasil Akhir</option>
+                <option value="deal" data-imagesrc="deal.png">Deal</option>
+                <option value="dibatalkan" data-imagesrc="dibatalkan.png">Dibatalkan</option>
+                </select>`;
+            select.value = currentValue;
+            select.style.width = (currentValue.length + 1) + "ch"; // Sesuaikan lebar select
+            cell.textContent = "";
+            cell.appendChild(select);
+            cell.setAttribute("data-orig-value", currentValue);
         }
+
+        var editableDateCells = row.getElementsByClassName("editable-date");
+        for (var i = 0; i < editableDateCells.length; i++) {
+            var cell = editableDateCells[i];
+            var field = cell.getAttribute("data-field");
+            var currentValue = cell.textContent;
+            var input = document.createElement("input");
+            input.type = "date";
+            input.value = currentValue;
+            cell.textContent = "";
+            cell.appendChild(input);
+            cell.setAttribute("data-orig-value", currentValue);
+        }
+
+        button.style.display = "none";
+        row.querySelector(".save-button").style.display = "inline";
+    }
+
+    function saveRow(button) {
+        var row = button.parentNode.parentNode;
+        row.classList.remove("editing");
+
+        var editableCells = row.getElementsByClassName("editable");
+        for (var i = 0; i < editableCells.length; i++) {
+            var cell = editableCells[i];
+            var input = cell.querySelector("input");
+            var origValue = cell.getAttribute("data-orig-value");
+            var newValue = input.value;
+            cell.textContent = newValue;
+            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
+        }
+
+        var editableSelectCells = row.getElementsByClassName("editable-select");
+        for (var i = 0; i < editableSelectCells.length; i++) {
+            var cell = editableSelectCells[i];
+            var select = cell.querySelector("select");
+            var origValue = cell.getAttribute("data-orig-value");
+            var newValue = select.value;
+            cell.textContent = newValue;
+            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
+        }
+
+        var editableDateCells = row.getElementsByClassName("editable-date");
+        for (var i = 0; i < editableDateCells.length; i++) {
+            var cell = editableDateCells[i];
+            var input = cell.querySelector("input");
+            var origValue = cell.getAttribute("data-orig-value");
+            var newValue = input.value;
+            cell.textContent = newValue;
+            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
+        }
+
+        button.style.display = "none";
+        row.querySelector(".edit-button").style.display = "inline";
+    }
 </script>
