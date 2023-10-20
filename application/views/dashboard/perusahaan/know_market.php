@@ -456,8 +456,8 @@
                             <tr style="color: white;">
                                 <!-- <th>No.</th> -->
                                 <th><button id="no">No.</button></th>
-                                <th><button id="name">Name</button></th>
-                                <th><button id="hp">HP</button></th>
+                                <th><button id="name">Nama Peserta</button></th>
+                                <th><button id="hp">Jumlah Tender Yang Diikuti</button></th>
                             </tr>
                         </thead>
                         <tbody id="table-content"></tbody>

@@ -419,6 +419,9 @@ $route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
 $route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
+// restAPI for know your market
+$route['api/pengguna/getPesertaTender'] = 'api/ApiAnalytic/getPesertaTender';
+
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
 
