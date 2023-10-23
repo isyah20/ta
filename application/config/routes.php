@@ -760,6 +760,11 @@ $route['api-mobile/preferensi/getPreferensiJenisTender/(:num)'] = 'api-mobile/Ap
 $route['api-mobile/preferensi/getPreferensiListLPSE'] = 'api-mobile/ApiPreferensi/getPreferensiListLPSE';
 $route['api-mobile/preferensi/simpanPreferensi'] = 'api-mobile/ApiPreferensi/simpanPreferensi';
 
+// mobile restAPI route for Tender
+$route['api-mobile/getListLokasiPekerjaan'] = 'api-mobile/ApiSupplier/getListLokasiPekerjaan';
+$route['api-mobile/getListJenisPengadaan'] = 'api-mobile/ApiSupplier/getListJenisPengadaan';
+$route['api-mobile/getDetailPemenang'] = 'api-mobile/ApiSupplier/getDetailPemenang';
+
 
 //Admin
 // $route['admin'] = 'admin/admin';
