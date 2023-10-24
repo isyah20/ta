@@ -365,6 +365,14 @@ class Supplier_model extends CI_Model
 
         return $this->db->query($sql);
     }
+
+    // Get jumlah pemenang tender based on user preferensi and keyword and id_pengguna
+    public function getJumKatalogPemenangTender($data) 
+    {
+        
+    }
+
+
     public function getJumTender()
     {
         // $sql = "SELECT COUNT(kode_tender) AS jum_tender FROM tender_terbaru WHERE akhir_daftar>=CURRENT_TIMESTAMP";

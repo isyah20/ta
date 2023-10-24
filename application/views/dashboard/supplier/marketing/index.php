@@ -190,7 +190,6 @@
 
     .modal-body p {
         font-size: 18px;
-        /* Ganti ukuran font sesuai dengan keinginan Anda */
     }
 
     .custom-button {
@@ -603,7 +602,7 @@
 
     .form-select {
         background-color: white;
-        height: fit-content;
+        /* height: fit-content; */
         /* Mengatur warna latar belakang menjadi putih */
     }
 
@@ -614,29 +613,65 @@
     }
 
     .expandChildTable:before {
-    /* content: "+"; */
     display: block;
     cursor: pointer;
-    }
-    .expandChildTable.selected:before {
-        /* content: "-"; */
     }
     .childTableRow {
         display: none;
     }
     .childTableRow table {
-        /* border: 2px solid #555; */
-        margin-left:40%;
+        border: 1px solid #E1CBCB;
+        margin-left:35%;
+    }
+
+    .status {
+        margin-left:117%;
+        margin-bottom: 5px; 
+        margin-top:5px;
+        width:140px;
+    }
+
+    #colored-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 200px;
+        padding: 10px;
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #colored-select option {
+        background-color: #e0e0e0;
+    }
+
+    #colored-select option:nth-child(2) {
+        background-color: #ffcccc;
+    }
+
+    #colored-select option:nth-child(3) {
+        background-color: #ccffcc;
+    }
+
+    #colored-select option:nth-child(4) {
+        background-color: #ccccff;
     }
 
     /* CSS untuk mengatur tampilan saat tampilan diubah menjadi mobile */
     @media (max-width: 768px) {
         .btn-img {
             width: 24px;
-            /* Mengatur ukuran gambar */
             height: 24px;
             margin-right: 10px;
-            /* Menambahkan ruang antara gambar-gambar */
+        }
+        .childTableRow table {
+        border: 1px solid #E1CBCB;
+        margin-left:25%;
+        }
+        .status {
+            margin-left:90%;
         }
     }
 </style>
@@ -707,61 +742,11 @@
                                 <th colspan="2" class="custom-padding">
                                     Catatan
                                 </th>
-                                <th class="custom-padding">
+                                <th class="custom-padding" style="padding-right:15px;">
                                     Aksi
                                 </th>
-                                <th></th>
                             </tr>
                         </thead>
-                        <tbody id="data-leads">
-                            <tr>
-                                <td>1</td>
-                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
-                                </td>
-                                <td class="editable-select">Negotiation</td>
-                                <td class="editable-date">02/12/2024</td>
-                                
-                                <td class="editable" colspan="2">Lancarr Semua Gess</td>
-                                <td>
-                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
-                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
-                                    </a>
-                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
-                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
-                                    </a>
-                                    <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
-                            </tr>
-                            <tr class="childTableRow">
-                                <td colspan="5">
-                                    <table class="table custom-table-container">
-                                        <thead class="thead">
-                                            <tr>
-                                                <th class="custom-padding">
-                                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
-                                                    Status
-                                                </th>
-                                                <th class="custom-padding">
-                                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
-                                                    Jadwal
-                                                </th>
-                                                <th class="custom-padding">
-                                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
-                                                    Catatan
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="data-leads">
-                                            <tr class="">
-                                                <td>Negotiation</td>
-                                                <td>02/12/2024</td>
-                                                <td colspan="2">Lancarr Semua Gess</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
                         <tbody id="data-leads">
                             <tr>
                                 <td>2</td>
@@ -770,40 +755,41 @@
                                 </td>
                                 <td class="editable-select">Negotiation</td>
                                 <td class="editable-date">02/12/2024</td>
-                                <td class="editable" colspan="2" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
-                                <td>
-                                    <a href="#" class="btn btn-link edit-button" onclick="editRow(this)">
-                                        <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px">
-                                    </a>
-                                    <a href="#" class="btn btn-link save-button" style="display:none" onclick="saveRow(this)">
-                                        <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px">
-                                    </a>
-                                <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" alt=""></span></td>
+                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
+                                <td></td>
+                                <td><span><img src="<?= base_url('assets\img\add-circle-button.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#buatAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Buat Agenda"></span>
+                                <a href="#" class="btn-link edit-button" onclick="editRow(this)" data-bs-toggle="tooltip" title="Ubah Agenda">
+                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px"></a>  
+                                <a href="#" class="btn-link save-button" style="display:none" onclick="saveRow(this)">
+                                <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px"></a>
+                                <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span></td>
                             </tr>
                             <tr class="childTableRow">
                                 <td colspan="5">
                                     <table class="table custom-table-container">
-                                        <thead class="thead">
+                                        <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> 
                                             <tr>
-                                                <th class="custom-padding">
-                                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                <th>
                                                     Status
                                                 </th>
-                                                <th class="custom-padding">
-                                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                <th>
                                                     Jadwal
                                                 </th>
-                                                <th class="custom-padding">
-                                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                                <th>
                                                     Catatan
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody id="data-leads">
                                             <tr>
-                                                <td class="custom-padding">Negotiation</td>
-                                                <td class="custom-padding">02/12/2024</td>
-                                                <td class="custom-padding" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -844,17 +830,17 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-kontak">
+                                    <tbody id="data-contact">
                                         <td>joko</td>
                                         <td>HRD</td>
                                         <td>hrd@telkom.co.id</td>
                                         <td>081123456666</td>
                                         <td class="btn-cell">
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#editKontakModal" data-dismiss="modal">
+                                            <a href="#" class="btn btn-link" onclick="editRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
 
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                            <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
                                         </td>
@@ -869,8 +855,8 @@
                         <div></div>
                         <div class="link flex-row align-items-center w-100">
                             <span>
-                                <a class="btn-custom text-white text-center" data-toggle="modal" data-target="#inputKontakModal" data-dismiss="modal">
-                                    <i class="fas me-1"></i>Tambahkan Kontak
+                                <a class="btn-custom text-white text-center" id="addRow" onclick="addRowContact()">
+                                    Tambahkan Kontak
                                 </a>
                             </span>
                         </div>
@@ -939,6 +925,58 @@
     </div>
 </div>
 <!-- end modal input kontak -->
+
+<!-- modal input status-->
+<div class="col-12">
+    <div class="modal fade" id="buatAgenda" tabindex="-1" role="dialog" aria-labelledby="editKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
+        <div class="modal-dialog custom-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                    </button>
+                </div>
+                <div class="modal-body border-0">
+                    <h3 class="modal-title" id="editKontakModalLabel">Buat Agenda</h3>
+                    <!-- <p class="text-center"> Sesuaikan lagi kontak yang bisa dihubungi</p> -->
+                    <div class="input-popup justify-content-end gap-2">
+                        <form class="row g-2">
+                            <div class="col-12">
+                                <label for="inputNama" class="form-label text-start">Status</label>
+                                <select class="border border-1 form-select" style="height:40px;padding-top:0px;" id="colored-select" aria-label="Pilih Status">
+                                    <option selected>Pilih Status</option>
+                                    <option value="option1">Sedang Dihubungi</option> //kuning
+                                    <option value="option2">Negosiasi</option> //biru
+                                    <option value="option3">Diterima</option> //erah
+                                    <option value="option4">Ditolak</option> //hijau
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="inputPosisi" class="form-label text-start">Jadwal</label>
+                                <input type="date" class="border border-1 form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
+                            </div>
+                            <div class="col-12">
+                                <label for="inputEmail" class="form-label text-start">Catatan</label>
+                                <input type="text" class="border border-1 form-control" id="inputEmail" placeholder="Masukkan Catatan">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="d-flex justify-content-start mt-3 gap-2">
+                        <div></div>
+                        <div class="link flex-row align-items-center w-100">
+                            <span>
+                                <a class="btn-custom text-white text-center">
+                                    <i class="fas me-1"></i>Simpan Perubahan
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end input status-->
 
 <!-- modal edit -->
 <div class="col-12">
@@ -1186,8 +1224,8 @@
 
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
 $(function() {
     $('.expandChildTable').on('click', function() {
@@ -1195,538 +1233,157 @@ $(function() {
     })
 });
 </script>
-<!-- 
+
+<!-- Script add row kontak -->
 <script>
-    var keyword = '',
-        jenis_pengadaan = '',
-        hps_awal = 0,
-        hps_akhir = 0,
-        prov = '',
-        kab = '',
-        jum_pemenang, timer;
+        // Fungsi untuk menambahkan baris ke dalam tabel
+        function addRowContact() {
+            var table = document.getElementById("data-contact");
+            var newRow = table.insertRow(table.rows.length);
 
-    $(document).ready(function() {
-        $.ajax({
-            url: "<?= base_url() ?>api/supplier/jumlah-pemenang",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                $('#total-today').html(data.total_today);
-                $('#total-month').html(data.total_month);
-                $('#total-year').html(data.total_year);
-                // console.log(data.total_today);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {}
-        });
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2); 
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
 
-        // $.ajax({
-        //     url: "<?= base_url() ?>api/supplier/jumlah-pemenang",
-        //     type: "GET",
-        //     dataType: "JSON",
-        //     success: function(data) {
-        //         $('#total-pemenang-tender').html(data.jumlah_pemenang);
-        //         console.log(data.jumlah_pemenang);
-        //     },
-        //     error: function(jqXHR, textStatus, errorThrown) {}
-        // });
-        // $.ajax({
-        //     url: "<?= base_url() ?>api/supplier/jumlah-pemenang-terbaru",
-        //     type: "GET",
-        //     dataType: "JSON",
-        //     success: function(data) {
-        //         $('#total-pemenang-tender-terbaru').html(data.jumlah_pemenang_terbaru);
-        //         console.log(data.jumlah_pemenang_terbaru);
-        //     },
-        //     error: function(jqXHR, textStatus, errorThrown) {}
-        // });
-
-        $.ajax({
-            url: "<?= base_url() ?>api/getPreferensiPengguna/" + id_pengguna,
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                if (data != null) {
-                    $('#sec-set-preferensi').hide();
-
-                    setTimeout(function() {
-                        let status = $('#status_user').val();
-
-                        if (status == '0') {
-                            $('#sec-upgrade-paket').show();
-                            $('#sec-pemenang-terbaru').hide();
-                        } else {
-                            $('#sec-upgrade-paket').hide();
-                            $('#sec-pemenang-terbaru').show();
-
-                            filterTender();
-
-                            /*$.ajax({
-                                                url : "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna/"+id_pengguna,
-                                                type: "GET",
-                                                dataType: "JSON",
-                                                success : function(data){
-                                                    jum_pemenang = data.jumlah;
-                                                    
-                                                    if (jum_pemenang > 0) {
-                                                        $('#pagination-container').pagination({
-                                                            dataSource: "<?= base_url() ?>api/getKatalogPemenangTerbaruByPengguna/"+id_pengguna+"/"+jum_pemenang,
-                                                            locator: '',
-                                                            totalNumber: jum_pemenang,
-                                                            pageSize: 10,
-                                                            autoHidePrevious: true,
-                                                            autoHideNext: true,
-                                                            showNavigator: true,
-                                                            formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> pemenang tender terbaru',
-                                                            position: 'bottom',
-                                                            className: 'paginationjs-theme-red paginationjs-big',
-                                                            ajax: {
-                                                                beforeSend: function(xhr, settings) {
-                                                                    const url = settings.url
-                                                                    const params = new URLSearchParams(url)
-                                                                    let currentPageNum = params.get('pageNumber')
-                                                                    currentPageNum = parseInt(currentPageNum)
-                                                                    if (currentPageNum >= 2 && id_pengguna == 0) {
-                                                                        window.location.href = `${base_url}login`
-                                                                        return false
-                                                                    }
-                                        
-                                                                    $('#list-pemenang').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan pemenang tender terbaru...</span></div>');
-                                                                }
-                                                            },
-                                                            callback: function(data, pagination) {
-                                                                if (data != '') {
-                                                                    let html = template(data);
-                                                                    $('#list-pemenang').html(html);
-                                                                }
-                                                            }
-                                                        });
-                                                    } else {
-                                                        $('#list-pemenang').html(`
-                                                            <div class="row align-items-center rounded-3 bg-white shadow mx-0 my-3">
-                                                                <div class="col-md-2 p-3 text-center text-md-end">
-                                                                    <img src="<?= base_url("assets/img/rincian 2.png") ?>" width="140" alt="">
-                                                                </div>
-                                                                <div class="col-md-8 p-3 text-center text-md-start">
-                                                                    <h4 class="mb-2">Pemenang tender kosong!</h4>
-                                                                    <p class="m-0">Belum ada pemenang tender sesuai preferensi yang Anda tentukan.<br>Silakan bisa coba atur ulang preferensi Anda menggunakan kata kunci lain untuk mendapatkan hasil lebih baik.</p>
-                                                                </div>
-                                                                <div class="col-md-2 p-3 text-center">
-                                                                    <a href="<?= base_url() ?>preferensi" class="btn btn-danger m-1">Pengaturan</a>
-                                                                </div>
-                                                            </div>
-                                                        `);
-                                                        
-                                                        $('#pagination-container').hide();
-                                                    }
-                                                },
-                                                error: function (jqXHR, textStatus, errorThrown){}
-                                            });*/
-                        }
-                    }, 1000);
-                } else $('#sec-set-preferensi').show();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {}
-        });
-    });
-
-    function filterTender(sort = '3') {
-        let params = {
-            'id_pengguna': id_pengguna,
-            'keyword': keyword,
-            'jenis_pengadaan': jenis_pengadaan,
-            'nilai_hps_awal': hps_awal,
-            'nilai_hps_akhir': hps_akhir,
-            'prov': prov,
-            'kab': kab,
-            'sort': sort
-        };
-
-        $.ajax({
-            url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna/" + id_pengguna,
-            type: "POST",
-            dataType: "JSON",
-            data: params,
-            success: function(data) {
-                jum_pemenang = data.jumlah;
-
-                if (jum_pemenang > 0) {
-                    $('#pagination-container').pagination({
-                        dataSource: "<?= base_url() ?>api/getKatalogPemenangTerbaruByPengguna1",
-                        locator: '',
-                        totalNumber: jum_pemenang,
-                        pageSize: 10,
-                        autoHidePrevious: true,
-                        autoHideNext: true,
-                        showNavigator: true,
-                        formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> pemenang tender terbaru',
-                        position: 'bottom',
-                        className: 'paginationjs-theme-red paginationjs-big',
-                        ajax: {
-                            type: 'POST',
-                            data: params,
-                            beforeSend: function(xhr, settings) {
-                                const url = settings.url
-                                const params = new URLSearchParams(url)
-                                let currentPageNum = params.get('pageNumber')
-                                currentPageNum = parseInt(currentPageNum)
-                                if (currentPageNum >= 2 && id_pengguna == 0) {
-                                    window.location.href = `${base_url}login`
-                                    return false
-                                }
-
-                                $('#list-pemenang').html('<div class="d-flex justify-content-center my-4"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan pemenang tender terbaru...</span></div>');
-                            }
-                        },
-                        callback: function(data, pagination) {
-                            if (data != '') {
-                                let html = template(data);
-                                $('#list-pemenang').html(html);
-                            }
-                        }
-                    });
-                } else {
-                    $('#list-pemenang').html(`
-                            <div class="row align-items-center rounded-3 bg-white shadow my-3" style="width: 98.2%;margin-inline: 12px;">
-                                <div class="col-md-2 p-3 text-center">
-                                    <img src="<?= base_url("assets/img/rincian 2.png") ?>" width="140" alt="">
-                                </div>
-                                <div class="col-md-10 p-3 text-center text-md-start">
-                                    <h4 class="mb-2">Pemenang tender kosong!</h4>
-                                    <p class="m-0">Tidak ada pemenang tender sesuai kata kunci yang Anda tentukan.<br>Silakan bisa coba atur ulang kata kunci pencarian Anda untuk mendapatkan informasi pemenang tender sesuai yang diharapkan!</p>
-                                </div>
-                            </div>
-                        `);
-
-                    $('#pagination-container').hide();
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {}
-        });
-    }
-
-    function template(data) {
-        var pemenang = '';
-        for (var i = 0; i <= data.length - 1; i++) {
-            let update_hari = data[i].update_hari;
-            if (update_hari == 0) update_hari = 'Hari ini';
-            else if (update_hari == 1) update_hari = 'Kemarin';
-            else update_hari = update_hari + ' hari yang lalu';
-
-            pemenang +=
-                `<div class="paket col-md-6 px-1 py-0">
-                        <div class="p-card bg-white shadow p-3 p-lg-4 rounded-4 border hover-scale">
-                            <div class="d-flex align-items-center border-bottom pb-3">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img class="rounded-circle me-1" src="<?= base_url("assets/img/img-profile-default.png") ?>" width="45">
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                    <div class="profiles">
-                                        <div class="ms-2">
-                                            <a class="p-0" href="` + data[i].url + `"><h6>` + data[i].nama_lpse + `</h6></a>
-                                            <span><i class="fas fa-calendar-alt me-1"></i>` + update_hari + `</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="p-0 nama-paket" href="#"><h5 title="` + data[i].nama_tender + `">` + data[i].nama_tender + `</h5></a>
-                            <span class="badge badge-danger mb-3">` + data[i].jenis_tender + `</span>
-                            <table class="rincian-paket" width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td class="th">Kode Tender</td>
-                                        <td>:</td>
-                                        <td><strong>` + data[i].kode_tender + `</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="th">Nilai Penawaran</td>
-                                        <td>:</td>
-                                        <td><div class="label label-success mb-0">` + formatRupiah(data[i].harga_penawaran, 'Rp') + `</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="th">Nama Pemenang</td>
-                                        <td>:</td>
-                                        <td><div class="badge badge-akhirdaftar">` + data[i].nama_pemenang + `</div></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="d-flex justify-content-between mt-3">
-                                <div></div>
-                                <div class="link d-flex flex-row align-items-center" style="gap: 15px">
-                                <span><a class="btn btn-sm border btn-outline" href="${base_url}detail-pemenang/${data[i].kode_tender}" target="_blank"><i class="fas me-1"></i>Detail Pemenang</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
+            cell1.contentEditable = true;
+            cell2.contentEditable = true;
+            cell3.contentEditable = true;
+            cell4.contentEditable = true;
+            cell5.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveRowContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                            '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
         }
 
-        return pemenang;
-    }
-
-    $('.dropdown-sorting .dropdown-item').on('click', function() {
-        let sort = $(this).data('sort');
-
-        filterTender(sort);
-    });
-
-    $('#checkallhps').on('click', function() {
-        let allhps = this.checked;
-        $('#nilai_hps_awal, #nilai_hps_akhir').prop('disabled', allhps);
-
-        if (allhps) hps_awal = hps_akhir = 0;
-        else {
-            $('#nilai_hps_awal').focus();
-            hps_awal = $('#nilai_hps_awal').val();
-            hps_akhir = $('#nilai_hps_akhir').val();
-        }
-
-        filterTender();
-    });
-
-    $('#nilai_hps_awal, #nilai_hps_akhir').inputmask('decimal', {
-        'alias': 'numeric',
-        'groupSeparator': '.',
-        'autoGroup': true,
-        'digits': 0,
-        'digitsOptional': false,
-        'allowMinus': false,
-        'placeholder': '0',
-        'rightAlign': false,
-        'autoUnmask': true
-    }).on('keyup', function() {
-        hps_awal = $('#nilai_hps_awal').val();
-        hps_akhir = $('#nilai_hps_akhir').val();
-
-        if (parseInt(hps_akhir) < parseInt(hps_awal)) $('#nilai_hps_akhir').addClass('is-invalid');
-        else {
-            $('#nilai_hps_akhir').removeClass('is-invalid');
-            filterTender();
-        }
-    });
-
-    $('#keyword').on('keyup', function() {
-        clearTimeout(timer);
-
-        timer = setTimeout(function() {
-            keyword = $('#keyword').val();
-            filterTender();
-        }, 1000);
-    });
-
-    function formatData(data) {
-        if (!data.id) return data.text;
-        if (data.kategori != "2") return "<b>" + data.text + "</b>";
-        else return "<span style='padding-left: 20px;'>" + data.text + "</span>";
-    }
-
-    $('.select2-wilayah').select2({
-        placeholder: "Lokasi Pekerjaan",
-        theme: 'bootstrap-5',
-        allowClear: true,
-        "language": {
-            noResults: function() {
-                return "<span>Tidak ada lokasi pekerjaan</span>";
-            },
-            loadingMore: function() {
-                return "<span>Menampilkan lainnya...</span>";
-            },
-            searching: function() {
-                return "<span>Mencari hasil...</span>";
-            },
-            errorLoading: function() {
-                return "<span>Gagal menampilkan lokasi pekerjaan</span>";
+        // Fungsi untuk menyimpan perubahan pada baris
+        function saveRowContact(button) {
+            var row = button.parentNode.parentNode;
+            var email = row.cells[2].textContent.trim();
+            var noTelp = row.cells[3].textContent.trim();
+            
+            if (email === "" || noTelp === "") {
+                alert("Email dan No Telp harus diisi sebelum menyimpan.");
+                return;
             }
-        },
-        escapeMarkup: function(markup) {
-            return markup;
-        },
-        ajax: {
-            // url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/getListLokasiPekerjaan",
-            url: "<?= base_url('api/getListLokasiPekerjaan') ?>",
-            dataType: 'json',
-            delay: 250,
-            data: function(params) {
-                return {
-                    q: params.term,
-                    id_pengguna: id_pengguna,
-                    jenis: '4',
-                    page_limit: 10,
-                    page: (params.page > 1 ? params.page - 1 : params.page)
-                };
-            },
-            processResults: function(data, params) {
-                params.page = params.page || 1;
-                return {
-                    results: data.results,
-                    pagination: {
-                        more: (params.page * 10) < data.total_count
-                    }
-                };
-            },
-            cache: true
-        },
-        templateResult: formatData
-    }).on('change', function() {
-        let wilayah = $(this).val();
 
-        if (wilayah != null) {
-            if (wilayah.includes('00')) {
-                prov = wilayah;
-                kab = '';
-            } else {
-                kab = wilayah;
-                prov = '';
+            for (var i = 0; i < 4; i++) {
+                row.cells[i].removeAttribute("contenteditable");
             }
-        } else kab = prov = '';
 
-        filterTender();
-    });
-
-    $('.select2-jenis-pengadaan').select2({
-        placeholder: "Jenis Pengadaan",
-        theme: 'bootstrap-5',
-        allowClear: true,
-        "language": {
-            noResults: function() {
-                return "<span>Tidak ada jenis pengadaan</span>";
-            },
-            loadingMore: function() {
-                return "<span>Menampilkan lainnya...</span>";
-            },
-            searching: function() {
-                return "<span>Mencari hasil...</span>";
-            },
-            errorLoading: function() {
-                return "<span>Gagal menampilkan jenis pengadaan</span>";
-            }
-        },
-        escapeMarkup: function(markup) {
-            return markup;
-        },
-        ajax: {
-            url: "<?= base_url('api/getListJenisPengadaan') ?>",
-            dataType: 'json',
-            delay: 250,
-            data: function(params) {
-                return {
-                    q: params.term,
-                    id_pengguna: id_pengguna,
-                    jenis: '4',
-                    page_limit: 10,
-                    page: (params.page > 1 ? params.page - 1 : params.page)
-                };
-            },
-            processResults: function(data, params) {
-                params.page = params.page || 1;
-                console.log(data, "data Pengadaan");
-                return {
-                    results: data.results,
-                    pagination: {
-                        more: (params.page * 10) < data.total_count
-                    }
-                };
-            },
-            cache: true
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn btn-link" onclick="editRowContact(this)"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                                    '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
         }
-    }).on('change', function() {
-        jenis_pengadaan = $(this).val();
-        filterTender();
-    });
-</script> -->
 
-<script>
-    new Choices(document.querySelector(".choices-multiple"));
+        // Fungsi untuk mengubah baris menjadi mode edit
+        function editRowContact(button) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+            for (var i = 0; i < 4; i++) {
+                cells[i].setAttribute("contenteditable", "true");
+            }
+            
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveRowContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        // Fungsi untuk menghapus baris
+        function deleteRowContact(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
 </script>
 
 <script>
-        function editRow(button) {
-            var row = button.parentNode.parentNode;
-            row.classList.add("editing");
+    function editRow(button) {
+        var row = button.parentNode.parentNode;
+        row.classList.add("editing");
 
-            var editableCells = row.getElementsByClassName("editable");
-            for (var i = 0; i < editableCells.length; i++) {
-                var cell = editableCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var input = document.createElement("input");
-                input.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(input);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-            var editableSelectCells = row.getElementsByClassName("editable-select");
-            for (var i = 0; i < editableSelectCells.length; i++) {
-                var cell = editableSelectCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var select = document.createElement("select");
-                select.innerHTML = `<select id="status-select">
-                    <option value="menunggu-jawaban" data-imagesrc="menunggu-jawaban.png">Menunggu Jawaban</option>
-                    <option value="negosiasi" data-imagesrc="negosiasi.png">Negosiasi</option>
-                    <option value="menunggu-hasil-akhir" data-imagesrc="menunggu-hasil-akhir.png">Menunggu Hasil Akhir</option>
-                    <option value="deal" data-imagesrc="deal.png">Deal</option>
-                    <option value="dibatalkan" data-imagesrc="dibatalkan.png">Dibatalkan</option>
-                    </select>`; // Isi opsi sesuai kebutuhan
-                select.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(select);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var field = cell.getAttribute("data-field");
-                var currentValue = cell.textContent;
-                var input = document.createElement("input");
-                input.type = "date";
-                input.value = currentValue;
-                cell.textContent = "";
-                cell.appendChild(input);
-                cell.setAttribute("data-orig-value", currentValue);
-            }
-
-
-            button.style.display = "none";
-            row.querySelector(".save-button").style.display = "inline";
+        var editableCells = row.getElementsByClassName("editable");
+        for (var i = 0; i < editableCells.length; i++) {
+            var cell = editableCells[i];
+            var field = cell.getAttribute("data-field");
+            var currentValue = cell.textContent;
+            var input = document.createElement("input");
+            input.value = currentValue;
+            input.style.width = (currentValue.length + 1) + "ch"; // Sesuaikan lebar input
+            cell.textContent = "";
+            cell.appendChild(input);
+            cell.setAttribute("data-orig-value", currentValue);
         }
 
-        function saveRow(button) {
-            var row = button.parentNode.parentNode;
-            row.classList.remove("editing");
-
-            var editableCells = row.getElementsByClassName("editable");
-            for (var i = 0; i < editableCells.length; i++) {
-                var cell = editableCells[i];
-                var input = cell.querySelector("input");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = input.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
-            var editableSelectCells = row.getElementsByClassName("editable-select");
-            for (var i = 0; i < editableSelectCells.length; i++) {
-                var cell = editableSelectCells[i];
-                var select = cell.querySelector("select");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = select.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
-            var editableDateCells = row.getElementsByClassName("editable-date");
-            for (var i = 0; i < editableDateCells.length; i++) {
-                var cell = editableDateCells[i];
-                var input = cell.querySelector("input");
-                var origValue = cell.getAttribute("data-orig-value");
-                var newValue = input.value;
-                cell.textContent = newValue;
-                // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-            }
-
-
-            button.style.display = "none";
-            row.querySelector(".edit-button").style.display = "inline";
+        var editableSelectCells = row.getElementsByClassName("editable-select");
+        for (var i = 0; i < editableSelectCells.length; i++) {
+            var cell = editableSelectCells[i];
+            var field = cell.getAttribute("data-field");
+            var currentValue = cell.textContent;
+            var select = document.createElement("select");
+            select.innerHTML = `<select id="status-select">
+                <option value="menunggu-jawaban" data-imagesrc="menunggu-jawaban.png">Menunggu Jawaban</option>
+                <option value="negosiasi" data-imagesrc="negosiasi.png">Negosiasi</option>
+                <option value="menunggu-hasil-akhir" data-imagesrc="menunggu-hasil-akhir.png">Menunggu Hasil Akhir</option>
+                <option value="deal" data-imagesrc="deal.png">Deal</option>
+                <option value="dibatalkan" data-imagesrc="dibatalkan.png">Dibatalkan</option>
+                </select>`;
+            select.value = currentValue;
+            select.style.width = (currentValue.length + 1) + "ch"; // Sesuaikan lebar select
+            cell.textContent = "";
+            cell.appendChild(select);
+            cell.setAttribute("data-orig-value", currentValue);
         }
-    </script>
+
+        var editableDateCells = row.getElementsByClassName("editable-date");
+        for (var i = 0; i < editableDateCells.length; i++) {
+            var cell = editableDateCells[i];
+            var field = cell.getAttribute("data-field");
+            var currentValue = cell.textContent;
+            var input = document.createElement("input");
+            input.type = "date";
+            input.value = currentValue;
+            cell.textContent = "";
+            cell.appendChild(input);
+            cell.setAttribute("data-orig-value", currentValue);
+        }
+
+        button.style.display = "none";
+        row.querySelector(".save-button").style.display = "inline";
+    }
+
+    function saveRow(button) {
+        var row = button.parentNode.parentNode;
+        row.classList.remove("editing");
+
+        var editableCells = row.getElementsByClassName("editable");
+        for (var i = 0; i < editableCells.length; i++) {
+            var cell = editableCells[i];
+            var input = cell.querySelector("input");
+            var origValue = cell.getAttribute("data-orig-value");
+            var newValue = input.value;
+            cell.textContent = newValue;
+            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
+        }
+
+        var editableSelectCells = row.getElementsByClassName("editable-select");
+        for (var i = 0; i < editableSelectCells.length; i++) {
+            var cell = editableSelectCells[i];
+            var select = cell.querySelector("select");
+            var origValue = cell.getAttribute("data-orig-value");
+            var newValue = select.value;
+            cell.textContent = newValue;
+            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
+        }
+
+        var editableDateCells = row.getElementsByClassName("editable-date");
+        for (var i = 0; i < editableDateCells.length; i++) {
+            var cell = editableDateCells[i];
+            var input = cell.querySelector("input");
+            var origValue = cell.getAttribute("data-orig-value");
+            var newValue = input.value;
+            cell.textContent = newValue;
+            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
+        }
+
+        button.style.display = "none";
+        row.querySelector(".edit-button").style.display = "inline";
+    }
+</script>

@@ -61,7 +61,17 @@ class Supplier_api extends CI_Model
     public function updateTimMarketing($data, $id)
     {
         $this->db->update('tim_marketing', $data, ['id_tim' => $id]);
-        return $this->db->affected_rows();
+        // update in table pengguna also
+        // $this->db->update('pengguna', $data, ['id_pengguna' => $id_pengguna]);
+        if ($this->db->affected_rows() == '1') {
+            return TRUE;
+        } else {
+            if ($this->db->trans_status() === FALSE) {
+                return false;
+            }
+            return true;
+        }
+        // return $this->db->affected_rows();
     }
 
     public function deleteTimMarketing($id)
@@ -109,8 +119,17 @@ class Supplier_api extends CI_Model
     // Update the same Tim to table pengguna
     public function updateTimPengguna($data, $id)
     {
-        $this->db->update('pengguna', $data, ['id_pengguna' => $id]);
-        return $this->db->affected_rows();
+        $status = $this->db->update('pengguna', $data, ['id_pengguna' => $id]);
+        $this->db->trans_complete();
+        // was there any update or error?
+        if ($this->db->affected_rows() == '1') {
+            return TRUE;
+        } else {
+            if ($this->db->trans_status() === FALSE) {
+                return false;
+            }
+            return true;
+        }
     }
 
 
@@ -314,8 +333,21 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         $this->db->where('kontak_lead.id_lead IS NULL');
         $this->db->where('data_leads.id_pengguna', $id_pengguna);
         $query = $this->db->get();
-        return $query->row_array();
+        return $query->row()->jumlah;
     }
+
+    // Get data leads where kontak lead is not null
+    public function getDataLeadsLengkap($id_pengguna)
+    {
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->where('kontak_lead.id_lead IS NOT NULL');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
 
     // public function getJumlahPemenangTender($id_pengguna)
     // {

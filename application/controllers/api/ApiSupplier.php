@@ -72,7 +72,7 @@ class ApiSupplier extends RestController
 
     public function create_post()
     {
-        $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email', ['required' => 'Email tidak boleh kosong!',]);
+        $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email|is_unique[pengguna.email]', ['required' => 'Email tidak boleh kosong!', 'valid_email' => 'Email tidak valid', 'is_unique' => 'Email tidak boleh sama']);
         $this->form_validation->set_rules('nama_tim', 'nama tim', 'required|trim', ['required' => 'Nama tim tidak boleh kosong!',]);
         $this->form_validation->set_rules('no_telp', 'nomor telepon', 'required|trim', ['required' => 'No telepon tidak boleh kosong!',]);
         $this->form_validation->set_rules('alamat', 'alamat', 'required|trim', ['required' => 'Alamat tidak boleh kosong!',]);
@@ -106,8 +106,8 @@ class ApiSupplier extends RestController
                 'posisi' => $this->post('posisi'),
                 'is_valid_user' => 0,
                 'password_default' => $password,
-                'id_supplier' => 360,
-                // 'id_supplier' => $_COOKIE['id_pengguna'],
+                // 'id_supplier' => 360,
+                'id_supplier' => $_COOKIE['id_pengguna'],
                 'id_pengguna' => $result['id_pengguna'],
             ];
             if ($this->Supplier_api->createTimMarketing($data) > 0) {
@@ -404,13 +404,6 @@ class ApiSupplier extends RestController
     public function editTimMarketing_post($id)
     {
         // $id = $this->post('id_tim');
-        $email = $this->post('email');
-        if (!$this->form_validation->run()) {
-            $this->response([
-                'status' => false,
-                'message' => $email
-            ], RestController::HTTP_BAD_REQUEST);
-        }
         $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email', ['required' => 'Email tidak boleh kosong!', 'valid_email' => 'Email tidak valid']);
         $this->form_validation->set_rules('nama_tim', 'nama tim', 'required|trim', ['required' => 'Nama tim tidak boleh kosong!',]);
         $this->form_validation->set_rules('no_telp', 'nomor telepon', 'required|trim', ['required' => 'No telepon tidak boleh kosong!',]);
@@ -438,13 +431,20 @@ class ApiSupplier extends RestController
         //     'message' => $test,
         // ], RestController::HTTP_BAD_REQUEST);
         // $test =  $this->sendEmailPassword_get($data['email'], $id);
-        if ($id === null) {
+        // $this->response([
+        //     'status' => false,
+        //     // 'message' => 'Data gagal diubah'
+        //     'message1' => $this->Supplier_api->getTimMarketingById($id)['id_pengguna'],
+        //     'message' => $this->Supplier_api->updateTimPengguna($data, $this->Supplier_api->getTimMarketingById($id)['id_pengguna'])
+        // ], RestController::HTTP_BAD_REQUEST);
+
+        if (!isset($id)) {
             $this->response([
                 'status' => false,
                 'message' => 'Berikan id'
             ], RestController::HTTP_BAD_REQUEST);
-        } else if ($this->Supplier_api->updateTimPengguna($data, $this->Supplier_api->getTimMarketingById($id)['id_pengguna']) > 0) {
-            if ($this->Supplier_api->updateTimMarketing(array('posisi' => $this->post('posisi')), $id) > 0) {
+        } else if ($this->Supplier_api->updateTimPengguna($data, $this->Supplier_api->getTimMarketingById($id)['id_pengguna'])) {
+            if ($this->Supplier_api->updateTimMarketing(array('posisi' => $this->post('posisi')), $id)) {
                 $this->response([
                     'status' => true,
                     'message' => 'Data berhasil diubah'
@@ -458,7 +458,8 @@ class ApiSupplier extends RestController
         } else {
             $this->response([
                 'status' => false,
-                'message' => 'Data gagal diubah'
+                // 'message' => 'Data gagal diubah'
+                'message' => $id
             ], RestController::HTTP_BAD_REQUEST);
         }
 

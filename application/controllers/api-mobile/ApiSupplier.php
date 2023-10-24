@@ -417,6 +417,7 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
+
     //Get pemenang filter
     public function pemenangFiltered_post()
     {
@@ -520,6 +521,35 @@ class ApiSupplier extends RestController
         }
     }
 
+    public function getDataLeadsLengkap_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        // $data = $this->Supplier_api->getDataLeadsLengkap($id_pengguna);
+        $belum_lengkap = $this->Supplier_api->getCountDataLeads($id_pengguna);
+        $total = $this->Supplier_api->getTotalDataLeads($id_pengguna);
+        $lengkap = $total - $belum_lengkap;
+
+        $data = [
+            'belum_lengkap' => $belum_lengkap,
+            'lengkap' => $lengkap,
+            'total' => $total
+        ];
+
+        if ($total) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                // 'jumlah' => $this->Supplier_api->countDataLeads($id_pengguna)->row('jumlah')
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan',
+                'data' => $data
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
     public function getJumlahPemenang_get()
     {
         $id = $this->input->get('id_pengguna');
@@ -542,7 +572,16 @@ class ApiSupplier extends RestController
 
     public function getJumKatalogPemenang_get()
     {
-        parse_str(file_get_contents('php://input'), $data);
+        // parse_str(file_get_contents('php://input'), $data);
+        $data = [
+            'id_pengguna' => $this->input->get('id_pengguna'),
+            'keyword' => $this->input->get('keyword'),
+            'jenis_pengadaan' => $this->input->get('jenis_pengadaan'),
+            'nilai_hps_awal' => $this->input->get('nilai_hps_awal'),
+            'nilai_hps_akhir' => $this->input->get('nilai_hps_akhir'),
+            'prov' => $this->input->get('prov'),
+            'kab' => $this->input->get('kab'),
+        ];
         $response = $this->Tender_model->getJumKatalogPemenangTerbaruByPengguna1($data)->row();
 
         if ($response) {
@@ -557,4 +596,83 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function getKatalogPemenang_get()
+    {
+        // parse_str(file_get_contents('php://input'), $data);
+        $data = [
+            'id_pengguna' => $this->input->get('id_pengguna'),
+            'keyword' => $this->input->get('keyword'),
+            'jenis_pengadaan' => $this->input->get('jenis_pengadaan'),
+            'nilai_hps_awal' => $this->input->get('nilai_hps_awal'),
+            'nilai_hps_akhir' => $this->input->get('nilai_hps_akhir'),
+            'prov' => $this->input->get('prov'),
+            'kab' => $this->input->get('kab'),
+            'pageSize' => $this->input->get('pageSize'),
+            'pageNumber' => $this->input->get('pageNumber'),
+            'sort' => $this->input->get('sort'),
+        ];
+        $response = $this->Tender_model->getKatalogPemenangTerbaruByPengguna1($data)->result();
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getPemenangTender_get()
+    {
+        $data = [
+            'id_pengguna' => $this->input->get('id_pengguna'),
+            'keyword' => $this->input->get('keyword'),
+            'jenis_pengadaan' => $this->input->get('jenis_pengadaan'),
+            'nilai_hps_awal' => $this->input->get('nilai_hps_awal'),
+            'nilai_hps_akhir' => $this->input->get('nilai_hps_akhir'),
+            'prov' => $this->input->get('prov'),
+            'kab' => $this->input->get('kab'),
+            // 'pageSize' => $this->input->get('pageSize'),
+            // 'pageNumber' => $this->input->get('pageNumber'),
+            'sort' => $this->input->get('sort'),
+        ];
+
+        $response = $this->Tender_model->getPemenangTerbaruByPengguna($data)->result();
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getRiwayatPemenang_get()
+    {
+        $npwp = $this->input->get('npwp');
+        $data = $this->Supplier_api->getPemenangByNPWP($npwp);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
 }

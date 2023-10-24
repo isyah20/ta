@@ -764,9 +764,9 @@
             },
             beforeSend: addAuthorizationHeader,
             success: function(data) {
-                $('.belum-lengkap').html(data.data.jumlah);
+                $('.belum-lengkap').html(data.data);
                 // $('.belum-lengkap').html(data.data.belum_lengkap);
-                var belum = data.data.jumlah
+                var belum = data.data
                 $.ajax({
                     url: "<?= base_url('api/supplier/getTotal') ?>",
                     type: "GET",
