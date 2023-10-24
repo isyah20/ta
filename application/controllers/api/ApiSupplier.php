@@ -141,18 +141,7 @@ class ApiSupplier extends RestController
 
     public function sendEmailPassword_get($data)
     {
-        // $email = $this->input->get('email');
-        // if(isset($id)){
-        // $result = $this->Pengguna_model->getPenggunaById($id);
-        // $result = $this->Pengguna_model->getPenggunaById($id);
-        // }
-        // var_dump($result);
-        // die;
-
         if (!empty($data)) {
-            // $tokenOld = random_string('alnum', 25);
-            // $tokenUpdate = $this->Pengguna_model->updateToken($email, $tokenOld);
-            // $token = $tokenUpdate['token'];
             $reset_key = random_string('alnum', 25);
 
             if ($this->Reset_model->update_reset_key($data['email'], $reset_key)) {
@@ -424,19 +413,6 @@ class ApiSupplier extends RestController
             'alamat' => $this->post('alamat'),
         ];
 
-        // $test =  $this->Supplier_api->getTimMarketingById($id)['id_pengguna'];
-        // $test =  $this->Supplier_api->updateTimPengguna($data, $id);
-        // $this->response([
-        //     'status' => true,
-        //     'message' => $test,
-        // ], RestController::HTTP_BAD_REQUEST);
-        // $test =  $this->sendEmailPassword_get($data['email'], $id);
-        // $this->response([
-        //     'status' => false,
-        //     // 'message' => 'Data gagal diubah'
-        //     'message1' => $this->Supplier_api->getTimMarketingById($id)['id_pengguna'],
-        //     'message' => $this->Supplier_api->updateTimPengguna($data, $this->Supplier_api->getTimMarketingById($id)['id_pengguna'])
-        // ], RestController::HTTP_BAD_REQUEST);
 
         if (!isset($id)) {
             $this->response([
@@ -462,44 +438,6 @@ class ApiSupplier extends RestController
                 'message' => $id
             ], RestController::HTTP_BAD_REQUEST);
         }
-
-        // $this->response([
-        //     'status' => true,
-        //     'message' => $test,
-        // ], RestController::HTTP_OK);
-        // if ($id === null) {
-        //     $this->response([
-        //         'status' => false,
-        //         'message' => 'Berikan id'
-        //     ], RestController::HTTP_BAD_REQUEST);
-        // } else if ($this->Supplier_api->updateTimMarketing($data, $id) > 0) {
-        //     // $test =  $this->sendEmailPassword_get($data['email'], $id);
-
-        //     // $this->response([
-        //     //     'status' => true,
-        //     //     'message' => $test,
-        //     // ], RestController::HTTP_OK);
-        //     $this->response([
-        //         'status' => true,
-        //         'message' => 'Data berhasil diubah'
-        //     ], RestController::HTTP_OK);
-        // } else {
-        //     $this->response([
-        //         'status' => false,
-        //         'message' => 'Data gagal diubah'
-        //     ], RestController::HTTP_BAD_REQUEST);
-        // }
-        // if ($this->Supplier_api->updateTimMarketing($data, $id) > 0) {
-        //     $this->response([
-        //         'status' => true,
-        //         'message' => 'Data berhasil diubah'
-        //     ], RestController::HTTP_OK);
-        // } else {
-        //     $this->response([
-        //         'status' => false,
-        //         'message' => 'Data gagal diubah'
-        //     ], RestController::HTTP_BAD_REQUEST);
-        // }
     }
 
     // Function Plotting
