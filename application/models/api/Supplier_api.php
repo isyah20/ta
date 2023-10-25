@@ -24,8 +24,10 @@ class Supplier_api extends CI_Model
 
     public function getTimMarketing($id_supplier)
     {
-        $this->db->select(['*']);
+        // $this->db->select(['*']);
+        $this->db->select('tim_marketing.*, pengguna.nama AS nama_tim, pengguna.email, pengguna.no_telp, pengguna.alamat');
         $this->db->from('tim_marketing');
+        $this->db->join('pengguna', 'pengguna.id_pengguna = tim_marketing.id_pengguna');
         $this->db->where('id_supplier', $id_supplier);
         $query = $this->db->get();
         return $query->result_array();
@@ -33,8 +35,9 @@ class Supplier_api extends CI_Model
 
     public function getTimMarketingById($id)
     {
-        $this->db->select(['*']);
+        $this->db->select('tim_marketing.*, pengguna.nama AS nama_tim, pengguna.email, pengguna.no_telp, pengguna.alamat');
         $this->db->from('tim_marketing');
+        $this->db->join('pengguna', 'pengguna.id_pengguna = tim_marketing.id_pengguna');
         $this->db->where('id_tim', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -55,18 +58,30 @@ class Supplier_api extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function updateTimMarketing($data, $id, $id_pengguna)
+    public function updateTimMarketing($data, $id)
     {
         $this->db->update('tim_marketing', $data, ['id_tim' => $id]);
         // update in table pengguna also
-        $this->db->update('pengguna', $data, ['id_pengguna' => $id_pengguna]);
-        return $this->db->affected_rows();
+        // $this->db->update('pengguna', $data, ['id_pengguna' => $id_pengguna]);
+        if ($this->db->affected_rows() == '1') {
+            return TRUE;
+        } else {
+            if ($this->db->trans_status() === FALSE) {
+                return false;
+            }
+            return true;
+        }
+        // return $this->db->affected_rows();
     }
 
-    public function deleteTimMarketing($id, $id_pengguna)
+    public function deleteTimMarketing($id)
     {
+        $this->db->select('tim_marketing.*');
+        $this->db->from('tim_marketing');
+        $this->db->where('id_tim', $id);
+        $query = $this->db->get();
+        $id_pengguna = $query->row_array()['id_pengguna'];
         $this->db->delete('tim_marketing', ['id_tim' => $id]);
-        // delete in table pengguna also
         $this->db->delete('pengguna', ['id_pengguna' => $id_pengguna]);
         return $this->db->affected_rows();
     }
@@ -92,9 +107,31 @@ class Supplier_api extends CI_Model
     // Insert the same Tim to table pengguna
     public function insertTimToPengguna($data)
     {
-        $this->db->insert('pengguna', $data);
-        return $this->db->affected_rows();
+        $result =  $this->db->insert('pengguna', $data);
+        // return $this->db->affected_rows();
+        $inserted_id = $this->db->insert_id();
+        $data = [
+            'status' => $result,
+            'id_pengguna' => $inserted_id
+        ];
+        return $data;
     }
+    // Update the same Tim to table pengguna
+    public function updateTimPengguna($data, $id)
+    {
+        $status = $this->db->update('pengguna', $data, ['id_pengguna' => $id]);
+        $this->db->trans_complete();
+        // was there any update or error?
+        if ($this->db->affected_rows() == '1') {
+            return TRUE;
+        } else {
+            if ($this->db->trans_status() === FALSE) {
+                return false;
+            }
+            return true;
+        }
+    }
+
 
     // Get profile field only from data_lead
     public function getProfile($id)
@@ -229,7 +266,7 @@ class Supplier_api extends CI_Model
 
         return $this->db->query($sql);
     }
-    
+
     public function getCRMLeads($id_pengguna)
     {
 
@@ -333,13 +370,13 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         // FROM preferensi, pemenang p
         // WHERE preferensi.id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',p.id_lpse<>'',p.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',p.jenis_tender<>'',p.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
         // ";
-        
+
         $this->db->select('
         COUNT(DISTINCT CASE WHEN DATE(tgl_pemenang) = DATE(NOW()) THEN npwp ELSE NULL END) AS total_today,
         COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) AND MONTH(tgl_pemenang) = MONTH(NOW()) THEN npwp ELSE NULL END) AS total_month,
         COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = YEAR(NOW()) THEN npwp ELSE NULL END) AS total_year
         ');
-        
+
         $this->db->from('preferensi');
         $this->db->join('pemenang p', 'preferensi.id_pengguna = p.id_pengguna', 'INNER');
         $this->db->where('DATEDIFF(CURRENT_DATE, tgl_pemenang) <=', $this->interval_pemenang);

@@ -150,6 +150,7 @@ $route['api/supplier/tim-suplier'] = 'DashboardUserSupplier/getTimMarketingByIdS
 $route['api/supplier/lead/tim'] = 'DashboardUserSupplier/getLeadByIdTim';
 $route['api/supplier/tim/add'] = 'DashboardUserSupplier/addTimMarketing';
 $route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarketing/$1';
+// $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';
 $route['asosiasi'] = 'DashboardUserAsosiasi';
