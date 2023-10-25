@@ -739,7 +739,7 @@
                                 <th class="custom-padding">
                                     Jadwal
                                 </th>
-                                <th colspan="2" class="custom-padding">
+                                <th colspan="2" class="custom-padding" contenteditable="false">
                                     Catatan
                                 </th>
                                 <th class="custom-padding" style="padding-right:15px;">
@@ -1300,17 +1300,17 @@ $(function() {
         row.classList.add("editing");
 
         var editableCells = row.getElementsByClassName("editable");
-        for (var i = 0; i < editableCells.length; i++) {
-            var cell = editableCells[i];
-            var field = cell.getAttribute("data-field");
-            var currentValue = cell.textContent;
-            var input = document.createElement("input");
-            input.value = currentValue;
-            input.style.width = (currentValue.length + 1) + "ch"; // Sesuaikan lebar input
-            cell.textContent = "";
-            cell.appendChild(input);
-            cell.setAttribute("data-orig-value", currentValue);
-        }
+    for (var i = 0; i < editableCells.length; i++) {
+        var cell = editableCells[i];
+        var field = cell.getAttribute("data-field");
+        var currentValue = cell.textContent;
+        var input = document.createElement("div"); // Change to <div> for contenteditable
+        input.setAttribute("contenteditable", "true"); // Add contenteditable attribute
+        input.textContent = currentValue;
+        cell.textContent = "";
+        cell.appendChild(input);
+        cell.setAttribute("data-orig-value", currentValue);
+    }
 
         var editableSelectCells = row.getElementsByClassName("editable-select");
         for (var i = 0; i < editableSelectCells.length; i++) {
