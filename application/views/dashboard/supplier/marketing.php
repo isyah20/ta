@@ -510,7 +510,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputEmail" class="form-label text-start">Email</label>
-                                    <input type="text" name="email" class="form-control" id="inputEmail1" placeholder="Masukkan Email" required>
+                                    <input type="text" name="email" class="form-control" id="inputEmail1" placeholder="Masukkan Email" required disabled>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
@@ -681,10 +681,19 @@
                                     beforeSend: addAuthorizationHeader,
                                     success: function(response) {
                                         if (response.status == true) {
-                                            alert('Data berhasil diubah');
-                                            window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                            swal({
+                                                title: "Data berhasil diubah",
+                                                icon: "success",
+                                                button: "Ok",
+                                            }).then(function() {
+                                                window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                            });
                                         } else {
-                                            alert('Data gagal diubah');
+                                            swal({
+                                                title: "Data gagal diubah",
+                                                icon: "error",
+                                                button: "Ok",
+                                            });
                                         }
                                     },
                                     error: function(xhr, status, error) {
@@ -695,7 +704,7 @@
                                             content: span,
                                             icon: "error",
                                             button: "Ok",
-                                        })
+                                        });
                                         console.log(xhr.responseText);
                                     }
                                 });
@@ -742,60 +751,95 @@
         })
     });
     $(document).ready(function() {
-        // Handle form submission
-        $('#submit-input').click(function(event) {
-            event.preventDefault();
-            $('#submit-input').html('<div style="width:20px; height:20px; backgorund-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
-            $('#submit-input').attr('disabled', true);
-            // Get the form instance
-            var formData = {
-                nama_tim: $('input[name=nama_tim]').val(),
-                posisi: $('input[name=posisi]').val(),
-                email: $('input[name=email]').val(),
-                no_telp: $('input[name=no_telp]').val(),
-                alamat: $('textarea[name=alamat]').val(),
-            };
+    // Handle form submission
+    $('#submit-input').click(function(event) {
+        event.preventDefault();
+        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+        $('#submit-input').attr('disabled', true);
 
-            // Make an AJAX request
-            $.ajax({
-                url: '<?= base_url("api/supplier/create") ?>',
-                type: 'POST',
-                data: formData,
-                beforeSend: addAuthorizationHeader,
-                success: function(response) {
-                    $('#submit-input').html('Tambahkan');
-                    $('#submit-input').attr('disabled', 'false');
-                    if (response.status == true) {
-                        swal({
-                            title: "Data berhasil ditambahkan!",
-                            icon: "success",
-                            button: "Ok",
-                        }).then(function() {
-                            window.location.href = "<?= base_url('suplier/marketing') ?>";
-                        });
-                    } else {
-                        swal({
-                            title: "Data gagal ditambahkan!",
-                            icon: "error",
-                            button: "Ok",
-                        })
-                    }
-                },
-                error: function(xhr, status, error) {
+        // Get the email input value
+        var emailInput = $('input[name=email]').val();
+
+        // Validate the email format
+        if (!isValidEmail(emailInput)) {
+            $('#submit-input').html('Tambahkan');
+            $('#submit-input').attr('disabled', false);
+            swal({
+                title: "Alamat email tidak valid",
+                text: "Harap masukkan alamat email yang benar",
+                icon: "error",
+                button: "Ok",
+            });
+        } else {
+            // Ask for confirmation
+            swal({
+                title: "Konfirmasi Email",
+                text: "Apakah email ini sudah benar dan aktif?",
+                icon: "info",
+                buttons: ["Tidak", "Ya"]
+            }).then((confirmed) => {
+                if (confirmed) {
+                    var formData = {
+                        nama_tim: $('input[name=nama_tim]').val(),
+                        posisi: $('input[name=posisi]').val(),
+                        email: emailInput,
+                        no_telp: $('input[name=no_telp]').val(),
+                        alamat: $('textarea[name=alamat]').val(),
+                    };
+
+                    // Make an AJAX request
+                    $.ajax({
+                        url: '<?= base_url("api/supplier/create") ?>',
+                        type: 'POST',
+                        data: formData,
+                        beforeSend: addAuthorizationHeader,
+                        success: function(response) {
+                            $('#submit-input').html('Tambahkan');
+                            $('#submit-input').attr('disabled', 'false');
+                            if (response.status == true) {
+                                swal({
+                                    title: "Data berhasil ditambahkan!",
+                                    icon: "success",
+                                    button: "Ok",
+                                }).then(function() {
+                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                });
+                            } else {
+                                swal({
+                                    title: "Data gagal ditambahkan!",
+                                    icon: "error",
+                                    button: "Ok",
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            $('#submit-input').html('Tambahkan');
+                            $('#submit-input').attr('disabled', false);
+                            var span = document.createElement("span");
+                            span.innerHTML = JSON.parse(xhr.responseText).message;
+                            swal({
+                                title: "ERROR",
+                                content: span,
+                                icon: "error",
+                                button: "Ok",
+                            });
+                            console.log(xhr.responseText);
+                            console.log(JSON.parse(xhr.responseText).message);
+                        }
+                    });
+                } else {
+                    // User chose not to proceed
                     $('#submit-input').html('Tambahkan');
                     $('#submit-input').attr('disabled', false);
-                    var span = document.createElement("span");
-                    span.innerHTML = JSON.parse(xhr.responseText).message;
-                    swal({
-                        title: "ERROR",
-                        content: span,
-                        icon: "error",
-                        button: "Ok",
-                    })
-                    console.log(xhr.responseText);
-                    console.log(JSON.parse(xhr.responseText).message);
                 }
             });
-        });
+        }
     });
+
+    // Function to validate email format
+    function isValidEmail(email) {
+        var emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+        return emailPattern.test(email);
+    }
+});
 </script>
