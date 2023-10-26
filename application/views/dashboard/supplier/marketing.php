@@ -658,6 +658,8 @@
 
                             $("#form-edit").submit(function(event) {
                                 event.preventDefault();
+                                $('#submit-edit').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                                $('#submit-edit').attr('disabled', true);
 
                                 // Get the form instance
                                 var formData = {
@@ -754,8 +756,6 @@
     // Handle form submission
     $('#submit-input').click(function(event) {
         event.preventDefault();
-        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
-        $('#submit-input').attr('disabled', true);
 
         // Get the email input value
         var emailInput = $('input[name=email]').val();
@@ -774,11 +774,13 @@
             // Ask for confirmation
             swal({
                 title: "Konfirmasi Email",
-                text: "Apakah email ini sudah benar dan aktif?",
+                text: "Apakah email yang Anda masukan sudah benar?",
                 icon: "info",
                 buttons: ["Tidak", "Ya"]
             }).then((confirmed) => {
                 if (confirmed) {
+                    $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                    $('#submit-input').attr('disabled', true);
                     var formData = {
                         nama_tim: $('input[name=nama_tim]').val(),
                         posisi: $('input[name=posisi]').val(),
