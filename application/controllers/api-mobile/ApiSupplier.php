@@ -675,4 +675,107 @@ class ApiSupplier extends RestController
         }
     }
 
+    public function getListLokasiPekerjaan_get() {
+	    // $response = array(
+	    //   "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+	    //   "results" => $this->Tender_model->getListLokasiPekerjaan(
+	    //   					$this->input->get("q"),
+	    //   					$this->input->get("id_pengguna"),
+	    //   					$this->input->get("jenis"),
+	    //   					$this->input->get("page") * $this->input->get("page_limit"),
+	    //   					$this->input->get("page_limit")
+	    //   			   )
+	    // );
+
+        $q = $this->input->get("q");
+        $id_pengguna = $this->input->get("id_pengguna");
+        $jenis = $this->input->get("jenis");
+        // $page_limit = $this->input->get("page_limit");
+        // $page = $page_limit * $this->input->get("page");
+
+        $total_count = $this->Tender_model->getJumlahLokasiPekerjaan($q, $id_pengguna, $jenis);
+        $res = $this->Tender_model->getLokasiPekerjaan($q, $id_pengguna, $jenis);
+
+        if ($res) {
+            $this->response([
+                'status' => true,
+                'data' => $res,
+                'total_count' => $total_count
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data tidak ditemukan"
+            ], RestController::HTTP_NOT_FOUND);
+        }
+
+	    // $this->output
+	    //   	 ->set_status_header(200)
+	    //   	 ->set_content_type('application/json')
+	    //   	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	    //   	 ->_display();
+	    // exit;
+  	}
+  	
+  	public function getListJenisPengadaan_get() {
+	    // $response = array(
+	    //   "total_count" => $this->Tender_model->getJumlahListJenisPengadaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+	    //   "results" => $this->Tender_model->getListJenisPengadaan(
+	    //   					$this->input->get("q"),
+	    //   					$this->input->get("id_pengguna"),
+	    //   					$this->input->get("jenis"),
+	    //   					$this->input->get("page") * $this->input->get("page_limit"),
+	    //   					$this->input->get("page_limit")
+	    //   			   )
+	    // );
+        $q = $this->input->get("q");
+        $id_pengguna = $this->input->get("id_pengguna");
+        $jenis = $this->input->get("jenis");
+        // $page_limit = $this->input->get("page_limit");
+        // $page = $page_limit * $this->input->get("page");
+
+        $total_count = $this->Tender_model->getJumlahJenisPengadaan($q, $id_pengguna, $jenis);
+        $res = $this->Tender_model->getJenisPengadaan($q, $id_pengguna, $jenis);
+
+        if ($res) {
+            $this->response([
+                'status' => true,
+                'data' => $res,
+                'total_count' => $total_count
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data tidak ditemukan"
+            ], RestController::HTTP_NOT_FOUND);
+        }
+
+	    // $this->output
+	    //   	 ->set_status_header(200)
+	    //   	 ->set_content_type('application/json')
+	    //   	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+	    //   	 ->_display();
+	    // exit;
+  	}
+
+    public function getDetailPemenang_get() {
+        $id = $this->input->get('kode_tender');
+        $response = $this->Tender_model->getWinnerById($id)->row();
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data tidak ditemukan"
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
 }

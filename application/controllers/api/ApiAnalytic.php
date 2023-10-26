@@ -34,8 +34,10 @@ class ApiAnalytic extends RestController {
     }
 
     public function getPesertaTender_get() {
-        $id = $this->get('id_peserta');
-        $data = $this->Analytic_model->getPesertaTender($id);
+        // $id = $this->get('id_peserta');
+        $page_size = $this->get('pageSize');
+        $page_number = ($this->get('pageNumber') - 1) * $page_size;
+        $data = $this->Analytic_model->getPesertaTender($page_size, $page_number);
 
         if ($data) {
             $this->response([
