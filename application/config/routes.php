@@ -397,6 +397,7 @@ $route['api/statistikhome'] = 'api/ApiTender/getdatastatistik';
 
 // restAPI route for Marketing
 $route['api/marketing/get/(:num)'] = 'api/ApiMarketing/show/$1';
+$route['api/marketing/getLeadsByTim/(:num)'] = 'api/ApiMarketing/getLeadsByTim/$1';
 
 //restAPI route for Suplier 
 $route['api/supplier/get'] = 'api/ApiSupplier';

@@ -54,4 +54,20 @@ class ApiMarketing extends RestController {
             'message' => 'Data berhasil diubah'
         ], RestController::HTTP_OK);
     }
+
+    public function getLeadsByTim_get($id){
+        $data = $this->marketing->getLeadsByTim($id);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

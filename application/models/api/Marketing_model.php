@@ -40,4 +40,14 @@ class Marketing_model extends CI_Model {
         return $this->db->affected_rows();
     }
     
+    public function getLeadsByTim($id){
+        $this->db->select('data_leads.*, kontak_lead.*');
+        $this->db->from('data_leads');
+        $this->db->join('plot_tim', 'data_leads.id_lead = plot_tim.id_lead');
+        $this->db->join('tim_marketing', 'plot_tim.id_tim = tim_marketing.id_tim');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->where('tim_marketing.id_pengguna', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
