@@ -59,4 +59,12 @@ class Marketing_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function getHistoryMarketing($id){
+        $this->db->select('*');
+        $this->db->from('history_marketing');
+        $this->db->where('id_plot', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
