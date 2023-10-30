@@ -71,7 +71,7 @@ class ApiMarketing extends RestController {
         }
     }
 
-    public function getKontakLeadById($id){
+    public function getKontakLeadById_get($id){
         $data = $this->marketing->getKontakLeadById($id);
 
         if ($data) {

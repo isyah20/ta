@@ -41,7 +41,7 @@ class Marketing_model extends CI_Model {
     }
     
     public function getLeadsByTim($id){
-        $this->db->select('data_leads.*, kontak_lead.*, status, jadwal, catatan');
+        $this->db->select('data_leads.*, kontak_lead.*,id_plot, status, jadwal, catatan');
         $this->db->from('data_leads');
         $this->db->join('plot_tim', 'data_leads.id_lead = plot_tim.id_lead');
         $this->db->join('tim_marketing', 'plot_tim.id_tim = tim_marketing.id_tim');
