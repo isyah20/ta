@@ -480,11 +480,10 @@
     }
 
     .form-select-custom {
-        width: 615px;
+        width: 415px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
-        margin-bottom: 15px;
         border: 1px solid;
         background-color: white;
     }
@@ -631,34 +630,6 @@
         width:140px;
     }
 
-    #colored-select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        width: 200px;
-        padding: 10px;
-        background-color: #fff;
-        color: #333;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    #colored-select option {
-        background-color: #e0e0e0;
-    }
-
-    #colored-select option:nth-child(2) {
-        background-color: #ffcccc;
-    }
-
-    #colored-select option:nth-child(3) {
-        background-color: #ccffcc;
-    }
-
-    #colored-select option:nth-child(4) {
-        background-color: #ccccff;
-    }
-
     /* CSS untuk mengatur tampilan saat tampilan diubah menjadi mobile */
     @media (max-width: 768px) {
         .btn-img {
@@ -691,23 +662,17 @@
     <div class="container bg-white">
         <div class="row">
             <div class="col-md-7">
-                <div class="card-select wow fadeInUp">
+                <div class="card-select wow fadeInUp" data-wow-delay="0.2s">
                     <div class="select-custom container-fluid">
-                        <div class="row">
-                            <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
-                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                <select class="select2-wilayah" id="wilayah" style="border:none;">
-                                </select>
-                            </div>
-                            <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
-                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                <select class="select2-jenis-pengadaan" style="border:none;">
-                                </select>
-                            </div>
-
+                        <div class="row wow fadeInUp">
+                                <div class="col-sm-1 form-select-custom " style="width: 190px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="" style="margin-top:8px">
+                                    <select class="select2-wilayah" id="wilayah" style="border:none;">
+                                    </select>
+                                </div>
                             <!-- Search Nama -->
-                            <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
-                                <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                            <div class=" col-sm-10 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
+                                <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                                 <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
                             </div>
                         </div>
@@ -757,11 +722,8 @@
                                 <td class="editable-date">02/12/2024</td>
                                 <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
                                 <td></td>
-                                <td><span><img src="<?= base_url('assets\img\add-circle-button.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#buatAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Buat Agenda"></span>
-                                <a href="#" class="btn-link edit-button" onclick="editRow(this)" data-bs-toggle="tooltip" title="Ubah Agenda">
-                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px"></a>  
-                                <a href="#" class="btn-link save-button" style="display:none" onclick="saveRow(this)">
-                                <img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Edit"  width="30px"></a>
+                                <td><span><img src="<?= base_url('assets\img\add-circle-button.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#buatAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Buat Agenda">
+                                <span><img src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#editAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Edit Agenda"></span>
                                 <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span></td>
                             </tr>
                             <tr class="childTableRow">
@@ -938,17 +900,16 @@
                 </div>
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="editKontakModalLabel">Buat Agenda</h3>
-                    <!-- <p class="text-center"> Sesuaikan lagi kontak yang bisa dihubungi</p> -->
                     <div class="input-popup justify-content-end gap-2">
                         <form class="row g-2">
                             <div class="col-12">
                                 <label for="inputNama" class="form-label text-start">Status</label>
-                                <select class="border border-1 form-select" style="height:40px;padding-top:0px;" id="colored-select" aria-label="Pilih Status">
+                                <select class="border border-1 form-select" style="height:40px;padding-top:0px;" aria-label="Pilih Status">
                                     <option selected>Pilih Status</option>
-                                    <option value="option1">Sedang Dihubungi</option> //kuning
-                                    <option value="option2">Negosiasi</option> //biru
-                                    <option value="option3">Diterima</option> //erah
-                                    <option value="option4">Ditolak</option> //hijau
+                                    <option value="option1">Sedang Dihubungi</option>
+                                    <option value="option2">Negosiasi</option>
+                                    <option value="option3">Diterima</option>
+                                    <option value="option4">Ditolak</option>
                                 </select>
                             </div>
                             <div class="col-12">
@@ -957,7 +918,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="inputEmail" class="form-label text-start">Catatan</label>
-                                <input type="text" class="border border-1 form-control" id="inputEmail" placeholder="Masukkan Catatan">
+                                <textarea type="text" class="border border-1 form-control" id="inputEmail" placeholder="Masukkan Catatan"></textarea>
                             </div>
                         </form>
                     </div>
@@ -977,6 +938,57 @@
     </div>
 </div>
 <!--end input status-->
+
+<!-- modal edit status-->
+<div class="col-12">
+    <div class="modal fade" id="editAgenda" tabindex="-1" role="dialog" aria-labelledby="editStatus" aria-hidden="true" style="margin-top: -30px;">
+        <div class="modal-dialog custom-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                    </button>
+                </div>
+                <div class="modal-body border-0">
+                    <h3 class="modal-title" id="editKontakModalLabel">Ubah Agenda</h3>
+                    <div class="input-popup justify-content-end gap-2">
+                        <form class="row g-2">
+                            <div class="col-12">
+                                <label for="inputNama" class="form-label text-start">Status</label>
+                                <select class="border border-1 form-select" style="height:40px;padding-top:0px;" aria-label="Pilih Status">
+                                    <option selected>Pilih Status</option>
+                                    <option value="option1">Sedang Dihubungi</option>
+                                    <option value="option2">Negosiasi</option>
+                                    <option value="option3">Diterima</option>
+                                    <option value="option4">Ditolak</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="inputPosisi" class="form-label text-start">Jadwal</label>
+                                <input type="date" class="border border-1 form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
+                            </div>
+                            <div class="col-12">
+                                <label for="inputEmail" class="form-label text-start">Catatan</label>
+                                <textarea type="text" class="border border-1 form-control" id="inputEmail" placeholder="Masukkan Catatan"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="d-flex justify-content-start mt-3 gap-2">
+                        <div></div>
+                        <div class="link flex-row align-items-center w-100">
+                            <span>
+                                <a class="btn-custom text-white text-center">
+                                    <i class="fas me-1"></i>Simpan Perubahan
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end edit status-->
 
 <!-- modal edit -->
 <div class="col-12">
