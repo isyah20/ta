@@ -41,12 +41,21 @@ class Marketing_model extends CI_Model {
     }
     
     public function getLeadsByTim($id){
-        $this->db->select('data_leads.*, kontak_lead.*');
+        $this->db->select('data_leads.*, kontak_lead.*, status, jadwal, catatan');
         $this->db->from('data_leads');
         $this->db->join('plot_tim', 'data_leads.id_lead = plot_tim.id_lead');
         $this->db->join('tim_marketing', 'plot_tim.id_tim = tim_marketing.id_tim');
         $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
         $this->db->where('tim_marketing.id_pengguna', $id);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function getKontakLeadById($id){
+        $this->db->select('*');
+        $this->db->from('kontak_lead');
+        $this->db->where('id_lead', $id);
         $query = $this->db->get();
         return $query->result_array();
     }
