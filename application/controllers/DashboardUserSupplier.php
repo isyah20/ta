@@ -40,7 +40,7 @@ class DashboardUserSupplier extends CI_Controller
         $data = [
             'title' => 'Dashboard'
         ];
-        // var_dump(api_url());
+        // var_dump($_COOKIE);
         // die;
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
@@ -471,7 +471,8 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function getNamaPerusahaanById($id){
+    public function getNamaPerusahaanById($id)
+    {
         $data = $this->Supplier_model->getNamaPerusahaanById($id);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);

@@ -150,6 +150,7 @@ $route['api/supplier/tim-suplier'] = 'DashboardUserSupplier/getTimMarketingByIdS
 $route['api/supplier/lead/tim'] = 'DashboardUserSupplier/getLeadByIdTim';
 $route['api/supplier/tim/add'] = 'DashboardUserSupplier/addTimMarketing';
 $route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarketing/$1';
+// $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';
 $route['asosiasi'] = 'DashboardUserAsosiasi';
@@ -396,6 +397,8 @@ $route['api/statistikhome'] = 'api/ApiTender/getdatastatistik';
 
 // restAPI route for Marketing
 $route['api/marketing/get/(:num)'] = 'api/ApiMarketing/show/$1';
+$route['api/marketing/getLeadsByTim/(:num)'] = 'api/ApiMarketing/getLeadsByTim/$1';
+$route['api/marketing/getKontakLeadById/(:num)'] = 'api/ApiMarketing/getKontakLeadById/$1';
 
 //restAPI route for Suplier 
 $route['api/supplier/get'] = 'api/ApiSupplier';

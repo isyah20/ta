@@ -49,11 +49,11 @@
 		<?php echo form_error('password_confirm', '<p class="text-danger pl-4 pb-2">'); ?>
 	<?php endif; ?>
 
-		<div class="container-login100-form-btn">
-			<button class="login100-form-btn">UBAH</button>
-		</div>
+	<div class="container-login100-form-btn">
+		<button class="login100-form-btn">UBAH</button>
+	</div>
 
-		<?= form_close() ?>
+	<?= form_close() ?>
 	</div>
 </form>
 <script>
