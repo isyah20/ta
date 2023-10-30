@@ -421,6 +421,8 @@ $route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
 // restAPI for know your market
 $route['api/pengguna/getPesertaTender'] = 'api/ApiAnalytic/getPesertaTender';
+$route['api/pengguna/getCountPerMonth'] = 'api/ApiAnalytic/getCountPerMonth';
+$route['api/pengguna/getPesertaDaftar'] = 'api/ApiAnalytic/getPesertaDaftar';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
