@@ -30,7 +30,7 @@ class DashboardUserAsosiasi extends CI_Controller
         ]);
     }
 
-    public function index()
+   /*  public function index()
     {
         $notif = null;
 
@@ -110,6 +110,14 @@ class DashboardUserAsosiasi extends CI_Controller
         $this->load->view('profile_pengguna/templates/navbar', [
             'photo' => $this->user->getPhotoProfile((int) $id_pengguna, $this->db),
         ]);
+        $this->load->view('dashboard/asosiasi/index');
+        $this->load->view('templates/footer');
+    } */
+
+    public function index(){
+
+        $this->load->view('templates/header', 'Dashboard');
+        $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/asosiasi/index');
         $this->load->view('templates/footer');
     }
