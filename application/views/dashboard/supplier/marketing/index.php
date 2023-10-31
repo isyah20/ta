@@ -778,7 +778,7 @@
                 </div>
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
-                    <p class="text-center">PT Telekomunikasi Indonesia</p>
+                    <p class="text-center" id="nama-perusahaan">PT Telekomunikasi Indonesia</p>
                     <div class="input-popup align-items-center">
                         <div class="input-popup justify-content-end">
                             <div class="table-responsive">
@@ -793,7 +793,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="data-contact">
-                                        <td>joko</td>
+                                        <!-- <td>joko</td>
                                         <td>HRD</td>
                                         <td>hrd@telkom.co.id</td>
                                         <td>081123456666</td>
@@ -805,7 +805,7 @@
                                             <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
-                                        </td>
+                                        </td> -->
 
                                     </tbody>
                                 </table>
@@ -1421,7 +1421,7 @@ $(function() {
                     html +=  '<tr>' +
                                '<td>' + (i + 1) + '</td>' +
                                 '<td style="font-weight: bold;">' + (data.data[i].nama_perusahaan|| '') + '</td>' +
-                                '<td>' + (data.data[i].no_telp|| '-') + '<span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>' +
+                                '<td>' + (data.data[i].no_telp|| '-') + '<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="' + data.data[i].id_lead + '"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>' +
                                 // '<td>'+ '<span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>'+'</td>'+
                                 '</td>' +
                                 '<td class="editable-select">' + (data.data[i].status|| '') + '</td>' +
@@ -1437,12 +1437,12 @@ $(function() {
 
                 //get data kontak
             $("#data-leads").on("click", ".contact", function() {
-                var leads="";
                 var id_lead = $(this).data("id");
                 $.ajax({
-                    url: "<?= site_url('DashboardUserSupplier/getKontakLeadById/') ?>" + id_lead,
+                    url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
                     type: "GET",
                     dataType: "json",
+                    beforeSend: addAuthorizationHeader,
                     success: function(data) {
                         var kontak = "";
 
@@ -1462,12 +1462,12 @@ $(function() {
                         alert("Terjadi kesalahan saat mengambil data kontak.");
                     }
                 });
-                return leads;
-
+                
                 $.ajax({
-                    url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
+                    url: "<?= base_url() ?>api/marketing/getLeadsByTim/" + id_pengguna,
                     type: "GET",
                     dataType: "JSON",
+                    beforeSend: addAuthorizationHeader,
                     success: function(data) {
                         $('#nama-perusahaan').html(data.nama_perusahaan);
                         console.log(data.nama_perusahaan);
