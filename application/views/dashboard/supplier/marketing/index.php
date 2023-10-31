@@ -1431,37 +1431,45 @@ $(function() {
                 $('#data-leads').html(html);
 
                 //get data kontak
-            $("#data-leads").on("click", ".contact", function() {
-                var id_lead = $(this).data("id");
-                $.ajax({
-                    url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
-                    type: "GET",
-                    dataType: "json",
-                    beforeSend: addAuthorizationHeader,
-                    success: function(data) {
-                        var kontak = "";
+                $("#data-leads").on("click", ".contact", function() {
+                    var id_lead = $(this).data("id");
+                    $.ajax({
+                        url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
+                        type: "GET",
+                        dataType: "json",
+                        beforeSend: addAuthorizationHeader,
+                        success: function(data) {
+                            var kontak = "";
 
-                        $.each(data.data, function(index, value) {
-                            kontak +=
-                                `<tr>
-                                    <td>` + value.nama + `</td>
-                                    <td>` + value.posisi + `</td>
-                                    <td>` + value.email + `</td>
-                                    <td>` + value.no_telp + `</td>
-                                </tr>`;
-                        });
+                            $.each(data.data, function(index, value) {
+                                kontak +=
+                                    `<tr>
+                                        <td>` + value.nama + `</td>
+                                        <td>` + value.posisi + `</td>
+                                        <td>` + value.email + `</td>
+                                        <td>` + value.no_telp + `</td>
+                                    </tr>`;
+                            });
 
-                        $("#infoKontakModal .data-kontak").html(kontak);
-                        console.log(kontak);
-                    },
-                    error: function() {
-                        alert("Terjadi kesalahan saat mengambil data kontak.");
-                    }
+                            $("#infoKontakModal .data-kontak").html(kontak);
+                            console.log(kontak);
+                        },
+                        error: function() {
+                            alert("Terjadi kesalahan saat mengambil data kontak.");
+                        }
+                    });
+
+                    $.ajax({
+                        url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function(data) {
+                            $('#nama-perusahaan').html(data.nama_perusahaan);
+                            console.log(data.nama_perusahaan);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {}
+                    });
                 });
-
-                
-            });
-
             }
         })
     });
