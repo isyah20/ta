@@ -650,11 +650,8 @@
 <section class="bg-white pt-5 mt-5">
     <div class="mt-3 container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-12">
-            <h3 class="mb-0 ms-2 wow fadeInUp" style="order: 1;">
-                Hi Bambang
-                <p>Siap Memasakan produkmu?
-                </p>
-            </h3>
+            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Follow Up Calon Customermu</p>
+            </h4>
         </div>
     </div>
 </section>
