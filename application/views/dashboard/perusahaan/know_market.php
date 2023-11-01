@@ -112,7 +112,6 @@
         margin-bottom: 15px;
         border: 1px solid;
         background-color: white;
-        margin-top: 1rem;
         margin-left: 10px;
         height: 2rem;
     }
