@@ -592,8 +592,14 @@ class Supplier_model extends CI_Model
         }
     }
 
-    public function insertPlotMarketing($id_lead, $id_tim)
+    public function insertPlotMarketing($data)
     {
+        $id_lead = $data['id_lead'];
+        // $id_tim = $data['id_tim'];
+        $catatan = $data['catatan'];
+        $status = $data['status'];
+        $jadwal = $data['jadwal'];
+
         $this->db->select('*');
         $this->db->from('plot_tim');
         $this->db->where('id_lead', $id_lead);
@@ -603,9 +609,17 @@ class Supplier_model extends CI_Model
 
         if ($isSet > 0) {
             $this->db->where('id_lead', $id_lead);
-            return $this->db->update('plot_tim', ['id_tim' => $id_tim]);
+            $sql = $this->db->update('plot_tim', 
+            ['catatan' => $catatan,
+            'status' => $status,
+            'jadwal' => $jadwal
+            ]);
+
+            if ($sql) {
+                return $this->db->insert('history_marketing', ['id_lead' => $id_lead, 'status' => $status, 'catatan' => $catatan]);
+            }
         }
-        return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
+        // return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
     }
 
     public function deleteHistoryMarketing($id_lead)

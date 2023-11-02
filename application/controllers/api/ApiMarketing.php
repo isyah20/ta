@@ -22,6 +22,7 @@ class ApiMarketing extends RestController {
     {
         parent::__construct();
         $this->load->model('api/Marketing_model', 'marketing');
+        $this->load->model('Supplier_model', 'supplier');
         $this->init();
     }
 
@@ -100,6 +101,30 @@ class ApiMarketing extends RestController {
                 'status' => false,
                 'message' => 'Data tidak ditemukan'
             ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function insertHistory_post() {
+        $data = [
+            'id_lead' => $this->post('id_lead'),
+            // $id_team = $this->post('id_team'),
+            'jadwal' => $this->post('jadwal'),
+            'catatan' => $this->post('catatan'),
+            'status' => $this->post('status'),
+        ];
+
+        $res = $this->supplier->insertPlotMarketing($data);
+
+        if ($res) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil ditambahkan'
+            ], RestController::HTTP_CREATED);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal ditambahkan'
+            ], RestController::HTTP_BAD_REQUEST);
         }
     }
 }
