@@ -650,11 +650,8 @@
 <section class="bg-white pt-5 mt-5">
     <div class="mt-3 container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-12">
-            <h3 class="mb-0 ms-2 wow fadeInUp" style="order: 1;">
-                Hi Bambang
-                <p>Siap Memasakan produkmu?
-                </p>
-            </h3>
+            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Follow Up Calon Customermu</p>
+            </h4>
         </div>
     </div>
 </section>
@@ -713,7 +710,7 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
-                            <tr>
+                            <!-- <tr>
                                 <td>2</td>
                                 <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
                                 <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
@@ -725,8 +722,8 @@
                                 <td><span><img src="<?= base_url('assets\img\add-circle-button.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#buatAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Buat Agenda">
                                 <span><img src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#editAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Edit Agenda"></span>
                                 <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span></td>
-                            </tr>
-                            <tr class="childTableRow">
+                            </tr> -->
+                            <!-- <tr class="childTableRow">
                                 <td colspan="5">
                                     <table class="table custom-table-container">
                                         <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> 
@@ -742,7 +739,7 @@
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody id="data-leads">
+                                        <tbody>
                                             <tr>
                                                 <td class="editable-select">Negotiation</td>
                                                 <td class="editable-date">2023-10-17 15:30:00</td>
@@ -756,7 +753,7 @@
                                         </tbody>
                                     </table>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -778,7 +775,7 @@
                 </div>
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
-                    <p class="text-center">PT Telekomunikasi Indonesia</p>
+                    <p class="text-center" id="nama-perusahaan">PT Telekomunikasi Indonesia</p>
                     <div class="input-popup align-items-center">
                         <div class="input-popup justify-content-end">
                             <div class="table-responsive">
@@ -792,8 +789,8 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-contact">
-                                        <td>joko</td>
+                                    <tbody class="data-kontak">
+                                        <!-- <td>joko</td>
                                         <td>HRD</td>
                                         <td>hrd@telkom.co.id</td>
                                         <td>081123456666</td>
@@ -805,7 +802,7 @@
                                             <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
-                                        </td>
+                                        </td> -->
 
                                     </tbody>
                                 </table>
@@ -1129,7 +1126,6 @@
 
 
                                 <button type="button" class="custom-button justify-content-center">
-                                    <img src="<?= base_url("assets/img/revome-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
                                     Tambah Kontak
                                 </button>
                                 <!-- <button type="button" class="custom-button justify-content-center">
@@ -1237,14 +1233,6 @@
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
-$(function() {
-    $('.expandChildTable').on('click', function() {
-        $(this).toggleClass('selected').closest('tr').next().toggle();
-    })
-});
-</script>
 
 <!-- Script add row kontak -->
 <script>
@@ -1398,4 +1386,212 @@ $(function() {
         button.style.display = "none";
         row.querySelector(".edit-button").style.display = "inline";
     }
+</script>
+
+<script>
+    var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
+    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+
+    function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+    }
+
+$(document).ready(function() {
+    // Ambil data dari API pertama (Tabel Utama)
+    $.ajax({
+        url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna, // Ganti dengan URL API pertama
+        type: "GET",
+        dataType: "json",
+        beforeSend: addAuthorizationHeader,
+        success: function(data1) {
+            // Membuat baris untuk tabel utama
+            for (let i = 0; i < data1.data.length; i++) {
+                const rowHtml = `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${data1.data[i].nama_perusahaan || ''}</td>
+                        <td>${data1.data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data1.data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                        <td class="editable-select">${data1.data[i].status || ''}</td>
+                        <td class="editable-date">${data1.data[i].jadwal || ''}</td>
+                        <td class="editable" style="max-width: 400px">${data1.data[i].catatan || ''}</td>
+                        <td></td>
+                        <td>
+                            <span><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-id="${data1.data[i].id_tim}" data-bs-toggle="tooltip" title="Buat Agenda">
+                            <span><img src="<?= base_url('assets/img/icon-pencil-edit.svg') ?>" width="30px" style="margin-left:3px" data-id="${data1.data[i].id_tim}" data-bs-toggle="tooltip" title="Edit Agenda"></span>
+                            <span class="expandChildTable" data-id="${data1.data[i].id_lead}"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
+                        </td>
+                    </tr>
+                    <tr class="childTableRow">
+                        <td colspan="5">
+                            <table class="table custom-table-container">
+                                <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464">
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Jadwal</th>
+                                        <th>Catatan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data-history">
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                `;
+                $('#data-leads').append(rowHtml);
+            }
+
+            //get data kontak
+            $("#data-leads").on("click", ".contact", function() {
+                    var id_lead = $(this).data("id");
+                    $.ajax({
+                        url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
+                        type: "GET",
+                        dataType: "json",
+                        beforeSend: addAuthorizationHeader,
+                        success: function(data) {
+                            var kontak = "";
+
+                            $.each(data.data, function(index, value) {
+                                kontak +=
+                                    `<tr>
+                                        <td>` + value.nama + `</td>
+                                        <td>` + value.posisi + `</td>
+                                        <td>` + value.email + `</td>
+                                        <td>` + value.no_telp + `</td>
+                                         <td><img src="<?= base_url('assets/img/icon-pencil-edit.svg') ?>" width="30px" style="visibility" data-toggle="modal" data-target="" data-id="" data-bs-toggle="tooltip" title="Ubah kontak">
+                                         <img src="<?= base_url('assets/img/icon-delete.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="" data-id="" data-bs-toggle="tooltip" title="Hapus Kontak"></td>
+                                    </tr>`;
+                            });
+
+                            $("#infoKontakModal .data-kontak").html(kontak);
+                            console.log(kontak);
+                        },
+                        error: function() {
+                            alert("Terjadi kesalahan saat mengambil data kontak.");
+                        }
+                    });
+
+                    $.ajax({
+                        url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function(data) {
+                            $('#nama-perusahaan').html(data.nama_perusahaan);
+                            console.log(data.nama_perusahaan);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {}
+                    });
+                });
+
+                // Tambahkan fungsi expandChildTable
+    $('.expandChildTable').on('click', function() {
+        const id_lead = $(this).data('id');
+        const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
+
+        // Hapus data yang sudah ada di dalam tabel ekspansi sebelum mengambil data baru
+        childTable.empty();
+
+        // Ambil data dari API kedua (Tabel Ekspansi) berdasarkan ID lead
+        $.ajax({
+            url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead, // Ganti dengan URL API kedua
+            type: "GET",
+            dataType: "json",
+            beforeSend: addAuthorizationHeader,
+            success: function(data) {
+                // Tambahkan data dari API kedua ke tabel ekspansi
+                $.each(data.data, function(index, value) {
+                    const childRowHtml = `
+                        <tr>
+                            <td class="editable-select">${value.status || ''}</td>
+                            <td class="editable-date">${value.jadwal || ''}</td>
+                            <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
+                        </tr>
+                    `;
+                    childTable.append(childRowHtml);
+                });
+                childTable.parent().show(); // Tampilkan tabel ekspansi
+            },
+        });
+    });
+        },
+    });
+
+});
+
+    // $(document).ready(function() {
+    //     $.ajax({
+    //         url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna,
+    //         type: "GET",
+    //         dataType: "json",
+    //         beforeSend: addAuthorizationHeader,
+    //         success: function(data) {
+    //             let html = '';
+    //             let i;
+    //             for (i = 0; i < data.data.length; i++) {
+    //                 html +=  '<tr>' +
+    //                             '<td>' + (i + 1) + '</td>' +
+    //                             '<td style="font-weight: bold;">' + (data.data[i].nama_perusahaan|| '') + '</td>' +
+    //                             '<td>' + (data.data[i].no_telp|| '-') + '<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="' + data.data[i].id_lead + '"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>' +
+    //                             '</td>' +
+    //                             '<td class="editable-select">' + (data.data[i].status|| '') + '</td>' +
+    //                             '<td class="editable-date">' + (data.data[i].jadwal|| '') + '</td>' +
+    //                             '<td class="editable" style="max-width: 400px">' + (data.data[i].catatan|| '') + '</td>' +
+    //                             '<td></td>' +
+    //                             '<td><span><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#buatAgenda" data-id="' + data.data[i].id_tim + '" data-bs-toggle="tooltip" title="Buat Agenda">' +
+    //                             '<span><img src="<?= base_url('assets/img/icon-pencil-edit.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#editAgenda" data-id="' + data.data[i].id_tim + '" data-bs-toggle="tooltip" title="Edit Agenda"></span>' +
+    //                             '<span class="expandChildTable" data-id="' + data.data[i].id_lead + '"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span></td>' +
+    //                         '</tr>' +
+    //                         '<tr class="childTableRow"><td colspan="2"><table class="table custom-table-container"><thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> <tr><th> Status</th><th>Jadwal</th><th>Catatan</th></tr></thead><tbody id="data-leads"><tr><td class="editable-select">Negotiation</td><td class="editable-date">2023-10-17 15:30:00</td><td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td></tr><tr><td class="editable-select">Negotiation</td><td class="editable-date">2023-10-17 15:30:00</td><td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td></tr></tbody></table></td></tr>';             
+    //             }
+    //             $('#data-leads').html(html);
+
+    //             $(function() {
+    //                 $('.expandChildTable').on('click', function() {
+    //                     $(this).toggleClass('selected').closest('tr').next().toggle();
+    //                 })
+    //             });
+
+    //             //get data kontak
+    //             $("#data-leads").on("click", ".contact", function() {
+    //                 var id_lead = $(this).data("id");
+    //                 $.ajax({
+    //                     url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
+    //                     type: "GET",
+    //                     dataType: "json",
+    //                     beforeSend: addAuthorizationHeader,
+    //                     success: function(data) {
+    //                         var kontak = "";
+
+    //                         $.each(data.data, function(index, value) {
+    //                             kontak +=
+    //                                 `<tr>
+    //                                     <td>` + value.nama + `</td>
+    //                                     <td>` + value.posisi + `</td>
+    //                                     <td>` + value.email + `</td>
+    //                                     <td>` + value.no_telp + `</td>
+    //                                 </tr>`;
+    //                         });
+
+    //                         $("#infoKontakModal .data-kontak").html(kontak);
+    //                         console.log(kontak);
+    //                     },
+    //                     error: function() {
+    //                         alert("Terjadi kesalahan saat mengambil data kontak.");
+    //                     }
+    //                 });
+
+    //                 $.ajax({
+    //                     url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
+    //                     type: "GET",
+    //                     dataType: "JSON",
+    //                     success: function(data) {
+    //                         $('#nama-perusahaan').html(data.nama_perusahaan);
+    //                         console.log(data.nama_perusahaan);
+    //                     },
+    //                     error: function(jqXHR, textStatus, errorThrown) {}
+    //                 });
+    //             });
+    //         }
+    //     })
+    // });
 </script>
