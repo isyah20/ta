@@ -778,4 +778,68 @@ class ApiSupplier extends RestController
         }
     }
 
+    public function getTahun_get() {
+        $npwp = $this->input->get('npwp');
+        $res = $this->Supplier_api->getTahun($npwp);
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $res,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data tidak ditemukan"
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getPemenangFiltered() {
+        $data = [
+            'npwp' => $this->input->get('npwp'),
+            'lokasi' => $this->input->get('lokasi'),
+            'jenis' => $this->input->get('jenis_pengadaan'),
+            'penawaran_awal' => $this->input->get('nilai_penawaran_awal'),
+            'penawaran_akhir' => $this->input->get('nilai_penawaran_akhir'),
+            'tahun' => $this->input->get('tahun'),
+        ];
+
+        $response = $this->Supplier_api->getRiwayatPemenangFiltered($data);
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data tidak ditemukan"
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function plotCRM_get() {
+        $id_lead = $this->input->get('id_lead');
+        $id_tim = $this->input->get('id_tim');
+
+        $data = $this->Supplier_model->insertPlotTim($id_lead, $id_tim);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                'message' => "Data berhasil diubah"
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data gagal diubah"
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

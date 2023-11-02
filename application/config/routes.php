@@ -124,6 +124,7 @@ $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';
 $route['suplier/test-crm'] = 'DashboardUserSupplier/testCRM';
+$route['suplier/plot-crm'] = 'api-mobile/ApiSupplier/plotCRM';
 $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';

@@ -504,7 +504,7 @@
                   `<div class="row"><div class="col-12">
                 <div class="title bg-color wow fadeInUp" data-wow-delay="0.2s" style="padding: 10px; margin-top:15px">
                 <div class="card card-name rounded-3" style="height: 40px;padding-top:2%"  onclick="toggleCardVisibility(this,'container` + index + 2 + `')">
-                  <h5 class="title-text" style="margin-left:10px">` + value.nama_tim + `
+                  <h5 class="title-text" style="margin-left:10px">` + value.nama + `
                   </h5>
                   <span class="arrow-icon"><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
                   <span id="card-count-container` + index + 2 + `" class="badge" style="margin-top:3px">` + value.jumlah + `</span>
