@@ -1458,6 +1458,8 @@ $(document).ready(function() {
                                         <td>` + value.posisi + `</td>
                                         <td>` + value.email + `</td>
                                         <td>` + value.no_telp + `</td>
+                                         <td><img src="<?= base_url('assets/img/icon-pencil-edit.svg') ?>" width="30px" style="visibility" data-toggle="modal" data-target="" data-id="" data-bs-toggle="tooltip" title="Ubah kontak">
+                                         <img src="<?= base_url('assets/img/icon-delete.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="" data-id="" data-bs-toggle="tooltip" title="Hapus Kontak"></td>
                                     </tr>`;
                             });
 
