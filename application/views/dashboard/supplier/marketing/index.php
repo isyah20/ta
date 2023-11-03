@@ -1397,14 +1397,12 @@
     }
 
 $(document).ready(function() {
-    // Ambil data dari API pertama (Tabel Utama)
     $.ajax({
-        url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna, // Ganti dengan URL API pertama
+        url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna,
         type: "GET",
         dataType: "json",
         beforeSend: addAuthorizationHeader,
         success: function(data1) {
-            // Membuat baris untuk tabel utama
             for (let i = 0; i < data1.data.length; i++) {
                 const rowHtml = `
                     <tr>
@@ -1440,6 +1438,32 @@ $(document).ready(function() {
                 $('#data-leads').append(rowHtml);
             }
 
+             // Tambahkan fungsi expandChildTable
+            $('.expandChildTable').on('click', function() {
+                    const id_lead = $(this).data('id');
+                    const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
+                    childTable.empty();
+                    $.ajax({
+                        url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead,
+                        type: "GET",
+                        dataType: "json",
+                        beforeSend: addAuthorizationHeader,
+                        success: function(data) {
+                            $.each(data.data, function(index, value) {
+                                const childRowHtml = `
+                                    <tr>
+                                        <td class="editable-select">${value.status || ''}</td>
+                                        <td class="editable-date">${value.jadwal || ''}</td>
+                                        <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
+                                    </tr>
+                                `;
+                                childTable.append(childRowHtml);
+                            });
+                            childTable.parent().show();
+                        },
+                    });
+                });
+
             //get data kontak
             $("#data-leads").on("click", ".contact", function() {
                     var id_lead = $(this).data("id");
@@ -1458,9 +1482,15 @@ $(document).ready(function() {
                                         <td>` + value.posisi + `</td>
                                         <td>` + value.email + `</td>
                                         <td>` + value.no_telp + `</td>
-                                         <td><img src="<?= base_url('assets/img/icon-pencil-edit.svg') ?>" width="30px" style="visibility" data-toggle="modal" data-target="" data-id="" data-bs-toggle="tooltip" title="Ubah kontak">
-                                         <img src="<?= base_url('assets/img/icon-delete.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="" data-id="" data-bs-toggle="tooltip" title="Hapus Kontak"></td>
-                                    </tr>`;
+                                        <td>
+                                            <a href="#" class="btn btn-link" onclick="editRowContact(this)">
+                                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                            </a>
+                                            <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
+                                                <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                            </a>
+                                        </td>
+                                        </tr>`;
                             });
 
                             $("#infoKontakModal .data-kontak").html(kontak);
@@ -1482,40 +1512,8 @@ $(document).ready(function() {
                         error: function(jqXHR, textStatus, errorThrown) {}
                     });
                 });
-
-                // Tambahkan fungsi expandChildTable
-    $('.expandChildTable').on('click', function() {
-        const id_lead = $(this).data('id');
-        const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
-
-        // Hapus data yang sudah ada di dalam tabel ekspansi sebelum mengambil data baru
-        childTable.empty();
-
-        // Ambil data dari API kedua (Tabel Ekspansi) berdasarkan ID lead
-        $.ajax({
-            url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead, // Ganti dengan URL API kedua
-            type: "GET",
-            dataType: "json",
-            beforeSend: addAuthorizationHeader,
-            success: function(data) {
-                // Tambahkan data dari API kedua ke tabel ekspansi
-                $.each(data.data, function(index, value) {
-                    const childRowHtml = `
-                        <tr>
-                            <td class="editable-select">${value.status || ''}</td>
-                            <td class="editable-date">${value.jadwal || ''}</td>
-                            <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
-                        </tr>
-                    `;
-                    childTable.append(childRowHtml);
-                });
-                childTable.parent().show(); // Tampilkan tabel ekspansi
             },
         });
-    });
-        },
-    });
-
 });
 
     // $(document).ready(function() {
