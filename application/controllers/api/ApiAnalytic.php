@@ -35,14 +35,56 @@ class ApiAnalytic extends RestController {
 
     public function getPesertaTender_get() {
         // $id = $this->get('id_peserta');
-        $page_size = $this->get('pageSize');
-        $page_number = ($this->get('pageNumber') - 1) * $page_size;
-        $data = $this->Analytic_model->getPesertaTender($page_size, $page_number);
+        // $page_size = $this->get('pageSize');
+        // $page_number = ($this->get('pageNumber') - 1) * $page_size;
+        $data = [
+            'id_pengguna' => $this->get('id_pengguna'),
+            'keyword' => $this->get('keyword'),
+            'pageSize' => $this->get('pageSize'),
+            'pageNumber' => $this->get('pageNumber')
+        ];
 
-        if ($data) {
+        $res = $this->Analytic_model->getPesertaTender($data)->result();
+
+        if ($res) {
             $this->response([
                 'status' => true,
-                'data' => $data
+                'data' => $res
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan',
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getCountPerMonth_get() {
+        $id_pengguna = $this->input->get('id_pengguna');
+
+        $res = $this->Analytic_model->getWinner($id_pengguna)->result();
+
+        if ($res) {
+            $this->response([
+                'status' => true,
+                'data' => $res
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getPesertaDaftar_get() {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $res = $this->Analytic_model->getPesertaMendaftar($id_pengguna)->result();
+
+        if ($res) {
+            $this->response([
+                'status' => true,
+                'data' => $res
             ], RestController::HTTP_OK);
         } else {
             $this->response([

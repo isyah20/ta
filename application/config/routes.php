@@ -124,6 +124,7 @@ $route['user-dashboard'] = 'DashboardUser';
 $route['user-dashboard/list-tender'] = 'DashboardUser/listTenderPage';
 $route['suplier'] = 'DashboardUserSupplier';
 $route['suplier/test-crm'] = 'DashboardUserSupplier/testCRM';
+$route['suplier/plot-crm'] = 'api-mobile/ApiSupplier/plotCRM';
 $route['suplier/leads'] = 'DashboardUserSupplier/dataLeads';
 $route['suplier/getleads/(:num)'] = 'DashboardUserSupplier/getDataLeadsById/$1';
 $route['suplier/getleads'] = 'DashboardUserSupplier/getDataLeads';
@@ -400,6 +401,7 @@ $route['api/marketing/get/(:num)'] = 'api/ApiMarketing/show/$1';
 $route['api/marketing/getLeadsByTim/(:num)'] = 'api/ApiMarketing/getLeadsByTim/$1';
 $route['api/marketing/getKontakLeadById/(:num)'] = 'api/ApiMarketing/getKontakLeadById/$1';
 $route['api/marketing/getHistoryMarketing/(:num)'] = 'api/ApiMarketing/getHistoryMarketing/$1';
+$route['api/marketing/insertHistory'] = 'api/ApiMarketing/insertHistory';
 
 //restAPI route for Suplier 
 $route['api/supplier/get'] = 'api/ApiSupplier';
@@ -425,6 +427,8 @@ $route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
 // restAPI for know your market
 $route['api/pengguna/getPesertaTender'] = 'api/ApiAnalytic/getPesertaTender';
+$route['api/pengguna/getCountPerMonth'] = 'api/ApiAnalytic/getCountPerMonth';
+$route['api/pengguna/getPesertaDaftar'] = 'api/ApiAnalytic/getPesertaDaftar';
 
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';

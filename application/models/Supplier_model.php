@@ -538,6 +538,7 @@ class Supplier_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
     public function insertUpdatePlotTim($id_lead, $id_tim)
     {
         $this->db->select('*');
@@ -553,6 +554,80 @@ class Supplier_model extends CI_Model
         }
         return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
     }
+
+    public function insertPlotTim($id_lead, $id_tim)
+    {
+        $this->db->select('*');
+        $this->db->from('plot_tim');
+        $this->db->where('id_lead', $id_lead);
+
+        $query = $this->db->get();
+        $isSet = $query->num_rows();
+
+        $query2 = "SELECT * 
+                FROM history_marketing 
+                WHERE id_lead = $id_lead";
+
+        $isSet2 = $this->db->query($query2)->num_rows();
+
+        if ($isSet > 0) {
+            $this->db->where('id_lead', $id_lead);
+            $sql2 = $this->db->update('plot_tim', ['id_tim' => $id_tim]);
+
+            if ($sql2) {
+                if ($id_tim == 0) {
+                    $this->db->where('id_lead', $id_lead);
+                    return $this->db->delete('history_marketing');
+                } else if ($isSet2 == 0) {
+                    return $this->db->insert('history_marketing', ['id_lead' => $id_lead]);
+                }
+            }
+        } else {
+            $sql = $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
+
+            if ($sql) {
+                $this->db->insert('history_marketing', ['id_lead' => $id_lead]);
+                return $this->db->affected_rows();
+            }
+        }
+    }
+
+    public function insertPlotMarketing($data)
+    {
+        $id_lead = $data['id_lead'];
+        // $id_tim = $data['id_tim'];
+        $catatan = $data['catatan'];
+        $status = $data['status'];
+        $jadwal = $data['jadwal'];
+
+        $this->db->select('*');
+        $this->db->from('plot_tim');
+        $this->db->where('id_lead', $id_lead);
+
+        $query = $this->db->get();
+        $isSet = $query->num_rows();
+
+        if ($isSet > 0) {
+            $this->db->where('id_lead', $id_lead);
+            $sql = $this->db->update('plot_tim', 
+            ['catatan' => $catatan,
+            'status' => $status,
+            'jadwal' => $jadwal
+            ]);
+
+            if ($sql) {
+                return $this->db->insert('history_marketing', ['id_lead' => $id_lead, 'status' => $status, 'catatan' => $catatan]);
+            }
+        }
+        // return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
+    }
+
+    public function deleteHistoryMarketing($id_lead)
+    {
+        $this->db->where('id_lead', $id_lead);
+        $this->db->delete('history_marketing');
+    }
+
     public function deletePlotTimByIdLead($id_lead)
     {
         $this->db->where('id_lead', $id_lead);
@@ -590,8 +665,9 @@ class Supplier_model extends CI_Model
     }
     public function getTimBySupplierId($id_supplier)
     {
-        $this->db->select('tm.*, (SELECT COUNT(*) FROM plot_tim pt WHERE pt.id_tim = tm.id_tim) AS jumlah');
+        $this->db->select('tm.*, pengguna.*, (SELECT COUNT(*) FROM plot_tim pt WHERE pt.id_tim = tm.id_tim) AS jumlah');
         $this->db->from('tim_marketing tm');
+        $this->db->join('pengguna', 'pengguna.id_pengguna = tm.id_pengguna');
         $this->db->where('tm.id_supplier', $id_supplier);
         $query = $this->db->get();
         return $query->result_array();
