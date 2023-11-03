@@ -141,6 +141,7 @@
     td {
         padding: 0.5rem 1rem;
         text-align: left;
+        height: 3rem;
     }
 
     .data-table {
@@ -220,9 +221,9 @@
     }
 
     .custom-img3 {
-        width: 30px;
-        height: 30px;
-        margin-left: 1rem;
+        width: 15px;
+        height: 15px;
+        margin-left: 10px;
     }
 
     .tren-card {
@@ -252,16 +253,54 @@
     .btnbtnbtn {
         color: #f2f2f2;
         background-color: #D21B1B;
-        font-size: 10px;
-        font-weight: 500;
+        font-size: 8px;
+        font-weight: 700;
         border-radius: 10px;
         height: 35px;
-        width: 50px;
+        width: 80px;
         border-color: #D21B1B;
     }
 
     .btn:hover {
         background-color: #D21B1B;
+    }
+
+    @media (max-width: 768px) {
+        .justify-content-start {
+            justify-content: center !important;
+        }
+
+        .container-lg {
+            padding-top: 30px;
+            justify-content: center;
+        }
+
+        .col-7, .col-8,
+        .col-4 {
+            width: 100%;
+            /* Make the columns take the full width on smaller screens */
+        }
+
+        .overflow {
+            overflow: hidden;
+        }
+
+        .form-select-custom {
+            width: 100%;
+            margin-right: 0;
+        }
+
+        .tren-card {
+            width: 100%;
+        }
+
+        .card-select {
+            padding: 20px;
+        }
+
+        .form-select-custom {
+            flex-basis: calc(50% - 10px);
+        }
     }
 </style>
 
@@ -307,29 +346,37 @@
                     <div class="col-lg-2" style="padding:0">
                         <div>
                             <center>
+                                <div class="chart2" style="margin-left:50; padding:0">
+                                    <canvas id="doughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                    <!-- <div id="chartCenterText" style="position: absolute; top: 52%; left: 80%; transform: translate(-50%, -50%); text-align: center;">
+                                            <p style="font-size: 8px; font-weight: bold;">Statistik Anggota</p>
+                                        </div> -->
+                                </div>
+                            </center>
+                            <!-- <center>
                                 <div class="chart2" style="margin:0; padding:0">
-                                    <canvas id="doughnutChart" width="150" height="150" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                    <canvas id="doughnutChart" width="40" height="40" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
                                     <div id="chartCenterText" style="position: absolute; top: 52%; left: 80%; transform: translate(-50%, -50%); text-align: center;">
                                         <p style="font-size: 65%; font-weight: bold; margin-left:27%;">Statistik Anggota</p>
                                     </div>
                                 </div>
-                            </center>
+                            </center> -->
                         </div>
                     </div>
                     <div class="col text-center mt-4 mb-4" style="padding:0">
-                        <h6 style="font-size:12px; margin-top:20; margin-left:50;"><b>Total Tender</b></h6>
+                        <h6 style="font-size:12px; margin-top:20; margin-left:150;"><b>Total Tender</b></h6>
                         <!-- <h5 style="font-size:30px" id="ikut"><b>42</b></h5> -->
-                        <h5 style="font-size:30px; margin-left:50;" id="total"> <b>4659</b></h5>
+                        <h5 style="font-size:30px; margin-left:150;" id="total"> <b>4659</b></h5>
                     </div>
                     <div class="col mt-4 mb-4">
                         <div class="row">
-                            <div class="col-1" style="padding:0">
-                                <div style=" border-left: 3px solid #F9845F; height: 100px; opacity:1"></div>
+                            <div class="col-1" style="padding:0; margin-left:10px">
+                                <div style=" border-left: 5px solid #F9845F; height: 100px; opacity:1"></div>
                             </div>
                             <div class="col" style="margin-top:5%; padding:0">
-                                <h5 id="menang" class="tender-summary"><span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>9 Menang</h5>
-                                <h5 id="kalah" class="tender-summary"><span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>33 Kalah</h5>
-                                <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>42 Ikut Tender</h5>
+                                <h5 id="menang" class="tender-summary" style="font-size: 14px;"><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
+                                <h5 id="kalah" class="tender-summary" style="font-size: 14px;"><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
+                                <h5 id="ikut" class="tender-summary" style="font-size: 14px;"><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
                             </div>
                         </div>
                     </div>
@@ -379,7 +426,7 @@
 </section>
 
 <section>
-    <div class="container-lg wow fadeInUp">
+    <div class="container mt-4 wow fadeInUp">
         <div class="row">
             <div class="col-8">
                 <div class="row">
@@ -403,11 +450,92 @@
                                 <th><button id="hps">Penurunan HPS</button></th>
                             </tr>
                         </thead>
-                        <tbody id="table-content"></tbody>
+                        <tbody id="table-content">
+                            <tr>
+                                <td><span id="no">1</span></td>
+                                <td id="name" style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td id="tender">24</td>
+                                <td id="m" style="color: #059669;">23</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>15</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">2</span></td>
+                                <td id="name" style="font-weight: bold;">PT SANGKURIANG INTERNASIONAL</td>
+                                <td id="tender">13</td>
+                                <td id="m" style="color: #059669;">13</td>
+                                <td id="k" style="color: #D21B1B;">0</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>0</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">3</span></td>
+                                <td id="name" style="font-weight: bold;">CV. TORCHE INDONESIA</td>
+                                <td id="tender">22</td>
+                                <td id="m" style="color: #059669;">20</td>
+                                <td id="k" style="color: #D21B1B;">2</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>22</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">4</span></td>
+                                <td id="name" style="font-weight: bold;">Adhyamitra Tata Sarana</td>
+                                <td id="tender">17</td>
+                                <td id="m" style="color: #059669;">16</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>20</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">5</span></td>
+                                <td id="name" style="font-weight: bold;">PT. PASYA MITRA UTAMA</td>
+                                <td id="tender">19</td>
+                                <td id="m" style="color: #059669;">15</td>
+                                <td id="k" style="color: #D21B1B;">4</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>0</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">6</span></td>
+                                <td id="name" style="font-weight: bold;">PT. Mediatama Kreasi Informatika</td>
+                                <td id="tender">31</td>
+                                <td id="m" style="color: #059669;">29</td>
+                                <td id="k" style="color: #D21B1B;">2</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>25</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">7</span></td>
+                                <td id="name" style="font-weight: bold;">PT. Metanouva Informatika</td>
+                                <td id="tender">11</td>
+                                <td id="m" style="color: #059669;">10</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>12</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">8</span></td>
+                                <td id="name" style="font-weight: bold;">PT. TERA DATA INDONUSA</td>
+                                <td id="tender">11</td>
+                                <td id="m" style="color: #059669;">11</td>
+                                <td id="k" style="color: #D21B1B;">0</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>35</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">9</span></td>
+                                <td id="name" style="font-weight: bold;">PT. ASHA CIPTA PERSADA</td>
+                                <td id="tender">16</td>
+                                <td id="m" style="color: #059669;">15</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>24</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">10</span></td>
+                                <td id="name" style="font-weight: bold;">PT. INTERMITRA VERTIKAL SELARAS</td>
+                                <td id="tender">13</td>
+                                <td id="m" style="color: #059669;">13</td>
+                                <td id="k" style="color: #D21B1B;">0</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>28</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-4 mt-5">
                 <div class="wow fadeInUp animation" data-wow-delay="0.2s">
                     <div class="shadow-sm bg-white">
                         <div class="tren-card">
@@ -442,7 +570,7 @@
                             </div>
                             <div class="wow fadeIn">
                                 <h1 class="tren-title d-flex wow fadeInUp" data-wow-delay="0.5s">1,2% <span><img class="custom-img2" src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt=""></span></h1>
-                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #D21B1B;"><i class="fas fa-arrow-up mr-1"></i>0,7 </span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
+                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #D21B1B;"><i class="fas fa-arrow-down mr-1"></i>0,7 </span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
                             </div>
                         </div>
                     </div>
@@ -455,7 +583,7 @@
                             </div>
                             <div class="wow fadeIn">
                                 <h1 class="tren-title d-flex wow fadeInUp" data-wow-delay="0.5s">6,5% <span><img class="custom-img2" src="<?= base_url('assets\img\down_hps.svg') ?>" alt=""></span></h1>
-                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #D21B1B;"><i class="fas fa-arrow-up mr-1"></i>4 </span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
+                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #D21B1B;"><i class="fas fa-arrow-down mr-1"></i>4 </span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
                             </div>
                         </div>
                     </div>
@@ -466,8 +594,7 @@
 </section>
 
 
-
-<script>
+<!-- <script>
     var ctx = document.getElementById("doughnutChart").getContext("2d");
 
     const data = {
@@ -479,11 +606,19 @@
     };
 
     const options = {
-        legend: {
-            display: false
-        },
         responsive: true,
-        maintainAspectRatio: false, // To control the chart size based on the container
+        plugins: {
+            legend: {
+                position: 'top',
+                display: false,
+                width: 50,
+                height: 50,
+            },
+            title: {
+                display: false,
+                text: 'Chart.js Doughnut Chart'
+            }
+        },
     };
 
     const doughnutChart = new Chart(ctx, {
@@ -491,4 +626,214 @@
         data: data,
         options: options,
     });
+</script> -->
+
+<script>
+    var ctx = document.getElementById('doughnutChart').getContext('2d');
+
+    var totalTender = 0;
+    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100];
+    for (var i = 0; i < data.length; i++) {
+        totalTender += data[i];
+    }
+
+    var doughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Tender 1', 'Tender 2', 'Tender 3'],
+            datasets: [{
+                data: data,
+                backgroundColor: ['#495894', '#56C474', '#EF5350'],
+                borderWidth: 2, // Add gaps between segments
+                borderColor: 'white' // Color of the gaps
+            }]
+        },
+        options: {
+            cutout: '65%', // Make the doughnut thinner
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    var ctx = this.ctx;
+                    ctx.save();
+
+                    // Draw "Total Tender" text with smaller font
+                    ctx.font = "20px Ubuntu";
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fontWeight = 800;
+                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                    ctx.fillText("Statistik", centerX, centerY - 20);
+
+                    // Draw the numerical value with larger font
+                    ctx.font = "14px Ubuntu";
+                    ctx.fontWeight = 500;
+                    ctx.fillText("Anggota", centerX, centerY + 10);
+
+                    ctx.restore();
+                }
+            }
+        }
+    });
 </script>
+
+<!-- <script>
+    const response = {
+        "pokedata": [{
+                "no": 1,
+                "name": "PT. Telekomunikasi Indonesia, Tbk.",
+                "tender": 24,
+                "m": 23,
+                "k": 1,
+                "hps": 15
+            },
+            {
+                "no": 2,
+                "name": "PT SANGKURIANG INTERNASIONAL",
+                "tender": 13,
+                "m": 13,
+                "k": 0,
+                "hps": 0
+            },
+            {
+                "no": 3,
+                "name": "CV. TORCHE INDONESIA",
+                "tender": 22,
+                "m": 20,
+                "k": 2,
+                "hps": 22
+            },
+            {
+                "no": 4,
+                "name": "Adhyamitra Tata Sarana",
+                "tender": 17,
+                "m": 16,
+                "k": 1,
+                "hps": 20
+            },
+            {
+                "no": 5,
+                "name": "PT. PASYA MITRA UTAMA",
+                "tender": 19,
+                "m": 15,
+                "k": 4,
+                "hps": 0
+            },
+            {
+                "no": 6,
+                "name": "PT. Mediatama Kreasi Informatika",
+                "tender": 31,
+                "m": 29,
+                "k": 2,
+                "hps": 25
+            },
+            {
+                "no": 7,
+                "name": "PT. Metanouva Informatika",
+                "tender": 11,
+                "m": 10,
+                "k": 1,
+                "hps": 12
+            },
+            {
+                "no": 8,
+                "name": "PT. TERA DATA INDONUSA",
+                "tender": 11,
+                "m": 11,
+                "k": 0,
+                "hps": 35
+            },
+            {
+                "no": 9,
+                "name": "PT. ASHA CIPTA PERSADA	",
+                "tender": 16,
+                "m": 15,
+                "k": 1,
+                "hps": 24
+            },
+            {
+                "no": 10,
+                "name": "PT. INTERMITRA VERTIKAL SELARAS",
+                "tender": 13,
+                "m": 13,
+                "k": 0,
+                "hps": 28
+            }
+        ]
+    }
+    const tableContent = document.getElementById("table-content")
+    const tableButtons = document.querySelectorAll("th button");
+
+    const createRow = (obj) => {
+        const row = document.createElement("tr");
+        const objKeys = Object.keys(obj);
+        objKeys.map((key) => {
+            const cell = document.createElement("td");
+            cell.setAttribute("data-attr", key);
+            cell.innerHTML = obj[key];
+            row.appendChild(cell);
+        });
+        return row;
+    };
+
+    const getTableContent = (data) => {
+        data.map((obj) => {
+            const row = createRow(obj);
+            tableContent.appendChild(row);
+        });
+    };
+
+    const sortData = (data, param, direction = "asc") => {
+        tableContent.innerHTML = '';
+        const sortedData =
+            direction == "asc" ? [...data].sort(function(a, b) {
+                if (a[param] < b[param]) {
+                    return -1;
+                }
+                if (a[param] > b[param]) {
+                    return 1;
+                }
+                return 0;
+            }) : [...data].sort(function(a, b) {
+                if (b[param] < a[param]) {
+                    return -1;
+                }
+                if (b[param] > a[param]) {
+                    return 1;
+                }
+                return 0;
+            });
+
+        getTableContent(sortedData);
+    };
+
+    const resetButtons = (event) => {
+        [...tableButtons].map((button) => {
+            if (button !== event.target) {
+                button.removeAttribute("data-dir");
+            }
+        });
+    };
+
+    window.addEventListener("load", () => {
+        getTableContent(response.pokedata);
+
+        [...tableButtons].map((button) => {
+            button.addEventListener("click", (e) => {
+                resetButtons(e);
+                if (e.target.getAttribute("data-dir") == "desc") {
+                    sortData(response.pokedata, e.target.id, "desc");
+                    e.target.setAttribute("data-dir", "asc");
+                } else {
+                    sortData(response.pokedata, e.target.id, "asc");
+                    e.target.setAttribute("data-dir", "desc");
+                }
+            });
+        });
+    });
+</script> -->
