@@ -1328,7 +1328,6 @@
         function saveEditContact(button) {
             var row = button.parentNode.parentNode;
             var idKontak = row.id;
-            console.log(idKontak);
             var nama = row.cells[0].textContent.trim();
             var posisi = row.cells[1].textContent.trim();
             var email = row.cells[2].textContent.trim();
@@ -1347,7 +1346,7 @@
                 nama: nama,
                 posisi: posisi,
                 email: email,
-                no_telp: noTelp
+                no_telp: noTelp,
             };
 
             $.ajax({
@@ -1593,7 +1592,7 @@ $(document).ready(function() {
 
                             $.each(data.data, function(index, value) {
                                 kontak +=
-                                    `<tr>
+                                    `<tr id="` + value.id_kontak + `">
                                         <td>` + value.nama + `</td>
                                         <td>` + value.posisi + `</td>
                                         <td>` + value.email + `</td>
