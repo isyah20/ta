@@ -305,7 +305,7 @@
                         if (kategori == '2') url_dashboard = "<?= base_url('user-dashboard') ?>";
                         else if (kategori == '3') url_dashboard = "<?= base_url('asosiasi') ?>";
                         else if (kategori == '4') url_dashboard = "<?= base_url('suplier') ?>";
-                        else if (katefori == '5') url_dashboard = "<?= base_url('marketing') ?>";
+                        else if (kategori == '5') url_dashboard = "<?= base_url('marketing') ?>";
 
                         $('#nav_dashboard').prop('href', url_dashboard);
                         $('.nama-pengguna').html(nama_pengguna);
