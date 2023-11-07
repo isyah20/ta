@@ -511,7 +511,7 @@ class Supplier_model extends CI_Model
     }
 
     public function getNamaPerusahaanById($id){
-        $this->db->select('nama_perusahaan');
+        $this->db->select('id_lead, nama_perusahaan');
         $this->db->from('data_leads');
         $this->db->where('id_lead', $id);
         $query = $this->db->get();

@@ -776,6 +776,7 @@
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
                     <p class="text-center" id="nama-perusahaan">PT Telekomunikasi Indonesia</p>
+                    <input type="hidden" id="id-lead" value="123">
                     <div class="input-popup align-items-center">
                         <div class="input-popup justify-content-end">
                             <div class="table-responsive">
@@ -1265,6 +1266,8 @@
         // Fungsi untuk menyimpan perubahan pada baris
         function saveRowContact(button) {
             var row = button.parentNode.parentNode;
+            var id_lead = document.getElementById('id-lead').value;
+            console.log(id_lead);
             var nama = row.cells[0].textContent.trim();
             var posisi = row.cells[1].textContent.trim();
             var email = row.cells[2].textContent.trim();
@@ -1280,7 +1283,7 @@
             }
 
             var data = {
-                id_lead: document.getElementById('id-lead').value,
+                id_lead: id_lead,
                 nama: nama,
                 posisi: posisi,
                 email: email,
@@ -1374,6 +1377,34 @@
         function deleteRowContact(button) {
             var row = button.parentNode.parentNode;
             var idKontak = row.id;
+
+            $.ajax({
+                url: "<?= base_url('api/supplier/deleteContact/') ?>" + idKontak,
+                type: "DELETE",
+                beforeSend: addAuthorizationHeader,
+                success: function (response) {
+                    if (response.status == true) {
+                        swal({
+                            title: "Data berhasil dihapus!",
+                            // text: "You clicked the button!",
+                            icon: "success",
+                            button: "Ok",
+                        }).then(function () {
+                            window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                        });
+                    } else {
+                        swal({
+                            title: "Data gagal dihapus!",
+                            // text: "You clicked the button!",
+                            icon: "error",
+                            button: "Ok",
+                        })
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
             row.parentNode.removeChild(row);
         }
 </script>
@@ -1562,8 +1593,7 @@ $(document).ready(function() {
 
                             $.each(data.data, function(index, value) {
                                 kontak +=
-                                    `<input type="hidden" id="id-lead" value="` + value.id_lead + `">
-                                    <tr id="` + value.id_kontak + `">
+                                    `<tr>
                                         <td>` + value.nama + `</td>
                                         <td>` + value.posisi + `</td>
                                         <td>` + value.email + `</td>
@@ -1592,6 +1622,7 @@ $(document).ready(function() {
                         type: "GET",
                         dataType: "JSON",
                         success: function(data) {
+                            $('#id-lead').val(data.id_lead);
                             $('#nama-perusahaan').html(data.nama_perusahaan);
                             console.log(data.nama_perusahaan);
                         },
