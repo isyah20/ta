@@ -1236,6 +1236,13 @@
 
 <!-- Script add row kontak -->
 <script>
+    var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
+    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+
+    function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+    }
+
         // Fungsi untuk menambahkan baris ke dalam tabel
         function addRowContact() {
             var table = document.getElementById("tabel-kontak");
@@ -1258,6 +1265,8 @@
         // Fungsi untuk menyimpan perubahan pada baris
         function saveRowContact(button) {
             var row = button.parentNode.parentNode;
+            var nama = row.cells[0].textContent.trim();
+            var posisi = row.cells[1].textContent.trim();
             var email = row.cells[2].textContent.trim();
             var noTelp = row.cells[3].textContent.trim();
             
@@ -1269,6 +1278,32 @@
             for (var i = 0; i < 4; i++) {
                 row.cells[i].removeAttribute("contenteditable");
             }
+
+            var data = {
+                id_lead: document.getElementById('id-lead').value,
+                nama: nama,
+                posisi: posisi,
+                email: email,
+                no_telp: noTelp
+            };
+
+            $.ajax({
+                url: "<?= base_url('api/supplier/insertContact') ?>",
+                type: "POST",
+                data: data,
+                beforeSend: addAuthorizationHeader,
+                success: function(response) {
+                    var result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        alert('Data berhasil disimpan.');
+                    } else {
+                        alert('Gagal menyimpan data.');
+                    }
+                },
+                error: function(error) {
+                    alert('Terjadi kesalahan saat menyimpan data.');
+                }
+            });
 
             var actionCell = row.getElementsByTagName("td")[4];
             actionCell.innerHTML = '<a href="#" class="btn btn-link" onclick="editRowContact(this)"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
@@ -1284,17 +1319,66 @@
             }
             
             var actionCell = row.getElementsByTagName("td")[4];
-            actionCell.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveRowContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+            actionCell.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveEditContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        function saveEditContact(button) {
+            var row = button.parentNode.parentNode;
+            var idKontak = row.id;
+            console.log(idKontak);
+            var nama = row.cells[0].textContent.trim();
+            var posisi = row.cells[1].textContent.trim();
+            var email = row.cells[2].textContent.trim();
+            var noTelp = row.cells[3].textContent.trim();
+            
+            if (email === "" || noTelp === "") {
+                alert("Email dan No Telp harus diisi sebelum menyimpan.");
+                return;
+            }
+
+            for (var i = 0; i < 4; i++) {
+                row.cells[i].removeAttribute("contenteditable");
+            }
+
+            var data = {
+                nama: nama,
+                posisi: posisi,
+                email: email,
+                no_telp: noTelp
+            };
+
+            $.ajax({
+                url: "<?= base_url('api/supplier/updateContact/') ?>" + idKontak,
+                type: "POST",
+                data: data,
+                beforeSend: addAuthorizationHeader,
+                success: function(response) {
+                    var result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        alert('Data berhasil disimpan.');
+                    } else {
+                        alert('Gagal menyimpan data.');
+                    }
+                },
+                error: function(error) {
+                    alert('Terjadi kesalahan saat menyimpan data.');
+                }
+            });
+
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn btn-link" onclick="editRowContact(this)"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                                    '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
         }
 
         // Fungsi untuk menghapus baris
         function deleteRowContact(button) {
             var row = button.parentNode.parentNode;
+            var idKontak = row.id;
             row.parentNode.removeChild(row);
         }
 </script>
 
-<script>
+<!-- <script>
     function editRow(button) {
         var row = button.parentNode.parentNode;
         row.classList.add("editing");
@@ -1386,7 +1470,7 @@
         button.style.display = "none";
         row.querySelector(".edit-button").style.display = "inline";
     }
-</script>
+</script> -->
 
 <script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
@@ -1478,7 +1562,8 @@ $(document).ready(function() {
 
                             $.each(data.data, function(index, value) {
                                 kontak +=
-                                    `<tr>
+                                    `<input type="hidden" id="id-lead" value="` + value.id_lead + `">
+                                    <tr id="` + value.id_kontak + `">
                                         <td>` + value.nama + `</td>
                                         <td>` + value.posisi + `</td>
                                         <td>` + value.email + `</td>
