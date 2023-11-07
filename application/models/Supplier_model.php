@@ -616,7 +616,7 @@ class Supplier_model extends CI_Model
             ]);
 
             if ($sql) {
-                return $this->db->insert('history_marketing', ['id_lead' => $id_lead, 'status' => $status, 'catatan' => $catatan]);
+                return $this->db->insert('history_marketing', ['id_lead' => $id_lead, 'status' => $status, 'catatan' => $catatan, 'jadwal' => $jadwal]);
             }
         }
         // return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
