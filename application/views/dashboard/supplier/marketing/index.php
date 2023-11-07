@@ -911,7 +911,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="inputPosisi" class="form-label text-start">Jadwal</label>
-                                <input type="date" name="jadwal" class="border border-1 form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
+                                <input type="datetime-local" name="jadwal" class="border border-1 form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
                             </div>
                             <div class="col-12">
                                 <label for="inputEmail" class="form-label text-start">Catatan</label>

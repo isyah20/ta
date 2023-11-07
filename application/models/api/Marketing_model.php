@@ -41,7 +41,7 @@ class Marketing_model extends CI_Model {
     }
     
     public function getLeadsByTim($id){
-        $this->db->select('data_leads.*, kontak_lead.*, plot_tim.status, plot_tim.jadwal, plot_tim.catatan');
+        $this->db->select('data_leads.*,  kontak_lead.nama, kontak_lead.posisi, kontak_lead.no_telp, kontak_lead.email, plot_tim.status, plot_tim.jadwal, plot_tim.catatan');
         $this->db->select('COUNT(history_marketing.id_lead) AS jumlah_history');
         $this->db->from('data_leads');
         $this->db->join('plot_tim', 'data_leads.id_lead = plot_tim.id_lead');
