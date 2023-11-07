@@ -148,7 +148,7 @@
                         else {
                             if (kategori == '3') jenis_perusahaan = 'Asosiasi';
                             else if (kategori == '4') jenis_perusahaan = 'Suplier';
-                            else if (kategori == '4') jenis_perusahaan = 'Marketing';
+                            else if (kategori == '5') jenis_perusahaan = 'Marketing';
                         }
                         
                         if (status == '0') paket = 'Standard';
