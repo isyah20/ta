@@ -200,7 +200,7 @@
     /* scroll notif */
 
     .scrollable-container {
-        max-height: 90vh;
+        max-height: 80vh;
         overflow-y: auto;
         /* background-color: white; */
         padding: 2.5%;
@@ -292,6 +292,7 @@
         align-items: flex-start;
         gap: 18px;
         margin-top: 2rem;
+
     }
 
     .sum-riwayat {
@@ -363,82 +364,37 @@
                 <h4 style="font-weight:510; font-size:22px;" class="mt-2 mb-2">Selamat datang kembali, <?= $peserta['0']['nama_peserta'] ?> sudah siap menangkan tender?</h4>
                 <h4 style="font-weight:510; font-size:22px;" class="mt-2 mb-2">Selamat datang kembali, sudah siap menangkan tender?</h4>
                 <div class="dashboard-hero mt-4">
-                    <div class="row col-sm-8 justify-content-center mx-1 px-1 ">
+                    <!-- <div class="row col-sm-8 justify-content-center mx-1 px-1 ">
 
-                        <!-- filter LPSE -->
-                        <!-- <div class="sel2">
-                            <select class="js-data-example-ajax" id="klpd" name="klpd" style="width: 150px; margin:10px">
-                                <option value="">Semua LPSE</option>
-                                <?php
-                                foreach ($lpse as $lpse) :
-                                ?>
-                                    <option value="<?= $lpse['id_lpse'] ?>"><?php echo $lpse['nama_lpse'] ?></option>
-                                <?php
-                                endforeach;
-                                ?>
-                            </select>
-
-                            <script>
-                                $(document).ready(function() {
-                                    $('.js-data-example-ajax').select2();
-                                });
-                            </script>
-
-                            Filter Tahun
-                            <select class="js-example-basic-single" name="tahun" id="tahun" style="width: 150px; margin:10px">
-                                <option value="">Tahun</option>
-                                <option class="select-tahun-option" selected value="">Semua tahun</option>
-                                <?php
-                                $tahun = (int) date('Y');
-                                for ($i = 0; $i < 5; $i++) :
-                                ?>
-                                    <option class="select-tahun-option" value="<?= $tahun ?>"><?= $tahun ?></option>
-                                <?php
-                                    $tahun--;
-                                endfor;
-                                ?>
-                            </select>
-                            <span id="loading-filter"></span>
-                            <script>
-                                // In your Javascript (external .js resource or <script> tag)
-                                $(document).ready(function() {
-                                    $('.js-example-basic-single').select2({
-                                        minimumResultsForSearch: Infinity
-                                    });
-
-                                });
-                            </script>
-
-                        </div> -->
-                        <!-- End of Filter Tahun -->
-                    </div>
-
+                    </div> -->
 
                     <div class="row mt-2">
-                        <div class="col-lg-2" style="padding:0">
+                        <div class="col-lg-3" style="padding:0">
                             <div>
                                 <center>
                                     <div class="chart2" style="margin:0; padding:0">
-                                        <canvas id="ikut-tender" width="160px" height="160px"></canvas>
+                                        <canvas id="myDoughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                        <!-- <div id="chartCenterText" style="position: absolute; top: 52%; left: 80%; transform: translate(-50%, -50%); text-align: center;">
+                                            <p style="font-size: 8px; font-weight: bold;">Statistik Anggota</p>
+                                        </div> -->
                                     </div>
                                 </center>
                             </div>
-
                         </div>
-                        <div class="col text-center mt-4 mb-4" style="padding:0">
-                            <h6 style="font-size:12px; margin-top:10%; "><b>Total Tender</b></h6>
-                            <!-- <h5 style="font-size:30px" id="ikut"><b><?= $total['3'] ?></b></h5> -->
-                            <h5 style="font-size:30px" id="total"><b></b></h5>
-                        </div>
-                        <div class="col mt-4 mb-4">
+                        <!-- <div class="col text-center mt-4 mb-4" style="padding:0">
+                            <h6 style="font-size:12px; margin-top:20; margin-left:50;"><b>Total Tender</b></h6>
+                            <h5 style="font-size:30px" id="ikut"><b>42</b></h5>
+                            <h5 style="font-size:30px; margin-left:50;" id="total"> <b>4659</b></h5>
+                        </div> -->
+                        <div class="col-lg-5 mt-3 mb-3">
                             <div class="row">
                                 <div class="col-1" style="padding:0">
                                     <div style=" border-left: 3px solid #F9845F; height: 100px; opacity:1"></div>
                                 </div>
                                 <div class="col" style="margin-top:5%; padding:0">
-                                    <h5 id="menang" class="tender-summary"><span class="tender-summary-span tender-summary-span-win"></span>Tender Dimenangkan</h5>
-                                    <h5 id="kalah" class="tender-summary"><span class="tender-summary-span tender-summary-span-lost"></span>Sedang Diikuti (Pasca Evaluasi)</h5>
-                                    <h5 id="ikut" class="tender-summary"><span class="tender-summary-span tender-summary-span-total"></span>Kalah Tender</h5>
+                                    <h5 id="menang" class="tender-summary"><span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>9 Menang</h5>
+                                    <h5 id="kalah" class="tender-summary"><span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>33 Kalah</h5>
+                                    <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>42 Ikut Tender</h5>
                                 </div>
                             </div>
                         </div>
@@ -446,7 +402,6 @@
                             <center> <img src="<?= base_url('assets/img/dashboard-hero.png') ?>" class="dh-img" alt=""></center>
                         </div>
                     </div>
-
                 </div>
                 <div class="table-responsive mt-4 custom-table-scroll">
                     <table class="table custom-table-container">
@@ -501,8 +456,10 @@
 
             <!-- Notif tender -->
             <div class="col-lg-4">
-                <h4 class="my-2 mb-4" style="font-weight: 510; font-size: 22px;">Tender Terbaru</h4>
-                <a href="user-dashboard/list-tender">Lihat Semua</a>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="my-2" style="font-weight: 510; font-size: 22px;">Tender Terbaru</h4>
+                    <a href="user-dashboard/list-tender">Lihat Semua</a>
+                </div>
                 <div class="scrollable-container">
                     <div class="custom-scroll">
                         <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
@@ -615,26 +572,26 @@
                 <div style="padding:0">
                     <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700">Summary</h3>
                     <div class="sum-semua">
-                        <div class="card-hps justify-content-between px-4" style="background: #EF5350;">
+                        <div class="col-auto card-hps justify-content-between px-4" style="background: #EF5350;">
                             <h6>> 10 Miliar</h6>
                             <h6>9</h6>
 
                         </div>
-                        <div class="card-hps justify-content-between px-4" style="background: #495894;">
+                        <div class="col-auto card-hps justify-content-between px-4" style="background: #495894;">
                             <h6>1 - 10 Miliar</h6>
                             <h6>19</h6>
 
                         </div>
-                        <div class="card-hps justify-content-between align-item-center px-4 " style="background: #F17D3A;">
+                        <div class="col-auto card-hps justify-content-between align-item-center px-4 " style="background: #F17D3A;">
                             <h6>500 Juta - 1 Miliar</h6>
                             <h6>93</h6>
                         </div>
-                        <div class="card-hps justify-content-between px-4" style="background: #83D4FA;">
+                        <div class="col-auto card-hps justify-content-between px-4" style="background: #83D4FA;">
                             <h6>100 - 500 Juta</h6>
                             <h6>229</h6>
 
                         </div>
-                        <div class="card-hps justify-content-between px-4" style="background: #EF5350;">
+                        <div class="col-auto card-hps justify-content-between px-4" style="background: #EF5350;">
                             <h6>
                                 < 100 Juta</h6>
                                     <h6>342</h6>
@@ -656,7 +613,7 @@
             <div class="col-lg-8">
                 <div class="chart-bg">
                     <div style="padding:0">
-                        <h3 style="color:#000000; margin:10px; font-size:18px; font-weight:700"> Riwayat Menang Kalah</h3>
+                        <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700"> Riwayat Menang Kalah</h3>
                         <div class="chart-peserta">
                             <canvas id="chart-ikuttender"></canvas>
                         </div>
@@ -669,76 +626,76 @@
                     <div class="scrollable-container-menang">
                         <div class="custom-scroll">
                             <div class="sum-riwayat">
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="menang" style="font-weight: 400; font-size: 12px">Menang</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="menang" style="font-weight: 400; font-size: 14px">Menang</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="menang" style="font-weight: 400; font-size: 12px">Menang</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="menang" style="font-weight: 400; font-size: 14px">Menang</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="menang" style="font-weight: 400; font-size: 12px">Menang</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="menang" style="font-weight: 400; font-size: 14px">Menang</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="kalah" style="font-weight: 400; font-size: 14px">Kalah</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="kalah" style="font-weight: 400; font-size: 14px">Kalah</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="kalah" style="font-weight: 400; font-size: 14px">Kalah</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="kalah" style="font-weight: 400; font-size: 14px">Kalah</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="kalah" style="font-weight: 400; font-size: 14px">Kalah</h6>
                                     </div>
                                 </div>
-                                <div class="card-riwayat">
+                                <div class="col-auto card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
+                                    <div class="col-3-auto">
+                                        <h6 class="kalah" style="font-weight: 400; font-size: 14px">Kalah</h6>
                                     </div>
                                 </div>
                             </div>
@@ -827,7 +784,7 @@
 
                                 <div class="card-riwayat">
                                     <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
+                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
                                     </div>
                                     <div class="col-3">
                                         <h6 class="menang" style="font-weight: 400; font-size: 12px">Menang</h6>
@@ -990,461 +947,120 @@
     var barChart = new Chart(ctxBarChart, barConfig);
 </script>
 
+
+<!-- doughnut chart -->
 <script>
-    console.log('test');
-    const npwpComplete = parseInt(<?= $npwpComplete ? '1' : '0' ?>);
-    const worker = new Worker('dashboard-worker.js')
-    worker.onmessage = (event) => {
-        $('#loading-filter').text('');
-        const payload = event.data
-        if ('event_name' in payload) {
-            if (payload.event_name == 'getdata') {
-                $('#dataChart').html(payload.data);
-                setChart();
-            } else if (payload.event_name == 'error') {
-                console.log(payload.data)
-            }
-        } else {
-            console.log(`worker said: ${JSON.stringify(payload.data)}`)
-        }
+    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+
+    var totalTender = 0;
+    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100];
+    for (var i = 0; i < data.length; i++) {
+        totalTender += data[i];
     }
 
-    const sendMsg = (klpd, year) => {
-        $('#loading-filter').text('Loading...');
-        worker.postMessage({
-            event_name: 'getdata',
-            params: {
-                url: `${base_url}DashboardUser/chart/`,
-                data: {
-                    klpd: klpd,
-                    year: year
-                }
-            }
-        })
-    }
-
-    let klpd = '',
-        tahun = '';
-    // getData(klpd, tahun);
-
-    // klpd = $('#klpd').find(":selected").val();
-    // klpd = $('#klpd').find(":selected").val();
-    // console.log($("#klpd").find(":selected").val());
-    const userId = '<?= $userId ?>';
-    {
-        if (npwpComplete == 1) {
-            sendMsg(klpd, tahun)
-        }
-    }
-
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('completeProfile', () => ({
-            npwp: '',
-            errors: {
-                npwp: null,
-            },
-            msg: {
-                npwp: null,
-            },
-            loading: false,
-            token: '',
-            npwpAlertClass: '',
-            showAlert: false,
-            alertMsg: '',
-            init() {
-                this.$watch('npwp', (newVal, oldVal) => {
-                    this.errors.npwp = !this.validateNpwp()
-                })
-            },
-            hideAlert() {
-                window.location.href = `${base_url}user-dashboard/list-tender`
-            },
-            validateNpwp() {
-                const valLength = this.npwp.length > 0 && this.npwp.length <= 20
-                if (!valLength) {
-                    this.msg.npwp = 'Nomor NPWP tidak valid'
-                }
-
-                return valLength
-            },
-            saveNpwp(evt) {
-                $.ajax({
-                        url: `${base_url}npwp`,
-                        type: 'POST',
-                        data: {
-                            npwp: this.npwp,
-                            user_id: userId
-                        },
-                        dataType: 'json',
-                        beforeSend: () => {
-                            this.loading = true
-                        },
-                    })
-                    .done(resp => {
-                        this.loading = false
-                        this.alertMsg = resp.message
-                        if (resp.error_code == 0) {
-                            this.npwpAlertClass = 'alert alert-success npwp-alert-msg'
-                            $('#npwpModal').modal('hide');
-                        } else {
-                            this.npwpAlertClass = 'alert alert-danger npwp-alert-msg'
-                        }
-                        this.showAlert = true
-                        console.log(resp)
-                    })
-                    .fail(err => {
-                        const errs = JSON.parse(err.responseText)
-                        this.loading = false
-                        console.log(err)
-                        this.errors.npwp = true
-                        this.msg.npwp = errs.errors.npwp
-                        // this.alertMsg = resp.message
-                        // if (resp.error_code == 0) {
-                        //     this.npwpAlertClass = 'alert alert-success'
-                        // } else {
-                        //     this.npwpAlertClass = 'alert alert-danger'
-                        // }
-                        // this.showAlert = true
-                    })
-                return evt.preventDefault()
-            }
-        }))
-    });
-
-    $(document).ready(function() {
-        $('#btn-getdata').on('click', function() {
-            worker.postMessage({
-                event_name: 'fetch',
-                params: {
-                    url: `${base_url}pengguna/get-token`
-                }
-            })
-        })
-
-        $('#klpd').on('change', function() {
-            klpd = $('#klpd').val();
-            console.log(klpd);
-            // getData(klpd, tahun);
-            sendMsg(klpd, tahun);
-        });
-
-        $('#tahun').on('change', function() {
-            tahun = $('#tahun').val();
-            // getData(klpd, tahun);
-            sendMsg(klpd, tahun);
-        });
-
-    })
-
-    get1 = document.getElementById('chart1').innerHTML;
-    let chart1 = JSON.parse(JSON.parse(get1));
-    console.log(chart1);
-
-    const ctx = document.getElementById('timeSeries-user');
-    new Chart(ctx, {
-        type: 'bar',
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'],
+            labels: ['Tender 1', 'Tender 2', 'Tender 3'],
             datasets: [{
-                label: 'tender',
-                backgroundColor: '#FDA797',
-                data: chart1,
-
+                data: data,
+                backgroundColor: ['#495894', '#56C474', '#EF5350'],
+                borderWidth: 2, // Add gaps between segments
+                borderColor: 'white' // Color of the gaps
             }]
         },
         options: {
+            cutout: '65%', // Make the doughnut thinner
             plugins: {
                 legend: {
                     display: false
                 }
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
+            animation: {
+                onComplete: function() {
+                    var ctx = this.ctx;
+                    ctx.save();
+
+                    // Draw "Total Tender" text with smaller font
+                    ctx.font = "14px Ubuntu";
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fontWeight = 500;
+                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                    ctx.fillText("Total Tender", centerX, centerY - 10);
+
+                    // Draw the numerical value with larger font
+                    ctx.font = "30px Ubuntu";
+                    ctx.fontWeight = 700;
+                    ctx.fillText(totalTender.toFixed(2), centerX, centerY + 20);
+
+                    ctx.restore();
                 }
             }
         }
     });
-
-
-    get2 = document.getElementById('chart2').innerHTML;
-    let chart2 = JSON.parse(JSON.parse(get2));
-
-    var chartDom = document.getElementById('ikut-tender');
-    var myChart = echarts.init(chartDom);
-    var option;
-
-    option = {
-        series: [{
-            name: 'Access From',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-                show: false,
-                position: 'center'
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: '16',
-                    fontWeight: 'bold',
-                    textStyle: {
-                        color: '#000000'
-                    },
-                }
-            },
-            labelLine: {
-                show: false
-            },
-            data: [{
-                    value: chart2['1'],
-                    name: chart2['4'] + '%',
-                    itemStyle: {
-                        color: '#6EE7B7'
-                    }
-                },
-                // {
-                //     value: chart2['3'],
-                //     itemStyle: {
-                //         color: '#F9845F'
-                //     }
-                // },
-                {
-                    value: chart2['2'],
-                    name: chart2['5'] + '%',
-                    itemStyle: {
-                        color: '#DF3131'
-                    }
-                }
-            ]
-        }]
-    };
-    option && myChart.setOption(option);
-
-
-    get3 = document.getElementById('chart3').innerHTML;
-    let chart3 = JSON.parse(JSON.parse(get3));
-
-    const hps = document.getElementById('riwayatHPS');
-
-    new Chart(hps, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'],
-            datasets: [{
-                    label: '<500 juta',
-                    backgroundColor: '#EF5350',
-                    data: chart3['0'],
-                    barPercentage: 0.5,
-                },
-                {
-                    label: '500jt - 1m',
-                    backgroundColor: '#81D4FA',
-                    data: chart3['1'],
-                    barPercentage: 0.5,
-                },
-                {
-                    label: '1m - 10m',
-                    backgroundColor: '#F27932',
-                    data: chart3['2'],
-                    barPercentage: 0.5,
-                },
-                {
-                    label: '10m - 100m',
-                    backgroundColor: '#495894',
-                    data: chart3['3'],
-                    barPercentage: 0.5,
-                },
-                {
-                    label: '>100m',
-                    backgroundColor: '#56C474',
-                    data: chart3['4'],
-                    barPercentage: 0.5,
-                }
-            ]
-        },
-
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            responsive: true,
-            scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true
-                }
-            }
-        }
-    });
-
-    function setChart() {
-        get1 = document.getElementById('chart1').innerHTML;
-        let chart1 = JSON.parse(get1);
-
-        $("canvas#timeSeries-user").remove();
-        $("div.chart1").append('<canvas id="timeSeries-user"></canvas>');
-
-        const ctx = document.getElementById('timeSeries-user');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'],
-                datasets: [{
-                    label: 'tender',
-                    backgroundColor: '#FDA797',
-                    data: chart1,
-
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    }
-                }
-            }
-        });
-
-
-
-        get2 = document.getElementById('chart2').innerHTML;
-        let chart2 = JSON.parse(get2);
-
-        $("canvas#ikut-tender").remove();
-        $("div.chart2").append('<canvas id="ikut-tender" width="150px" height="150px"></canvas>');
-
-        var chartDom = document.getElementById('ikut-tender');
-        var myChart = echarts.init(chartDom);
-        var option;
-
-        option = {
-            series: [{
-                name: 'Access From',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '16',
-                        fontWeight: 'bold',
-                        textStyle: {
-                            color: '#000000'
-                        },
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [{
-                        value: chart2['1'],
-                        name: chart2['4'] + `%`,
-                        itemStyle: {
-                            color: '#6EE7B7'
-                        }
-                    },
-                    // {
-                    //     value: chart2['3'],
-                    //     itemStyle: {
-                    //         color: '#F9845F'
-                    //     }
-                    // },
-                    {
-                        value: chart2['2'],
-                        name: chart2['5'] + `%`,
-                        itemStyle: {
-                            color: '#DF3131'
-                        }
-                    }
-                ]
-            }]
-        };
-        option && myChart.setOption(option);
-
-        $('#ikut').html(`<span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['3'] + ` Ikut Tender`);
-        $('#menang').html(`<span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['1'] + ` Menang`);
-        $('#kalah').html(`<span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>` + chart2['2'] + ` Kalah`);
-        $('#total').html(` <b>` + chart2['0'] + `</b>`);
-
-        get3 = document.getElementById('chart3').innerHTML;
-        let chart3 = JSON.parse(get3);
-
-        $("canvas#riwayatHPS").remove();
-        $("div.chart3").append('<canvas id="riwayatHPS"></canvas>');
-
-        const hps = document.getElementById('riwayatHPS');
-
-        new Chart(hps, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'],
-                datasets: [{
-                        label: '<500 juta',
-                        backgroundColor: '#EF5350',
-                        data: chart3['0'],
-                    },
-                    {
-                        label: '500jt - 1m',
-                        backgroundColor: '#81D4FA',
-                        data: chart3['1'],
-                    },
-                    {
-                        label: '1m - 10m',
-                        backgroundColor: '#F27932',
-                        data: chart3['2'],
-                    },
-                    {
-                        label: '10m - 100m',
-                        backgroundColor: '#495894',
-                        data: chart3['3'],
-                    },
-                    {
-                        label: '>100m',
-                        backgroundColor: '#56C474',
-                        data: chart3['4'],
-                    }
-                ]
-            },
-
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                responsive: true,
-                scales: {
-                    x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true
-                    }
-                }
-            }
-        });
-
-
-        $('#sum1').html(chart3['range1'] + `<span>&nbsp<img src="<?= base_url('assets/img/under-500.png') ?>" width="20px" alt=""></span>`);
-        $('#sum2').html(chart3['range2'] + `<span>&nbsp<img src="<?= base_url('assets/img/500-1m.png') ?>" width="20px" alt=""></span>`);
-        $('#sum3').html(chart3['range3'] + `<span>&nbsp<img src="<?= base_url('assets/img/1-10m.png') ?>" width="20px" alt=""></span>`);
-        $('#sum4').html(chart3['range4'] + `<span>&nbsp<img src="<?= base_url('assets/img/10-100m.png') ?>" width="20px" alt=""></span>`);
-        $('#sum5').html(chart3['range5'] + `<span>&nbsp<img src="<?= base_url('assets/img/over-100m.png') ?>" width="20px" alt=""></span>`);
-    }
 </script>
+<script>
+    // var ctx = document.getElementById("doughnutChart").getContext("2d");
+
+    // var data = {
+    //     labels: ["Label 1", "Label 2", "Label 3"],
+    //     datasets: [{
+    //         data: [30, 40, 30], // Adjust data values as needed
+    //         backgroundColor: ["#495894", "#56C474", "#D21B1B"], // Adjust colors as needed
+    //     }, ],
+    // };
+
+    // var options = {
+    //     responsive: true,
+    //     maintainAspectRatio: false, // To control the chart size based on the container
+    // };
+
+    // var doughnutChart = new Chart(ctx, {
+    //     type: "doughnut",
+    //     data: data,
+    //     options: options,
+    // });
+    var ctx = document.getElementById('doughnutChart').getContext('2d');
+
+    var totalTender = 0;
+    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100];
+    for (var i = 0; i < data.length; i++) {
+        totalTender += data[i];
+    }
+
+    var doughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Tender 1', 'Tender 2', 'Tender 3'],
+            datasets: [{
+                data: data,
+                backgroundColor: ['red', 'blue', 'green']
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    var ctx = this.chart.ctx;
+                    ctx.font = "20px Arial";
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText("Total Tender: " + totalTender.toFixed(2), this.chart.width / 2, this.chart.height / 2);
+                }
+            }
+        }
+    });
+</script>
+
+
+
+
 <script src="<?= base_url('assets/js/users/dashboard.js') ?>"></script>
