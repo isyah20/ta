@@ -779,7 +779,7 @@
                     <div class="input-popup align-items-center">
                         <div class="input-popup justify-content-end">
                             <div class="table-responsive">
-                                <table class="table table-striped popup-table">
+                                <table class="table table-striped popup-table" id="tabel-kontak">
                                     <thead class="popup-thead">
                                         <tr>
                                             <th>Nama</th>
@@ -1238,7 +1238,7 @@
 <script>
         // Fungsi untuk menambahkan baris ke dalam tabel
         function addRowContact() {
-            var table = document.getElementById("data-contact");
+            var table = document.getElementById("tabel-kontak");
             var newRow = table.insertRow(table.rows.length);
 
             var cell1 = newRow.insertCell(0);
@@ -1404,19 +1404,19 @@ $(document).ready(function() {
         beforeSend: addAuthorizationHeader,
         success: function(data1) {
             for (let i = 0; i < data1.data.length; i++) {
+                var hasMultipleHistory = data1.data[i].jumlah_history > 0 ? 'visible' : 'hidden';
                 const rowHtml = `
                     <tr>
                         <td>${i + 1}</td>
                         <td>${data1.data[i].nama_perusahaan || ''}</td>
                         <td>${data1.data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data1.data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                        <td class="editable-select">${data1.data[i].status || ''}</td>
-                        <td class="editable-date">${data1.data[i].jadwal || ''}</td>
-                        <td class="editable" style="max-width: 400px">${data1.data[i].catatan || ''}</td>
+                        <td>${data1.data[i].status || ''}</td>
+                        <td>${data1.data[i].jadwal || ''}</td>
+                        <td style="max-width: 400px">${data1.data[i].catatan || ''}</td>
                         <td></td>
                         <td>
                             <span><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-id="${data1.data[i].id_tim}" data-bs-toggle="tooltip" title="Buat Agenda">
-                            <span><img src="<?= base_url('assets/img/icon-pencil-edit.svg') ?>" width="30px" style="margin-left:3px" data-id="${data1.data[i].id_tim}" data-bs-toggle="tooltip" title="Edit Agenda"></span>
-                            <span class="expandChildTable" data-id="${data1.data[i].id_lead}"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
+                            <span class="expandChildTable" data-id="${data1.data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
                         </td>
                     </tr>
                     <tr class="childTableRow">
@@ -1441,6 +1441,7 @@ $(document).ready(function() {
              // Tambahkan fungsi expandChildTable
             $('.expandChildTable').on('click', function() {
                     const id_lead = $(this).data('id');
+                    console.log(id_lead);
                     const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
                     childTable.empty();
                     $.ajax({
