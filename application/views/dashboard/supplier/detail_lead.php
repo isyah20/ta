@@ -2735,181 +2735,104 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"
     integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <script>
-
     var global_npwp = '',
-
         global_jenis_pengadaan = '',
-
         global_penwaran_awal = 0,
-
         global_penwaran_akhir = 0,
-
         global_tahun = 0,
-
         global_loc = '';
 
     var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
-
 
     function addAuthorizationHeader(xhr) {
         xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
     }
 
     // Get id from url
-
     // var id_profile = window.location.pathname.split('/')[4];
-
     var id_profile = window.location.href.split('/').pop();
-
     console.log(id_profile);
 
     // Get nama perusahaan and profil from data_leads and set it to the frontend
-
     $(document).ready(function () {
-
         $('#checkallhps').on('click', function () {
-
             let allhps = this.checked;
-
             $('#nilai_hps_awal, #nilai_hps_akhir').prop('disabled', allhps);
-
-
-
             if (allhps) hps_awal = hps_akhir = 0;
-
             else {
-
                 $('#nilai_hps_awal').focus();
-
                 global_penwaran_awal = $('#nilai_hps_awal').val();
-
                 global_penwaran_akhir = $('#nilai_hps_akhir').val();
-
             }
 
-
-
             filterRiwayat();
-
         });
 
         $('#nilai_hps_awal, #nilai_hps_akhir').inputmask('decimal', {
-
             'alias': 'numeric',
-
             'groupSeparator': '.',
-
             'autoGroup': true,
-
             'digits': 0,
-
             'digitsOptional': false,
-
             'allowMinus': false,
-
             'placeholder': '0',
-
             'rightAlign': false,
-
             'autoUnmask': true
-
         }).on('keyup', function () {
-
             global_penwaran_awal = $('#nilai_hps_awal').val();
-
             global_penwaran_akhir = $('#nilai_hps_akhir').val();
 
-
-
             if (parseInt(global_penwaran_akhir) < parseInt(global_penwaran_awal)) $('#nilai_hps_akhir').addClass('is-invalid');
-
             else {
-
                 $('#nilai_hps_akhir').removeClass('is-invalid');
-
                 filterRiwayat();
-
             }
-
         });
 
         $.ajax({
-
             // url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getProfile/" + id_profile,
-
             url: "<?= base_url('api/supplier/getProfile/') ?>" + id_profile,
-
             method: "GET",
-
             dataType: "json",
-
             beforeSend: addAuthorizationHeader,
-
             success: function (data) {
-
                 var id_leads = data.data.id_lead;
-
                 global_npwp = data.data.npwp;
-
                 var npwp = data.data.npwp;
 
                 console.log(id_leads);
-
                 console.log(npwp);
 
                 $("#namaPerusahaan").html(data.data.nama_perusahaan);
-
                 $("#editableParagraph").html(data.data.profil);
-
                 $("#npwp").html(data.data.npwp);
-
                 $("#alamat").html(data.data.alamat);
-
-
 
                 $("#imageButton").click(function () {
 
                     $("#editableParagraph").attr("contenteditable", "true");
-
                     $("#saveButton").css("display", "block");
 
                 });
                 
-
                 $("#saveButton").click(function () {
-
                     $("#editableParagraph").attr("contenteditable", "false");
-
                     $("#saveButton").css("display", "none");
-
                     var editedParagraph = $("#editableParagraph").html();
 
                     $.ajax({
-
                         url: "<?= base_url('api/supplier/insertProfile/') ?>" + id_leads,
-
                         type: "POST",
-
                         data: {
-
                             profil: editedParagraph
-
                         },
-
                         beforeSend: addAuthorizationHeader,
-
                         success: function (response) {
-
                             if (response.status == true) {
                                 swal({
                                     title: "Berhasil mengubah profil!",
@@ -2927,55 +2850,30 @@
                                     button: "Ok",
                                 })
                             }
-
                         },
-
                         error: function (xhr, status, error) {
-
                             console.error(error);
-
                         }
-
                     });
-
                 });
 
-
-
                 $("#formLengkapiLead").submit(function (e) {
-
                     e.preventDefault();
 
-
-
                     var form = {
-
                         id_lead: id_leads,
-
                         nama: $('input[name=nam]').val(),
-
                         posisi: $('input[name=pos]').val(),
-
                         email: $('input[name=em]').val(),
-
                         no_telp: $('input[name=no_tlp]').val()
-
                     }
 
-
-
                     $.ajax({
-
                         url: "<?= base_url('api/supplier/insertContact') ?>",
-
                         type: "POST",
-
                         data: form,
-
                         beforeSend: addAuthorizationHeader,
-
                         success: function (response) {
-
                             if (response.status == true) {
                                 swal({
                                     title: "Kontak berhasil ditambahkan!",
@@ -2993,47 +2891,26 @@
                                     button: "Ok",
                                 })
                             }
-
                         }
-
                     })
-
                 });
-
-
 
                 $.ajax({
-
                     //url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangByNPWP/" + npwp,
-
                     url: "<?= base_url('api/supplier/getPemenangByNPWP/') ?>" + npwp,
-
                     method: "GET",
-
                     dataType: "json",
-
                     beforeSend: addAuthorizationHeader,
-
                     success: function (data) {
-
                         console.log(data.data);
-
                         initialSelect(data.data)
-
                         setTabelRiwayat(data);
-
                     }
-
                 });
-
             }
-
         });
 
-
-
         // Ajax to get data kontak
-
         $.ajax({
 
             //url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getContact/" + id_profile,
@@ -3282,301 +3159,164 @@
 
         })
 
-
-
         function setTabelRiwayat(data) {
-
             var riwayatTender = "";
 
-
-
             $.each(data.data, function (index, value) {
-
                 var rowNumber = index + 1;
-
                 riwayatTender +=
-
                     `<tr>
-
                         <td style="text-align:center">` + rowNumber + `</td>
-
                         <td class="custom-padding">` + (value.nama_tender || '') + `</td>
-
                         <td>` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</td>
-
                         <td>` + (value.jenis_pengadaan || '') + `</td>
-
                         <td style="color:#10B981">` + formatRupiah(value.harga_penawaran, 'Rp. ' || '') + `</td>
-
                         <td style="color:#EB650D">` + (value.tahun || '') + `</td>
-
                     </tr>`;
-
             });
 
-
-
             $("#riwayat-tender").html(riwayatTender);
-
         }
 
-
-
         function initialSelect(data) {
-
             let lokasi = [];
-
             let jenis = [];
-
             let tahun = [];
 
-
-
             $.each(data, function (index, value) {
-
                 if (!lokasi.includes((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim())) {
-
                     lokasi.push((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim());
-
                 }
-
                 if (!jenis.includes(value.jenis_pengadaan)) {
-
                     jenis.push(value.jenis_pengadaan);
-
                 }
-
                 if (!tahun.includes(value.tahun)) {
-
                     tahun.push(value.tahun);
-
                 }
-
             });
 
             console.log(lokasi, jenis, tahun, "UNIQ");
 
-
-
             $('.select2-jenis-pengadaan').select2({
-
                 placeholder: "Jenis Pengadaan",
-
                 theme: 'bootstrap-5',
-
                 allowClear: true,
-
                 "language": {
-
                     noResults: function () {
-
                         return "<span>Tidak ada jenis pengadaan</span>";
-
                     },
-
                     loadingMore: function () {
-
                         return "<span>Menampilkan lainnya...</span>";
-
                     },
-
                     searching: function () {
-
                         return "<span>Mencari hasil...</span>";
-
                     },
-
                     errorLoading: function () {
-
                         return "<span>Gagal menampilkan jenis pengadaan</span>";
-
                     }
-
                 },
 
                 escapeMarkup: function (markup) {
-
                     return markup;
-
                 },
-
                 data: jenis
-
             }).on('change', function () {
-
                 global_jenis_pengadaan = $(this).val();
-
                 filterRiwayat();
-
             });
 
             $('.select2-wilayah').select2({
-
                 placeholder: "Lokasi Pekerjaan",
-
                 theme: 'bootstrap-5',
-
                 allowClear: true,
-
                 "language": {
-
                     noResults: function () {
-
                         return "<span>Tidak ada lokasi pekerjaan</span>";
-
                     },
-
                     loadingMore: function () {
-
                         return "<span>Menampilkan lainnya...</span>";
-
                     },
-
                     searching: function () {
-
                         return "<span>Mencari hasil...</span>";
-
                     },
-
                     errorLoading: function () {
-
                         return "<span>Gagal menampilkan lokasi pekerjaan</span>";
-
                     }
-
                 },
-
                 escapeMarkup: function (markup) {
-
                     return markup;
-
                 },
-
                 data: lokasi
-
             }).on('change', function () {
-
                 global_loc = $(this).val();
-
                 filterRiwayat();
-
             });
 
             $('.select2-tahun').select2({
-
                 placeholder: "Tahun",
-
                 theme: 'bootstrap-5',
-
                 allowClear: true,
-
                 "language": {
-
                     noResults: function () {
-
                         return "<span>Tidak ada tahun</span>";
-
                     },
 
                     loadingMore: function () {
-
                         return "<span>Menampilkan lainnya...</span>";
-
                     },
 
                     searching: function () {
-
                         return "<span>Mencari hasil...</span>";
-
                     },
 
                     errorLoading: function () {
-
                         return "<span>Gagal menampilkan tahun</span>";
-
                     }
-
                 },
 
                 escapeMarkup: function (markup) {
-
                     return markup;
-
                 },
-
                 data: tahun
 
             }).on('change', function () {
-
                 global_tahun = $(this).val();
-
                 console.log(tahun, "Value Tahun Select");
-
                 filterRiwayat();
-
             });
-
         }
 
-
-
         function filterRiwayat() {
-
             console.log(global_tahun);
-
             let params = {
-
                 'npwp': global_npwp,
-
                 'jenis_pengadaan': global_jenis_pengadaan,
-
                 'nilai_penawaran_awal': global_penwaran_awal,
-
                 'nilai_penawaran_akhir': global_penwaran_akhir,
-
                 'lokasi': global_loc,
-
                 'tahun': global_tahun,
-
             };
 
             console.log(params);
 
             $.ajax({
-
                 //url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/supplier/getPemenangFilter",
-
                 url: "<?= base_url('api/supplier/getPemenangFilter') ?>",
-
                 method: "POST",
-
                 dataType: "json",
-
                 data: params,
-
                 beforeSend: addAuthorizationHeader,
-
                 success: function (data) {
 
                     console.log(data);
-
                     setTabelRiwayat(data);
-
                 },
 
                 error: function () {
-
                     var data = [];
-
                     setTabelRiwayat(data);
-
                 },
-
             });
-
-
-
         }
-
     });
 </script>

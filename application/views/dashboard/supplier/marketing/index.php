@@ -829,63 +829,6 @@
 </div>
 <!-- end modal popup info kontak -->
 
-<!-- modal input kontak -->
-<div class="col-12">
-    <div class="modal fade" id="inputKontakModal" tabindex="-1" role="dialog" aria-labelledby="inputKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
-        <div class="modal-dialog custom-modal" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                    </button>
-                </div>
-
-
-                <div class="modal-body border-0">
-                    <h3 class="modal-title" id="inputKontakModalLabel">Tambahkan Kontak</h3>
-                    <p class="text-center"> Tambahkan untuk memasarkan produkmu</p>
-                    <div class="input-popup justify-content-end gap-2">
-                        <form class="row g-2">
-                            <div class="col-6">
-                                <label for="inputNama" class="form-label text-start">Nama</label>
-                                <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                <input type="text" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputEmail" class="form-label text-start">Email</label>
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA">
-                            </div>
-                            <button type="button" class="custom-button justify-content-center">
-                                <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                Tambah Kontak
-                            </button>
-
-                        </form>
-                    </div>
-                    <div class="d-flex justify-content-start mt-3 gap-2">
-                        <div></div>
-                        <div class="link flex-row align-items-center w-100">
-                            <span>
-                                <a class="btn-custom text-white text-center">
-                                    <i class="fas me-1"></i>Tambahkan
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal input kontak -->
-
 <!-- modal input status-->
 <div class="col-12">
     <div class="modal fade" id="buatAgenda" tabindex="-1" role="dialog" aria-labelledby="editKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
@@ -988,56 +931,6 @@
 </div>
 <!--end edit status-->
 
-<!-- modal edit -->
-<div class="col-12">
-    <div class="modal fade" id="editKontakModal" tabindex="-1" role="dialog" aria-labelledby="editKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
-        <div class="modal-dialog custom-modal" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                    </button>
-                </div>
-                <div class="modal-body border-0">
-                    <h3 class="modal-title" id="editKontakModalLabel">Edit Contact</h3>
-                    <p class="text-center"> Sesuaikan lagi kontak yang bisa dihubungi</p>
-                    <div class="input-popup justify-content-end gap-2">
-                        <form class="row g-2">
-                            <div class="col-12">
-                                <label for="inputNama" class="form-label text-start">Nama</label>
-                                <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
-                            </div>
-                            <div class="col-12">
-                                <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                <input type="text" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi">
-                            </div>
-                            <div class="col-12">
-                                <label for="inputEmail" class="form-label text-start">Email</label>
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email">
-                            </div>
-                            <div class="col-12">
-                                <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="d-flex justify-content-start mt-3 gap-2">
-                        <div></div>
-                        <div class="link flex-row align-items-center w-100">
-                            <span>
-                                <a class="btn-custom text-white text-center">
-                                    <i class="fas me-1"></i>Simpan Perubahan
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal edit kontak -->
-
 <!-- modal hapus -->
 <div class="col-12">
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
@@ -1081,149 +974,6 @@
 </div>
 <!-- end modal hapus -->
 
-<!-- modal lengkapi leads  -->
-<div class="col-12 align-content-center justify-content-center">
-    <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
-        <div class="modal-dialog custom-modal" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                    </button>
-                </div>
-                <div class="modal-body border-0">
-                    <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
-                    <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-                    <div class="input-popup align-items-center">
-                        <div class="input-popup justify-content-end">
-                            <form class="row g-2">
-                                <div class="col-12">
-                                    <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                    <input type="text" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
-                                    <textarea class="form-control" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
-                                </div>
-                                <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
-
-                                <div class="col-6">
-                                    <label for="inputNama" class="form-label text-start">Nama</label>
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
-                                </div>
-
-                                <div class="col-6">
-                                    <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                    <input type="text" class="form-control" id="inputPosisi" placeholder="Marketing">
-                                </div>
-                                <div class="col-6">
-                                    <label for="inputEmail" class="form-label text-start">Email</label>
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
-                                </div>
-                                <div class="col-6">
-                                    <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                    <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
-                                </div>
-
-
-                                <button type="button" class="custom-button justify-content-center">
-                                    Tambah Kontak
-                                </button>
-                                <!-- <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/add-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                        Hapus Kontak
-                                    </button> -->
-                            </form>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-start mt-3 gap-2">
-                        <div></div>
-                        <div class="link flex-row align-items-center w-100">
-                            <span>
-                                <a class="btn-custom text-white text-center">
-                                    <i class="fas me-1"></i>Tambahkan
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="my-2 text-center">
-                        <p style="font-size: 15px;">
-                            Mari Kami bantu carikan informasi tentang perusahaan ini?
-                            <a href="#">
-                                Klik Disini
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal lengkapi leads -->
-
-<!-- modal edit Data -->
-<div class="col-12">
-    <div class="modal fade" id="editDataModal" tabindex="-1" role="dialog" aria-labelledby="editDataModalLabel" aria-hidden="true" style="margin-top: 30px;">
-        <div class="modal-dialog custom-modal" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                    </button>
-                </div>
-                <div class="modal-body border-0">
-                    <h3 class="modal-title" id="editDataModalLabel">Edit </h3>
-                    <p class="text-center"></p>
-                    <div class="input-popup justify-content-end gap-2">
-                        <form class="row g-2">
-                            <div class="col-12">
-                                <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
-                            </div>
-                            <div class="col-12">
-                                <label for="inputStatus" class="form-label text-start">Status</label>
-                                <select class="form-select" id="inputStatus" aria-label="Pilih Status">
-                                    <option selected>Pilih Status</option>
-                                    <option value="aktif">Planning</option>
-                                    <option value="tidak aktif">Negotiation</option>
-                                    <option value="sedang cuti">Leads</option>
-                                    <option value="sedang cuti">Pause</option>
-                                    <option value="sedang cuti">Done</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="inputJadwal" class="form-label text-start">Jadwal</label>
-                                <input type="date" class="form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
-                            </div>
-
-                            <div class="col-12">
-                                <label for="inputNoHP" class="form-label text-start">Kontak</label>
-                                <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan Kontak">
-                            </div>
-                            <div class="col-12">
-                                <label for="catatan" class="form-label text-start">Catatan</label>
-                                <textarea class="form-control" id="catatan" rows="2" placeholder="Buat Catatan"></textarea>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="d-flex justify-content-start mt-3 gap-2">
-                        <div></div>
-                        <div class="link flex-row align-items-center w-100">
-                            <span>
-                                <a class="btn-custom text-white text-center">
-                                    <i class="fas me-1"></i>Tambahkan
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal edit kontak -->
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <!-- script popup -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1235,7 +985,6 @@
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- Script add row kontak -->
 <script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
     var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
@@ -1244,7 +993,180 @@
         xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
     }
 
-        // Fungsi untuk menambahkan baris ke dalam tabel
+    $(document).ready(function() {
+        $.ajax({
+            url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna,
+            type: "GET",
+            dataType: "json",
+            beforeSend: addAuthorizationHeader,
+            success: function(data1) {
+                for (let i = 0; i < data1.data.length; i++) {
+                    var hasMultipleHistory = data1.data[i].jumlah_history > 0 ? 'visible' : 'hidden';
+                    const rowHtml = `
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${data1.data[i].nama_perusahaan || ''}</td>
+                            <td>${data1.data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data1.data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                            <td>${data1.data[i].status || ''}</td>
+                            <td>${data1.data[i].jadwal || ''}</td>
+                            <td style="max-width: 400px">${data1.data[i].catatan || ''}</td>
+                            <td></td>
+                            <td>
+                                <span class="insert-history" data-id="${data1.data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
+                                <span class="expandChildTable" data-id="${data1.data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
+                            </td>
+                        </tr>
+                        <tr class="childTableRow">
+                            <td colspan="5">
+                                <table class="table custom-table-container">
+                                    <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464">
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Jadwal</th>
+                                            <th>Catatan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data-history">
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    `;
+                    $('#data-leads').append(rowHtml);
+                }
+
+                // Tambahkan fungsi expandChildTable
+                $('.expandChildTable').on('click', function() {
+                        const id_lead = $(this).data('id');
+                        console.log(id_lead);
+                        const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
+                        childTable.empty();
+                        $.ajax({
+                            url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead,
+                            type: "GET",
+                            dataType: "json",
+                            beforeSend: addAuthorizationHeader,
+                            success: function(data) {
+                                $.each(data.data, function(index, value) {
+                                    const childRowHtml = `
+                                        <tr>
+                                            <td class="editable-select">${value.status || ''}</td>
+                                            <td class="editable-date">${value.jadwal || ''}</td>
+                                            <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
+                                        </tr>
+                                    `;
+                                    childTable.append(childRowHtml);
+                                });
+                                childTable.parent().show();
+                            },
+                        });
+                });
+
+                //get data kontak
+                $("#data-leads").on("click", ".contact", function() {
+                        var id_lead = $(this).data("id");
+                        $.ajax({
+                            url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
+                            type: "GET",
+                            dataType: "json",
+                            beforeSend: addAuthorizationHeader,
+                            success: function(data) {
+                                var kontak = "";
+
+                                $.each(data.data, function(index, value) {
+                                    kontak +=
+                                        `<tr id="` + value.id_kontak + `">
+                                            <td>` + value.nama + `</td>
+                                            <td>` + value.posisi + `</td>
+                                            <td>` + value.email + `</td>
+                                            <td>` + value.no_telp + `</td>
+                                            <td>
+                                                <a href="#" class="btn btn-link" onclick="editRowContact(this)">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                                </a>
+                                                <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
+                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                                </a>
+                                            </td>
+                                            </tr>`;
+                                });
+
+                                $("#infoKontakModal .data-kontak").html(kontak);
+                                console.log(kontak);
+                            },
+                            error: function() {
+                                alert("Terjadi kesalahan saat mengambil data kontak.");
+                            }
+                        });
+
+                        $.ajax({
+                            url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function(data) {
+                                $('#id-lead').val(data.id_lead);
+                                $('#nama-perusahaan').html(data.nama_perusahaan);
+                                console.log(data.nama_perusahaan);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {}
+                        });
+                });
+
+                $("#data-leads").on("click", ".insert-history", function(){
+                    var id_lead = $(this).data("id");
+                    console.log(id_lead);
+                    $('#submit-input').click(function(event) {
+                    event.preventDefault();
+
+                    var formData = {
+                        id_lead: id_lead,
+                        status: document.getElementById('status').value,
+                        jadwal: $('input[name=jadwal]').val(),
+                        catatan: document.getElementById('catatan').value,
+                    };
+
+                    $.ajax({
+                        url: '<?= base_url("api/marketing/insertHistory") ?>',
+                            type: 'POST',
+                            data: formData,
+                            beforeSend: addAuthorizationHeader,
+                            success: function(response) {
+                                if (response.status == true) {
+                                    swal({
+                                        title: "Data berhasil ditambahkan!",
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then(function() {
+                                        window.location.href = "<?= base_url('marketing') ?>";
+                                    });
+                                } else {
+                                    swal({
+                                        title: "Data gagal ditambahkan!",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                var span = document.createElement("span");
+                                span.innerHTML = JSON.parse(xhr.responseText).message;
+                                swal({
+                                    title: "ERROR",
+                                    content: span,
+                                    icon: "error",
+                                    button: "Ok",
+                                });
+                                console.log(xhr.responseText);
+                                console.log(JSON.parse(xhr.responseText).message);
+                            }
+                    });
+                    });
+                });
+            }
+        });
+    });
+
+    //script tabel kontak
         function addRowContact() {
             var table = document.getElementById("tabel-kontak");
             var newRow = table.insertRow(table.rows.length);
@@ -1406,281 +1328,4 @@
             });
             row.parentNode.removeChild(row);
         }
-</script>
-
-<!-- <script>
-    function editRow(button) {
-        var row = button.parentNode.parentNode;
-        row.classList.add("editing");
-
-        var editableCells = row.getElementsByClassName("editable");
-    for (var i = 0; i < editableCells.length; i++) {
-        var cell = editableCells[i];
-        var field = cell.getAttribute("data-field");
-        var currentValue = cell.textContent;
-        var input = document.createElement("div"); // Change to <div> for contenteditable
-        input.setAttribute("contenteditable", "true"); // Add contenteditable attribute
-        input.textContent = currentValue;
-        cell.textContent = "";
-        cell.appendChild(input);
-        cell.setAttribute("data-orig-value", currentValue);
-    }
-
-        var editableSelectCells = row.getElementsByClassName("editable-select");
-        for (var i = 0; i < editableSelectCells.length; i++) {
-            var cell = editableSelectCells[i];
-            var field = cell.getAttribute("data-field");
-            var currentValue = cell.textContent;
-            var select = document.createElement("select");
-            select.innerHTML = `<select id="status-select">
-                <option value="menunggu-jawaban" data-imagesrc="menunggu-jawaban.png">Menunggu Jawaban</option>
-                <option value="negosiasi" data-imagesrc="negosiasi.png">Negosiasi</option>
-                <option value="menunggu-hasil-akhir" data-imagesrc="menunggu-hasil-akhir.png">Menunggu Hasil Akhir</option>
-                <option value="deal" data-imagesrc="deal.png">Deal</option>
-                <option value="dibatalkan" data-imagesrc="dibatalkan.png">Dibatalkan</option>
-                </select>`;
-            select.value = currentValue;
-            select.style.width = (currentValue.length + 1) + "ch"; // Sesuaikan lebar select
-            cell.textContent = "";
-            cell.appendChild(select);
-            cell.setAttribute("data-orig-value", currentValue);
-        }
-
-        var editableDateCells = row.getElementsByClassName("editable-date");
-        for (var i = 0; i < editableDateCells.length; i++) {
-            var cell = editableDateCells[i];
-            var field = cell.getAttribute("data-field");
-            var currentValue = cell.textContent;
-            var input = document.createElement("input");
-            input.type = "date";
-            input.value = currentValue;
-            cell.textContent = "";
-            cell.appendChild(input);
-            cell.setAttribute("data-orig-value", currentValue);
-        }
-
-        button.style.display = "none";
-        row.querySelector(".save-button").style.display = "inline";
-    }
-
-    function saveRow(button) {
-        var row = button.parentNode.parentNode;
-        row.classList.remove("editing");
-
-        var editableCells = row.getElementsByClassName("editable");
-        for (var i = 0; i < editableCells.length; i++) {
-            var cell = editableCells[i];
-            var input = cell.querySelector("input");
-            var origValue = cell.getAttribute("data-orig-value");
-            var newValue = input.value;
-            cell.textContent = newValue;
-            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-        }
-
-        var editableSelectCells = row.getElementsByClassName("editable-select");
-        for (var i = 0; i < editableSelectCells.length; i++) {
-            var cell = editableSelectCells[i];
-            var select = cell.querySelector("select");
-            var origValue = cell.getAttribute("data-orig-value");
-            var newValue = select.value;
-            cell.textContent = newValue;
-            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-        }
-
-        var editableDateCells = row.getElementsByClassName("editable-date");
-        for (var i = 0; i < editableDateCells.length; i++) {
-            var cell = editableDateCells[i];
-            var input = cell.querySelector("input");
-            var origValue = cell.getAttribute("data-orig-value");
-            var newValue = input.value;
-            cell.textContent = newValue;
-            // Tambahkan kode untuk menyimpan perubahan ke server jika diperlukan
-        }
-
-        button.style.display = "none";
-        row.querySelector(".edit-button").style.display = "inline";
-    }
-</script> -->
-
-<script>
-    var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
-    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
-
-    function addAuthorizationHeader(xhr) {
-        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
-    }
-
-$(document).ready(function() {
-    $.ajax({
-        url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna,
-        type: "GET",
-        dataType: "json",
-        beforeSend: addAuthorizationHeader,
-        success: function(data1) {
-            for (let i = 0; i < data1.data.length; i++) {
-                var hasMultipleHistory = data1.data[i].jumlah_history > 0 ? 'visible' : 'hidden';
-                const rowHtml = `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td>${data1.data[i].nama_perusahaan || ''}</td>
-                        <td>${data1.data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data1.data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                        <td>${data1.data[i].status || ''}</td>
-                        <td>${data1.data[i].jadwal || ''}</td>
-                        <td style="max-width: 400px">${data1.data[i].catatan || ''}</td>
-                        <td></td>
-                        <td>
-                            <span class="insert-history" data-id="${data1.data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
-                            <span class="expandChildTable" data-id="${data1.data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
-                        </td>
-                    </tr>
-                    <tr class="childTableRow">
-                        <td colspan="5">
-                            <table class="table custom-table-container">
-                                <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464">
-                                    <tr>
-                                        <th>Status</th>
-                                        <th>Jadwal</th>
-                                        <th>Catatan</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="data-history">
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                `;
-                $('#data-leads').append(rowHtml);
-            }
-
-             // Tambahkan fungsi expandChildTable
-            $('.expandChildTable').on('click', function() {
-                    const id_lead = $(this).data('id');
-                    console.log(id_lead);
-                    const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
-                    childTable.empty();
-                    $.ajax({
-                        url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead,
-                        type: "GET",
-                        dataType: "json",
-                        beforeSend: addAuthorizationHeader,
-                        success: function(data) {
-                            $.each(data.data, function(index, value) {
-                                const childRowHtml = `
-                                    <tr>
-                                        <td class="editable-select">${value.status || ''}</td>
-                                        <td class="editable-date">${value.jadwal || ''}</td>
-                                        <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
-                                    </tr>
-                                `;
-                                childTable.append(childRowHtml);
-                            });
-                            childTable.parent().show();
-                        },
-                    });
-            });
-
-            //get data kontak
-            $("#data-leads").on("click", ".contact", function() {
-                    var id_lead = $(this).data("id");
-                    $.ajax({
-                        url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
-                        type: "GET",
-                        dataType: "json",
-                        beforeSend: addAuthorizationHeader,
-                        success: function(data) {
-                            var kontak = "";
-
-                            $.each(data.data, function(index, value) {
-                                kontak +=
-                                    `<tr id="` + value.id_kontak + `">
-                                        <td>` + value.nama + `</td>
-                                        <td>` + value.posisi + `</td>
-                                        <td>` + value.email + `</td>
-                                        <td>` + value.no_telp + `</td>
-                                        <td>
-                                            <a href="#" class="btn btn-link" onclick="editRowContact(this)">
-                                                <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-                                            </a>
-                                            <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
-                                                <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-                                            </a>
-                                        </td>
-                                        </tr>`;
-                            });
-
-                            $("#infoKontakModal .data-kontak").html(kontak);
-                            console.log(kontak);
-                        },
-                        error: function() {
-                            alert("Terjadi kesalahan saat mengambil data kontak.");
-                        }
-                    });
-
-                    $.ajax({
-                        url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
-                        type: "GET",
-                        dataType: "JSON",
-                        success: function(data) {
-                            $('#id-lead').val(data.id_lead);
-                            $('#nama-perusahaan').html(data.nama_perusahaan);
-                            console.log(data.nama_perusahaan);
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {}
-                    });
-            });
-
-            $("#data-leads").on("click", ".insert-history", function(){
-                var id_lead = $(this).data("id");
-                console.log(id_lead);
-                $('#submit-input').click(function(event) {
-                event.preventDefault();
-
-                var formData = {
-                    id_lead: id_lead,
-                    status: document.getElementById('status').value,
-                    jadwal: $('input[name=jadwal]').val(),
-                    catatan: document.getElementById('catatan').value,
-                };
-
-                $.ajax({
-                    url: '<?= base_url("api/marketing/insertHistory") ?>',
-                        type: 'POST',
-                        data: formData,
-                        beforeSend: addAuthorizationHeader,
-                        success: function(response) {
-                            if (response.status == true) {
-                                swal({
-                                    title: "Data berhasil ditambahkan!",
-                                    icon: "success",
-                                    button: "Ok",
-                                }).then(function() {
-                                    window.location.href = "<?= base_url('marketing') ?>";
-                                });
-                            } else {
-                                swal({
-                                    title: "Data gagal ditambahkan!",
-                                    icon: "error",
-                                    button: "Ok",
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            var span = document.createElement("span");
-                            span.innerHTML = JSON.parse(xhr.responseText).message;
-                            swal({
-                                title: "ERROR",
-                                content: span,
-                                icon: "error",
-                                button: "Ok",
-                            });
-                            console.log(xhr.responseText);
-                            console.log(JSON.parse(xhr.responseText).message);
-                        }
-                });
-                });
-            });
-        }
-    });
-});
-            
 </script>

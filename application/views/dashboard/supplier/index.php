@@ -954,4 +954,4 @@
         jenis_pengadaan = $(this).val();
         filterTender();
     });
-</script>
+</script> 
