@@ -141,7 +141,8 @@
     td {
         padding: 0.5rem 1rem;
         text-align: left;
-        height: 3rem;
+        height: 4rem;
+        font-size: 16px;
     }
 
     .data-table {
@@ -265,17 +266,50 @@
         background-color: #D21B1B;
     }
 
+    .tender {
+        font-size: 12px;
+        margin-top: 80px;
+        margin-left: 110px;
+    }
+
+    #total {
+        font-size: 30px;
+        margin-left: 110;
+    }
+    .col2{
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .col3 {
+        margin-top: 90px;
+    }
+
+    .line {
+        border-left: 5px solid #F9845F;
+        height: 110px;
+        opacity: 1;
+    }
+
+    .col-1 {
+        padding: 0;
+        margin-left: 15px;
+    }
+
+    .tender-summary {
+        font-size: 14px;
+    }
+
     @media (max-width: 768px) {
         .justify-content-start {
             justify-content: center !important;
         }
-
-        .container-lg {
-            padding-top: 30px;
-            justify-content: center;
+        .container-lg{
+            margin-top: 100px;
         }
 
-        .col-7, .col-8,
+        .col-7,
+        .col-8,
         .col-4 {
             width: 100%;
             /* Make the columns take the full width on smaller screens */
@@ -290,23 +324,75 @@
             margin-right: 0;
         }
 
-        .tren-card {
-            width: 100%;
-        }
-
-        .card-select {
-            padding: 20px;
-        }
-
         .form-select-custom {
-            flex-basis: calc(50% - 10px);
+            flex-basis: calc(90% - 10px);
+            margin-left: 20px;
+        }
+
+        .btnbtnbtn {
+            flex-basis: calc(90% - 10px);
+            margin-left: 20px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .custom-img3 {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+
+        .h4 {
+            padding-top: 50px;
+            font-size: 15px;
+            margin-left: 20px;
+        }
+
+        .dashboard-hero {
+            margin-left: 2px;
+        }
+
+        .chart2 {
+            width: 80%;
+            height: 80%;
+            margin-right: 20px;
+        }
+
+        .custom-table-container {
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+
+        .line {
+            margin-right: 100px;
+        }
+
+        .tender {
+            font-size: 18px;
+            margin-left: 20px;
+        }
+
+        #total {
+            margin-left: 20px;
+        }
+
+        .col-1 {
+            margin-left: 10px;
+        }
+        .col2{
+            margin-top: 10px;
+        }
+
+        .tender-summary {
+            font-size: 17px;
         }
     }
 </style>
 
 <section class="bg-white">
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
-        <h4 class="mb-0 fw-semibold wow fadeInUp">Selamat Datang! <p class="pt-2">Sudah Siap Memantau Performa Anggota Mu Hari ini ?</p>
+        <h4 class="mb-0 fw-semibold wow fadeInUp">Selamat Datang! <p class="pt-2">Sudah Siap Memantau Performa Anggotamu Hari ini ?</p>
         </h4>
     </div>
 </section>
@@ -314,78 +400,40 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-7 bg-cream shadow-sm wow fadeInUp">
-                <div>
-
-                    <!-- filter LPSE -->
-
-                    <div class="container " data-wow-delay="0.1s">
-                        <div class="row">
-                            <div class="card-select">
-                                <div class="select-custom container-fluid">
-                                    <div class="row">
-                                        <div class="col form-select-custom d-flex" style="width: 100px; margin-right:10px">
-                                            <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                            <select class="" style="border:none;">
-                                            </select>
-                                        </div>
-                                        <div class="col form-select-custom d-flex" style="width: 100px; margin-right:10px">
-                                            <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                            <select class="" style="border:none;">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End of Filter Tahun -->
-                </div>
-
-                <div class="row mt-2">
+            <div class="col-lg-8 wow fadeInUp">
+                <div class="row dashboard-hero mt-4">
                     <div class="col-lg-2" style="padding:0">
                         <div>
                             <center>
-                                <div class="chart2" style="margin-left:50; padding:0">
+                                <div class="chart2" style="margin-left:20; margin-top:50; margin-bottom:50; padding:0">
                                     <canvas id="doughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
-                                    <!-- <div id="chartCenterText" style="position: absolute; top: 52%; left: 80%; transform: translate(-50%, -50%); text-align: center;">
-                                            <p style="font-size: 8px; font-weight: bold;">Statistik Anggota</p>
-                                        </div> -->
                                 </div>
                             </center>
-                            <!-- <center>
-                                <div class="chart2" style="margin:0; padding:0">
-                                    <canvas id="doughnutChart" width="40" height="40" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
-                                    <div id="chartCenterText" style="position: absolute; top: 52%; left: 80%; transform: translate(-50%, -50%); text-align: center;">
-                                        <p style="font-size: 65%; font-weight: bold; margin-left:27%;">Statistik Anggota</p>
-                                    </div>
-                                </div>
-                            </center> -->
                         </div>
                     </div>
-                    <div class="col text-center mt-4 mb-4" style="padding:0">
-                        <h6 style="font-size:12px; margin-top:20; margin-left:150;"><b>Total Tender</b></h6>
+                    <div class="col text-center col2" style="padding:0">
+                        <h6 class="tender"><b>Total Tender</b></h6>
                         <!-- <h5 style="font-size:30px" id="ikut"><b>42</b></h5> -->
-                        <h5 style="font-size:30px; margin-left:150;" id="total"> <b>4659</b></h5>
+                        <h5 id="total"> <b>4659</b></h5>
                     </div>
-                    <div class="col mt-4 mb-4">
-                        <div class="row">
-                            <div class="col-1" style="padding:0; margin-left:10px">
-                                <div style=" border-left: 5px solid #F9845F; height: 100px; opacity:1"></div>
+                    <div class="col col3">
+                        <div class="row rowtext">
+                            <div class="col-1">
+                                <div class="line"></div>
                             </div>
                             <div class="col" style="margin-top:5%; padding:0">
-                                <h5 id="menang" class="tender-summary" style="font-size: 14px;"><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
-                                <h5 id="kalah" class="tender-summary" style="font-size: 14px;"><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
-                                <h5 id="ikut" class="tender-summary" style="font-size: 14px;"><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
+                                <h5 id="menang" class="tender-summary" ><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
+                                <h5 id="kalah" class="tender-summary" ><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
+                                <h5 id="ikut" class="tender-summary" ><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 wow fadeInUp">
-                        <center> <img src="http://localhost/tenderplus/assets/img/dashboard-hero.svg" class="dh-img" alt=""></center>
+                        <center> <img src="http://localhost/tenderplus/assets/img/dashboard-hero.png" class="dh-img" alt="" style="margin-top: 10rem; "></center>
                     </div>
                 </div>
             </div>
-            <div class="col-4 wow fadeInUp ">
+            <div class="col-lg-4 wow fadeInUp ">
                 <h4 class="my-0 mb-1" style="font-weight:510; font-size: 22px;">Aktifitas Terbaru</h4>
                 <div class="mt-3 shadow-sm wow fadeInUp" style="max-height: auto; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
                     <div class="d-flex align-content-center p-2" style="height: auto">
@@ -428,14 +476,14 @@
 <section>
     <div class="container mt-4 wow fadeInUp">
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-8">
                 <div class="row">
-                    <h4 class="col-md-4 my-0 mb-3" style="font-weight:500; font-size: 20px;">Anggota Asosiasi</h4>
-                    <div class=".col-md-2 .offset-md-3 form-select-custom" style="padding-left:30px; margin-right:20px;">
+                    <h4 class="col-lg-4 my-0 mb-3" style="font-weight:500; font-size: 20px;">Anggota Asosiasi</h4>
+                    <div class=".col-lg-2 .offset-md-3 form-select-custom" style="padding-left:30px; margin-right:20px;">
                         <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari Nama Anggota">
                         <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-bottom:0px;margin-top:5px">
                     </div>
-                    <button class="col-md-2 btnbtnbtn"><span><img class="custom-img3" src="<?= base_url('assets\img\icon_tambah_anggota.svg') ?>" alt=""></span style="font">Tambah Anggota</button>
+                    <button class="col-lg-2 btnbtnbtn"><span><img class="custom-img3" src="<?= base_url('assets\img\icon_tambah_anggota.svg') ?>" alt=""></span style="font">Tambah Anggota</button>
                 </div>
                 <div class="custom-table-container shadow-sm table-striped">
                     <table class="data-table">
@@ -535,7 +583,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-4 mt-5">
+            <div class="col-lg-4 mt-5">
                 <div class="wow fadeInUp animation" data-wow-delay="0.2s">
                     <div class="shadow-sm bg-white">
                         <div class="tren-card">
