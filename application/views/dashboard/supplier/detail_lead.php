@@ -3307,7 +3307,6 @@
                 data: params,
                 beforeSend: addAuthorizationHeader,
                 success: function (data) {
-
                     console.log(data);
                     setTabelRiwayat(data);
                 },

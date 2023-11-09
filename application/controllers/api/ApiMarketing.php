@@ -72,6 +72,27 @@ class ApiMarketing extends RestController {
         }
     }
 
+    //Get filter
+    public function leadsByTimFiltered_post()
+    {
+        $id_pengguna = $this->input->post('id_pengguna');
+        $nama_perusahaan = $this->input->post('nama_perusahaan');
+        $status = $this->input->post('status');
+        $data = $this->marketing->getLeadsByTimFiltered($id_pengguna, $nama_perusahaan, $status);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
     public function getKontakLeadById_get($id){
         $data = $this->marketing->getKontakLeadById($id);
 

@@ -368,6 +368,16 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         return $query->row()->total;
     }
 
+    public function getTotalDataLeadFiltered($id_pengguna, $nama_perusahaan)
+    {
+        $this->db->select('COUNT(*) as total');
+        $this->db->from('data_leads');
+        $this->db->where('id_pengguna', $id_pengguna);
+        $this->db->where('LOWER(nama_perusahaan) LIKE', 'LOWER(\'%' . $this->db->escape_like_str($nama_perusahaan) . '%\')', false);
+        $query = $this->db->get();
+        return $query->row()->total;
+    }
+
     public function getCountDataLeads($id_pengguna)
     {
         $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);

@@ -55,33 +55,28 @@ class Marketing_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function getKatalogPemenangTerbaruByPengguna1($data)
+    public function getLeadsByTimFiltered($id_pengguna, $nama_perusahaan, $status)
     {
-        $id_pengguna = $data['id_pengguna'];
-        $page_size = $data['pageSize'];
-        $page_number = ($data['pageNumber'] - 1) * $page_size;
+        $this->db->select('data_leads.*,  kontak_lead.nama, kontak_lead.posisi, kontak_lead.no_telp, kontak_lead.email, plot_tim.status, plot_tim.jadwal, plot_tim.catatan');
+        $this->db->select('COUNT(history_marketing.id_lead) AS jumlah_history');
+        $this->db->from('data_leads');
+        $this->db->join('plot_tim', 'data_leads.id_lead = plot_tim.id_lead');
+        $this->db->join('tim_marketing', 'plot_tim.id_tim = tim_marketing.id_tim');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->join('history_marketing', 'data_leads.id_lead = history_marketing.id_lead', 'left');
+        $this->db->where('tim_marketing.id_pengguna', $id_pengguna);
+        $this->db->group_by('data_leads.id_lead, kontak_lead.id_kontak, status, jadwal, catatan');
 
-        $kriteria = $order = '';
-        $keyword = $data['keyword'];
-        if ($keyword != '') $kriteria .= " AND (nama_tender LIKE '%{$keyword}%' OR nama_pemenang LIKE '%{$keyword}%')";
+        if (!empty($nama_perusahaan)) {
+            $this->db->where('data_leads.nama_perusahaan', $nama_perusahaan);
+        }
+        if (!empty($status)) {
+            $this->db->like('plot_tim.status', $status);
+        }
+        
+        $query = $this->db->get();
 
-        $sort = $data['sort'];
-        if ($sort == '1') $order = "harga_penawaran ASC";
-        else if ($sort == '2') $order = "harga_penawaran DESC";
-        else if ($sort == '3') $order = "tgl_pemenang DESC";
-        else if ($sort == '4') $order = "tgl_pemenang ASC";
-
-        $sql = "SELECT kode_tender,nama_pemenang,nama_tender,jenis_tender.jenis_tender,ROUND(harga_penawaran,0) AS harga_penawaran,nama_lpse,'' AS foto,url,'' AS link_sumber,COALESCE(DATEDIFF(CURRENT_DATE,tgl_pemenang),0) AS update_hari
-                FROM preferensi,pemenang
-                INNER JOIN lpse ON pemenang.id_lpse=lpse.id_lpse
-                INNER JOIN jenis_tender ON pemenang.jenis_tender=jenis_tender.id_jenis
-                LEFT JOIN wilayah ON CONCAT(REPLACE(REPLACE(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 2), '(', -1)),')',''),'.',''),' ',TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(lokasi_pekerjaan, ' - ', 3), ' - ', -1), '(', 1), '(', -1)))=wilayah
-                WHERE id_pengguna={$id_pengguna} AND DATEDIFF(CURRENT_DATE,tgl_pemenang) <= {$this->interval_pemenang} AND preferensi.status='1' AND (IF(preferensi.id_lpse='',pemenang.id_lpse<>'',pemenang.id_lpse IN ({$preferensi->id_lpse})) AND IF(preferensi.jenis_pengadaan='',pemenang.jenis_tender<>'',pemenang.jenis_tender IN ({$preferensi->jenis_pengadaan})) AND IF(keyword='',nama_tender<>'',nama_tender REGEXP keyword) AND IF(nilai_hps_awal=0 AND nilai_hps_akhir=0,harga_penawaran<>'',harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir)) {$kriteria}
-                GROUP BY kode_tender,npwp
-                ORDER BY {$order}
-                LIMIT {$page_number},{$page_size}";
-                
-                return $this->db->query($sql);
+        return $query->result();
     }
 
     public function getKontakLeadById($id){

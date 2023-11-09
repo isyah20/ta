@@ -402,6 +402,7 @@ $route['api/marketing/getLeadsByTim/(:num)'] = 'api/ApiMarketing/getLeadsByTim/$
 $route['api/marketing/getKontakLeadById/(:num)'] = 'api/ApiMarketing/getKontakLeadById/$1';
 $route['api/marketing/getHistoryMarketing/(:num)'] = 'api/ApiMarketing/getHistoryMarketing/$1';
 $route['api/marketing/insertHistory'] = 'api/ApiMarketing/insertHistory';
+$route['api/marketing/leadsByTimFiltered'] = 'api/ApiMarketing/leadsByTimFiltered';
 
 //restAPI route for Suplier 
 $route['api/supplier/get'] = 'api/ApiSupplier';
@@ -422,6 +423,7 @@ $route['api/supplier/getPemenangByNPWP/(:any)'] = 'api/ApiSupplier/getPemenangBy
 $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
 $route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
 $route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
+$route['api/supplier/getTotalDataLeadFiltered'] = 'api/ApiSupplier/getTotalDataLeadFiltered';
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
 $route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 
@@ -752,6 +754,7 @@ $route['api-mobile/supplier/createTim'] = 'api-mobile/ApiSupplier/create';
 $route['api-mobile/supplier/deleteTim/(:num)'] = 'api-mobile/ApiSupplier/deleteTim/$1';
 $route['api-mobile/supplier/updateTim/(:num)'] = 'api-mobile/ApiSupplier/editTimMarketing/$1';
 $route['api-mobile/supplier/getTimById/(:num)'] = 'api-mobile/ApiSupplier/getbyId/$1';
+
 
 // Not Fixed
 $route['api-mobile/supplier/getPemenangByNPWP/(:any)'] = 'api-mobile/ApiSupplier/getPemenangByNPWP/$1';

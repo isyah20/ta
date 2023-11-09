@@ -733,8 +733,6 @@
         </div>
     </div>
     <!-- end modal popup info kontak -->
-
-
 </section>
 
 
@@ -922,19 +920,78 @@
 
         function filterLeads(id_pengguna, key) {
             $.ajax({
-                url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
+                url: "<?= base_url('api/supplier/getTotalDataLeadFiltered') ?>",
                 type: "GET",
+                dataType: "JSON",
                 data: {
                     id_pengguna: id_pengguna,
                     key: key
                 },
-                dataType: "json",
                 beforeSend: addAuthorizationHeader,
                 success: function(data) {
-                    console.log(data, 'data');
-                    setTableLeads(data)
+                    total_leads = data.data;
+
+                    $('#pagination-container').pagination({
+                        dataSource: "<?php echo site_url('api/supplier/lead/filter'); ?>",
+                        locator: '',
+                        totalNumber: total_leads,
+                        pageSize: 10,
+                        autoHidePrevious: true,
+                        autoHideNext: true,
+                        showNavigator: true,
+                        formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> data leads',
+                        position: 'bottom',
+                        className: 'paginationjs-theme-red paginationjs-big',
+                        ajax: {
+                            type: "GET",
+                            data: {
+                                id_pengguna: id_pengguna,
+                                key: key
+                            },
+                            beforeSend: addAuthorizationHeader,
+                            function(xhr, settings) {
+                                const url = settings.url
+                                const params = new URLSearchParams(url)
+                                let currentPageNum = params.get('pageNumber')
+                                currentPageNum = parseInt(currentPageNum)
+                                if (currentPageNum >= 2 && id_pengguna == null) {
+                                    window.location.href = `${base_url}login`
+                                    return false
+                                }
+
+                                $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                            }
+                        },
+                        callback: function(data, pagination) {
+                            if (data != '') {
+                                currentPage = pagination.pageNumber;
+                                let html = setTableLeads(data);
+                                $('#data-leads').html(html);
+                            }
+                        }
+                    });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
                 }
             });
         }
+
+        // function filterLeads(id_pengguna, key) {
+        //     $.ajax({
+        //         url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
+        //         type: "GET",
+        //         data: {
+        //             id_pengguna: id_pengguna,
+        //             key: key
+        //         },
+        //         dataType: "json",
+        //         beforeSend: addAuthorizationHeader,
+        //         success: function(data) {
+        //             console.log(data, 'data');
+        //             setTableLeads(data)
+        //         }
+        //     });
+        // }
     });
 </script>

@@ -683,6 +683,7 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
+    
     //Get pemenang filter
     public function pemenangFiltered_post()
     {
@@ -760,6 +761,25 @@ class ApiSupplier extends RestController
     {
         $id_pengguna = $this->input->get('id_pengguna');
         $data = $this->Supplier_api->getTotalDataLeads($id_pengguna);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getTotalDataLeadFiltered_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $nama_perusahaan = $this->input->get('key');
+        $data = $this->Supplier_api->getTotalDataLeadFiltered($id_pengguna, $nama_perusahaan);
 
         if ($data) {
             $this->response([

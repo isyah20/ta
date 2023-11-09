@@ -315,7 +315,7 @@ class Supplier_model extends CI_Model
         return print_r(json_encode($option));
     }
 
-    public function getDataLeadFilter($id_pengguna, $nama_perusahaan)
+    public function getDataLeadFilter($id_pengguna, $nama_perusahaan, $page_number, $page_size)
     {
         $sql = "SELECT
         data_leads.id_lead AS id,
@@ -337,7 +337,7 @@ class Supplier_model extends CI_Model
             AND LOWER(nama_perusahaan) LIKE LOWER('%{$nama_perusahaan}%')
         GROUP BY
             data_leads.id_lead
-        ";
+        LIMIT {$page_number},{$page_size}";
 
         $query = $this->db->query($sql);
 

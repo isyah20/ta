@@ -914,9 +914,11 @@ class DashboardUserSupplier extends CI_Controller
 
     public function getDataLeadFilter()
     {
+        $page_size = $_GET['pageSize'];
+        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
         $id_pengguna = $this->input->get('id_pengguna');
         $keyword = $this->input->get('key');
-        $data = $this->Supplier_model->getDataLeadFilter($id_pengguna, $keyword);
+        $data = $this->Supplier_model->getDataLeadFilter($id_pengguna, $keyword, $page_number, $page_size);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
