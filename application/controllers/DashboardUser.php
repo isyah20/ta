@@ -82,15 +82,15 @@ class DashboardUser extends CI_Controller
         // $pesertaTenderIkut = $this->ApiPesertaModel->getPesertaIkutTender($pengguna['npwp']);
         $pesertaTenderIkut = null;
         try {
-            $pesertaResp = $this->client->request('GET', 'peserta/pesertaIkutTender', $this->client->getConfig('headers'));
-            if ($pesertaResp->getStatusCode() == 200) {
-                $pesertaTenderIkut = json_decode($pesertaResp->getBody()->getContents(), true);
-                $pesertaTenderIkut = $pesertaTenderIkut['data'] ?? [];
+            // $pesertaResp = $this->client->request('GET', 'peserta/pesertaIkutTender', $this->client->getConfig('headers'));
+            $pesertaResp = $this->ApiPesertaModel->getPesertaIkutTender($pengguna['npwp']);
+            if ($pesertaResp) {
+                // $pesertaTenderIkut = json_decode($pesertaResp->getBody()->getContents(), true);
+                $pesertaTenderIkut = $pesertaResp ?? [];
             } else {
                 $pesertaTenderIkut = null;
             }
         } catch (ClientException $e) {
-            // die;
             $pesertaTenderIkut = null;
         } 
 

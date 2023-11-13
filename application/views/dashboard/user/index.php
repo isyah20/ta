@@ -509,17 +509,22 @@
                         </thead>
                         <tbody id="data-leads">
                         <?php if ($pesertaTenderIkut != null) {
+                            $no = 0;
+                            function formatRupiah($number) {
+                                return 'Rp ' . number_format(sprintf('%0.2f', $number), 2, ',', '.');
+                            }
                                 foreach ($pesertaTenderIkut as $pesertaIkut) : 
                                     $persentase = ($pesertaIkut['harga_penawaran'] / $pesertaIkut['nilai_hps_paket']) * 100;
                                     $persentase = 100 - $persentase;
                                     $persentase = round($persentase, 2);
+                                    $no++;
                                 ?>
                             <tr>
                                 <th></th>
-                                <td>1</td>
+                                <td><?= $no ?></td>
                                 <td class="custom-padding"><?= $pesertaIkut['nama_tender'] ?></td>
-                                <td class="green-td"><?= $pesertaIkut['nilai_hps_paket'] ?></td>
-                                <td class="green-td"><?= $pesertaIkut['harga_penawaran'] ?></td>
+                                <td class="green-td"><?= formatRupiah($pesertaIkut['nilai_hps_paket']) ?></td>
+                                <td class="green-td"><?= formatRupiah($pesertaIkut['harga_penawaran']) ?></td>
                                 <td class="orange-td"><?= $persentase ?></td>
                             </tr>
                                 <?php
