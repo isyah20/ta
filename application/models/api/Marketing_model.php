@@ -55,6 +55,16 @@ class Marketing_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function getTotalLeadsByTim($id)
+    {
+        $this->db->select('COUNT(pt.id_lead) AS total');
+        $this->db->from('plot_tim pt');
+        $this->db->join('tim_marketing tm', 'pt.id_tim = tm.id_tim');
+        $this->db->where('tm.id_pengguna', $id);
+        $query = $this->db->get();
+        return $query->row()->total;
+    }
+
     public function getLeadsByTimFiltered($id_pengguna, $nama_perusahaan, $status)
     {
         $this->db->select('data_leads.*,  kontak_lead.nama, kontak_lead.posisi, kontak_lead.no_telp, kontak_lead.email, plot_tim.status, plot_tim.jadwal, plot_tim.catatan');
@@ -68,7 +78,7 @@ class Marketing_model extends CI_Model {
         $this->db->group_by('data_leads.id_lead, kontak_lead.id_kontak, status, jadwal, catatan');
 
         if (!empty($nama_perusahaan)) {
-            $this->db->where('data_leads.nama_perusahaan', $nama_perusahaan);
+            $this->db->where('LOWER(nama_perusahaan) LIKE', 'LOWER(\'%' . $this->db->escape_like_str($nama_perusahaan) . '%\')', false);
         }
         if (!empty($status)) {
             $this->db->like('plot_tim.status', $status);

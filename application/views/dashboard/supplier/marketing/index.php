@@ -984,6 +984,7 @@
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 
 <script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
@@ -994,205 +995,64 @@
         xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
     }
 
-    // $(document).ready(function() {
-    //     $.ajax({
-    //         url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna,
-    //         type: "GET",
-    //         dataType: "json",
-    //         beforeSend: addAuthorizationHeader,
-    //         success: function(data1) {
-    //             for (let i = 0; i < data1.data.length; i++) {
-    //                 var hasMultipleHistory = data1.data[i].jumlah_history > 0 ? 'visible' : 'hidden';
-    //                 const rowHtml = `
-    //                     <tr>
-    //                         <td>${i + 1}</td>
-    //                         <td>${data1.data[i].nama_perusahaan || ''}</td>
-    //                         <td>${data1.data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data1.data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-    //                         <td>${data1.data[i].status || ''}</td>
-    //                         <td>${data1.data[i].jadwal || ''}</td>
-    //                         <td style="max-width: 400px">${data1.data[i].catatan || ''}</td>
-    //                         <td></td>
-    //                         <td>
-    //                             <span class="insert-history" data-id="${data1.data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
-    //                             <span class="expandChildTable" data-id="${data1.data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
-    //                         </td>
-    //                     </tr>
-    //                     <tr class="childTableRow">
-    //                         <td colspan="5">
-    //                             <table class="table custom-table-container">
-    //                                 <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464">
-    //                                     <tr>
-    //                                         <th>Status</th>
-    //                                         <th>Jadwal</th>
-    //                                         <th>Catatan</th>
-    //                                     </tr>
-    //                                 </thead>
-    //                                 <tbody id="data-history">
-    //                                 </tbody>
-    //                             </table>
-    //                         </td>
-    //                     </tr>
-    //                 `;
-    //                 $('#data-leads').append(rowHtml);
-    //             }
+        //Get Leads with pagination
+        $.ajax({
+            url: "<?= base_url('api/supplier/getTotal') ?>",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            beforeSend: addAuthorizationHeader,
+            success: function(data) {
+                total_leads = data.data;
 
-    //             // Tambahkan fungsi expandChildTable
-    //             $('.expandChildTable').on('click', function() {
-    //                     const id_lead = $(this).data('id');
-    //                     console.log(id_lead);
-    //                     const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
-    //                     childTable.empty();
-    //                     $.ajax({
-    //                         url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead,
-    //                         type: "GET",
-    //                         dataType: "json",
-    //                         beforeSend: addAuthorizationHeader,
-    //                         success: function(data) {
-    //                             $.each(data.data, function(index, value) {
-    //                                 const childRowHtml = `
-    //                                     <tr>
-    //                                         <td class="editable-select">${value.status || ''}</td>
-    //                                         <td class="editable-date">${value.jadwal || ''}</td>
-    //                                         <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
-    //                                     </tr>
-    //                                 `;
-    //                                 childTable.append(childRowHtml);
-    //                             });
-    //                             childTable.parent().show();
-    //                         },
-    //                     });
-    //             });
+                $('#pagination-container').pagination({
+                    dataSource: "<?= base_url() ?>api/supplier/getLead",
+                    locator: '',
+                    totalNumber: total_leads,
+                    pageSize: 10,
+                    autoHidePrevious: true,
+                    autoHideNext: true,
+                    showNavigator: true,
+                    formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> data leads',
+                    position: 'bottom',
+                    className: 'paginationjs-theme-red paginationjs-big',
+                    ajax: {
+                        type: "GET",
+                        data: {
+                            id_pengguna: id_pengguna
+                        },
+                        beforeSend: addAuthorizationHeader,
+                        function(xhr, settings) {
+                            const url = settings.url
+                            const params = new URLSearchParams(url)
+                            let currentPageNum = params.get('pageNumber')
+                            currentPageNum = parseInt(currentPageNum)
+                            if (currentPageNum >= 2 && id_pengguna == null) {
+                                window.location.href = `${base_url}login`
+                                return false
+                            }
 
-    //             //get data kontak
-    //             $("#data-leads").on("click", ".contact", function() {
-    //                     var id_lead = $(this).data("id");
-    //                     $.ajax({
-    //                         url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
-    //                         type: "GET",
-    //                         dataType: "json",
-    //                         beforeSend: addAuthorizationHeader,
-    //                         success: function(data) {
-    //                             var kontak = "";
-
-    //                             $.each(data.data, function(index, value) {
-    //                                 kontak +=
-    //                                     `<tr id="` + value.id_kontak + `">
-    //                                         <td>` + value.nama + `</td>
-    //                                         <td>` + value.posisi + `</td>
-    //                                         <td>` + value.email + `</td>
-    //                                         <td>` + value.no_telp + `</td>
-    //                                         <td>
-    //                                             <a href="#" class="btn btn-link" onclick="editRowContact(this)">
-    //                                                 <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-    //                                             </a>
-    //                                             <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
-    //                                                 <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-    //                                             </a>
-    //                                         </td>
-    //                                         </tr>`;
-    //                             });
-
-    //                             $("#infoKontakModal .data-kontak").html(kontak);
-    //                             console.log(kontak);
-    //                         },
-    //                         error: function() {
-    //                             alert("Terjadi kesalahan saat mengambil data kontak.");
-    //                         }
-    //                     });
-
-    //                     $.ajax({
-    //                         url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
-    //                         type: "GET",
-    //                         dataType: "JSON",
-    //                         success: function(data) {
-    //                             $('#id-lead').val(data.id_lead);
-    //                             $('#nama-perusahaan').html(data.nama_perusahaan);
-    //                             console.log(data.nama_perusahaan);
-    //                         },
-    //                         error: function(jqXHR, textStatus, errorThrown) {}
-    //                     });
-    //             });
-
-    //             $("#data-leads").on("click", ".insert-history", function(){
-    //                 var id_lead = $(this).data("id");
-    //                 console.log(id_lead);
-    //                 $('#submit-input').click(function(event) {
-    //                 event.preventDefault();
-
-    //                 var formData = {
-    //                     id_lead: id_lead,
-    //                     status: document.getElementById('status').value,
-    //                     jadwal: $('input[name=jadwal]').val(),
-    //                     catatan: document.getElementById('catatan').value,
-    //                 };
-
-    //                 $.ajax({
-    //                     url: '<?= base_url("api/marketing/insertHistory") ?>',
-    //                         type: 'POST',
-    //                         data: formData,
-    //                         beforeSend: addAuthorizationHeader,
-    //                         success: function(response) {
-    //                             if (response.status == true) {
-    //                                 swal({
-    //                                     title: "Data berhasil ditambahkan!",
-    //                                     icon: "success",
-    //                                     button: "Ok",
-    //                                 }).then(function() {
-    //                                     window.location.href = "<?= base_url('marketing') ?>";
-    //                                 });
-    //                             } else {
-    //                                 swal({
-    //                                     title: "Data gagal ditambahkan!",
-    //                                     icon: "error",
-    //                                     button: "Ok",
-    //                                 });
-    //                             }
-    //                         },
-    //                         error: function(xhr, status, error) {
-    //                             var span = document.createElement("span");
-    //                             span.innerHTML = JSON.parse(xhr.responseText).message;
-    //                             swal({
-    //                                 title: "ERROR",
-    //                                 content: span,
-    //                                 icon: "error",
-    //                                 button: "Ok",
-    //                             });
-    //                             console.log(xhr.responseText);
-    //                             console.log(JSON.parse(xhr.responseText).message);
-    //                         }
-    //                 });
-    //                 });
-    //             });
-    //         }
-    //     });
-    // });
-
-        // filter data leads
-        searchElement.addEventListener("input", function(event) {
-            var filterValue = event.target.value;
-            filterLeads(id_pengguna, filterValue);
-            console.log("Input yang diketik: " + filterValue);
+                            $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                        }
+                    },
+                    callback: function(data, pagination) {
+                        if (data != '') {
+                            currentPage = pagination.pageNumber;
+                            let html = setTableLeads(data);
+                            $('#data-leads').html(html);
+                        }
+                    }
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            }
         });
 
-        function filterLeads(id_pengguna, key) {
-            $.ajax({
-                url: "<?php echo site_url('api/marketing/leadsByTimFiltered'); ?>",
-                type: "GET",
-                data: {
-                    id_pengguna: id_pengguna,
-                    key: key
-                },
-                dataType: "json",
-                beforeSend: addAuthorizationHeader,
-                success: function(data) {
-                    console.log(data, 'data');
-                    setTableLeads(data)
-                }
-            });
-        }
-
-        function setTableLeads(data) {
-            $.ajax({
+    $(document).ready(function() {
+        $.ajax({
             url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna,
             type: "GET",
             dataType: "json",
@@ -1362,6 +1222,30 @@
                 });
             }
         });
+    });
+
+        // filter data leads
+        searchElement.addEventListener("input", function(event) {
+            var filterValue = event.target.value;
+            filterLeads(id_pengguna, filterValue);
+            console.log("Input yang diketik: " + filterValue);
+        });
+
+        function filterLeads(id_pengguna, key) {
+            $.ajax({
+                url: "<?php echo site_url('api/marketing/leadsByTimFiltered'); ?>",
+                type: "GET",
+                data: {
+                    id_pengguna: id_pengguna,
+                    key: key
+                },
+                dataType: "json",
+                beforeSend: addAuthorizationHeader,
+                success: function(data) {
+                    console.log(data, 'data');
+                    setTableLeads(data)
+                }
+            });
         }
 
         //script tabel kontak

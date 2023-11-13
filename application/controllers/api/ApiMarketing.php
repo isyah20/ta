@@ -72,6 +72,24 @@ class ApiMarketing extends RestController {
         }
     }
 
+    public function getTotalLeadsByTim_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->marketing->getTotalLeadsByTim($id_pengguna);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
     //Get filter
     public function leadsByTimFiltered_post()
     {

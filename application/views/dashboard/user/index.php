@@ -128,7 +128,7 @@
     }
 
     .container-lg {
-        margin-top: 90px;
+        margin-top: 50px;
     }
 
     .container {
@@ -141,6 +141,7 @@
     .table-responsive.custom-table-scroll {
         max-height: 300px;
         overflow-y: auto;
+        padding: 0.75em;
     }
 
     .custom-table-container {
@@ -242,13 +243,14 @@
 
     .summary-box {
         min-width: 200px;
-        width: auto;
+        width: 100%;
         max-height: 125px;
         height: auto;
         border-radius: 10px;
         /* box-shadow: 0px 0px 50px 2px rgba(153, 153, 153, 0.084); */
         padding: 10px;
         margin: auto;
+        display: flex;
     }
 
     .card-riwayat {
@@ -270,14 +272,16 @@
 
     .card-hps {
         display: flex;
-        min-width: 400px;
-        width: auto;
-        padding: 15px 16px;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
         border-radius: 13.622px;
         box-shadow: 0.68112px 1.36225px 8.8546px 0px rgba(217, 217, 217, 0.80);
         color: white;
         vertical-align: middle;
     }
+
 
     .card-hps h6 {
         font-size: 16px;
@@ -287,13 +291,16 @@
     }
 
     .sum-semua {
-        display: inline-flex;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        /* For stacking items vertically */
+        align-items: stretch;
+        /* For full width */
         gap: 18px;
         margin-top: 2rem;
-
+        padding: 7.5%;
     }
+
 
     .sum-riwayat {
         display: inline-flex;
@@ -331,6 +338,55 @@
         border-radius: 5px;
         background: var(--success-100, #D1FAE5);
     }
+
+    .border-suram {
+        display: flex;
+        padding: 5px;
+        align-items: center;
+        gap: 5.449px;
+        border-radius: 13.622px;
+        background: var(--X, rgba(10, 10, 10, 0.15));
+
+    }
+
+    .form-select-custom {
+        width: 300px;
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        border: 1px solid;
+        background-color: white;
+        margin-top: 0;
+        height: 2rem;
+    }
+
+    .form-select-custom:hover {
+        border: 1.5px solid var(--primary-red-500, #D21B1B);
+    }
+
+    .form-input-custom {
+        border-radius: 20px;
+        font-size: 1rem;
+        width: 92%;
+    }
+
+
+    .sum-semua-notif {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .dashboard-hero {
+        background-color: #ffeee6;
+        width: 100%;
+        min-height: 100px;
+        height: auto;
+        border-radius: 10px;
+        padding: 2em;
+    }
 </style>
 
 <div class="modal fade" id="npwpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" x-data="completeProfile">
@@ -357,44 +413,80 @@
     </div>
 </div>
 
-<section id="user-dashboard" class="user-dashboard my-5 py-5 bg-white" style="margin-top:70px">
-    <div class="container" data-aos="fade_up">
+<section class="bg-white">
+
+</section>
+<section id="user-dashboard" class="user-dashboard mt-5 py-5 bg-white" style="margin-top:70px">
+    <!-- <div class="container-lg wow pb-3 fadeInUp mb-3" data-wow-delay="0.1s">
+        <h4 style="font-weight:510; font-size:22px;">Selamat datang kembali, <?= $peserta['0']['nama_peserta'] ?></h4>
+        <h4 style="font-weight:510; font-size:22px;">Sudah siap untuk memenangkan Tender?</h4>
+    </div> -->
+
+    <div class="container mb-3 pb-3" data-aos="fade_up">
+        <div class="row">
+            <div class="col-lg-12" style="margin:0">
+                <h4 style="font-weight:510; font-size:22px;">Selamat datang kembali, <?= $peserta['0']['nama_peserta'] ?></h4>
+                <h4 style="font-weight:510; font-size:22px;">Sudah siap untuk memenangkan Tender?</h4>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-lg" data-aos="fade_up">
         <div class="row">
             <div class="col-lg-8" style="margin:0">
-                <h4 style="font-weight:510; font-size:22px;" class="mt-2 mb-2">Selamat datang kembali, <?= $peserta['0']['nama_peserta'] ?> sudah siap menangkan tender?</h4>
-                <h4 style="font-weight:510; font-size:22px;" class="mt-2 mb-2">Selamat datang kembali, sudah siap menangkan tender?</h4>
+                <!-- filter LPSE -->
+                <div class="container " data-wow-delay="0.1s">
+                    <div class="row">
+                        <div class="card-select">
+                            <div class="select-custom container-fluid">
+                                <div class="row">
+                                    <div class="col form-select-custom d-flex" style="width: 300px;">
+                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                        <select class="" style="border:none;">
+                                        </select>
+                                    </div>
+                                    <div class="col form-select-custom d-flex" style="width: 200px;">
+                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                        <select class="" style="border:none;">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Filter Tahun -->
+
                 <div class="dashboard-hero mt-4">
                     <!-- <div class="row col-sm-8 justify-content-center mx-1 px-1 ">
 
                     </div> -->
 
                     <div class="row mt-2">
-                        <div class="col-lg-3" style="padding:0">
+                        <div class="col-lg-3 pl-4">
                             <div>
                                 <center>
                                     <div class="chart2" style="margin:0; padding:0">
                                         <canvas id="myDoughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
-                                        <!-- <div id="chartCenterText" style="position: absolute; top: 52%; left: 80%; transform: translate(-50%, -50%); text-align: center;">
-                                            <p style="font-size: 8px; font-weight: bold;">Statistik Anggota</p>
-                                        </div> -->
+
                                     </div>
                                 </center>
                             </div>
                         </div>
-                        <!-- <div class="col text-center mt-4 mb-4" style="padding:0">
-                            <h6 style="font-size:12px; margin-top:20; margin-left:50;"><b>Total Tender</b></h6>
-                            <h5 style="font-size:30px" id="ikut"><b>42</b></h5>
-                            <h5 style="font-size:30px; margin-left:50;" id="total"> <b>4659</b></h5>
-                        </div> -->
-                        <div class="col-lg-5 mt-3 mb-3">
+
+                        <div class="col-lg-5 px-3 mt-3 mb-3 align-content-center justify-content-center align-items-center">
                             <div class="row">
-                                <div class="col-1" style="padding:0">
-                                    <div style=" border-left: 3px solid #F9845F; height: 100px; opacity:1"></div>
+                                <div class="col-2">
+
                                 </div>
+                                <!-- <div class="col-1" style="padding:0">
+                                    <div style=" border-left: 3px solid #F9845F; height: 100px; opacity:1"></div>
+                                </div> -->
                                 <div class="col" style="margin-top:5%; padding:0">
-                                    <h5 id="menang" class="tender-summary"><span style="border-left: 6px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>9 Menang</h5>
-                                    <h5 id="kalah" class="tender-summary"><span style="border-left: 6px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>33 Kalah</h5>
-                                    <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>42 Ikut Tender</h5>
+                                    <h5 id="menang" class="tender-summary"><span style="border-left: 6px solid #6EE7B7; height: 45px; opacity:4; margin-right:10px"></span>9 Tender Dimenangkan</h5>
+                                    <h5 id="kalah" class="tender-summary"><span style="border-left: 6px solid #DF3131; height: 35px; opacity:1; margin-right:10px"></span>33 Sedang Diikuti (Pasca Evaluasi)</h5>
+                                    <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #8B6464; height: 35px; opacity:1; margin-right:10px"></span>42 Kalah Tender</h5>
                                 </div>
                             </div>
                         </div>
@@ -403,7 +495,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive mt-4 custom-table-scroll">
+                <div class="row table-responsive mt-4 custom-table-scroll">
                     <table class="table custom-table-container">
                         <thead class="thead text-center">
                             <tr>
@@ -448,6 +540,30 @@
                                 <td class="green-td">Rp 1.540.000.000</td>
                                 <td class="orange-td">2023</td>
                             </tr>
+                            <tr>
+                                <th></th>
+                                <td>2</td>
+                                <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
+                                <td class="green-td">Rp 1.500.000.000</i></td>
+                                <td class="green-td">Rp 1.540.000.000</td>
+                                <td class="orange-td">2023</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>2</td>
+                                <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
+                                <td class="green-td">Rp 1.500.000.000</i></td>
+                                <td class="green-td">Rp 1.540.000.000</td>
+                                <td class="orange-td">2023</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>2</td>
+                                <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
+                                <td class="green-td">Rp 1.500.000.000</i></td>
+                                <td class="green-td">Rp 1.540.000.000</td>
+                                <td class="orange-td">2023</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -462,91 +578,93 @@
                 </div>
                 <div class="scrollable-container">
                     <div class="custom-scroll">
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                        <div class="sum-semua-notif">
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                            </div>
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
+                                        <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -558,7 +676,7 @@
     </div>
 
     <!-- chart stacked -->
-    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s" style="border-radius: 10px; background: #FFF; box-shadow: 0px 0px 25px 2px rgba(153, 153, 153, 0.15);">
+    <div class="container-lg pt-3 wow fadeInUp" data-wow-delay="0.1s" style="border-radius: 10px; background: #FFF; box-shadow: 0px 0px 25px 2px rgba(153, 153, 153, 0.15);">
         <div class="row">
             <div class="col-lg-8">
                 <div style="padding:0">
@@ -571,30 +689,31 @@
             <div class="col-lg-4">
                 <div style="padding:0">
                     <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700">Summary</h3>
-                    <div class="sum-semua">
-                        <div class="col-auto card-hps justify-content-between px-4" style="background: #EF5350;">
+                    <div class="sum-semua row">
+                        <!-- For large screens, it will take up 4 columns. For extra small screens, it will take up all 12 columns -->
+                        <div class="col-auto card-hps justify-content-between align-items-center px-4" style="background: #EF5350;">
                             <h6>> 10 Miliar</h6>
-                            <h6>9</h6>
-
+                            <h6 class="border-suram">9</h6>
                         </div>
+
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #495894;">
                             <h6>1 - 10 Miliar</h6>
-                            <h6>19</h6>
+                            <h6 class="border-suram">197</h6>
 
                         </div>
                         <div class="col-auto card-hps justify-content-between align-item-center px-4 " style="background: #F17D3A;">
                             <h6>500 Juta - 1 Miliar</h6>
-                            <h6>93</h6>
+                            <h6 class="border-suram">93</h6>
                         </div>
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #83D4FA;">
                             <h6>100 - 500 Juta</h6>
-                            <h6>229</h6>
+                            <h6 class="border-suram">229</h6>
 
                         </div>
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #EF5350;">
                             <h6>
                                 < 100 Juta</h6>
-                                    <h6>342</h6>
+                                    <h6 class="border-suram">342</h6>
 
                         </div>
                     </div>
@@ -608,19 +727,19 @@
     <!-- end chart stacked -->
 
     <!-- riwayat menang kalah  -->
-    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container-lg pt-3 wow fadeInUp" data-wow-delay="0.1s" style="border-radius: 10px; background: #FFF; box-shadow: 0px 0px 25px 2px rgba(153, 153, 153, 0.15);">
         <div class="row">
             <div class="col-lg-8">
-                <div class="chart-bg">
+                <div class="">
                     <div style="padding:0">
                         <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700"> Riwayat Menang Kalah</h3>
-                        <div class="chart-peserta">
+                        <div class="chart3">
                             <canvas id="chart-ikuttender"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 chart-bg">
+            <div class="col-lg-4">
                 <div style="padding:0">
                     <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700">Summary</h3>
                     <div class="scrollable-container-menang">
@@ -709,128 +828,6 @@
 
 </section>
 
-<!-- chart stacked -->
-<!-- <section class="bg-white">
-    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s" style="border-radius: 10px; background: #FFF; box-shadow: 0px 0px 25px 2px rgba(153, 153, 153, 0.15);">
-        <div class="row">
-            <div class="col-lg-8">
-                <div style="padding:0">
-                    <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700">Riwayat Ikut Tender Berdasarkan HPS</h3>
-                    <div class="chart3">
-                        <canvas id="stackedBarChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div style="padding:0">
-                    <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700">Summary</h3>
-                    <div class="sum-semua">
-                        <div class="card-hps justify-content-between px-4" style="background: #EF5350;">
-                            <h6>> 10 Miliar</h6>
-                            <h6>9</h6>
-
-                        </div>
-                        <div class="card-hps justify-content-between px-4" style="background: #495894;">
-                            <h6>1 - 10 Miliar</h6>
-                            <h6>19</h6>
-
-                        </div>
-                        <div class="card-hps justify-content-between align-item-center px-4 " style="background: #F17D3A;">
-                            <h6>500 Juta - 1 Miliar</h6>
-                            <h6>93</h6>
-                        </div>
-                        <div class="card-hps justify-content-between px-4" style="background: #83D4FA;">
-                            <h6>100 - 500 Juta</h6>
-                            <h6>229</h6>
-
-                        </div>
-                        <div class="card-hps justify-content-between px-4" style="background: #EF5350;">
-                            <h6>
-                                < 100 Juta</h6>
-                                    <h6>342</h6>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</section> -->
-
-
-<!-- riwayat menang kalah  -->
-<!-- <section class="bg-white my-5 py-5">
-    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="chart-bg">
-                    <div style="padding:0">
-                        <h3 style="color:#000000; margin:10px; font-size:18px; font-weight:700"> PESERTA LPSE</h3>
-                        <div class="chart-peserta">
-                            <canvas id="chart-ikuttender"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 chart-bg">
-                <div style="padding:0">
-                    <h3 style="color:#000000; margin:10px; font-size:24px; font-weight:700">Summary</h3>
-                    <div class="scrollable-container">
-                        <div class="custom-scroll">
-                            <div class="sum-riwayat">
-
-                                <div class="card-riwayat">
-                                    <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 14px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
-                                    </div>
-                                    <div class="col-3">
-                                        <h6 class="menang" style="font-weight: 400; font-size: 12px">Menang</h6>
-                                    </div>
-                                </div>
-                                <div class="card-riwayat">
-                                    <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
-                                    </div>
-                                    <div class="col-3">
-                                        <h6 class="menang" style="font-weight: 400; font-size: 12px">Menang</h6>
-                                    </div>
-                                </div>
-                                <div class="card-riwayat">
-                                    <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
-                                    </div>
-                                    <div class="col-3">
-                                        <h6 class="menang" style="font-weight: 400; font-size: 12px">Menang</h6>
-                                    </div>
-                                </div>
-                                <div class="card-riwayat">
-                                    <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
-                                    </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
-                                    </div>
-                                </div>
-                                <div class="card-riwayat">
-                                    <div class="col">
-                                        <h6 style="font-weight: 400; font-size: 12px">Jasa Konsultansi Perorangan Senior Spesialis Program dan Kurasi</h6>
-                                    </div>
-                                    <div class="col-3">
-                                        <h6 class="kalah" style="font-weight: 400; font-size: 12px">Kalah</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- end riwayat menang kalah  -->
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 <script defer src="<?= base_url() ?>assets/js/alpine-3.12.0.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
@@ -915,7 +912,7 @@
                 label: 'Data Bulan',
                 backgroundColor: '#DF3131',
                 data: generateRandomData(),
-                barPercentage: 0.7,
+                barPercentage: 0.5,
             }]
         },
         options: {
@@ -1003,26 +1000,6 @@
     });
 </script>
 <script>
-    // var ctx = document.getElementById("doughnutChart").getContext("2d");
-
-    // var data = {
-    //     labels: ["Label 1", "Label 2", "Label 3"],
-    //     datasets: [{
-    //         data: [30, 40, 30], // Adjust data values as needed
-    //         backgroundColor: ["#495894", "#56C474", "#D21B1B"], // Adjust colors as needed
-    //     }, ],
-    // };
-
-    // var options = {
-    //     responsive: true,
-    //     maintainAspectRatio: false, // To control the chart size based on the container
-    // };
-
-    // var doughnutChart = new Chart(ctx, {
-    //     type: "doughnut",
-    //     data: data,
-    //     options: options,
-    // });
     var ctx = document.getElementById('doughnutChart').getContext('2d');
 
     var totalTender = 0;

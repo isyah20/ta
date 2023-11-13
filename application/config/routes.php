@@ -399,6 +399,7 @@ $route['api/statistikhome'] = 'api/ApiTender/getdatastatistik';
 // restAPI route for Marketing
 $route['api/marketing/get/(:num)'] = 'api/ApiMarketing/show/$1';
 $route['api/marketing/getLeadsByTim/(:num)'] = 'api/ApiMarketing/getLeadsByTim/$1';
+$route['api/marketing/getTotalLeadsByTim'] = 'api/ApiMarketing/getTotalLeadsByTim';
 $route['api/marketing/getKontakLeadById/(:num)'] = 'api/ApiMarketing/getKontakLeadById/$1';
 $route['api/marketing/getHistoryMarketing/(:num)'] = 'api/ApiMarketing/getHistoryMarketing/$1';
 $route['api/marketing/insertHistory'] = 'api/ApiMarketing/insertHistory';
