@@ -436,10 +436,10 @@
                                 <tr>
                                 <th></th>
                                 <td>-</td>
-                                <td class="custom-padding"><?= $pesertaIkut['nama_tender'] ?></td>
-                                <td class="green-td"><?= $pesertaIkut['nilai_hps_paket'] ?></td>
-                                <td class="green-td"><?= $pesertaIkut['harga_penawaran'] ?></td>
-                                <td class="orange-td"><?= $persentase ?></td>
+                                <td class="custom-padding">-</td>
+                                <td class="green-td">-</td>
+                                <td class="green-td">-</td>
+                                <td class="orange-td">-</td>
                             </tr>
                                 <?php } ?>
                         </tbody>
