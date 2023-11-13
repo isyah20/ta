@@ -416,38 +416,32 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
+                        <?php if ($pesertaTenderIkut != null) {
+                                foreach ($pesertaTenderIkut as $pesertaIkut) : 
+                                    $persentase = ($pesertaIkut['harga_penawaran'] / $pesertaIkut['nilai_hps_paket']) * 100;
+                                    $persentase = 100 - $persentase;
+                                    $persentase = round($persentase, 2);
+                                ?>
                             <tr>
                                 <th></th>
                                 <td>1</td>
-                                <td class="custom-padding">Belanja Pemeliharaan Bangunan Gedung-Bangunan Gedung Tempat Tinggal-Asrama SLBN</td>
-                                <td class="green-td">Rp 11.500.000.000</td>
-                                <td class="green-td">Rp 1.500.000.000</td>
-                                <td class="orange-td">2023</td>
+                                <td class="custom-padding"><?= $pesertaIkut['nama_tender'] ?></td>
+                                <td class="green-td"><?= $pesertaIkut['nilai_hps_paket'] ?></td>
+                                <td class="green-td"><?= $pesertaIkut['harga_penawaran'] ?></td>
+                                <td class="orange-td"><?= $persentase ?></td>
                             </tr>
-                            <tr>
+                                <?php
+                                endforeach;
+                                } else { ?>
+                                <tr>
                                 <th></th>
-                                <td>2</td>
-                                <td class="custom-padding">Jasa Konsultansi Perorangan Manajer Standar Kurikulum Merdeka</td>
-                                <td class="green-td">Rp 3.500.000.000</i></td>
-                                <td class="green-td">Rp 7.500.000.000</td>
-                                <td class="orange-td">2023</td>
+                                <td>-</td>
+                                <td class="custom-padding"><?= $pesertaIkut['nama_tender'] ?></td>
+                                <td class="green-td"><?= $pesertaIkut['nilai_hps_paket'] ?></td>
+                                <td class="green-td"><?= $pesertaIkut['harga_penawaran'] ?></td>
+                                <td class="orange-td"><?= $persentase ?></td>
                             </tr>
-                            <tr>
-                                <th></th>
-                                <td>2</td>
-                                <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
-                                <td class="green-td">Rp 1.500.000.000</i></td>
-                                <td class="green-td">Rp 6.500.000.000</td>
-                                <td class="orange-td">2023</td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>2</td>
-                                <td class="custom-padding">Paket Konsolidasi Pengadaan Produk Dalam Negeri </td>
-                                <td class="green-td">Rp 1.500.000.000</i></td>
-                                <td class="green-td">Rp 1.540.000.000</td>
-                                <td class="orange-td">2023</td>
-                            </tr>
+                                <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -460,6 +454,8 @@
                     <h4 class="my-2" style="font-weight: 510; font-size: 22px;">Tender Terbaru</h4>
                     <a href="user-dashboard/list-tender">Lihat Semua</a>
                 </div>
+                <?php if ($notif != null) {
+                foreach ($notif as $row) : ?>
                 <div class="scrollable-container">
                     <div class="custom-scroll">
                         <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
@@ -468,92 +464,33 @@
                                     <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
                                 </div>
                                 <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6>
-                                    <h5 style="font-weight: 400; font-size: 14px">LPSE [nama_lpse] Baru Saja Merilis Tender Baru</h5>
+                                    <h6 style="font-weight: 600; font-size: 12px">LPSE <?= $row['nama_lpse'] ?></h6>
+                                    <h5 style="font-weight: 400; font-size: 14px"><?= $row['nama_tender'] ?></h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php
+                endforeach;
+                } else { ?>
+                <div class="scrollable-container">
+                    <div class="custom-scroll">
+                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                <div class="col-2">
+                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                </div>
+                                <div class="col">
+                                    <!-- <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6> -->
+                                    <h5 style="font-weight: 400; font-size: 14px">Tidak ada notifikasi tender terbabru</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
-
         </div>
     </div>
 

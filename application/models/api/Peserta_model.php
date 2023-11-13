@@ -49,4 +49,17 @@ class Peserta_model extends CI_Model
         $this->db->where('id_peserta', $id);
         return $this->db->delete('peserta');
     }
+
+    // Get nama peserta from table peserta by npwp in table peserta_tender. And get harga penwaran from peserta tender, where harga_penawaran not 0
+    public function getPesertaIkutTender($npwp) 
+    {
+        $this->db->select('peserta.nama_peserta, peserta_tender.harga_penawaran, paket.nama_tender, paket.nilai_hps_paket');
+        $this->db->from('peserta_tender');
+        $this->db->join('peserta', 'peserta.npwp = peserta_tender.npwp');
+        $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender');
+        $this->db->where('peserta_tender.npwp', $npwp)
+        ->where('peserta_tender.harga_penawaran !=', 0);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

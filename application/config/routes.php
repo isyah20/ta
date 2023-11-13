@@ -591,6 +591,7 @@ $route['api/pesertanpwp'] = 'api/ApiPeserta/getPesertaNpwp';
 $route['api/peserta/create'] = 'api/ApiPeserta/create';
 $route['api/peserta/update/(:num)'] = 'api/ApiPeserta/update/$1';
 $route['api/peserta/delete/(:num)'] = 'api/ApiPeserta/destroy/$1';
+$route['api/peserta/pesertaIkutTender'] = 'api/ApiPeserta/getPesertaTender';
 
 //restApi route for Paket
 $route['api/paket'] = 'api/ApiPaket';

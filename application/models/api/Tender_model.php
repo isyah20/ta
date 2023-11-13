@@ -2344,7 +2344,7 @@ class Tender_model extends CI_Model
         $this->db->join('pengguna', 'pengguna.id_pengguna = preferensi.id_pengguna');
         $this->db->join('lpse', 'lpse.id_lpse = tender_terbaru.id_lpse');
         $this->db->join('kategori_lpse', 'kategori_lpse.id_kategori = lpse.id_kategori');
-        $this->db->where('tender_terbaru.tgl_pembuatan BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 24 HOUR) AND CURRENT_DATE()');
+        $this->db->where('tender_terbaru.tgl_pembuatan BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE()');
         $this->db->group_by([
             'tender_terbaru.id',
             'tender_terbaru.nama_tender',
