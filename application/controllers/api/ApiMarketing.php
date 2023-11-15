@@ -56,8 +56,11 @@ class ApiMarketing extends RestController {
         ], RestController::HTTP_OK);
     }
 
-    public function getLeadsByTim_get($id){
-        $data = $this->marketing->getLeadsByTim($id);
+    public function getLeadsByTim_get(){
+        $id_pengguna = $this->input->get('id_pengguna');
+        $page_size = $_GET['pageSize'];
+        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
+        $data = $this->marketing->getLeadsByTim($id_pengguna, $page_size, $page_number);
 
         if ($data) {
             $this->response([

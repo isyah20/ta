@@ -1,1219 +1,887 @@
-<?php date_default_timezone_set('Asia/Kolkata'); ?>
-<div class="" id="cek"></div>
-<div class="" id="dataChart">
-    <p class="d-none" id="chart1"><?php echo json_encode($akumulasi) ?></p>
-    <p class="d-none" id="chart2"><?php echo json_encode($rata1) ?></p>
-</div>
-<?php
-if ($response == "[]") {
-    ?>
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#asosiasiModal').modal('show');
-        });
-    </script>
-<?php
-}
-$total = json_decode($akumulasi);
-$tampilan = json_decode($rata1);
-// var_dump(json_decode($akumulasi))
-?>
-<div class="modal fade" id="asosiasiModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable rincian-modal" style="width:500px">
-        <div class="modal-content">
-            <div class="modal-header header-syarat">
-                <button type="button" class="btn-close close-syarat" data-bs-dismiss="modal" aria-label="Close"></button>
+<link href="<?= base_url() ?>assets/css/home/pagination.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    .animation {
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .bg-cream {
+        background-color: #FFEEE6;
+    }
+
+    .container-lg {
+        margin-top: 80px;
+    }
+
+    .dashboard-hero {
+        width: 100%;
+        height: auto;
+        min-height: 100px;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .overflow {
+        overflow: auto;
+    }
+
+    .shadow-sm {
+        border-radius: 10px;
+        margin: 5px;
+    }
+
+    .card-select {
+        font-size: 10px;
+        margin-left: 8px;
+        margin-top: 10px;
+        display: flex;
+    }
+
+    .form-select-custom {
+        width: 300px;
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        border: 1px solid;
+        background-color: white;
+        margin-top: 0;
+        margin-left: 10px;
+        height: 2rem;
+    }
+
+    .form-select-custom:hover {
+        border: 1.5px solid var(--primary-red-500, #D21B1B);
+    }
+
+    .form-input-custom {
+        border-radius: 20px;
+        font-size: 1rem;
+        width: 92%;
+    }
+
+    .chart2 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .custom-img {
+        width: 30x;
+        height: 30px;
+    }
+
+    .table-container {
+        margin: auto;
+        max-width: 1200px;
+        min-height: 100vh;
+        overflow: scroll;
+        width: 100%;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    thead tr {
+        border-bottom: 1px solid;
+        border-top: 1px solid;
+        height: 1px;
+    }
+
+    th {
+        font-weight: bold;
+        height: inherit;
+        padding: 0;
+    }
+
+    th:not(:first-of-type) {
+        border-left: 1px solid #ddd;
+    }
+
+    th button {
+        background-color: #D21B1B;
+        border: none;
+        cursor: pointer;
+        display: block;
+        font: inherit;
+        height: 100%;
+        margin: 0;
+        min-width: max-content;
+        padding: 0.5rem 0.5rem;
+        position: relative;
+        text-align: left;
+        width: 100%;
+    }
+
+    th button::after {
+        position: absolute;
+        right: 0.5rem;
+    }
+
+    th button[data-dir="asc"]::after {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpolygon points='0, 0 8,0 4,8 8' fill='%23818688'/%3E%3C/svg%3E");
+    }
+
+    th button[data-dir="desc"]::after {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpolygon points='4 0,8 8,0 8' fill='%23818688'/%3E%3C/svg%3E");
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    td {
+        padding: 0.5rem 1rem;
+        text-align: left;
+        height: 4rem;
+        font-size: 16px;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table th {
+        background-color: #D21B1B;
+        border: 1px solid #D21B1B;
+        text-align: left;
+
+    }
+
+    .data-table th button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        color: white;
+    }
+
+    .data-table td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+    }
+
+    .data-table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .data-table tbody tr:hover {
+        background-color: #ddd;
+    }
+
+    .custom-table-container {
+        border-radius: 10px 10px 10px 10px;
+        overflow: hidden;
+        border: 1px solid var(--neutral-100, #F0E2E2);
+        overflow-y: scroll;
+        max-height: 550px;
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .data-table {
+        text-align: center;
+    }
+
+    tbody {
+        text-align: left;
+        font-size: 15px;
+    }
+
+    .custom-table-container table.data-table tbody {
+        background-color: white;
+    }
+
+    .custom-table-container table.data-table tbody tr:nth-child(even) {
+        background-color: white;
+    }
+
+    .custom-table-container table.data-table tbody tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    .custom-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .custom-img2 {
+        width: 40px;
+        height: 40px;
+        margin-left: 11rem;
+    }
+
+    .custom-img3 {
+        width: 15px;
+        height: 15px;
+        margin-left: 10px;
+    }
+
+    .tren-card {
+        width: 400px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .tren-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #553333;
+    }
+
+    .tren-text {
+        font-size: 15px;
+        font-weight: bold;
+        color: #B89494;
+        margin-top: 5px;
+    }
+
+    .tren-isi {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .btnbtnbtn {
+        color: #f2f2f2;
+        background-color: #D21B1B;
+        font-size: 8px;
+        font-weight: 700;
+        border-radius: 10px;
+        height: 35px;
+        width: 80px;
+        border-color: #D21B1B;
+    }
+
+    .btn:hover {
+        background-color: #D21B1B;
+    }
+
+    .tender {
+        font-size: 12px;
+        margin-top: 80px;
+        margin-left: 110px;
+    }
+
+    #total {
+        font-size: 30px;
+        margin-left: 110;
+    }
+    .col2{
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .col3 {
+        margin-top: 90px;
+    }
+
+    .line {
+        border-left: 5px solid #F9845F;
+        height: 110px;
+        opacity: 1;
+    }
+
+    .col-1 {
+        padding: 0;
+        margin-left: 15px;
+    }
+
+    .tender-summary {
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+        .justify-content-start {
+            justify-content: center !important;
+        }
+        .container-lg{
+            margin-top: 100px;
+        }
+
+        .col-7,
+        .col-8,
+        .col-4 {
+            width: 100%;
+            /* Make the columns take the full width on smaller screens */
+        }
+
+        .overflow {
+            overflow: hidden;
+        }
+
+        .form-select-custom {
+            width: 100%;
+            margin-right: 0;
+        }
+
+        .form-select-custom {
+            flex-basis: calc(90% - 10px);
+            margin-left: 20px;
+        }
+
+        .btnbtnbtn {
+            flex-basis: calc(90% - 10px);
+            margin-left: 20px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .custom-img3 {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+
+        .h4 {
+            padding-top: 50px;
+            font-size: 15px;
+            margin-left: 20px;
+        }
+
+        .dashboard-hero {
+            margin-left: 2px;
+        }
+
+        .chart2 {
+            width: 80%;
+            height: 80%;
+            margin-right: 20px;
+        }
+
+        .custom-table-container {
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+
+        .line {
+            margin-right: 100px;
+        }
+
+        .tender {
+            font-size: 18px;
+            margin-left: 20px;
+        }
+
+        #total {
+            margin-left: 20px;
+        }
+
+        .col-1 {
+            margin-left: 10px;
+        }
+        .col2{
+            margin-top: 10px;
+        }
+
+        .tender-summary {
+            font-size: 17px;
+        }
+    }
+</style>
+
+<section class="bg-white">
+    <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
+        <h4 class="mb-0 fw-semibold wow fadeInUp">Selamat Datang! <p class="pt-2">Sudah Siap Memantau Performa Anggotamu Hari ini ?</p>
+        </h4>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 wow fadeInUp">
+                <div class="row dashboard-hero mt-4">
+                    <div class="col-lg-2" style="padding:0">
+                        <div>
+                            <center>
+                                <div class="chart2" style="margin-left:20; margin-top:50; margin-bottom:50; padding:0">
+                                    <canvas id="doughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="col text-center col2" style="padding:0">
+                        <h6 class="tender"><b>Total Tender</b></h6>
+                        <!-- <h5 style="font-size:30px" id="ikut"><b>42</b></h5> -->
+                        <h5 id="total"> <b>4659</b></h5>
+                    </div>
+                    <div class="col col3">
+                        <div class="row rowtext">
+                            <div class="col-1">
+                                <div class="line"></div>
+                            </div>
+                            <div class="col" style="margin-top:5%; padding:0">
+                                <h5 id="menang" class="tender-summary" ><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
+                                <h5 id="kalah" class="tender-summary" ><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
+                                <h5 id="ikut" class="tender-summary" ><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 wow fadeInUp">
+                        <center> <img src="http://localhost/tenderplus/assets/img/dashboard-hero.png" class="dh-img" alt="" style="margin-top: 10rem; "></center>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body modal-syarat">
-                <h6 class="text-center mb-4"><b>ANDA BELUM MEMASUKAN ANGGOTA</b></h6>
-                <center>
-                    <iconify-icon icon="ic:round-warning" style="color: #eb650d;" width="100" height="100"></iconify-icon>
-                </center>
-                <h6 class="text-center mb-4" style="font-size:14px">Silahkan masukan anggota anda melalui fitur yang tersedia</h6>
+            <div class="col-lg-4 wow fadeInUp ">
+                <h4 class="my-0 mb-1" style="font-weight:510; font-size: 22px;">Aktifitas Terbaru</h4>
+                <div class="mt-3 shadow-sm wow fadeInUp" style="max-height: auto; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
+                    <div class="d-flex align-content-center p-2" style="height: auto">
+                        <div class="col-2">
+                            <img class="custom-img" src="<?= base_url('assets\img\aktifitasGreen.svg') ?>" alt="">
+                        </div>
+                        <div class="col">
+                            <h6 style="font-weight:bold; font-size:15px">PT Telekomunikasi Indonesia, Tbk.</h6>
+                            <h6 style="font-size: 12px;">Memenangkan Tender Jasa Konsultansi Perorangan Manajer Software Engineer</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 shadow-sm wow fadeInUp" style="max-height: auto; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
+                    <div class="d-flex align-content-center p-2" style="height:auto">
+                        <div class="col-2">
+                            <img class="custom-img" src="<?= base_url('assets\img\aktifitasRed.svg') ?>" alt="">
+                        </div>
+                        <div class="col">
+                            <h6 style="font-weight:bold; font-size:15px">PT Unilever Indonesia</h6>
+                            <h6 style="font-size: 12px;">Perusahaan diluar asosiasi memenangkan tender di wilayah kita</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 shadow-sm wow fadeInUp" style="max-height: auto; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
+                    <div class="d-flex align-content-center p-2" style="height:auto">
+                        <div class="col-2">
+                            <img class="custom-img" src="<?= base_url('assets\img\aktifitasBlue.svg') ?>" alt="">
+                        </div>
+                        <div class="col">
+                            <h6 style="font-weight:bold; font-size:15px">CV Medioker Prasaja Mandiri</h6>
+                            <h6 style="font-size: 12px;">Mendaftar Tender Konsolidasi Pengadaan Logistik dan Sampul Kertas Biasa Dalam Rangka Pemilu 2024 untuk Katalog Rancangan Anggaran Pemilu 2024</h6>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<section id="asosiasi" class="user-dashboard" style="margin-top:80px">
-    <div class="container" data-aos="fade_up">
+<section>
+    <div class="container mt-4 wow fadeInUp">
         <div class="row">
             <div class="col-lg-8">
-                <h4 style="font-weight:510">Selamat Datang <?= $_SESSION['user_data']['nama'] ?> ! <br> Sudah Siap Memantau Kegiatan Anggota Mu Hari ini ?</h4>
-                <div class="dashboard-hero mb-4">
-                    <div class="d-flex justify-content-between sel2">
-                        <div>
-                            <!-- Filter LPSE -->
-                            <select class="js-data-example-ajax" id="lpse" name="lpse" style="width: 150px; margin:10px">
-                                <option value="">Semua LPSE</option>
-                                <?php
-                                foreach ($lpse as $lpse) :
-                                    ?>
-                                    <option value="<?= $lpse['id_lpse'] ?>"><?php echo $lpse['nama_lpse'] ?></option>
-                                <?php
-                                endforeach;
-?>
-                            </select>
-                            <script>
-                                $(document).ready(function() {
-                                    $('.js-data-example-ajax').select2();
-                                });
-                            </script>
-                            <!-- End of Filter LPSE -->
-                            <!-- Filter Tahun -->
-                            <select class="js-example-basic-single" id="tahun" name="tahun" style="width: 150px; margin:10px">
-                                <option value="">Semua Tahun</option>
-                                <?php
-$tahun = (int) date('Y');
-for ($i = 0; $i < 5; $i++) :
-    ?>
-                                    <option value="<?= $tahun ?>"><?= $tahun ?></option>
-                                <?php
-        $tahun--;
-endfor;
-?>
-                            </select>
-                        </div>
-                        <div>
-                            <?php if ($response == "[]") {
-                                ?>
-                                <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#asosiasiModal">
-                                    <iconify-icon icon="ic:round-warning" style="color: #eb650d;" width="50" height="50"></iconify-icon>
-                                </a>
-                            <?php
-                            } ?>
-                        </div>
-                        <script>
-                            $(document).ready(function() {
-                                $('.js-example-basic-single').select2({
-                                    minimumResultsForSearch: Infinity
-                                });
-                            });
-                        </script>
+                <div class="row">
+                    <h4 class="col-lg-4 my-0 mb-3" style="font-weight:500; font-size: 20px;">Anggota Asosiasi</h4>
+                    <div class=".col-lg-2 .offset-md-3 form-select-custom" style="padding-left:30px; margin-right:20px;">
+                        <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari Nama Anggota">
+                        <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-bottom:0px;margin-top:5px">
                     </div>
-                    <div class="row">
-                        <div class="col-lg-2" style="padding:0">
-                            <div class="chart1">
-                                <center>
-                                    <canvas id="ikut-tender" width="150px" height="150px"></canvas>
-                                </center>
-                            </div>
-                            <script>
-                                var chartDom = document.getElementById('ikut-tender');
-                                var myChart = echarts.init(chartDom);
-                                var option;
-                                getdata = document.getElementById('chart1').innerHTML;
-                                let chart1 = JSON.parse(JSON.parse(getdata));
-                                // console.log(chart1['1'])
-                                option = {
-                                    series: [{
-                                        name: 'Access From',
-                                        type: 'pie',
-                                        radius: ['40%', '70%'],
-                                        avoidLabelOverlap: false,
-                                        label: {
-                                            show: false,
-                                            position: 'center'
-                                        },
-                                        emphasis: {
-                                            label: {
-                                                show: true,
-                                                fontSize: '20',
-                                                fontWeight: 'bold',
-                                                textStyle: {
-                                                    color: 'black'
-                                                },
-                                            }
-                                        },
-                                        labelLine: {
-                                            show: false
-                                        },
-                                        data: [{
-                                                value: chart1['0'],
-                                                name: chart1['4'] + '%',
-                                                itemStyle: {
-                                                    color: '#6EE7B7'
-                                                }
-                                            },
-                                            {
-                                                value: chart1['2'],
-                                                name: chart1['6'] + '%',
-                                                itemStyle: {
-                                                    color: '#F9845F',
-                                                }
-                                            },
-                                            {
-                                                value: chart1['1'],
-                                                name: chart1['5'] + '%',
-                                                itemStyle: {
-                                                    color: '#DF3131'
-                                                }
-                                            }
-                                        ]
-                                    }]
-                                };
-                                option && myChart.setOption(option);
-                            </script>
-                        </div>
-                        <div class="col text-center mt-4 mb-4" style="padding:0">
-                            <h6 style="font-size:12px; margin-top:10%; "><b>Total Yang Sedang <br> Diikuti Anggota</b></h6>
-                            <h5 style="font-size:30px"><b id="ikut"><?= $total['2'] ?></b></h5>
-                        </div>
-                        <div class="col mt-4 mb-4">
-                            <div class="row">
-                                <div class="col-1" style="padding:0">
-                                    <div style=" border-left: 3px solid #F9845F; height: 100px; opacity:1"></div>
-                                </div>
-                                <div class="col" style="margin-top:5%; padding:0">
-                                    <h5 style="font-size:16px; font-weight:600"><span style="border-left: 3px solid #8B6464; height: 25px; opacity:1; margin-right:10px"></span>
-                                        <span id="total_tender"><?= $total['3']  ?></span> Total Tender
-                                    </h5>
-                                    <h5 style="font-size:16px; font-weight:600"><span style="border-left: 3px solid #6EE7B7; height: 25px; opacity:1; margin-right:10px"></span>
-                                        <span id="menang"><?= $total['0'] ?></span> Menang
-                                    </h5>
-                                    <h5 style="font-size:16px; font-weight:600"><span style="border-left: 3px solid #DF3131; height: 25px; opacity:1; margin-right:10px"></span>
-                                        <span id="kalah"><?= $total['1'] ?></span> Kalah
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <center> <img src="<?= base_url('assets/img/dashboard-hero.png') ?>" class="dh-img" alt=""></center>
-                        </div>
-                    </div>
+                    <button class="col-lg-2 btnbtnbtn"><span><img class="custom-img3" src="<?= base_url('assets\img\icon_tambah_anggota.svg') ?>" alt=""></span style="font">Tambah Anggota</button>
                 </div>
-                <!--
-                <div class="row justify-content-center mx-1 px-1 filter">
-                    <select id="perusahaan" class="col-lg my-lg-2 mx-lg-1 my-1 mx-2 form-select">
-                        <option value="">Perusahaan</option>
-                    </select>
-                    <select id="lpse" class="col-lg my-lg-2 mx-lg-1 my-1 mx-2 form-select">
-                        <option value="">LPSE</option>
-                    </select>
-                    <select id="tahun" class="col-lg my-lg-2 mx-lg-1 my-1 mx-2 form-select">
-                        <option value="">Tahun</option>
-                    </select>
-                </div>-->
-                <div class="d-flex bd-highlight anggota mx-2 dropdown">
-                    <h2 class="mt-4 flex-grow-1 bd-highlight" style="margin-left: 20px;">Anggota Tim</h2>
-                    <form class="col-lg-7 mx-2 align-self-center search-asosiasi" action="#">
-                        <input placeholder="Cari berdasarkan Nama" name="search_key_anggota" id="search_key_anggota" class="search input_blacklist" type="text">
-                    </form>
-                    <a href="#" class="mt-4 mx-2 btn_blacklist bd-highlight" type="button" data-bs-toggle="modal" data-bs-target="#daftarhitam">
-                        <iconify-icon inline icon="ic:baseline-account-box" style="color: white;" width="23" height="23"></iconify-icon>
-                    </a>
-                    <a href="#" class="d-flex mt-4 btn_add dropdown-toggle bd-highlight" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <iconify-icon inline icon="material-symbols:person-add-outline-rounded" style="color: white;" width="20" height="20"></iconify-icon>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="d-flex dropdown-item select-item" href="#" data-bs-toggle="modal" data-bs-target="#addasosiasiupload">
-                                <iconify-icon inline icon="material-symbols:description" style="color: #d21b1b;" width="20" height="20"></iconify-icon>
-                                &nbsp;Import File Anggota
-                            </a>
-                        </li>
-                        <li>
-                            <a class="d-flex dropdown-item select-item" href="#" data-bs-toggle="modal" data-bs-target="#addasosiasi">
-                                <iconify-icon inline icon="material-symbols:library-add" style="color: #d21b1b;" width="20" height="20"></iconify-icon>
-                                &nbsp;Tambah Anggota
-                            </a>
-                        </li>
-                    </ul>
-                    <a href="#" class="d-flex mt-4 mx-2 btn_add bd-highlight">
-                        <iconify-icon inline icon="ic:baseline-file-download" style="color: white;" width="20" height="20"></iconify-icon>
-                    </a>
-                </div>
-                <!-- Modal ADD word -->
-                <div class="modal fade addasosiasi" id="addasosiasi" tabindex="-1" aria-labelledby="addasosiasiLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-lg ">
-                        <div class="modal-content">
-                            <div class="modal-content-header">
-                                <h5 id="addasosiasiLabel">Tambah Anggota Tim</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-content-body">
-                                <form id="add-anggota-asosiasi" method="post" class="mt-0 d-flex" action="<?= base_url('add/anggota') ?>">
-                                    <input hidden type="text" class="input_text" id="id_pengguna" name="id_pengguna" value="<?= $_SESSION['user_data']['id_pengguna'] ?>" placeholder="">
-                                    <input type="text" class="input_text" id="nama" name="nama" disabled>
-                                    <input type="text" class="input_text" id="npwp" name="npwp" placeholder="NPWP" required>
-                                    <button type="submit" class="btn-tambah">Tambah</button>
-                                    <!-- <a href="<?= base_url('add/anggota') ?>">cek</a> -->
-                                </form>
-                                <p style="text-align: center;" id="validate-status1"></p>
-                                <div style="text-align: center;" id="result"></div>
-                                <script>
-                                    $('.addasosiasi').ready(function() {
-                                        $('#npwp').ready(function() {
-                                            $("#npwp").keyup(validate_row);
-                                        });
-
-                                        function validate_row() {
-                                            var npwp = $("#npwp").val();
-                                            // console.log(strlen(npwp))
-                                            // var password2 = $("#password2").val();
-                                            if (npwp.length < 20) {
-                                                $("#validate-status1").text("Masukan npwp dengan benar, dengan format xx.xxx.xxx.x-xxx.xxx");
-                                            } else if (npwp.length = 20) {
-                                                $("#validate-status1").text("silahkan cek kembali NPWP anda");
-                                            } else if (npwp.length > 20) {
-                                                $("#validate-status1").text("Masukan npwp dengan benar, dengan format xx.xxx.xxx.x-xxx.xxx");
-                                            }
-                                        }
-                                        $("#add-anggota-asosiasi").submit(function(event) {
-                                            event.preventDefault();
-                                            var $form = $(this),
-                                                url = $form.attr('action');
-                                            var posting = $.post(url, {
-                                                id_pengguna: $('#id_pengguna').val(),
-                                                npwp: $('#npwp').val()
-                                            });
-                                            posting.done(function(data) {
-                                                $('#result').text('success');
-                                            });
-                                            posting.fail(function() {
-                                                $('#result').text('failed');
-                                            });
-                                        });
-                                    })
-                                </script>
-                                <div class="d-flex justify-content-center">
-                                    <form class="col-lg-7 mx-2 align-self-center search-asosiasi" action="#">
-                                        <input placeholder="Cari berdasarkan Nama" name="search_key_add" id="search_key_add" class="search input_blacklist" type="text">
-                                    </form>
-                                </div>
-                                <div class="myTable-anggota">
-                                    <div class="px-4 py-2">
-                                        <!-- <div class="d-flex justify-content-between">
-                                            <div class="d-flex">
-                                                <p>1. </p>
-                                                <p>Perusahaan Tbk</p>
-                                            </div>
-                                            <button>
-                                                <iconify-icon inline icon="mdi:trash-can-outline" style="color: #cf0000;" height="30px" width="30px"></iconify-icon>
-                                            </button>
-                                        </div> -->
-                                        <table id="add_anggota" class="asosiasi_table mt-4 row-table" style="overflow-x: hidden;width: 820px;">
-                                            <thead>
-                                                <tr>
-                                                    <th class="mx-1 text-center col-kode text-brown"></th>
-                                                    <th class="mx-1 col-nama text-brown">
-                                                    </th>
-                                                    <th class="mx-1 text-center col-klpd text-brown">
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <script>
-                                    $("#search_key_add").keyup(function() {
-                                        search_key = $(this).val();
-                                        console.log(search_key);
-                                        anggota.draw();
-                                    })
-                                    $('.myTable-anggota').ready(function() {
-                                        $(".button_delete_anggota").click(function() {
-                                            var del_id = $(this).attr('id_anggota');
-                                            console.log(del_id)
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: '<?php base_url('remove/anggota/') ?>' + del_id,
-                                                // data: 'delete_id=' + del_id,
-                                                success: function(data) {
-                                                    jQuery('#del_id').fadeOut('slow');
-                                                }
-                                            });
-                                        });
-                                    });
-                                    var search_key = $("#search_key_add").val();
-                                    var anggota = $('#add_anggota').DataTable({
-                                        // "dom": "ftr",
-                                        // pageLength: 20,
-                                        // "pageLength": 20,
-                                        // lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
-                                        "columnDefs": [{
-                                            "searchable": false,
-                                            "orderable": false,
-                                            "targets": 0,
-                                        }],
-                                        // "order": [
-                                        //     [1, 'asc']
-                                        // ],
-                                        order: [
-                                            [1, "desc"]
-                                        ],
-
-                                        "bDeferRender": false,
-                                        "info": false,
-                                        "bLengthChange": false,
-                                        "bSort": false,
-                                        "dom": "frt",
-                                        "language": {
-                                            "loadingRecords": "",
-                                            // "processing": '<i style="position:static;"><iconify-icon icon="eos-icons:loading" style="color: #f27676;" width="200" height="200"></iconify-icon></i><span></span>',
-                                            "processing": '',
-                                        },
-                                        serverSide: true,
-                                        ordering: false,
-                                        searching: false,
-                                        'serverMethod': 'post',
-                                        ajax: {
-                                            url: "<?= base_url('DashboardUserAsosiasi/data_anggota') ?>",
-                                            type: "POST",
-                                            data: function(data) {
-                                                // page : page,
-                                                data.search_key = search_key;
-                                                // // data.cariWilayah = JSON.stringify(wilayah);
-                                                // data.lpse = lpse;
-                                                // data.tahun = tahun;
-                                                // data.orderby = orderby
-                                                // data.cariTahapan = JSON.stringify(tahapan);
-                                                // data.cariOrderBy = JSON.stringify(orderby);
-                                            },
-                                            // data: 'search_key=' + search_key + '&tahun=' + tahun + '&lpse=' + lpse,
-                                        },
-                                        scrollY: 500,
-                                        scroller: {
-                                            loadingIndicator: true
-                                        },
-                                        rowCallback: function(row) {
-                                            $(row).addClass('row-table');
-                                        },
-                                    });
-                                    // $('.button_delete_anggota').on('click', function() {
-                                    //     anggota.rows($('#add_anggota tr.active')).remove().draw();
-                                    // })
-                                    anggota.draw();
-                                </script>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal ADD word -->
-                <div class="modal fade addasosiasi" id="daftarhitam" tabindex="-1" aria-labelledby="addasosiasiLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-content-header d-flex justify-content-end" style="position: absolute; right:0rem">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-content-body">
-                                <h3 class="h3_judul">DAFTAR HITAM</h3>
-                                <div class="tab text-center">
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button class="tablinks btn btn-outline-blacklist" onclick="openCity(event, 'Aktif')" id="defaultOpen"> <span><?= $blacklist['aktif'] ?></span> Aktif</button>
-                                        <button class="tablinks btn btn-outline-blacklist" onclick="openCity(event, 'Selesai')"><span><?= $blacklist['selesai'] ?></span> Selesai</button>
-                                        <button class="tablinks btn btn-outline-blacklist" onclick="openCity(event, 'Penundaan')"><span>-</span> Penundaan</button>
-                                        <button class="tablinks btn btn-outline-blacklist" onclick="openCity(event, 'Batal')"><span>-</span> Batal</button>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-center mx-1">
-                                    <!-- Filter Wilayah -->
-                                    <button class="col-lg-4 filter-item1 mx-1 my-lg-2 my-1 p-2 d-flex justify-content-between align-self-center" id="dropdownWilayah" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                        <p class="align-self-center" style="margin-bottom: 0rem;">Wilayah</p>
-                                        <iconify-icon inline icon="material-symbols:arrow-drop-down" style="color: #bf0c0c;" width="24" height="24"></iconify-icon>
-                                    </button>
-                                    <ul class="dropdown-menu overflow-auto dropdownWilayah" id="myDropdown4" style="max-height: 250px; width:235px;" aria-labelledby="dropdownWilayah">
-                                        <div class="row mx-1 my-2">
-                                            <input class="mx-2" type="text" placeholder="Search.." id="myInput4" style="height:30px; width: 95%;" onkeyup="filterFunction4()">
-                                        </div>
-                                        <script>
-                                            function filterFunction4() {
-                                                var input, filter, ul, li, a, i;
-                                                input = document.getElementById("myInput4");
-                                                filter = input.value.toUpperCase();
-                                                div = document.getElementById("myDropdown4");
-                                                a = div.getElementsByTagName("li");
-                                                for (i = 0; i < a.length; i++) {
-                                                    txtValue = a[i].textContent || a[i].innerText;
-                                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                        a[i].style.display = "";
-                                                    } else {
-                                                        a[i].style.display = "none";
-                                                    }
-                                                }
-                                            }
-                                        </script>
-                                        <?php
-                                        $i = 1;
-foreach ($wilayah as $wilayah) :
-    ?>
-                                            <li class="row mx-1 my-2">
-                                                <div class="col-1 text-center d-flex align-items-center mx-2">
-                                                    <input class="checkbox" type="checkbox" id="wilayah<?= $i ?>" name="wilayah" value="<?= $wilayah['id_wilayah'] ?>">
-                                                </div>
-                                                <h6 class="col-9 p-0 m-0 d-flex align-items-center">
-                                                    <label for="wilayah<?= $i ?>"> <?php echo $wilayah['wilayah'] ?></label>
-                                                </h6>
-                                            </li>
-                                        <?php
-        $i++;
-endforeach;
-?>
-                                    </ul>
-                                    <!-- End of Filter Wilayah -->
-                                    <form class="col-lg-7 mx-2 align-self-center" action="#">
-                                        <input placeholder="Cari berdasarkan Nama Perusahaan" name="search_key" id="search_key" class="search input_blacklist" type="text">
-                                    </form>
-                                </div>
-                                <div id="Aktif" class="tabcontent aktif">
-                                    <div class="data_blacklist-overflow clay">
-                                        <div id="ajaxContent"></div>
-                                        <script>
-                                            $('.aktif').ready(function() {
-                                                /*--first time load--*/
-                                                ajaxlist(page_url = false);
-
-                                                // Input text
-                                                $(document).on('keyup', "#search_key", function(event) {
-                                                    ajaxlist(page_url = false);
-                                                    event.preventDefault();
-                                                })
-
-                                                /*-- Page click --*/
-                                                $(document).on('click', ".aktif li a", function(event) {
-                                                    var page_url = $(this).attr('href');
-                                                    ajaxlist(page_url);
-                                                    event.preventDefault();
-                                                });
-
-                                                let wilayah = [];
-                                                $('input[type="checkbox"][name="wilayah"]').on("change", function() {
-                                                    if (this.checked) {
-                                                        const index = wilayah.findIndex((obj) => obj === $(this).val());
-                                                        if (index === -1) {
-                                                            wilayah.push($(this).val());
-                                                            // console.log(this.value);
-                                                        } else {
-                                                            wilayah[index] = $(this).val();
-                                                        }
-                                                    } else if (this.checked == false) {
-                                                        wilayah.splice(wilayah.indexOf($(this).val()), 1);
-                                                    }
-                                                    // console.log(wilayah);
-                                                    ajaxlist(page_url = false, wilayah)
-                                                    event.preventDefault();
-                                                });
-
-                                                /*-- create function ajaxlist --*/
-                                                function ajaxlist(page_url = false, wilayah) {
-                                                    var search_key = $("#search_key").val();
-                                                    var wilayah = $(".checkbox:checked").val();
-                                                    if (wilayah == undefined) {
-                                                        wilayah = '';
-                                                    }
-                                                    // console.log(wilayah);
-                                                    // console.log(search_key);
-                                                    var base_url = '<?php echo base_url('index_ajax/') ?>';
-
-                                                    if (page_url == false) {
-                                                        var page_url = base_url;
-                                                    }
-
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        url: page_url,
-                                                        data: 'search_key=' + search_key + '&wilayah=' + wilayah,
-                                                        success: function(response) {
-                                                            $("#ajaxContent").html(response);
-                                                        }
-                                                    });
-                                                }
-                                            })
-                                        </script>
-                                    </div>
-                                </div>
-                                <div id="Selesai" class="tabcontent selesai">
-                                    <div class="data_blacklist-overflow clay">
-                                        <div id="selesai_blacklist"></div>
-                                        <script>
-                                            $('.selesai').ready(function() {
-                                                //SELESAI BALCKLIST//
-
-                                                /*--first time load--*/
-                                                ajaxlist_selesai(selesai_url = false);
-
-                                                // Input text
-                                                $(document).on('keyup', "#search_key", function(event) {
-                                                    ajaxlist_selesai(selesai_url = false);
-                                                    event.preventDefault();
-                                                })
-
-                                                /*-- Page click --*/
-                                                $(document).on('click', ".selesai li a", function(event) {
-                                                    var selesai_url = $(this).attr('href');
-                                                    ajaxlist_selesai(selesai_url);
-                                                    event.preventDefault();
-                                                });
-
-                                                let wilayah_selesai = [];
-                                                $('input[type="checkbox"][name="wilayah"]').on("change", function() {
-                                                    if (this.checked) {
-                                                        const index = wilayah_selesai.findIndex((obj) => obj === $(this).val());
-                                                        if (index === -1) {
-                                                            wilayah_selesai.push($(this).val());
-                                                            // console.log(this.value);
-                                                        } else {
-                                                            wilayah_selesai[index] = $(this).val();
-                                                        }
-                                                    } else if (this.checked == false) {
-                                                        wilayah_selesai.splice(wilayah_selesai.indexOf($(this).val()), 1);
-                                                    }
-                                                    console.log(wilayah_selesai);
-                                                    ajaxlist_selesai(selesai_url = false, wilayah_selesai)
-                                                    event.preventDefault();
-                                                });
-
-                                                /*-- create function ajaxlist_selesai --*/
-                                                function ajaxlist_selesai(selesai_url = false, wilayah_selesai) {
-                                                    var search_key = $("#search_key").val();
-                                                    if (search_key == undefined) {
-                                                        search_key = '';
-                                                    }
-                                                    var wilayah_selesai = $(".checkbox:checked").val();
-                                                    if (wilayah_selesai == undefined) {
-                                                        wilayah_selesai = '';
-                                                    }
-                                                    // console.log(wilayah_selesai);
-                                                    // console.log(search_key);
-                                                    var base_url = '<?php echo base_url('blacklist_selesai/') ?>';
-
-                                                    if (selesai_url == false) {
-                                                        var selesai_url = base_url;
-                                                    }
-
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        url: selesai_url,
-                                                        data: 'search_key=' + search_key + '&wilayah=' + wilayah_selesai,
-                                                        success: function(response) {
-                                                            $("#selesai_blacklist").html(response);
-                                                        }
-                                                    });
-                                                }
-                                            })
-                                        </script>
-                                    </div>
-                                </div>
-                                <div id="Penundaan" class="tabcontent">
-                                    <h3>Penundaan</h3>
-                                    <!-- <p>Tokyo is the capital of Japan.</p> -->
-                                </div>
-                                <div id="Batal" class="tabcontent">
-                                    <h3>Batal</h3>
-                                    <!-- <p>Tokyo is the capital of Japan.</p> -->
-                                </div>
-                                <!-- <div class="mx-4 mt-5">Pagination</div> -->
-                            </div>
-                            <script>
-                                function openCity(evt, cityName) {
-                                    var i, tabcontent, tablinks;
-                                    tabcontent = document.getElementsByClassName("tabcontent");
-                                    for (i = 0; i < tabcontent.length; i++) {
-                                        tabcontent[i].style.display = "none";
-                                    }
-                                    tablinks = document.getElementsByClassName("tablinks");
-                                    for (i = 0; i < tablinks.length; i++) {
-                                        tablinks[i].className = tablinks[i].className.replace(" active", "");
-                                    }
-                                    document.getElementById(cityName).style.display = "block";
-                                    evt.currentTarget.className += " active";
-                                }
-
-                                // Get the element with id="defaultOpen" and click on it
-                                document.getElementById("defaultOpen").click();
-                            </script>
-                        </div>
-                    </div>
+                <div class="custom-table-container shadow-sm table-striped">
+                    <table class="data-table">
+                        <thead class="thead">
+                            <tr style="color: white;">
+                                <!-- <th>No.</th> -->
+                                <th><button id="no">No.</button></th>
+                                <th><button id="name">Nama</button></th>
+                                <th><button id="tender">Ikut Tender</button></th>
+                                <th><button id="m">Menang</button></th>
+                                <th><button id="k">Kalah</button></th>
+                                <th><button id="hps">Penurunan HPS</button></th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-content">
+                            <tr>
+                                <td><span id="no">1</span></td>
+                                <td id="name" style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td id="tender">24</td>
+                                <td id="m" style="color: #059669;">23</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>15</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">2</span></td>
+                                <td id="name" style="font-weight: bold;">PT SANGKURIANG INTERNASIONAL</td>
+                                <td id="tender">13</td>
+                                <td id="m" style="color: #059669;">13</td>
+                                <td id="k" style="color: #D21B1B;">0</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>0</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">3</span></td>
+                                <td id="name" style="font-weight: bold;">CV. TORCHE INDONESIA</td>
+                                <td id="tender">22</td>
+                                <td id="m" style="color: #059669;">20</td>
+                                <td id="k" style="color: #D21B1B;">2</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>22</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">4</span></td>
+                                <td id="name" style="font-weight: bold;">Adhyamitra Tata Sarana</td>
+                                <td id="tender">17</td>
+                                <td id="m" style="color: #059669;">16</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>20</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">5</span></td>
+                                <td id="name" style="font-weight: bold;">PT. PASYA MITRA UTAMA</td>
+                                <td id="tender">19</td>
+                                <td id="m" style="color: #059669;">15</td>
+                                <td id="k" style="color: #D21B1B;">4</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>0</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">6</span></td>
+                                <td id="name" style="font-weight: bold;">PT. Mediatama Kreasi Informatika</td>
+                                <td id="tender">31</td>
+                                <td id="m" style="color: #059669;">29</td>
+                                <td id="k" style="color: #D21B1B;">2</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>25</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">7</span></td>
+                                <td id="name" style="font-weight: bold;">PT. Metanouva Informatika</td>
+                                <td id="tender">11</td>
+                                <td id="m" style="color: #059669;">10</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>12</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">8</span></td>
+                                <td id="name" style="font-weight: bold;">PT. TERA DATA INDONUSA</td>
+                                <td id="tender">11</td>
+                                <td id="m" style="color: #059669;">11</td>
+                                <td id="k" style="color: #D21B1B;">0</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>35</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">9</span></td>
+                                <td id="name" style="font-weight: bold;">PT. ASHA CIPTA PERSADA</td>
+                                <td id="tender">16</td>
+                                <td id="m" style="color: #059669;">15</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>24</td>
+                            </tr>
+                            <tr>
+                                <td><span id="no">10</span></td>
+                                <td id="name" style="font-weight: bold;">PT. INTERMITRA VERTIKAL SELARAS</td>
+                                <td id="tender">13</td>
+                                <td id="m" style="color: #059669;">13</td>
+                                <td id="k" style="color: #D21B1B;">0</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>28</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <h4 style="font-weight:510">Aktivitas Terakhir</h4>
-                <?php if ($notif != null) {
-                    foreach ($notif as $row) : ?>
-                        <div class="mt-4" style="max-height: 340px; overflow:auto;">
-
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height:auto">
-                                <div class="col">
-                                    <h6 style="font-weight:600; font-size:12px">NOTIFIKASI TENDER</h6>
-                                    <h5 style="font-weight:600; font-size:14px">LPSE <?= $row['nama_lpse'] ?> Baru Saja Merilis Tender Baru</h5>
-                                </div>
-                                <div class="col-2">
-                                    <img src="<?= base_url('assets/img/notif-tender.png') ?>" style="margin-top:30%; width:45px" alt="">
-                                </div>
+            <div class="col-lg-4 mt-5">
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s">
+                    <div class="shadow-sm bg-white">
+                        <div class="tren-card">
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <h1 class="tren-text wow fadeInUp" data-wow-delay="0.3s">RATA-RATA IKUT TENDER</h1>
                             </div>
-                        </div>
-                    <?php
-                    endforeach;
-                } else { ?>
-                    <div class="mt-4" style="max-height: 340px; overflow:auto;">
-                        <div class="row summary-box d-flex align-content-center mb-2" style="height:auto">
-                            <div class="col">
-                                <h6 style="font-weight:600; font-size:14px">Tidak terdapat aktivitas terbaru</h6>
-                            </div>
-                            <div class="col-2">
-                                <img src="<?= base_url('assets/img/notif-tender.png') ?>" style="margin-top:30%; width:45px" alt="">
+                            <div class="wow fadeIn">
+                                <h1 class="tren-title d-flex wow fadeInUp" data-wow-delay="0.5s">17,7% <span><img class="custom-img2" src="<?= base_url('assets\img\icon_card_people_peserta_(3).svg') ?>" alt=""></span></h1>
+                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #059669;"><i class="fas fa-arrow-up mr-1"></i>1,5 </span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-            </div>
-            <div id="anggota" class="anggota mb-5">
-                <div class="container" data-aos="fade_up">
-                    <div class="row anggota">
-                        <div class="col-lg-8">
-                            <!-- <div class="overflow-auto"> -->
-                            <div class="table-cipung">
-                                <table id="testing" class="asosiasi_table mt-4 row-table" style="overflow-x: hidden;width: 820px;">
-                                    <thead>
-                                        <tr>
-                                            <th style="cursor: pointer;" class="mx-1 text-center col-kode text-brown">No.</th>
-                                            <th style="cursor: pointer;" class="mx-1 col-nama text-brown">Nama <iconify-icon inline icon="ri:arrow-up-down-line"></iconify-icon>
-                                            </th>
-                                            <th style="cursor: pointer;" class="mx-1 text-center col-klpd text-brown">Ikut Tender <iconify-icon inline icon="ri:arrow-up-down-line"></iconify-icon>
-                                            </th>
-                                            <th style="cursor: pointer;" class="mx-1 text-center col-hps text-brown">Menang <iconify-icon inline icon="ri:arrow-up-down-line"></iconify-icon>
-                                            </th>
-                                            <th style="cursor: pointer;" class="mx-1 text-center col-kalah text-brown">Kalah <iconify-icon inline icon="ri:arrow-up-down-line"></iconify-icon>
-                                            </th>
-                                            <th style="cursor: pointer;" class="mx-1 text-center col-penurunan text-brown">
-                                                <div class="d-flex">Penurunan HPS
-                                                    <div class="align-self-center mx-1">
-                                                        <iconify-icon inline icon="mdi:chevron-up-down" style="color: black;"></iconify-icon>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="overflow-x: hidden;">
-                                    </tbody>
-                                </table>
-                                <script>
-                                    let orderby = null;
-                                    $('.col-nama').on('click', function() {
-                                        if (orderby === null) {
-                                            orderby = "nama2";
-                                        } else if (orderby === "nama2") {
-                                            orderby = "nama1";
-                                        } else if (orderby === "nama1") {
-                                            orderby = "nama2";
-                                        } else {
-                                            orderby = "nama2";
-                                        }
-                                        console.log(orderby);
-                                        dataTable.draw();
-                                    });
-                                    $('.col-klpd').on('click', function() {
-                                        if (orderby === null) {
-                                            orderby = "ikut2";
-                                        } else if (orderby === "ikut2") {
-                                            orderby = "ikut1";
-                                        } else if (orderby === "ikut1") {
-                                            orderby = "ikut2";
-                                        } else {
-                                            orderby = "ikut2";
-                                        }
-                                        console.log(orderby);
-                                        dataTable.draw();
-                                    });
-                                    $('.col-hps').on('click', function() {
-                                        if (orderby === null) {
-                                            orderby = "menang2";
-                                        } else if (orderby === "menang2") {
-                                            orderby = "menang1";
-                                        } else if (orderby === "menang1") {
-                                            orderby = "menang2";
-                                        } else {
-                                            orderby = "menang2";
-                                        }
-                                        console.log(orderby);
-                                        dataTable.draw();
-                                    });
-                                    $('.col-kalah').on('click', function() {
-                                        if (orderby === null) {
-                                            orderby = "kalah2";
-                                        } else if (orderby === "kalah2") {
-                                            orderby = "kalah1";
-                                        } else if (orderby === "kalah1") {
-                                            orderby = "kalah2";
-                                        } else {
-                                            orderby = "kalah2";
-                                        }
-                                        console.log(orderby);
-                                        dataTable.draw();
-                                    });
-                                    $('.col-penurunan').on('click', function() {
-                                        if (orderby === null) {
-                                            orderby = "penurunan2";
-                                        } else if (orderby === "penurunan2") {
-                                            orderby = "penurunan1";
-                                        } else if (orderby === "penurunan1") {
-                                            orderby = "penurunan2";
-                                        } else {
-                                            orderby = "penurunan2";
-                                        }
-                                        console.log(orderby);
-                                        dataTable.draw();
-                                    });
-                                    // let search_key = null,
-                                    //     lpse = [],
-                                    //     tahun = [];
-                                    $("#search_key_anggota").keyup(function() {
-                                        search_key = $(this).val();
-                                        // console.log(search_key);
-                                        dataTable.draw();
-                                    })
-                                    $("#lpse").on('change', function() {
-                                        lpse = $(this).val()
-                                        // console.log(lpse)
-                                        dataTable.draw();
-                                    })
-                                    $("#tahun").on('change', function() {
-                                        tahun = $(this).val()
-                                        // console.log(tahun)
-                                        dataTable.draw();
-                                    })
-                                    var search_key = $("#search_key_anggota").val();
-                                    var lpse = $("#lpse").val();
-                                    if (lpse == undefined) {
-                                        lpse = '';
-                                    }
-                                    var tahun = $("#tahun").val();
-                                    if (tahun == undefined) {
-                                        tahun = '';
-                                    }
-                                    var dataTable = $('#testing').DataTable({
-                                        // "dom": "ftr",
-                                        // pageLength: 20,
-                                        // "pageLength": 20,
-                                        // lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
-                                        "columnDefs": [{
-                                            "searchable": false,
-                                            "orderable": false,
-                                            "targets": 0,
-                                            // "aoColumns": [{
-                                            //         "sWidth": "15%"
-                                            //     },
-                                            //     {
-                                            //         "sWidth": "15%"
-                                            //     },
-                                            //     {
-                                            //         "sWidth": "15%"
-                                            //     },
-                                            //     {
-                                            //         "sWidth": "15%"
-                                            //     },
-                                            //     {
-                                            //         "sWidth": "15%"
-                                            //     },
-                                            //     {
-                                            //         "sWidth": "15%"
-                                            //     },
-                                            //     {
-                                            //         "sWidth": "15%"
-                                            //     },
-                                            // ],
-                                        }],
-                                        "order": [
-                                            [1, 'asc']
-                                        ],
-
-                                        "bDeferRender": false,
-                                        "info": false,
-                                        "bLengthChange": false,
-                                        "bSort": false,
-                                        "dom": "frt",
-                                        "language": {
-                                            "loadingRecords": "",
-                                            // "processing": '<i style="position:static;"><iconify-icon icon="eos-icons:loading" style="color: #f27676;" width="200" height="200"></iconify-icon></i><span></span>',
-                                            "processing": '',
-                                        },
-                                        serverSide: true,
-                                        ordering: false,
-                                        searching: false,
-                                        'serverMethod': 'post',
-                                        ajax: {
-                                            url: "<?= base_url('DashboardUserAsosiasi/table_data') ?>",
-                                            type: "POST",
-                                            data: function(data) {
-                                                // page : page,
-                                                data.search_key = search_key;
-                                                // // data.cariWilayah = JSON.stringify(wilayah);
-                                                data.lpse = lpse;
-                                                data.tahun = tahun;
-                                                data.orderby = orderby
-                                                // data.cariTahapan = JSON.stringify(tahapan);
-                                                // data.cariOrderBy = JSON.stringify(orderby);
-                                            },
-                                            // data: 'search_key=' + search_key + '&tahun=' + tahun + '&lpse=' + lpse,
-                                        },
-                                        scrollY: 500,
-                                        scroller: {
-                                            loadingIndicator: true
-                                        },
-                                        rowCallback: function(row) {
-                                            $(row).addClass('row-table');
-                                        },
-                                    });
-                                    dataTable.draw();
-                                    // t.on('order.dt search.dt', function() {
-                                    //     t.column(0, {
-                                    //         search: 'applied',
-                                    //         order: 'applied'
-                                    //     }).nodes().each(function(cell, i) {
-                                    //         cell.innerHTML = i + 1;
-                                    //     });
-                                    // }).draw()
-                                    // console.log(dataTable.draw());
-
-                                    // $('#testing').ready(function() {
-                                    //     ajaxlist(page_url = false);
-
-                                    //     function ajaxlist(page_url = false, lpse, tahun, limit) {
-                                    //         var search_key = $("#search_key_anggota").val();
-                                    //         var lpse = $("#lpse").val();
-                                    //         if (lpse == undefined) {
-                                    //             lpse = '';
-                                    //         }
-                                    //         var tahun = $("#tahun").val();
-                                    //         if (tahun == undefined) {
-                                    //             tahun = '';
-                                    //         }
-                                    //         // console.log(lpse);
-                                    //         // console.log(search_key);
-                                    //         var base_url = '<?php echo base_url('table_ajax/') ?>';
-
-                                    //         if (page_url == false) {
-                                    //             var page_url = base_url;
-                                    //         }
-
-                                    //         $.ajax({
-                                    //             type: "POST",
-                                    //             url: page_url,
-                                    //             data: 'search_key=' + search_key + '&tahun=' + tahun + '&lpse=' + lpse,
-                                    //             success: function(response) {
-                                    //                 $("#testing").html(response);
-                                    //             }
-                                    //         });
-                                    //     }
-                                    // })
-                                </script>
+                </div>
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s">
+                    <div class="shadow-sm bg-white">
+                        <div class="tren-card">
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <h1 class="tren-text wow fadeInUp" data-wow-delay="0.3s">RATA-RATA MENANG TENDER</h1>
                             </div>
-                            <!-- </div> -->
+                            <div class="wow fadeIn">
+                                <h1 class="tren-title d-flex wow fadeInUp" data-wow-delay="0.5s">8,9% <span><img class="custom-img2" src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt=""></span></h1>
+                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #059669;"><i class="fas fa-arrow-up mr-1"></i>2,7</span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
+                            </div>
                         </div>
-
-                        <div class="col-lg-4 mt-3">
-                            <div class="col-lg chart-bg mt-2 py-3 px-4" style="height: 135px;">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h3>RATA RATA IKUT TENDER</h3>
-                                        <h1 id="rata_ikut"><?= ($tampilan['1'] == null) ? '0' : $tampilan['1'] ?></h1>
-                                        <p id="rata_ikut_persen">
-                                            <?php if ($tampilan['0'] > 0) {
-                                                ?>
-                                                <span style="color: #059669;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon>
-                                                    <?= $tampilan['0'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } elseif ($tampilan['0'] < 0) {
-                                                ?>
-                                                <span style="color: #BF0C0C;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon>
-                                                    <?= $tampilan['0'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } else {
-                                                ?>
-                                                <span style="color: black">
-                                                    0%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } ?>
-                                        </p>
-                                    </div>
-                                    <img src="<?= base_url("assets/img/icon1_asosiasi.svg") ?>" alt="" class="">
-                                </div>
+                    </div>
+                </div>
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s">
+                    <div class="shadow-sm bg-white">
+                        <div class="tren-card">
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <h1 class="tren-text wow fadeInUp" data-wow-delay="0.3s">RATA-RATA KALAH TENDER</h1>
                             </div>
-                            <div class="col-lg chart-bg mt-2 py-3 px-4" style="height: 135px;">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h3>RATA RATA MENANG TENDER</h3>
-                                        <h1 id="rata_menang"><?= ($tampilan['2'] == null) ? '0' : $tampilan['2']  ?></h1>
-                                        <p id="rata_menang_persen">
-                                            <?php if ($tampilan['5'] > 0) {
-                                                ?>
-                                                <span style="color: #059669;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon>
-                                                    <?= $tampilan['5'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } elseif ($tampilan['5'] < 0) {
-                                                ?>
-                                                <span style="color: #BF0C0C;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon>
-                                                    <?= $tampilan['5'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } else {
-                                                ?>
-                                                <span style="color: black">
-                                                    0%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } ?>
-                                        </p>
-                                    </div>
-                                    <img src="<?= base_url("assets/img/icon2_asosiasi.svg") ?>" alt="" class="">
-                                </div>
+                            <div class="wow fadeIn">
+                                <h1 class="tren-title d-flex wow fadeInUp" data-wow-delay="0.5s">1,2% <span><img class="custom-img2" src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt=""></span></h1>
+                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #D21B1B;"><i class="fas fa-arrow-down mr-1"></i>0,7 </span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
                             </div>
-                            <div class="col-lg chart-bg mt-2 py-3 px-4" style="height: 135px;">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h3>RATA RATA KALAH LELANG</h3>
-                                        <h1 id="rata_kalah"><?= ($tampilan['3'] == null) ? '0' : $tampilan['3'] ?></h1>
-                                        <p id="rata_kalah_persen">
-                                            <?php if ($tampilan['6'] > 0) {
-                                                ?>
-                                                <span style="color: #059669;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon>
-                                                    <?= $tampilan['6'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } elseif ($tampilan['6'] < 0) {
-                                                ?>
-                                                <span style="color: #BF0C0C;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon>
-                                                    <?= $tampilan['6'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } else {
-                                                ?>
-                                                <span style="color: black">
-                                                    0%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } ?>
-                                        </p>
-                                    </div>
-                                    <img src="<?= base_url("assets/img/icon3_asosiasi.svg") ?>" alt="" class="">
-                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s">
+                    <div class="shadow-sm bg-white">
+                        <div class="tren-card">
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <h1 class="tren-text wow fadeInUp" data-wow-delay="0.3s">RATA-RATA PENURUNAN HPS</h1>
                             </div>
-                            <div class="col-lg chart-bg mt-2 py-3 px-4" style="height: 135px;">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h3>RATA RATA PENURUNAN HPS</h3>
-                                        <h1 id="rata_penurunan"><?= ($tampilan['4'] == null) ? '0' : $tampilan['4'] ?></h1>
-                                        <p id="rata_penurunan_persen">
-                                            <?php if ($tampilan['7'] > 0) {
-                                                ?>
-                                                <span style="color: #059669;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon>
-                                                    <?= $tampilan['7'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } elseif ($tampilan['7'] < 0) {
-                                                ?>
-                                                <span style="color: #BF0C0C;">
-                                                    <iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon>
-                                                    <?= $tampilan['7'] ?>%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } else {
-                                                ?>
-                                                <span style="color: black">
-                                                    0%
-                                                </span>
-                                                dari Tahun Lalu
-                                            <?php
-                                            } ?>
-                                        </p>
-                                    </div>
-                                    <img src="<?= base_url("assets/img/icondown.png") ?>" style="max-height: 77px;" alt="" class="">
-                                </div>
+                            <div class="wow fadeIn">
+                                <h1 class="tren-title d-flex wow fadeInUp" data-wow-delay="0.5s">6,5% <span><img class="custom-img2" src="<?= base_url('assets\img\down_hps.svg') ?>" alt=""></span></h1>
+                                <h1 class="tren-isi d-flex mb-2 wow fadeInUp" data-wow-delay="0.5s"><span style="color: #D21B1B;"><i class="fas fa-arrow-down mr-1"></i>4 </span> <span style="margin-left: 5px;">dari tahun lalu</span></h1>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
+
+
+<!-- <script>
+    var ctx = document.getElementById("doughnutChart").getContext("2d");
+
+    const data = {
+        labels: ["Label 1", "Label 2", "Label 3"],
+        datasets: [{
+            data: [30, 40, 30], // Adjust data values as needed
+            backgroundColor: ["#495894", "#56C474", "#D21B1B"], // Adjust colors as needed
+        }, ],
+    };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                display: false,
+                width: 50,
+                height: 50,
+            },
+            title: {
+                display: false,
+                text: 'Chart.js Doughnut Chart'
+            }
+        },
+    };
+
+    const doughnutChart = new Chart(ctx, {
+        type: "doughnut",
+        data: data,
+        options: options,
+    });
+</script> -->
+
 <script>
-    $('#asosiasi').ready(function() {
-        $(document).on('change', "#lpse", function(event) {
-            lpse = $("#lpse :selected").val();
-            ajaxdinamis(lpse, tahun)
-        })
+    var ctx = document.getElementById('doughnutChart').getContext('2d');
 
-        $(document).on('change', "#tahun", function(event) {
-            tahun = $("#tahun :selected").val();
-            console.log(tahun)
-            ajaxdinamis(lpse, tahun)
-        })
+    var totalTender = 0;
+    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100];
+    for (var i = 0; i < data.length; i++) {
+        totalTender += data[i];
+    }
 
+    var doughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Tender 1', 'Tender 2', 'Tender 3'],
+            datasets: [{
+                data: data,
+                backgroundColor: ['#495894', '#56C474', '#EF5350'],
+                borderWidth: 2, // Add gaps between segments
+                borderColor: 'white' // Color of the gaps
+            }]
+        },
+        options: {
+            cutout: '65%', // Make the doughnut thinner
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    var ctx = this.ctx;
+                    ctx.save();
 
-        function ajaxdinamis(lpse, tahun) {
-            var lpse = $("#lpse").val();
-            if (lpse == undefined) {
-                lpse = '2022';
+                    // Draw "Total Tender" text with smaller font
+                    ctx.font = "20px Ubuntu";
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fontWeight = 800;
+                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                    ctx.fillText("Statistik", centerX, centerY - 20);
+
+                    // Draw the numerical value with larger font
+                    ctx.font = "14px Ubuntu";
+                    ctx.fontWeight = 500;
+                    ctx.fillText("Anggota", centerX, centerY + 10);
+
+                    ctx.restore();
+                }
             }
-            var tahun = $("#tahun").val();
-            if (tahun == undefined) {
-                tahun = '2022';
+        }
+    });
+</script>
+
+<!-- <script>
+    const response = {
+        "pokedata": [{
+                "no": 1,
+                "name": "PT. Telekomunikasi Indonesia, Tbk.",
+                "tender": 24,
+                "m": 23,
+                "k": 1,
+                "hps": 15
+            },
+            {
+                "no": 2,
+                "name": "PT SANGKURIANG INTERNASIONAL",
+                "tender": 13,
+                "m": 13,
+                "k": 0,
+                "hps": 0
+            },
+            {
+                "no": 3,
+                "name": "CV. TORCHE INDONESIA",
+                "tender": 22,
+                "m": 20,
+                "k": 2,
+                "hps": 22
+            },
+            {
+                "no": 4,
+                "name": "Adhyamitra Tata Sarana",
+                "tender": 17,
+                "m": 16,
+                "k": 1,
+                "hps": 20
+            },
+            {
+                "no": 5,
+                "name": "PT. PASYA MITRA UTAMA",
+                "tender": 19,
+                "m": 15,
+                "k": 4,
+                "hps": 0
+            },
+            {
+                "no": 6,
+                "name": "PT. Mediatama Kreasi Informatika",
+                "tender": 31,
+                "m": 29,
+                "k": 2,
+                "hps": 25
+            },
+            {
+                "no": 7,
+                "name": "PT. Metanouva Informatika",
+                "tender": 11,
+                "m": 10,
+                "k": 1,
+                "hps": 12
+            },
+            {
+                "no": 8,
+                "name": "PT. TERA DATA INDONUSA",
+                "tender": 11,
+                "m": 11,
+                "k": 0,
+                "hps": 35
+            },
+            {
+                "no": 9,
+                "name": "PT. ASHA CIPTA PERSADA	",
+                "tender": 16,
+                "m": 15,
+                "k": 1,
+                "hps": 24
+            },
+            {
+                "no": 10,
+                "name": "PT. INTERMITRA VERTIKAL SELARAS",
+                "tender": 13,
+                "m": 13,
+                "k": 0,
+                "hps": 28
             }
-            $.ajax({
-                type: "POST",
-                url: "DashboardUserAsosiasi/chart_dinamis",
-                data: 'tahun=' + tahun + '&lpse=' + lpse,
-                success: function(response) {
-                    $("#dataChart").html(response);
-                    mydata();
+        ]
+    }
+    const tableContent = document.getElementById("table-content")
+    const tableButtons = document.querySelectorAll("th button");
+
+    const createRow = (obj) => {
+        const row = document.createElement("tr");
+        const objKeys = Object.keys(obj);
+        objKeys.map((key) => {
+            const cell = document.createElement("td");
+            cell.setAttribute("data-attr", key);
+            cell.innerHTML = obj[key];
+            row.appendChild(cell);
+        });
+        return row;
+    };
+
+    const getTableContent = (data) => {
+        data.map((obj) => {
+            const row = createRow(obj);
+            tableContent.appendChild(row);
+        });
+    };
+
+    const sortData = (data, param, direction = "asc") => {
+        tableContent.innerHTML = '';
+        const sortedData =
+            direction == "asc" ? [...data].sort(function(a, b) {
+                if (a[param] < b[param]) {
+                    return -1;
+                }
+                if (a[param] > b[param]) {
+                    return 1;
+                }
+                return 0;
+            }) : [...data].sort(function(a, b) {
+                if (b[param] < a[param]) {
+                    return -1;
+                }
+                if (b[param] > a[param]) {
+                    return 1;
+                }
+                return 0;
+            });
+
+        getTableContent(sortedData);
+    };
+
+    const resetButtons = (event) => {
+        [...tableButtons].map((button) => {
+            if (button !== event.target) {
+                button.removeAttribute("data-dir");
+            }
+        });
+    };
+
+    window.addEventListener("load", () => {
+        getTableContent(response.pokedata);
+
+        [...tableButtons].map((button) => {
+            button.addEventListener("click", (e) => {
+                resetButtons(e);
+                if (e.target.getAttribute("data-dir") == "desc") {
+                    sortData(response.pokedata, e.target.id, "desc");
+                    e.target.setAttribute("data-dir", "asc");
+                } else {
+                    sortData(response.pokedata, e.target.id, "asc");
+                    e.target.setAttribute("data-dir", "desc");
                 }
             });
-        }
-
-        function mydata() {
-
-
-            // console.log(document.getElementById('chart1'))
-            get1 = document.getElementById('chart1').innerHTML;
-            let chart1 = JSON.parse(get1);
-
-            $("canvas#ikut-tender").remove();
-            $("div.chart1").append('<canvas id="ikut-tender" width="150px" height="150px"></canvas>');
-
-            var chartDom = document.getElementById('ikut-tender');
-            var myChart = echarts.init(chartDom);
-            var option;
-
-            option = {
-                series: [{
-                    name: 'Access From',
-                    type: 'pie',
-                    radius: ['40%', '70%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            fontSize: '20',
-                            fontWeight: 'bold',
-                            textStyle: {
-                                color: 'black'
-                            },
-                        }
-                    },
-                    labelLine: {
-                        show: false
-                    },
-                    data: [{
-                            value: chart1['0'],
-                            name: chart1['4'] + '%',
-                            itemStyle: {
-                                color: '#6EE7B7'
-                            }
-                        },
-                        {
-                            value: chart1['2'],
-                            name: chart1['6'] + '%',
-                            itemStyle: {
-                                color: '#F9845F',
-                            }
-                        },
-                        {
-                            value: chart1['1'],
-                            name: chart1['5'] + '%',
-                            itemStyle: {
-                                color: '#DF3131'
-                            }
-                        }
-                    ]
-                }]
-            };
-            option && myChart.setOption(option);
-
-            $('#ikut').html(chart1['2']);
-            $('#total_tender').html(chart1['3']);
-            $('#menang').html(chart1['0']);
-            $('#kalah').html(chart1['1']);
-
-
-            get2 = document.getElementById('chart2').innerHTML;
-            let chart2 = JSON.parse(get2);
-
-            if (chart2['0'] == null) {
-                chart2['0'] = '-'
-            }
-            if (chart2['5'] == null) {
-                chart2['5'] = '-'
-            }
-            if (chart2['6'] == null) {
-                chart2['6'] = '-'
-            }
-            if (chart2['7'] == null) {
-                chart2['7'] = '-'
-            }
-            if (chart2['4'] == null) {
-                chart2['4'] = '0.0'
-            }
-
-
-            $('#rata_ikut').html(chart2['1'])
-            // $('#rata_ikut_persen').html(`<iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon> ` + chart2['0'] + `%`)
-            if (chart2['0'] >= 0) {
-                $('#rata_ikut_persen').html(`<span style="color: #059669;"><iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon> ` + chart2['0'] + `%</span> dari Tahun Lalu`)
-            } else if (chart2['0'] < 0) {
-                $('#rata_ikut_persen').html(`<span style="color: #BF0C0C;"><iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon> ` + chart2['0'] + `%</span> dari Tahun Lalu`)
-            } else {
-                $('#rata_ikut_persen').html(`<span style="color: black">` + chart2['0'] + `%</span> dari Tahun Lalu`)
-            }
-
-            $('#rata_menang').html(chart2['2'])
-            // $('#rata_menang_persen').html(`<iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon> ` + chart2['5'] + `%`)
-            if (chart2['5'] >= 0) {
-                $('#rata_menang_persen').html(`<span style="color: #059669;"><iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon> ` + chart2['5'] + `%</span> dari Tahun Lalu`)
-            } else if (chart2['5'] < 0) {
-                $('#rata_menang_persen').html(`<span style="color: #BF0C0C;"><iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon> ` + chart2['5'] + `%</span> dari Tahun Lalu`)
-            } else {
-                $('#rata_menang_persen').html(`<span style="color: black;"> ` + chart2['5'] + `%</span> dari Tahun Lalu`)
-            }
-
-            $('#rata_kalah').html(chart2['3'])
-            // $('#rata_kalah_persen').html(`<iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon> ` + chart2['6'] + `%`)
-            if (chart2['6'] >= 0) {
-                $('#rata_kalah_persen').html(`<span style="color: #059669;"><iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon> ` + chart2['6'] + `%</span> dari Tahun Lalu`)
-            } else if (chart2['6'] < 0) {
-                $('#rata_kalah_persen').html(`<span style="color: #BF0C0C;"><iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon> ` + chart2['6'] + `%</span> dari Tahun Lalu`)
-            } else {
-                $('#rata_kalah_persen').html(`<span style="color: black;"> ` + chart2['6'] + `%</span> dari Tahun Lalu`)
-            }
-
-            $('#rata_penurunan').html(chart2['4'] + `%`)
-            // $('#rata_penurunan_persen').html(`<iconify-icon inline icon="material-symbols:arrow-downward"></iconify-icon> ` + chart2['7'] + `%`)
-            if (chart2['7'] >= 0) {
-                $('#rata_penurunan_persen').html(`<span style="color: #059669;"><iconify-icon inline icon="material-symbols:arrow-upward-rounded"></iconify-icon> ` + chart2['7'] + `%</span> dari Tahun Lalu`)
-            } else if (chart2['7'] < 0) {
-                $('#rata_penurunan_persen').html(`<span style="color: #BF0C0C;"><iconify-icon inline icon="material-symbols:arrow-downward-rounded"></iconify-icon> ` + chart2['7'] + `%</span> dari Tahun Lalu`)
-            } else {
-                $('#rata_penurunan_persen').html(`<span style="color: black;"> ` + chart2['7'] + `%</span> dari Tahun Lalu`)
-            }
-
-
-        }
-    })
-</script>
+        });
+    });
+</script> -->

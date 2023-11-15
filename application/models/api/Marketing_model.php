@@ -40,20 +40,22 @@ class Marketing_model extends CI_Model {
         return $this->db->affected_rows();
     }
     
-    public function getLeadsByTim($id){
-        $this->db->select('data_leads.*,  kontak_lead.nama, kontak_lead.posisi, kontak_lead.no_telp, kontak_lead.email, plot_tim.status, plot_tim.jadwal, plot_tim.catatan');
+    public function getLeadsByTim($id_pengguna, $page_size, $page_number) {
+        $this->db->select('data_leads.*, kontak_lead.nama, kontak_lead.posisi, kontak_lead.no_telp, kontak_lead.email, plot_tim.status, plot_tim.jadwal, plot_tim.catatan');
         $this->db->select('COUNT(history_marketing.id_lead) AS jumlah_history');
         $this->db->from('data_leads');
         $this->db->join('plot_tim', 'data_leads.id_lead = plot_tim.id_lead');
         $this->db->join('tim_marketing', 'plot_tim.id_tim = tim_marketing.id_tim');
         $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
         $this->db->join('history_marketing', 'data_leads.id_lead = history_marketing.id_lead', 'left');
-        $this->db->where('tim_marketing.id_pengguna', $id);
-        $this->db->group_by('data_leads.id_lead, kontak_lead.id_kontak, status, jadwal, catatan');
+        $this->db->where('tim_marketing.id_pengguna', $id_pengguna);
+        $this->db->group_by('data_leads.id_lead, kontak_lead.id_kontak, plot_tim.status, plot_tim.jadwal, plot_tim.catatan');
+        $this->db->limit($page_size, $page_number);
+    
         $query = $this->db->get();
-
         return $query->result_array();
     }
+    
 
     public function getTotalLeadsByTim($id)
     {

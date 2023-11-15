@@ -30,89 +30,97 @@ class DashboardUserAsosiasi extends CI_Controller
         ]);
     }
 
-    public function index()
-    {
-        $notif = null;
+    public function index(){
 
-        try {
-            $tender = $this->client->request('GET', 'api/tender/notifikasi-tender-baru-dashboard-user', $this->client->getConfig('headers'));
-            $notif = json_decode($tender->getBody()->getContents(), true);
-
-            $notif = $notif['data'];
-        } catch (ClientException $e) {
-            $notif = null;
-        }
-        $id_pengguna = $this->session->user_data['id_pengguna'];
-        $search = [
-            'lpse' => trim($this->input->post('lpse')),
-            'tahun' => trim($this->input->post('tahun')),
-        ];
-
-        $response_rata = $this->anggota->getdatadinamisavg($search, $id_pengguna);
-        // die;
-        $rata1 = [];
-        foreach ($response_rata as $b) {
-            $rata1[0] = $b['persen_ikut_tender'];
-            $rata1[1] = $b['rata_ikut_tender'];
-            $rata1[2] = $b['rata_menang_tender'];
-            $rata1[3] = $b['rata_kalah_tender'];
-            $rata1[4] = $b['rata_penurunan_hps'];
-            $rata1[5] = $b['persen_menang_tender'];
-            $rata1[6] = $b['persen_kalah_tender'];
-            $rata1[7] = $b['persen_penurunan_tender'];
-        }
-
-        $response = $this->anggota->getdatadinamis($search, $id_pengguna);
-        if (json_encode($response) != "[]") {
-            $akumulasi = [];
-
-            foreach ($response as $r) {
-                $akumulasi[0] = (int) $r['total_menang'];
-                $akumulasi[1] = (int) $r['total_kalah'];
-                $akumulasi[2] = (int) $r['total_ikut'];
-                $akumulasi[3] = (int) $r['total_ikut_semua'];
-                // $akumulasi[4] = (int)$r['persen_menang'];
-                // $akumulasi[5] = (int)$r['persen_kalah'];
-                // $akumulasi[6] = (int)$r['persen_ikut'];
-            }
-
-            if (($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) != 0) {
-                $akumulasi[4] = round($response['0']['total_menang'] / ($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) * 100);
-                $akumulasi[5] = round($response['0']['total_kalah'] / ($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) * 100);
-                $akumulasi[6] = round($response['0']['total_ikut'] / ($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) * 100);
-            } else {
-                $akumulasi[4] = 0;
-                $akumulasi[5] = 0;
-                $akumulasi[6] = 0;
-            }
-        } else {
-            $akumulasi = [0, 0, 0, 0];
-        }
-        $lpse = $this->lpse->getAllLpse();;
-        $wilayah = $this->WilayahModel->getAllWilayah();
-        $blacklist = $this->blacklist->getAll();
-        foreach ($blacklist['data'] as $b);
-        $data = [
-            'title' => 'Asosiasi Dashboard',
-            // 'blacklist' => $this->daftarhitam->getDaftarHItamByNpwp(),
-            'wilayah' => $wilayah['data'],
-            'blacklist' => $b,
-            'lpse' => $lpse['data'],
-            'notif' => $notif,
-            // 'anggota' => $anggota,
-            'akumulasi' => json_encode($akumulasi),
-            'rata1' => json_encode($rata1),
-            'response' => json_encode($response),
-            // 'anggota' => $anggota['data']
-        ];
-        $this->load->library('user');
-        $this->load->view('templates/header', $data);
-        $this->load->view('profile_pengguna/templates/navbar', [
-            'photo' => $this->user->getPhotoProfile((int) $id_pengguna, $this->db),
-        ]);
+        $this->load->view('templates/header', 'Dashboard');
+        $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('dashboard/asosiasi/index');
         $this->load->view('templates/footer');
     }
+
+    // public function index()
+    // {
+    //     $notif = null;
+
+    //     try {
+    //         $tender = $this->client->request('GET', 'api/tender/notifikasi-tender-baru-dashboard-user', $this->client->getConfig('headers'));
+    //         $notif = json_decode($tender->getBody()->getContents(), true);
+
+    //         $notif = $notif['data'];
+    //     } catch (ClientException $e) {
+    //         $notif = null;
+    //     }
+    //     $id_pengguna = $this->session->user_data['id_pengguna'];
+    //     $search = [
+    //         'lpse' => trim($this->input->post('lpse')),
+    //         'tahun' => trim($this->input->post('tahun')),
+    //     ];
+
+    //     $response_rata = $this->anggota->getdatadinamisavg($search, $id_pengguna);
+    //     // die;
+    //     $rata1 = [];
+    //     foreach ($response_rata as $b) {
+    //         $rata1[0] = $b['persen_ikut_tender'];
+    //         $rata1[1] = $b['rata_ikut_tender'];
+    //         $rata1[2] = $b['rata_menang_tender'];
+    //         $rata1[3] = $b['rata_kalah_tender'];
+    //         $rata1[4] = $b['rata_penurunan_hps'];
+    //         $rata1[5] = $b['persen_menang_tender'];
+    //         $rata1[6] = $b['persen_kalah_tender'];
+    //         $rata1[7] = $b['persen_penurunan_tender'];
+    //     }
+
+    //     $response = $this->anggota->getdatadinamis($search, $id_pengguna);
+    //     if (json_encode($response) != "[]") {
+    //         $akumulasi = [];
+
+    //         foreach ($response as $r) {
+    //             $akumulasi[0] = (int) $r['total_menang'];
+    //             $akumulasi[1] = (int) $r['total_kalah'];
+    //             $akumulasi[2] = (int) $r['total_ikut'];
+    //             $akumulasi[3] = (int) $r['total_ikut_semua'];
+    //             // $akumulasi[4] = (int)$r['persen_menang'];
+    //             // $akumulasi[5] = (int)$r['persen_kalah'];
+    //             // $akumulasi[6] = (int)$r['persen_ikut'];
+    //         }
+
+    //         if (($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) != 0) {
+    //             $akumulasi[4] = round($response['0']['total_menang'] / ($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) * 100);
+    //             $akumulasi[5] = round($response['0']['total_kalah'] / ($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) * 100);
+    //             $akumulasi[6] = round($response['0']['total_ikut'] / ($response['0']['total_menang'] + $response['0']['total_kalah'] + $response['0']['total_ikut']) * 100);
+    //         } else {
+    //             $akumulasi[4] = 0;
+    //             $akumulasi[5] = 0;
+    //             $akumulasi[6] = 0;
+    //         }
+    //     } else {
+    //         $akumulasi = [0, 0, 0, 0];
+    //     }
+    //     $lpse = $this->lpse->getAllLpse();;
+    //     $wilayah = $this->WilayahModel->getAllWilayah();
+    //     $blacklist = $this->blacklist->getAll();
+    //     foreach ($blacklist['data'] as $b);
+    //     $data = [
+    //         'title' => 'Asosiasi Dashboard',
+    //         // 'blacklist' => $this->daftarhitam->getDaftarHItamByNpwp(),
+    //         'wilayah' => $wilayah['data'],
+    //         'blacklist' => $b,
+    //         'lpse' => $lpse['data'],
+    //         'notif' => $notif,
+    //         // 'anggota' => $anggota,
+    //         'akumulasi' => json_encode($akumulasi),
+    //         'rata1' => json_encode($rata1),
+    //         'response' => json_encode($response),
+    //         // 'anggota' => $anggota['data']
+    //     ];
+    //     $this->load->library('user');
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('profile_pengguna/templates/navbar', [
+    //         'photo' => $this->user->getPhotoProfile((int) $id_pengguna, $this->db),
+    //     ]);
+    //     $this->load->view('dashboard/asosiasi/index');
+    //     $this->load->view('templates/footer');
+    // }
 
     public function create()
     {
