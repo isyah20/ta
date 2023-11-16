@@ -1059,7 +1059,7 @@ $.ajax({
 
 
         function setTableLeads(data) {
-            console.log(data[1]);
+            console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     var hasMultipleHistory = data[i].jumlah_history > 0 ? 'visible' : 'hidden';
                     const rowHtml = `
@@ -1405,20 +1405,31 @@ $.ajax({
             console.log("Input yang diketik: " + filterValue);
         });
 
-        function filterLeads(id_pengguna, key) {
+        function filterLeads(id_pengguna, nama_perusahaan) {
             $.ajax({
                 url: "<?php echo site_url('api/marketing/leadsByTimFiltered'); ?>",
                 type: "GET",
                 data: {
                     id_pengguna: id_pengguna,
-                    key: key
+                    nama_perusahaan: nama_perusahaan,
+                    status: status
                 },
                 dataType: "json",
-                beforeSend: addAuthorizationHeader,
+                beforeSend: function(xhr, settings) {
+                    addAuthorizationHeader(xhr);
+                    // Display loading message
+                    $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan data tender...</span></div>');
+                },
                 success: function(data) {
-                    console.log(data, 'data');
-                    setTableLeads(data)
-                }
+                    // console.log(data.data, 'data');
+                    $('#data-leads').html("");
+                    let html = setTableLeads(data.data);
+                    $('#data-leads').html(html);
+                }, 
+                error: function(data) {
+                    $('#data-leads').html("");
+
+                }, 
             });
         }
 
