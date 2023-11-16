@@ -470,20 +470,20 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
-    public function getCRMLeads_get()
-    {
-        $id_pengguna = $this->input->get('id_pengguna');
-        $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
-        $response['jumlah'] = $this->Supplier_api->countCRMLeads($id_pengguna)->row('jumlah');
+    // public function getCRMLeads_get()
+    // {
+    //     $id_pengguna = $this->input->get('id_pengguna');
+    //     $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
+    //     $response['jumlah'] = $this->Supplier_api->countCRMLeads($id_pengguna)->row('jumlah');
 
-        $this->output
-            ->set_status_header(200)
-            ->set_content_type('application/json')
-            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-            ->_display();
+    //     $this->output
+    //         ->set_status_header(200)
+    //         ->set_content_type('application/json')
+    //         ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+    //         ->_display();
 
-        exit;
-    }
+    //     exit;
+    // }
 
     public function getCountLeadNull_get()
     {
@@ -675,17 +675,18 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getListLokasiPekerjaan_get() {
-	    // $response = array(
-	    //   "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
-	    //   "results" => $this->Tender_model->getListLokasiPekerjaan(
-	    //   					$this->input->get("q"),
-	    //   					$this->input->get("id_pengguna"),
-	    //   					$this->input->get("jenis"),
-	    //   					$this->input->get("page") * $this->input->get("page_limit"),
-	    //   					$this->input->get("page_limit")
-	    //   			   )
-	    // );
+    public function getListLokasiPekerjaan_get()
+    {
+        // $response = array(
+        //   "total_count" => $this->Tender_model->getJumlahListLokasiPekerjaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+        //   "results" => $this->Tender_model->getListLokasiPekerjaan(
+        //   					$this->input->get("q"),
+        //   					$this->input->get("id_pengguna"),
+        //   					$this->input->get("jenis"),
+        //   					$this->input->get("page") * $this->input->get("page_limit"),
+        //   					$this->input->get("page_limit")
+        //   			   )
+        // );
 
         $q = $this->input->get("q");
         $id_pengguna = $this->input->get("id_pengguna");
@@ -710,25 +711,26 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
 
-	    // $this->output
-	    //   	 ->set_status_header(200)
-	    //   	 ->set_content_type('application/json')
-	    //   	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-	    //   	 ->_display();
-	    // exit;
-  	}
-  	
-  	public function getListJenisPengadaan_get() {
-	    // $response = array(
-	    //   "total_count" => $this->Tender_model->getJumlahListJenisPengadaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
-	    //   "results" => $this->Tender_model->getListJenisPengadaan(
-	    //   					$this->input->get("q"),
-	    //   					$this->input->get("id_pengguna"),
-	    //   					$this->input->get("jenis"),
-	    //   					$this->input->get("page") * $this->input->get("page_limit"),
-	    //   					$this->input->get("page_limit")
-	    //   			   )
-	    // );
+        // $this->output
+        //   	 ->set_status_header(200)
+        //   	 ->set_content_type('application/json')
+        //   	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        //   	 ->_display();
+        // exit;
+    }
+
+    public function getListJenisPengadaan_get()
+    {
+        // $response = array(
+        //   "total_count" => $this->Tender_model->getJumlahListJenisPengadaan($this->input->get("q"), $this->input->get("id_pengguna"), $this->input->get("jenis")),
+        //   "results" => $this->Tender_model->getListJenisPengadaan(
+        //   					$this->input->get("q"),
+        //   					$this->input->get("id_pengguna"),
+        //   					$this->input->get("jenis"),
+        //   					$this->input->get("page") * $this->input->get("page_limit"),
+        //   					$this->input->get("page_limit")
+        //   			   )
+        // );
         $q = $this->input->get("q");
         $id_pengguna = $this->input->get("id_pengguna");
         $jenis = $this->input->get("jenis");
@@ -752,15 +754,16 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
 
-	    // $this->output
-	    //   	 ->set_status_header(200)
-	    //   	 ->set_content_type('application/json')
-	    //   	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-	    //   	 ->_display();
-	    // exit;
-  	}
+        // $this->output
+        //   	 ->set_status_header(200)
+        //   	 ->set_content_type('application/json')
+        //   	 ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        //   	 ->_display();
+        // exit;
+    }
 
-    public function getDetailPemenang_get() {
+    public function getDetailPemenang_get()
+    {
         $id = $this->input->get('kode_tender');
         $response = $this->Tender_model->getWinnerById($id)->row();
 
@@ -778,7 +781,8 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getTahun_get() {
+    public function getTahun_get()
+    {
         $npwp = $this->input->get('npwp');
         $res = $this->Supplier_api->getTahun($npwp);
 
@@ -796,7 +800,8 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getPemenangFiltered() {
+    public function getPemenangFiltered()
+    {
         $data = [
             'npwp' => $this->input->get('npwp'),
             'lokasi' => $this->input->get('lokasi'),
@@ -822,24 +827,148 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function plotCRM_get() {
-        $id_lead = $this->input->get('id_lead');
-        $id_tim = $this->input->get('id_tim');
+    // public function plotCRM_get()
+    // {
+    //     $id_lead = $this->input->get('id_lead');
+    //     $id_tim = $this->input->get('id_tim');
 
-        $data = $this->Supplier_model->insertPlotTim($id_lead, $id_tim);
+    //     $data = $this->Supplier_model->insertPlotTim($id_lead, $id_tim);
 
-        if ($data) {
+    //     if ($data) {
+    //         $this->response([
+    //             'status' => true,
+    //             'data' => $data,
+    //             'message' => "Data berhasil diubah"
+    //         ], RestController::HTTP_OK);
+    //     } else {
+    //         $this->response([
+    //             'status' => false,
+    //             'data' => 0,
+    //             'message' => "Data gagal diubah"
+    //         ], RestController::HTTP_NOT_FOUND);
+    //     }
+    // }
+
+
+    // CRM
+    public function createMarketing_post()
+    {
+        $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email|is_unique[pengguna.email]', ['required' => 'Email tidak boleh kosong!', 'valid_email' => 'Email tidak valid', 'is_unique' => 'Email tidak boleh sama']);
+        $this->form_validation->set_rules('nama_tim', 'nama tim', 'required|trim', ['required' => 'Nama tim tidak boleh kosong!',]);
+        $this->form_validation->set_rules('no_telp', 'nomor telepon', 'required|trim', ['required' => 'No telepon tidak boleh kosong!',]);
+        $this->form_validation->set_rules('alamat', 'alamat', 'required|trim', ['required' => 'Alamat tidak boleh kosong!',]);
+        $this->form_validation->set_rules('posisi', 'posisi', 'required|trim', ['required' => 'Posisi tidak boleh kosong!',]);
+
+        if (!$this->form_validation->run()) {
             $this->response([
-                'status' => true,
-                'data' => $data,
-                'message' => "Data berhasil diubah"
-            ], RestController::HTTP_OK);
+                'status' => false,
+                'message' => validation_errors()
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+
+        $token = random_string('alnum', 25);
+        $password = random_string('alnum', 8);
+        $data_pengguna = [
+            'nama' => $this->post('nama_tim'),
+            'email' => $this->post('email'),
+            'alamat' => $this->post('alamat'),
+            'no_telp' => $this->post('no_telp'),
+            'kategori' => UserCategory::MARKETING,
+            'password' => md5($password),
+            'token' => $token,
+            'is_active' => 1,
+            'tgl_update' => date('Y-m-d H:i:s'),
+            // 'status' => UserType::PAID,
+        ];
+        $result = $this->Supplier_api->insertTimToPengguna($data_pengguna);
+
+        if ($result['status']) {
+            $data = [
+                'posisi' => $this->post('posisi'),
+                'is_valid_user' => 0,
+                'password_default' => $password,
+                // 'id_supplier' => 360,
+                'id_supplier' => $_COOKIE['id_pengguna'],
+                'id_pengguna' => $result['id_pengguna'],
+            ];
+            if ($this->Supplier_api->createTimMarketing($data) > 0) {
+                $supplier = $this->Pengguna_model->getProfilPengguna($data['id_supplier'])->row_array();
+                $data_pengguna['password_default'] = $password;
+                $data_pengguna['nama_supplier'] = $supplier['nama'];
+                $statusEmail = $this->sendEmailPassword_get($data_pengguna);
+                if (!$statusEmail['status']) {
+                    $this->response([
+                        'status' => false,
+                        'message' => 'Email gagal terkirim',
+                    ], RestController::HTTP_BAD_REQUEST);
+                }
+                $this->response([
+                    'status' => true,
+                    'message' => 'Data berhasil ditambahkan'
+                ], RestController::HTTP_CREATED);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Gagal menambahkan data tim markteing'
+                ], RestController::HTTP_BAD_REQUEST);
+            }
         } else {
             $this->response([
                 'status' => false,
-                'data' => 0,
-                'message' => "Data gagal diubah"
-            ], RestController::HTTP_NOT_FOUND);
+                'message' => 'Gagal menambahkan data pengguna'
+            ], RestController::HTTP_BAD_REQUEST);
         }
+    }
+
+    // public function plotTim_get()
+    // {
+    //     $data = $this->Supplier_model->getPlotTim();
+    //     $json_data = json_encode($data);
+    //     $this->output->set_content_type('application/json')->set_output($json_data);
+    // }
+
+    public function getCRMLeads_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
+        $response['jumlah'] = $this->Supplier_api->countCRMLeads($id_pengguna)->row('jumlah');
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+
+    public function getTimMarketingByIdSupplier_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_model->getTimBySupplierId($id_pengguna);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getLeadByIdTim_get()
+    {
+        $id_tim = $this->input->get('id_tim');
+        $data = $this->Supplier_model->getDataLeadByIdTim($id_tim);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function plotCRM_get()
+    {
+        $id_lead = $this->input->get('id_lead');
+        $id_tim = $this->input->get('id_tim');
+        // if ($id_tim == 0) {
+        //     $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
+        // } else {
+        $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        // }
+        // $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
     }
 }
