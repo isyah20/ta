@@ -1069,7 +1069,7 @@ $.ajax({
                             <td>${data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
                             <td>${data[i].status || ''}</td>
                             <td>${data[i].jadwal || ''}</td>
-                            <td style="max-width: 400px">${data[i].catatan || ''}</td>
+                            <td style="max-width: 400px;word-wrap: break-word;">${data[i].catatan || ''}</td>
                             <td></td>
                             <td>
                                 <span class="insert-history" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
@@ -1112,7 +1112,7 @@ $.ajax({
                                         <tr>
                                             <td class="editable-select">${value.status || ''}</td>
                                             <td class="editable-date">${value.jadwal || ''}</td>
-                                            <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
+                                            <td class="editable" style="max-width: 400px;word-wrap: break-word;">${value.catatan || ''}</td>
                                         </tr>
                                     `;
                                     childTable.append(childRowHtml);
