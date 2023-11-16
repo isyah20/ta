@@ -827,27 +827,7 @@ class ApiSupplier extends RestController
         }
     }
 
-    // public function plotCRM_get()
-    // {
-    //     $id_lead = $this->input->get('id_lead');
-    //     $id_tim = $this->input->get('id_tim');
 
-    //     $data = $this->Supplier_model->insertPlotTim($id_lead, $id_tim);
-
-    //     if ($data) {
-    //         $this->response([
-    //             'status' => true,
-    //             'data' => $data,
-    //             'message' => "Data berhasil diubah"
-    //         ], RestController::HTTP_OK);
-    //     } else {
-    //         $this->response([
-    //             'status' => false,
-    //             'data' => 0,
-    //             'message' => "Data gagal diubah"
-    //         ], RestController::HTTP_NOT_FOUND);
-    //     }
-    // }
 
 
     // CRM
@@ -920,12 +900,6 @@ class ApiSupplier extends RestController
         }
     }
 
-    // public function plotTim_get()
-    // {
-    //     $data = $this->Supplier_model->getPlotTim();
-    //     $json_data = json_encode($data);
-    //     $this->output->set_content_type('application/json')->set_output($json_data);
-    // }
 
     public function getCRMLeads_get()
     {
@@ -933,42 +907,76 @@ class ApiSupplier extends RestController
         $response = $this->Supplier_api->getCRMLeads($id_pengguna)->result();
         $response['jumlah'] = $this->Supplier_api->countCRMLeads($id_pengguna)->row('jumlah');
 
-        $this->output
-            ->set_status_header(200)
-            ->set_content_type('application/json')
-            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
-            ->_display();
-
-        exit;
+        if (!empty($response)) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data lead CRM tidak ditemukan!"
+            ], RestController::HTTP_NOT_FOUND);
+        }
     }
 
     public function getTimMarketingByIdSupplier_get()
     {
         $id_pengguna = $this->input->get('id_pengguna');
-        $data = $this->Supplier_model->getTimBySupplierId($id_pengguna);
-        $json_data = json_encode($data);
-        $this->output->set_content_type('application/json')->set_output($json_data);
+        $response = $this->Supplier_model->getTimBySupplierId($id_pengguna);
+        if (!empty($response)) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data tim marketing tidak ditemukan!"
+            ], RestController::HTTP_NOT_FOUND);
+        }
     }
 
     public function getLeadByIdTim_get()
     {
         $id_tim = $this->input->get('id_tim');
-        $data = $this->Supplier_model->getDataLeadByIdTim($id_tim);
-        $json_data = json_encode($data);
-        $this->output->set_content_type('application/json')->set_output($json_data);
+        $response = $this->Supplier_model->getDataLeadByIdTim($id_tim);
+        if (!empty($response)) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => 0,
+                'message' => "Data lead pada tim tidak ditemukan!"
+            ], RestController::HTTP_NOT_FOUND);
+        }
     }
 
     public function plotCRM_get()
     {
         $id_lead = $this->input->get('id_lead');
         $id_tim = $this->input->get('id_tim');
-        // if ($id_tim == 0) {
-        //     $data = $this->Supplier_model->deletePlotTimByIdLead($id_lead);
-        // } else {
-        $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
-        // }
-        // $data = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
-        $json_data = json_encode($data);
-        $this->output->set_content_type('application/json')->set_output($json_data);
+        $response = $this->Supplier_model->insertUpdatePlotTim($id_lead, $id_tim);
+
+        if ((bool)$response) {
+            $this->response([
+                'status' => true,
+                'id_lead' => $id_lead,
+                'id_tim' => $id_tim,
+                'message' => 'Plotting CRM berhasil!',
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'id_lead' => $id_lead,
+                'id_tim' => $id_tim,
+                'message' => "Terjadi kesalahan dalam plotting CRM!"
+            ], RestController::HTTP_BAD_REQUEST);
+        }
     }
 }
