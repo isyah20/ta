@@ -432,6 +432,7 @@
           });
         });
 
+        // Kayake ngga kangge ini
         function getPlotTim() {
           var data = [];
           $.ajax({
@@ -445,6 +446,8 @@
           });
           return data;
         }
+
+
 
         function getDataLead() {
           $.ajax({

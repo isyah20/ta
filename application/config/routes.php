@@ -750,6 +750,14 @@ $route['api-mobile/supplier/updateContact/(:num)'] = 'api-mobile/ApiSupplier/upd
 $route['api-mobile/supplier/deleteContact/(:num)'] = 'api-mobile/ApiSupplier/deleteContact/$1';
 $route['api-mobile/supplier/getRiwayatPemenang'] = 'api-mobile/ApiSupplier/getRiwayatPemenang';
 
+// CRM
+// $route['api-mobile/supplier/create'] = 'api-mobile/ApiSupplier/createMarketing';
+$route['api-mobile/supplier/plot-tim'] = 'api-mobile/ApiSupplier/plotTim';
+$route['api-mobile/supplier/getCRMLeads'] = 'api-mobile/ApiSupplier/getCRMLeads';
+$route['api-mobile/supplier/tim-marketing'] = 'api-mobile/ApiSupplier/getTimMarketingByIdSupplier';
+$route['api-mobile/supplier/lead-plotted-tim'] = 'api-mobile/ApiSupplier/getLeadByIdTim';
+$route['api-mobile/supplier/plot-crm'] = 'api-mobile/ApiSupplier/plotCRM';
+
 // Tim Marketing
 $route['api-mobile/supplier/getTim'] = 'api-mobile/ApiSupplier';
 $route['api-mobile/supplier/createTim'] = 'api-mobile/ApiSupplier/create';
