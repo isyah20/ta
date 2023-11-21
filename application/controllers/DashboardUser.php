@@ -55,7 +55,7 @@ class DashboardUser extends CI_Controller
         $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
         $npwpComplete = !empty($pengguna['npwp']);
 
-        
+
         $notif = null;
         try {
             $tenderResp = $this->client->request('GET', 'tender/notif', $this->client->getConfig('headers'));
@@ -92,7 +92,7 @@ class DashboardUser extends CI_Controller
             }
         } catch (ClientException $e) {
             $pesertaTenderIkut = null;
-        } 
+        }
 
         // Statistik Ikut Tender
         $timeSeriesUser = array_fill(0, 12, 0);
@@ -507,7 +507,9 @@ class DashboardUser extends CI_Controller
     {
         $data = $this->input->post();
         if ($data != null) {
-            // return $data['cariTahun'];
+            // return json_encode($data['cariTahun']);
+
+            // die;
             $this->load->library('session');
             $this->load->library('user');
             $this->load->model('api/Peserta_model');
@@ -519,7 +521,12 @@ class DashboardUser extends CI_Controller
             $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
 
             // $peserta = $this->Peserta_model->getPesertaNpwp($pengguna['npwp']);
-            $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+            // $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+            $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  '', 'tahun' => $data['cariTahun']));
+            // $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => '02.750.385.3-013.000', 'id_lpse' => '', 'tahun' => '2022'));
+
+            // $dataPesertaTender["TEST"] = $data['cariTahun'];
+            // echo json_encode($dataPesertaTender);
 
             // Statistik Ikut Tender
             $timeSeriesUser = array_fill(0, 12, 0);
@@ -534,13 +541,17 @@ class DashboardUser extends CI_Controller
                 }
             }
 
+            $tenderDiikuti = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+
             // time sereies chart Tender
-            $akumulasi[0] = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
-            $akumulasi[1] = $totalMenang;
-            $akumulasi[2] = $totalKalah;
-            $akumulasi[3] = $totalKalah + $totalMenang;
-            $akumulasi[4] = (($totalKalah + $totalMenang) != 0) ? ($totalMenang / ($totalKalah + $totalMenang) * 100) : 0;
-            $akumulasi[5] = (($totalKalah + $totalMenang) != 0) ? ($totalKalah / ($totalKalah + $totalMenang) * 100) : 0;
+            $akumulasi[0] = $totalMenang;
+            $akumulasi[1] = $totalKalah;
+            $akumulasi[2] = $tenderDiikuti;
+            $akumulasi[3] = ($totalKalah + $totalMenang + $tenderDiikuti);
+            // $akumulasi[3] = $totalKalah + $totalMenang;
+            // $akumulasi[4] = (($totalKalah + $totalMenang + $tenderDiikuti) != 0) ? ($tenderDiikuti / ($totalKalah + $totalMenang + $tenderDiikuti) * 100) : 0;
+            // $akumulasi[5] = (($totalKalah + $totalMenang + $tenderDiikuti) != 0) ? ($totalMenang / ($totalKalah + $totalMenang + $tenderDiikuti) * 100) : 0;
+            // $akumulasi[6] = (($totalKalah + $totalMenang + $tenderDiikuti) != 0) ? ($totalKalah / ($totalKalah + $totalMenang + $tenderDiikuti) * 100) : 0;
 
             // hps chart ikut tender
             for ($i = 0; $i < 12; $i++) {
@@ -591,7 +602,19 @@ class DashboardUser extends CI_Controller
             $range['range4'] = array_sum($range4);
             $range['range5'] = array_sum($range5);
 
-            echo '<p class="d-none" id="chart1">' . json_encode($timeSeriesUser) . '</p><p class="d-none" id="chart3">' . json_encode($range) . '</p><p class="d-none" id="chart2">' . json_encode($akumulasi) . '</p>';
+            $dataChart['time_series'] = $timeSeriesUser;
+            $dataChart['range'] = $range;
+            $dataChart['akumulasi'] = $akumulasi;
+            // return json_encode($dataChart);
+            $this->output
+                ->set_status_header(200)
+                ->set_content_type('application/json')
+                ->set_output(json_encode($dataChart, JSON_PRETTY_PRINT))
+                ->_display();
+
+            exit;
+
+            // echo '<p class="d-none" id="chart1">' . json_encode($timeSeriesUser) . '</p><p class="d-none" id="chart3">' . json_encode($range) . '</p><p class="d-none" id="chart2">' . json_encode($akumulasi) . '</p>';
         }
     }
 
