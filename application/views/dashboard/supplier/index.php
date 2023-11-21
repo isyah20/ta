@@ -189,7 +189,7 @@
 
     .card-body {
         margin-top: 10px;
-        padding-left: 4%;
+        padding-left: 6%;
         border-radius: 30px;
     }
 
@@ -217,7 +217,7 @@
         width: 35px;
         height: 40px;
         margin-right: 6%;
-        margin-left: 6%
+        margin-left: 66%;
     }
 
     .content-above-navbar {
@@ -252,6 +252,66 @@
         width: 92%;
     }
 
+    /* CSS */
+.custom-colored-dot-list {
+  list-style: none;
+  padding: 0;
+}
+
+.custom-colored-dot-list li {
+  position: relative;
+  padding-left: 20px; /* Jarak antara titik dan teks */
+  line-height: 1.5;
+}
+
+.custom-colored-dot-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); 
+  width: 10px; 
+  height: 10px; 
+  border-radius: 50%; 
+}
+
+.custom-colored-dot-list li:nth-child(1)::before {
+  background-color: #F17D3A;
+}
+
+.custom-colored-dot-list li:nth-child(2)::before {
+  background-color: #83D4F9;
+}
+
+.custom-colored-dot-list li:nth-child(3)::before {
+  background-color: #495894;
+}
+
+.custom-colored-dot-list li:nth-child(4)::before {
+  background-color: #56C474; /* Biru muda */
+}
+
+.custom-colored-dot-list li:nth-child(5)::before {
+  background-color: #EF5350; /* Biru tua */
+}
+
+.color-grey {
+  color:rgba(106, 106, 106, 0.90)
+}
+
+    .circle {
+        display: inline-block;
+        width: 30px; /* Lebar lingkaran yang lebih besar */
+        height: 30px; /* Tinggi lingkaran yang lebih besar */
+        border-radius: 50%;
+        background-color: orange;
+        text-align: center;
+        line-height: 30px; /* Sesuaikan dengan tinggi lingkaran */
+        color: white;
+        margin-right: 10px; /* Jarak antara lingkaran dan teks */
+        float:right;
+    }
+
     @media (max-width: 576px) {
         .sec-pemenang-terbaru {
             margin-left: auto;
@@ -271,7 +331,127 @@
             </div>
         </div>
     </div>
-    </session>
+ </session>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                <div class="row">
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                        <div class="shadow rounded-3 bg-white">
+                            <div class="card-body ">
+                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                    <p class="card-title ">Pemenang Hari Ini</p>
+                                </div>
+                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-today">0</h1>
+                                    <img src="<?= base_url('assets\img\leads_new.svg') ?>" style="width:80px" class="card-img" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                        <div class="shadow rounded-3 bg-white ">
+                            <div class="card-body ">
+                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                    <p class="card-title ">Pemenang Bulan Ini</p>
+                                </div>
+                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-month">0</h1>
+                                    <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-hero mt-4">
+                            <div class="row mt-2">
+                                <div class="col-lg-5 pl-4">
+                                    <div>
+                                        <center>
+                                            <div class="chart2" style="margin:0; padding:0">
+                                                <canvas id="myDoughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 px-3 ml-4 align-content-center justify-content-center align-items-center">
+                                    <div class="row display-flex">
+                                        
+                                        <div class="col" style="margin-top:5%;padding-left:50px">
+                                        <h2 class="text-center">Status CRM</h2>
+                                        <ul class="custom-colored-dot-list">
+                                            <li class="color-grey">Tanpa Status <span style="padding-left:90px">10%</span></li>
+                                            <li class="color-grey">Sedang Dihubungi <span style="padding-left:50px">10%</span></li>
+                                            <li class="color-grey">Proses Negosiasi <span style="padding-left:60px">10%</span></li>
+                                            <li class="color-grey">Diterima <span style="padding-left:120px">10%</span></li>
+                                            <li class="color-grey">Ditolak <span style="padding-left:130px">10%</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+                <div class="shadow rounded-3 bg-white">
+                    <div class="card-body">
+                        <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                            <p class="card-title">Pemenang Tahun Ini</p>
+                        </div>
+                        <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
+                            <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img m-sm-none" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="shadow rounded-3 bg-white">
+                    <div class="card-body" style="margin-top:25px;height:240px;overflow-y: auto;">
+                        <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
+                           <h4 style="margin-left:45px;margin-top:5px">Tim Marketing</h4>
+                        </div>
+                        <div class="class">
+                               <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><span class="circle">99</span>
+                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="circle">99</span>
+                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="circle">99</span>
+                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="circle">99</span>
+                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                           </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+                <div class="shadow rounded-3 bg-white">
+                    <div class="card-body">
+                        <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                            <p class="card-title" style="height:310px">Pemenang Tender</p>
+                        </div>
+                        <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
+                            <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     <session>
         <div class="container bg-white">
             <div class="row">
@@ -306,7 +486,7 @@
                                         </div>
                                         <div class="col-12 text-center">
                                             <p class="my-3">Silakan atur rentang nilai penawaran pada kolom di bawah ini:</p>
-                                        </div>fo
+                                        </div>
                                         <div class="col-sm-5 pe-sm-0">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text">Nilai Awal (Rp)</span>
@@ -358,7 +538,7 @@
                                         <p class="card-title ">Pemenang Hari Ini</p>
                                     </div>
                                     <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" class="card-img" alt="">
+                                        <img src="<?= base_url('assets\img\leads_new.svg') ?>" class="card-img" alt="">
                                         <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-today">0</h1>
                                     </div>
                                 </div>
@@ -371,7 +551,7 @@
                                         <p class="card-title ">Pemenang Bulan Ini</p>
                                     </div>
                                     <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" class="card-img" alt="">
+                                        <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
                                         <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-month">0</h1>
                                     </div>
                                 </div>
@@ -384,7 +564,7 @@
                                         <p class="card-title">Pemenang Tahun Ini</p>
                                     </div>
                                     <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                                        <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" class="card-img m-sm-none" alt="">
+                                        <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img m-sm-none" alt="">
                                         <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
                                     </div>
                                 </div>
@@ -955,3 +1135,57 @@
         filterTender();
     });
 </script> 
+<!-- doughnut chart -->
+<script>
+    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+
+    var totalTender = 0;
+    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100,Math.random() * 100];
+    for (var i = 0; i < data.length; i++) {
+        totalTender += data[i];
+    }
+
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Tender 1', 'Tender 2', 'Tender 3', 'Tender 4', 'Tender 5'],
+            datasets: [{
+                data: data,
+                backgroundColor: ['#495894', '#56C474', '#EF5350', '#83D4F9', '#F17D3A'],
+                borderWidth: 2, // Add gaps between segments
+                borderColor: 'white' // Color of the gaps
+            }]
+        },
+        options: {
+            cutout: '65%', // Make the doughnut thinner
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    var ctx = this.ctx;
+                    ctx.save();
+
+                    // Draw "Total Tender" text with smaller font
+                    ctx.font = "14px Ubuntu";
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fontWeight = 500;
+                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                    ctx.fillText("Total Tender", centerX, centerY - 10);
+
+                    // Draw the numerical value with larger font
+                    ctx.font = "30px Ubuntu";
+                    ctx.fontWeight = 700;
+                    ctx.fillText(totalTender.toFixed(2), centerX, centerY + 20);
+
+                    ctx.restore();
+                }
+            }
+        }
+    });
+</script>
