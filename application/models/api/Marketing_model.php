@@ -104,6 +104,7 @@ class Marketing_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('history_marketing');
         $this->db->where('id_lead', $id);
+        $this->db->order_by('id_history', 'desc');
         $query = $this->db->get();
         return $query->result_array();
     }

@@ -276,7 +276,8 @@
         font-size: 30px;
         margin-left: 110;
     }
-    .col2{
+
+    .col2 {
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
     }
@@ -304,7 +305,8 @@
         .justify-content-start {
             justify-content: center !important;
         }
-        .container-lg{
+
+        .container-lg {
             margin-top: 100px;
         }
 
@@ -380,13 +382,29 @@
         .col-1 {
             margin-left: 10px;
         }
-        .col2{
+
+        .col2 {
             margin-top: 10px;
         }
 
         .tender-summary {
             font-size: 17px;
         }
+    }
+
+    .close {
+        background-color: transparent;
+        border: none;
+
+    }
+
+    .close span {
+        color: #BF0C0C;
+        /* Warna teks close */
+        font-size: 2rem;
+        /* Ukuran teks close */
+        width: 24px;
+        height: 24px;
     }
 </style>
 
@@ -422,9 +440,9 @@
                                 <div class="line"></div>
                             </div>
                             <div class="col" style="margin-top:5%; padding:0">
-                                <h5 id="menang" class="tender-summary" ><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
-                                <h5 id="kalah" class="tender-summary" ><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
-                                <h5 id="ikut" class="tender-summary" ><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
+                                <h5 id="menang" class="tender-summary"><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
+                                <h5 id="kalah" class="tender-summary"><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
+                                <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
                             </div>
                         </div>
                     </div>
@@ -483,7 +501,7 @@
                         <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari Nama Anggota">
                         <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-bottom:0px;margin-top:5px">
                     </div>
-                    <button class="col-lg-2 btnbtnbtn"><span><img class="custom-img3" src="<?= base_url('assets\img\icon_tambah_anggota.svg') ?>" alt=""></span style="font">Tambah Anggota</button>
+                    <button class="col-lg-2 btnbtnbtn" data-toggle="modal" data-target="#uploadModal"><span><img class="custom-img3" src="<?= base_url('assets\img\icon_tambah_anggota.svg') ?>" alt=""></span style="font">Tambah Anggota</button>
                 </div>
                 <div class="custom-table-container shadow-sm table-striped">
                     <table class="data-table">
@@ -639,6 +657,47 @@
             </div>
         </div>
     </div>
+
+    <!-- modal upload -->
+
+    <div class="col-12 py-5">
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true" style="margin-top: 50px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <img src="<?= base_url("assets/img/icon-file.png") ?>" style="width: 60px; height: 60px; padding: 0;">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color:#BF0C0C">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-left align-content-center justify-content-center">
+                        <h3 class="modal-title" id="uploadModalLabel">Masukkan File Anggota Anda</h3>
+                        <p class="">Ukuran file maks. 100Mb</p>
+                        <div class="input-popup text-center align-items-center justify-content-center" style="padding:5%; border-radius: 10px; border: 1px dashed var(--primary-red-600, #BF0C0C); background: var(--font-white, #FCFCFC);">
+                            <img src="<?= base_url("assets/img/cloud-icon.png") ?>" alt="Gambar" style="height: 80px; width:80px">
+                            <p>Drag and drop file Anda</p>
+                            <p>File harus memiliki format csv, xlx, xlsx, xlsm, atau xlsb</p>
+                            <p>atau</p>
+                            <input type="file" name="anggota" id="data_anggota" class="form-control" style="display: none;">
+                            <label for="data_anggota" class="btn btn-sm border" style="border-radius: 3px; border: 1px solid var(--primary-red-600, #BF0C0C);">
+                                Pilih File
+                            </label>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end modal upload -->
 </section>
 
 
@@ -885,3 +944,11 @@
         });
     });
 </script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
