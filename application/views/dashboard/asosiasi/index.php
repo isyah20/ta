@@ -266,9 +266,15 @@
         background-color: #D21B1B;
     }
 
+    .chart2 {
+        margin-left: 20;
+        margin-top: 35;
+        padding: 0
+    }
+
     .tender {
         font-size: 12px;
-        margin-top: 80px;
+        margin-top: 70px;
         margin-left: 110px;
     }
 
@@ -276,13 +282,13 @@
         font-size: 30px;
         margin-left: 110;
     }
-    .col2{
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
+
+    .col2 {
+        margin-top: 1rem;
     }
 
     .col3 {
-        margin-top: 90px;
+        margin-top: 80px;
     }
 
     .line {
@@ -300,11 +306,17 @@
         font-size: 14px;
     }
 
+    .dashboard-hero {
+        width: 100%;
+        height: 80%;
+    }
+
     @media (max-width: 768px) {
         .justify-content-start {
             justify-content: center !important;
         }
-        .container-lg{
+
+        .container-lg {
             margin-top: 100px;
         }
 
@@ -351,11 +363,10 @@
 
         .dashboard-hero {
             margin-left: 2px;
+            height: auto;
         }
 
         .chart2 {
-            width: 80%;
-            height: 80%;
             margin-right: 20px;
         }
 
@@ -371,6 +382,7 @@
         .tender {
             font-size: 18px;
             margin-left: 20px;
+            margin-top: 6rem;
         }
 
         #total {
@@ -380,8 +392,9 @@
         .col-1 {
             margin-left: 10px;
         }
-        .col2{
-            margin-top: 10px;
+
+        .col2 {
+            margin-top: 2px;
         }
 
         .tender-summary {
@@ -405,7 +418,7 @@
                     <div class="col-lg-2" style="padding:0">
                         <div>
                             <center>
-                                <div class="chart2" style="margin-left:20; margin-top:50; margin-bottom:50; padding:0">
+                                <div class="chart2">
                                     <canvas id="doughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
                                 </div>
                             </center>
@@ -422,14 +435,14 @@
                                 <div class="line"></div>
                             </div>
                             <div class="col" style="margin-top:5%; padding:0">
-                                <h5 id="menang" class="tender-summary" ><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
-                                <h5 id="kalah" class="tender-summary" ><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
-                                <h5 id="ikut" class="tender-summary" ><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
+                                <h5 id="menang" class="tender-summary"><span style="border-left: 6px solid #495894; height: 25px; opacity:1; margin-right:5px"></span>63.000 Total Tender</h5>
+                                <h5 id="kalah" class="tender-summary"><span style="border-left: 6px solid #56C474; height: 25px; opacity:1; margin-right:5px"></span>4.750 Dimenangkan</h5>
+                                <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #D21B1B; height: 25px; opacity:1; margin-right:5px"></span>2.821 Kalah</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 wow fadeInUp">
-                        <center> <img src="http://localhost/tenderplus/assets/img/dashboard-hero.png" class="dh-img" alt="" style="margin-top: 10rem; "></center>
+                        <center> <img src="http://localhost/tenderplus/assets/img/dashboard-hero.png" class="dh-img" alt="" style="margin-top: 5rem; margin-bottom: 1rem; "></center>
                     </div>
                 </div>
             </div>
@@ -475,10 +488,10 @@
 
 <section>
     <div class="container mt-4 wow fadeInUp">
-        <div class="row">
+        <div class="row ">
             <div class="col-lg-8">
                 <div class="row">
-                    <h4 class="col-lg-4 my-0 mb-3" style="font-weight:500; font-size: 20px;">Anggota Asosiasi</h4>
+                    <h4 class="col-lg-4 my-0 mb-3 " style="font-weight:500; font-size: 20px;">Anggota Asosiasi</h4>
                     <div class=".col-lg-2 .offset-md-3 form-select-custom" style="padding-left:30px; margin-right:20px;">
                         <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari Nama Anggota">
                         <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-bottom:0px;margin-top:5px">
