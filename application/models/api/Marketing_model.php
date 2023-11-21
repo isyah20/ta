@@ -80,7 +80,8 @@ class Marketing_model extends CI_Model {
         $this->db->group_by('data_leads.id_lead, kontak_lead.id_kontak, status, jadwal, catatan');
 
         if (!empty($nama_perusahaan)) {
-            $this->db->where('LOWER(nama_perusahaan) LIKE', 'LOWER(\'%' . $this->db->escape_like_str($nama_perusahaan) . '%\')', false);
+            $this->db->where('LOWER(data_leads.nama_perusahaan) LIKE', 'LOWER(\'%' . $this->db->escape_like_str($nama_perusahaan) . '%\')', false);
+            //$this->db->like('data_leads.nama_perusahaan', $nama_perusahaan);
         }
         if (!empty($status)) {
             $this->db->like('plot_tim.status', $status);
