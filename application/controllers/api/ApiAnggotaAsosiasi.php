@@ -15,13 +15,14 @@ class ApiAnggotaAsosiasi extends RestController
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('api/AnggotaAsosiasi_model', 'anggota');
+        $this->load->model('api/AnggotaAsosiasi_model');
+        $this->load->model('Asosiasi_model');
     }
 
     // method must name between _get to using get request
     public function index_get()
     {
-        $resultAnggotaAsosiasi = $this->AnggotaAsosiasi_model->getData();
+        $resultAnggotaAsosiasi = $this->Asosiasi_model->getAll();
 
         if ($resultAnggotaAsosiasi) {
             $this->response([
@@ -179,4 +180,59 @@ class ApiAnggotaAsosiasi extends RestController
     //         ], RestController::HTTP_NOT_FOUND);
     //     }
     // }
+
+    public function getAsosiasiAnggota_get() {
+        // input id pengguna
+        $id_pengguna = $this->input->get('id_pengguna');
+
+        $response = $this->AnggotaAsosiasi_model->getAsosiasiAnggota($id_pengguna);
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data not found'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getAnggotaAsosiasi_get() {
+        $id_pengguna = $this->input->get('id_pengguna');
+
+        $res = $this->AnggotaAsosiasi_model->getAnggotaAsosiasi($id_pengguna);
+
+        if($res) {
+            $this->response([
+                'status' => true,
+                'data' => $res
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data not found'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getDataChart_get(){
+        $id_pengguna = $this->input->get('id_pengguna');
+
+        $res = $this->AnggotaAsosiasi_model->getDataCharts($id_pengguna);
+
+        if ($res) {
+            $this->response([
+                'status' => true,
+                'data' => $res
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data not found'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

@@ -1131,4 +1131,298 @@ class AnggotaAsosiasi_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    // get data in asosiasi where id pengguna is id pengguna in asosiasi
+    public function getAsosiasiAnggota ($id_pengguna)
+    {
+        $this->db->select('*');
+        $this->db->from('asosiasi');
+        $this->db->where('id_pengguna', $id_pengguna);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // get data in anggota_asosiasi where id pengguna is id pengguna in asosiasi and then join peserta tender to get name of peserta using npwp
+    public function getAnggotaAsosiasi ($id_pengguna)
+    {
+
+        //total_ikut
+        // $this->db->select("COUNT(peserta_tender.`kode_tender`)");
+        // $this->db->from("peserta_tender");
+        // $this->db->join("paket", "paket.`kode_tender` = peserta_tender.`kode_tender`");
+        // $this->db->where("peserta_tender.`npwp` = anggota_asosiasi.`npwp`");
+        // $this->db->where("peserta_tender.harga_penawaran != 0 ");
+        // $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '$tahun'");
+        //     }
+        // }
+        // $sub_total_ikut = $this->db->get_compiled_select();
+
+        //total_ikut_semua
+        // $this->db->select("SUM(($sub_total_ikut))");
+        // $this->db->from("asosiasi");
+        // $total_ikut_semua = $this->db->get_compiled_select();
+
+        //menang
+        // $this->db->select("COUNT(id_pemenang)");
+        // $this->db->from("pemenang");
+        // $this->db->where("npwp = anggota_asosiasi.`npwp`");
+        // $this->db->join("anggota_asosiasi", "pemenang.npwp = anggota_asosiasi.npwp");
+        // $this->db->where("pemenang.`npwp` = anggota_asosiasi.`npwp`");
+        // $this->db->join("tender", "pemenang.kode_tender = tender.kode_tender");
+        // $this->db->join("asosiasi", "anggota_asosiasi.id_pengguna = asosiasi.id_pengguna");
+        // $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '$tahun'");
+        //     }
+        // }
+        // $sub_menang = $this->db->get_compiled_select();
+        
+
+        //total menang
+        // $this->db->select("SUM(($sub_menang))");
+        // $this->db->from("asosiasi");
+        // $total_menang = $this->db->get_compiled_select();
+
+        $this->db->select('count(id_pemenang)');
+        $this->db->from('pemenang');
+        $this->db->where('npwp = anggota_asosiasi.`npwp`');
+        $this->db->join("paket", "pemenang.kode_tender = paket.kode_tender");
+        $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("tahun LIKE '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("tender.id_lpse = '$lpse'");
+        //     }
+        // }
+        $menang = $this->db->get_compiled_select();
+
+        //perusahaan dengan harga_penawaran !=0
+        // $this->db->select("peserta_tender.kode_tender");
+        // $this->db->from("peserta_tender");
+        // $this->db->where("npwp = anggota_asosiasi.`npwp`");
+        // $this->db->where("harga_penawaran !=0");
+        // $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        // $this->db->join("paket", "peserta_tender.kode_tender = paket.kode_tender");
+        // $sub_kalah = $this->db->get_compiled_select();
+
+        //kalah
+        // $this->db->select("COUNT(id_pemenang)");
+        // $this->db->from("pemenang");
+        // $this->db->where("pemenang.kode_tender IN ($sub_kalah)");
+        // $this->db->where("npwp != asosiasi.`npwp`");
+        // $this->db->join("paket", "pemenang.kode_tender = paket.kode_tender");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("tender.id_lpse = '$lpse'");
+        //     }
+        // }
+        // $kalah = $this->db->get_compiled_select();
+
+        //total kalah
+        // $this->db->select("SUM(($kalah))");
+        // $this->db->from("asosiasi");
+        // $total_kalah = $this->db->get_compiled_select();
+
+        $this->db->select("kode_tender");
+        $this->db->from("peserta_tender");
+        $this->db->where("npwp = anggota_asosiasi.npwp");
+        $this->db->where("harga_penawaran !=0");
+        $id_tender = $this->db->get_compiled_select();
+
+        $this->db->select('COUNT(id_pemenang)');
+        $this->db->from('pemenang');
+        $this->db->join("paket", "pemenang.kode_tender = paket.kode_tender");
+        $this->db->where("pemenang.kode_tender IN ($id_tender) ");
+        $this->db->where("npwp != anggota_asosiasi.`npwp`");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("tahun LIKE '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("tender.id_lpse = '$lpse'");
+        //     }
+        // }
+        $kalah = $this->db->get_compiled_select();
+
+        $this->db->select('COUNT(peserta_tender.`kode_tender`)');
+        $this->db->from('peserta_tender');
+        $this->db->join("paket", "paket.`kode_tender` = peserta_tender.`kode_tender`");
+        $this->db->where("peserta_tender.`npwp` = anggota_asosiasi.`npwp`");
+        $this->db->where("peserta_tender.harga_penawaran != 0 ");
+        $this->db->where("paket.status_tender NOT IN ('Tender Sudah Selesai','Selesai','Gagal', 'Seleksi Batal', 'Tender Gagal', 'Seleksi Gagal', 'Tender Batal')");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("tahun LIKE '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("id_lpse = '$lpse'");
+        //     }
+        // }
+        $ikut = $this->db->get_compiled_select();
+
+
+
+        $this->db->select('anggota_asosiasi.*, peserta.nama_peserta');
+        $this->db->select("($ikut) as total_ikut");
+        $this->db->select("($menang) as total_menang");
+        $this->db->select("($kalah) as total_kalah");
+        $this->db->from('anggota_asosiasi');
+        $this->db->join('peserta', 'anggota_asosiasi.npwp = peserta.npwp');
+        $this->db->join('asosiasi', 'anggota_asosiasi.id_pengguna = asosiasi.id_pengguna');
+        $this->db->where('anggota_asosiasi.id_pengguna', $id_pengguna);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getDataCharts($id_pengguna) {
+        //menang
+        $this->db->select("COUNT(id_pemenang)");
+        $this->db->from("pemenang");
+        $this->db->where("npwp = asosiasi.`npwp`");
+        $this->db->join("paket", "pemenang.kode_tender = paket.kode_tender");
+        $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("tender.id_lpse = '$lpse'");
+        //     }
+        // }
+        $sub_menang = $this->db->get_compiled_select();
+
+        //total menang
+        $this->db->select("SUM(($sub_menang))");
+        $this->db->from("asosiasi");
+        $total_menang = $this->db->get_compiled_select();
+
+        //perusahaan dengan harga_penawaran !=0
+        $this->db->select("peserta_tender.kode_tender");
+        $this->db->from("peserta_tender");
+        $this->db->where("npwp = asosiasi.`npwp`");
+        $this->db->where("harga_penawaran !=0");
+        $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        $this->db->join("paket", "peserta_tender.kode_tender = paket.kode_tender");
+        $sub_kalah = $this->db->get_compiled_select();
+
+        //kalah
+        $this->db->select("COUNT(id_pemenang)");
+        $this->db->from("pemenang");
+        $this->db->where("pemenang.kode_tender IN ($sub_kalah)");
+        $this->db->where("npwp != asosiasi.`npwp`");
+        $this->db->join("paket", "pemenang.kode_tender = paket.kode_tender");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("tender.id_lpse = '$lpse'");
+        //     }
+        // }
+        $kalah = $this->db->get_compiled_select();
+
+        //total kalah
+        $this->db->select("SUM(($kalah))");
+        $this->db->from("asosiasi");
+        $total_kalah = $this->db->get_compiled_select();
+
+        //ikut
+        $this->db->select('COUNT(peserta_tender.`kode_tender`)');
+        $this->db->from('peserta_tender');
+        $this->db->join("paket", "paket.`kode_tender` = peserta_tender.`kode_tender`");
+        $this->db->where("peserta_tender.`npwp` = asosiasi.`npwp`");
+        $this->db->where("peserta_tender.harga_penawaran != 0 ");
+        $this->db->where("paket.status_tender NOT IN ('Tender Sudah Selesai','Selesai','Gagal', 'Seleksi Batal', 'Tender Gagal', 'Seleksi Gagal', 'Tender Batal')");
+        $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("id_lpse = '$lpse'");
+        //     }
+        // }
+        $ikut = $this->db->get_compiled_select();
+
+        //total kalah
+        $this->db->select("SUM(($ikut))");
+        $this->db->from("asosiasi");
+        $total_ikut = $this->db->get_compiled_select();
+
+        //total_ikut
+        $this->db->select("COUNT(peserta_tender.`kode_tender`)");
+        $this->db->from("peserta_tender");
+        $this->db->join("paket", "paket.`kode_tender` = peserta_tender.`kode_tender`");
+        $this->db->where("peserta_tender.`npwp` = asosiasi.`npwp`");
+        $this->db->where("peserta_tender.harga_penawaran != 0 ");
+        $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        // $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '2021'");
+        // if ($search['tahun']) {
+        //     $tahun = $search['tahun'];
+        //     if ($tahun) {
+        //         $this->db->where("CAST(SUBSTRING(tender.tgl_pembuatan, 1, 4)AS DATE) = '$tahun'");
+        //     }
+        // }
+        // if ($search['lpse']) {
+        //     $lpse = $search['lpse'];
+        //     if ($lpse) {
+        //         $this->db->where("id_lpse = '$lpse'");
+        //     }
+        // }
+        $sub_total_ikut = $this->db->get_compiled_select();
+
+        //total_ikut_semua
+        $this->db->select("SUM(($sub_total_ikut))");
+        $this->db->from("asosiasi");
+        $total_ikut_semua = $this->db->get_compiled_select();
+
+        // $this->db->select("*");
+        $this->db->select("($total_menang) as total_menang");
+        $this->db->select("($total_kalah) as total_kalah");
+        $this->db->select("($total_ikut) as total_ikut");
+        $this->db->select("($total_ikut_semua) as total_ikut_semua");
+        $this->db->from("asosiasi");
+        $this->db->where("asosiasi.id_pengguna = $id_pengguna");
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
