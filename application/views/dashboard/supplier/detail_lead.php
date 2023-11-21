@@ -3284,7 +3284,7 @@
                 console.log(tahun, "Value Tahun Select");
                 filterRiwayat();
             });
-        }
+        }   
 
         function filterRiwayat() {
             console.log(global_tahun);

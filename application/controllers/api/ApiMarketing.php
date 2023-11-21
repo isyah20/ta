@@ -94,11 +94,11 @@ class ApiMarketing extends RestController {
     }
 
     //Get filter
-    public function leadsByTimFiltered_post()
+    public function leadsByTimFiltered_get()
     {
-        $id_pengguna = $this->input->post('id_pengguna');
-        $nama_perusahaan = $this->input->post('nama_perusahaan');
-        $status = $this->input->post('status');
+        $id_pengguna = $this->input->get('id_pengguna');
+        $nama_perusahaan = $this->input->get('nama_perusahaan');
+        $status = $this->input->get('status');
         $data = $this->marketing->getLeadsByTimFiltered($id_pengguna, $nama_perusahaan, $status);
 
         if ($data) {
