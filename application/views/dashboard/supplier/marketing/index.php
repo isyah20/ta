@@ -911,10 +911,11 @@
                                 <label for="inputNama" class="form-label text-start">Status</label>
                                 <select class="border border-1 form-select" style="height:40px;padding-top:0px;" aria-label="Pilih Status">
                                     <option selected>Pilih Status</option>
-                                    <option value="option1">Sedang Dihubungi</option>
-                                    <option value="option2">Negosiasi</option>
-                                    <option value="option3">Diterima</option>
-                                    <option value="option4">Ditolak</option>
+                                    <option value="option1">Belum Dihubungi</option>
+                                    <option value="option2">Sedang Dihubungi</option>
+                                    <option value="option3">Negosiasi</option>
+                                    <option value="option4">Diterima</option>
+                                    <option value="option5">Ditolak</option>
                                 </select>
                             </div>
                             <div class="col-12">
