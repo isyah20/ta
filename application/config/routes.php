@@ -758,6 +758,12 @@ $route['api-mobile/supplier/tim-marketing'] = 'api-mobile/ApiSupplier/getTimMark
 $route['api-mobile/supplier/lead-plotted-tim'] = 'api-mobile/ApiSupplier/getLeadByIdTim';
 $route['api-mobile/supplier/plot-crm'] = 'api-mobile/ApiSupplier/plotCRM';
 
+// Manage Marketing
+$route['api-mobile/supplier/getMarketing'] = 'api-mobile/ApiSupplier/getMarketing';
+$route['api-mobile/supplier/deleteMarketing'] = 'api-mobile/ApiSupplier/deleteTimMaketing';
+$route['api-mobile/supplier/getTimMarketingById'] = 'api-mobile/ApiSupplier/getTimMarketingById';
+
+
 // Tim Marketing
 $route['api-mobile/supplier/getTim'] = 'api-mobile/ApiSupplier';
 $route['api-mobile/supplier/createTim'] = 'api-mobile/ApiSupplier/create';
