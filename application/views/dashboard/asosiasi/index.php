@@ -258,7 +258,7 @@
         font-weight: 700;
         border-radius: 10px;
         height: 35px;
-        width: 80px;
+        /* width: 80px; */
         border-color: #D21B1B;
     }
 
