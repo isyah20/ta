@@ -169,4 +169,37 @@ class ApiMarketing extends RestController {
             ], RestController::HTTP_BAD_REQUEST);
         }
     }
+
+    //get total plot for dashboard suplier
+    public function getTotalPlotEachTim_get($id){
+        $data = $this->marketing->getTotalPlotEachTim($id);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getTotalStatusPlotTim_get($id){
+        $data = $this->marketing->getTotalStatusPlotTim($id);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

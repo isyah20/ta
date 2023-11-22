@@ -276,23 +276,23 @@
 }
 
 .custom-colored-dot-list li:nth-child(1)::before {
-  background-color: #F17D3A;
+    background-color: #495894;
 }
 
 .custom-colored-dot-list li:nth-child(2)::before {
-  background-color: #83D4F9;
+    background-color: #56C474; /* Biru muda */
 }
 
 .custom-colored-dot-list li:nth-child(3)::before {
-  background-color: #495894;
+    background-color: #EF5350; /* Biru tua */
 }
 
 .custom-colored-dot-list li:nth-child(4)::before {
-  background-color: #56C474; /* Biru muda */
+    background-color: #83D4F9;
 }
 
 .custom-colored-dot-list li:nth-child(5)::before {
-  background-color: #EF5350; /* Biru tua */
+    background-color: #F17D3A;
 }
 
 .color-grey {
@@ -341,7 +341,7 @@
                         <div class="shadow rounded-3 bg-white">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                    <p class="card-title ">Pemenang Hari Ini</p>
+                                    <p class="card-title ">Data Leads Terbaru</p>
                                 </div>
                                 <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-today">0</h1>
@@ -354,10 +354,10 @@
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                    <p class="card-title ">Pemenang Bulan Ini</p>
+                                    <p class="card-title ">Leads Belum Dilengkapi</p>
                                 </div>
                                 <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-month">0</h1>
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap">0</h1>
                                     <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
                                 </div>
                             </div>
@@ -382,11 +382,11 @@
                                         <div class="col" style="margin-top:5%;padding-left:50px">
                                         <h2 class="text-center">Status CRM</h2>
                                         <ul class="custom-colored-dot-list">
-                                            <li class="color-grey">Tanpa Status <span style="padding-left:90px">10%</span></li>
-                                            <li class="color-grey">Sedang Dihubungi <span style="padding-left:50px">10%</span></li>
-                                            <li class="color-grey">Proses Negosiasi <span style="padding-left:60px">10%</span></li>
-                                            <li class="color-grey">Diterima <span style="padding-left:120px">10%</span></li>
-                                            <li class="color-grey">Ditolak <span style="padding-left:130px">10%</span></li>
+                                            <li  class="color-grey">Belum Dihubungi <span id="statusBelumDihubungi" style="padding-left:50px">10%</span></li>
+                                            <li  class="color-grey">Diterima <span id="statusDiterima"  style="padding-left:120px">10%</span></li>
+                                            <li class="color-grey">Ditolak <span  id="statusDitolak" style="padding-left:130px">10%</span></li>
+                                            <li  class="color-grey">Proses Negosiasi <span id="statusNegosiasi" style="padding-left:60px">10%</span></li>
+                                            <li  class="color-grey">Sedang Dihubungi <span id="statusDihubungi" style="padding-left:50px">10%</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -398,10 +398,10 @@
                 <div class="shadow rounded-3 bg-white">
                     <div class="card-body">
                         <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="card-title">Pemenang Tahun Ini</p>
+                            <p class="card-title">Total Data Leads</p>
                         </div>
                         <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
+                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads">0</h1>
                             <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img m-sm-none" alt="">
                         </div>
                     </div>
@@ -413,8 +413,8 @@
                         </div>
                         <div class="class">
                                <table class="table">
-                                <tbody>
-                                    <tr>
+                                <tbody id="total-plot-tim">
+                                    <!-- <tr>
                                         <td><span class="circle">99</span>
                                         <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
                                     </tr>
@@ -429,7 +429,7 @@
                                     <tr>
                                         <td><span class="circle">99</span>
                                         <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                                 </table>
                            </div>
@@ -453,24 +453,37 @@
     </div>
 </section>
     <session>
-        <div class="container bg-white">
+        <div class="container bg-white"><br>
             <div class="row">
+            <div class="col-md-5">
+                    <div class="card-select wow fadeInUp">
+                        <div class="select-custom container-fluid">
+                            <div class="row">
+                                <!-- Search Nama -->
+                                <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:20px;">
+                                    <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                                    <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-7">
                     <div class="card-select wow fadeInUp">
                         <div class="select-custom container-fluid">
                             <div class="row">
-                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
+                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:15px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-wilayah" id="wilayah" style="border:none;">
                                     </select>
                                 </div>
-                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
+                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:15px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-jenis-pengadaan" style="border:none;">
                                     </select>
                                 </div>
                                 <!-- Select Trigger Filter Nilai Penawaran -->
-                                <div id="dropdownHPS" class="col-sm-2 form-select-custom d-flex" style="width: 180px;margin-right:5px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                <div id="dropdownHPS" class="col-sm-2 form-select-custom d-flex" style="width: 180px;margin-right:15px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
                                 </div>
@@ -520,16 +533,11 @@
                                         <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
                                     </a>
                                 </div>
-                                <!-- Search Nama -->
-                                <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:20px;">
-                                    <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
-                                    <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <!-- <div class="col-md-5">
                     <div class="row">
                         <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 30%;">
                             <div class="shadow rounded-3 bg-white ">
@@ -571,7 +579,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 </section>
 
@@ -679,10 +687,10 @@
 </section>
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+    var id_pengguna = Cookies.get('id_pengguna');
     var keyword = '',
         jenis_pengadaan = '',
         hps_awal = 0,
@@ -690,7 +698,66 @@
         prov = '',
         kab = '',
         jum_pemenang, timer;
+    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
 
+    function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+    }
+
+        // Get total leads
+        $.ajax({
+            url: "<?= base_url('api/supplier/getCount') ?>",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            beforeSend: addAuthorizationHeader,
+            success: function(data) {
+                $('#belum-lengkap').html(data.data);
+                // $('.belum-lengkap').html(data.data.belum_lengkap);
+                var belum = data.data
+                $.ajax({
+                    url: "<?= base_url('api/supplier/getTotal') ?>",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        id_pengguna: id_pengguna
+                    },
+                    beforeSend: addAuthorizationHeader,
+                    success: function(data) {
+                        // $('.total-leads').html(data.total_leads);
+                        $('#total-leads').html(data.data);
+                        var total = data.data
+                    }
+                })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        })
+
+        // Get total tim
+        $.ajax({
+            url: "<?= base_url() ?>api/marketing/getTotalPlotEachTim/" + id_pengguna,
+            type: "GET",
+            dataType: "JSON",
+            beforeSend: addAuthorizationHeader,
+            success: function(data) {
+                var leads = "";
+                $.each(data.data, function(index, value) {
+                    leads +=
+                        `<tr>
+                            <td><span class="circle">`+ value.jumlah_plot +`</span>
+                            <span style="font-weight:bold">`+ value.nama +`</span><br><span style="font-size:13px">`+ value.alamat.split(',').slice(-2).map(item => item.trim()).join(', ') +`</span></td>
+                        </tr>`;
+                });
+                $("#total-plot-tim").html(leads);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        })
 
     $(document).ready(function() {
         setInterval(syncDataLead, 180000);
@@ -1136,7 +1203,7 @@
     });
 </script> 
 <!-- doughnut chart -->
-<script>
+<!-- <script>
     var ctx = document.getElementById('myDoughnutChart').getContext('2d');
 
     var totalTender = 0;
@@ -1188,4 +1255,107 @@
             }
         }
     });
+</script> -->
+
+
+<script>
+    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+    var totalTender = 0;
+
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Tender 1', 'Tender 2', 'Tender 3', 'Tender 4', 'Tender 5'],
+            datasets: [{
+                data: [0], // Initial data, will be updated after fetching
+                backgroundColor: ['#495894', '#56C474', '#EF5350', '#83D4F9', '#F17D3A'],
+                borderWidth: 2,
+                borderColor: 'white'
+            }]
+        },
+        options: {
+            cutout: '65%',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    updateTotalTenderText();
+                }
+            }
+        }
+    });
+
+    // Function untuk melakukan AJAX request dan mengupdate chart
+    function updateChartWithData() {
+        $.ajax({
+            url: "<?= base_url() ?>api/marketing/getTotalStatusPlotTim/" + id_pengguna,
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: addAuthorizationHeader,
+            success: function(response) {
+                if (response.status) {
+                    // Update chart data and labels
+                    myDoughnutChart.data.labels = response.data.map(item => item.status);
+                    myDoughnutChart.data.datasets[0].data = response.data.map(item => parseFloat(item.jumlah_status));
+                    console.log(response.data[0].jumlah_status);
+                    console.log(response);
+
+                    
+                    // Recalculate totalTender
+                    totalTender = response.data.reduce((acc, item) => acc + parseFloat(item.jumlah_status), 0);
+                    console.log(totalTender);
+                    document.getElementById('statusBelumDihubungi').innerHTML=`${Math.ceil(response.data[0].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusDiterima').innerHTML=`${Math.ceil(response.data[1].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusDitolak').innerHTML=`${Math.ceil(response.data[2].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusNegosiasi').innerHTML=`${Math.ceil(response.data[3].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusDihubungi').innerHTML=`${Math.ceil(response.data[4].jumlah_status/totalTender*100)}%`;
+                    // Update "Total Tender" text
+                    updateTotalTenderText();
+                    
+                    // Update chart
+                    myDoughnutChart.update();
+                } else {
+                    console.error('Error in response:', response);
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
+    function updateTotalTenderText() {
+        var presentase = 100;
+        var ctx = myDoughnutChart.ctx;
+        ctx.save();
+
+        // Draw "Total Tender" text with smaller font
+        ctx.font = "14px Ubuntu";
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fontWeight = 500;
+        var centerX = myDoughnutChart.chartArea.left + (myDoughnutChart.chartArea.right - myDoughnutChart.chartArea.left) / 2;
+        var centerY = myDoughnutChart.chartArea.top + (myDoughnutChart.chartArea.bottom - myDoughnutChart.chartArea.top) / 2;
+        ctx.fillText("Total Tender", centerX, centerY - 10);
+
+        // Draw the numerical value with larger font
+        ctx.font = "30px Ubuntu";
+        ctx.fontWeight = 700;
+        ctx.fillText(presentase + "%", centerX, centerY + 20);
+
+        ctx.restore();
+    }
+
+    // Panggil updateChartWithData untuk pertama kali
+    updateChartWithData();
 </script>
+
+
+
+
+
+

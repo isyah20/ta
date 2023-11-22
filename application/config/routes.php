@@ -404,6 +404,8 @@ $route['api/marketing/getKontakLeadById/(:num)'] = 'api/ApiMarketing/getKontakLe
 $route['api/marketing/getHistoryMarketing/(:num)'] = 'api/ApiMarketing/getHistoryMarketing/$1';
 $route['api/marketing/insertHistory'] = 'api/ApiMarketing/insertHistory';
 $route['api/marketing/leadsByTimFiltered'] = 'api/ApiMarketing/leadsByTimFiltered';
+$route['api/marketing/getTotalPlotEachTim/(:num)'] = 'api/ApiMarketing/getTotalPlotEachTim/$1';
+$route['api/marketing/getTotalStatusPlotTim/(:num)'] = 'api/ApiMarketing/getTotalStatusPlotTim/$1';
 
 //restAPI route for Suplier 
 $route['api/supplier/get'] = 'api/ApiSupplier';
