@@ -356,7 +356,7 @@
     </div>
  </session>
 <section>
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
             <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
                 <div class="row">
@@ -367,7 +367,7 @@
                                     <p class="card-title ">Data Leads Terbaru</p>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads-terbaru">0</h1>
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads-terbaru">10</h1>
                                     <img src="<?= base_url('assets\img\leads_new.svg') ?>" style="width:80px" class="card-img" alt="">
                                 </div>
                             </div>

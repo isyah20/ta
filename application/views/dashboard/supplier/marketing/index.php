@@ -672,11 +672,11 @@
                 <div style="margin-top:15px" class="wow fadeInUp" data-wow-delay="0.2s">
                     <div class="select-custom container-fluid">
                         <div class="row wow fadeInUp">
-                                <div class="col-sm-1 form-select-custom " style="width: 190px; margin-right:5px">
+                                <!-- <div class="col-sm-1 form-select-custom " style="width: 190px; margin-right:5px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="" style="margin-top:8px">
                                     <select class="select2-wilayah" id="wilayah" style="border:none;">
                                     </select>
-                                </div>
+                                </div> -->
                             <!-- Search Nama -->
                             <div class=" col-sm-10 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
                                 <input id="input-cari-perusahaan" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
