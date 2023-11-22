@@ -367,7 +367,7 @@
                                     <p class="card-title ">Data Leads Terbaru</p>
                                 </div>
                                 <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-today">0</h1>
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads-terbaru">0</h1>
                                     <img src="<?= base_url('assets\img\leads_new.svg') ?>" style="width:80px" class="card-img" alt="">
                                 </div>
                             </div>
@@ -472,7 +472,7 @@
                                     <span>Hari ini</span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 5%;background-color:#F17D3A" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">5</div>
+                                    <div class="progress-bar" id="total-today" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
                                 </div>
                                 </div>
                                 <div class="progress-info">
@@ -480,7 +480,7 @@
                                     <span>Minggu ini</span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 23%;background-color:#F17D3A" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100">23</div>
+                                    <div class="progress-bar" id="total-week" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
                                 </div>
                                 </div>
                                 <div class="progress-info">
@@ -488,7 +488,7 @@
                                     <span>Bulan ini</span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 60%;background-color:#F17D3A" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">120</div>
+                                    <div class="progress-bar"  id="total-month" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
                                 </div>
                                 </div>
                                 <div class="progress-info">
@@ -496,7 +496,7 @@
                                     <span>Tahun ini</span>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%;background-color:#F17D3A" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">842</div>
+                                    <div class="progress-bar" id="total-year" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
                                 </div>
                                 </div>
                             </div>
@@ -827,7 +827,18 @@
             type: "GET",
             dataType: "JSON",
             success: function(data) {
+                const totalToday = document.getElementById('total-today');
+                const totalWeek = document.getElementById('total-week');
+                const totalMonth = document.getElementById('total-month');
+                const totalYear = document.getElementById('total-year');
+
+                totalToday.style.width = `${data.total_today}%`;
+                totalWeek.style.width = `${data.total_week}%`;
+                totalMonth.style.width = `${data.total_month}%`;
+                totalYear.style.width = `${data.total_year}%`;
+
                 $('#total-today').html(data.total_today);
+                $('#total-week').html(data.total_week);
                 $('#total-month').html(data.total_month);
                 $('#total-year').html(data.total_year);
                 // console.log(data.total_today);
@@ -1263,61 +1274,6 @@
     });
 </script> 
 <!-- doughnut chart -->
-<!-- <script>
-    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
-
-    var totalTender = 0;
-    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100,Math.random() * 100];
-    for (var i = 0; i < data.length; i++) {
-        totalTender += data[i];
-    }
-
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Tender 1', 'Tender 2', 'Tender 3', 'Tender 4', 'Tender 5'],
-            datasets: [{
-                data: data,
-                backgroundColor: ['#495894', '#56C474', '#EF5350', '#83D4F9', '#F17D3A'],
-                borderWidth: 2, // Add gaps between segments
-                borderColor: 'white' // Color of the gaps
-            }]
-        },
-        options: {
-            cutout: '65%', // Make the doughnut thinner
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            animation: {
-                onComplete: function() {
-                    var ctx = this.ctx;
-                    ctx.save();
-
-                    // Draw "Total Tender" text with smaller font
-                    ctx.font = "14px Ubuntu";
-                    ctx.fillStyle = 'black';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fontWeight = 500;
-                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
-                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
-                    ctx.fillText("Total Tender", centerX, centerY - 10);
-
-                    // Draw the numerical value with larger font
-                    ctx.font = "30px Ubuntu";
-                    ctx.fontWeight = 700;
-                    ctx.fillText(totalTender.toFixed(2), centerX, centerY + 20);
-
-                    ctx.restore();
-                }
-            }
-        }
-    });
-</script> -->
-
-
 <script>
     var ctx = document.getElementById('myDoughnutChart').getContext('2d');
     var totalTender = 0;
