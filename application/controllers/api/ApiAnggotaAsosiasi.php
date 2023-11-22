@@ -8,6 +8,9 @@ require APPPATH . "libraries/RestController.php";
 
 // use namespace
 use chriskacerguis\RestServer\RestController;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\ColumnIterator;
 
 //  to use RestController class we need to extend it to our controller class
 class ApiAnggotaAsosiasi extends RestController
@@ -235,4 +238,75 @@ class ApiAnggotaAsosiasi extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function upload_excel() {
+        // Upload configuration
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'csv|xls|xlsx';
+        $this->load->library('upload', $config);
+    
+        if (!$this->upload->do_upload('excel_file')) {
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+        } else {
+            $data = $this->upload->data();
+            $file_path = './uploads/' . $data['file_name'];
+    
+            // Load the PhpSpreadsheet library
+            $this->load->library('PhpSpreadsheet');
+    
+            // Read the Excel file
+            $spreadsheet = $this->phpspreadsheet->load($file_path);
+            $sheet = $spreadsheet->getActiveSheet();
+    
+            // Get the highest row and column
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();
+    
+            // Loop through each row of the worksheet
+            for ($row = 1; $row <= $highestRow; $row++) {
+                // Get cell values
+                $npwp = $sheet->getCellByColumnAndRow(1, $row)->getValue();
+                // $column2 = $sheet->getCellByColumnAndRow(2, $row)->getValue();
+                // ... add more columns as needed
+    
+                // Insert data into the database
+                $data = array(
+                    'npwp' => $npwp,
+                    // 'column2' => $column2,
+                    // ... add more columns as needed
+                );
+    
+                $this->db->insert('anggota_asoiasi', $data);
+            }
+    
+            // Delete the uploaded file
+            unlink($file_path);
+    
+            // echo 'Data inserted successfully.';
+        }
+    }
+
+    public function insertNewAnggota_post(){
+        $data = [
+            'id_pengguna' => htmlspecialchars((string) $this->post('id_pengguna', true)),
+            'npwp' => htmlspecialchars((string) $this->post('npwp', true)),
+        ];
+
+        $resp = $this->AnggotaAsosiasi_model->insertAnggota($data);
+
+        if ($resp) {
+            $this->response([
+                'status' => true,
+                'data' => 'Peserta Tender berhasil ditambahkan',
+            ], RestController::HTTP_CREATED);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Peserta Tender gagal ditambahkan',
+            ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+    
+    
 }

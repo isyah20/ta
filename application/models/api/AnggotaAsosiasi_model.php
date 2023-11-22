@@ -1425,4 +1425,9 @@ class AnggotaAsosiasi_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function insertAnggota($data) {
+        $this->db->insert('anggota_asosiasi', $data);
+        return $this->db->affected_rows();
+    }
 }

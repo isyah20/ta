@@ -445,6 +445,7 @@ $route['api/asosiasi/destroy/(:num)'] = 'api/ApiAnggotaAsosiasi/destroy/$1';
 $route['api/asosiasi/getAsosiasiAnggota'] = 'api/ApiAnggotaAsosiasi/getAsosiasiAnggota';
 $route['api/asosiasi/getAnggotaAsosiasi'] = 'api/ApiAnggotaAsosiasi/getAnggotaAsosiasi';
 $route['api/asosiasi/getDataChart'] = 'api/ApiAnggotaAsosiasi/getDataChart';
+$route['api/asosiasi/insertNewAnggota'] = 'api/ApiAnggotaAsosiasi/insertNewAnggota';
 // $route['api/asosiasifilter'] = 'api/ApiAnggotaAsosiasi/asosiasifilter';
 // $route['api/asosiasifilterhps'] = 'api/ApiAnggotaAsosiasi/asosiasifilterhps';
 // $route['api/testing_penurunan'] = 'api/ApiAnggotaAsosiasi/testing';
