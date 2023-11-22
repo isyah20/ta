@@ -787,6 +787,7 @@
 
 
     $(document).ready(function() {
+        getData('', '');
         console.log("TEST");
         // $('#btn-getdata').on('click', function() {
         //     worker.postMessage({
@@ -844,7 +845,8 @@
                 url: "<?= base_url(); ?>user-dashboard/chart",
                 type: "POST",
                 data: {
-                    cariKLPD: JSON.stringify(klpd),
+                    cariKLPD: klpd,
+                    // cariKLPD: JSON.stringify(klpd),
                     cariTahun: tahun
                 },
                 beforeSend: (jqXHR, settings) => {

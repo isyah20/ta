@@ -506,6 +506,7 @@ class DashboardUser extends CI_Controller
     public function chart()
     {
         $data = $this->input->post();
+
         if ($data != null) {
             // return json_encode($data['cariTahun']);
 
@@ -522,7 +523,7 @@ class DashboardUser extends CI_Controller
 
             // $peserta = $this->Peserta_model->getPesertaNpwp($pengguna['npwp']);
             // $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
-            $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  '', 'tahun' => $data['cariTahun']));
+            $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
             // $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => '02.750.385.3-013.000', 'id_lpse' => '', 'tahun' => '2022'));
 
             // $dataPesertaTender["TEST"] = $data['cariTahun'];
@@ -541,7 +542,8 @@ class DashboardUser extends CI_Controller
                 }
             }
 
-            $tenderDiikuti = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+            $tenderDiikuti = 0;
+            // $tenderDiikuti = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
 
             // time sereies chart Tender
             $akumulasi[0] = $totalMenang;
