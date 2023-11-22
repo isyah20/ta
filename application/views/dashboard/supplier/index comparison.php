@@ -204,13 +204,13 @@
         color: #B89494;
         font-size: 26px;
         font-weight: bold;
-        /* padding-top: 10px; */
+        padding-top: 10px;
     }
 
     .card-text {
-        font-size: 50px;
+        font-size: 28px;
         font-weight: bold;
-        /* padding-top: 2%; */
+        padding-top: 2%;
     }
 
     .card-img {
@@ -252,6 +252,7 @@
         width: 92%;
     }
 
+    /* CSS */
 .custom-colored-dot-list {
   list-style: none;
   padding: 0;
@@ -298,40 +299,16 @@
   color:rgba(106, 106, 106, 0.90)
 }
 
-.progress-wrapper {
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.progress-info {
-  margin-bottom: 10px;
-}
-
-.progress-label span {
-  display: block;
-  text-align: left;
-  font-weight: bold;
-  margin-bottom: 5px; 
-}
-
-.progress {
-  height: 20px;
-}
-
-.progress-bar {
-  background-color: #F17D3A;
-}
-
     .circle {
         display: inline-block;
-        width: 30px; 
-        height: 30px; 
+        width: 30px; /* Lebar lingkaran yang lebih besar */
+        height: 30px; /* Tinggi lingkaran yang lebih besar */
         border-radius: 50%;
-        background-color: #F17D3A;
+        background-color: orange;
         text-align: center;
-        line-height: 30px; 
+        line-height: 30px; /* Sesuaikan dengan tinggi lingkaran */
         color: white;
-        margin-right: 10px;
+        margin-right: 10px; /* Jarak antara lingkaran dan teks */
         float:right;
     }
 
@@ -366,8 +343,8 @@
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                                     <p class="card-title ">Data Leads Terbaru</p>
                                 </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads-terbaru">0</h1>
+                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-today">0</h1>
                                     <img src="<?= base_url('assets\img\leads_new.svg') ?>" style="width:80px" class="card-img" alt="">
                                 </div>
                             </div>
@@ -430,7 +407,7 @@
                     </div>
                 </div>
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="margin-top:25px;height:245px;overflow-y: auto;">
+                    <div class="card-body" style="margin-top:25px;height:240px;overflow-y: auto;">
                         <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
                            <h4 style="margin-left:45px;margin-top:5px">Tim Marketing</h4>
                         </div>
@@ -459,49 +436,15 @@
                     </div>
                 </div>
             </div>
-            <!-- Chart Pemenang Tender -->
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+            <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="height:395px;padding-left:0px">
-                        <h4 class="text-center pt-4" style="font-weight:bold;padding-left:7px">Pemenang Tender Terbaru</h4>  <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                            <div class="progress-wrapper">
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Hari ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-today" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Minggu ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-week" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Bulan ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar"  id="total-month" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Tahun ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-year" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
+                    <div class="card-body">
+                        <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                            <p class="card-title" style="height:310px">Pemenang Tender</p>
                         </div>
+                        <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
+                            <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img" alt="">
                         </div>
                     </div>
                 </div>
@@ -745,9 +688,6 @@
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     var id_pengguna = Cookies.get('id_pengguna');
@@ -827,18 +767,7 @@
             type: "GET",
             dataType: "JSON",
             success: function(data) {
-                const totalToday = document.getElementById('total-today');
-                const totalWeek = document.getElementById('total-week');
-                const totalMonth = document.getElementById('total-month');
-                const totalYear = document.getElementById('total-year');
-
-                totalToday.style.width = `${data.total_today}%`;
-                totalWeek.style.width = `${data.total_week}%`;
-                totalMonth.style.width = `${data.total_month}%`;
-                totalYear.style.width = `${data.total_year}%`;
-
                 $('#total-today').html(data.total_today);
-                $('#total-week').html(data.total_week);
                 $('#total-month').html(data.total_month);
                 $('#total-year').html(data.total_year);
                 // console.log(data.total_today);
@@ -1274,6 +1203,61 @@
     });
 </script> 
 <!-- doughnut chart -->
+<!-- <script>
+    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+
+    var totalTender = 0;
+    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100,Math.random() * 100];
+    for (var i = 0; i < data.length; i++) {
+        totalTender += data[i];
+    }
+
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Tender 1', 'Tender 2', 'Tender 3', 'Tender 4', 'Tender 5'],
+            datasets: [{
+                data: data,
+                backgroundColor: ['#495894', '#56C474', '#EF5350', '#83D4F9', '#F17D3A'],
+                borderWidth: 2, // Add gaps between segments
+                borderColor: 'white' // Color of the gaps
+            }]
+        },
+        options: {
+            cutout: '65%', // Make the doughnut thinner
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    var ctx = this.ctx;
+                    ctx.save();
+
+                    // Draw "Total Tender" text with smaller font
+                    ctx.font = "14px Ubuntu";
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fontWeight = 500;
+                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                    ctx.fillText("Total Tender", centerX, centerY - 10);
+
+                    // Draw the numerical value with larger font
+                    ctx.font = "30px Ubuntu";
+                    ctx.fontWeight = 700;
+                    ctx.fillText(totalTender.toFixed(2), centerX, centerY + 20);
+
+                    ctx.restore();
+                }
+            }
+        }
+    });
+</script> -->
+
+
 <script>
     var ctx = document.getElementById('myDoughnutChart').getContext('2d');
     var totalTender = 0;

@@ -94,11 +94,11 @@ class ApiMarketing extends RestController {
     }
 
     //Get filter
-    public function leadsByTimFiltered_post()
+    public function leadsByTimFiltered_get()
     {
-        $id_pengguna = $this->input->post('id_pengguna');
-        $nama_perusahaan = $this->input->post('nama_perusahaan');
-        $status = $this->input->post('status');
+        $id_pengguna = $this->input->get('id_pengguna');
+        $nama_perusahaan = $this->input->get('nama_perusahaan');
+        $status = $this->input->get('status');
         $data = $this->marketing->getLeadsByTimFiltered($id_pengguna, $nama_perusahaan, $status);
 
         if ($data) {
@@ -167,6 +167,39 @@ class ApiMarketing extends RestController {
                 'status' => false,
                 'message' => 'Data gagal ditambahkan'
             ], RestController::HTTP_BAD_REQUEST);
+        }
+    }
+
+    //get total plot for dashboard suplier
+    public function getTotalPlotEachTim_get($id){
+        $data = $this->marketing->getTotalPlotEachTim($id);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getTotalStatusPlotTim_get($id){
+        $data = $this->marketing->getTotalStatusPlotTim($id);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
         }
     }
 }

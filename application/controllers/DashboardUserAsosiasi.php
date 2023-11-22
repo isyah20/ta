@@ -13,13 +13,14 @@ class DashboardUserAsosiasi extends CI_Controller
             redirect('login');
         }
         $this->load->model('api/Daftarhitam_model', 'daftarhitam');
-        $this->load->model('api/AnggotaAsosiasi_model', 'anggota');
+        $this->load->model('api/AnggotaAsosiasi_model');
         $this->load->model('Pemenang_model');
         $this->load->model('Blacklist_model', 'blacklist');
         $this->load->model('Asosiasi_model', 'asosiasi');
         $this->load->model('Lpse_model', 'lpse');
         $this->load->model('Tender_model');
         $this->load->model('WilayahModel');
+        $this->load->model('Pengguna_model');
         $this->client = new Client([
             // Base URI is used with relative requests
             'base_uri' => base_url() . 'api/',
@@ -31,9 +32,32 @@ class DashboardUserAsosiasi extends CI_Controller
     }
 
     public function index(){
+        // $data = null;
+        $sessionData = $this->session->user_data;
+        $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
+        $id_pengguna = $this->session->user_data['id_pengguna'];
 
-        $this->load->view('templates/header', 'Dashboard');
-        $this->load->view('profile_pengguna/templates/navbar');
+        $data_asosiasi = null;
+        try {
+            $respData = $this->AnggotaAsosiasi_model->getAnggotaAsosiasi($id_pengguna);
+            if ($respData) {
+                $data_asosiasi = $respData ?? [];
+            } else {
+                $data_asosiasi = null;
+            }
+        } catch (ClientException $e) {
+            $data_asosiasi = null;
+        }
+
+        $data = [
+            'title' => 'Dashboard',
+            'pengguna' => $pengguna,
+            'data_asosiasi' => $data_asosiasi,
+        ];
+        // var_dump($data);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar', $data);
         $this->load->view('dashboard/asosiasi/index');
         $this->load->view('templates/footer');
     }
