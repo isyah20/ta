@@ -204,13 +204,13 @@
         color: #B89494;
         font-size: 26px;
         font-weight: bold;
-        padding-top: 10px;
+        /* padding-top: 10px; */
     }
 
     .card-text {
-        font-size: 28px;
+        font-size: 50px;
         font-weight: bold;
-        padding-top: 2%;
+        /* padding-top: 2%; */
     }
 
     .card-img {
@@ -252,7 +252,6 @@
         width: 92%;
     }
 
-    /* CSS */
 .custom-colored-dot-list {
   list-style: none;
   padding: 0;
@@ -299,16 +298,40 @@
   color:rgba(106, 106, 106, 0.90)
 }
 
+.progress-wrapper {
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.progress-info {
+  margin-bottom: 10px;
+}
+
+.progress-label span {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 5px; 
+}
+
+.progress {
+  height: 20px;
+}
+
+.progress-bar {
+  background-color: #F17D3A;
+}
+
     .circle {
         display: inline-block;
-        width: 30px; /* Lebar lingkaran yang lebih besar */
-        height: 30px; /* Tinggi lingkaran yang lebih besar */
+        width: 30px; 
+        height: 30px; 
         border-radius: 50%;
-        background-color: orange;
+        background-color: #F17D3A;
         text-align: center;
-        line-height: 30px; /* Sesuaikan dengan tinggi lingkaran */
+        line-height: 30px; 
         color: white;
-        margin-right: 10px; /* Jarak antara lingkaran dan teks */
+        margin-right: 10px;
         float:right;
     }
 
@@ -341,9 +364,9 @@
                         <div class="shadow rounded-3 bg-white">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                    <p class="card-title ">Pemenang Hari Ini</p>
+                                    <p class="card-title ">Data Leads Terbaru</p>
                                 </div>
-                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-today">0</h1>
                                     <img src="<?= base_url('assets\img\leads_new.svg') ?>" style="width:80px" class="card-img" alt="">
                                 </div>
@@ -354,9 +377,9 @@
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body ">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                    <p class="card-title ">Pemenang Bulan Ini</p>
+                                    <p class="card-title ">Leads Belum Dilengkapi </p>
                                 </div>
-                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                                     <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-month">0</h1>
                                     <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
                                 </div>
@@ -398,16 +421,16 @@
                 <div class="shadow rounded-3 bg-white">
                     <div class="card-body">
                         <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="card-title">Pemenang Tahun Ini</p>
+                            <p class="card-title">Total Data Leads</p>
                         </div>
-                        <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
+                        <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
                             <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
                             <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img m-sm-none" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="margin-top:25px;height:240px;overflow-y: auto;">
+                    <div class="card-body" style="margin-top:25px;height:245px;overflow-y: auto;">
                         <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
                            <h4 style="margin-left:45px;margin-top:5px">Tim Marketing</h4>
                         </div>
@@ -436,15 +459,49 @@
                     </div>
                 </div>
             </div>
-            <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+            <!-- Chart Pemenang Tender -->
+            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body">
-                        <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="card-title" style="height:310px">Pemenang Tender</p>
+                    <div class="card-body" style="height:395px;padding-left:0px">
+                        <h4 class="text-center pt-4" style="font-weight:bold;padding-left:7px">Pemenang Tender Terbaru</h4>  <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="progress-wrapper">
+                                <div class="progress-info">
+                                <div class="progress-label">
+                                    <span>Hari ini</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 5%;background-color:#F17D3A" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">5</div>
+                                </div>
+                                </div>
+                                <div class="progress-info">
+                                <div class="progress-label">
+                                    <span>Minggu ini</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 23%;background-color:#F17D3A" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100">23</div>
+                                </div>
+                                </div>
+                                <div class="progress-info">
+                                <div class="progress-label">
+                                    <span>Bulan ini</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 60%;background-color:#F17D3A" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">120</div>
+                                </div>
+                                </div>
+                                <div class="progress-info">
+                                <div class="progress-label">
+                                    <span>Tahun ini</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 100%;background-color:#F17D3A" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">842</div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-year">0</h1>
-                            <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img" alt="">
                         </div>
                     </div>
                 </div>
@@ -681,6 +738,9 @@
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     var keyword = '',
