@@ -979,4 +979,66 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_BAD_REQUEST);
         }
     }
+
+    public function getMarketing_get()
+    {
+
+        $id_supplier = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getTimMarketing($id_supplier);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function deleteTimMaketing_delete()
+    {
+        $id_tim = $this->input->get('id_tim');
+
+        if ($id_tim === null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Berikan id'
+            ], RestController::HTTP_BAD_REQUEST);
+        } else {
+            if ($this->Supplier_api->deleteTimMarketing($id) > 0) {
+                $this->response([
+                    'status' => true,
+                    'id' => $id,
+                    'message' => 'Data berhasil dihapus'
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Data tidak ditemukan'
+                ], RestController::HTTP_NOT_FOUND);
+            }
+        }
+    }
+
+    public function getTimMarketingById_get()
+    {
+        $id_tim = $this->get('id_tim');
+        $data = $this->Supplier_api->getTimMarketingById($id_tim);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }
