@@ -176,6 +176,7 @@ $route['api/getTabelPenawaranTerendah'] = 'Competitor/getTabelPenawaranTerendah'
 $route['api/getRataPenawaranTerendah'] = 'Competitor/getRataPenawaranTerendah';
 $route['api/getTawaranRendah'] = 'Competitor/getTawaranRendah';
 
+
 //Market
 $route['market'] = 'Market';
 $route['user-dashboard/market'] = 'Market/indexMarket';
@@ -438,11 +439,15 @@ $route['api/pengguna/getPesertaDaftar'] = 'api/ApiAnalytic/getPesertaDaftar';
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
 
-//restAPI route for ASOSIASI
+//restAPI route for ASOSIASI 
 $route['api/asosiasi'] = 'api/ApiAnggotaAsosiasi';
 $route['api/asosiasibypengguna'] = 'api/ApiAnggotaAsosiasi/getdatadinamis';
 $route['api/asosiasi/create'] = 'api/ApiAnggotaAsosiasi/create';
 $route['api/asosiasi/destroy/(:num)'] = 'api/ApiAnggotaAsosiasi/destroy/$1';
+$route['api/asosiasi/getAsosiasiAnggota'] = 'api/ApiAnggotaAsosiasi/getAsosiasiAnggota';
+$route['api/asosiasi/getAnggotaAsosiasi'] = 'api/ApiAnggotaAsosiasi/getAnggotaAsosiasi';
+$route['api/asosiasi/getDataChart'] = 'api/ApiAnggotaAsosiasi/getDataChart';
+$route['api/asosiasi/insertNewAnggota'] = 'api/ApiAnggotaAsosiasi/insertNewAnggota';
 // $route['api/asosiasifilter'] = 'api/ApiAnggotaAsosiasi/asosiasifilter';
 // $route['api/asosiasifilterhps'] = 'api/ApiAnggotaAsosiasi/asosiasifilterhps';
 // $route['api/testing_penurunan'] = 'api/ApiAnggotaAsosiasi/testing';
