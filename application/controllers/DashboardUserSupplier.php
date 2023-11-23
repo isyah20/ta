@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 use App\components\traits\ClientApi;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\ColumnIterator;
 
 class DashboardUserSupplier extends CI_Controller
 {
@@ -39,7 +40,7 @@ class DashboardUserSupplier extends CI_Controller
         $data = [
             'title' => 'Dashboard'
         ];
-        // var_dump(api_url());
+        // var_dump($_COOKIE);
         // die;
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
@@ -126,7 +127,7 @@ class DashboardUserSupplier extends CI_Controller
 
     public function exportLeads()
     {
-        require_once 'vendor\autoload.php';
+        require_once 'vendor/autoload.php';
         $spreadsheet = new Spreadsheet();
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $activeSheet = $spreadsheet->getActiveSheet();
@@ -298,7 +299,7 @@ class DashboardUserSupplier extends CI_Controller
     }
     public function exportTenderTerbaru()
     {
-        require_once 'vendor\autoload.php';
+        require_once 'vendor/autoload.php';
         $spreadsheet = new Spreadsheet();
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $activeSheet = $spreadsheet->getActiveSheet();
@@ -466,6 +467,13 @@ class DashboardUserSupplier extends CI_Controller
     public function getKontakLeadById($id)
     {
         $data = $this->Supplier_model->getKontakLeadById($id);
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function getNamaPerusahaanById($id)
+    {
+        $data = $this->Supplier_model->getNamaPerusahaanById($id);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
@@ -906,9 +914,11 @@ class DashboardUserSupplier extends CI_Controller
 
     public function getDataLeadFilter()
     {
+        $page_size = $_GET['pageSize'];
+        $page_number = ($_GET['pageNumber'] - 1) * $page_size;
         $id_pengguna = $this->input->get('id_pengguna');
         $keyword = $this->input->get('key');
-        $data = $this->Supplier_model->getDataLeadFilter($id_pengguna, $keyword);
+        $data = $this->Supplier_model->getDataLeadFilter($id_pengguna, $keyword, $page_number, $page_size);
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }

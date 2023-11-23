@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // import the library
 require APPPATH . "libraries/Format.php";
 require APPPATH . "libraries/RestController.php";
+// use GuzzleHttp\Exception\ClientException;
 
 // use namespace
 use chriskacerguis\RestServer\RestController;

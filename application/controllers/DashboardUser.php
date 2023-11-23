@@ -24,6 +24,7 @@ class DashboardUser extends CI_Controller
         $this->load->model('Peserta_model');
         $this->load->model('PesertaTender_model');
         $this->load->model('Api/PesertaTenderModel');
+        $this->load->model('api/Peserta_model', 'ApiPesertaModel');
         $this->init();
     }
 
@@ -48,11 +49,13 @@ class DashboardUser extends CI_Controller
         $this->load->model('api/PesertaTenderModel');
         $this->load->model('scrapping/Pengguna_model');
         $this->load->model('scrapping/Lpse_model');
+        $this->load->model('api/Peserta_model', 'ApiPesertaModel');
 
         $sessionData = $this->session->user_data;
         $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
         $npwpComplete = !empty($pengguna['npwp']);
 
+        
         $notif = null;
         try {
             $tenderResp = $this->client->request('GET', 'tender/notif', $this->client->getConfig('headers'));
@@ -74,6 +77,22 @@ class DashboardUser extends CI_Controller
         // var_dump($tahun);
         // die;
         $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' => "", 'tahun' => ''));
+
+        // Get Peserta Tender yang sedang diikuti 
+        // $pesertaTenderIkut = $this->ApiPesertaModel->getPesertaIkutTender($pengguna['npwp']);
+        $pesertaTenderIkut = null;
+        try {
+            // $pesertaResp = $this->client->request('GET', 'peserta/pesertaIkutTender', $this->client->getConfig('headers'));
+            $pesertaResp = $this->ApiPesertaModel->getPesertaIkutTender($pengguna['npwp']);
+            if ($pesertaResp) {
+                // $pesertaTenderIkut = json_decode($pesertaResp->getBody()->getContents(), true);
+                $pesertaTenderIkut = $pesertaResp ?? [];
+            } else {
+                $pesertaTenderIkut = null;
+            }
+        } catch (ClientException $e) {
+            $pesertaTenderIkut = null;
+        } 
 
         // Statistik Ikut Tender
         $timeSeriesUser = array_fill(0, 12, 0);
@@ -161,6 +180,7 @@ class DashboardUser extends CI_Controller
             'userId' => (int) $sessionData['id_pengguna'],
             'userStatus' => (int) $sessionData['status'],
             'npwpComplete' => $npwpComplete,
+            'pesertaTenderIkut' => $pesertaTenderIkut
         ];
 
         $this->load->view('templates/header', $data);

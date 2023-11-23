@@ -148,6 +148,7 @@
                         else {
                             if (kategori == '3') jenis_perusahaan = 'Asosiasi';
                             else if (kategori == '4') jenis_perusahaan = 'Suplier';
+                            else if (kategori == '5') jenis_perusahaan = 'Marketing';
                         }
                         
                         if (status == '0') paket = 'Standard';
@@ -157,6 +158,7 @@
                         if (kategori == '2') $('#nav_dashboard').prop('href',"<?= base_url('user-dashboard') ?>");
                 	    else if (kategori == '3') $('#nav_dashboard').prop('href',"<?= base_url('asosiasi') ?>");
                 	    else if (kategori == '4') $('#nav_dashboard').prop('href',"<?= base_url('suplier') ?>");
+                        else if (kategori == '5') $('#nav_dashboard').prop('href',"<?= base_url('marketing') ?>");
                         
                         $('#nav_nama_pengguna').html(nama_pengguna);
                         $('#nav_jenis_perusahaan').html(jenis_perusahaan);

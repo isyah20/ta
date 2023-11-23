@@ -15,6 +15,11 @@
         margin-top: 20px;
     }
 
+    .container-lg-2 {
+        margin-left: 80px;
+        margin-top: 50px;
+    }
+
     .overflow {
         overflow: auto;
     }
@@ -112,6 +117,7 @@
         margin-bottom: 15px;
         border: 1px solid;
         background-color: white;
+        margin-top: 1rem;
         margin-left: 10px;
         height: 2rem;
     }
@@ -296,6 +302,14 @@
             justify-content: center !important;
         }
 
+        .container-lg-2 {
+            width: 100%;
+            margin-top: 80px;
+            margin-left: 30px;
+        }
+
+        .container-lg {}
+
         .form-select-custom {
             width: 100%;
             margin-right: 0;
@@ -354,9 +368,11 @@
 </style>
 
 <section class="bg-white">
-    <br>
-    <br>
-    <br>
+    <div class="container-lg-2 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
+        <div class="section-title section-title-padding">
+            <h6 class="mb-0 wow fadeInUp">Know Your Market</h6>
+        </div>
+    </div>
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
         <h4 class="mb-0 fw-semibold wow fadeInUp">Hi, Kami Siap Membantu Menganalisa<p class="pt-2">LPSE Pilihan Mu!</p>
         </h4>
@@ -405,7 +421,7 @@
     <div class="container-lg" data-aos="fade_up">
         <div class="row">
             <!-- Time Series Ikut Tender -->
-            <div class="col-lg-6 wow fadeInUp">
+            <div class="col-lg-6">
                 <div class="chart-bg mt-4" style="height:95%; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
                     <div class="container wow fadeInUp">
                         <div style="padding:0">
@@ -425,7 +441,7 @@
                                                 < 100Jt</h1>
                                         </div>
                                         <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1340</h1>
+                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">10</h1>
                                             <img class="custom-img" src="<?= base_url('assets\img\icon_hpshijau.svg') ?>" alt="">
                                         </div>
                                     </div>
@@ -438,7 +454,7 @@
                                             <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">100 - 500Jt</h1>
                                         </div>
                                         <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">2340</h1>
+                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">20</h1>
                                             <img class="custom-img" src="<?= base_url('assets\img\icon_hpsorange.svg') ?>" alt="">
                                         </div>
                                     </div>
@@ -451,7 +467,7 @@
                                             <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">500Jt - 1 M</h1>
                                         </div>
                                         <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1342</h1>
+                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">12</h1>
                                             <img class="custom-img" src="<?= base_url('assets\img\icon_hpsmerah.svg') ?>" alt="">
                                         </div>
                                     </div>
@@ -464,7 +480,7 @@
                                             <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">1 - 10 M</h1>
                                         </div>
                                         <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1343</h1>
+                                            <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
                                             <img class="custom-img" src="<?= base_url('assets\img\icon_hpsabu.svg') ?>" alt="">
                                         </div>
                                     </div>
@@ -477,9 +493,9 @@
 
             <!-- Riwayat ikut tender HPS -->
 
-            <div class="col-lg-6 wow fadeInUp">
+            <div class="col-lg-6 ">
                 <div class="chart-bg  mt-4 " style="height:95%; border-radius: 10px; box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);">
-                    <div style="padding:0 wow fadeInUp">
+                    <div style="padding:0">
                         <h3 class="col" style="color:#000000; margin:10px; font-size:20px; font-weight:700"> PROYEK LPSE XXXX</h3>
                         <div class="chart3" style="margin:0; padding:0">
                             <canvas id="stackedBarChart" style="font-size: 10px;"></canvas>
@@ -487,7 +503,7 @@
                     </div>
                     <hr class="chart-line">
                     <h5 style="color:#000000; margin-top:10px; margin-left:20px; font-size:20px; font-weight:600"> Summary</h5>
-                    <div class="container wow fadeInUp">
+                    <div class="container">
                         <div class="wow fadeInUp animation" data-wow-delay="0.2s">
                             <div class="shadow-sm bg-white">
                                 <div class="card-sum">
@@ -496,7 +512,7 @@
                                             < 100Jt</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1230</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">10</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Thijau.svg') ?>" alt="">
                                     </div>
                                 </div>
@@ -509,7 +525,7 @@
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">100 - 500Jt</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">2230</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">20</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Torange.svg') ?>" alt="">
                                     </div>
                                 </div>
@@ -522,7 +538,7 @@
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">500Jt - 1 M</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1223</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">12</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Tmerah.svg') ?>" alt="">
                                     </div>
                                 </div>
@@ -535,7 +551,7 @@
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">1 - 10 M</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1323</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Tabu.svg') ?>" alt="">
                                     </div>
                                 </div>
@@ -582,7 +598,7 @@
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">PESERTA MENANG</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1012</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">10</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Thijau.svg') ?>" alt="">
                                     </div>
                                 </div>
@@ -595,7 +611,7 @@
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">PESERTA MENAWAR</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">2012</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">20</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Torange.svg') ?>" alt="">
                                     </div>
                                 </div>
@@ -608,7 +624,7 @@
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">PESERTA MENDAFTAR</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1212</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">12</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Thitam.svg') ?>" alt="">
                                     </div>
                                 </div>
@@ -621,7 +637,7 @@
                                         <h1 class="sum-title wow fadeInUp" data-wow-delay="0.5s">TOTAL PESERTA</h1>
                                     </div>
                                     <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">1312</h1>
+                                        <h1 class="sum-text wow fadeInUp" data-wow-delay="0.3s">13</h1>
                                         <img class="custom-img" src="<?= base_url('assets\img\Tabu.svg') ?>" alt="">
                                     </div>
                                 </div>

@@ -181,6 +181,34 @@
                         </ul>
                     </li> -->
                 <?php endif; ?>
+                <!-- <?php if($userCat == UserCategory::MARKETING && in_array($userStatus, [UserType::TRIAL, UserType::PAID])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-white link-danger text-center fw-bold" href="<?= base_url('suplier/leads') ?>" id="nav_dashboard">Leads</a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-profile">
+                        <a class="nav-link dropdown-toggle text-white link-danger text-center" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <b>Marketing</b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end my-2 p-0 rounded-3">
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative rounded-bottom" href="<?= base_url('suplier/marketing') ?>">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Manage Marketing</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="py-2 dropdown-item d-flex position-relative rounded-bottom" href="<?= base_url('suplier/crm') ?>">
+                                    <div class="shape-rounded">
+                                        <iconify-icon icon="ic:outline-analytics" style="color: white;" width="18px" height="25px"></iconify-icon>
+                                    </div>
+                                    <p class="px-2 text-dropdown">Plotting Tim</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?> -->
             </ul>
 
             <div class="dropdown dropdown-profile d-md-block">
@@ -277,6 +305,7 @@
                         if (kategori == '2') url_dashboard = "<?= base_url('user-dashboard') ?>";
                         else if (kategori == '3') url_dashboard = "<?= base_url('asosiasi') ?>";
                         else if (kategori == '4') url_dashboard = "<?= base_url('suplier') ?>";
+                        else if (kategori == '5') url_dashboard = "<?= base_url('marketing') ?>";
 
                         $('#nav_dashboard').prop('href', url_dashboard);
                         $('.nama-pengguna').html(nama_pengguna);

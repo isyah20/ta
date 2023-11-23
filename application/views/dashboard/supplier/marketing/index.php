@@ -1,6 +1,12 @@
+<link href="<?= base_url() ?>assets/css/home/pagination.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+    .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav {
+        font-size: 1rem !important;
+    }
+
     .animation {
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         -webkit-appearance: none;
@@ -190,7 +196,6 @@
 
     .modal-body p {
         font-size: 18px;
-        /* Ganti ukuran font sesuai dengan keinginan Anda */
     }
 
     .custom-button {
@@ -481,11 +486,10 @@
     }
 
     .form-select-custom {
-        width: 615px;
+        width: 415px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
-        margin-bottom: 15px;
         border: 1px solid;
         background-color: white;
     }
@@ -603,38 +607,61 @@
 
     .form-select {
         background-color: white;
-        height: fit-content;
+        /* height: fit-content; */
         /* Mengatur warna latar belakang menjadi putih */
     }
 
     /* CSS untuk menjaga elemen-elemen di baris yang sama */
     .btn-cell {
         display: flex;
-        /* Menggunakan flexbox untuk menjaga elemen sejajar */
         align-items: center;
-        /* Mengatur pemusatan vertikal elemen-elemen */
+    }
+
+    .expandChildTable:before {
+    display: block;
+    cursor: pointer;
+    }
+    .childTableRow {
+        display: none;
+    }
+    .childTableRow table {
+        border: 1px solid #E1CBCB;
+        margin-left:35%;
+    }
+
+    .status {
+        margin-left:117%;
+        margin-bottom: 5px; 
+        margin-top:5px;
+        width:140px;
     }
 
     /* CSS untuk mengatur tampilan saat tampilan diubah menjadi mobile */
     @media (max-width: 768px) {
         .btn-img {
             width: 24px;
-            /* Mengatur ukuran gambar */
             height: 24px;
             margin-right: 10px;
-            /* Menambahkan ruang antara gambar-gambar */
+        }
+        .childTableRow table {
+        border: 1px solid #E1CBCB;
+        margin-left:25%;
+        }
+        .status {
+            margin-left:90%;
         }
     }
+    /* .bg-color{
+        border-radius: 30px;
+        background: #DBF9D6;
+    } */
 </style>
 
 <section class="bg-white pt-5 mt-5">
     <div class="mt-3 container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-12">
-            <h3 class="mb-0 ms-2 wow fadeInUp" style="order: 1;">
-                Hi Bambang
-                <p>Siap Memasakan produkmu?
-                </p>
-            </h3>
+            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Siap Menawarkan Produk Mu Hari ini?</p>
+            </h4>
         </div>
     </div>
 </section>
@@ -642,23 +669,17 @@
     <div class="container bg-white">
         <div class="row">
             <div class="col-md-7">
-                <div class="card-select wow fadeInUp">
+                <div style="margin-top:15px" class="wow fadeInUp" data-wow-delay="0.2s">
                     <div class="select-custom container-fluid">
-                        <div class="row">
-                            <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
-                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                <select class="select2-wilayah" id="wilayah" style="border:none;">
-                                </select>
-                            </div>
-                            <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:5px">
-                                <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                <select class="select2-jenis-pengadaan" style="border:none;">
-                                </select>
-                            </div>
-
+                        <div class="row wow fadeInUp">
+                                <div class="col-sm-1 form-select-custom " style="width: 190px; margin-right:5px">
+                                    <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="" style="margin-top:8px">
+                                    <select class="select2-wilayah" id="wilayah" style="border:none;">
+                                    </select>
+                                </div>
                             <!-- Search Nama -->
-                            <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
-                                <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                            <div class=" col-sm-10 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
+                                <input id="input-cari-perusahaan" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                                 <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
                             </div>
                         </div>
@@ -675,65 +696,78 @@
             <div class="col">
                 <div class="table-responsive">
                     <table class="table custom-table-container">
-                        <thead class="thead">
+                        <thead class="thead text-center">
                             <tr>
                                 <th class="custom-padding">No.</th>
                                 <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-apartment.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                     Nama Perusahaan
                                 </th>
                                 <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-status.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                    Kontak
+                                </th>
+                                <th class="custom-padding">
                                     Status
                                 </th>
                                 <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-date.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
                                     Jadwal
                                 </th>
-                                <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-cp.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
-                                    Kontak
-                                </th>
-                                <th></th>
-                                <th class="custom-padding">
-                                    <img src="<?= base_url("assets/img/icon-notes.svg") ?>" alt="icon-company" style="width: 18px; height: 18px; padding: 0;">
+                                <th colspan="2" class="custom-padding" contenteditable="false">
                                     Catatan
                                 </th>
-                                <th class="custom-padding">
+                                <th class="custom-padding" style="padding-right:15px;">
                                     Aksi
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="data-leads">
-                            <tr class="my-2">
-                                <td>1</td>
-                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td>Negotiation</td>
-                                <td>02/12/2024</td>
-                                <td>0811-2345-6666 (Office)</td>
-
-                                <td>
-                                    <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
-                                </td>
-                                <td>Lancarr Semua Gess</td>
-                                <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td>
-                            </tr>
-                            <tr class="my-2">
+                            <!-- <tr style="vertical-align: middle;">
                                 <td>2</td>
-                                <td style="font-weight: bold;" class="">PT. Telekomunikasi Indonesia, Tbk.</td>
-                                <td>Done</td>
-                                <td>02/10/2024</td>
-                                <td>0811-2345-6666 (Office)</td>
-
-                                <td>
-                                    <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
+                                <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
-                                <td>Sudah selesai tinggal promosi</td>
-                                <td><a href=# class="btn btn-success" data-toggle="modal" data-target="#editDataModal">Edit</a></td>
-                            </tr>
+                                <td ><span style=" padding: 8%; border-radius: 30px; background: var(--color-blue, #D0E9F9);">Negotiation</span></td>
+                                <td class="editable-date ">02/12/2024</td>
+                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
+                                <td></td>
+                                <td><span><img src="<?= base_url('assets\img\add-circle-button.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#buatAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Buat Agenda">
+                                <span><img src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#editAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Edit Agenda"></span>
+                                <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span></td>
+                            </tr> 
+                            <tr class="childTableRow">
+                                <td colspan="5">
+                                    <table class="table custom-table-container">
+                                        <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> 
+                                            <tr>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Jadwal
+                                                </th>
+                                                <th>
+                                                    Catatan
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="editable-select" style="border-radius: 30px; background: var(--color-blue, #D0E9F9);">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="editable-select" style="border-radius: 30px; background: var(--color-blue, #D0E9F9);">Negotiation</td>
+                                                <td class="editable-date">2023-10-17 15:30:00</td>
+                                                <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
+                <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
             </div>
         </div>
     </div>
@@ -750,15 +784,14 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
-
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
-                    <p class="text-center">PT Telekomunikasi Indonesia</p>
+                    <p class="text-center" id="nama-perusahaan">PT Telekomunikasi Indonesia</p>
+                    <input type="hidden" id="id-lead" value="123">
                     <div class="input-popup align-items-center">
                         <div class="input-popup justify-content-end">
                             <div class="table-responsive">
-                                <table class="table table-striped popup-table">
+                                <table class="table table-striped popup-table" id="tabel-kontak">
                                     <thead class="popup-thead">
                                         <tr>
                                             <th>Nama</th>
@@ -768,20 +801,20 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-kontak">
-                                        <td>joko</td>
+                                    <tbody class="data-kontak">
+                                        <!-- <td>joko</td>
                                         <td>HRD</td>
                                         <td>hrd@telkom.co.id</td>
                                         <td>081123456666</td>
                                         <td class="btn-cell">
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#editKontakModal" data-dismiss="modal">
+                                            <a href="#" class="btn btn-link" onclick="editRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
 
-                                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal">
+                                            <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
                                                 <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
                                             </a>
-                                        </td>
+                                        </td> -->
 
                                     </tbody>
                                 </table>
@@ -793,8 +826,8 @@
                         <div></div>
                         <div class="link flex-row align-items-center w-100">
                             <span>
-                                <a class="btn-custom text-white text-center" data-toggle="modal" data-target="#inputKontakModal" data-dismiss="modal">
-                                    <i class="fas me-1"></i>Tambahkan Kontak
+                                <a class="btn-custom text-white text-center" id="addRow" onclick="addRowContact()">
+                                    Tambahkan Kontak
                                 </a>
                             </span>
                         </div>
@@ -807,9 +840,9 @@
 </div>
 <!-- end modal popup info kontak -->
 
-<!-- modal input kontak -->
+<!-- modal input status-->
 <div class="col-12">
-    <div class="modal fade" id="inputKontakModal" tabindex="-1" role="dialog" aria-labelledby="inputKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
+    <div class="modal fade" id="buatAgenda" tabindex="-1" role="dialog" aria-labelledby="editKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
         <div class="modal-dialog custom-modal" role="document">
             <div class="modal-content">
                 <div class="modal-header border-0">
@@ -817,43 +850,39 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
-
                 <div class="modal-body border-0">
-                    <h3 class="modal-title" id="inputKontakModalLabel">Tambahkan Kontak</h3>
-                    <p class="text-center"> Tambahkan untuk memasarkan produkmu</p>
+                    <h3 class="modal-title" id="editKontakModalLabel">Buat Agenda</h3>
                     <div class="input-popup justify-content-end gap-2">
-                        <form class="row g-2">
-                            <div class="col-6">
-                                <label for="inputNama" class="form-label text-start">Nama</label>
-                                <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                <input type="text" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputEmail" class="form-label text-start">Email</label>
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA">
-                            </div>
-                            <button type="button" class="custom-button justify-content-center">
-                                <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                Tambah Kontak
-                            </button>
+                        <form id="form-input" class="row g-2">
+                            <div class="col-12">
+                                <label for="inputNama" class="form-label text-start">Status</label>
+                                <select id="status" class="border border-1 form-select" style="height:40px;padding-top:0px;" aria-label="Pilih Status">
+                                    <option selected>Pilih Status</option>
+                                    <option value="Sedang Dihubungi">Sedang Dihubungi</option>
+                                    <!-- <option value="Negosiasi" >Negosiasi</option> -->
+                                    <option value="Negosiasi" >Negosiasi</option>
 
+                                    <option value="Diterima">Diterima</option>
+                                    <option value="Ditolak">Ditolak</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="inputPosisi" class="form-label text-start">Jadwal</label>
+                                <input type="datetime-local" name="jadwal" class="border border-1 form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
+                            </div>
+                            <div class="col-12">
+                                <label for="inputEmail" class="form-label text-start">Catatan</label>
+                                <textarea type="text" id="catatan" class="border border-1 form-control" id="inputEmail" placeholder="Masukkan Catatan"></textarea>
+                            </div>
                         </form>
                     </div>
                     <div class="d-flex justify-content-start mt-3 gap-2">
                         <div></div>
                         <div class="link flex-row align-items-center w-100">
                             <span>
-                                <a class="btn-custom text-white text-center">
-                                    <i class="fas me-1"></i>Tambahkan
-                                </a>
+                                <button type="submit" id="submit-input" class="btn-custom text-white text-center" style="width:407px;border:none">
+                                    Tambahkan
+                                </button>
                             </span>
                         </div>
                     </div>
@@ -862,11 +891,11 @@
         </div>
     </div>
 </div>
-<!-- end modal input kontak -->
+<!--end input status-->
 
-<!-- modal edit -->
+<!-- modal edit status-->
 <div class="col-12">
-    <div class="modal fade" id="editKontakModal" tabindex="-1" role="dialog" aria-labelledby="editKontakModalLabel" aria-hidden="true" style="margin-top: -30px;">
+    <div class="modal fade" id="editAgenda" tabindex="-1" role="dialog" aria-labelledby="editStatus" aria-hidden="true" style="margin-top: -30px;">
         <div class="modal-dialog custom-modal" role="document">
             <div class="modal-content">
                 <div class="modal-header border-0">
@@ -874,28 +903,27 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
-
                 <div class="modal-body border-0">
-                    <h3 class="modal-title" id="editKontakModalLabel">Edit Contact</h3>
-                    <p class="text-center"> Sesuaikan lagi kontak yang bisa dihubungi</p>
+                    <h3 class="modal-title" id="editKontakModalLabel">Ubah Agenda</h3>
                     <div class="input-popup justify-content-end gap-2">
                         <form class="row g-2">
                             <div class="col-12">
-                                <label for="inputNama" class="form-label text-start">Nama</label>
-                                <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
+                                <label for="inputNama" class="form-label text-start">Status</label>
+                                <select class="border border-1 form-select" style="height:40px;padding-top:0px;" aria-label="Pilih Status">
+                                    <option selected>Pilih Status</option>
+                                    <option value="option2">Sedang Dihubungi</option>
+                                    <option value="option3">Negosiasi</option>
+                                    <option value="option4">Diterima</option>
+                                    <option value="option5">Ditolak</option>
+                                </select>
                             </div>
                             <div class="col-12">
-                                <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                <input type="text" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi">
+                                <label for="inputPosisi" class="form-label text-start">Jadwal</label>
+                                <input type="date" class="border border-1 form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
                             </div>
                             <div class="col-12">
-                                <label for="inputEmail" class="form-label text-start">Email</label>
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email">
-                            </div>
-                            <div class="col-12">
-                                <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA">
+                                <label for="inputEmail" class="form-label text-start">Catatan</label>
+                                <textarea type="text" class="border border-1 form-control" id="inputEmail" placeholder="Masukkan Catatan"></textarea>
                             </div>
                         </form>
                     </div>
@@ -914,7 +942,7 @@
         </div>
     </div>
 </div>
-<!-- end modal edit kontak -->
+<!--end edit status-->
 
 <!-- modal hapus -->
 <div class="col-12">
@@ -959,603 +987,490 @@
 </div>
 <!-- end modal hapus -->
 
-<!-- modal lengkapi leads  -->
-<div class="col-12 align-content-center justify-content-center">
-    <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
-        <div class="modal-dialog custom-modal" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                    </button>
-                </div>
-
-
-                <div class="modal-body border-0">
-                    <h3 class="modal-title" id="lengkapiLeadsModalLabel">Lengkapi Leads</h3>
-                    <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
-                    <div class="input-popup align-items-center">
-                        <div class="input-popup justify-content-end">
-                            <form class="row g-2">
-                                <div class="col-12">
-                                    <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                    <input type="text" class="form-control" id="inputNama" placeholder="PT Sangkuriang International">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputPosisi" class="form-label text-start">Profile Perusahaan </label>
-                                    <textarea class="form-control" id="inputProfile" placeholder="Masukkan profil singkat perusahaan" rows="2"></textarea>
-                                </div>
-                                <label class="form-label text-start mt-3" style="font-weight: bold;">Input Contact Person</label>
-
-                                <div class="col-6">
-                                    <label for="inputNama" class="form-label text-start">Nama</label>
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Subandi">
-                                </div>
-
-                                <div class="col-6">
-                                    <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                    <input type="text" class="form-control" id="inputPosisi" placeholder="Marketing">
-                                </div>
-                                <div class="col-6">
-                                    <label for="inputEmail" class="form-label text-start">Email</label>
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
-                                </div>
-                                <div class="col-6">
-                                    <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                    <input type="text" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
-                                </div>
-
-
-                                <button type="button" class="custom-button justify-content-center">
-                                    <img src="<?= base_url("assets/img/revome-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                    Tambah Kontak
-                                </button>
-                                <!-- <button type="button" class="custom-button justify-content-center">
-                                        <img src="<?= base_url("assets/img/add-red-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
-                                        Hapus Kontak
-                                    </button> -->
-                            </form>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-start mt-3 gap-2">
-                        <div></div>
-                        <div class="link flex-row align-items-center w-100">
-                            <span>
-                                <a class="btn-custom text-white text-center">
-                                    <i class="fas me-1"></i>Tambahkan
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="my-2 text-center">
-                        <p style="font-size: 15px;">
-                            Mari Kami bantu carikan informasi tentang perusahaan ini?
-                            <a href="#">
-                                Klik Disini
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal lengkapi leads -->
-
-<!-- modal edit Data -->
-<div class="col-12">
-    <div class="modal fade" id="editDataModal" tabindex="-1" role="dialog" aria-labelledby="editDataModalLabel" aria-hidden="true" style="margin-top: 30px;">
-        <div class="modal-dialog custom-modal" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                    </button>
-                </div>
-
-
-                <div class="modal-body border-0">
-                    <h3 class="modal-title" id="editDataModalLabel">Edit </h3>
-                    <p class="text-center"></p>
-                    <div class="input-popup justify-content-end gap-2">
-                        <form class="row g-2">
-                            <div class="col-12">
-                                <label for="inputNama" class="form-label text-start">Nama Perusahaan</label>
-                                <input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama">
-                            </div>
-                            <div class="col-12">
-                                <label for="inputStatus" class="form-label text-start">Status</label>
-                                <select class="form-select" id="inputStatus" aria-label="Pilih Status">
-                                    <option selected>Pilih Status</option>
-                                    <option value="aktif">Planning</option>
-                                    <option value="tidak aktif">Negotiation</option>
-                                    <option value="sedang cuti">Leads</option>
-                                    <option value="sedang cuti">Pause</option>
-                                    <option value="sedang cuti">Done</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="inputJadwal" class="form-label text-start">Jadwal</label>
-                                <input type="date" class="form-control" id="inputJadwal" placeholder="Masukkan Jadwal">
-                            </div>
-
-                            <div class="col-12">
-                                <label for="inputNoHP" class="form-label text-start">Kontak</label>
-                                <input type="text" class="form-control" id="inputNoHP" placeholder="Masukkan Kontak">
-                            </div>
-                            <div class="col-12">
-                                <label for="catatan" class="form-label text-start">Catatan</label>
-                                <textarea class="form-control" id="catatan" rows="2" placeholder="Buat Catatan"></textarea>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="d-flex justify-content-start mt-3 gap-2">
-                        <div></div>
-                        <div class="link flex-row align-items-center w-100">
-                            <span>
-                                <a class="btn-custom text-white text-center">
-                                    <i class="fas me-1"></i>Simpan Perubahan
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal edit kontak -->
-<script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
 <!-- script popup -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="<?= base_url() ?>assets/js/home/pagination.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
-<!-- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
-    var keyword = '',
-        jenis_pengadaan = '',
-        hps_awal = 0,
-        hps_akhir = 0,
-        prov = '',
-        kab = '',
-        jum_pemenang, timer;
+    var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
+    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+    var searchElement = document.getElementById("input-cari-perusahaan");
 
-    $(document).ready(function() {
-        $.ajax({
-            url: "<?= base_url() ?>api/supplier/jumlah-pemenang",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                $('#total-today').html(data.total_today);
-                $('#total-month').html(data.total_month);
-                $('#total-year').html(data.total_year);
-                // console.log(data.total_today);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {}
-        });
+    function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+    }
 
-        // $.ajax({
-        //     url: "<?= base_url() ?>api/supplier/jumlah-pemenang",
-        //     type: "GET",
-        //     dataType: "JSON",
-        //     success: function(data) {
-        //         $('#total-pemenang-tender').html(data.jumlah_pemenang);
-        //         console.log(data.jumlah_pemenang);
-        //     },
-        //     error: function(jqXHR, textStatus, errorThrown) {}
-        // });
-        // $.ajax({
-        //     url: "<?= base_url() ?>api/supplier/jumlah-pemenang-terbaru",
-        //     type: "GET",
-        //     dataType: "JSON",
-        //     success: function(data) {
-        //         $('#total-pemenang-tender-terbaru').html(data.jumlah_pemenang_terbaru);
-        //         console.log(data.jumlah_pemenang_terbaru);
-        //     },
-        //     error: function(jqXHR, textStatus, errorThrown) {}
-        // });
-
-        $.ajax({
-            url: "<?= base_url() ?>api/getPreferensiPengguna/" + id_pengguna,
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                if (data != null) {
-                    $('#sec-set-preferensi').hide();
-
-                    setTimeout(function() {
-                        let status = $('#status_user').val();
-
-                        if (status == '0') {
-                            $('#sec-upgrade-paket').show();
-                            $('#sec-pemenang-terbaru').hide();
-                        } else {
-                            $('#sec-upgrade-paket').hide();
-                            $('#sec-pemenang-terbaru').show();
-
-                            filterTender();
-
-                            /*$.ajax({
-                                                url : "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna/"+id_pengguna,
-                                                type: "GET",
-                                                dataType: "JSON",
-                                                success : function(data){
-                                                    jum_pemenang = data.jumlah;
-                                                    
-                                                    if (jum_pemenang > 0) {
-                                                        $('#pagination-container').pagination({
-                                                            dataSource: "<?= base_url() ?>api/getKatalogPemenangTerbaruByPengguna/"+id_pengguna+"/"+jum_pemenang,
-                                                            locator: '',
-                                                            totalNumber: jum_pemenang,
-                                                            pageSize: 10,
-                                                            autoHidePrevious: true,
-                                                            autoHideNext: true,
-                                                            showNavigator: true,
-                                                            formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> pemenang tender terbaru',
-                                                            position: 'bottom',
-                                                            className: 'paginationjs-theme-red paginationjs-big',
-                                                            ajax: {
-                                                                beforeSend: function(xhr, settings) {
-                                                                    const url = settings.url
-                                                                    const params = new URLSearchParams(url)
-                                                                    let currentPageNum = params.get('pageNumber')
-                                                                    currentPageNum = parseInt(currentPageNum)
-                                                                    if (currentPageNum >= 2 && id_pengguna == 0) {
-                                                                        window.location.href = `${base_url}login`
-                                                                        return false
-                                                                    }
-                                        
-                                                                    $('#list-pemenang').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan pemenang tender terbaru...</span></div>');
-                                                                }
-                                                            },
-                                                            callback: function(data, pagination) {
-                                                                if (data != '') {
-                                                                    let html = template(data);
-                                                                    $('#list-pemenang').html(html);
-                                                                }
-                                                            }
-                                                        });
-                                                    } else {
-                                                        $('#list-pemenang').html(`
-                                                            <div class="row align-items-center rounded-3 bg-white shadow mx-0 my-3">
-                                                                <div class="col-md-2 p-3 text-center text-md-end">
-                                                                    <img src="<?= base_url("assets/img/rincian 2.png") ?>" width="140" alt="">
-                                                                </div>
-                                                                <div class="col-md-8 p-3 text-center text-md-start">
-                                                                    <h4 class="mb-2">Pemenang tender kosong!</h4>
-                                                                    <p class="m-0">Belum ada pemenang tender sesuai preferensi yang Anda tentukan.<br>Silakan bisa coba atur ulang preferensi Anda menggunakan kata kunci lain untuk mendapatkan hasil lebih baik.</p>
-                                                                </div>
-                                                                <div class="col-md-2 p-3 text-center">
-                                                                    <a href="<?= base_url() ?>preferensi" class="btn btn-danger m-1">Pengaturan</a>
-                                                                </div>
-                                                            </div>
-                                                        `);
-                                                        
-                                                        $('#pagination-container').hide();
-                                                    }
-                                                },
-                                                error: function (jqXHR, textStatus, errorThrown){}
-                                            });*/
+     // Get total number of leads for pagination
+    $.ajax({
+        url: "<?= base_url('api/marketing/getTotalLeadsByTim') ?>",
+        type: "GET",
+        dataType: "JSON",
+        data: {
+            id_pengguna: id_pengguna
+        },
+        beforeSend: addAuthorizationHeader,
+        success: function(data) {
+            const total_leads = data.data;
+            $('#pagination-container').pagination({
+                dataSource:  '<?= base_url() ?>api/marketing/getLeadsByTim',
+                locator: 'data',
+                totalNumber: total_leads,
+                pageSize: 10,
+                autoHidePrevious: true,
+                autoHideNext: true,
+                showNavigator: true,
+                formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> data leads',
+                position: 'bottom',
+                className: 'paginationjs-theme-red paginationjs-big',
+                ajax: {
+                    type: 'GET',
+                    data: {
+                        id_pengguna: id_pengguna
+                    },
+                    beforeSend: function(xhr, settings) {
+                        addAuthorizationHeader(xhr);
+                        const url = settings.url;
+                        const params = new URLSearchParams(url);
+                        let currentPageNum = parseInt(params.get('pageNumber'));
+                        if (currentPageNum >= 2 && id_pengguna == null) {
+                            window.location.href = `${base_url}login`;
+                            return false;
                         }
-                    }, 1000);
-                } else $('#sec-set-preferensi').show();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {}
-        });
-    });
 
-    function filterTender(sort = '3') {
-        let params = {
-            'id_pengguna': id_pengguna,
-            'keyword': keyword,
-            'jenis_pengadaan': jenis_pengadaan,
-            'nilai_hps_awal': hps_awal,
-            'nilai_hps_akhir': hps_akhir,
-            'prov': prov,
-            'kab': kab,
-            'sort': sort
-        };
-
-        $.ajax({
-            url: "<?= base_url() ?>api/getJumKatalogPemenangTerbaruByPengguna/" + id_pengguna,
-            type: "POST",
-            dataType: "JSON",
-            data: params,
-            success: function(data) {
-                jum_pemenang = data.jumlah;
-
-                if (jum_pemenang > 0) {
-                    $('#pagination-container').pagination({
-                        dataSource: "<?= base_url() ?>api/getKatalogPemenangTerbaruByPengguna1",
-                        locator: '',
-                        totalNumber: jum_pemenang,
-                        pageSize: 10,
-                        autoHidePrevious: true,
-                        autoHideNext: true,
-                        showNavigator: true,
-                        formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> pemenang tender terbaru',
-                        position: 'bottom',
-                        className: 'paginationjs-theme-red paginationjs-big',
-                        ajax: {
-                            type: 'POST',
-                            data: params,
-                            beforeSend: function(xhr, settings) {
-                                const url = settings.url
-                                const params = new URLSearchParams(url)
-                                let currentPageNum = params.get('pageNumber')
-                                currentPageNum = parseInt(currentPageNum)
-                                if (currentPageNum >= 2 && id_pengguna == 0) {
-                                    window.location.href = `${base_url}login`
-                                    return false
-                                }
-
-                                $('#list-pemenang').html('<div class="d-flex justify-content-center my-4"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan pemenang tender terbaru...</span></div>');
-                            }
-                        },
-                        callback: function(data, pagination) {
-                            if (data != '') {
-                                let html = template(data);
-                                $('#list-pemenang').html(html);
-                            }
-                        }
-                    });
-                } else {
-                    $('#list-pemenang').html(`
-                            <div class="row align-items-center rounded-3 bg-white shadow my-3" style="width: 98.2%;margin-inline: 12px;">
-                                <div class="col-md-2 p-3 text-center">
-                                    <img src="<?= base_url("assets/img/rincian 2.png") ?>" width="140" alt="">
-                                </div>
-                                <div class="col-md-10 p-3 text-center text-md-start">
-                                    <h4 class="mb-2">Pemenang tender kosong!</h4>
-                                    <p class="m-0">Tidak ada pemenang tender sesuai kata kunci yang Anda tentukan.<br>Silakan bisa coba atur ulang kata kunci pencarian Anda untuk mendapatkan informasi pemenang tender sesuai yang diharapkan!</p>
-                                </div>
-                            </div>
-                        `);
-
-                    $('#pagination-container').hide();
+                        // Display loading message
+                        $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                    }
+                },
+                callback: function(data, pagination) {
+                    // console.log("YEAKJSKJS INN");
+                    if (data != '') {
+                        $('#data-leads').html("");
+                        currentPage = pagination.pageNumber;
+                        let html = setTableLeads(data);
+                        $('#data-leads').html(html);
+                    }
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+        }
+    });
+
+
+        function setTableLeads(data) {
+            console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    var hasMultipleHistory = data[i].jumlah_history > 0 ? 'visible' : 'hidden';
+                    const contactName = data[i].nama ? ` (${data[i].nama})` : '';
+                    const statusBackgroundColor = getStatusBackgroundColor(data[i].status);
+                    const formattedDate = formatDate(data[i].jadwal);
+                    const rowHtml = `
+                        <tr style="vertical-align: middle;">
+                            <td>${i + 1}</td>
+                            <td style="font-weight: bold;">${data[i].nama_perusahaan || ''}</td>
+                            <td>${data[i].no_telp || '-'} ${contactName}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                            <td><span style="background:${statusBackgroundColor}; border-radius:30px;display: inline-block;padding:7px">${data[i].status || ''}</span></td>
+                            <td>${formattedDate || ''}</td>
+                            <td style="max-width: 200px; min-width:200px; word-wrap: break-word;">${data[i].catatan || ''}</td>
+                            <td></td>
+                            <td>
+                                <span class="insert-history" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
+                                <span class="expandChildTable" data-id="${data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
+                            </td>
+                        </tr>
+                        <tr class="childTableRow">
+                            <td colspan="4">
+                                <table class="table custom-table-container">
+                                    <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464">
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Jadwal</th>
+                                            <th >Catatan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data-history">
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    `;
+                    $('#data-leads').append(rowHtml);
+                }
+
+                // Tambahkan fungsi expandChildTable
+                $('.expandChildTable').on('click', function() {
+                        const id_lead = $(this).data('id');
+                        console.log(id_lead);
+                        const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
+                        childTable.empty();
+                        $.ajax({
+                            url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead,
+                            type: "GET",
+                            dataType: "json",
+                            beforeSend: addAuthorizationHeader,
+                            success: function(data) {
+                                $.each(data.data, function(index, value) {
+                                    const statusBackgroundColor = getStatusBackgroundColor(value.status);
+                                    const formattedDate = formatDate(value.jadwal);
+                                    const childRowHtml = `
+                                        <tr>
+                                            <td><span style="background:${statusBackgroundColor}; border-radius:30px;display: inline-block;padding:7px">${value.status || ''}</span></td>
+                                            <td>${formattedDate || ''}</td>
+                                            <td style="max-width: 400px;word-wrap: break-word;">${value.catatan || ''}</td>
+                                        </tr>
+                                    `;
+                                    childTable.append(childRowHtml);
+                                });
+                                childTable.parent().show();
+                            },
+                        });
+                });             
+        }
+
+        //get data kontak
+        $("#data-leads").on("click", ".contact", function() {
+                        var id_lead = $(this).data("id");
+                        $.ajax({
+                            url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
+                            type: "GET",
+                            dataType: "json",
+                            beforeSend: addAuthorizationHeader,
+                            success: function(data) {
+                                var kontak = "";
+
+                                $.each(data.data, function(index, value) {
+                                    kontak +=
+                                        `<tr id="` + value.id_kontak + `">
+                                            <td>` + value.nama + `</td>
+                                            <td>` + value.posisi + `</td>
+                                            <td>` + value.email + `</td>
+                                            <td>` + value.no_telp + `</td>
+                                            <td>
+                                                <a href="#" class="btn btn-link" onclick="editRowContact(this)">
+                                                    <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                                </a>
+                                                <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
+                                                    <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
+                                                </a>
+                                            </td>
+                                            </tr>`;
+                                });
+
+                                $("#infoKontakModal .data-kontak").html(kontak);
+                                console.log(kontak);
+                            },
+                            error: function() {
+                                swal({
+                                        title: "Data kontak kosong!",
+                                        text: "Silahkan tambahkan data kontak!",
+                                        icon: "info",
+                                        button: "Ok",
+                                });
+                                //alert("Terjadi kesalahan saat mengambil data kontak.");
+                            }
+                        });
+
+                        $.ajax({
+                            url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function(data) {
+                                $('#id-lead').val(data.id_lead);
+                                $('#nama-perusahaan').html(data.nama_perusahaan);
+                                console.log(data.nama_perusahaan);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {}
+                        });
+                });
+
+                $("#data-leads").on("click", ".insert-history", function(){
+                    var id_lead = $(this).data("id");
+                    console.log(id_lead);
+
+                    // Pindahkan event listener ke luar dari event listener di atas
+                    $('#submit-input').off('click').on('click', function(event) {
+                        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                        $('#submit-input').attr('disabled', true);
+                        event.preventDefault();
+
+                        var formData = {
+                            id_lead: id_lead,
+                            status: document.getElementById('status').value,
+                            jadwal: $('input[name=jadwal]').val(),
+                            catatan: document.getElementById('catatan').value,
+                        };
+
+                        $.ajax({
+                            url: '<?= base_url("api/marketing/insertHistory") ?>',
+                            type: 'POST',
+                            data: formData,
+                            beforeSend: addAuthorizationHeader,
+                            success: function(response) {
+                                if (response.status == true) {
+                                    swal({
+                                        title: "Data berhasil ditambahkan!",
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then(function() {
+                                        window.location.href = "<?= base_url('marketing') ?>";
+                                    });
+                                } else {
+                                    swal({
+                                        title: "Data gagal ditambahkan!",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                var span = document.createElement("span");
+                                span.innerHTML = JSON.parse(xhr.responseText).message;
+                                swal({
+                                    title: "ERROR",
+                                    content: span,
+                                    icon: "error",
+                                    button: "Ok",
+                                });
+                                console.log(xhr.responseText);
+                                console.log(JSON.parse(xhr.responseText).message);
+                            }
+                        });
+                    });
+                });
+
+
+        function formatDate(dateString) {
+            if (!dateString) {
+                return '';
+            }
+
+            const dateObject = new Date(dateString);
+            const monthNames = [
+                "Januari", "Februari", "Maret",
+                "April", "Mei", "Juni", "Juli",
+                "Agustus", "September", "Oktober",
+                "November", "Desember"
+            ];
+
+            const day = dateObject.getDate();
+            const monthIndex = dateObject.getMonth();
+            const year = dateObject.getFullYear();
+
+            const hours = dateObject.getHours();
+            const minutes = dateObject.getMinutes();
+
+            const formattedDate = `${day} ${monthNames[monthIndex]} ${year} <br> ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} WIB`;
+
+            return formattedDate;
+        }
+        
+        function getStatusBackgroundColor(status) {
+            switch (status) {
+                case 'Belum dihubungi':
+                    return '#EBCFFC';
+                case 'Sedang Dihubungi':
+                    return '#F8F5BD';
+                case 'Negosiasi':
+                    return '#D0E9F9';
+                case 'Diterima':
+                    return '#DBF9D6';
+                case 'Ditolak':
+                    return '#FEC1C1';
+                default:
+                    return ''; 
+            }
+        }
+        
+        // filter data leads
+        searchElement.addEventListener("input", function(event) {
+            var filterValue = event.target.value;
+            filterLeads(id_pengguna, filterValue);
+            console.log("Input yang diketik: " + filterValue);
         });
-    }
 
-    function template(data) {
-        var pemenang = '';
-        for (var i = 0; i <= data.length - 1; i++) {
-            let update_hari = data[i].update_hari;
-            if (update_hari == 0) update_hari = 'Hari ini';
-            else if (update_hari == 1) update_hari = 'Kemarin';
-            else update_hari = update_hari + ' hari yang lalu';
-
-            pemenang +=
-                `<div class="paket col-md-6 px-1 py-0">
-                        <div class="p-card bg-white shadow p-3 p-lg-4 rounded-4 border hover-scale">
-                            <div class="d-flex align-items-center border-bottom pb-3">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img class="rounded-circle me-1" src="<?= base_url("assets/img/img-profile-default.png") ?>" width="45">
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                    <div class="profiles">
-                                        <div class="ms-2">
-                                            <a class="p-0" href="` + data[i].url + `"><h6>` + data[i].nama_lpse + `</h6></a>
-                                            <span><i class="fas fa-calendar-alt me-1"></i>` + update_hari + `</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="p-0 nama-paket" href="#"><h5 title="` + data[i].nama_tender + `">` + data[i].nama_tender + `</h5></a>
-                            <span class="badge badge-danger mb-3">` + data[i].jenis_tender + `</span>
-                            <table class="rincian-paket" width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td class="th">Kode Tender</td>
-                                        <td>:</td>
-                                        <td><strong>` + data[i].kode_tender + `</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="th">Nilai Penawaran</td>
-                                        <td>:</td>
-                                        <td><div class="label label-success mb-0">` + formatRupiah(data[i].harga_penawaran, 'Rp') + `</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="th">Nama Pemenang</td>
-                                        <td>:</td>
-                                        <td><div class="badge badge-akhirdaftar">` + data[i].nama_pemenang + `</div></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="d-flex justify-content-between mt-3">
-                                <div></div>
-                                <div class="link d-flex flex-row align-items-center" style="gap: 15px">
-                                <span><a class="btn btn-sm border btn-outline" href="${base_url}detail-pemenang/${data[i].kode_tender}" target="_blank"><i class="fas me-1"></i>Detail Pemenang</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-        }
-
-        return pemenang;
-    }
-
-    $('.dropdown-sorting .dropdown-item').on('click', function() {
-        let sort = $(this).data('sort');
-
-        filterTender(sort);
-    });
-
-    $('#checkallhps').on('click', function() {
-        let allhps = this.checked;
-        $('#nilai_hps_awal, #nilai_hps_akhir').prop('disabled', allhps);
-
-        if (allhps) hps_awal = hps_akhir = 0;
-        else {
-            $('#nilai_hps_awal').focus();
-            hps_awal = $('#nilai_hps_awal').val();
-            hps_akhir = $('#nilai_hps_akhir').val();
-        }
-
-        filterTender();
-    });
-
-    $('#nilai_hps_awal, #nilai_hps_akhir').inputmask('decimal', {
-        'alias': 'numeric',
-        'groupSeparator': '.',
-        'autoGroup': true,
-        'digits': 0,
-        'digitsOptional': false,
-        'allowMinus': false,
-        'placeholder': '0',
-        'rightAlign': false,
-        'autoUnmask': true
-    }).on('keyup', function() {
-        hps_awal = $('#nilai_hps_awal').val();
-        hps_akhir = $('#nilai_hps_akhir').val();
-
-        if (parseInt(hps_akhir) < parseInt(hps_awal)) $('#nilai_hps_akhir').addClass('is-invalid');
-        else {
-            $('#nilai_hps_akhir').removeClass('is-invalid');
-            filterTender();
-        }
-    });
-
-    $('#keyword').on('keyup', function() {
-        clearTimeout(timer);
-
-        timer = setTimeout(function() {
-            keyword = $('#keyword').val();
-            filterTender();
-        }, 1000);
-    });
-
-    function formatData(data) {
-        if (!data.id) return data.text;
-        if (data.kategori != "2") return "<b>" + data.text + "</b>";
-        else return "<span style='padding-left: 20px;'>" + data.text + "</span>";
-    }
-
-    $('.select2-wilayah').select2({
-        placeholder: "Lokasi Pekerjaan",
-        theme: 'bootstrap-5',
-        allowClear: true,
-        "language": {
-            noResults: function() {
-                return "<span>Tidak ada lokasi pekerjaan</span>";
-            },
-            loadingMore: function() {
-                return "<span>Menampilkan lainnya...</span>";
-            },
-            searching: function() {
-                return "<span>Mencari hasil...</span>";
-            },
-            errorLoading: function() {
-                return "<span>Gagal menampilkan lokasi pekerjaan</span>";
-            }
-        },
-        escapeMarkup: function(markup) {
-            return markup;
-        },
-        ajax: {
-            // url: "http://beetend:76oZ8XuILKys5@localhost/tenderplus/api/getListLokasiPekerjaan",
-            url: "<?= base_url('api/getListLokasiPekerjaan') ?>",
-            dataType: 'json',
-            delay: 250,
-            data: function(params) {
-                return {
-                    q: params.term,
+        function filterLeads(id_pengguna, nama_perusahaan) {
+            $.ajax({
+                url: "<?php echo site_url('api/marketing/leadsByTimFiltered'); ?>",
+                type: "GET",
+                data: {
                     id_pengguna: id_pengguna,
-                    jenis: '4',
-                    page_limit: 10,
-                    page: (params.page > 1 ? params.page - 1 : params.page)
-                };
-            },
-            processResults: function(data, params) {
-                params.page = params.page || 1;
-                return {
-                    results: data.results,
-                    pagination: {
-                        more: (params.page * 10) < data.total_count
-                    }
-                };
-            },
-            cache: true
-        },
-        templateResult: formatData
-    }).on('change', function() {
-        let wilayah = $(this).val();
+                    nama_perusahaan: nama_perusahaan,
+                    status: status
+                },
+                dataType: "json",
+                beforeSend: function(xhr, settings) {
+                    addAuthorizationHeader(xhr);
+                    // Display loading message
+                    $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan data tender...</span></div>');
+                },
+                success: function(data) {
+                    // console.log(data.data, 'data');
+                    $('#data-leads').html("");
+                    let html = setTableLeads(data.data);
+                    $('#data-leads').html(html);
+                }, 
+                error: function(data) {
+                    $('#data-leads').html("");
 
-        if (wilayah != null) {
-            if (wilayah.includes('00')) {
-                prov = wilayah;
-                kab = '';
-            } else {
-                kab = wilayah;
-                prov = '';
-            }
-        } else kab = prov = '';
-
-        filterTender();
-    });
-
-    $('.select2-jenis-pengadaan').select2({
-        placeholder: "Jenis Pengadaan",
-        theme: 'bootstrap-5',
-        allowClear: true,
-        "language": {
-            noResults: function() {
-                return "<span>Tidak ada jenis pengadaan</span>";
-            },
-            loadingMore: function() {
-                return "<span>Menampilkan lainnya...</span>";
-            },
-            searching: function() {
-                return "<span>Mencari hasil...</span>";
-            },
-            errorLoading: function() {
-                return "<span>Gagal menampilkan jenis pengadaan</span>";
-            }
-        },
-        escapeMarkup: function(markup) {
-            return markup;
-        },
-        ajax: {
-            url: "<?= base_url('api/getListJenisPengadaan') ?>",
-            dataType: 'json',
-            delay: 250,
-            data: function(params) {
-                return {
-                    q: params.term,
-                    id_pengguna: id_pengguna,
-                    jenis: '4',
-                    page_limit: 10,
-                    page: (params.page > 1 ? params.page - 1 : params.page)
-                };
-            },
-            processResults: function(data, params) {
-                params.page = params.page || 1;
-                console.log(data, "data Pengadaan");
-                return {
-                    results: data.results,
-                    pagination: {
-                        more: (params.page * 10) < data.total_count
-                    }
-                };
-            },
-            cache: true
+                }, 
+            });
         }
-    }).on('change', function() {
-        jenis_pengadaan = $(this).val();
-        filterTender();
-    });
-</script> -->
 
-<script>
-    new Choices(document.querySelector(".choices-multiple"));
-</script>
+        //script tabel kontak
+        function addRowContact() {
+            var table = document.getElementById("tabel-kontak");
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2); 
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+
+            cell1.contentEditable = true;
+            cell2.contentEditable = true;
+            cell3.contentEditable = true;
+            cell4.contentEditable = true;
+            cell5.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveRowContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                            '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        // Fungsi untuk menyimpan perubahan pada baris
+        function saveRowContact(button) {
+            var row = button.parentNode.parentNode;
+            var id_lead = document.getElementById('id-lead').value;
+            console.log(id_lead);
+            var nama = row.cells[0].textContent.trim();
+            var posisi = row.cells[1].textContent.trim();
+            var email = row.cells[2].textContent.trim();
+            var noTelp = row.cells[3].textContent.trim();
+            
+            if (email === "" || noTelp === "") {
+                alert("Email dan No Telp harus diisi sebelum menyimpan.");
+                return;
+            }
+
+            for (var i = 0; i < 4; i++) {
+                row.cells[i].removeAttribute("contenteditable");
+            }
+
+            var data = {
+                id_lead: id_lead,
+                nama: nama,
+                posisi: posisi,
+                email: email,
+                no_telp: noTelp
+            };
+
+            $.ajax({
+                url: "<?= base_url('api/supplier/insertContact') ?>",
+                type: "POST",
+                data: data,
+                beforeSend: addAuthorizationHeader,
+                success: function(response) {
+                    var result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        alert('Data berhasil disimpan.');
+                    } else {
+                        alert('Gagal menyimpan data.');
+                    }
+                },
+                error: function(error) {
+                    alert('Terjadi kesalahan saat menyimpan data.');
+                }
+            });
+
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn btn-link" onclick="editRowContact(this)"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                                    '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        // Fungsi untuk mengubah baris menjadi mode edit
+        function editRowContact(button) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName("td");
+            for (var i = 0; i < 4; i++) {
+                cells[i].setAttribute("contenteditable", "true");
+            }
+            
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn-link save-button" onclick="saveEditContact(this)"><img src="<?= base_url("assets/img/ceklis.svg") ?>" alt="Save"  class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        function saveEditContact(button) {
+            var row = button.parentNode.parentNode;
+            var idKontak = row.id;
+            var nama = row.cells[0].textContent.trim();
+            var posisi = row.cells[1].textContent.trim();
+            var email = row.cells[2].textContent.trim();
+            var noTelp = row.cells[3].textContent.trim();
+            
+            if (email === "" || noTelp === "") {
+                alert("Email dan No Telp harus diisi sebelum menyimpan.");
+                return;
+            }
+
+            for (var i = 0; i < 4; i++) {
+                row.cells[i].removeAttribute("contenteditable");
+            }
+
+            var data = {
+                nama: nama,
+                posisi: posisi,
+                email: email,
+                no_telp: noTelp,
+            };
+
+            $.ajax({
+                url: "<?= base_url('api/supplier/updateContact/') ?>" + idKontak,
+                type: "POST",
+                data: data,
+                beforeSend: addAuthorizationHeader,
+                success: function(response) {
+                    var result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        alert('Data berhasil disimpan.');
+                    } else {
+                        alert('Gagal menyimpan data.');
+                    }
+                },
+                error: function(error) {
+                    alert('Terjadi kesalahan saat menyimpan data.');
+                }
+            });
+
+            var actionCell = row.getElementsByTagName("td")[4];
+            actionCell.innerHTML = '<a href="#" class="btn btn-link" onclick="editRowContact(this)"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>' +
+                                    '<a href="#" class="btn btn-link" onclick="deleteRowContact(this)"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 20px; height: 20px; padding: 0; max-width: none;"></a>';
+        }
+
+        // Fungsi untuk menghapus baris
+        function deleteRowContact(button) {
+            var row = button.parentNode.parentNode;
+            var idKontak = row.id;
+
+            $.ajax({
+                url: "<?= base_url('api/supplier/deleteContact/') ?>" + idKontak,
+                type: "DELETE",
+                beforeSend: addAuthorizationHeader,
+                success: function (response) {
+                    if (result.status === 'success') {
+                        alert('Data berhasil dihapus.');
+                    } else {
+                        alert('Gagal menghapus data.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+            row.parentNode.removeChild(row);
+        }
+</script> 

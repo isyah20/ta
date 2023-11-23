@@ -173,4 +173,21 @@ class ApiPeserta extends RestController
             ], RestController::HTTP_BAD_REQUEST);
         }
     }
+
+    public function getPesertaTender_get() {
+        $npwp = $this->get('npwp');
+        $response = $this->Peserta_model->getPesertaIkutTender($npwp);
+
+        if ($response) {
+            $this->response([
+                'status' => true,
+                'data' => $response,
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data not found',
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

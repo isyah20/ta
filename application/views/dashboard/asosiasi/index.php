@@ -1,6 +1,6 @@
 <link href="<?= base_url() ?>assets/css/home/pagination.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -258,7 +258,7 @@
         font-weight: 700;
         border-radius: 10px;
         height: 35px;
-        width: 80px;
+        /* width: 80px; */
         border-color: #D21B1B;
     }
 
@@ -284,11 +284,12 @@
     }
 
     .col2 {
-        margin-top: 1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .col3 {
-        margin-top: 80px;
+        margin-top: 90px;
     }
 
     .line {
@@ -363,10 +364,11 @@
 
         .dashboard-hero {
             margin-left: 2px;
-            height: auto;
         }
 
         .chart2 {
+            width: 80%;
+            height: 80%;
             margin-right: 20px;
         }
 
@@ -382,7 +384,6 @@
         .tender {
             font-size: 18px;
             margin-left: 20px;
-            margin-top: 6rem;
         }
 
         #total {
@@ -394,18 +395,34 @@
         }
 
         .col2 {
-            margin-top: 2px;
+            margin-top: 10px;
         }
 
         .tender-summary {
             font-size: 17px;
         }
     }
+
+    .close {
+        background-color: transparent;
+        border: none;
+
+    }
+
+    .close span {
+        color: #BF0C0C;
+        /* Warna teks close */
+        font-size: 2rem;
+        /* Ukuran teks close */
+        width: 24px;
+        height: 24px;
+    }
 </style>
 
 <section class="bg-white">
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
-        <h4 class="mb-0 fw-semibold wow fadeInUp">Selamat Datang! <p class="pt-2">Sudah Siap Memantau Performa Anggotamu Hari ini ?</p>
+        <h4 class="mb-0 fw-semibold wow fadeInUp">Selamat Datang <?= $pengguna['nama'] ?> !
+            <p class="pt-2">Sudah Siap Memantau Performa Anggotamu Hari ini ?</p>
         </h4>
     </div>
 </section>
@@ -418,7 +435,7 @@
                     <div class="col-lg-2" style="padding:0">
                         <div>
                             <center>
-                                <div class="chart2">
+                                <div class="chart2" style="margin-left:20; margin-top:50; margin-bottom:50; padding:0">
                                     <canvas id="doughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
                                 </div>
                             </center>
@@ -442,7 +459,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 wow fadeInUp">
-                        <center> <img src="http://localhost/tenderplus/assets/img/dashboard-hero.png" class="dh-img" alt="" style="margin-top: 5rem; margin-bottom: 1rem; "></center>
+                        <center> <img src="http://localhost/tenderplus/assets/img/dashboard-hero.png" class="dh-img" alt="" style="margin-top: 10rem; "></center>
                     </div>
                 </div>
             </div>
@@ -488,15 +505,20 @@
 
 <section>
     <div class="container mt-4 wow fadeInUp">
-        <div class="row ">
+        <div class="row">
             <div class="col-lg-8">
                 <div class="row">
-                    <h4 class="col-lg-4 my-0 mb-3 " style="font-weight:500; font-size: 20px;">Anggota Asosiasi</h4>
+                    <h4 class="col-lg-4 my-0 mb-3" style="font-weight:500; font-size: 20px;">Anggota Asosiasi</h4>
                     <div class=".col-lg-2 .offset-md-3 form-select-custom" style="padding-left:30px; margin-right:20px;">
                         <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari Nama Anggota">
                         <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-bottom:0px;margin-top:5px">
                     </div>
-                    <button class="col-lg-2 btnbtnbtn"><span><img class="custom-img3" src="<?= base_url('assets\img\icon_tambah_anggota.svg') ?>" alt=""></span style="font">Tambah Anggota</button>
+                    <button class="col-lg-2 btnbtnbtn" data-toggle="modal" data-target="#uploadModal"><span><img class="custom-img3" src="<?= base_url('assets\img\icon_tambah_anggota.svg') ?>" alt=""></span style="font">Tambah Anggota</button>
+                    <div class="d-flex justify-content-start">
+                    <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
+                        <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Tim</a></span>
+                    </div>
+            </div>
                 </div>
                 <div class="custom-table-container shadow-sm table-striped">
                     <table class="data-table">
@@ -512,7 +534,32 @@
                             </tr>
                         </thead>
                         <tbody id="table-content">
+                        <?php if ($data_asosiasi != null) {
+                            $no = 0;
+                            foreach ($data_asosiasi as $asosiasi) : 
+                                $no++;
+                            ?>
                             <tr>
+                                <td><span id="no"><?= $no ?></span></td>
+                                <td id="name" style="font-weight: bold;"><?= $asosiasi['nama_peserta'] ?></td>
+                                <td id="tender"><?= $asosiasi['total_ikut'] ?></td>
+                                <td id="m" style="color: #059669;"><?= $asosiasi['total_menang'] ?></td>
+                                <td id="k" style="color: #D21B1B;"><?= $asosiasi['total_kalah'] ?></td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>15</td>
+                            </tr>
+                                <?php
+                                endforeach;
+                                } else { ?>
+                            <tr>
+                                <td><span id="no">1</span></td>
+                                <td id="name" style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
+                                <td id="tender">24</td>
+                                <td id="m" style="color: #059669;">23</td>
+                                <td id="k" style="color: #D21B1B;">1</td>
+                                <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>15</td>
+                            </tr>
+                                <?php } ?>
+                            <!-- <tr>
                                 <td><span id="no">1</span></td>
                                 <td id="name" style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
                                 <td id="tender">24</td>
@@ -591,7 +638,7 @@
                                 <td id="m" style="color: #059669;">13</td>
                                 <td id="k" style="color: #D21B1B;">0</td>
                                 <td id="hps" style="color: #059669;"><i class="fas fa-arrow-down mr-1 h-10"></i>28</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -652,8 +699,95 @@
             </div>
         </div>
     </div>
+
+    <!-- modal upload -->
+
+    <div class="col-12 py-5">
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true" style="margin-top: 50px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <img src="<?= base_url("assets/img/icon-file.png") ?>" style="width: 60px; height: 60px; padding: 0;">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color:#BF0C0C">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-left align-content-center justify-content-center">
+                        <h3 class="modal-title" id="uploadModalLabel">Masukkan File Anggota Anda</h3>
+                        <p class="">Ukuran file maks. 100Mb</p>
+                        <div class="input-popup text-center align-items-center justify-content-center" style="padding:5%; border-radius: 10px; border: 1px dashed var(--primary-red-600, #BF0C0C); background: var(--font-white, #FCFCFC);">
+                            <img src="<?= base_url("assets/img/cloud-icon.png") ?>" alt="Gambar" style="height: 80px; width:80px">
+                            <p>Drag and drop file Anda</p>
+                            <p>File harus memiliki format csv, xlx, xlsx, xlsm, atau xlsb</p>
+                            <p>atau</p>
+                            <form method="post" action="<?php echo base_url('your_controller/upload_excel'); ?>" enctype="multipart/form-data">
+                                <input type="file" name="excel_file" />
+                                <input type="submit" value="Upload" />
+                            </form>
+                            <!-- <input type="file" name="anggota" id="data_anggota" class="form-control" style="display: none;"> -->
+                            <!-- <input type="file" id="fileElem" class="form-control" style="display: none; multiple accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /> -->
+                            <!-- <label for="data_anggota" class="btn btn-sm border" style="border-radius: 3px; border: 1px solid var(--primary-red-600, #BF0C0C);">
+                                Pilih File
+                            </label> -->
+                            
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- end modal upload -->
 </section>
 
+<!-- modal input marketing -->
+<div class="col-12 py-5">
+        <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal-dialog custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body border-0">
+                        <h3 class="modal-title" id="inputMarketingModalLabel">Input Anggota Baru</h3>
+                        <p class="text-center">Tambahkan untuk memasukkan anggota baru ke asosiasi mu</p>
+                        <div class="input-popup justify-content-end">
+                            <form id="form-input" class="row g-2">
+                                <div class="col-12">
+                                    <label for="inputNama" class="form-label text-start">npwp</label>
+                                    <input type="text" name="npwp" class="form-control" id="inputNama" placeholder="Masukkan Nama" required>
+                                </div>
+                                <div class="justify-content-start mt-3 gap-2">
+                                    <div class="link flex-row align-items-center w-100">
+                                        <span>
+                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                            <button type="submit" id="submit-input" class="btn-custom text-white text-center" style="width:407px;border:none">
+                                                Tambahkan
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- end modal input marketing -->
 
 <!-- <script>
     var ctx = document.getElementById("doughnutChart").getContext("2d");
@@ -691,6 +825,45 @@
 
 <script>
     var ctx = document.getElementById('doughnutChart').getContext('2d');
+    var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
+    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+
+    function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+    }
+
+    $(document).ready(function() {
+        $('#submit-input').click(function(event) {
+            event.preventDefault();
+
+            var npwp = $('input[name="npwp"]').val();
+            var formData = {
+                'npwp': npwp,
+                'id_pengguna': id_pengguna
+            };
+
+            $.ajax({
+                url: '<?= base_url("api/asosiasi/insertNewAnggota") ?>',
+                type: 'POST',
+                data: formData,
+                beforeSend: addAuthorizationHeader,
+                success: function(response) {
+                    if (response.status == true) {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(response) {
+                    alert(response.message);
+                }
+            });
+        });
+    });
+    // })
+
+
 
     var totalTender = 0;
     var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100];
@@ -898,3 +1071,11 @@
         });
     });
 </script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
