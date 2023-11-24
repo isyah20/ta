@@ -176,6 +176,7 @@ $route['api/getTabelPenawaranTerendah'] = 'Competitor/getTabelPenawaranTerendah'
 $route['api/getRataPenawaranTerendah'] = 'Competitor/getRataPenawaranTerendah';
 $route['api/getTawaranRendah'] = 'Competitor/getTawaranRendah';
 
+
 //Market
 $route['market'] = 'Market';
 $route['user-dashboard/market'] = 'Market/indexMarket';
@@ -404,6 +405,8 @@ $route['api/marketing/getKontakLeadById/(:num)'] = 'api/ApiMarketing/getKontakLe
 $route['api/marketing/getHistoryMarketing/(:num)'] = 'api/ApiMarketing/getHistoryMarketing/$1';
 $route['api/marketing/insertHistory'] = 'api/ApiMarketing/insertHistory';
 $route['api/marketing/leadsByTimFiltered'] = 'api/ApiMarketing/leadsByTimFiltered';
+$route['api/marketing/getTotalPlotEachTim/(:num)'] = 'api/ApiMarketing/getTotalPlotEachTim/$1';
+$route['api/marketing/getTotalStatusPlotTim/(:num)'] = 'api/ApiMarketing/getTotalStatusPlotTim/$1';
 
 //restAPI route for Suplier 
 $route['api/supplier/get'] = 'api/ApiSupplier';
@@ -436,11 +439,15 @@ $route['api/pengguna/getPesertaDaftar'] = 'api/ApiAnalytic/getPesertaDaftar';
 //restAPI route for DaftarHItam
 $route['api/daftarhitambynpwp'] = 'api/ApiDaftarHitam/daftarhitambynpwp';
 
-//restAPI route for ASOSIASI
+//restAPI route for ASOSIASI 
 $route['api/asosiasi'] = 'api/ApiAnggotaAsosiasi';
 $route['api/asosiasibypengguna'] = 'api/ApiAnggotaAsosiasi/getdatadinamis';
 $route['api/asosiasi/create'] = 'api/ApiAnggotaAsosiasi/create';
 $route['api/asosiasi/destroy/(:num)'] = 'api/ApiAnggotaAsosiasi/destroy/$1';
+$route['api/asosiasi/getAsosiasiAnggota'] = 'api/ApiAnggotaAsosiasi/getAsosiasiAnggota';
+$route['api/asosiasi/getAnggotaAsosiasi'] = 'api/ApiAnggotaAsosiasi/getAnggotaAsosiasi';
+$route['api/asosiasi/getDataChart'] = 'api/ApiAnggotaAsosiasi/getDataChart';
+$route['api/asosiasi/insertNewAnggota'] = 'api/ApiAnggotaAsosiasi/insertNewAnggota';
 // $route['api/asosiasifilter'] = 'api/ApiAnggotaAsosiasi/asosiasifilter';
 // $route['api/asosiasifilterhps'] = 'api/ApiAnggotaAsosiasi/asosiasifilterhps';
 // $route['api/testing_penurunan'] = 'api/ApiAnggotaAsosiasi/testing';
@@ -766,7 +773,7 @@ $route['api-mobile/supplier/getTimMarketingById'] = 'api-mobile/ApiSupplier/getT
 
 // Tim Marketing
 $route['api-mobile/supplier/getTim'] = 'api-mobile/ApiSupplier';
-$route['api-mobile/supplier/createTim'] = 'api-mobile/ApiSupplier/create';
+$route['api-mobile/supplier/createTim/(:num)'] = 'api-mobile/ApiSupplier/createTim/$1';
 $route['api-mobile/supplier/deleteTim/(:num)'] = 'api-mobile/ApiSupplier/deleteTim/$1';
 $route['api-mobile/supplier/updateTim/(:num)'] = 'api-mobile/ApiSupplier/editTimMarketing/$1';
 $route['api-mobile/supplier/getTimById/(:num)'] = 'api-mobile/ApiSupplier/getbyId/$1';

@@ -651,12 +651,16 @@
             margin-left:90%;
         }
     }
+    /* .bg-color{
+        border-radius: 30px;
+        background: #DBF9D6;
+    } */
 </style>
 
 <section class="bg-white pt-5 mt-5">
     <div class="mt-3 container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-12">
-            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Follow Up Calon Customermu</p>
+            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Siap Menawarkan Produk Mu Hari ini?</p>
             </h4>
         </div>
     </div>
@@ -665,7 +669,7 @@
     <div class="container bg-white">
         <div class="row">
             <div class="col-md-7">
-                <div class="card-select wow fadeInUp" data-wow-delay="0.2s">
+                <div style="margin-top:15px" class="wow fadeInUp" data-wow-delay="0.2s">
                     <div class="select-custom container-fluid">
                         <div class="row wow fadeInUp">
                                 <div class="col-sm-1 form-select-custom " style="width: 190px; margin-right:5px">
@@ -716,20 +720,20 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
-                            <!-- <tr>
+                            <!-- <tr style="vertical-align: middle;">
                                 <td>2</td>
                                 <td style="font-weight: bold;">PT. Telekomunikasi Indonesia, Tbk.</td>
                                 <td>0811-2345-6666 (Office) <span><button class="allcontact contact" style="visibility" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span>
                                 </td>
-                                <td class="editable-select">Negotiation</td>
-                                <td class="editable-date">02/12/2024</td>
+                                <td ><span style=" padding: 8%; border-radius: 30px; background: var(--color-blue, #D0E9F9);">Negotiation</span></td>
+                                <td class="editable-date ">02/12/2024</td>
                                 <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed.</td>
                                 <td></td>
                                 <td><span><img src="<?= base_url('assets\img\add-circle-button.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#buatAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Buat Agenda">
                                 <span><img src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" width="30px" style="margin-left:3px;visibility" data-toggle="modal" data-target="#editAgenda" data-id="` + value.id + `" data-bs-toggle="tooltip" title="Edit Agenda"></span>
                                 <span class="expandChildTable"><img src="<?= base_url('assets\img\icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span></td>
-                            </tr> -->
-                            <!-- <tr class="childTableRow">
+                            </tr> 
+                            <tr class="childTableRow">
                                 <td colspan="5">
                                     <table class="table custom-table-container">
                                         <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464"> 
@@ -747,12 +751,12 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-select" style="border-radius: 30px; background: var(--color-blue, #D0E9F9);">Negotiation</td>
                                                 <td class="editable-date">2023-10-17 15:30:00</td>
                                                 <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
                                             </tr>
                                             <tr>
-                                                <td class="editable-select">Negotiation</td>
+                                                <td class="editable-select" style="border-radius: 30px; background: var(--color-blue, #D0E9F9);">Negotiation</td>
                                                 <td class="editable-date">2023-10-17 15:30:00</td>
                                                 <td class="editable" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis sem ante, sit amet dignissim purus mattis sed. Sed sed accumsan neque, ut maximus ex. Mauris cursus aliquam efficitur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</td>
                                             </tr>
@@ -855,7 +859,9 @@
                                 <select id="status" class="border border-1 form-select" style="height:40px;padding-top:0px;" aria-label="Pilih Status">
                                     <option selected>Pilih Status</option>
                                     <option value="Sedang Dihubungi">Sedang Dihubungi</option>
-                                    <option value="Negosiasi">Negosiasi</option>
+                                    <!-- <option value="Negosiasi" >Negosiasi</option> -->
+                                    <option value="Negosiasi" >Negosiasi</option>
+
                                     <option value="Diterima">Diterima</option>
                                     <option value="Ditolak">Ditolak</option>
                                 </select>
@@ -905,10 +911,10 @@
                                 <label for="inputNama" class="form-label text-start">Status</label>
                                 <select class="border border-1 form-select" style="height:40px;padding-top:0px;" aria-label="Pilih Status">
                                     <option selected>Pilih Status</option>
-                                    <option value="option1">Sedang Dihubungi</option>
-                                    <option value="option2">Negosiasi</option>
-                                    <option value="option3">Diterima</option>
-                                    <option value="option4">Ditolak</option>
+                                    <option value="option2">Sedang Dihubungi</option>
+                                    <option value="option3">Negosiasi</option>
+                                    <option value="option4">Diterima</option>
+                                    <option value="option5">Ditolak</option>
                                 </select>
                             </div>
                             <div class="col-12">
@@ -1001,75 +1007,78 @@
     }
 
      // Get total number of leads for pagination
-$.ajax({
-    url: "<?= base_url('api/marketing/getTotalLeadsByTim') ?>",
-    type: "GET",
-    dataType: "JSON",
-    data: {
-        id_pengguna: id_pengguna
-    },
-    beforeSend: addAuthorizationHeader,
-    success: function(data) {
-        const total_leads = data.data;
-        $('#pagination-container').pagination({
-            dataSource:  '<?= base_url() ?>api/marketing/getLeadsByTim',
-            locator: 'data',
-            totalNumber: total_leads,
-            pageSize: 10,
-            autoHidePrevious: true,
-            autoHideNext: true,
-            showNavigator: true,
-            formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> data leads',
-            position: 'bottom',
-            className: 'paginationjs-theme-red paginationjs-big',
-            ajax: {
-                type: 'GET',
-                data: {
-                    id_pengguna: id_pengguna
-                },
-                beforeSend: function(xhr, settings) {
-                    addAuthorizationHeader(xhr);
-                    const url = settings.url;
-                    const params = new URLSearchParams(url);
-                    let currentPageNum = parseInt(params.get('pageNumber'));
-                    if (currentPageNum >= 2 && id_pengguna == null) {
-                        window.location.href = `${base_url}login`;
-                        return false;
-                    }
+    $.ajax({
+        url: "<?= base_url('api/marketing/getTotalLeadsByTim') ?>",
+        type: "GET",
+        dataType: "JSON",
+        data: {
+            id_pengguna: id_pengguna
+        },
+        beforeSend: addAuthorizationHeader,
+        success: function(data) {
+            const total_leads = data.data;
+            $('#pagination-container').pagination({
+                dataSource:  '<?= base_url() ?>api/marketing/getLeadsByTim',
+                locator: 'data',
+                totalNumber: total_leads,
+                pageSize: 10,
+                autoHidePrevious: true,
+                autoHideNext: true,
+                showNavigator: true,
+                formatNavigator: 'Menampilkan <span class="count-paket"><%= rangeStart %> - <%= rangeEnd %></span> dari <span class="count-paket"><%= totalNumber %></span> data leads',
+                position: 'bottom',
+                className: 'paginationjs-theme-red paginationjs-big',
+                ajax: {
+                    type: 'GET',
+                    data: {
+                        id_pengguna: id_pengguna
+                    },
+                    beforeSend: function(xhr, settings) {
+                        addAuthorizationHeader(xhr);
+                        const url = settings.url;
+                        const params = new URLSearchParams(url);
+                        let currentPageNum = parseInt(params.get('pageNumber'));
+                        if (currentPageNum >= 2 && id_pengguna == null) {
+                            window.location.href = `${base_url}login`;
+                            return false;
+                        }
 
-                    // Display loading message
-                    $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                        // Display loading message
+                        $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan tender terbaru...</span></div>');
+                    }
+                },
+                callback: function(data, pagination) {
+                    // console.log("YEAKJSKJS INN");
+                    if (data != '') {
+                        $('#data-leads').html("");
+                        currentPage = pagination.pageNumber;
+                        let html = setTableLeads(data);
+                        $('#data-leads').html(html);
+                    }
                 }
-            },
-            callback: function(data, pagination) {
-                // console.log("YEAKJSKJS INN");
-                if (data != '') {
-                    $('#data-leads').html("");
-                    currentPage = pagination.pageNumber;
-                    let html = setTableLeads(data);
-                    $('#data-leads').html(html);
-                }
-            }
-        });
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-        toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
-    }
-});
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+        }
+    });
 
 
         function setTableLeads(data) {
-            console.log(data[1]);
+            console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     var hasMultipleHistory = data[i].jumlah_history > 0 ? 'visible' : 'hidden';
+                    const contactName = data[i].nama ? ` (${data[i].nama})` : '';
+                    const statusBackgroundColor = getStatusBackgroundColor(data[i].status);
+                    const formattedDate = formatDate(data[i].jadwal);
                     const rowHtml = `
-                        <tr>
+                        <tr style="vertical-align: middle;">
                             <td>${i + 1}</td>
-                            <td>${data[i].nama_perusahaan || ''}</td>
-                            <td>${data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                            <td>${data[i].status || ''}</td>
-                            <td>${data[i].jadwal || ''}</td>
-                            <td style="max-width: 400px">${data[i].catatan || ''}</td>
+                            <td style="font-weight: bold;">${data[i].nama_perusahaan || ''}</td>
+                            <td>${data[i].no_telp || '-'} ${contactName}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                            <td><span style="background:${statusBackgroundColor}; border-radius:30px;display: inline-block;padding:7px">${data[i].status || ''}</span></td>
+                            <td>${formattedDate || ''}</td>
+                            <td style="max-width: 200px; min-width:200px; word-wrap: break-word;">${data[i].catatan || ''}</td>
                             <td></td>
                             <td>
                                 <span class="insert-history" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
@@ -1077,13 +1086,13 @@ $.ajax({
                             </td>
                         </tr>
                         <tr class="childTableRow">
-                            <td colspan="5">
+                            <td colspan="4">
                                 <table class="table custom-table-container">
                                     <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464">
                                         <tr>
                                             <th>Status</th>
                                             <th>Jadwal</th>
-                                            <th>Catatan</th>
+                                            <th >Catatan</th>
                                         </tr>
                                     </thead>
                                     <tbody id="data-history">
@@ -1108,11 +1117,13 @@ $.ajax({
                             beforeSend: addAuthorizationHeader,
                             success: function(data) {
                                 $.each(data.data, function(index, value) {
+                                    const statusBackgroundColor = getStatusBackgroundColor(value.status);
+                                    const formattedDate = formatDate(value.jadwal);
                                     const childRowHtml = `
                                         <tr>
-                                            <td class="editable-select">${value.status || ''}</td>
-                                            <td class="editable-date">${value.jadwal || ''}</td>
-                                            <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
+                                            <td><span style="background:${statusBackgroundColor}; border-radius:30px;display: inline-block;padding:7px">${value.status || ''}</span></td>
+                                            <td>${formattedDate || ''}</td>
+                                            <td style="max-width: 400px;word-wrap: break-word;">${value.catatan || ''}</td>
                                         </tr>
                                     `;
                                     childTable.append(childRowHtml);
@@ -1120,10 +1131,11 @@ $.ajax({
                                 childTable.parent().show();
                             },
                         });
-                });
+                });             
+        }
 
-                //get data kontak
-                $("#data-leads").on("click", ".contact", function() {
+        //get data kontak
+        $("#data-leads").on("click", ".contact", function() {
                         var id_lead = $(this).data("id");
                         $.ajax({
                             url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
@@ -1155,7 +1167,13 @@ $.ajax({
                                 console.log(kontak);
                             },
                             error: function() {
-                                alert("Terjadi kesalahan saat mengambil data kontak.");
+                                swal({
+                                        title: "Data kontak kosong!",
+                                        text: "Silahkan tambahkan data kontak!",
+                                        icon: "info",
+                                        button: "Ok",
+                                });
+                                //alert("Terjadi kesalahan saat mengambil data kontak.");
                             }
                         });
 
@@ -1175,18 +1193,22 @@ $.ajax({
                 $("#data-leads").on("click", ".insert-history", function(){
                     var id_lead = $(this).data("id");
                     console.log(id_lead);
-                    $('#submit-input').click(function(event) {
-                    event.preventDefault();
 
-                    var formData = {
-                        id_lead: id_lead,
-                        status: document.getElementById('status').value,
-                        jadwal: $('input[name=jadwal]').val(),
-                        catatan: document.getElementById('catatan').value,
-                    };
+                    // Pindahkan event listener ke luar dari event listener di atas
+                    $('#submit-input').off('click').on('click', function(event) {
+                        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                        $('#submit-input').attr('disabled', true);
+                        event.preventDefault();
 
-                    $.ajax({
-                        url: '<?= base_url("api/marketing/insertHistory") ?>',
+                        var formData = {
+                            id_lead: id_lead,
+                            status: document.getElementById('status').value,
+                            jadwal: $('input[name=jadwal]').val(),
+                            catatan: document.getElementById('catatan').value,
+                        };
+
+                        $.ajax({
+                            url: '<?= base_url("api/marketing/insertHistory") ?>',
                             type: 'POST',
                             data: formData,
                             beforeSend: addAuthorizationHeader,
@@ -1219,185 +1241,53 @@ $.ajax({
                                 console.log(xhr.responseText);
                                 console.log(JSON.parse(xhr.responseText).message);
                             }
-                    });
+                        });
                     });
                 });
+
+
+        function formatDate(dateString) {
+            if (!dateString) {
+                return '';
             }
+
+            const dateObject = new Date(dateString);
+            const monthNames = [
+                "Januari", "Februari", "Maret",
+                "April", "Mei", "Juni", "Juli",
+                "Agustus", "September", "Oktober",
+                "November", "Desember"
+            ];
+
+            const day = dateObject.getDate();
+            const monthIndex = dateObject.getMonth();
+            const year = dateObject.getFullYear();
+
+            const hours = dateObject.getHours();
+            const minutes = dateObject.getMinutes();
+
+            const formattedDate = `${day} ${monthNames[monthIndex]} ${year} <br> ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} WIB`;
+
+            return formattedDate;
+        }
         
-
-    // $(document).ready(function() {
-    //     $.ajax({
-    //         url: "<?= base_url('api/marketing/getLeadsByTim/') ?>" + id_pengguna,
-    //         type: "GET",
-    //         dataType: "json",
-    //         beforeSend: addAuthorizationHeader,
-    //         success: function(data1) {
-    //             for (let i = 0; i < data1.data.length; i++) {
-    //                 var hasMultipleHistory = data1.data[i].jumlah_history > 0 ? 'visible' : 'hidden';
-    //                 const rowHtml = `
-    //                     <tr>
-    //                         <td>${i + 1}</td>
-    //                         <td>${data1.data[i].nama_perusahaan || ''}</td>
-    //                         <td>${data1.data[i].no_telp || '-'}<span><button class="allcontact contact" data-toggle="modal" data-target="#infoKontakModal" data-id="${data1.data[i].id_lead}"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-    //                         <td>${data1.data[i].status || ''}</td>
-    //                         <td>${data1.data[i].jadwal || ''}</td>
-    //                         <td style="max-width: 400px">${data1.data[i].catatan || ''}</td>
-    //                         <td></td>
-    //                         <td>
-    //                             <span class="insert-history" data-id="${data1.data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
-    //                             <span class="expandChildTable" data-id="${data1.data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
-    //                         </td>
-    //                     </tr>
-    //                     <tr class="childTableRow">
-    //                         <td colspan="5">
-    //                             <table class="table custom-table-container">
-    //                                 <thead class="text-center" style="background-color:#F0E2E2; color:#8B6464">
-    //                                     <tr>
-    //                                         <th>Status</th>
-    //                                         <th>Jadwal</th>
-    //                                         <th>Catatan</th>
-    //                                     </tr>
-    //                                 </thead>
-    //                                 <tbody id="data-history">
-    //                                 </tbody>
-    //                             </table>
-    //                         </td>
-    //                     </tr>
-    //                 `;
-    //                 $('#data-leads').append(rowHtml);
-    //             }
-
-    //             // Tambahkan fungsi expandChildTable
-    //             $('.expandChildTable').on('click', function() {
-    //                     const id_lead = $(this).data('id');
-    //                     console.log(id_lead);
-    //                     const childTable = $(this).toggleClass('selected').closest('tr').next().toggle().find('#data-history');
-    //                     childTable.empty();
-    //                     $.ajax({
-    //                         url: "<?= site_url('api/marketing/getHistoryMarketing/') ?>" + id_lead,
-    //                         type: "GET",
-    //                         dataType: "json",
-    //                         beforeSend: addAuthorizationHeader,
-    //                         success: function(data) {
-    //                             $.each(data.data, function(index, value) {
-    //                                 const childRowHtml = `
-    //                                     <tr>
-    //                                         <td class="editable-select">${value.status || ''}</td>
-    //                                         <td class="editable-date">${value.jadwal || ''}</td>
-    //                                         <td class="editable" style="max-width: 400px">${value.catatan || ''}</td>
-    //                                     </tr>
-    //                                 `;
-    //                                 childTable.append(childRowHtml);
-    //                             });
-    //                             childTable.parent().show();
-    //                         },
-    //                     });
-    //             });
-
-    //             //get data kontak
-    //             $("#data-leads").on("click", ".contact", function() {
-    //                     var id_lead = $(this).data("id");
-    //                     $.ajax({
-    //                         url: "<?= site_url('api/marketing/getKontakLeadById/') ?>" + id_lead,
-    //                         type: "GET",
-    //                         dataType: "json",
-    //                         beforeSend: addAuthorizationHeader,
-    //                         success: function(data) {
-    //                             var kontak = "";
-
-    //                             $.each(data.data, function(index, value) {
-    //                                 kontak +=
-    //                                     `<tr id="` + value.id_kontak + `">
-    //                                         <td>` + value.nama + `</td>
-    //                                         <td>` + value.posisi + `</td>
-    //                                         <td>` + value.email + `</td>
-    //                                         <td>` + value.no_telp + `</td>
-    //                                         <td>
-    //                                             <a href="#" class="btn btn-link" onclick="editRowContact(this)">
-    //                                                 <img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-    //                                             </a>
-    //                                             <a href="#" class="btn btn-link" onclick="deleteRowContact(this)">
-    //                                                 <img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" class="btn-img" style="width: 18px; height: 18px; padding: 0; max-width: none;">
-    //                                             </a>
-    //                                         </td>
-    //                                         </tr>`;
-    //                             });
-
-    //                             $("#infoKontakModal .data-kontak").html(kontak);
-    //                             console.log(kontak);
-    //                         },
-    //                         error: function() {
-    //                             alert("Terjadi kesalahan saat mengambil data kontak.");
-    //                         }
-    //                     });
-
-    //                     $.ajax({
-    //                         url: "<?= base_url() ?>DashboardUserSupplier/getNamaPerusahaanById/" + id_lead,
-    //                         type: "GET",
-    //                         dataType: "JSON",
-    //                         success: function(data) {
-    //                             $('#id-lead').val(data.id_lead);
-    //                             $('#nama-perusahaan').html(data.nama_perusahaan);
-    //                             console.log(data.nama_perusahaan);
-    //                         },
-    //                         error: function(jqXHR, textStatus, errorThrown) {}
-    //                     });
-    //             });
-
-    //             $("#data-leads").on("click", ".insert-history", function(){
-    //                 var id_lead = $(this).data("id");
-    //                 console.log(id_lead);
-    //                 $('#submit-input').click(function(event) {
-    //                 event.preventDefault();
-
-    //                 var formData = {
-    //                     id_lead: id_lead,
-    //                     status: document.getElementById('status').value,
-    //                     jadwal: $('input[name=jadwal]').val(),
-    //                     catatan: document.getElementById('catatan').value,
-    //                 };
-
-    //                 $.ajax({
-    //                     url: '<?= base_url("api/marketing/insertHistory") ?>',
-    //                         type: 'POST',
-    //                         data: formData,
-    //                         beforeSend: addAuthorizationHeader,
-    //                         success: function(response) {
-    //                             if (response.status == true) {
-    //                                 swal({
-    //                                     title: "Data berhasil ditambahkan!",
-    //                                     icon: "success",
-    //                                     button: "Ok",
-    //                                 }).then(function() {
-    //                                     window.location.href = "<?= base_url('marketing') ?>";
-    //                                 });
-    //                             } else {
-    //                                 swal({
-    //                                     title: "Data gagal ditambahkan!",
-    //                                     icon: "error",
-    //                                     button: "Ok",
-    //                                 });
-    //                             }
-    //                         },
-    //                         error: function(xhr, status, error) {
-    //                             var span = document.createElement("span");
-    //                             span.innerHTML = JSON.parse(xhr.responseText).message;
-    //                             swal({
-    //                                 title: "ERROR",
-    //                                 content: span,
-    //                                 icon: "error",
-    //                                 button: "Ok",
-    //                             });
-    //                             console.log(xhr.responseText);
-    //                             console.log(JSON.parse(xhr.responseText).message);
-    //                         }
-    //                 });
-    //                 });
-    //             });
-    //         }
-    //     });
-    // });
-
+        function getStatusBackgroundColor(status) {
+            switch (status) {
+                case 'Belum dihubungi':
+                    return '#EBCFFC';
+                case 'Sedang Dihubungi':
+                    return '#F8F5BD';
+                case 'Negosiasi':
+                    return '#D0E9F9';
+                case 'Diterima':
+                    return '#DBF9D6';
+                case 'Ditolak':
+                    return '#FEC1C1';
+                default:
+                    return ''; 
+            }
+        }
+        
         // filter data leads
         searchElement.addEventListener("input", function(event) {
             var filterValue = event.target.value;
@@ -1405,20 +1295,31 @@ $.ajax({
             console.log("Input yang diketik: " + filterValue);
         });
 
-        function filterLeads(id_pengguna, key) {
+        function filterLeads(id_pengguna, nama_perusahaan) {
             $.ajax({
                 url: "<?php echo site_url('api/marketing/leadsByTimFiltered'); ?>",
                 type: "GET",
                 data: {
                     id_pengguna: id_pengguna,
-                    key: key
+                    nama_perusahaan: nama_perusahaan,
+                    status: status
                 },
                 dataType: "json",
-                beforeSend: addAuthorizationHeader,
+                beforeSend: function(xhr, settings) {
+                    addAuthorizationHeader(xhr);
+                    // Display loading message
+                    $('#data-leads').html('<div class="d-flex justify-content-center my-2"><div role="status" class="spinner-border text-danger"></div><span class="ms-2 pt-1">Menampilkan data tender...</span></div>');
+                },
                 success: function(data) {
-                    console.log(data, 'data');
-                    setTableLeads(data)
-                }
+                    // console.log(data.data, 'data');
+                    $('#data-leads').html("");
+                    let html = setTableLeads(data.data);
+                    $('#data-leads').html(html);
+                }, 
+                error: function(data) {
+                    $('#data-leads').html("");
+
+                }, 
             });
         }
 
@@ -1560,22 +1461,10 @@ $.ajax({
                 type: "DELETE",
                 beforeSend: addAuthorizationHeader,
                 success: function (response) {
-                    if (response.status == true) {
-                        swal({
-                            title: "Data berhasil dihapus!",
-                            // text: "You clicked the button!",
-                            icon: "success",
-                            button: "Ok",
-                        }).then(function () {
-                            window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                        });
+                    if (result.status === 'success') {
+                        alert('Data berhasil dihapus.');
                     } else {
-                        swal({
-                            title: "Data gagal dihapus!",
-                            // text: "You clicked the button!",
-                            icon: "error",
-                            button: "Ok",
-                        })
+                        alert('Gagal menghapus data.');
                     }
                 },
                 error: function (xhr, status, error) {
@@ -1584,4 +1473,4 @@ $.ajax({
             });
             row.parentNode.removeChild(row);
         }
-</script>
+</script> 

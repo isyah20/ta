@@ -80,7 +80,8 @@ class Marketing_model extends CI_Model {
         $this->db->group_by('data_leads.id_lead, kontak_lead.id_kontak, status, jadwal, catatan');
 
         if (!empty($nama_perusahaan)) {
-            $this->db->where('LOWER(nama_perusahaan) LIKE', 'LOWER(\'%' . $this->db->escape_like_str($nama_perusahaan) . '%\')', false);
+            $this->db->where('LOWER(data_leads.nama_perusahaan) LIKE', 'LOWER(\'%' . $this->db->escape_like_str($nama_perusahaan) . '%\')', false);
+            //$this->db->like('data_leads.nama_perusahaan', $nama_perusahaan);
         }
         if (!empty($status)) {
             $this->db->like('plot_tim.status', $status);
@@ -103,7 +104,31 @@ class Marketing_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('history_marketing');
         $this->db->where('id_lead', $id);
+        $this->db->order_by('id_history', 'desc');
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    public function getTotalPlotEachTim($id_supplier) {
+        $this->db->select('pm.nama AS nama, pm.alamat AS alamat, COUNT(pt.id_tim) AS jumlah_plot');
+        $this->db->from('tim_marketing tm');
+        $this->db->join('pengguna pm', 'tm.id_pengguna = pm.id_pengguna');
+        $this->db->join('plot_tim pt', 'tm.id_tim = pt.id_tim', 'left');
+        $this->db->where('tm.id_supplier', $id_supplier);
+        $this->db->group_by('tm.id_tim');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    public function getTotalStatusPlotTim($id_supplier) {
+        $this->db->select('dl.id_pengguna, pt.status, COUNT(*) as jumlah_status');
+        $this->db->from('plot_tim pt');
+        $this->db->join('data_leads dl', 'pt.id_lead = dl.id_lead');
+        $this->db->where('dl.id_pengguna', $id_supplier);
+        $this->db->group_by('pt.status');
+
+        $query = $this->db->get();
+        return $query->result();
     }
 }

@@ -10,6 +10,11 @@ class Pengguna_model extends CI_Model
         parent::__construct();
     }
 
+    public function getProfilPengguna($id)
+    {
+        return $this->db->where('id_pengguna', $id)
+            ->get('pengguna');
+    }
     public function getAllPengguna()
     {
         $query = $this->db->get('pengguna');
