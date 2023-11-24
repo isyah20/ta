@@ -188,36 +188,37 @@
     }
 
     .card-body {
-        margin-top: 10px;
         padding-left: 6%;
         border-radius: 30px;
+        height:120px;
     }
 
     .card-title p {
         color: #B89494;
-        font-size: 0.75rem;
+        font-size: 16px;
         font-weight: bold;
-        padding: 6% 0% 6% 3%;
+        padding: 6% 0% 0% 3%;
     }
 
     .card-title {
         color: #B89494;
         font-size: 26px;
         font-weight: bold;
-        /* padding-top: 10px; */
     }
 
     .card-text {
         font-size: 50px;
         font-weight: bold;
-        /* padding-top: 2%; */
+        padding-left: 10px;
     }
 
     .card-img {
-        width: 35px;
-        height: 40px;
-        margin-right: 6%;
-        margin-left: 66%;
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+        margin-right: 15px;
+        float:right;
+        margin-bottom: 19px;
     }
 
     .content-above-navbar {
@@ -233,7 +234,7 @@
     }
 
     .form-select-custom {
-        width: 675px;
+        width: 575px;
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
@@ -366,9 +367,11 @@
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                                     <p class="card-title ">Data Leads Terbaru</p>
                                 </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads-terbaru">0</h1>
-                                    <img src="<?= base_url('assets\img\leads_new.svg') ?>" style="width:80px" class="card-img" alt="">
+                                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                                    <div class="d-flex justify-content-between">
+                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" >9</h1>
+                                        <img src="<?= base_url('assets\img\leads_new.svg') ?>" class="card-img" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -379,9 +382,11 @@
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                                     <p class="card-title ">Leads Belum Dilengkapi</p>
                                 </div>
-                                <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap">0</h1>
-                                    <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
+                                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                                    <div class="d-flex justify-content-between">
+                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap">0</h1>
+                                        <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -423,9 +428,11 @@
                         <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                             <p class="card-title">Total Data Leads</p>
                         </div>
-                        <div class="d-flex wow fadeInUp pb-3" data-wow-delay="0.3s">
-                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads">0</h1>
-                            <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img m-sm-none" alt="">
+                        <div class="wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="d-flex justify-content-between">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads">1000</h1>
+                                <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -462,7 +469,7 @@
             <!-- Chart Pemenang Tender -->
             <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="height:395px;padding-left:0px">
+                    <div class="card-body" style="height:390px;padding-left:0px">
                         <h4 class="text-center pt-4" style="font-weight:bold;padding-left:7px">Pemenang Tender Terbaru</h4>  <div class="container mt-4">
                         <div class="row">
                             <div class="col-md-12">
@@ -512,35 +519,27 @@
     <session>
         <div class="container bg-white"><br>
             <div class="row">
-            <div class="col-md-5">
-                    <div class="card-select wow fadeInUp">
-                        <div class="select-custom container-fluid">
-                            <div class="row">
-                                <!-- Search Nama -->
-                                <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px; margin-right:20px;">
-                                    <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
-                                    <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-7">
                     <div class="card-select wow fadeInUp">
                         <div class="select-custom container-fluid">
-                            <div class="row">
-                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:15px">
+                            <div class="row flex-nowrap">
+                                <!-- Search Nama -->
+                                <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px;margin-right:10px;">
+                                    <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
+                                    <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;">
+                                </div>
+                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:10px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-wilayah" id="wilayah" style="border:none;">
                                     </select>
                                 </div>
-                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:15px">
+                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:10px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-jenis-pengadaan" style="border:none;">
                                     </select>
                                 </div>
                                 <!-- Select Trigger Filter Nilai Penawaran -->
-                                <div id="dropdownHPS" class="col-sm-2 form-select-custom d-flex" style="width: 180px;margin-right:15px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                <div id="dropdownHPS" class="col-sm-2 form-select-custom d-flex" style="width: 180px;" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <button style="border:none;background-color: white;padding-top: 2px">Nilai Penawaran</button>
                                 </div>
