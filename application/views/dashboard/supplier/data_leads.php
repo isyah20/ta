@@ -30,7 +30,7 @@
 
     tbody {
         margin: 10px;
-        text-align: left;
+        text-align: middle;
         font-size: 14.5px;
     }
 
@@ -153,6 +153,9 @@
         font-size: 1rem;
         width: 380px;
         padding-left: 10px;
+    }
+    .custom-img{
+        margin-left: 8px;
     }
 
     .allcontact {
@@ -577,8 +580,8 @@
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
                         <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px">
-                            <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                             <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
+                            <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                         </div>
                         <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
                             <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
