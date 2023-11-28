@@ -95,7 +95,7 @@
 
     .card-input {
         font-size: 10px;
-        margin-top: 2rem;
+        margin-top: 3rem;
         display: flex;
         width: 500px;
     }
@@ -110,7 +110,7 @@
         padding: 5px 10px;
         gap: 10px;
         font-size: 13px;
-        margin-left: 5px;
+        align-content: center;
     }
 
     .btn.btn-outline-danger {
