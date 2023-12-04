@@ -212,6 +212,19 @@ class Supplier_api extends CI_Model
         return $query->result();
     }
 
+    public function getPemenangByNPWPs($npwp, $keyword)
+    {
+        $this->db->select('pemenang.*, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(tgl_pemenang) AS tahun');
+        $this->db->from('pemenang');
+        $this->db->join('jenis_tender', 'pemenang.jenis_tender = jenis_tender.id_jenis', 'LEFT');
+        $this->db->where('npwp', $npwp);
+        if (!empty($keyword)) {
+            $this->db->like('nama_tender', $keyword);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function getTahun($npwp)
     {
         $this->db->select('pemenang.nama_pemenang, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(tgl_pemenang) AS tahun');
@@ -283,6 +296,19 @@ class Supplier_api extends CI_Model
 
     public function getDataLeads($id_pengguna, $page_size, $page_number)
     {
+        // $this->db->select(['data_leads.id_lead AS id', 'id_pengguna', 'nama_perusahaan', 'data_leads.npwp', 'profil', 'pemenang.*', 'kontak_lead.*', 'COUNT(kontak_lead.id_kontak) AS jumlah_kontak']);
+        // $this->db->from('data_leads');
+        // $this->db->join('pemenang', 'data_leads.id_pemenang = pemenang.id_pemenang', 'left');
+        // $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        // $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        // if (!empty($keyword)) {
+        //     $this->db->like('nama_perusahaan', $keyword);
+        // }
+        // $this->db->group_by('data_leads.id_lead');
+        // $this->db->order_by('id', 'DESC');
+        // $this->db->limit($page_size, $page_number);
+        // $query = $this->db->get();
+        // return $query->result_array();
 
         $sql = "SELECT
         data_leads.id_lead AS id,
@@ -308,6 +334,23 @@ class Supplier_api extends CI_Model
         LIMIT {$page_number},{$page_size}";
 
         return $this->db->query($sql);
+    }
+
+    public function getDataLeadsFiltered($id_pengguna, $page_size, $page_number, $keyword)
+    {
+        $this->db->select(['data_leads.id_lead AS id', 'id_pengguna', 'nama_perusahaan', 'data_leads.npwp', 'profil', 'pemenang.*', 'kontak_lead.*', 'COUNT(kontak_lead.id_kontak) AS jumlah_kontak']);
+        $this->db->from('data_leads');
+        $this->db->join('pemenang', 'data_leads.id_pemenang = pemenang.id_pemenang', 'left');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        if (!empty($keyword)) {
+            $this->db->like('nama_perusahaan', $keyword);
+        }
+        $this->db->group_by('data_leads.id_lead');
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($page_size, $page_number);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function getCRMLeads($id_pengguna)
