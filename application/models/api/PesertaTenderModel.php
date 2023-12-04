@@ -86,10 +86,10 @@ class PesertaTenderModel extends CI_Model
 
     public function getPesertaTenderFilter($data)
     {
-        // $klpd = $data['id_lpse'];
-        // $tahun = $data['tahun'];
-        $klpd = json_decode(str_replace('&quot;', '', $data['klpd']), true);
-        $tahun = json_decode(str_replace('&quot;', '', $data['tahun']), true);
+        $klpd = $data['id_lpse'];
+        $tahun = $data['tahun'];
+        // $klpd = json_decode(str_replace('&quot;', '', $data['id_lpse']), true);
+        // $tahun = json_decode(str_replace('&quot;', '', $data['tahun']), true);
 
         // print_r($tahun);
         // print_r($klpd);
@@ -112,7 +112,7 @@ class PesertaTenderModel extends CI_Model
         // $this->db->where_in('id_lpse', $klpd);
         $this->db->group_by('paket.kode_tender');
         $query = $this->db->get();
-        var_dump($query->result_array());
+        // var_dump($query->result_array());
         return $query->result_array();
     }
 
@@ -277,13 +277,15 @@ class PesertaTenderModel extends CI_Model
         return $query->result_array();
     }
 
-    public function getJumlahMenangKlpd(?string $tahun = null, ?string $npwp = null, $klpd)
+    public function getJumlahMenangKlpd(?string $tahun = null, ?string $npwp = null,  ?string $klpd)
     {
         $this->db->select('COUNT(id_pemenang)');
         $this->db->from('pemenang');
         $this->db->join('paket', 'paket.kode_tender = pemenang.kode_tender');
         $this->db->where('npwp', $npwp, null, false);
-        $this->db->where_in('id_lpse', $klpd);
+        if ($klpd != null) {
+            $this->db->where_in('id_lpse', $klpd);
+        }
         if ($tahun != null) {
             $this->db->where("YEAR(`paket`.`tanggal_pembuatan`) = ($tahun)", null, false);
         }
@@ -469,7 +471,7 @@ class PesertaTenderModel extends CI_Model
 
         $this->db->select('count(kode_tender)');
         $this->db->from('paket');
-        $this->db->where("`kode_tender` IN ($sub)", null, false);   
+        $this->db->where("`kode_tender` IN ($sub)", null, false);
         $this->db->where("`nilai_hps_paket` < 500000000", null, false);
         $range1 = $this->db->get_compiled_select();
 

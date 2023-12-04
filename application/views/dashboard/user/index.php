@@ -443,12 +443,25 @@
                                 <div class="row">
                                     <div class="col form-select-custom d-flex" style="width: 300px;">
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                        <select class="" style="border:none;">
+                                        <select id="select-lpse" class="" style="border:none;">
+                                            <option value="">Semua LPSE</option>
+                                            <?php foreach ($lpse as $lpse) : ?>
+                                                <option value="<?= $lpse['id_lpse'] ?>"><?php echo $lpse['nama_lpse'] ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="col form-select-custom d-flex" style="width: 200px;">
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                        <select class="" style="border:none;">
+                                        <select id="select-tahun" class="" style="border:none;">
+                                            <option class="select-tahun-option" selected value="">Semua tahun</option>
+                                            <?php $tahun = (int) date('Y');
+                                            for ($i = 0; $i < 5; $i++) :
+                                            ?>
+                                                <option class="select-tahun-option" value="<?= $tahun ?>"><?= $tahun ?></option>
+                                            <?php
+                                                $tahun--;
+                                            endfor;  ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -486,7 +499,7 @@
                                 <div class="col" style="margin-top:5%; padding:0">
                                     <h5 id="menang" class="tender-summary"><span style="border-left: 6px solid #6EE7B7; height: 45px; opacity:4; margin-right:10px"></span>9 Tender Dimenangkan</h5>
                                     <h5 id="kalah" class="tender-summary"><span style="border-left: 6px solid #DF3131; height: 35px; opacity:1; margin-right:10px"></span>33 Sedang Diikuti (Pasca Evaluasi)</h5>
-                                    <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #8B6464; height: 35px; opacity:1; margin-right:10px"></span>42 Kalah Tender</h5>
+                                    <h5 id="ikut" class="tender-summary"><span style="border-left: 6px solid #495894; height: 35px; opacity:1; margin-right:10px"></span>42 Kalah Tender</h5>
                                 </div>
                             </div>
                         </div>
@@ -508,37 +521,38 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
-                        <?php if ($pesertaTenderIkut != null) {
-                            $no = 0;
-                            function formatRupiah($number) {
-                                return 'Rp ' . number_format(sprintf('%0.2f', $number), 2, ',', '.');
-                            }
-                                foreach ($pesertaTenderIkut as $pesertaIkut) : 
+                            <?php if ($pesertaTenderIkut != null) {
+                                $no = 0;
+                                function formatRupiah($number)
+                                {
+                                    return 'Rp ' . number_format(sprintf('%0.2f', $number), 2, ',', '.');
+                                }
+                                foreach ($pesertaTenderIkut as $pesertaIkut) :
                                     $persentase = ($pesertaIkut['harga_penawaran'] / $pesertaIkut['nilai_hps_paket']) * 100;
                                     $persentase = 100 - $persentase;
                                     $persentase = round($persentase, 2);
                                     $no++;
-                                ?>
-                            <tr>
-                                <th></th>
-                                <td><?= $no ?></td>
-                                <td class="custom-padding"><?= $pesertaIkut['nama_tender'] ?></td>
-                                <td class="green-td"><?= formatRupiah($pesertaIkut['nilai_hps_paket']) ?></td>
-                                <td class="green-td"><?= formatRupiah($pesertaIkut['harga_penawaran']) ?></td>
-                                <td class="orange-td"><?= $persentase ?></td>
-                            </tr>
+                            ?>
+                                    <tr>
+                                        <th></th>
+                                        <td><?= $no ?></td>
+                                        <td class="custom-padding"><?= $pesertaIkut['nama_tender'] ?></td>
+                                        <td class="green-td"><?= formatRupiah($pesertaIkut['nilai_hps_paket']) ?></td>
+                                        <td class="green-td"><?= formatRupiah($pesertaIkut['harga_penawaran']) ?></td>
+                                        <td class="orange-td"><?= $persentase ?></td>
+                                    </tr>
                                 <?php
                                 endforeach;
-                                } else { ?>
+                            } else { ?>
                                 <tr>
-                                <th></th>
-                                <td>-</td>
-                                <td class="custom-padding">-</td>
-                                <td class="green-td">-</td>
-                                <td class="green-td">-</td>
-                                <td class="orange-td">-</td>
-                            </tr>
-                                <?php } ?>
+                                    <th></th>
+                                    <td>-</td>
+                                    <td class="custom-padding">-</td>
+                                    <td class="green-td">-</td>
+                                    <td class="green-td">-</td>
+                                    <td class="orange-td">-</td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -552,40 +566,40 @@
                     <a href="user-dashboard/list-tender">Lihat Semua</a>
                 </div>
                 <?php if ($notif != null) {
-                foreach ($notif as $row) : ?>
-                <div class="scrollable-container">
-                    <div class="custom-scroll">
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h6 style="font-weight: 600; font-size: 12px">LPSE <?= $row['nama_lpse'] ?></h6>
-                                    <h5 style="font-weight: 400; font-size: 14px"><?= $row['nama_tender'] ?></h5>
+                    foreach ($notif as $row) : ?>
+                        <div class="scrollable-container">
+                            <div class="custom-scroll">
+                                <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                    <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                        <div class="col-2">
+                                            <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                        </div>
+                                        <div class="col">
+                                            <h6 style="font-weight: 600; font-size: 12px">LPSE <?= $row['nama_lpse'] ?></h6>
+                                            <h5 style="font-weight: 400; font-size: 14px"><?= $row['nama_tender'] ?></h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <?php
-                endforeach;
+                    <?php
+                    endforeach;
                 } else { ?>
-                <div class="scrollable-container">
-                    <div class="custom-scroll">
-                        <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                            <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
-                                <div class="col-2">
-                                    <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
-                                </div>
-                                <div class="col">
-                                    <!-- <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6> -->
-                                    <h5 style="font-weight: 400; font-size: 14px">Tidak ada notifikasi tender terbabru</h5>
+                    <div class="scrollable-container">
+                        <div class="custom-scroll">
+                            <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                    <div class="col-2">
+                                        <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <!-- <h6 style="font-weight: 600; font-size: 12px">Kabupaten Yogyakarta</h6> -->
+                                        <h5 style="font-weight: 400; font-size: 14px">Tidak ada notifikasi tender terbabru</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php } ?>
             </div>
         </div>
@@ -609,27 +623,27 @@
                         <!-- For large screens, it will take up 4 columns. For extra small screens, it will take up all 12 columns -->
                         <div class="col-auto card-hps justify-content-between align-items-center px-4" style="background: #EF5350;">
                             <h6>> 10 Miliar</h6>
-                            <h6 class="border-suram">9</h6>
+                            <h6 id="summary5" class="border-suram">9</h6>
                         </div>
 
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #495894;">
                             <h6>1 - 10 Miliar</h6>
-                            <h6 class="border-suram">197</h6>
+                            <h6 id="summary4" class="border-suram">197</h6>
 
                         </div>
                         <div class="col-auto card-hps justify-content-between align-item-center px-4 " style="background: #F17D3A;">
                             <h6>500 Juta - 1 Miliar</h6>
-                            <h6 class="border-suram">93</h6>
+                            <h6 id="summary3" class="border-suram">93</h6>
                         </div>
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #83D4FA;">
                             <h6>100 - 500 Juta</h6>
-                            <h6 class="border-suram">229</h6>
+                            <h6 id="summary2" class="border-suram">229</h6>
 
                         </div>
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #EF5350;">
                             <h6>
                                 < 100 Juta</h6>
-                                    <h6 class="border-suram">342</h6>
+                                    <h6 id="summary1" class="border-suram">342</h6>
 
                         </div>
                     </div>
@@ -755,8 +769,113 @@
             length: 12
         }, () => Math.floor(Math.random() * 100));
     }
+    let valLPSE = null,
+        valTahun = null;
+    var dataChart3 = {
+        '0': generateRandomData(),
+        '1': generateRandomData(),
+        '2': generateRandomData(),
+        '3': generateRandomData(),
+        '4': generateRandomData()
+    };
+    var dataDoughnutChart = {
+        '0': generateRandomData(),
+        '1': generateRandomData(),
+        '2': generateRandomData(),
+    };
 
-    const barconfig = {
+
+
+    $(document).ready(function() {
+        getData('', '');
+        console.log("TEST");
+        // $('#btn-getdata').on('click', function() {
+        //     worker.postMessage({
+        //         event_name: 'fetch',
+        //         params: {
+        //             url: `${base_url}pengguna/get-token`
+        //         }
+        //     })
+        // })
+
+        $('#select-lpse').on('change', function() {
+            valLPSE = $('#select-lpse').val();
+            console.log(valLPSE, 'console');
+            getData(valLPSE, valTahun);
+            // sendMsg(klpd, tahun)
+        });
+
+        $('#select-tahun').on('change', function() {
+            valTahun = $('#select-tahun').val();
+            console.log(valTahun, 'console');
+            getData(valLPSE, valTahun);
+
+            // sendMsg(klpd, tahun)
+        });
+
+    })
+
+
+    function updateChart(data) {
+        // console.log(data.range.range1);
+        $('#menang').html("<span style=\"border-left: 6px solid #6EE7B7; height: 45px; opacity:4; margin-right:10px\"></span>" + data.akumulasi[0] + " Tender Dimenangkan");
+        $('#kalah').html("<span style=\"border-left: 6px solid #DF3131; height: 35px; opacity:1; margin-right:10px\"></span>" + data.akumulasi[1] + " Kalah Tender");
+        $('#ikut').html("<span style=\"border-left: 6px solid #495894; height: 35px; opacity:1; margin-right:10px\"></span>" + data.akumulasi[2] + " Sedang Diikuti (Pasca Evaluasi)");
+
+        $('#summary1').html(data.range.range1);
+        $('#summary2').html(data.range.range2);
+        $('#summary3').html(data.range.range3);
+        $('#summary4').html(data.range.range4);
+        $('#summary5').html(data.range.range5);
+
+        // dataChart3 = data.time_series;
+
+        // dataDoughnutChart = {
+        //     '0': data.akumulasi[0],
+        //     '1': data.akumulasi[1],
+        //     '2': data.akumulasi[2],
+        // };
+        updateChartData(data)
+    }
+
+    function getData(klpd, tahun) {
+        // $('#loading-filter').text('');
+        // console.log(klpd, tahun);
+        $.ajax({
+                url: "<?= base_url(); ?>user-dashboard/chart",
+                type: "POST",
+                data: {
+                    cariKLPD: klpd,
+                    // cariKLPD: JSON.stringify(klpd),
+                    cariTahun: tahun
+                },
+                beforeSend: (jqXHR, settings) => {
+                    // Tampilkan pesan loading jika diperlukan
+                    // $('#loading-filter').text('Loading...');
+                }
+            })
+            .done((result) => {
+                console.log(result);
+                updateChart(result);
+                console.log(dataChart3);
+                // Manipulasi elemen HTML atau lakukan tindakan setelah menerima data
+                // $('#loading-filter').text('');
+                // $('#dataChart').html(result);
+                // setChart();
+            })
+            .fail((jqXHR, textStatus, err) => {
+                // Tangani kesalahan atau tampilkan pesan kesalahan jika permintaan gagal
+                // $('#loading-filter').text('');
+                console.error("AJAX request failed: " + textStatus, err);
+                // Tampilkan pesan kesalahan kepada pengguna jika diperlukan
+                // alert("AJAX request failed: " + textStatus);
+            });
+        page = 1; // Jika diperlukan, tetapi disarankan memindahkan kode ini ke dalam .done callback jika terkait dengan respons dari AJAX
+    }
+
+
+
+    const barConfigHPS = {
         type: 'bar',
         data: {
             labels: [
@@ -765,31 +884,31 @@
             datasets: [{
                     label: '<500 juta',
                     backgroundColor: '#EF5350',
-                    data: generateRandomData(),
+                    data: dataChart3['0'],
                     barPercentage: 0.5,
                 },
                 {
                     label: '500jt - 1m',
                     backgroundColor: '#81D4FA',
-                    data: generateRandomData(),
+                    data: dataChart3['1'],
                     barPercentage: 0.5,
                 },
                 {
                     label: '1m - 10m',
                     backgroundColor: '#F27932',
-                    data: generateRandomData(),
+                    data: dataChart3['2'],
                     barPercentage: 0.5,
                 },
                 {
                     label: '10m - 100m',
                     backgroundColor: '#495894',
-                    data: generateRandomData(),
+                    data: dataChart3['3'],
                     barPercentage: 0.5,
                 },
                 {
                     label: '>100m',
                     backgroundColor: '#56C474',
-                    data: generateRandomData(),
+                    data: dataChart3['4'],
                     barPercentage: 0.5,
                 }
             ]
@@ -814,11 +933,16 @@
         }
     };
 
+    // Inisialisasi chart pertama kali
     var ctxStackedBar = document.getElementById('stackedBarChart').getContext('2d');
-    var stackedBarChart = new Chart(ctxStackedBar, barconfig);
+    var stackedBarChart = new Chart(ctxStackedBar, barConfigHPS);
+
+
+
+
 
     //ikut tender 
-    const barConfig = {
+    const barConfigTimeSeries = {
         type: 'bar',
         data: {
             labels: [
@@ -827,6 +951,7 @@
             datasets: [{
                 label: 'Data Bulan',
                 backgroundColor: '#DF3131',
+                // data: dataChart3,
                 data: generateRandomData(),
                 barPercentage: 0.5,
             }]
@@ -856,8 +981,10 @@
         }
     };
 
+
+
     var ctxBarChart = document.getElementById('chart-ikuttender').getContext('2d');
-    var barChart = new Chart(ctxBarChart, barConfig);
+    var barChart = new Chart(ctxBarChart, barConfigTimeSeries);
 </script>
 
 
@@ -871,13 +998,13 @@
         totalTender += data[i];
     }
 
-    var myDoughnutChart = new Chart(ctx, {
+    var doughnutChartConfig = {
         type: 'doughnut',
         data: {
-            labels: ['Tender 1', 'Tender 2', 'Tender 3'],
+            labels: ['Menang Tender', 'Kalah Tender', 'Tender Sedang Diikut'],
             datasets: [{
                 data: data,
-                backgroundColor: ['#495894', '#56C474', '#EF5350'],
+                backgroundColor: ['#56C474', '#EF5350', '#495894'],
                 borderWidth: 2, // Add gaps between segments
                 borderColor: 'white' // Color of the gaps
             }]
@@ -913,44 +1040,105 @@
                 }
             }
         }
-    });
+    };
+    var myDoughnutChart = new Chart(ctx, doughnutChartConfig);
+
+    // Fungsi untuk memperbarui data di stackedBarChart
+    function updateChartData(newData) {
+        barConfigHPS.data.datasets[0].data = newData.range[0];
+        barConfigHPS.data.datasets[1].data = newData.range[1];
+        barConfigHPS.data.datasets[2].data = newData.range[2];
+        barConfigHPS.data.datasets[3].data = newData.range[3];
+        barConfigHPS.data.datasets[4].data = newData.range[4];
+
+        barConfigTimeSeries.data.datasets[0].data = newData.time_series;
+
+        doughnutChartConfig.data.datasets[0].data = {
+            '0': newData.akumulasi[0],
+            '1': newData.akumulasi[1],
+            '2': newData.akumulasi[2],
+        };
+
+        doughnutChartConfig.options.animation = {
+            onComplete: function() {
+                var ctx = this.ctx;
+                ctx.save();
+
+                // Draw "Total Tender" text with smaller font
+                ctx.font = "14px Ubuntu";
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fontWeight = 500;
+                var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                ctx.fillText("Total Tender", centerX, centerY - 10);
+
+                // Draw the numerical value with larger font
+                ctx.font = "30px Ubuntu";
+                ctx.fontWeight = 700;
+                ctx.fillText(newData.akumulasi[3], centerX, centerY + 20);
+
+                ctx.restore();
+            }
+        };
+
+        if (stackedBarChart) {
+            stackedBarChart.destroy(); // Hancurkan chart sebelumnya
+        }
+        if (barChart) {
+            barChart.destroy(); // Hancurkan chart sebelumnya
+        }
+        if (myDoughnutChart) {
+            myDoughnutChart.destroy(); // Hancurkan chart sebelumnya
+        }
+
+        // Buat chart baru dengan data yang diperbarui
+        stackedBarChart = new Chart(document.getElementById('stackedBarChart').getContext('2d'), barConfigHPS);
+
+        barChart = new Chart(document.getElementById('chart-ikuttender').getContext('2d'), barConfigTimeSeries);
+
+        myDoughnutChart = new Chart(document.getElementById('myDoughnutChart').getContext('2d'), doughnutChartConfig);
+
+
+    }
 </script>
 <script>
-    var ctx = document.getElementById('doughnutChart').getContext('2d');
+    // var ctx = document.getElementById('doughnutChart').getContext('2d');
 
-    var totalTender = 0;
-    var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100];
-    for (var i = 0; i < data.length; i++) {
-        totalTender += data[i];
-    }
+    // var totalTender = 0;
+    // var data = [Math.random() * 100, Math.random() * 100, Math.random() * 100];
+    // for (var i = 0; i < data.length; i++) {
+    //     totalTender += data[i];
+    // }
 
-    var doughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Tender 1', 'Tender 2', 'Tender 3'],
-            datasets: [{
-                data: data,
-                backgroundColor: ['red', 'blue', 'green']
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: true
-                }
-            },
-            animation: {
-                onComplete: function() {
-                    var ctx = this.chart.ctx;
-                    ctx.font = "20px Arial";
-                    ctx.fillStyle = 'black';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText("Total Tender: " + totalTender.toFixed(2), this.chart.width / 2, this.chart.height / 2);
-                }
-            }
-        }
-    });
+    // var doughnutChart = new Chart(ctx, {
+    //     type: 'doughnut',
+    //     data: {
+    //         labels: ['Tender 1', 'Tender 2', 'Tender 3'],
+    //         datasets: [{
+    //             data: data,
+    //             backgroundColor: ['red', 'blue', 'green']
+    //         }]
+    //     },
+    //     options: {
+    //         plugins: {
+    //             legend: {
+    //                 display: true
+    //             }
+    //         },
+    //         animation: {
+    //             onComplete: function() {
+    //                 var ctx = this.chart.ctx;
+    //                 ctx.font = "20px Arial";
+    //                 ctx.fillStyle = 'black';
+    //                 ctx.textAlign = 'center';
+    //                 ctx.textBaseline = 'middle';
+    //                 ctx.fillText("Total Tender: " + totalTender.toFixed(2), this.chart.width / 2, this.chart.height / 2);
+    //             }
+    //         }
+    //     }
+    // });
 </script>
 
 

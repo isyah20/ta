@@ -459,6 +459,7 @@
             },
             success: function(result) {
               console.log(result);
+              console.log("TYPE", typeof(result));
               var leads = `<div id="container1"  margin-right: 50px;" class="workspace box wow fadeInUp box-full bg-color" data-id="0" data-wow-delay="0.1s">
               <div class=" card-title card-name-company" style="padding-left:10px; margin-bottom:30px">
             <h5 class=" title-company" > Daftar Perusahaan</h5>
