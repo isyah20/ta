@@ -277,13 +277,15 @@ class PesertaTenderModel extends CI_Model
         return $query->result_array();
     }
 
-    public function getJumlahMenangKlpd(?string $tahun = null, ?string $npwp = null, $klpd)
+    public function getJumlahMenangKlpd(?string $tahun = null, ?string $npwp = null,  ?string $klpd)
     {
         $this->db->select('COUNT(id_pemenang)');
         $this->db->from('pemenang');
         $this->db->join('paket', 'paket.kode_tender = pemenang.kode_tender');
         $this->db->where('npwp', $npwp, null, false);
-        $this->db->where_in('id_lpse', $klpd);
+        if ($klpd != null) {
+            $this->db->where_in('id_lpse', $klpd);
+        }
         if ($tahun != null) {
             $this->db->where("YEAR(`paket`.`tanggal_pembuatan`) = ($tahun)", null, false);
         }
