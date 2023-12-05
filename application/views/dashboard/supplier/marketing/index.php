@@ -1081,8 +1081,8 @@
                             <td style="max-width: 200px; min-width:200px; word-wrap: break-word;">${data[i].catatan || ''}</td>
                             <td></td>
                             <td>
-                                <span class="insert-history" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
-                                <span class="expandChildTable" data-id="${data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
+                                <button style="border:none;background:#fff" class="insert-history" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda"></button>
+                                <button style="border:none;background:#fff;visibility:` + hasMultipleHistory + `" class="expandChildTable" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></button>
                             </td>
                         </tr>
                         <tr class="childTableRow">

@@ -1,7 +1,6 @@
 <link href="<?= base_url() ?>assets/css/home/pagination.css" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
 
 
@@ -542,7 +541,7 @@
 
         align-items: center;
 
-        color: var(--Grey, #CCC);
+        color: var(--font-middle-grey, rgba(106, 106, 106, 0.90));
 
         font-family: Ubuntu;
 
@@ -587,9 +586,6 @@
         display: flex;
 
         width: 518px;
-
-        height: 555px;
-
         padding: 20px 30px 30px 30px;
 
         flex-direction: column;
@@ -613,13 +609,9 @@
         width: 735px;
 
         padding: 45px 30px 25px 30px;
-
         flex-direction: column;
-
         align-items: center;
-
         gap: 40px;
-
     }
 
 
@@ -726,7 +718,7 @@
 
         padding: 0;
 
-        background: none;
+        background: transparent;
 
         cursor: pointer;
 
@@ -1005,9 +997,11 @@
     }
 
     #saveButton {
-
         display: none;
+    }
 
+    #cancelButton {
+        display: none;
     }
 </style>
 
@@ -1718,11 +1712,7 @@
 
 
 
-        .custom-card-detail .row {
 
-            /* padding: 10px; */
-
-        }
 
 
 
@@ -1937,7 +1927,7 @@
 
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
 
-        <div class="col-12 my-5">
+        <div class="col-12 my-4">
 
             <h2 id="namaPerusahaan" class="mb-3 wow fadeInUp" style="order: 1;">
 
@@ -1953,8 +1943,7 @@
 
                     <p id="npwp" class="mb-0 ms-2 wow fadeInUp">-</p>
 
-                    <img src="<?= base_url('assets\img\icon-location.svg') ?>" alt=""
-                        style="margin-left: 30px; margin-bottom: 3px">
+                    <img src="<?= base_url('assets\img\icon-location.svg') ?>" alt="" style="margin-left: 30px; margin-bottom: 3px">
 
                     <p id="alamat" class="mb-0 ms-2 wow fadeInUp">-</p>
 
@@ -1982,8 +1971,7 @@
 
                 <div class="col-5 justify-content-center align-content-start">
 
-                    <img src="<?= base_url('assets\img\img-detail-leads.svg') ?>" class="img-fluid rounded-start"
-                        style="padding-top:40px" alt="">
+                    <img src="<?= base_url('assets\img\img-detail-leads.svg') ?>" class="img-fluid rounded-start" style="padding-top:40px" alt="">
 
                 </div>
 
@@ -1997,24 +1985,41 @@
 
                             <img id="imageButton" src="<?= base_url('assets\img\icon-pencil-edit.svg') ?>" alt="">
 
-                            <button id="saveButton" type="submit" class="btn btn-danger">
 
-                                <i id="saveButton" class="fas me-1"></i>Tambahkan
-
-                            </button>
 
                         </div>
 
                         <div class="profile-info my-2">
 
-                            <img class="profile-image" src="<?= base_url('assets\img\pu_profil.svg') ?>"
-                                style="margin-left:8px" alt="">
+                            <img class="profile-image" src="<?= base_url('assets\img\pu_profil.svg') ?>" style="margin-left:8px" alt="">
 
                             <p id="editableParagraph" contenteditable="false">
-
                                 -
-
                             </p>
+
+                        </div>
+                        <!-- Pastikan elemen pembungkus ini full-width -->
+                        <!-- <div style="display: flex; justify-content: flex-end; width: 100%;">
+
+                            <button id="saveButton" type="submit" style="background: none; border: none; padding: 0;">
+
+                                <img class="checklist" src="<?= base_url('assets/img/ICON-green.png') ?>" style="width: 50px; height: 50px;" alt="Checklist Icon">
+                                <img class="cancel" src="<?= base_url('assets/img/ICON-red.png') ?>" style="width: 50px; height: 50px;" alt="Cancel Icon">
+                            </button>
+
+                        </div> -->
+                        <!-- Pembungkus untuk tombol -->
+                        <div style="display: flex; justify-content: flex-end; width: 100%;">
+
+                            <!-- Button Save -->
+                            <button id="saveButton" type="submit" style="background: none; border: none; padding: 0; margin-right: 10px;">
+                                <img class="checklist" src="<?= base_url('assets/img/ICON-green.png') ?>" style="width: 40px; height: 40px;" alt="Checklist Icon">
+                            </button>
+
+                            <!-- Button Cancel -->
+                            <button id="cancelButton" type="button" style="background: none; border: none; padding: 0;">
+                                <img class="cancel" src="<?= base_url('assets/img/ICON-red.png') ?>" style="width: 40px; height: 40px;" alt="Cancel Icon">
+                            </button>
 
                         </div>
 
@@ -2028,8 +2033,7 @@
 
                             <div class="col">
 
-                                <img class="contact-image" src="<?= base_url('assets\img\pu_contact.svg') ?>"
-                                    style="margin-left:8px" alt="">
+                                <img class="contact-image" src="<?= base_url('assets\img\pu_contact.svg') ?>" style="margin-left:8px" alt="">
 
                             </div>
 
@@ -2076,7 +2080,7 @@
                                                     <td>
 
 
-
+                                                        0
                                                     </td>
 
                                                 </tr>
@@ -2125,11 +2129,9 @@
 
                         <div class="card-contact">
 
-                            <button type="button" class="custom-button justify-content-center" data-toggle="modal"
-                                data-target="#lengkapiLeadsModal">
+                            <button type="button" class="custom-button justify-content-center" data-toggle="modal" data-target="#lengkapiLeadsModal">
 
-                                <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25"
-                                    viewBox="0 0 36 35" fill="none">
+                                <img src="<?= base_url("assets/img/add-green-button.svg") ?>" width="36" height="25" viewBox="0 0 36 35" fill="none">
 
                                 Tambah Kontak
 
@@ -2157,8 +2159,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-sm-2 form-select-custom d-flex space"
-                                        style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="col-sm-2 form-select-custom d-flex space" style="width: 190px; margin-right:1%;margin-top: 2%">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2170,8 +2171,7 @@
 
                                     </div>
 
-                                    <div class="col-sm-2 form-select-custom d-flex"
-                                        style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2185,9 +2185,7 @@
 
                                     <!-- Select Trigger Filter Nilai Penawaran -->
 
-                                    <div class="col-sm-2 form-select-custom d-flex" id="dropdownHPS"
-                                        style="width: 180px;margin-right:1%;margin-top: 2%;padding:5px 5px 5px 11px"
-                                        data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                    <div class="col-sm-2 form-select-custom d-flex" id="dropdownHPS" style="width: 180px;margin-right:1%;margin-top: 2%;padding:5px 5px 5px 11px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2198,8 +2196,7 @@
 
                                     <!-- Tampilah Nilai Penawaran -->
 
-                                    <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3"
-                                        style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
+                                    <ul class="dropdown-menu overflow-auto dropdownHPS" id="myDropdown3" style="max-height: 250px; width: 750px;" aria-labelledby="dropdownHPS">
 
                                         <div class="row m-0 formset-hps justify-content-center">
 
@@ -2207,8 +2204,7 @@
 
                                                 <div class="form-check p-0">
 
-                                                    <input class="form-check-input" style="float: none;" type="checkbox"
-                                                        id="checkallhps" name="checkallhps" checked>
+                                                    <input class="form-check-input" style="float: none;" type="checkbox" id="checkallhps" name="checkallhps" checked>
 
                                                     <label class="form-check-label ps-1" for="checkallhps">Semua</label>
 
@@ -2232,8 +2228,7 @@
 
                                                     <span class="input-group-text">Nilai Awal (Rp)</span>
 
-                                                    <input class="form-control" type="text" name="nilai_hps_awal"
-                                                        id="nilai_hps_awal" value="0" disabled>
+                                                    <input class="form-control" type="text" name="nilai_hps_awal" id="nilai_hps_awal" value="0" disabled>
 
                                                 </div>
 
@@ -2247,8 +2242,7 @@
 
                                                     <span class="input-group-text">Nilai Akhir (Rp)</span>
 
-                                                    <input class="form-control" type="text" name="nilai_hps_akhir"
-                                                        id="nilai_hps_akhir" value="0" disabled>
+                                                    <input class="form-control" type="text" name="nilai_hps_akhir" id="nilai_hps_akhir" value="0" disabled>
 
                                                     <div class="invalid-feedback">Nilai penawaran akhir harus lebih
                                                         besar!</div>
@@ -2261,8 +2255,7 @@
 
                                     </ul>
 
-                                    <div class="form-select-custom w-300 d-flex"
-                                        style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2396,8 +2389,7 @@
 
         <div class="col-12 align-content-center justify-content-center">
 
-            <div class="modal fade" id="tambahLeadsModal" tabindex="-1" role="dialog"
-                aria-labelledby="tambahLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal fade" id="tambahLeadsModal" tabindex="-1" role="dialog" aria-labelledby="tambahLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
 
                 <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
 
@@ -2405,11 +2397,9 @@
 
                         <div class="modal-header border-0">
 
-                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close"
-                                style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
 
-                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel"
-                                    style="width: 32px; height: 32px; padding: 0;">
+                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
 
                             </button>
 
@@ -2433,41 +2423,37 @@
 
 
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputNama" class="form-label text-start">Nama</label>
 
-                                            <input type="text" name="nama" class="form-control" id="inputNama"
-                                                placeholder="Subandi">
+                                            <input type="text" name="nama" class="form-control" id="inputNama" placeholder="Subandi">
 
                                         </div>
 
 
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputPosisi" class="form-label text-start">Posisi</label>
 
-                                            <input type="text" name="posisi" class="form-control" id="inputPosisi"
-                                                placeholder="Marketing">
+                                            <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Marketing">
 
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputEmail" class="form-label text-start">Email</label>
 
-                                            <input type="email" name="email" class="form-control" id="inputEmail"
-                                                placeholder="Subandi@gmail.com">
+                                            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com">
 
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
 
-                                            <input type="text" name="no_telp" class="form-control" id="inputNoHP"
-                                                placeholder="0878 6463 0101">
+                                            <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="0878 6463 0101">
 
                                         </div>
 
@@ -2511,8 +2497,7 @@
 
         <div class="col-12 align-content-center justify-content-center">
 
-            <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog"
-                aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal fade" id="lengkapiLeadsModal" tabindex="-1" role="dialog" aria-labelledby="lengkapiLeadsModalLabel" aria-hidden="true" style="margin-top: -30px;">
 
                 <div class="modal-dialog modal-dialog-scrollable custom-modal" role="document">
 
@@ -2520,19 +2505,13 @@
 
                         <div class="modal-header border-0">
 
-                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close"
-                                style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
 
-                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel"
-                                    style="width: 32px; height: 32px; padding: 0;">
+                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
 
                             </button>
 
                         </div>
-
-
-
-
 
                         <div class="modal-body border-0">
 
@@ -2544,45 +2523,41 @@
 
                                 <div class="input-popup justify-content-end">
 
-                                    <form class="row g-2" method="post" id="formLengkapiLead">
+                                    <form class="row g-2 px-2" method="post" id="formLengkapiLead">
 
 
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputNama" class="form-label text-start">Nama</label>
 
-                                            <input type="text" name="nam" class="form-control" id="inputNama"
-                                                placeholder="Subandi" required>
+                                            <input type="text" name="nam" class="form-control" id="inputNama" placeholder="Subandi" required>
 
                                         </div>
 
 
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputPosisi" class="form-label text-start">Posisi</label>
 
-                                            <input type="text" name="pos" class="form-control" id="inputPosisi"
-                                                placeholder="Marketing" required>
+                                            <input type="text" name="pos" class="form-control" id="inputPosisi" placeholder="Marketing" required>
 
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputEmail" class="form-label text-start">Email</label>
 
-                                            <input type="email" name="em" class="form-control" id="inputEmail"
-                                                placeholder="Subandi@gmail.com" required>
+                                            <input type="email" name="em" class="form-control" id="inputEmail" placeholder="Subandi@gmail.com" required>
 
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-12">
 
                                             <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
 
-                                            <input type="text" name="no_tlp" class="form-control" id="inputNoHP"
-                                                placeholder="0878 6463 0101" required>
+                                            <input type="text" name="no_tlp" class="form-control" id="inputNoHP" placeholder="0878 6463 0101" required>
 
                                         </div>
 
@@ -2608,8 +2583,7 @@
 
                                 <div class="link flex-row align-items-center w-100">
 
-                                    <button id="submit-form" type="submit"
-                                        class="btn-custom text-white text-center w-100 border-0">
+                                    <button id="submit-form" type="submit" class="btn-custom text-white text-center w-100 border-0">
 
                                         <i class="fas me-1"></i>Tambahkan
 
@@ -2641,8 +2615,7 @@
 
         <div class="col-12">
 
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-                aria-hidden="true" style="margin-top: -30px;">
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
 
                 <div class="modal-dialog custom-modal-delete" role="document">
 
@@ -2650,72 +2623,40 @@
 
                         <div class="modal-header border-0">
 
-                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close"
-                                style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-
-                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel"
-                                    style="width: 32px; height: 32px; padding: 0;">
-
+                            <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                             </button>
-
                         </div>
-
                         <div class="modal-body border-0 text-center">
-
                             <h3 class="modal-title" id="deleteModalLabel">Hapus Data</h3>
-
                             <p class="text-center">Yakin ingin menghapus data perusahaan ini ?</p>
-
-                            <div class="input-popup align-items-center justify-content-center">
-
-                                <img src="<?= base_url("assets/img/learning-instructions.svg") ?>" alt="Gambar">
+                            <div class="input-popup align-items-center justify-content-center" style="height: 300px;">
+                                <img src="<?= base_url("assets/img/img-trash.png") ?>" alt="Gambar">
 
                             </div>
-
-                            <div class="d-flex justify-content-start mt-3 gap-2">
-
-                                <div></div>
-
-                                <div class="link flex-row align-items-center w-100">
-
-                                    <span>
-
-                                        <a class="btn-custom text-white text-center">
-
-                                            <i class="fas me-1"></i>Hapus
-
-                                        </a>
-
-                                    </span>
-
+                            <div class="row">
+                                <div class="col-6 d-flex justify-content-end mt-3">
+                                    <div class="link flex-row align-items-center w-100">
+                                        <span>
+                                            <a class="btn-custom text-white text-center">
+                                                <i></i>Iya
+                                            </a>
+                                        </span>
+                                    </div>
                                 </div>
 
-                            </div>
-
-                            <div class="d-flex justify-content-start mt-3 gap-2">
-
-                                <div></div>
-
-                                <div class="link flex-row align-items-center w-100">
-
-                                    <span>
-
-                                        <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
-
-                                            <i class="fas me-1"></i>Batal
-
-                                        </a>
-
-                                    </span>
-
+                                <div class="col-6 d-flex justify-content-start mt-3 gap-1">
+                                    <div class="link flex-row align-items-center w-100">
+                                        <span>
+                                            <a class="btn btn-batal btn-sm border btn-outline" data-dismiss="modal">
+                                                <i></i>Tidak
+                                            </a>
+                                        </span>
+                                    </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
 
             </div>
@@ -2732,9 +2673,7 @@
 
 <!-- script popup -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"
-    integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -2759,8 +2698,8 @@
     console.log(id_profile);
 
     // Get nama perusahaan and profil from data_leads and set it to the frontend
-    $(document).ready(function () {
-        $('#checkallhps').on('click', function () {
+    $(document).ready(function() {
+        $('#checkallhps').on('click', function() {
             let allhps = this.checked;
             $('#nilai_hps_awal, #nilai_hps_akhir').prop('disabled', allhps);
             if (allhps) hps_awal = hps_akhir = 0;
@@ -2783,7 +2722,7 @@
             'placeholder': '0',
             'rightAlign': false,
             'autoUnmask': true
-        }).on('keyup', function () {
+        }).on('keyup', function() {
             global_penwaran_awal = $('#nilai_hps_awal').val();
             global_penwaran_akhir = $('#nilai_hps_akhir').val();
 
@@ -2800,7 +2739,7 @@
             method: "GET",
             dataType: "json",
             beforeSend: addAuthorizationHeader,
-            success: function (data) {
+            success: function(data) {
                 var id_leads = data.data.id_lead;
                 global_npwp = data.data.npwp;
                 var npwp = data.data.npwp;
@@ -2813,16 +2752,19 @@
                 $("#npwp").html(data.data.npwp);
                 $("#alamat").html(data.data.alamat);
 
-                $("#imageButton").click(function () {
+                $("#imageButton").click(function() {
 
                     $("#editableParagraph").attr("contenteditable", "true");
                     $("#saveButton").css("display", "block");
+                    $("#cancelButton").css("display", "block");
+
 
                 });
-                
-                $("#saveButton").click(function () {
+
+                $("#saveButton").click(function() {
                     $("#editableParagraph").attr("contenteditable", "false");
                     $("#saveButton").css("display", "none");
+                    $("#cancelButton").css("display", "none");
                     var editedParagraph = $("#editableParagraph").html();
 
                     $.ajax({
@@ -2832,14 +2774,14 @@
                             profil: editedParagraph
                         },
                         beforeSend: addAuthorizationHeader,
-                        success: function (response) {
+                        success: function(response) {
                             if (response.status == true) {
                                 swal({
                                     title: "Berhasil mengubah profil!",
                                     // text: "You clicked the button!",
                                     icon: "success",
                                     button: "Ok",
-                                }).then(function () {
+                                }).then(function() {
                                     window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
                                 });
                             } else {
@@ -2851,13 +2793,22 @@
                                 })
                             }
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             console.error(error);
                         }
                     });
                 });
 
-                $("#formLengkapiLead").submit(function (e) {
+                $("#cancelButton").click(function() {
+                    $("#editableParagraph").attr("contenteditable", "true");
+
+                    $("#saveButton").css("display", "none");
+                    $("#cancelButton").css("display", "none");
+                    $("#editableParagraph").html(originalText);
+                });
+
+
+                $("#formLengkapiLead").submit(function(e) {
                     e.preventDefault();
 
                     var form = {
@@ -2873,14 +2824,14 @@
                         type: "POST",
                         data: form,
                         beforeSend: addAuthorizationHeader,
-                        success: function (response) {
+                        success: function(response) {
                             if (response.status == true) {
                                 swal({
                                     title: "Kontak berhasil ditambahkan!",
                                     // text: "You clicked the button!",
                                     icon: "success",
                                     button: "Ok",
-                                }).then(function () {
+                                }).then(function() {
                                     window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
                                 });
                             } else {
@@ -2901,7 +2852,7 @@
                     method: "GET",
                     dataType: "json",
                     beforeSend: addAuthorizationHeader,
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data.data);
                         initialSelect(data.data)
                         setTabelRiwayat(data);
@@ -2923,7 +2874,7 @@
 
             beforeSend: addAuthorizationHeader,
 
-            success: function (data) {
+            success: function(data) {
 
                 let html = '';
 
@@ -2975,7 +2926,7 @@
 
                 // Delete action
 
-                $(".del-btn").click(function () {
+                $(".del-btn").click(function() {
 
                     var id = $(this).data("id");
 
@@ -2987,7 +2938,7 @@
 
 
 
-                $("#deleteModal .btn-custom").click(function () {
+                $("#deleteModal .btn-custom").click(function() {
 
                     var id = $(this).data("id");
 
@@ -2999,7 +2950,7 @@
 
                         beforeSend: addAuthorizationHeader,
 
-                        success: function (response) {
+                        success: function(response) {
 
                             if (response.status == true) {
                                 swal({
@@ -3007,7 +2958,7 @@
                                     // text: "You clicked the button!",
                                     icon: "success",
                                     button: "Ok",
-                                }).then(function () {
+                                }).then(function() {
                                     window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
                                 });
                             } else {
@@ -3021,7 +2972,7 @@
 
                         },
 
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
 
                             console.error(error);
 
@@ -3035,7 +2986,7 @@
 
                 // Edit action
 
-                $(".edit-btn").click(function () {
+                $(".edit-btn").click(function() {
 
                     var id = $(this).data("id");
 
@@ -3061,7 +3012,7 @@
 
                         beforeSend: addAuthorizationHeader,
 
-                        success: function (data) {
+                        success: function(data) {
 
                             $("#inputNama").val(data.data.nama);
 
@@ -3075,7 +3026,7 @@
 
 
 
-                            $("#formTambahLead").submit(function (e) {
+                            $("#formTambahLead").submit(function(e) {
 
                                 e.preventDefault();
 
@@ -3105,7 +3056,7 @@
 
                                     beforeSend: addAuthorizationHeader,
 
-                                    success: function (response) {
+                                    success: function(response) {
 
                                         if (response.status == true) {
                                             swal({
@@ -3113,7 +3064,7 @@
                                                 // text: "You clicked the button!",
                                                 icon: "success",
                                                 button: "Ok",
-                                            }).then(function () {
+                                            }).then(function() {
                                                 window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
                                             });
                                         } else {
@@ -3127,7 +3078,7 @@
 
                                     },
 
-                                    error: function (xhr, status, error) {
+                                    error: function(xhr, status, error) {
 
                                         console.error(error);
 
@@ -3139,7 +3090,7 @@
 
                         },
 
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
 
                             console.error(error);
 
@@ -3151,7 +3102,7 @@
 
             },
 
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
 
                 console.error(error);
 
@@ -3162,7 +3113,7 @@
         function setTabelRiwayat(data) {
             var riwayatTender = "";
 
-            $.each(data.data, function (index, value) {
+            $.each(data.data, function(index, value) {
                 var rowNumber = index + 1;
                 riwayatTender +=
                     `<tr>
@@ -3183,7 +3134,7 @@
             let jenis = [];
             let tahun = [];
 
-            $.each(data, function (index, value) {
+            $.each(data, function(index, value) {
                 if (!lokasi.includes((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim())) {
                     lokasi.push((value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim());
                 }
@@ -3202,25 +3153,25 @@
                 theme: 'bootstrap-5',
                 allowClear: true,
                 "language": {
-                    noResults: function () {
+                    noResults: function() {
                         return "<span>Tidak ada jenis pengadaan</span>";
                     },
-                    loadingMore: function () {
+                    loadingMore: function() {
                         return "<span>Menampilkan lainnya...</span>";
                     },
-                    searching: function () {
+                    searching: function() {
                         return "<span>Mencari hasil...</span>";
                     },
-                    errorLoading: function () {
+                    errorLoading: function() {
                         return "<span>Gagal menampilkan jenis pengadaan</span>";
                     }
                 },
 
-                escapeMarkup: function (markup) {
+                escapeMarkup: function(markup) {
                     return markup;
                 },
                 data: jenis
-            }).on('change', function () {
+            }).on('change', function() {
                 global_jenis_pengadaan = $(this).val();
                 filterRiwayat();
             });
@@ -3230,24 +3181,24 @@
                 theme: 'bootstrap-5',
                 allowClear: true,
                 "language": {
-                    noResults: function () {
+                    noResults: function() {
                         return "<span>Tidak ada lokasi pekerjaan</span>";
                     },
-                    loadingMore: function () {
+                    loadingMore: function() {
                         return "<span>Menampilkan lainnya...</span>";
                     },
-                    searching: function () {
+                    searching: function() {
                         return "<span>Mencari hasil...</span>";
                     },
-                    errorLoading: function () {
+                    errorLoading: function() {
                         return "<span>Gagal menampilkan lokasi pekerjaan</span>";
                     }
                 },
-                escapeMarkup: function (markup) {
+                escapeMarkup: function(markup) {
                     return markup;
                 },
                 data: lokasi
-            }).on('change', function () {
+            }).on('change', function() {
                 global_loc = $(this).val();
                 filterRiwayat();
             });
@@ -3257,34 +3208,34 @@
                 theme: 'bootstrap-5',
                 allowClear: true,
                 "language": {
-                    noResults: function () {
+                    noResults: function() {
                         return "<span>Tidak ada tahun</span>";
                     },
 
-                    loadingMore: function () {
+                    loadingMore: function() {
                         return "<span>Menampilkan lainnya...</span>";
                     },
 
-                    searching: function () {
+                    searching: function() {
                         return "<span>Mencari hasil...</span>";
                     },
 
-                    errorLoading: function () {
+                    errorLoading: function() {
                         return "<span>Gagal menampilkan tahun</span>";
                     }
                 },
 
-                escapeMarkup: function (markup) {
+                escapeMarkup: function(markup) {
                     return markup;
                 },
                 data: tahun
 
-            }).on('change', function () {
+            }).on('change', function() {
                 global_tahun = $(this).val();
                 console.log(tahun, "Value Tahun Select");
                 filterRiwayat();
             });
-        }   
+        }
 
         function filterRiwayat() {
             console.log(global_tahun);
@@ -3306,12 +3257,12 @@
                 dataType: "json",
                 data: params,
                 beforeSend: addAuthorizationHeader,
-                success: function (data) {
+                success: function(data) {
                     console.log(data);
                     setTabelRiwayat(data);
                 },
 
-                error: function () {
+                error: function() {
                     var data = [];
                     setTabelRiwayat(data);
                 },
