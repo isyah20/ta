@@ -348,7 +348,7 @@
                             <th class="custom-padding">Posisi</th>
                             <th class="custom-padding">Email</th>
                             <th class="custom-padding">No. HP/WA</th>
-                            <th class="custom-padding">Alamat</th>
+                            <th class="custom-padding">Area Kerja</th>
                             <th class="custom-padding" style="width:11%">Aksi</th>
                         </tr>
                     </thead>
@@ -418,8 +418,8 @@
                                     <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputAlamat" class="form-label text-start">Alamat</label>
-                                    <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
+                                    <label for="inputKerja" class="form-label text-start">Area Kerja</label>
+                                    <textarea class="form-control" name="area_kerja" id="inputAlamat" placeholder="Sleman, D.I. Yogyakarta" rows="2" required></textarea>
                                 </div>
                                 <div class="justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
@@ -518,8 +518,8 @@
                                     <input type="text" name="no_telp" class="form-control" id="inputNoHP1" placeholder="Masukkan No. HP/WA" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputAlamat" class="form-label text-start">Alamat</label>
-                                    <textarea class="form-control" name="alamat" id="inputAlamat1" placeholder="Masukkan Alamat" rows="2" required></textarea>
+                                    <label for="inputAlamat" class="form-label text-start">Area Kerja</label>
+                                    <textarea class="form-control" name="area_kerja" id="inputAlamat1" placeholder="Sleman, D.I. Yogyakarta" rows="2" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
@@ -574,7 +574,7 @@
                         '<td class="posisi">' + data.data[i].posisi + '</td>' +
                         '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
                         '<td class="nohp">' + data.data[i].no_telp + '</td>' +
-                        '<td style="width: 450px">' + data.data[i].alamat + '</td>' +
+                        '<td style="width: 450px">' + data.data[i].area_kerja + '</td>' +
                         '<td>' +
                         '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
                         '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>' +
@@ -641,7 +641,7 @@
                         posisi: $("#inputPosisi1").val(),
                         email: $("#inputEmail1").val(),
                         no_telp: $("#inputNoHP1").val(),
-                        alamat: $("#inputAlamat1").val(),
+                        area_kerja: $("#inputAlamat1").val(),
                     };
 
                     // Get data from id
@@ -655,7 +655,7 @@
                             $('#inputPosisi1').val(data.data.posisi);
                             $('#inputEmail1').val(data.data.email);
                             $('#inputNoHP1').val(data.data.no_telp);
-                            $('#inputAlamat1').val(data.data.alamat);
+                            $('#inputAlamat1').val(data.data.area_kerja);
 
                             $("#form-edit").submit(function(event) {
                                 event.preventDefault();
@@ -668,7 +668,7 @@
                                     posisi: $("#inputPosisi1").val(),
                                     email: $("#inputEmail1").val(),
                                     no_telp: $("#inputNoHP1").val(),
-                                    alamat: $("#inputAlamat1").val(),
+                                    area_kerja: $("#inputAlamat1").val(),
                                     // nama_tim: $('input[name=nama_tim]').val(),
                                     // posisi: $('input[name=posisi]').val(),
                                     // email: $('input[name=email]').val(),
@@ -787,7 +787,7 @@
                         posisi: $('input[name=posisi]').val(),
                         email: emailInput,
                         no_telp: $('input[name=no_telp]').val(),
-                        alamat: $('textarea[name=alamat]').val(),
+                        area_kerja: $('textarea[name=area_kerja]').val(),
                     };
 
                     // Make an AJAX request
