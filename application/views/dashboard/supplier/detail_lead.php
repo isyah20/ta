@@ -119,11 +119,12 @@
         color: var(--font-black, #0A0A0A);
         /* Heading/H3/Bold */
         font-family: Ubuntu;
-        font-size: 24px;
+        font-size: 20px;
         font-style: normal;
-        font-weight: 700;
+        font-weight: 600;
         line-height: normal;
         margin-left: 25px;
+        margin-bottom: 15px;
     }
     .h4 {
         font-family: Ubuntu;
@@ -134,7 +135,9 @@
     }
     /* row  */
     .row.g-0 {
-        margin: 20px;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
         /* Margin luar untuk div dengan class "row g-0" */
     }
     .col-7 {
@@ -741,6 +744,7 @@
         /* Mengurangi ukuran teks di dalam modal */
         .modal-title {
             font-size: 18px;
+            font-weight: 900;
         }
         .modal-body p {
             font-size: 14px;
@@ -1025,7 +1029,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-sm-2 form-select-custom d-flex space" style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="col-sm-2 form-select-custom d-flex space" style="width: 190px; margin-right:1%;">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -1037,7 +1041,7 @@
 
                                     </div>
 
-                                    <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:1%;">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -1051,7 +1055,7 @@
 
                                     <!-- Select Trigger Filter Nilai Penawaran -->
 
-                                    <div class="col-sm-2 form-select-custom d-flex" id="dropdownHPS" style="width: 180px;margin-right:1%;margin-top: 2%;padding:5px 5px 5px 11px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                    <div class="col-sm-2 form-select-custom d-flex" id="dropdownHPS" style="width: 180px;margin-right:1%;padding:5px 5px 5px 11px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -1121,7 +1125,7 @@
 
                                     </ul>
 
-                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:1%;">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -1145,7 +1149,7 @@
 
                         <div class="col">
 
-                            <div style="margin-left:1.5%; margin-top:2%">
+                            <div style="margin-left:1.5%; margin-top:1%">
 
                                 <div class="table-responsive custom-table-scroll">
 
