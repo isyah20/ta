@@ -12,6 +12,7 @@ class Supplier_api extends CI_Model
     {
         parent::__construct();
         $this->load->helper('tanggal');
+        // $this->load->model('Tender_model');
         $this->client = new Client([
             // Base URI is used with relative requests
             'base_uri' => base_url(),
@@ -485,4 +486,6 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         $query = $this->db->get();
         return $query->row_array();
     }
+
+
 }

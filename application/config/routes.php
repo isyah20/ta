@@ -408,7 +408,7 @@ $route['api/marketing/leadsByTimFiltered'] = 'api/ApiMarketing/leadsByTimFiltere
 $route['api/marketing/getTotalPlotEachTim/(:num)'] = 'api/ApiMarketing/getTotalPlotEachTim/$1';
 $route['api/marketing/getTotalStatusPlotTim/(:num)'] = 'api/ApiMarketing/getTotalStatusPlotTim/$1';
 
-//restAPI route for Suplier 
+//restAPI route for Suplier  
 $route['api/supplier/get'] = 'api/ApiSupplier';
 $route['api/supplier/create'] = 'api/ApiSupplier/create';
 $route['api/supplier/delete/(:num)'] = 'api/ApiSupplier/deleteTim/$1';
@@ -423,13 +423,15 @@ $route['api/supplier/updateContact/(:num)'] = 'api/ApiSupplier/updateContact/$1'
 $route['api/supplier/deleteContact/(:num)'] = 'api/ApiSupplier/deleteContact/$1';
 $route['api/supplier/getPemenangByNPWP/(:any)'] = 'api/ApiSupplier/getPemenangByNPWP/$1';
 // $route['api/supplier/getPemenangFilter/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'api/ApiSupplier/getPemenangFilter/$1/$2/$3/$4/$5/$6';
-// $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/getPemenangFilter';
+// $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/getPemenangFilter';getPemenang
 $route['api/supplier/getPemenangFilter'] = 'api/ApiSupplier/pemenangFiltered';
 $route['api/supplier/getCount'] = 'api/ApiSupplier/getCountLeadNull';
 $route['api/supplier/getTotal'] = 'api/ApiSupplier/getTotalLeads';
 $route['api/supplier/getTotalDataLeadFiltered'] = 'api/ApiSupplier/getTotalDataLeadFiltered';
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
 $route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
+$route['api/supplier/getJumlahPerMonth'] = 'api/ApiSupplier/getJumlahPemenangPerMonth';
+$route['api/supplier/getPemenang'] = 'api/ApiSupplier/getPemenang';
 
 // restAPI for know your market
 $route['api/pengguna/getPesertaTender'] = 'api/ApiAnalytic/getPesertaTender';
