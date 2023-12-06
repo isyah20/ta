@@ -31,6 +31,7 @@
     tbody {
         margin: 10px;
         text-align: middle;
+        vertical-align: center;
         font-size: 14.5px;
     }
 
@@ -95,9 +96,7 @@
 
     .card-input {
         font-size: 10px;
-        margin-top: 3rem;
         display: flex;
-        width: 500px;
     }
 
     .tbody-tr {
@@ -139,7 +138,7 @@
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         border: 1px solid;
         background-color: white;
     }
@@ -151,11 +150,11 @@
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 380px;
-        padding-left: 10px;
+        width: 470px;
     }
-    .custom-img{
-        margin-left: 8px;
+
+    .custom-img {
+        margin-left: 13px;
     }
 
     .allcontact {
@@ -561,36 +560,43 @@
         justify-content: center;
     }
 
+    /* .card-3 {
+        position: fixed;
+        top: -50%;
+        transform: translate(-50%, -50%);
+    } */
+
     .modal-lg {
         max-width: 735px;
     }
 </style>
 
-<section class="bg-white pt-5 mt-5">
+<!-- <section class="bg-white pt-5 mt-5">
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
         <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
         </h4>
     </div>
-</section>
+</section> -->
 
-<section class="bg-white ">
+<section class="bg-white pt-5 mt-5">
     <div class="overflow">
         <div class="container">
+            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p></h4>
             <div class="row">
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
-                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px">
+                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px;">
                             <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
                             <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                         </div>
                         <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
                             <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
-                                <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
+                                <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:4px" alt="">
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 justify-content d-flex">
+                <div class="col-6 justify-content d-flex card-3">
                     <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
                         <div class="shadow rounded-3 bg-white">
                             <div class="card-body">
@@ -634,7 +640,7 @@
             </div>
         </div>
     </div>
-    <div class="container wow fadeInUp" style="margin-top:10px">
+    <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
                 <div class="table-responsive">
@@ -692,9 +698,6 @@
                 <div class="modal-content">
                     <div class="modal-header border-0">
                         <img class="image-modal" src="<?= base_url("assets/img/red-whatsapp.svg") ?>" alt="Image" style="width: 75px; height: 75px; padding: 0;">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
                     </div>
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
