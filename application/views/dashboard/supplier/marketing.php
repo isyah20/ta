@@ -332,7 +332,7 @@
             <h4 class="mt-4 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Ini daftar tim kamu!</p>
             </h4>
             <div class="d-flex justify-content-start">
-                <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
+                <div class="link d-flex flex-row align-items-center" style="margin-top:50px">
                     <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
                             <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
                         </a>
@@ -340,7 +340,7 @@
                 </div>
             </div>
         </div>
-        <img src="<?= base_url('assets\img\amico.svg') ?>" alt="" style="width: 160px; margin-top:30px; margin-bottom:10px; margin-right:50px">
+        <img src="<?= base_url('assets\img\amico.svg') ?>" alt="" style="width: 200px; margin-top:40px; margin-bottom:10px; margin-right:50px">
     </div>
     <!-- tabel marketing -->
     <div class="container wow fadeInUp">
