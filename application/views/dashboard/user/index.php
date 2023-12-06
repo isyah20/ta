@@ -387,6 +387,13 @@
         border-radius: 10px;
         padding: 2em;
     }
+
+    /* SELECT 2 */
+    .select2-container--default .select2-selection--single {
+        background-color: none;
+        border: none;
+        border-radius: none;
+    }
 </style>
 
 <div class="modal fade" id="npwpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" x-data="completeProfile">
@@ -450,7 +457,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col form-select-custom d-flex" style="width: 200px;">
+                                    <div class="col form-select-custom d-flex ms-2" style="width: 200px;">
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                         <select id="select-tahun" class="" style="border:none;">
                                             <option class="select-tahun-option" selected value="">Semua tahun</option>
@@ -464,6 +471,19 @@
 
                                         </select>
                                     </div>
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#select-lpse').select2();
+                                        });
+                                        $(document).ready(function() {
+                                            $('#select-tahun').select2({
+                                                width: '100%',
+                                                minimumResultsForSearch: Infinity
+                                            });
+
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -520,7 +540,7 @@
                                 <th>Persentase Penurunan</th>
                             </tr>
                         </thead>
-                        <tbody id="data-leads">
+                        <tbody id="tender-ikut">
                             <?php if ($pesertaTenderIkut != null) {
                                 $no = 0;
                                 function formatRupiah($number)
@@ -838,6 +858,59 @@
         updateChartData(data)
     }
 
+
+    function formatRupiah(number) {
+        return 'Rp ' + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
+
+    function updateTable(data) {
+        const tabelTenderIkut = document.getElementById('tender-ikut');
+        tabelTenderIkut.innerHTML = '';
+
+        if (data.length > 0) {
+            data.forEach((pesertaIkut, index) => {
+                const persentase = ((pesertaIkut.harga_penawaran / pesertaIkut.nilai_hps_paket) * 100).toFixed(2);
+                const row = `<tr>
+                                <th></th>
+                                <td>${index + 1}</td>
+                                <td class="custom-padding">${pesertaIkut.nama_tender}</td>
+                                <td class="green-td">${formatRupiah(pesertaIkut.nilai_hps_paket)}</td>
+                                <td class="green-td">${formatRupiah(pesertaIkut.harga_penawaran)}</td>
+                                <td class="orange-td">${persentase}%</td>
+                            </tr>`;
+                tabelTenderIkut.insertAdjacentHTML('beforeend', row);
+            });
+        } else {
+            const emptyRow = `<tr>
+                                <th colspan="6" style="text-align: center; padding: 10px;">Tidak ada data yang tersedia untuk ditampilkan.</th>
+                                </tr>`;
+            tabelTenderIkut.insertAdjacentHTML('beforeend', emptyRow);
+        }
+    }
+
+    // Fungsi untuk menambahkan kartu berdasarkan status peserta
+    function addCardByStatus(data) {
+        const sumRiwayat = document.querySelector('.sum-riwayat');
+        let htmlCard = ''; // Menggunakan let untuk deklarasi variabel agar hanya terbatas pada lingkup fungsi ini
+
+        data.forEach(tender => {
+            console.log(tender);
+            htmlCard += `
+            <div class="col-auto card-riwayat w-100">
+                <div class="col">
+                    <h6 style="font-weight: 400; font-size: 14px">${tender.nama_tender}</h6>
+                </div>
+                <div class="col-3-auto">
+                    <h6 class="${tender.status_peserta}" style="font-weight: 400; font-size: 14px">${tender.status_peserta.charAt(0).toUpperCase() + tender.status_peserta.slice(1)}</h6>
+                </div>
+            </div>
+        `;
+        });
+
+        sumRiwayat.innerHTML = htmlCard;
+    }
+
+
     function getData(klpd, tahun) {
         // $('#loading-filter').text('');
         // console.log(klpd, tahun);
@@ -855,8 +928,11 @@
                 }
             })
             .done((result) => {
-                console.log(result);
+                console.log(result, result.win_lose, 'win_lose');
                 updateChart(result);
+                updateTable(result.join);
+                addCardByStatus(result.win_lose);
+
                 console.log(dataChart3);
                 // Manipulasi elemen HTML atau lakukan tindakan setelah menerima data
                 // $('#loading-filter').text('');
