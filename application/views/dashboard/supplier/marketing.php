@@ -598,21 +598,21 @@
                             beforeSend: addAuthorizationHeader,
                             success: function(response) {
 
-                                if (response.status == true) {
-                                    swal({
-                                        title: "Data berhasil dihapus!",
-                                        icon: "success",
-                                        button: "Ok",
-                                    }).then(function() {
-                                        window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                    });
-                                } else {
-                                    swal({
-                                        title: "Data gagal dihapus",
-                                        icon: "error",
-                                        button: "Ok",
-                                    })
-                                }
+                                // if (response.status == true) {
+                                //     swal({
+                                //         title: "Data berhasil dihapus!",
+                                //         icon: "success",
+                                //         button: "Ok",
+                                //     }).then(function() {
+                                //         window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                //     });
+                                // } else {
+                                //     swal({
+                                //         title: "Data gagal dihapus",
+                                //         icon: "error",
+                                //         button: "Ok",
+                                //     })
+                                // }
                             },
                             error: function(xhr, status, error) {
                                 var span = document.createElement("span");
@@ -683,21 +683,21 @@
                                     data: formData,
                                     beforeSend: addAuthorizationHeader,
                                     success: function(response) {
-                                        if (response.status == true) {
-                                            swal({
-                                                title: "Data berhasil diubah",
-                                                icon: "success",
-                                                button: "Ok",
-                                            }).then(function() {
-                                                window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                            });
-                                        } else {
-                                            swal({
-                                                title: "Data gagal diubah",
-                                                icon: "error",
-                                                button: "Ok",
-                                            });
-                                        }
+                                        // if (response.status == true) {
+                                        //     swal({
+                                        //         title: "Data berhasil diubah",
+                                        //         icon: "success",
+                                        //         button: "Ok",
+                                        //     }).then(function() {
+                                        //         window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                        //     });
+                                        // } else {
+                                        //     swal({
+                                        //         title: "Data gagal diubah",
+                                        //         icon: "error",
+                                        //         button: "Ok",
+                                        //     });
+                                        // }
                                     },
                                     error: function(xhr, status, error) {
                                         var span = document.createElement("span");
@@ -800,13 +800,13 @@
                             $('#submit-input').html('Tambahkan');
                             $('#submit-input').attr('disabled', 'false');
                             if (response.status == true) {
-                                swal({
-                                    title: "Data berhasil ditambahkan!",
-                                    icon: "success",
-                                    button: "Ok",
-                                }).then(function() {
-                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                });
+                                // swal({
+                                //     title: "Data berhasil ditambahkan!",
+                                //     icon: "success",
+                                //     button: "Ok",
+                                // }).then(function() {
+                                //     window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                // });
                             } else {
                                 swal({
                                     title: "Data gagal ditambahkan!",
