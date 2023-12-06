@@ -61,6 +61,10 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
+        top: -50%;
+        transform: translate(0%, -6%);
+        /* position: relative;
+        z-index: 2; */
     }
 
     .shadow-sm {
@@ -150,7 +154,7 @@
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 470px;
+        width: 450px;
     }
 
     .custom-img {
@@ -561,9 +565,8 @@
     }
 
     .card-3 {
-        position: fixed;
         top: -50%;
-        transform: translate(-10%, -50%);
+        transform: translate(-0%, -50%);
     }
 
     .modal-lg {
@@ -571,20 +574,22 @@
     }
 </style>
 
-<section class="bg-white pt-5 mt-5">
+<!-- <section class="bg-white pt-5 mt-5">
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
         <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
         </h4>
     </div>
-</section>
+</section> -->
 
-<section class="bg-white ">
+<section class="bg-white pt-5 mt-5">
     <div class="overflow">
         <div class="container">
+            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
+            </h4>
             <div class="row">
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
-                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px;">
+                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:0px;">
                             <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
                             <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                         </div>

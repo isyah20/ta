@@ -88,6 +88,14 @@
         font-size: 1rem;
     }
 
+    /* .toggle-button {
+        padding: 5px;
+        background-color: #059669;
+        color: #fff;
+        border: none;
+        border-radius: 5rem;
+    } */
+
     /* Style untuk ikon visibility */
     .toggle-button i {
         margin-left: 5px;
@@ -98,7 +106,7 @@
         color: white;
         transition: background-color 0.3s;
         height: 40px;
-        width: 150px;
+        width: 170px;
         font-size: 15px;
         align-content: center;
         padding-top: 8px;
@@ -224,6 +232,10 @@
         margin-top: 50px;
     }
 
+    .custom-img {
+        margin-left: 13px;
+    }
+
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -254,6 +266,7 @@
 
         tbody {
             font-size: 12px;
+            vertical-align: middle;
         }
 
         .thead th,
@@ -315,20 +328,23 @@
 <section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-6">
-            <h2 class="mb-0 ms-0 wow fadeInUp" style="order: 1;">
+            <h2 class="mt-5 ms-0 wow fadeInUp " style="order: 1; font-size:26px; font-weight:500;">
                 Selamat Datang!
                 <p>Ini daftar tim kamu!</p>
             </h2>
             <div class="d-flex justify-content-start">
-                <div class="link d-flex flex-row align-items-center" style="margin-top:20px">
-                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Tim</a></span>
+                <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
+                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
+                            <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
+                        </a>
+                    </span>
                 </div>
             </div>
         </div>
-        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 270px; margin-top:25px; margin-bottom:10px">
+        <img src="<?= base_url('assets\img\amico.svg') ?>" alt="" style="width: 160px; margin-top:30px; margin-bottom:10px; margin-right:50px">
     </div>
     <!-- tabel marketing -->
-    <div class="container py-5 wow fadeInUp">
+    <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
                 <table class="table custom-table-container">
@@ -339,7 +355,7 @@
                             <th class="custom-padding">Posisi</th>
                             <th class="custom-padding">Email</th>
                             <th class="custom-padding">No. HP/WA</th>
-                            <th class="custom-padding">Alamat</th>
+                            <th class="custom-padding">Area Kerja</th>
                             <th class="custom-padding" style="width:11%">Aksi</th>
                         </tr>
                     </thead>
@@ -376,7 +392,7 @@
     <!-- end tabel marketing -->
 
     <!-- modal input marketing -->
-    <div class="col-12">
+    <div class="col-12 py-5">
         <div class="modal fade" id="inputMarketingModal" tabindex="-1" role="dialog" aria-labelledby="inputMarketingModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -409,8 +425,8 @@
                                     <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputAlamat" class="form-label text-start">Alamat</label>
-                                    <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="Masukkan Alamat" rows="2" required></textarea>
+                                    <label for="inputKerja" class="form-label text-start">Area Kerja</label>
+                                    <textarea class="form-control" name="area_kerja" id="inputAlamat" placeholder="Sleman, D.I. Yogyakarta" rows="2" required></textarea>
                                 </div>
                                 <div class="justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
@@ -433,7 +449,7 @@
     <!-- end modal input marketing -->
 
     <!-- modal hapus -->
-    <div class="col-12">
+    <div class="col-12 py-5">
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -509,8 +525,8 @@
                                     <input type="text" name="no_telp" class="form-control" id="inputNoHP1" placeholder="Masukkan No. HP/WA" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputAlamat" class="form-label text-start">Alamat</label>
-                                    <textarea class="form-control" name="alamat" id="inputAlamat1" placeholder="Masukkan Alamat" rows="2" required></textarea>
+                                    <label for="inputAlamat" class="form-label text-start">Area Kerja</label>
+                                    <textarea class="form-control" name="area_kerja" id="inputAlamat1" placeholder="Sleman, D.I. Yogyakarta" rows="2" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
@@ -538,7 +554,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<!-- <script>
+<script>
     var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
     var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
 
@@ -565,7 +581,7 @@
                         '<td class="posisi">' + data.data[i].posisi + '</td>' +
                         '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
                         '<td class="nohp">' + data.data[i].no_telp + '</td>' +
-                        '<td style="width: 450px">' + data.data[i].alamat + '</td>' +
+                        '<td style="width: 450px">' + data.data[i].area_kerja + '</td>' +
                         '<td>' +
                         '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
                         '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>' +
@@ -589,21 +605,21 @@
                             beforeSend: addAuthorizationHeader,
                             success: function(response) {
 
-                                if (response.status == true) {
-                                    swal({
-                                        title: "Data berhasil dihapus!",
-                                        icon: "success",
-                                        button: "Ok",
-                                    }).then(function() {
-                                        window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                    });
-                                } else {
-                                    swal({
-                                        title: "Data gagal dihapus",
-                                        icon: "error",
-                                        button: "Ok",
-                                    })
-                                }
+                                // if (response.status == true) {
+                                //     swal({
+                                //         title: "Data berhasil dihapus!",
+                                //         icon: "success",
+                                //         button: "Ok",
+                                //     }).then(function() {
+                                //         window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                //     });
+                                // } else {
+                                //     swal({
+                                //         title: "Data gagal dihapus",
+                                //         icon: "error",
+                                //         button: "Ok",
+                                //     })
+                                // }
                             },
                             error: function(xhr, status, error) {
                                 var span = document.createElement("span");
@@ -632,7 +648,7 @@
                         posisi: $("#inputPosisi1").val(),
                         email: $("#inputEmail1").val(),
                         no_telp: $("#inputNoHP1").val(),
-                        alamat: $("#inputAlamat1").val(),
+                        area_kerja: $("#inputAlamat1").val(),
                     };
 
                     // Get data from id
@@ -646,7 +662,7 @@
                             $('#inputPosisi1').val(data.data.posisi);
                             $('#inputEmail1').val(data.data.email);
                             $('#inputNoHP1').val(data.data.no_telp);
-                            $('#inputAlamat1').val(data.data.alamat);
+                            $('#inputAlamat1').val(data.data.area_kerja);
 
                             $("#form-edit").submit(function(event) {
                                 event.preventDefault();
@@ -659,7 +675,7 @@
                                     posisi: $("#inputPosisi1").val(),
                                     email: $("#inputEmail1").val(),
                                     no_telp: $("#inputNoHP1").val(),
-                                    alamat: $("#inputAlamat1").val(),
+                                    area_kerja: $("#inputAlamat1").val(),
                                     // nama_tim: $('input[name=nama_tim]').val(),
                                     // posisi: $('input[name=posisi]').val(),
                                     // email: $('input[name=email]').val(),
@@ -674,21 +690,21 @@
                                     data: formData,
                                     beforeSend: addAuthorizationHeader,
                                     success: function(response) {
-                                        if (response.status == true) {
-                                            swal({
-                                                title: "Data berhasil diubah",
-                                                icon: "success",
-                                                button: "Ok",
-                                            }).then(function() {
-                                                window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                            });
-                                        } else {
-                                            swal({
-                                                title: "Data gagal diubah",
-                                                icon: "error",
-                                                button: "Ok",
-                                            });
-                                        }
+                                        // if (response.status == true) {
+                                        //     swal({
+                                        //         title: "Data berhasil diubah",
+                                        //         icon: "success",
+                                        //         button: "Ok",
+                                        //     }).then(function() {
+                                        //         window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                        //     });
+                                        // } else {
+                                        //     swal({
+                                        //         title: "Data gagal diubah",
+                                        //         icon: "error",
+                                        //         button: "Ok",
+                                        //     });
+                                        // }
                                     },
                                     error: function(xhr, status, error) {
                                         var span = document.createElement("span");
@@ -745,95 +761,95 @@
         })
     });
     $(document).ready(function() {
-    // Handle form submission
-    $('#submit-input').click(function(event) {
-        event.preventDefault();
+        // Handle form submission
+        $('#submit-input').click(function(event) {
+            event.preventDefault();
 
-        // Get the email input value
-        var emailInput = $('input[name=email]').val();
+            // Get the email input value
+            var emailInput = $('input[name=email]').val();
 
-        // Validate the email format
-        if (!isValidEmail(emailInput)) {
-            $('#submit-input').html('Tambahkan');
-            $('#submit-input').attr('disabled', false);
-            swal({
-                title: "Alamat email tidak valid",
-                text: "Harap masukkan alamat email yang benar",
-                icon: "error",
-                button: "Ok",
-            });
-        } else {
-            // Ask for confirmation
-            swal({
-                title: "Konfirmasi Email",
-                text: "Apakah email yang Anda masukan sudah benar?",
-                icon: "info",
-                buttons: ["Tidak", "Ya"]
-            }).then((confirmed) => {
-                if (confirmed) {
-                    $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
-                    $('#submit-input').attr('disabled', true);
-                    var formData = {
-                        nama_tim: $('input[name=nama_tim]').val(),
-                        posisi: $('input[name=posisi]').val(),
-                        email: emailInput,
-                        no_telp: $('input[name=no_telp]').val(),
-                        alamat: $('textarea[name=alamat]').val(),
-                    };
+            // Validate the email format
+            if (!isValidEmail(emailInput)) {
+                $('#submit-input').html('Tambahkan');
+                $('#submit-input').attr('disabled', false);
+                swal({
+                    title: "Alamat email tidak valid",
+                    text: "Harap masukkan alamat email yang benar",
+                    icon: "error",
+                    button: "Ok",
+                });
+            } else {
+                // Ask for confirmation
+                swal({
+                    title: "Konfirmasi Email",
+                    text: "Apakah email yang Anda masukan sudah benar?",
+                    icon: "info",
+                    buttons: ["Tidak", "Ya"]
+                }).then((confirmed) => {
+                    if (confirmed) {
+                        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                        $('#submit-input').attr('disabled', true);
+                        var formData = {
+                            nama_tim: $('input[name=nama_tim]').val(),
+                            posisi: $('input[name=posisi]').val(),
+                            email: emailInput,
+                            no_telp: $('input[name=no_telp]').val(),
+                            area_kerja: $('textarea[name=area_kerja]').val(),
+                        };
 
-                    // Make an AJAX request
-                    $.ajax({
-                        url: '<?= base_url("api/supplier/create") ?>',
-                        type: 'POST',
-                        data: formData,
-                        beforeSend: addAuthorizationHeader,
-                        success: function(response) {
-                            $('#submit-input').html('Tambahkan');
-                            $('#submit-input').attr('disabled', 'false');
-                            if (response.status == true) {
+                        // Make an AJAX request
+                        $.ajax({
+                            url: '<?= base_url("api/supplier/create") ?>',
+                            type: 'POST',
+                            data: formData,
+                            beforeSend: addAuthorizationHeader,
+                            success: function(response) {
+                                $('#submit-input').html('Tambahkan');
+                                $('#submit-input').attr('disabled', 'false');
+                                if (response.status == true) {
+                                    // swal({
+                                    //     title: "Data berhasil ditambahkan!",
+                                    //     icon: "success",
+                                    //     button: "Ok",
+                                    // }).then(function() {
+                                    //     window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                    // });
+                                } else {
+                                    swal({
+                                        title: "Data gagal ditambahkan!",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                $('#submit-input').html('Tambahkan');
+                                $('#submit-input').attr('disabled', false);
+                                var span = document.createElement("span");
+                                span.innerHTML = JSON.parse(xhr.responseText).message;
                                 swal({
-                                    title: "Data berhasil ditambahkan!",
-                                    icon: "success",
-                                    button: "Ok",
-                                }).then(function() {
-                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                });
-                            } else {
-                                swal({
-                                    title: "Data gagal ditambahkan!",
+                                    title: "ERROR",
+                                    content: span,
                                     icon: "error",
                                     button: "Ok",
                                 });
+                                console.log(xhr.responseText);
+                                console.log(JSON.parse(xhr.responseText).message);
                             }
-                        },
-                        error: function(xhr, status, error) {
-                            $('#submit-input').html('Tambahkan');
-                            $('#submit-input').attr('disabled', false);
-                            var span = document.createElement("span");
-                            span.innerHTML = JSON.parse(xhr.responseText).message;
-                            swal({
-                                title: "ERROR",
-                                content: span,
-                                icon: "error",
-                                button: "Ok",
-                            });
-                            console.log(xhr.responseText);
-                            console.log(JSON.parse(xhr.responseText).message);
-                        }
-                    });
-                } else {
-                    // User chose not to proceed
-                    $('#submit-input').html('Tambahkan');
-                    $('#submit-input').attr('disabled', false);
-                }
-            });
+                        });
+                    } else {
+                        // User chose not to proceed
+                        $('#submit-input').html('Tambahkan');
+                        $('#submit-input').attr('disabled', false);
+                    }
+                });
+            }
+        });
+
+        // Function to validate email format
+        function isValidEmail(email) {
+            var emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+            return emailPattern.test(email);
         }
     });
-
-    // Function to validate email format
-    function isValidEmail(email) {
-        var emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
-        return emailPattern.test(email);
-    }
-});
 </script>
