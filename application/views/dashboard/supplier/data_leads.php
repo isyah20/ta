@@ -95,7 +95,6 @@
 
     .card-input {
         font-size: 10px;
-        margin-top: 3rem;
         display: flex;
         width: 500px;
     }
@@ -139,7 +138,7 @@
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         border: 1px solid;
         background-color: white;
     }
@@ -151,10 +150,10 @@
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 380px;
-        padding-left: 10px;
+        width: 440px;
     }
-    .custom-img{
+
+    .custom-img {
         margin-left: 8px;
     }
 
@@ -579,14 +578,19 @@
             <div class="row">
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
-                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px">
+                        <div class="col-sm-1" style="width: 20%;padding-left:0px;padding-right: 0px">
+                            <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:190px;" data-bs-toggle="tooltip" data-bs-placement="top">
+                                <span style="padding:5px 5px 5px 0px; margin-left:10px; color:#6A6A6AE5">
+                                    Export Data Leads
+                                </span>
+                                <img src="<?= base_url('assets\img\export.svg') ?>" width="35" style="padding:4px" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-input wow fadeInUp">
+                        <div class="form-select-custom custom-select shadow-sm" style="padding:5px 5px 5px 0px; margin-right:10px">
                             <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
                             <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
-                        </div>
-                        <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
-                            <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
-                                <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -634,7 +638,7 @@
             </div>
         </div>
     </div>
-    <div class="container wow fadeInUp" style="margin-top:10px">
+    <div class="container wow fadeInUp" >
         <div class="row">
             <div class="col">
                 <div class="table-responsive">
