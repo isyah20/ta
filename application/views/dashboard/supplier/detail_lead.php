@@ -2776,18 +2776,16 @@
                         beforeSend: addAuthorizationHeader,
                         success: function(response) {
                             if (response.status == true) {
-                                swal({
-                                    title: "Berhasil mengubah profil!",
-                                    // text: "You clicked the button!",
-                                    icon: "success",
-                                    button: "Ok",
-                                }).then(function() {
-                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                                });
+                                // swal({
+                                //     title: "Berhasil mengubah profil!",
+                                //     icon: "success",
+                                //     button: "Ok",
+                                // }).then(function() {
+                                //     window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                // });
                             } else {
                                 swal({
                                     title: "Profil gagal diubah",
-                                    // text: "You clicked the button!",
                                     icon: "error",
                                     button: "Ok",
                                 })
@@ -2826,18 +2824,16 @@
                         beforeSend: addAuthorizationHeader,
                         success: function(response) {
                             if (response.status == true) {
-                                swal({
-                                    title: "Kontak berhasil ditambahkan!",
-                                    // text: "You clicked the button!",
-                                    icon: "success",
-                                    button: "Ok",
-                                }).then(function() {
-                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                                });
+                                // swal({
+                                //     title: "Kontak berhasil ditambahkan!",
+                                //     icon: "success",
+                                //     button: "Ok",
+                                // }).then(function() {
+                                //     window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                // });
                             } else {
                                 swal({
                                     title: "Data kontak gagal ditambahkan!",
-                                    // text: "You clicked the button!",
                                     icon: "error",
                                     button: "Ok",
                                 })
@@ -2952,23 +2948,21 @@
 
                         success: function(response) {
 
-                            if (response.status == true) {
-                                swal({
-                                    title: "Data berhasil dihapus!",
-                                    // text: "You clicked the button!",
-                                    icon: "success",
-                                    button: "Ok",
-                                }).then(function() {
-                                    window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                                });
-                            } else {
-                                swal({
-                                    title: "Data gagal dihapus!",
-                                    // text: "You clicked the button!",
-                                    icon: "error",
-                                    button: "Ok",
-                                })
-                            }
+                            // if (response.status == true) {
+                            //     swal({
+                            //         title: "Data berhasil dihapus!",
+                            //         icon: "success",
+                            //         button: "Ok",
+                            //     }).then(function() {
+                            //         window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                            //     });
+                            // } else {
+                            //     swal({
+                            //         title: "Data gagal dihapus!",
+                            //         icon: "error",
+                            //         button: "Ok",
+                            //     })
+                            // }
 
                         },
 
@@ -3058,23 +3052,21 @@
 
                                     success: function(response) {
 
-                                        if (response.status == true) {
-                                            swal({
-                                                title: "Data berhasil diubah!",
-                                                // text: "You clicked the button!",
-                                                icon: "success",
-                                                button: "Ok",
-                                            }).then(function() {
-                                                window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
-                                            });
-                                        } else {
-                                            swal({
-                                                title: "Data gagal diubah!",
-                                                // text: "You clicked the button!",
-                                                icon: "error",
-                                                button: "Ok",
-                                            })
-                                        }
+                                        // if (response.status == true) {
+                                        //     swal({
+                                        //         title: "Data berhasil diubah!",
+                                        //         icon: "success",
+                                        //         button: "Ok",
+                                        //     }).then(function() {
+                                        //         window.location.href = "<?= base_url('suplier/leads/') ?>" + id_profile;
+                                        //     });
+                                        // } else {
+                                        //     swal({
+                                        //         title: "Data gagal diubah!",
+                                        //         icon: "error",
+                                        //         button: "Ok",
+                                        //     })
+                                        // }
 
                                     },
 
