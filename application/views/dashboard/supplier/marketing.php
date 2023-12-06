@@ -21,6 +21,7 @@
     tbody {
         text-align: left;
         font-size: 15px;
+        vertical-align: middle;
     }
 
     .table {
@@ -77,7 +78,7 @@
 
     th.custom-padding,
     td.custom-padding {
-        border: none;
+        /* border: none; */
         vertical-align: middle;
         height: 60px !important;
     }
@@ -106,11 +107,10 @@
         color: white;
         transition: background-color 0.3s;
         height: 40px;
-        width: 150px;
+        width: 170px;
         font-size: 15px;
         align-content: center;
         padding-top: 8px;
-        margin-top: 20px;
     }
 
     .link .btn-simpan:hover {
@@ -233,6 +233,10 @@
         margin-top: 50px;
     }
 
+    .custom-img {
+        margin-left: 13px;
+    }
+
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -263,6 +267,7 @@
 
         tbody {
             font-size: 12px;
+            vertical-align: middle;
         }
 
         .thead th,
@@ -324,17 +329,20 @@
 <section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-6">
-            <h2 class="mt-4 ms-0 wow fadeInUp" style="order: 1;">
+            <h2 class="mt-5 ms-0 wow fadeInUp " style="order: 1; font-size:26px; font-weight:500;">
                 Selamat Datang!
                 <p>Ini daftar tim kamu!</p>
             </h2>
             <div class="d-flex justify-content-start">
                 <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
-                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal"><i class="fas me-1"></i>Tambahkan Tim</a></span>
+                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
+                            <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
+                        </a>
+                    </span>
                 </div>
             </div>
         </div>
-        <img src="<?= base_url('assets\img\image-marketing.svg') ?>" alt="" style="width: 270px; margin-top:25px; margin-bottom:10px">
+        <img src="<?= base_url('assets\img\amico.svg') ?>" alt="" style="width: 160px; margin-top:30px; margin-bottom:10px; margin-right:50px">
     </div>
     <!-- tabel marketing -->
     <div class="container wow fadeInUp">
@@ -569,13 +577,13 @@
                 let i;
                 for (i = 0; i < data.data.length; i++) {
                     html += '<tr>' +
-                        '<td class="text-center">' + (i + 1) + '</td>' +
-                        '<td class="nama">' + data.data[i].nama_tim + '</td>' +
-                        '<td class="posisi">' + data.data[i].posisi + '</td>' +
-                        '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
-                        '<td class="nohp">' + data.data[i].no_telp + '</td>' +
-                        '<td style="width: 450px">' + data.data[i].area_kerja + '</td>' +
-                        '<td>' +
+                        '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
+                        '<td class="custom-padding nama">' + data.data[i].nama_tim + '</td>' +
+                        '<td class="custom-padding posisi">' + data.data[i].posisi + '</td>' +
+                        '<td class="custom-padding"><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
+                        '<td class="custom-padding nohp">' + data.data[i].no_telp + '</td>' +
+                        '<td class="custom-padding" style="width: 450px">' + data.data[i].area_kerja + '</td>' +
+                        '<td class="custom-padding">' +
                         '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
                         '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>' +
                         '</td>' +
@@ -754,95 +762,95 @@
         })
     });
     $(document).ready(function() {
-    // Handle form submission
-    $('#submit-input').click(function(event) {
-        event.preventDefault();
+        // Handle form submission
+        $('#submit-input').click(function(event) {
+            event.preventDefault();
 
-        // Get the email input value
-        var emailInput = $('input[name=email]').val();
+            // Get the email input value
+            var emailInput = $('input[name=email]').val();
 
-        // Validate the email format
-        if (!isValidEmail(emailInput)) {
-            $('#submit-input').html('Tambahkan');
-            $('#submit-input').attr('disabled', false);
-            swal({
-                title: "Alamat email tidak valid",
-                text: "Harap masukkan alamat email yang benar",
-                icon: "error",
-                button: "Ok",
-            });
-        } else {
-            // Ask for confirmation
-            swal({
-                title: "Konfirmasi Email",
-                text: "Apakah email yang Anda masukan sudah benar?",
-                icon: "info",
-                buttons: ["Tidak", "Ya"]
-            }).then((confirmed) => {
-                if (confirmed) {
-                    $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
-                    $('#submit-input').attr('disabled', true);
-                    var formData = {
-                        nama_tim: $('input[name=nama_tim]').val(),
-                        posisi: $('input[name=posisi]').val(),
-                        email: emailInput,
-                        no_telp: $('input[name=no_telp]').val(),
-                        area_kerja: $('textarea[name=area_kerja]').val(),
-                    };
+            // Validate the email format
+            if (!isValidEmail(emailInput)) {
+                $('#submit-input').html('Tambahkan');
+                $('#submit-input').attr('disabled', false);
+                swal({
+                    title: "Alamat email tidak valid",
+                    text: "Harap masukkan alamat email yang benar",
+                    icon: "error",
+                    button: "Ok",
+                });
+            } else {
+                // Ask for confirmation
+                swal({
+                    title: "Konfirmasi Email",
+                    text: "Apakah email yang Anda masukan sudah benar?",
+                    icon: "info",
+                    buttons: ["Tidak", "Ya"]
+                }).then((confirmed) => {
+                    if (confirmed) {
+                        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                        $('#submit-input').attr('disabled', true);
+                        var formData = {
+                            nama_tim: $('input[name=nama_tim]').val(),
+                            posisi: $('input[name=posisi]').val(),
+                            email: emailInput,
+                            no_telp: $('input[name=no_telp]').val(),
+                            area_kerja: $('textarea[name=area_kerja]').val(),
+                        };
 
-                    // Make an AJAX request
-                    $.ajax({
-                        url: '<?= base_url("api/supplier/create") ?>',
-                        type: 'POST',
-                        data: formData,
-                        beforeSend: addAuthorizationHeader,
-                        success: function(response) {
-                            $('#submit-input').html('Tambahkan');
-                            $('#submit-input').attr('disabled', 'false');
-                            if (response.status == true) {
-                                // swal({
-                                //     title: "Data berhasil ditambahkan!",
-                                //     icon: "success",
-                                //     button: "Ok",
-                                // }).then(function() {
-                                //     window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                // });
-                            } else {
+                        // Make an AJAX request
+                        $.ajax({
+                            url: '<?= base_url("api/supplier/create") ?>',
+                            type: 'POST',
+                            data: formData,
+                            beforeSend: addAuthorizationHeader,
+                            success: function(response) {
+                                $('#submit-input').html('Tambahkan');
+                                $('#submit-input').attr('disabled', 'false');
+                                if (response.status == true) {
+                                    // swal({
+                                    //     title: "Data berhasil ditambahkan!",
+                                    //     icon: "success",
+                                    //     button: "Ok",
+                                    // }).then(function() {
+                                    //     window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                    // });
+                                } else {
+                                    swal({
+                                        title: "Data gagal ditambahkan!",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                $('#submit-input').html('Tambahkan');
+                                $('#submit-input').attr('disabled', false);
+                                var span = document.createElement("span");
+                                span.innerHTML = JSON.parse(xhr.responseText).message;
                                 swal({
-                                    title: "Data gagal ditambahkan!",
+                                    title: "ERROR",
+                                    content: span,
                                     icon: "error",
                                     button: "Ok",
                                 });
+                                console.log(xhr.responseText);
+                                console.log(JSON.parse(xhr.responseText).message);
                             }
-                        },
-                        error: function(xhr, status, error) {
-                            $('#submit-input').html('Tambahkan');
-                            $('#submit-input').attr('disabled', false);
-                            var span = document.createElement("span");
-                            span.innerHTML = JSON.parse(xhr.responseText).message;
-                            swal({
-                                title: "ERROR",
-                                content: span,
-                                icon: "error",
-                                button: "Ok",
-                            });
-                            console.log(xhr.responseText);
-                            console.log(JSON.parse(xhr.responseText).message);
-                        }
-                    });
-                } else {
-                    // User chose not to proceed
-                    $('#submit-input').html('Tambahkan');
-                    $('#submit-input').attr('disabled', false);
-                }
-            });
+                        });
+                    } else {
+                        // User chose not to proceed
+                        $('#submit-input').html('Tambahkan');
+                        $('#submit-input').attr('disabled', false);
+                    }
+                });
+            }
+        });
+
+        // Function to validate email format
+        function isValidEmail(email) {
+            var emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+            return emailPattern.test(email);
         }
     });
-
-    // Function to validate email format
-    function isValidEmail(email) {
-        var emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
-        return emailPattern.test(email);
-    }
-});
 </script>

@@ -23,7 +23,7 @@
 
     th.custom-padding,
     td.custom-padding {
-        border: none;
+        /* border: none; */
         vertical-align: middle;
         height: 60px !important;
     }
@@ -61,6 +61,10 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
+        top: -50%;
+        transform: translate(0%, 0%);
+        /* position: relative;
+        z-index: 2; */
     }
 
     .shadow-sm {
@@ -150,7 +154,7 @@
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 470px;
+        width: 450px;
     }
 
     .custom-img {
@@ -560,11 +564,10 @@
         justify-content: center;
     }
 
-    /* .card-3 {
-        position: fixed;
+    .card-3 {
         top: -50%;
-        transform: translate(-50%, -50%);
-    } */
+        transform: translate(-0%, -50%);
+    }
 
     .modal-lg {
         max-width: 735px;
@@ -579,13 +582,14 @@
 </section> -->
 
 <section class="bg-white pt-5 mt-5">
-    <div class="overflow">
+    <!-- <div class="overflow"> -->
         <div class="container">
-            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p></h4>
+            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
+            </h4>
             <div class="row">
                 <div class="col-6">
                     <div class="card-input wow fadeInUp">
-                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px;">
+                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:0px;">
                             <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
                             <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                         </div>
@@ -639,7 +643,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
@@ -859,15 +863,15 @@
                 var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
                 leads +=
                     `<tr>
-                    <td style="text-align:center">` + rowNumber + `</td>
-                    <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-                    <td class="npwp">` + (value.npwp || '') + `</td>
-                    <td>` + (value.nama || '') + `</td>
-                    <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
-                    <td>` + (value.no_telp || '') + `</td>
-                    <td><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                    <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-                    <td>
+                    <td class="custom-padding" style="text-align:center">` + rowNumber + `</td>
+                    <td class="custom-padding perusahaan">` + (value.nama_perusahaan || '') + `</td>
+                    <td class="custom-padding npwp">` + (value.npwp || '') + `</td>
+                    <td class="custom-padding">` + (value.nama || '') + `</td>
+                    <td class="custom-padding"><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
+                    <td class="custom-padding">` + (value.no_telp || '') + `</td>
+                    <td class="custom-padding"><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                    <td class="custom-padding">` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+                    <td class="custom-padding">
                         <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success">Detail</a>
                     </td>
                 </tr>`;
