@@ -678,10 +678,10 @@
                                     </select>
                                 </div> -->
                             <!-- Search Nama -->
-                            <div class=" col-sm-10 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
-                                <input id="input-cari-perusahaan" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
-                                <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;margin-right:10px">
-                            </div>
+                            <div class="col-md-1 form-select-custom" style="width:43%;padding:4px 5px 0px 15px;margin-right:10px ">
+                                    <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="margin-bottom:0px;">
+                                    <input id="keyword" type="text" class="form-input-custom" style="border:none;font-size:16px;padding-bottom:6px;margin-top:0px" placeholder="Cari nama tender atau pemenang">
+                                </div>
                         </div>
                     </div>
                 </div>

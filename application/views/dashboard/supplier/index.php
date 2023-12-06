@@ -55,7 +55,7 @@
     }
 
     .select2-container--bootstrap-5 .select2-selection {
-        width: 135px;
+        width: 150px;
         padding: 7px 0px 5px 5px;
         font-family: inherit;
         font-size: 1rem;
@@ -114,7 +114,7 @@
         cursor: pointer;
         width: 7px;
         right: 0px;
-        left: 130px;
+        left: 150px;
         bottom: 10px;
         background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
     }
@@ -128,8 +128,8 @@
     }
 
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
-        left: -25px;
-        width: 180px !important;
+        left: -40px;
+        width: 225px !important;
     }
 
     .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
@@ -190,24 +190,23 @@
     .card-body {
         padding-left: 6%;
         border-radius: 30px;
-        height:120px;
+        height:100px;
     }
 
     .card-title p {
         color: #B89494;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
-        padding: 6% 0% 0% 3%;
+        padding: 8% 0% 2% 3%;
     }
 
     .card-title {
         color: #B89494;
-        font-size: 26px;
         font-weight: bold;
     }
 
     .card-text {
-        font-size: 50px;
+        font-size: 40px;
         font-weight: bold;
         padding-left: 10px;
     }
@@ -222,7 +221,7 @@
     }
 
     .content-above-navbar {
-        margin-top: 65px;
+        margin-top: 85px;
         z-index: 999;
     }
 
@@ -276,27 +275,27 @@
 }
 
 .custom-colored-dot-list li:nth-child(1)::before {
-    background-color: #495894;
-}
-
-.custom-colored-dot-list li:nth-child(2)::before {
-    background-color: #56C474; /* Biru muda */
-}
-
-.custom-colored-dot-list li:nth-child(3)::before {
-    background-color: #EF5350; /* Biru tua */
-}
-
-.custom-colored-dot-list li:nth-child(4)::before {
-    background-color: #83D4F9;
-}
-
-.custom-colored-dot-list li:nth-child(5)::before {
     background-color: #F17D3A;
 }
 
+.custom-colored-dot-list li:nth-child(2)::before {
+    background-color: #83D4F9;
+}
+
+.custom-colored-dot-list li:nth-child(3)::before {
+    background-color: #495894; 
+}
+
+.custom-colored-dot-list li:nth-child(4)::before {
+    background-color: #56C474;
+}
+
+.custom-colored-dot-list li:nth-child(5)::before {
+    background-color: #EF5350;
+}
+
 .color-grey {
-  color:rgba(106, 106, 106, 0.90)
+ color: var(--font-middle-grey, rgba(106, 106, 106, 0.90));
 }
 
 .progress-wrapper {
@@ -344,122 +343,106 @@
     }
 </style>
 
-<section class="mt-7 bg-white">
+<section class="mt-10 bg-white">
     <div class="container">
         <div class="row justify-content d-flex content-above-navbar">
             <div class="col-md-5 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
-                <h4 class="mb-0 ms-2 mt-4 wow fadeInUp w-660" style="padding-top:8px;">
-                    Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Temukan Calon Customermu
-                    <p>
+                <h4 class="mb-0 ms-2 mt-4 wow fadeInUp w-660" style="padding-top:8px;font-size:26px">
+                    Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131; font-size:26px"></span>!<p>Mulai pantau dan kelola pemenang tender</p>
                 </h4>
             </div>
         </div>
     </div>
  </session>
 <section>
-    <div class="container-lg">
-        <div class="row">
+    <div class="container">
+        <div class="row mt-3">
             <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
                 <div class="row">
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33%;">
                         <div class="shadow rounded-3 bg-white">
-                            <div class="card-body ">
+                            <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                    <p class="card-title ">Data Leads Terbaru</p>
+                                    <p class="card-title">Leads Terbaru</p>
                                 </div>
                                 <div class="wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="d-flex justify-content-between">
-                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" >9</h1>
-                                        <img src="<?= base_url('assets\img\leads_new.svg') ?>" class="card-img" alt="">
+                                    <div class="d-flex">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(5).svg') ?>" alt="">
+                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" ></h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33%;">
                         <div class="shadow rounded-3 bg-white ">
-                            <div class="card-body ">
+                            <div class="card-body">
+                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                    <p class="card-title">Leads Belum Diplotting</p>
+                                </div>
+                                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                                    <div class="d-flex">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(4).svg') ?>" alt="">
+                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id=""></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33%;">
+                        <div class="shadow rounded-3 bg-white ">
+                            <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                                     <p class="card-title ">Leads Belum Dilengkapi</p>
                                 </div>
                                 <div class="wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="d-flex justify-content-between">
-                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap">0</h1>
-                                        <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
+                                    <div class="d-flex">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="">
+                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap"></h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="dashboard-hero mt-4">
-                            <div class="row mt-2">
-                                <div class="col-lg-5 pl-4">
-                                    <div>
-                                        <center>
-                                            <div class="chart2" style="margin:0; padding:0">
-                                                <canvas id="myDoughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
-                                            </div>
-                                        </center>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 px-3 ml-4 align-content-center justify-content-center align-items-center">
-                                    <div class="row display-flex">
-                                        
-                                        <div class="col" style="margin-top:5%;padding-left:50px">
-                                        <h2 class="text-center">Status CRM</h2>
-                                        <ul class="custom-colored-dot-list text-wrap">
-                                            <li  class="color-grey">Belum Dihubungi <span id="statusBelumDihubungi" style="padding-left:50px">10%</span></li>
-                                            <li  class="color-grey">Diterima <span id="statusDiterima"  style="padding-left:120px">10%</span></li>
-                                            <li class="color-grey">Ditolak <span  id="statusDitolak" style="padding-left:130px">10%</span></li>
-                                            <li  class="color-grey">Proses Negosiasi <span id="statusNegosiasi" style="padding-left:60px">10%</span></li>
-                                            <li  class="color-grey">Sedang Dihubungi <span id="statusDihubungi" style="padding-left:50px">10%</span></li>
-                                            </ul>
-                                        </div>
+                <!-- Grafik riwayat pemenang tender-->
+                <div class="row">
+                    <div class="col-lg-12 pl-4">
+                        <div class="shadow chart-bg mt-4" style="height:100%; border-radius: 10px;">
+                            <div class="container wow fadeInUp">
+                                <div style="padding:0">
+                                    <h4 style="color:#333333; margin:10px; font-size:20px; font-weight:500; padding-top:3px">Pemenang Tender Setiap Bulan</h4>
+                                    <div class="chart-container wow fadeInUp" style="margin:0; padding:0">
+                                        <canvas id="lineChart" style="width: 500; height:225;"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+            </div>
+            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width:25%;">
                 <div class="shadow rounded-3 bg-white">
                     <div class="card-body">
                         <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="card-title">Total Data Leads</p>
+                            <p class="card-title" style="padding-top:15px;padding-bottom:3px">Total Data Leads</p>
                         </div>
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="d-flex justify-content-between">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads">1000</h1>
-                                <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img" alt="">
+                            <div class="d-flex">
+                            <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(3).svg') ?>" alt="" style="width:35px;height:35px;margin-top:5px">
+                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads"></h1>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="margin-top:25px;height:280px;overflow-y: auto;">
+                    <div class="card-body" style="margin-top:25px;height:355px;overflow-y: auto;">
                         <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
-                           <h4 style="margin-left:45px;margin-top:5px">Tim Marketing</h4>
+                           <h4 style="margin-left:45px;margin-top:20px">Tim Marketing</h4>
                         </div>
                         <div class="class">
                                <table class="table">
                                 <tbody id="total-plot-tim">
-                                    <!-- <tr>
-                                        <td><span class="circle">99</span>
-                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="circle">99</span>
-                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="circle">99</span>
-                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="circle">99</span>
-                                        <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
-                                    </tr> -->
                                 </tbody>
                                 </table>
                            </div>
@@ -467,48 +450,29 @@
                 </div>
             </div>
             <!-- Chart Pemenang Tender -->
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+            <div class="wow fadeInUp animation col-sm-12" data-wow-delay="0.2s" style="width: 25%;">
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="height:425px;padding-left:0px">
-                        <h4 class="text-center pt-4" style="font-weight:bold;padding-left:7px">Pemenang Tender Terbaru</h4>  <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                            <div class="progress-wrapper">
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Hari ini</span>
+                    <div class="dashboard-hero" style="height:480px;padding-left:0px">
+                        <div>
+                        <h4 class="text-center">Status CRM</h4>
+                            <center>
+                                <div class="chart2" style="margin:0;padding:14px">
+                                    <canvas id="myDoughnutChart" width="200" height="200" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
                                 </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-today" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Minggu ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-week" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Bulan ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar"  id="total-month" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Tahun ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-year" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
+                            </center>
                         </div>
+                        <div class="px-3 ml-4 align-content-center justify-content-center align-items-center">
+                            <div class="row display-flex"> 
+                                <div class="col" style="margin-top:5%;padding-left:30px">   
+                                <ul class="custom-colored-dot-list">
+                                    <li  class="color-grey">Tanpa Status<span id="statusBelumDihubungi" style="float:right">10%</span></li>
+                                    <li  class="color-grey">Sedang Diproses<span id="statusDihubungi" style="float:right">10%</span></li>
+                                    <li  class="color-grey">Negosiasi<span id="statusNegosiasi" style="float:right">10%</span></li>
+                                    <li  class="color-grey">Diterima<span id="statusDiterima"  style="float:right">10%</span></li>
+                                    <li class="color-grey">Ditolak<span  id="statusDitolak" style="float:right">10%</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -516,24 +480,25 @@
         </div>
     </div>
 </section>
-    <session>
+<session>
         <div class="container bg-white"><br>
             <div class="row">
-                <div class="col-md-7">
-                    <div class="card-select wow fadeInUp">
+                <div class="col-md-12">
+                    <div class="wow fadeInUp">
                         <div class="select-custom container-fluid">
-                            <div class="row flex-nowrap">
+                            <div class="row" style="margin-top:30px">
+                            <h3 class="pb-2">Pemenang Tender Terbaru</h3>
                                 <!-- Search Nama -->
-                                <div class=" col-sm-1 form-select-custom" style="padding:5px; padding-left:30px;margin-right:10px;">
-                                    <input id="keyword" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama tender atau pemenang">
-                                    <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="float:right;padding-top:3px;">
+                                <div class="col-md-1 form-select-custom" style="width:43%;padding:6px 5px 0px 15px;margin-right:10px ">
+                                    <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="margin-bottom:0px;">
+                                    <input id="keyword" type="text" class="form-input-custom" style="border:none;font-size:16px;padding-bottom:8px;margin-top:0px" placeholder="Cari nama tender atau pemenang">
                                 </div>
-                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:10px">
+                                <div class="col-md-1 form-select-custom d-flex" style="width: 210px; margin-right:10px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-wilayah" id="wilayah" style="border:none;">
                                     </select>
                                 </div>
-                                <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:10px">
+                                <div class="col-md-1 form-select-custom d-flex" style="width: 210px; margin-right:10px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                     <select class="select2-jenis-pengadaan" style="border:none;">
                                     </select>
@@ -573,7 +538,7 @@
                                     </div>
                                 </ul>
                                 <!-- Filtering -->
-                                <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width: 8%;padding-left: 8px;">
+                                <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width:4%;padding-left:11px;">
                                     <a class="form-select-custom d-flex" style="width:40px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" style="padding:4px" alt="">
                                     </a>
@@ -584,8 +549,8 @@
                                         <li class="dropdown-item d-flex text-dropdown" data-sort="4">Penetapan Pemenang Terlama</li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 20px">
-                                    <a href="<?= base_url() ?>suplier/tender/export" type="button" class="form-select-custom d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
+                                <div class="col-sm-1" style="width:4%;padding-left:10px">
+                                    <a href="<?= base_url() ?>suplier/tender/export" type="button" class="form-select-custom d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ekspor Excel">
                                         <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
                                     </a>
                                 </div>
@@ -674,7 +639,7 @@
 
 <section>
     <div class="container">
-        <div class="pt-3 pb-3 mt-5 bg-white">
+        <div class="pb-3 mt-5 bg-white">
             <div id="sec-pemenang-terbaru" style="display: none">
                 <!-- <div class="text-center mb-3">
                 <h3 class="tender-title text-center wow fadeInUp d-inline-block px-3 pb-2" data-wow-delay="0.5s">Pemenang Tender</h3>
@@ -735,7 +700,7 @@
                 </div>
             </div> -->
 
-                <div class="row wow fadeInUp mx-0 my-2" id="list-pemenang" data-wow-delay="0.5s"></div>
+                <div class="row wow fadeInUp my-2" id="list-pemenang" data-wow-delay="0.5s"></div>
                 <div class="wow fadeInUp" id="pagination-container" data-wow-delay="0.5s"></div>
             </div>
         </div>
@@ -1053,8 +1018,8 @@
             else update_hari = update_hari + ' hari yang lalu';
 
             pemenang +=
-                `<div class="paket col-md-6 px-1 py-0">
-                        <div class="p-card bg-white shadow p-3 p-lg-4 rounded-4 border hover-scale">
+                `<div class="paket col-md-6">
+                        <div class="p-card bg-white shadow p-2 p-lg-4 rounded-4 border hover-scale">
                             <div class="d-flex align-items-center border-bottom pb-3">
                                 <div class="d-flex flex-row align-items-center">
                                     <img class="rounded-circle me-1" src="<?= base_url("assets/img/img-profile-default.png") ?>" width="45">
@@ -1283,7 +1248,7 @@
             labels: ['Tender 1', 'Tender 2', 'Tender 3', 'Tender 4', 'Tender 5'],
             datasets: [{
                 data: [0], // Initial data, will be updated after fetching
-                backgroundColor: ['#495894', '#56C474', '#EF5350', '#83D4F9', '#F17D3A'],
+                backgroundColor: ['#F17D3A', '#56C474', '#EF5350', '#495894', '#83D4F9'],
                 borderWidth: 2,
                 borderColor: 'white'
             }]
@@ -1351,16 +1316,16 @@
         ctx.font = "14px Ubuntu";
         ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fontWeight = 500;
+        // ctx.textBaseline = 'middle';
+        ctx.fontWeight = 700;
         var centerX = myDoughnutChart.chartArea.left + (myDoughnutChart.chartArea.right - myDoughnutChart.chartArea.left) / 2;
         var centerY = myDoughnutChart.chartArea.top + (myDoughnutChart.chartArea.bottom - myDoughnutChart.chartArea.top) / 2;
-        ctx.fillText("Total Tender", centerX, centerY - 10);
+        ctx.fillText("",centerX, centerY - 10);
 
         // Draw the numerical value with larger font
-        ctx.font = "30px Ubuntu";
-        ctx.fontWeight = 700;
-        ctx.fillText(presentase + "%", centerX, centerY + 20);
+        // ctx.font = "30px Ubuntu";
+        // ctx.fontWeight = 700;
+        // ctx.fillText(presentase + "%", centerX, centerY + 20);
 
         ctx.restore();
     }
@@ -1368,7 +1333,41 @@
     // Panggil updateChartWithData untuk pertama kali
     updateChartWithData();
 </script>
+<script>
+    // Data for Line Chart
+    function generateRandomData() {
+        return {
+            labels: [
+                'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
+            ],
+            datasets: [{
+                label: 'Dataset',
+                data: [500, 600, 700, 800, 900, 1000],
+                borderColor: '#064E3B',
+                backgroundColor: '#064E3B',
+                pointStyle: 'circle',
+                pointRadius: 2,
+                pointHoverRadius: 15,
+            }]
+        };
+    }
 
+    const chartConfig = {
+        type: 'line',
+        data: generateRandomData(),
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: false,
+                }
+            }
+        }
+    };
+
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    var lineChart = new Chart(ctx, chartConfig);
+</script>
 
 
 
