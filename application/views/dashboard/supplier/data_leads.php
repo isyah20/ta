@@ -566,7 +566,7 @@
 
     .card-3 {
         top: -50%;
-        transform: translate(-0%, -50%);
+        transform: translate(2%, -50%);
     }
 
     .card-2 {
@@ -594,7 +594,7 @@
         <div class="row">
             <div class="col-6 ">
                 <div class="card-input wow fadeInUp">
-                    <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:0px;">
+                    <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:8px;">
                         <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
                         <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                     </div>
