@@ -190,7 +190,7 @@
     .card-body {
         padding-left: 6%;
         border-radius: 30px;
-        height:120px;
+        height: 120px;
     }
 
     .card-title p {
@@ -217,7 +217,7 @@
         height: 60px;
         display: inline-block;
         margin-right: 15px;
-        float:right;
+        float: right;
         margin-bottom: 19px;
     }
 
@@ -253,87 +253,90 @@
         width: 92%;
     }
 
-.custom-colored-dot-list {
-  list-style: none;
-  padding: 0;
-}
+    .custom-colored-dot-list {
+        list-style: none;
+        padding: 0;
+    }
 
-.custom-colored-dot-list li {
-  position: relative;
-  padding-left: 20px; /* Jarak antara titik dan teks */
-  line-height: 1.5;
-}
+    .custom-colored-dot-list li {
+        position: relative;
+        padding-left: 20px;
+        /* Jarak antara titik dan teks */
+        line-height: 1.5;
+    }
 
-.custom-colored-dot-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%); 
-  width: 10px; 
-  height: 10px; 
-  border-radius: 50%; 
-}
+    .custom-colored-dot-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
 
-.custom-colored-dot-list li:nth-child(1)::before {
-    background-color: #495894;
-}
+    .custom-colored-dot-list li:nth-child(1)::before {
+        background-color: #495894;
+    }
 
-.custom-colored-dot-list li:nth-child(2)::before {
-    background-color: #56C474; /* Biru muda */
-}
+    .custom-colored-dot-list li:nth-child(2)::before {
+        background-color: #56C474;
+        /* Biru muda */
+    }
 
-.custom-colored-dot-list li:nth-child(3)::before {
-    background-color: #EF5350; /* Biru tua */
-}
+    .custom-colored-dot-list li:nth-child(3)::before {
+        background-color: #EF5350;
+        /* Biru tua */
+    }
 
-.custom-colored-dot-list li:nth-child(4)::before {
-    background-color: #83D4F9;
-}
+    .custom-colored-dot-list li:nth-child(4)::before {
+        background-color: #83D4F9;
+    }
 
-.custom-colored-dot-list li:nth-child(5)::before {
-    background-color: #F17D3A;
-}
+    .custom-colored-dot-list li:nth-child(5)::before {
+        background-color: #F17D3A;
+    }
 
-.color-grey {
-  color:rgba(106, 106, 106, 0.90)
-}
+    .color-grey {
+        color: rgba(106, 106, 106, 0.90)
+    }
 
-.progress-wrapper {
-  padding: 20px;
-  border-radius: 5px;
-}
+    .progress-wrapper {
+        padding: 20px;
+        border-radius: 5px;
+    }
 
-.progress-info {
-  margin-bottom: 10px;
-}
+    .progress-info {
+        margin-bottom: 10px;
+    }
 
-.progress-label span {
-  display: block;
-  text-align: left;
-  font-weight: bold;
-  margin-bottom: 5px; 
-}
+    .progress-label span {
+        display: block;
+        text-align: left;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
-.progress {
-  height: 20px;
-}
+    .progress {
+        height: 20px;
+    }
 
-.progress-bar {
-  background-color: #F17D3A;
-}
+    .progress-bar {
+        background-color: #F17D3A;
+    }
 
     .circle {
         display: inline-block;
-        width: 30px; 
-        height: 30px; 
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         background-color: #F17D3A;
         text-align: center;
-        line-height: 30px; 
+        line-height: 30px;
         color: white;
         margin-right: 10px;
-        float:right;
+        float: right;
     }
 
     @media (max-width: 576px) {
@@ -355,96 +358,96 @@
             </div>
         </div>
     </div>
- </session>
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
-                <div class="row">
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
-                        <div class="shadow rounded-3 bg-white">
-                            <div class="card-body ">
-                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                    <p class="card-title ">Data Leads Terbaru</p>
-                                </div>
-                                <div class="wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="d-flex justify-content-between">
-                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" >9</h1>
-                                        <img src="<?= base_url('assets\img\leads_new.svg') ?>" class="card-img" alt="">
+    </session>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                    <div class="row">
+                        <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                            <div class="shadow rounded-3 bg-white">
+                                <div class="card-body ">
+                                    <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                        <p class="card-title ">Data Leads Terbaru</p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
-                        <div class="shadow rounded-3 bg-white ">
-                            <div class="card-body ">
-                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                                    <p class="card-title ">Leads Belum Dilengkapi</p>
-                                </div>
-                                <div class="wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="d-flex justify-content-between">
-                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap">0</h1>
-                                        <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashboard-hero mt-4">
-                            <div class="row mt-2">
-                                <div class="col-lg-5 pl-4">
-                                    <div>
-                                        <center>
-                                            <div class="chart2" style="margin:0; padding:0">
-                                                <canvas id="myDoughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
-                                            </div>
-                                        </center>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 px-3 ml-4 align-content-center justify-content-center align-items-center">
-                                    <div class="row display-flex">
-                                        
-                                        <div class="col" style="margin-top:5%;padding-left:50px">
-                                        <h2 class="text-center">Status CRM</h2>
-                                        <ul class="custom-colored-dot-list">
-                                            <li  class="color-grey">Belum Dihubungi <span id="statusBelumDihubungi" style="padding-left:50px">10%</span></li>
-                                            <li  class="color-grey">Diterima <span id="statusDiterima"  style="padding-left:120px">10%</span></li>
-                                            <li class="color-grey">Ditolak <span  id="statusDitolak" style="padding-left:130px">10%</span></li>
-                                            <li  class="color-grey">Proses Negosiasi <span id="statusNegosiasi" style="padding-left:60px">10%</span></li>
-                                            <li  class="color-grey">Sedang Dihubungi <span id="statusDihubungi" style="padding-left:50px">10%</span></li>
-                                            </ul>
+                                    <div class="wow fadeInUp" data-wow-delay="0.3s">
+                                        <div class="d-flex justify-content-between">
+                                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s">9</h1>
+                                            <img src="<?= base_url('assets\img\leads_new.svg') ?>" class="card-img" alt="">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                </div>
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
-                <div class="shadow rounded-3 bg-white">
-                    <div class="card-body">
-                        <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="card-title">Total Data Leads</p>
+                        <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+                            <div class="shadow rounded-3 bg-white ">
+                                <div class="card-body ">
+                                    <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                        <p class="card-title ">Leads Belum Dilengkapi</p>
+                                    </div>
+                                    <div class="wow fadeInUp" data-wow-delay="0.3s">
+                                        <div class="d-flex justify-content-between">
+                                            <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap">0</h1>
+                                            <img src="<?= base_url('assets\img\leads_uncomplete.svg') ?>" class="card-img" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="d-flex justify-content-between">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads">1000</h1>
-                                <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img" alt="">
+                    </div>
+                    <div class="dashboard-hero mt-4">
+                        <div class="row mt-2">
+                            <div class="col-lg-5 pl-4">
+                                <div>
+                                    <center>
+                                        <div class="chart2" style="margin:0; padding:0">
+                                            <canvas id="myDoughnutChart" width="350" height="350" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 px-3 ml-4 align-content-center justify-content-center align-items-center">
+                                <div class="row display-flex">
+
+                                    <div class="col" style="margin-top:5%;padding-left:50px">
+                                        <h2 class="text-center">Status CRM</h2>
+                                        <ul class="custom-colored-dot-list">
+                                            <li class="color-grey">Belum Dihubungi <span id="statusBelumDihubungi" style="padding-left:50px">10%</span></li>
+                                            <li class="color-grey">Diterima <span id="statusDiterima" style="padding-left:120px">10%</span></li>
+                                            <li class="color-grey">Ditolak <span id="statusDitolak" style="padding-left:130px">10%</span></li>
+                                            <li class="color-grey">Proses Negosiasi <span id="statusNegosiasi" style="padding-left:60px">10%</span></li>
+                                            <li class="color-grey">Sedang Dihubungi <span id="statusDihubungi" style="padding-left:50px">10%</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="margin-top:25px;height:245px;overflow-y: auto;">
-                        <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
-                           <h4 style="margin-left:45px;margin-top:5px">Tim Marketing</h4>
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body">
+                            <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                <p class="card-title">Total Data Leads</p>
+                            </div>
+                            <div class="wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="d-flex justify-content-between">
+                                    <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads">1000</h1>
+                                    <img src="<?= base_url('assets\img\leads_complete.svg') ?>" class="card-img" alt="">
+                                </div>
+                            </div>
                         </div>
-                        <div class="class">
-                               <table class="table">
-                                <tbody id="total-plot-tim">
-                                    <!-- <tr>
+                    </div>
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body" style="margin-top:25px;height:245px;overflow-y: auto;">
+                            <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
+                                <h4 style="margin-left:45px;margin-top:5px">Tim Marketing</h4>
+                            </div>
+                            <div class="class">
+                                <table class="table">
+                                    <tbody id="total-plot-tim">
+                                        <!-- <tr>
                                         <td><span class="circle">99</span>
                                         <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
                                     </tr>
@@ -460,62 +463,63 @@
                                         <td><span class="circle">99</span>
                                         <span style="font-weight:bold">Fitri</span><br>Boyolali</td>
                                     </tr> -->
-                                </tbody>
+                                    </tbody>
                                 </table>
-                           </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Chart Pemenang Tender -->
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
-                <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="height:390px;padding-left:0px">
-                        <h4 class="text-center pt-4" style="font-weight:bold;padding-left:7px">Pemenang Tender Terbaru</h4>  <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                            <div class="progress-wrapper">
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Hari ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-today" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Minggu ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-week" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Bulan ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar"  id="total-month" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                                <div class="progress-info">
-                                <div class="progress-label">
-                                    <span>Tahun ini</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="total-year" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-                                </div>
-                                </div>
-                            </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <!-- Chart Pemenang Tender -->
+                <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body" style="height:390px;padding-left:0px">
+                            <h4 class="text-center pt-4" style="font-weight:bold;padding-left:7px">Pemenang Tender Terbaru</h4>
+                            <div class="container mt-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="progress-wrapper">
+                                            <div class="progress-info">
+                                                <div class="progress-label">
+                                                    <span>Hari ini</span>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar" id="total-today" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-info">
+                                                <div class="progress-label">
+                                                    <span>Minggu ini</span>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar" id="total-week" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-info">
+                                                <div class="progress-label">
+                                                    <span>Bulan ini</span>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar" id="total-month" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-info">
+                                                <div class="progress-label">
+                                                    <span>Tahun ini</span>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar" id="total-year" role="progressbar" style="width: 0%;background-color:#F17D3A" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <session>
         <div class="container bg-white"><br>
             <div class="row">
@@ -763,60 +767,60 @@
         xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
     }
 
-        // Get total leads
-        $.ajax({
-            url: "<?= base_url('api/supplier/getCount') ?>",
-            type: "GET",
-            dataType: "JSON",
-            data: {
-                id_pengguna: id_pengguna
-            },
-            beforeSend: addAuthorizationHeader,
-            success: function(data) {
-                $('#belum-lengkap').html(data.data);
-                // $('.belum-lengkap').html(data.data.belum_lengkap);
-                var belum = data.data
-                $.ajax({
-                    url: "<?= base_url('api/supplier/getTotal') ?>",
-                    type: "GET",
-                    dataType: "JSON",
-                    data: {
-                        id_pengguna: id_pengguna
-                    },
-                    beforeSend: addAuthorizationHeader,
-                    success: function(data) {
-                        // $('.total-leads').html(data.total_leads);
-                        $('#total-leads').html(data.data);
-                        var total = data.data
-                    }
-                })
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        })
+    // Get total leads
+    $.ajax({
+        url: "<?= base_url('api/supplier/getCount') ?>",
+        type: "GET",
+        dataType: "JSON",
+        data: {
+            id_pengguna: id_pengguna
+        },
+        beforeSend: addAuthorizationHeader,
+        success: function(data) {
+            $('#belum-lengkap').html(data.data);
+            // $('.belum-lengkap').html(data.data.belum_lengkap);
+            var belum = data.data
+            $.ajax({
+                url: "<?= base_url('api/supplier/getTotal') ?>",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    id_pengguna: id_pengguna
+                },
+                beforeSend: addAuthorizationHeader,
+                success: function(data) {
+                    // $('.total-leads').html(data.total_leads);
+                    $('#total-leads').html(data.data);
+                    var total = data.data
+                }
+            })
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    })
 
-        // Get total tim
-        $.ajax({
-            url: "<?= base_url() ?>api/marketing/getTotalPlotEachTim/" + id_pengguna,
-            type: "GET",
-            dataType: "JSON",
-            beforeSend: addAuthorizationHeader,
-            success: function(data) {
-                var leads = "";
-                $.each(data.data, function(index, value) {
-                    leads +=
-                        `<tr>
-                            <td><span class="circle">`+ value.jumlah_plot +`</span>
-                            <span style="font-weight:bold">`+ value.nama +`</span><br><span style="font-size:13px">`+ value.alamat.split(',').slice(-2).map(item => item.trim()).join(', ') +`</span></td>
+    // Get total tim
+    $.ajax({
+        url: "<?= base_url() ?>api/marketing/getTotalPlotEachTim/" + id_pengguna,
+        type: "GET",
+        dataType: "JSON",
+        beforeSend: addAuthorizationHeader,
+        success: function(data) {
+            var leads = "";
+            $.each(data.data, function(index, value) {
+                leads +=
+                    `<tr>
+                            <td><span class="circle">` + value.jumlah_plot + `</span>
+                            <span style="font-weight:bold">` + value.nama + `</span><br><span style="font-size:13px">` + value.alamat.split(',').slice(-2).map(item => item.trim()).join(', ') + `</span></td>
                         </tr>`;
-                });
-                $("#total-plot-tim").html(leads);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        })
+            });
+            $("#total-plot-tim").html(leads);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    })
 
     $(document).ready(function() {
         setInterval(syncDataLead, 180000);
@@ -1271,7 +1275,7 @@
         jenis_pengadaan = $(this).val();
         filterTender();
     });
-</script> 
+</script>
 <!-- doughnut chart -->
 <script>
     var ctx = document.getElementById('myDoughnutChart').getContext('2d');
@@ -1318,18 +1322,18 @@
                     console.log(response.data[0].jumlah_status);
                     console.log(response);
 
-                    
+
                     // Recalculate totalTender
                     totalTender = response.data.reduce((acc, item) => acc + parseFloat(item.jumlah_status), 0);
                     console.log(totalTender);
-                    document.getElementById('statusBelumDihubungi').innerHTML=`${Math.ceil(response.data[0].jumlah_status/totalTender*100)}%`;
-                    document.getElementById('statusDiterima').innerHTML=`${Math.ceil(response.data[1].jumlah_status/totalTender*100)}%`;
-                    document.getElementById('statusDitolak').innerHTML=`${Math.ceil(response.data[2].jumlah_status/totalTender*100)}%`;
-                    document.getElementById('statusNegosiasi').innerHTML=`${Math.ceil(response.data[3].jumlah_status/totalTender*100)}%`;
-                    document.getElementById('statusDihubungi').innerHTML=`${Math.ceil(response.data[4].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusBelumDihubungi').innerHTML = `${Math.ceil(response.data[0].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusDiterima').innerHTML = `${Math.ceil(response.data[1].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusDitolak').innerHTML = `${Math.ceil(response.data[2].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusNegosiasi').innerHTML = `${Math.ceil(response.data[3].jumlah_status/totalTender*100)}%`;
+                    document.getElementById('statusDihubungi').innerHTML = `${Math.ceil(response.data[4].jumlah_status/totalTender*100)}%`;
                     // Update "Total Tender" text
                     updateTotalTenderText();
-                    
+
                     // Update chart
                     myDoughnutChart.update();
                 } else {
@@ -1368,9 +1372,3 @@
     // Panggil updateChartWithData untuk pertama kali
     updateChartWithData();
 </script>
-
-
-
-
-
-
