@@ -62,7 +62,7 @@
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
         top: -50%;
-        transform: translate(0%, 0%);
+        transform: translate(-0%, -0%);
         /* position: relative;
         z-index: 2; */
     }
@@ -566,7 +566,12 @@
 
     .card-3 {
         top: -50%;
-        transform: translate(-0%, -50%);
+        transform: translate(2%, -50%);
+    }
+
+    .card-2 {
+        top: -50%;
+        transform: translate(-0%, -5%);
     }
 
     .modal-lg {
@@ -583,68 +588,68 @@
 
 <section class="bg-white pt-5 mt-5">
     <!-- <div class="overflow"> -->
-        <div class="container">
-            <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
-            </h4>
-            <div class="row">
-                <div class="col-6">
-                    <div class="card-input wow fadeInUp">
-                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:0px;">
-                            <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
-                            <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
-                        </div>
-                        <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
-                            <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
-                                <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:4px" alt="">
-                            </a>
+    <div class="container">
+        <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
+        </h4>
+        <div class="row">
+            <div class="col-6 ">
+                <div class="card-input wow fadeInUp">
+                    <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:8px;">
+                        <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
+                        <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
+                    </div>
+                    <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
+                        <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
+                            <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:4px" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 justify-content d-flex card-3">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body">
+                            <div>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">0</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 justify-content d-flex card-3">
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                        <div class="shadow rounded-3 bg-white">
-                            <div class="card-body">
-                                <div>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">0</h1>
-                                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body">
+                            <div>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp total" data-wow-delay="0.3s">0</h1>
                             </div>
                         </div>
                     </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                        <div class="shadow rounded-3 bg-white">
-                            <div class="card-body">
-                                <div>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp total" data-wow-delay="0.3s">0</h1>
-                                </div>
+                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body card-data">
+                            <div>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
                             </div>
-                        </div>
-                    </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                        <div class="shadow rounded-3 bg-white">
-                            <div class="card-body card-data">
-                                <div>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">0</h1>
-                                </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">0</h1>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     <!-- </div> -->
-    <div class="container wow fadeInUp">
+    <div class="container wow fadeInUp card-2">
         <div class="row">
             <div class="col">
                 <div class="table-responsive">

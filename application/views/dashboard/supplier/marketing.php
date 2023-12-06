@@ -329,10 +329,8 @@
 <section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-6">
-            <h2 class="mt-5 ms-0 wow fadeInUp " style="order: 1; font-size:26px; font-weight:500;">
-                Selamat Datang!
-                <p>Ini daftar tim kamu!</p>
-            </h2>
+            <h4 class="mt-4 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Ini daftar tim kamu!</p>
+            </h4>
             <div class="d-flex justify-content-start">
                 <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
                     <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
