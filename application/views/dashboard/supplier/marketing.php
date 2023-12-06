@@ -110,6 +110,7 @@
         font-size: 15px;
         align-content: center;
         padding-top: 8px;
+        margin-top: 20px;
     }
 
     .link .btn-simpan:hover {
@@ -323,7 +324,7 @@
 <section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-6">
-            <h2 class="mb-0 ms-0 wow fadeInUp" style="order: 1;">
+            <h2 class="mt-4 ms-0 wow fadeInUp" style="order: 1;">
                 Selamat Datang!
                 <p>Ini daftar tim kamu!</p>
             </h2>

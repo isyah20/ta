@@ -672,11 +672,11 @@
                 <div style="margin-top:15px" class="wow fadeInUp" data-wow-delay="0.2s">
                     <div class="select-custom container-fluid">
                         <div class="row wow fadeInUp">
-                                <div class="col-sm-1 form-select-custom " style="width: 190px; margin-right:5px">
+                                <!-- <div class="col-sm-1 form-select-custom " style="width: 190px; margin-right:5px">
                                     <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="" style="margin-top:8px">
                                     <select class="select2-wilayah" id="wilayah" style="border:none;">
                                     </select>
-                                </div>
+                                </div> -->
                             <!-- Search Nama -->
                             <div class=" col-sm-10 form-select-custom" style="padding:5px; padding-left:30px; margin-right:60px;">
                                 <input id="input-cari-perusahaan" type="text" class="form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
@@ -1081,8 +1081,8 @@
                             <td style="max-width: 200px; min-width:200px; word-wrap: break-word;">${data[i].catatan || ''}</td>
                             <td></td>
                             <td>
-                                <span class="insert-history" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda">
-                                <span class="expandChildTable" data-id="${data[i].id_lead}" style="visibility:` + hasMultipleHistory + `"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></span>
+                                <button style="border:none;background:#fff" class="insert-history" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/add-circle-button.svg') ?>" width="30px" style="margin-left:3px" data-toggle="modal" data-target="#buatAgenda" data-bs-toggle="tooltip" title="Buat Agenda"></button>
+                                <button style="border:none;background:#fff;visibility:` + hasMultipleHistory + `" class="expandChildTable" data-id="${data[i].id_lead}"><img src="<?= base_url('assets/img/icon_history.svg') ?>" width="30px" style="margin-left:2px" data-bs-toggle="tooltip" title="Riwayat Agenda"></button>
                             </td>
                         </tr>
                         <tr class="childTableRow">

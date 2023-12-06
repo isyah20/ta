@@ -357,7 +357,7 @@
     </div>
  </session>
 <section>
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
             <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
                 <div class="row">
@@ -409,7 +409,7 @@
                                         
                                         <div class="col" style="margin-top:5%;padding-left:50px">
                                         <h2 class="text-center">Status CRM</h2>
-                                        <ul class="custom-colored-dot-list">
+                                        <ul class="custom-colored-dot-list text-wrap">
                                             <li  class="color-grey">Belum Dihubungi <span id="statusBelumDihubungi" style="padding-left:50px">10%</span></li>
                                             <li  class="color-grey">Diterima <span id="statusDiterima"  style="padding-left:120px">10%</span></li>
                                             <li class="color-grey">Ditolak <span  id="statusDitolak" style="padding-left:130px">10%</span></li>
@@ -437,7 +437,7 @@
                     </div>
                 </div>
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="margin-top:25px;height:245px;overflow-y: auto;">
+                    <div class="card-body" style="margin-top:25px;height:280px;overflow-y: auto;">
                         <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
                            <h4 style="margin-left:45px;margin-top:5px">Tim Marketing</h4>
                         </div>
@@ -469,7 +469,7 @@
             <!-- Chart Pemenang Tender -->
             <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 25%;">
                 <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="height:390px;padding-left:0px">
+                    <div class="card-body" style="height:425px;padding-left:0px">
                         <h4 class="text-center pt-4" style="font-weight:bold;padding-left:7px">Pemenang Tender Terbaru</h4>  <div class="container mt-4">
                         <div class="row">
                             <div class="col-md-12">
