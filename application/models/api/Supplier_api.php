@@ -23,6 +23,8 @@ class Supplier_api extends CI_Model
         ]);
     }
 
+    public $interval_leads = 7;
+
     public function getTimMarketing($id_supplier)
     {
         // $this->db->select(['*']);
@@ -484,6 +486,19 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         $this->db->where('IF(nilai_hps_awal = 0 AND nilai_hps_akhir = 0, harga_penawaran <> "", harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir)');
 
         $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function getLeadsTerbaru($id_pengguna)
+    {
+        // get count data leads where date is the last 7 days
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $this->db->where('DATEDIFF(CURRENT_DATE, data_leads.tgl) <=', $this->interval_leads);
+        
+        $query = $this->db->get();
+        // return $query->result_array();
         return $query->row_array();
     }
 

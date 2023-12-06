@@ -380,18 +380,18 @@ class Supplier_model extends CI_Model
     
             // Get total pemenang from table pemenang from each month
             $sql = "SELECT
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 1 THEN npwp ELSE NULL END) AS jan,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 2 THEN npwp ELSE NULL END) AS feb,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 3 THEN npwp ELSE NULL END) AS mar,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 4 THEN npwp ELSE NULL END) AS apr,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 5 THEN npwp ELSE NULL END) AS mei,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 6 THEN npwp ELSE NULL END) AS jun,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 7 THEN npwp ELSE NULL END) AS jul,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 8 THEN npwp ELSE NULL END) AS agu,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 9 THEN npwp ELSE NULL END) AS sep,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 10 THEN npwp ELSE NULL END) AS okt,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 11 THEN npwp ELSE NULL END) AS nov,
-                COUNT(DISTINCT CASE WHEN YEAR(tgl_pemenang) = $tahun AND MONTH(tgl_pemenang) = 12 THEN npwp ELSE NULL END) AS des
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 1 THEN npwp END) AS jan,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 2 THEN npwp END) AS feb,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 3 THEN npwp END) AS mar,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 4 THEN npwp END) AS apr,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 5 THEN npwp END) AS mei,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 6 THEN npwp END) AS jun,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 7 THEN npwp END) AS jul,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 8 THEN npwp END) AS agu,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 9 THEN npwp END) AS sep,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 10 THEN npwp END) AS okt,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 11 THEN npwp END) AS nov,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 12 THEN npwp END) AS des
             FROM preferensi
             INNER JOIN pemenang p ON preferensi.id_pengguna = p.id_pemenang
             WHERE preferensi.status = '1'
@@ -403,7 +403,9 @@ class Supplier_model extends CI_Model
 
                         // $query = $this->db->get();  
                         // return $query->result_array();
-                return $this->db->query($sql);
+                $result = $this->db->query($sql)->row_array();
+                return array_values($result);
+                // return $result->result_array();
         }
 
     // Get jumlah pemenang tender based on user preferensi and keyword and id_pengguna

@@ -431,7 +431,8 @@ $route['api/supplier/getTotalDataLeadFiltered'] = 'api/ApiSupplier/getTotalDataL
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
 $route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 $route['api/supplier/getJumlahPerMonth'] = 'api/ApiSupplier/getJumlahPemenangPerMonth';
-$route['api/supplier/getPemenang'] = 'api/ApiSupplier/getPemenang';
+$route['api/supplier/getPemenang'] = 'api/ApiSupplier/getPemenang'; 
+$route['api/supplier/getLeadsTerbaru'] = 'api/ApiSupplier/getLeadsTerbaru';
 
 // restAPI for know your market
 $route['api/pengguna/getPesertaTender'] = 'api/ApiAnalytic/getPesertaTender';

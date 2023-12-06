@@ -801,7 +801,7 @@ class ApiSupplier extends RestController
         $id_pengguna = $this->input->get('id_pengguna');
         $tahun = $this->input->get('tahun');
         // $preferensi = $this->Tender_model->getPreferensiPengguna($id_pengguna);
-        $data = $this->Supplier_model->getJumlahPerMonth($id_pengguna, $tahun)->result_array();
+        $data = $this->Supplier_model->getJumlahPerMonth($id_pengguna, $tahun);
 
         if ($data) {
             $this->response([
@@ -821,6 +821,24 @@ class ApiSupplier extends RestController
         $id_pengguna = $this->input->get('id_pengguna');
         // $tahun = $this->input->get('tahun');
         $data = $this->Supplier_model->getJumlahPemenangTender($id_pengguna)->result_array();
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                // 'message' => 'Data ditemukan'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getLeadsTerbaru_get() {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getLeadsTerbaru($id_pengguna);
 
         if ($data) {
             $this->response([
