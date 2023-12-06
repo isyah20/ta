@@ -696,9 +696,6 @@
                 <div class="modal-content">
                     <div class="modal-header border-0">
                         <img class="image-modal" src="<?= base_url("assets/img/red-whatsapp.svg") ?>" alt="Image" style="width: 75px; height: 75px; padding: 0;">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
                     </div>
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
