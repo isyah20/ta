@@ -21,6 +21,7 @@
     tbody {
         text-align: left;
         font-size: 15px;
+        vertical-align: middle;
     }
 
     .table {
@@ -77,7 +78,7 @@
 
     th.custom-padding,
     td.custom-padding {
-        border: none;
+        /* border: none; */
         vertical-align: middle;
         height: 60px !important;
     }
@@ -328,10 +329,8 @@
 <section class="bg-white pt-4 mt-4 w-100">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
         <div class="col-6">
-            <h2 class="mt-5 ms-0 wow fadeInUp " style="order: 1; font-size:26px; font-weight:500;">
-                Selamat Datang!
-                <p>Ini daftar tim kamu!</p>
-            </h2>
+            <h4 class="mt-4 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Ini daftar tim kamu!</p>
+            </h4>
             <div class="d-flex justify-content-start">
                 <div class="link d-flex flex-row align-items-center" style="margin-top:10px">
                     <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
@@ -576,13 +575,13 @@
                 let i;
                 for (i = 0; i < data.data.length; i++) {
                     html += '<tr>' +
-                        '<td class="text-center">' + (i + 1) + '</td>' +
-                        '<td class="nama">' + data.data[i].nama_tim + '</td>' +
-                        '<td class="posisi">' + data.data[i].posisi + '</td>' +
-                        '<td><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
-                        '<td class="nohp">' + data.data[i].no_telp + '</td>' +
-                        '<td style="width: 450px">' + data.data[i].area_kerja + '</td>' +
-                        '<td>' +
+                        '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
+                        '<td class="custom-padding nama">' + data.data[i].nama_tim + '</td>' +
+                        '<td class="custom-padding posisi">' + data.data[i].posisi + '</td>' +
+                        '<td class="custom-padding"><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
+                        '<td class="custom-padding nohp">' + data.data[i].no_telp + '</td>' +
+                        '<td class="custom-padding" style="width: 450px">' + data.data[i].area_kerja + '</td>' +
+                        '<td class="custom-padding">' +
                         '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
                         '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>' +
                         '</td>' +
