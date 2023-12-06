@@ -541,6 +541,9 @@ class DashboardUser extends CI_Controller
                     $totalKalah++;
                 }
             }
+            // return $timeSeriesUser;
+            // var_dump($timeSeriesUser);
+            // die;
 
             $tenderDiikuti = 0;
             // $tenderDiikuti = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
