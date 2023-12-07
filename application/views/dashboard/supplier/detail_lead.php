@@ -2,1004 +2,430 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
-
-
 <style>
     .icon-text-container {
-
         display: flex;
-
         flex-direction: column;
-
     }
-
-
-
     .icon-text {
-
         display: flex;
-
         align-items: center;
-
         margin-bottom: 10px;
-
         /* Atur margin bawah sesuai kebutuhan */
-
     }
-
-
-
     .icon-text img {
-
         width: 20px;
-
         /* Atur lebar gambar sesuai kebutuhan */
-
         height: 20px;
-
         /* Atur tinggi gambar sesuai kebutuhan */
-
     }
-
-
-
-
-
     /* section 2 */
-
     .custom-card-detail {
-
         width: 100%;
-
         border-radius: 30px;
-
         border-bottom: 10px solid var(--primary-red-600, #BF0C0C);
-
         background: var(--font-white, #FCFCFC);
-
         box-shadow: 0px 0px 25px 2px rgba(95, 95, 95, 0.20);
-
         max-width: 1700px;
-
         /* Sesuaikan dengan lebar yang Anda inginkan */
-
         margin: 0 auto;
-
         /* Untuk tengahkankan card-detail */
-
     }
-
-
-
     .custom-card-detail {
-
         align-items: center;
-
         /* Agar konten di tengah */
-
         padding: 20px;
-
         /* Sesuaikan dengan jarak yang Anda inginkan */
-
     }
-
-
-
     .custom-card-detail .card-detail-title {
-
         font-size: 24px;
-
         /* Sesuaikan dengan ukuran font yang Anda inginkan */
-
         font-weight: bold;
-
         /* Sesuaikan dengan gaya font yang Anda inginkan */
-
     }
-
-
-
     .custom-card-detail .card-detail-text {
-
         /* width: 770px; Sesuaikan dengan lebar yang Anda inginkan */
-
         flex-shrink: 0;
-
         margin-top: 20px;
-
         /* Sesuaikan dengan margin yang Anda inginkan */
-
         padding-left: 20px;
-
         /* Sesuaikan dengan padding yang Anda inginkan */
-
         font-size: 16px;
-
     }
-
-
-
-
-
-
-
     /* table riwayat menang  */
-
     .animation {
-
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
         -webkit-appearance: none;
-
         -moz-appearance: none;
-
         appearance: none;
-
     }
-
-
-
     .thead {
-
         color: #fff;
-
         background-color: #E05151;
-
         text-align: left;
-
         font-size: 15px;
-
     }
-
-
-
     tbody {
-
         text-align: left;
-
         font-size: 15px;
-
     }
-
-
-
     .green-text {
-
         color: #139728;
-
     }
-
-
-
     .rounded {
-
         width: 25px;
-
         height: 25px;
-
         background-color: #553333;
-
         border-radius: 10px 10px 10px 10px;
-
         display: flex;
-
         justify-content: center;
-
         align-items: center;
-
         color: white;
-
         font-size: 15px;
-
     }
-
-
-
     .custom-table-container {
-
         border-radius: 10px 10px 10px 10px;
-
         overflow: hidden;
-
         border: 1px solid var(--neutral-100, #F0E2E2);
-
         box-shadow: 0px 0px 25px 2px rgba(95, 95, 95, 0.20);
-
-
-
     }
-
-
-
     th.custom-padding,
-
     td.custom-padding {
-
         max-width: 350px;
-
         border: none;
-
         vertical-align: middle;
-
         height: 65px !important;
-
         padding: 0px 7px 0px 30px !important;
-
     }
-
-
-
     th,
-
     td {
-
         border: none;
-
         vertical-align: middle;
-
         height: 65px;
-
         padding: 0px 7px 0px 30px;
-
     }
-
-
-
     .green-td {
-
         color: #10B981;
-
         /* Gaya lain yang Anda inginkan */
-
     }
-
-
-
     .orange-td {
-
         color: #EB650D;
-
-
-
     }
-
-
-
     .title-pemenang {
-
         display: flex;
-
         flex-direction: column;
-
         justify-content: center;
-
         flex-shrink: 0;
-
         color: var(--font-black, #0A0A0A);
-
         /* Heading/H3/Bold */
-
         font-family: Ubuntu;
-
-        font-size: 24px;
-
+        font-size: 20px;
         font-style: normal;
-
-        font-weight: 700;
-
+        font-weight: 600;
         line-height: normal;
-
         margin-left: 25px;
-
+        margin-bottom: 15px;
     }
-
-
-
     .h4 {
-
         font-family: Ubuntu;
-
         font-size: 18px;
-
         font-style: normal;
-
         font-weight: 700;
-
         color: #8B6464;
-
     }
-
-
-
-
-
     /* row  */
-
     .row.g-0 {
-
-        margin: 20px;
-
-        /* Margin luar untuk div dengan class "row g-0" */
-
-    }
-
-
-
-    .col-7 {
-
-        padding: 20px;
-
-        /* Padding untuk div dengan class "col-7" */
-
-    }
-
-
-
-    .col-5 {
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        justify-content: flex-start;
-
-        height: 100%;
-
-    }
-
-
-
-    .img-fluid {
-
-        align-self: flex-start;
-
-        width: 100%;
-
-        /* Mengisi lebar parent (.col-5) */
-
-        max-height: 100%;
-
-        /* Menyesuaikan tinggi maksimum parent (.col-5) */
-
-    }
-
-
-
-    .card-detail-body {
-
-        padding: 20px;
-
-        /* Padding untuk div dengan class "card-detail-body" */
-
-        border: none;
-
-        /* Contoh border untuk memberi tampilan yang lebih rapi */
-
-
-
-    }
-
-
-
-    .profile-info {
-
         margin-top: 20px;
-
-        /* Margin atas untuk div dengan class "profile-info" */
-
+        margin-left: 20px;
+        margin-right: 20px;
+        /* Margin luar untuk div dengan class "row g-0" */
     }
-
-
-
+    .col-7 {
+        padding: 20px;
+        /* Padding untuk div dengan class "col-7" */
+    }
+    .col-5 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        height: 100%;
+    }
+    .img-fluid {
+        align-self: flex-start;
+        width: 100%;
+        /* Mengisi lebar parent (.col-5) */
+        max-height: 100%;
+        /* Menyesuaikan tinggi maksimum parent (.col-5) */
+    }
+    .card-detail-body {
+        padding: 20px;
+        /* Padding untuk div dengan class "card-detail-body" */
+        border: none;
+        /* Contoh border untuk memberi tampilan yang lebih rapi */
+    }
+    .profile-info {
+        margin-top: 20px;
+        /* Margin atas untuk div dengan class "profile-info" */
+    }
     .table th,
-
     .table td {
-
         padding: 10px;
-
         /* Padding untuk sel dalam tabel */
 
     }
-
-
-
     .profile-summary,
 
     .profile-info,
 
     .contact-info {
-
         display: flex;
-
         align-items: flex-start;
-
         /* Ikon akan sejajar dengan bagian atas teks */
-
         gap: 15px;
-
         /* Jarak antara ikon dan teks */
-
     }
-
-
-
     .profile-summary img,
 
     .profile-info img,
 
     .contact-info img {
-
         width: 24px;
-
         /* Atur lebar ikon sesuai kebutuhan Anda */
-
         height: 24px;
-
         /* Atur tinggi ikon sesuai kebutuhan Anda */
-
     }
-
-
-
     .profile-info p {
-
         margin: 0;
-
         /* Menghilangkan margin bawaan dari paragraf */
-
         flex-grow: 1;
-
         /* Membuat teks memanfaatkan sisa ruang dalam flex container */
 
     }
-
-
-
-
-
-
-
     .contact-info {
-
         display: flex;
-
         align-items: center;
-
     }
-
-
-
     .table-contact {
-
         flex-grow: 1;
-
         /* Memanfaatkan sisa ruang dalam flex container */
-
         overflow: hidden;
-
         /* Mengatasi masalah overflow jika tabel terlalu lebar */
-
     }
-
-
 
     .table-contact tbody th,
-
     .table-contact tbody td {
-
         font-size: 14px;
-
         /* Atur ukuran font sesuai dengan kebutuhan Anda */
-
     }
-
-
-
     .table-contact thead th {
-
         font-size: 14px;
-
         padding-right: 8px;
-
         /* Atur ukuran font sesuai dengan kebutuhan Anda */
-
     }
-
-
-
     .table-contact th,
-
     .table-contact td,
-
     .table-contact tr {
-
         padding: 0;
-
         height: 25px;
-
         /* Ubah nilai padding sesuai dengan preferensi Anda */
-
         border: none;
-
         /* Menghilangkan border */
-
     }
-
-
-
-
-
     .custom-button {
-
         background: none;
-
         border: none;
-
         display: flex;
-
         align-items: center;
-
         color: var(--font-middle-grey, rgba(106, 106, 106, 0.90));
-
         font-family: Ubuntu;
-
         font-size: 18px;
-
         font-style: normal;
-
         font-weight: 500;
-
         line-height: 22px;
-
         cursor: pointer;
-
         outline: none;
-
     }
-
-
-
     .card-contact {
-
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
-
         text-align: center;
-
     }
-
-
-
-
-
-
-
     /* //style modal  */
-
     .modal-dialog {
-
         display: flex;
-
         width: 518px;
         padding: 20px 30px 30px 30px;
-
         flex-direction: column;
-
         justify-content: center;
-
         align-items: center;
-
         gap: 20px;
-
         flex-shrink: 0;
-
     }
-
-
-
     .custom-modal {
-
         display: flex;
-
         width: 735px;
-
         padding: 45px 30px 25px 30px;
         flex-direction: column;
         align-items: center;
         gap: 40px;
     }
-
-
-
     .custom-modal-delete {
-
-
-
         height: 768px;
-
-
-
     }
-
-
-
     .modal-title {
-
         color: var(--font-dark-grey, #333);
-
         text-align: center;
-
         font-family: Ubuntu;
-
         font-size: 33px;
-
         font-style: normal;
-
         font-weight: 700;
-
         line-height: normal;
-
     }
-
-
-
     .modal-body p {
-
         font-size: 18px;
-
         /* Ganti ukuran font sesuai dengan keinginan Anda */
-
     }
-
-
-
     .btn-custom {
-
         display: flex;
-
         padding: 15px 30px;
-
         justify-content: center;
-
         align-items: center;
-
         gap: 10px;
-
         align-self: stretch;
-
         border-radius: 5px;
-
         background: var(--primary-red-400, #DF3131);
-
         color: white;
-
         text-decoration: none;
-
         cursor: pointer;
-
-
-
     }
-
-
-
     .btn-batal {
-
         display: flex;
-
         padding: 15px 30px;
-
         justify-content: center;
-
         align-items: center;
-
         gap: 10px;
-
         align-self: stretch;
-
         border-radius: 5px;
-
         text-decoration: none;
-
         cursor: pointer;
-
     }
-
-
-
     #imageButton {
-
         border: none;
-
         padding: 0;
-
         background: transparent;
-
         cursor: pointer;
-
     }
-
-
-
     #imageButton:hover {
-
         opacity: 0.8;
-
     }
-
-
 
     .custom-table-container {
-
         border-radius: 10px 10px 10px 10px;
-
         overflow: hidden;
-
         border: 1px solid var(--neutral-100, #F0E2E2);
-
-
-
     }
-
     .space {
-
         margin-left: 2%;
-
     }
-
-
-
-
-
     /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
-
     @media (max-width: 767px) {
-
-
-
         /* Menghilangkan gambar */
-
         .col-4 {
-
             display: none;
-
         }
-
-
-
         /* Mengatur overflow-x dan whitespace pada tabel */
-
-
-
         .space {
-
             margin-left: 0px;
-
         }
-
-
-
     }
-
-
-
     /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
-
     @media (min-width: 768px) {
-
         .col-7 {
-
             padding-left: 3rem;
-
         }
-
     }
-
-
-
     /* CSS untuk menghilangkan padding pada perangkat mobile (lebar layar kurang dari atau sama dengan 767px) */
-
     @media (max-width: 767px) {
-
         .col-7 {
-
             padding-left: 0;
-
             width: 100%;
-
         }
-
-
-
         .row.g-0 {
-
             margin: 0;
-
             /* Menghapus margin pada perangkat mobile */
-
         }
-
-
-
         .custom-card-detail .row {
-
             padding: 10px;
-
         }
-
-
-
         .table-contact {
-
             flex-grow: unset;
-
             white-space: nowrap;
-
             overflow-x: auto;
-
             /* Mengaktifkan scroll horizontal */
-
         }
-
-
-
-
-
-
-
     }
-
-
-
-
-
     /* CSS untuk mengatur modal di perangkat mobile */
-
     /* CSS untuk mengatur modal di perangkat mobile */
-
     @media (max-width: 767px) {
-
         .modal-dialog {
-
             max-width: 90%;
-
             /* Mengatur lebar maksimum modal agar sesuai dengan layar */
-
         }
-
-
-
         .modal-content {
-
             overflow-y: auto;
-
             /* Menambahkan scrolling vertical jika kontennya melebihi layar */
-
             max-height: 80vh;
-
             /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
-
         }
-
-
 
         /* Mengurangi ukuran teks di dalam modal */
-
         .modal-title {
-
             font-size: 18px;
-
         }
-
-
-
         .modal-body p {
-
             font-size: 14px;
-
         }
-
-
-
         .form-label {
-
             font-size: 14px;
-
         }
-
-
-
         .form-control {
-
             font-size: 14px;
-
         }
-
-
-
         .input-popup img {
-
             max-width: 75%;
-
             /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
-
             height: auto;
-
             /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
-
         }
-
-
-
         /* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
-
     }
-
-
-
     /* CSS untuk mengatur modal di perangkat desktop */
-
     @media (min-width: 768px) {
-
         .modal-dialog {
-
             max-width: 600px;
-
             /* Atur lebar maksimum modal di layar desktop */
-
         }
-
     }
-
-
-
-
-
-
-
     /* hapus icon kecil di mobile  */
-
     /* Gaya CSS untuk desktop */
-
     .profile-image,
-
     .contact-image {
-
         display: block;
-
         /* Menampilkan gambar di desktop */
-
     }
-
-
-
     /* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
-
     @media screen and (max-width: 768px) {
-
-
-
         .profile-image,
-
         .contact-image {
-
             display: none;
-
             /* Menyembunyikan gambar di mobile */
-
         }
-
     }
-
     #saveButton {
         display: none;
     }
-
     #cancelButton {
         display: none;
     }
@@ -1007,959 +433,403 @@
 
 <style>
     .animation {
-
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
         -webkit-appearance: none;
-
         -moz-appearance: none;
-
         appearance: none;
-
     }
-
-
-
     .badge {
-
         font-size: var(--bs-body-font-size);
-
         font-weight: var(--bs-body-font-weight);
-
         padding: 6px 10px;
-
         border-radius: 7px 0 7px 0;
-
         white-space: break-spaces;
-
     }
-
-
-
     .badge-danger {
-
         background: var(--bs-red-primary);
-
     }
-
-
-
     .badge-akhirdaftar {
-
         background: #fff8ea;
-
         color: #ee9d0a;
-
         border-radius: 0 7px 7px 0;
-
         border: 1px solid #d18c0b;
-
         padding: 5px 8px 6px 5px;
-
         font-weight: 500;
-
         text-align: left;
-
     }
-
-
-
     .filter {
-
         border-radius: 1rem;
-
         margin-inline: 10px;
-
     }
-
-
-
     .filter-item a {
-
         display: flex;
-
         align-items: center;
-
     }
-
-
-
     .select2-container--bootstrap-5 .select2-selection--single {
-
-
-
         padding: 0.85rem 2.25rem .85rem 1rem;
-
         background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 16 16'%3e%3cpath fill='%23BF0C0C' stroke='%23BF0C0C00' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-
         background-repeat: no-repeat;
-
         background-position: right .76rem center;
-
         background-size: 18px 18px;
-
     }
-
-
-
     .select2-container--bootstrap-5 .select2-selection {
-
         width: 135px;
-
         /* min-height: calc(2.3em + .75rem + 2px); */
-
         /* min-height:10px; */
-
         /* padding: .375rem .75rem; */
-
         padding: 7px 0px 5px 5px;
-
         font-family: inherit;
-
         font-size: 1rem;
-
         font-weight: 400;
-
         line-height: 1.5;
-
         background-color: transparent;
-
         border: none;
-
         border-radius: 5px;
-
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
         -webkit-appearance: none;
-
         -moz-appearance: none;
-
         appearance: none;
-
     }
-
-
-
     .select2-container--bootstrap-5.select2-container--open.select2-container--below .select2-selection {
-
         border-bottom: 0 solid transparent;
-
         border-bottom-right-radius: 5px;
-
         border-bottom-left-radius: 5px;
-
     }
-
-
-
     .select2-container--bootstrap-5.select2-container--focus .select2-selection,
-
     .select2-container--bootstrap-5.select2-container--open .select2-selection {
-
         /* width: 221.5px; */
-
         border-color: #ffffff00;
-
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-
     }
-
-
-
     .select2-container--bootstrap-5 .select2-dropdown {
-
         border-color: #f0e2e2;
-
     }
-
-
-
     .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered .select2-selection__placeholder {
-
         color: #212529;
-
     }
 
-
-
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
-
         border: 1px solid var(--bs-border-color-translucent);
-
         border-radius: 5px;
-
         left: 10px;
-
         top: 2px;
-
         z-index: 1000;
-
     }
-
-
-
     .select2-container .select2-selection--single {
-
         box-sizing: border-box;
-
         cursor: pointer;
-
         display: block;
-
         /* height: 18px; */
-
         user-select: none;
-
         -webkit-user-select: none;
-
     }
-
     .select2-container .select2-selection--single .select2-selection__rendered .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear,
-
     .select2-container--bootstrap-5 .select2-selection--single .select2-selection__clear {
-
         cursor: pointer;
-
         width: 7px;
-
         right: 0px;
-
         left: 530%;
-
         bottom: 10px;
-
         background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23BF0C0C'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") 50%/.75rem auto no-repeat;
-
     }
-
-
-
     .select2-container--bootstrap-5 {
-
         padding-right: 0;
-
     }
-
-
-
     .select2-sorting+.select2-container--bootstrap-5 {
-
         /* padding-right: 6px; */
-
         padding-left: 0;
-
     }
-
-
-
     .select2-container--bootstrap-5 .select2-dropdown.select2-dropdown--below {
-
         /* width: 307px !important; */
-
         left: -25px;
-
         width: 180px !important;
-
     }
-
-
-
     .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected,
-
     .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option[aria-selected=true]:not(.select2-results__option--highlighted) {
-
         color: #fff;
-
         background-color: #c50000;
-
     }
-
-
-
     .dropdown-sorting .text-dropdown {
-
         padding: 8px 12px;
-
         cursor: pointer;
-
     }
-
-
-
     .dropdown-sorting li:hover {
-
         background: #c50000;
-
         border-radius: 0;
-
     }
-
-
-
     .dropdown-sorting .dropdown-menu::after {
-
         top: -20px;
-
     }
-
-
-
     .dropdown-sorting .nav-link,
-
     .dropdown-sorting a.nav-link:focus,
-
     .dropdown-sorting a.nav-link:hover {
-
         padding: 12px 9px !important;
-
     }
-
-
-
     .dropdown-sorting .dropdown-toggle::after {
-
         display: none;
-
     }
-
-
-
     .paket {
-
         margin-block: 8px !important;
-
     }
-
-
-
     .rincian-paket tr {
-
         line-height: 1.4;
-
     }
-
-
-
     #pagination-container {
-
         margin-inline: 10px;
-
         margin-top: 15px !important;
-
     }
-
-
-
     .paginationjs.paginationjs-big .paginationjs-nav.J-paginationjs-nav {
-
         font-size: var(--bs-body-font-size) !important;
-
     }
-
-
-
     .paginationjs .paginationjs-pages {
-
         margin-top: -5px;
-
     }
-
-
-
     .paginationjs .paginationjs-pages li {
-
         border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-
     }
-
-
-
     .shadow-sm {
-
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-
     }
-
-
-
     .bg-white {
-
         background-color: #fff;
-
     }
-
-
-
     .rounded {
-
         border-radius: 10px;
-
     }
-
-
-
     .white-row {
-
         background-color: white;
-
         text-align: center;
-
         border-radius: 0 0 10px 10px;
-
     }
-
-
-
     .shadow-sm {
-
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-
         border-radius: 10px;
-
     }
-
-
-
     .bg-white {
-
         background-color: #fff;
-
     }
-
-
-
     .rounded {
-
         border-radius: 10px;
-
     }
-
-
-
     .card-category {
-
         margin: 0 15px;
-
         border-radius: 10px;
-
         background: var(--shade-font-white, #FFF);
-
         box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.30);
-
     }
-
-
-
     .custom-container {
-
         display: flex;
-
         padding: 20px;
-
         height: 70px;
-
         align-items: flex-start;
-
         gap: 8px;
-
         border-radius: 10px 10px 0px 0px;
-
         background: var(--primary-red-300, #E05151);
-
     }
-
-
-
     .custom-table {
-
         width: 100%;
-
         border: 1px solid var(--neutral-100, #F0E2E2)
     }
-
-
-
     .custom-table td {
-
         padding: 10px;
-
         display: flex;
-
         justify-content: space-between;
-
         align-items: center;
-
         border-bottom: 1px solid var(--neutral-100, #F0E2E2)
     }
-
-
-
     .custom-table tr td:first-child {
-
         border-left: 1px solid var(--neutral-100, #F0E2E2);
-
     }
-
-
-
     .custom-table tr td:last-child {
-
         border-right: 1px solid var(--neutral-100, #F0E2E2);
-
     }
-
-
-
     .red-text {
-
         color: #E05151;
-
     }
-
-
-
     @media (max-width: 576px) {
-
         .wide {
-
             text-align: center;
-
             margin: 4px 35px;
-
             width: 320px !important;
-
         }
-
-
-
         .sec-pemenang-terbaru {
-
             margin-left: auto;
-
             margin-right: auto;
-
         }
-
     }
-
-
-
     .card-data {
-
         border-radius: 10px;
-
         background: var(--shade-font-white, #FFF);
-
     }
-
-
-
     .card-body {
-
         margin-top: 10px;
-
         padding-left: 10px;
-
     }
-
-
-
     .title {
-
         color: #B89494;
-
         font-size: 0.75rem;
-
         font-weight: bold;
-
         padding-top: 10px;
-
         padding-bottom: 10px;
-
     }
-
-
-
     .card-title {
-
         color: #B89494;
-
         font-size: 0.75rem;
-
         font-weight: bold;
-
         padding-top: 10px;
-
     }
-
-
-
     .card-text {
-
         font-size: 2rem;
-
         font-weight: bold;
-
     }
-
-
-
     .content-above-navbar {
-
         margin-top: 100px;
-
         /* Increase the margin-top value as needed */
-
         z-index: 999;
-
         /* Adjust the z-index value as needed */
-
     }
-
-
-
     .card-select {
-
         font-size: 10px;
-
         margin-left: 28px;
-
-        margin-top: 20px;
-
         display: flex;
-
     }
-
-
-
     .form-select-custom:hover {
-
         border: 1.5px solid var(--primary-red-500, #D21B1B);
-
     }
-
-
-
     .form-select-custom {
-
         width: 615px;
-
         color: #CCCCCC;
-
         border-radius: 20px;
-
         font-size: 1rem;
-
-        margin-bottom: 15px;
-
         border: 1px solid;
-
         background-color: white;
-
     }
-
-
-
     .form-input-custom {
-
         border-radius: 20px;
-
         font-size: 1rem;
-
     }
-
-
-
     /* Media query untuk perangkat mobile dengan lebar maksimal 767px */
-
     @media (max-width: 767px) {
-
-
-
         /* Menghilangkan gambar */
-
         .col-5 {
-
             display: none;
-
         }
-
-
-
         /* Mengatur overflow-x dan whitespace pada tabel */
-
-
-
         /* CSS untuk mengatur padding pada perangkat mobile */
-
         .col-7 {
-
             padding-left: 0;
-
             width: 100%;
-
         }
-
-
-
         .row.g-0 {
-
             margin: 0;
-
             /* Menghapus margin pada perangkat mobile */
-
         }
-
-
-
-
-
-
-
         .table-contact {
-
             flex-grow: unset;
-
             white-space: nowrap;
-
             overflow-x: auto;
-
             /* Mengaktifkan scroll horizontal */
-
         }
-
-
-
         /* CSS untuk mengatur modal di perangkat mobile */
-
         .modal-dialog {
-
             max-width: 90%;
-
             /* Mengatur lebar maksimum modal agar sesuai dengan layar */
-
         }
-
-
-
         .modal-content {
-
             overflow-y: auto;
-
             /* Menambahkan scrolling vertical jika kontennya melebihi layar */
-
             max-height: 80vh;
-
             /* Mengatur tinggi maksimum modal agar tidak terlalu panjang */
-
         }
-
-
-
         /* Mengurangi ukuran teks di dalam modal */
-
         .modal-title {
-
             font-size: 18px;
-
+            font-weight: 900;
         }
-
-
-
         .modal-body p {
-
             font-size: 14px;
-
         }
-
-
-
         .form-label {
-
             font-size: 14px;
-
         }
-
-
-
         .form-control {
-
             font-size: 14px;
-
         }
-
-
-
         .input-popup img {
-
             max-width: 75%;
-
             /* Mengatur lebar maksimum gambar agar sesuai dengan kontainer */
-
             height: auto;
-
             /* Mengatur ketinggian gambar agar disesuaikan dengan lebar maksimum */
-
         }
-
-
-
         /* ...Tambahkan peraturan CSS lainnya sesuai kebutuhan */
-
-
-
         /* Gaya CSS untuk mobile (layar dengan lebar maksimum 768px) */
-
         .profile-image,
-
         .contact-image {
-
             display: none;
-
             /* Menyembunyikan gambar di mobile */
-
         }
-
-
-
         .icon-text img {
-
             display: none;
-
         }
-
-
-
         .icon-text {
-
             flex-direction: column;
-
             /* Mengatur tampilan menjadi satu kolom */
-
             align-items: flex-start;
-
             padding: auto;
-
             /* Mengatur agar elemen berada di tengah-tengah kolom */
-
         }
-
-
-
         .title-desc {
-
             margin-left: 10px;
-
         }
-
     }
-
-
-
     /* CSS untuk mengatur padding pada perangkat desktop (lebar layar lebih besar dari 767px) */
-
     @media (min-width: 768px) {
-
         .col-7 {
-
             padding-left: 3rem;
-
         }
-
-
-
         /* CSS untuk mengatur modal di perangkat desktop */
-
         .modal-dialog {
-
             max-width: 600px;
-
             /* Atur lebar maksimum modal di layar desktop */
-
         }
-
-
-
         /* Gaya CSS untuk desktop */
-
         .profile-image,
-
         .contact-image {
-
             display: block;
-
             /* Menampilkan gambar di desktop */
-
         }
-
-
-
-
-
         .mobile-image {
-
             margin-left: 30px;
-
             margin-bottom: 3px;
-
         }
-
     }
-
-
-
     .table-responsive.custom-table-scroll {
-
         max-height: 600px;
-
         /* Atur tinggi maksimum sesuai kebutuhan */
-
         overflow-y: auto;
-
         /* Aktifkan overflow-y untuk scrolling vertikal jika diperlukan */
-
     }
 </style>
 
-
-
 <section class="bg-white pt-3 my-5">
-
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-
-        <div class="col-12 my-4">
-
-            <h2 id="namaPerusahaan" class="mb-3 wow fadeInUp" style="order: 1;">
-
+        <div class="col-12 my-3">
+            <h2 id="namaPerusahaan" class="mb-2 wow fadeInUp" style="order: 1; font-size:26px">
                 -
-
             </h2>
-
             <div class="row icon-text-container">
-
                 <div class="icon-text">
-
                     <img src="<?= base_url('assets\img\icon-npwp.svg') ?>" alt="">
 
                     <p id="npwp" class="mb-0 ms-2 wow fadeInUp">-</p>
 
                     <img src="<?= base_url('assets\img\icon-location.svg') ?>" alt="" style="margin-left: 30px; margin-bottom: 3px">
-
                     <p id="alamat" class="mb-0 ms-2 wow fadeInUp">-</p>
-
                 </div>
-
-
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
-
 
 <section class="my-5">
 
@@ -2159,7 +1029,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-sm-2 form-select-custom d-flex space" style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="col-sm-2 form-select-custom d-flex space" style="width: 190px; margin-right:1%;">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2171,7 +1041,7 @@
 
                                     </div>
 
-                                    <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:1%;">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2185,7 +1055,7 @@
 
                                     <!-- Select Trigger Filter Nilai Penawaran -->
 
-                                    <div class="col-sm-2 form-select-custom d-flex" id="dropdownHPS" style="width: 180px;margin-right:1%;margin-top: 2%;padding:5px 5px 5px 11px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                    <div class="col-sm-2 form-select-custom d-flex" id="dropdownHPS" style="width: 180px;margin-right:1%;padding:5px 5px 5px 11px" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2255,7 +1125,7 @@
 
                                     </ul>
 
-                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:1%;margin-top: 2%">
+                                    <div class="form-select-custom w-300 d-flex" style="width: 190px; margin-right:1%;">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
@@ -2279,7 +1149,7 @@
 
                         <div class="col">
 
-                            <div style="margin-left:1.5%; margin-top:2%">
+                            <div style="margin-left:1.5%; margin-top:1%">
 
                                 <div class="table-responsive custom-table-scroll">
 
@@ -2507,7 +1377,7 @@
 
                             <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
 
-                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
+                                <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 25px; height: 25px; padding: 0;">
 
                             </button>
 

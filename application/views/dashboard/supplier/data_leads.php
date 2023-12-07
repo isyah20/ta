@@ -589,7 +589,7 @@
 <section class="bg-white pt-5 mt-5">
     <!-- <div class="overflow"> -->
     <div class="container">
-        <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
+        <h4 class="mb-0 wow fadeInUp">Hai <span class="fw-semibold nama-pengguna"></span>!<p class="pt-2">Segera Lengkapi <span class="fw-semibold" style="color: #df3131;">Data Leads</span> Anda!</p>
         </h4>
         <div class="row">
             <div class="col-6 ">
