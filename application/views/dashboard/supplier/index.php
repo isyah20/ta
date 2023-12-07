@@ -383,7 +383,7 @@
                                 <div class="wow fadeInUp" data-wow-delay="0.3s">
                                     <div class="d-flex">
                                     <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(4).svg') ?>" alt="">
-                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id=""></h1>
+                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-plot"></h1>
                                     </div>
                                 </div>
                             </div>
@@ -727,6 +727,23 @@
     function addAuthorizationHeader(xhr) {
         xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
     }
+
+        // Get Belum Plot 
+        $.ajax({
+            url: "<?= base_url('api/supplier/getLeadsNotPlotted') ?>",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            beforeSend: addAuthorizationHeader,
+            success: function(data) {
+                $('#belum-plot').html(data.data.jumlah);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        })
 
         // Get leads terbaru
         $.ajax({
