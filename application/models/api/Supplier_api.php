@@ -12,6 +12,7 @@ class Supplier_api extends CI_Model
     {
         parent::__construct();
         $this->load->helper('tanggal');
+        // $this->load->model('Tender_model');
         $this->client = new Client([
             // Base URI is used with relative requests
             'base_uri' => base_url(),
@@ -21,6 +22,8 @@ class Supplier_api extends CI_Model
             ],
         ]);
     }
+
+    public $interval_leads = 7;
 
     public function getTimMarketing($id_supplier)
     {
@@ -485,4 +488,19 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function getLeadsTerbaru($id_pengguna)
+    {
+        // get count data leads where date is the last 7 days
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $this->db->where('DATEDIFF(CURRENT_DATE, data_leads.tgl) <=', $this->interval_leads);
+        
+        $query = $this->db->get();
+        // return $query->result_array();
+        return $query->row_array();
+    }
+
+
 }

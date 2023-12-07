@@ -367,6 +367,47 @@ class Supplier_model extends CI_Model
         return $this->db->query($sql);
     }
 
+        // get jumlah pemenang from each month
+        public function getJumlahPerMonth($id_pengguna, $tahun)
+        {
+            
+            $preferensi = $this->Tender_model->getPreferensiPengguna($id_pengguna);
+            if (!empty($tahun)) {
+                $tahun = $tahun;
+            } else {
+                $tahun = date('Y');
+            }
+    
+            // Get total pemenang from table pemenang from each month
+            $sql = "SELECT
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 1 THEN npwp END) AS jan,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 2 THEN npwp END) AS feb,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 3 THEN npwp END) AS mar,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 4 THEN npwp END) AS apr,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 5 THEN npwp END) AS mei,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 6 THEN npwp END) AS jun,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 7 THEN npwp END) AS jul,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 8 THEN npwp END) AS agu,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 9 THEN npwp END) AS sep,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 10 THEN npwp END) AS okt,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 11 THEN npwp END) AS nov,
+                COUNT(DISTINCT CASE WHEN MONTH(tgl_pemenang) = 12 THEN npwp END) AS des
+            FROM preferensi
+            INNER JOIN pemenang p ON preferensi.id_pengguna = p.id_pemenang
+            WHERE preferensi.status = '1'
+                AND (preferensi.id_lpse = '' OR p.id_lpse <> '' OR p.id_lpse IN (' . $preferensi->id_lpse . '))
+                AND (preferensi.jenis_pengadaan = '' OR p.jenis_tender <> '' OR p.jenis_tender IN (' . $preferensi->jenis_pengadaan . '))
+                AND (keyword = '' OR nama_tender <> '' OR nama_tender REGEXP keyword)
+                AND (nilai_hps_awal = 0 AND nilai_hps_akhir = 0 OR (harga_penawaran <> '' AND harga_penawaran BETWEEN nilai_hps_awal AND nilai_hps_akhir))
+                AND (YEAR(tgl_pemenang) = $tahun);";
+
+                        // $query = $this->db->get();  
+                        // return $query->result_array();
+                $result = $this->db->query($sql)->row_array();
+                return array_values($result);
+                // return $result->result_array();
+        }
+
     // Get jumlah pemenang tender based on user preferensi and keyword and id_pengguna
     public function getJumKatalogPemenangTender($data) 
     {

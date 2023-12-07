@@ -368,7 +368,7 @@
                                 <div class="wow fadeInUp" data-wow-delay="0.3s">
                                     <div class="d-flex">
                                     <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(5).svg') ?>" alt="">
-                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" ></h1>
+                                        <h1 class="card-text wow fadeInUp" id="leads-terbaru" data-wow-delay="0.3s" ></h1>
                                     </div>
                                 </div>
                             </div>
@@ -727,6 +727,24 @@
     function addAuthorizationHeader(xhr) {
         xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
     }
+
+        // Get leads terbaru
+        $.ajax({
+            url: "<?= base_url('api/supplier/getLeadsTerbaru') ?>",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_pengguna: id_pengguna
+            },
+            beforeSend: addAuthorizationHeader,
+            success: function(data) {
+                $('#leads-terbaru').html(data.data.jumlah);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        })
+
 
         // Get total leads
         $.ajax({
@@ -1335,13 +1353,15 @@
 </script>
 <script>
     // Data for Line Chart
+    tahun = 2023;
+
     function generateRandomData() {
         return {
             labels: [
                 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
             ],
             datasets: [{
-                label: 'Dataset',
+                label: 'Data',
                 data: [500, 600, 700, 800, 900, 1000],
                 borderColor: '#064E3B',
                 backgroundColor: '#064E3B',
@@ -1367,6 +1387,38 @@
 
     var ctx = document.getElementById('lineChart').getContext('2d');
     var lineChart = new Chart(ctx, chartConfig);
+
+    // function for updating line chart
+    function updateLineChart() {
+        $.ajax({
+            url: "<?= base_url() ?>api/supplier/getJumlahPerMonth",
+            data : {
+                tahun : tahun,
+                id_pengguna : id_pengguna
+            },
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: addAuthorizationHeader,
+            success: function(response) {
+                if (response.status) {
+                    // Update chart data and labels
+                    lineChart.data.labels = [
+                'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
+            ]
+                    lineChart.data.datasets[0].data = response.data.map(item => parseFloat(item));
+                    console.log(response.data);
+                    console.log(response);
+
+                    // Update chart
+                    lineChart.update();
+                } else {
+                    console.error('Error in response:', response);
+                }
+            },
+        })
+    }
+
+    updateLineChart();
 </script>
 
 
