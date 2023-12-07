@@ -279,7 +279,7 @@
 }
 
 .custom-colored-dot-list li:nth-child(2)::before {
-    background-color: #83D4F9;
+    background-color: #4F97DA;
 }
 
 .custom-colored-dot-list li:nth-child(3)::before {
@@ -359,45 +359,45 @@
         <div class="row mt-3">
             <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
                 <div class="row">
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33%;">
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33.33%;">
                         <div class="shadow rounded-3 bg-white">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                                     <p class="card-title">Leads Terbaru</p>
                                 </div>
                                 <div class="wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="d-flex">
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(5).svg') ?>" alt="">
+                                    <div class="d-flex" style="padding-left:6px">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_green.svg') ?>" alt="">
                                         <h1 class="card-text wow fadeInUp" id="leads-terbaru" data-wow-delay="0.3s" ></h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33%;">
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33.33%;">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                                     <p class="card-title">Leads Belum Diplotting</p>
                                 </div>
                                 <div class="wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="d-flex">
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(4).svg') ?>" alt="">
+                                    <div class="d-flex" style="padding-left:6px">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_red.svg') ?>" alt="">
                                         <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-plot"></h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33%;">
+                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33.33%;">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
                                     <p class="card-title ">Leads Belum Dilengkapi</p>
                                 </div>
                                 <div class="wow fadeInUp" data-wow-delay="0.3s">
-                                    <div class="d-flex">
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="">
+                                    <div class="d-flex" style="padding-left:6px">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_sky.svg') ?>" alt="">
                                         <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="belum-lengkap"></h1>
                                     </div>
                                 </div>
@@ -411,7 +411,13 @@
                         <div class="shadow chart-bg mt-4" style="height:100%; border-radius: 10px;">
                             <div class="container wow fadeInUp">
                                 <div style="padding:0">
-                                    <h4 style="color:#333333; margin:10px; font-size:20px; font-weight:500; padding-top:3px">Pemenang Tender Setiap Bulan</h4>
+                                    <h4 style="color:#333333; margin:10px; font-size:20px; font-weight:500; padding-top:3px">Pemenang Tender Setiap Bulan
+                                    <div class="col-md-1 form-select-custom d-flex" style="width: 100px; float:right">
+                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                        <select class="select2-wilayah" id="wilayah" style="border:none;">
+                                        </select>
+                                    </div>
+                                </h4>
                                     <div class="chart-container wow fadeInUp" style="margin:0; padding:0">
                                         <canvas id="lineChart" style="width: 500; height:225;"></canvas>
                                     </div>
@@ -425,11 +431,11 @@
                 <div class="shadow rounded-3 bg-white">
                     <div class="card-body">
                         <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="card-title" style="padding-top:15px;padding-bottom:3px">Total Data Leads</p>
+                            <p class="card-title" style="padding-top:15px;padding-bottom:3px;">Total Data Leads</p>
                         </div>
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="d-flex">
-                            <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(3).svg') ?>" alt="" style="width:35px;height:35px;margin-top:5px">
+                            <div class="d-flex" style="padding-left:6px">
+                            <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_blue.svg') ?>" alt="">
                                 <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads"></h1>
                             </div>
                         </div>
@@ -454,10 +460,10 @@
                 <div class="shadow rounded-3 bg-white">
                     <div class="dashboard-hero" style="height:480px;padding-left:0px">
                         <div>
-                        <h4 class="text-center">Status CRM</h4>
+                        <h4 class="text-center" style="padding-left:7px;padding-top:5px">Status CRM</h4>
                             <center>
-                                <div class="chart2" style="margin:0;padding:14px">
-                                    <canvas id="myDoughnutChart" width="200" height="200" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                <div class="chart2" style="margin-left:12px; padding:7px">
+                                    <canvas id="myDoughnutChart" width="300" height="300" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 10px 15px 0px 16px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
                                 </div>
                             </center>
                         </div>
@@ -468,8 +474,8 @@
                                     <li  class="color-grey">Tanpa Status<span id="statusBelumDihubungi" style="float:right">10%</span></li>
                                     <li  class="color-grey">Sedang Diproses<span id="statusDihubungi" style="float:right">10%</span></li>
                                     <li  class="color-grey">Negosiasi<span id="statusNegosiasi" style="float:right">10%</span></li>
-                                    <li  class="color-grey">Diterima<span id="statusDiterima"  style="float:right">10%</span></li>
-                                    <li class="color-grey">Ditolak<span  id="statusDitolak" style="float:right">10%</span></li>
+                                    <li  class="color-grey">Selesai<span id="statusDiterima"  style="float:right">10%</span></li>
+                                    <li class="color-grey">Dibatalkan<span  id="statusDitolak" style="float:right">10%</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1283,7 +1289,7 @@
             labels: ['Tender 1', 'Tender 2', 'Tender 3', 'Tender 4', 'Tender 5'],
             datasets: [{
                 data: [0], // Initial data, will be updated after fetching
-                backgroundColor: ['#F17D3A', '#56C474', '#EF5350', '#495894', '#83D4F9'],
+                backgroundColor: ['#EF5350', '#495894', '#4F97DA', '#56C474', '#F17D3A',],
                 borderWidth: 2,
                 borderColor: 'white'
             }]
@@ -1385,6 +1391,7 @@
                 pointStyle: 'circle',
                 pointRadius: 2,
                 pointHoverRadius: 15,
+                tension:0.4,
             }]
         };
     }
