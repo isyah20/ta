@@ -853,4 +853,23 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function getLeadsNotPlotted_get() {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getLeadsNotPlotted($id_pengguna);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                // 'message' => 'Data ditemukan'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => $data,
+                // 'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

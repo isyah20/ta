@@ -502,5 +502,16 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         return $query->row_array();
     }
 
+    public function getLeadsNotPlotted($id_pengguna) {
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $this->db->where('data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim)');
+        // or id_lead is in table plot_tim but id_tim is 0
+        $this->db->or_where('data_leads.id_lead IN (SELECT id_lead FROM plot_tim WHERE id_tim = 0)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
 
 }
