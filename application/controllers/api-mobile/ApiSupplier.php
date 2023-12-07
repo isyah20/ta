@@ -30,6 +30,7 @@ class ApiSupplier extends RestController
         $this->load->model('Tender_model');
         $this->load->model('Preferensi_model', 'preferensi');
         $this->load->library('form_validation', 'google');
+        $this->load->library('email');
         $this->load->helper('form');
         $this->init();
     }
@@ -126,7 +127,7 @@ class ApiSupplier extends RestController
                 $data_pengguna['password_default'] = $password;
                 $data_pengguna['nama_supplier'] = $supplier['nama'];
                 $statusEmail = $this->sendEmailPassword_get($data_pengguna);
-                if ($statusEmail) {
+                if (!$statusEmail) {
                     $this->response([
                         'status' => false,
                         'message' => 'Email gagal terkirim',
@@ -160,9 +161,11 @@ class ApiSupplier extends RestController
                 $config = [];
                 $config['charset'] = 'utf-8';
                 $config['useragent'] = 'Codeigniter';
-                $config['protocol'] = "smtp";
+                $config['protocol'] = "mail";
+                // $config['protocol'] = "smtp";
                 $config['mailtype'] = "html";
-                $config['smtp_host'] = "smtp.gmail.com"; //pengaturan smtp
+                // $config['smtp_host'] = "smtp.gmail.com"; //pengaturan smtp
+                $config['smtp_host'] = "smtp.googlemail.com"; //pengaturan smtp
                 // $config['smtp_host'] = "sv2.ecc.co.id"; //pengaturan smtp
                 $config['smtp_port'] = "465";
                 $config['smtp_timeout'] = "5";
@@ -352,13 +355,21 @@ class ApiSupplier extends RestController
             </html>";
 
                 $sended = $this->email->message($message);
-                try {
-                    $this->email->send();
-                    return true;
-                } catch (Exception $e) {
-                    // Tangani jika terjadi kesalahan saat pengiriman email
-                    return false;
-                }
+                $isSend = $this->email->send();
+                return $isSend;
+                // if($isSend){
+                // }
+                // $this->response([
+                //     'status' => true,
+                //     'message' => $test
+                // ], RestController::HTTP_CREATED);
+                // try {
+                //     $this->email->send();
+                //     return true;
+                // } catch (Exception $e) {
+                //     // Tangani jika terjadi kesalahan saat pengiriman email
+                //     return false;
+                // }
 
                 // if ($this->email->send()) {
                 //     $this->response([
@@ -1366,7 +1377,15 @@ class ApiSupplier extends RestController
 
     public function editTimMarketing_post($id)
     {
-        // $id = $this->post('id_tim');
+        $pengguna = $this->Supplier_api->getTimMarketingById($id);
+        if (!isset($pengguna)) {
+            $this->response([
+                'status' => false,
+                'message' => "Pengguna tidak ditemukan!",
+            ], RestController::HTTP_NOT_FOUND);
+        }
+        $id_pengguna = $pengguna['id_pengguna'];
+
         $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email', ['required' => 'Email tidak boleh kosong!', 'valid_email' => 'Email tidak valid']);
         $this->form_validation->set_rules('nama_tim', 'nama tim', 'required|trim', ['required' => 'Nama tim tidak boleh kosong!',]);
         $this->form_validation->set_rules('no_telp', 'nomor telepon', 'required|trim', ['required' => 'No telepon tidak boleh kosong!',]);
@@ -1393,7 +1412,7 @@ class ApiSupplier extends RestController
                 'status' => false,
                 'message' => 'Berikan id'
             ], RestController::HTTP_BAD_REQUEST);
-        } else if ($this->Supplier_api->updateTimPengguna($data, $this->Supplier_api->getTimMarketingById($id)['id_pengguna'])) {
+        } else if ($this->Supplier_api->updateTimPengguna($data, $id_pengguna)) {
             if ($this->Supplier_api->updateTimMarketing(array('posisi' => $this->post('posisi')), $id)) {
                 $this->response([
                     'status' => true,

@@ -744,4 +744,37 @@ class PesertaTenderModel extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    // data menang, kalah, ikut 
+    public function getDataTenderFilter($npwp, $id_lpse, $tahun)
+    {
+        $this->db->select('peserta_tender.*, paket.nilai_hps_paket, paket.nama_tender, pemenang.nilai_hps');
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 6, 2) AS month');
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 1, 4) AS year');
+        $this->db->select("CASE
+            WHEN pemenang.kode_tender IS NOT NULL AND pemenang.npwp = peserta_tender.npwp THEN 'menang'
+            WHEN pemenang.kode_tender IS NULL AND paket.status_tender NOT IN ('Tender Sudah Selesai', 'Selesai') THEN 'ikut'
+            WHEN pemenang.kode_tender IS NOT NULL AND pemenang.npwp != peserta_tender.npwp THEN 'kalah'
+            ELSE NULL
+        END AS status_peserta");
+        $this->db->from('peserta_tender');
+        $this->db->join('pemenang', 'pemenang.kode_tender = peserta_tender.kode_tender', 'left');
+        $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender', 'left');
+        $this->db->where_not_in('paket.status_tender', ['Gagal', 'Seleksi Batal', 'Tender Gagal', 'Seleksi Gagal', 'Tender Batal']);
+        $this->db->where('peserta_tender.npwp', $npwp);
+        $this->db->where('peserta_tender.harga_penawaran !=', 0);
+
+        if ($tahun != '') {
+            $this->db->where('YEAR(paket.tanggal_pembuatan)', $tahun);
+        }
+        if ($id_lpse != '') {
+            $this->db->where('id_lpse', $id_lpse);
+        }
+
+        $result = $this->db->order_by('paket.tanggal_pembuatan', 'DESC')
+            ->get()
+            ->result_array();
+
+        return $result;
+    }
 }
