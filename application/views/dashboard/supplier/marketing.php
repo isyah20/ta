@@ -237,6 +237,21 @@
         margin-left: 13px;
     }
 
+    .title-mark {
+        margin-top: 50px;
+    }
+
+    .img-custom {
+        width: 200px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+        margin-left: 300px;
+    }
+
+    .link {
+        margin-top: 50px;
+    }
+
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -276,19 +291,14 @@
             white-space: nowrap;
         }
 
-        .container-lg img {
+        /* .container-lg img {
             width: 100%;
             height: auto;
-        }
+        } */
 
         .link .btn-simpan {
             font-size: 15px;
             padding: 8px 10px;
-        }
-
-        .container-lg img {
-            width: 100%;
-            height: auto;
         }
 
         h2 {
@@ -321,18 +331,35 @@
         }
 
         .link {
-            margin-top: 1rem;
+            margin-top: 5px;
+        }
+
+        .title-mark {
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .img-custom {
+            margin-left: 10px;
+        }
+
+        .custom-table-container {
+            margin-top: 20px;
+        }
+
+        .custom-img {
+            width: 20px;
         }
 
     }
 </style>
 <section class="bg-white pt-4 mt-4 w-100">
-    <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <div class="col-6">
-            <h4 class="mt-4 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Ini daftar tim kamu!</p>
+    <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col">
+            <h4 class="wow fadeInUp title-mark">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Ini daftar tim kamu!</p>
             </h4>
             <div class="d-flex justify-content-start">
-                <div class="link d-flex flex-row align-items-center" style="margin-top:50px">
+                <div class="link d-flex">
                     <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
                             <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
                         </a>
@@ -340,26 +367,27 @@
                 </div>
             </div>
         </div>
-        <img src="<?= base_url('assets\img\amico.svg') ?>" alt="" style="width: 200px; margin-top:40px; margin-bottom:10px; margin-right:50px">
+        <img class="img-custom" src="<?= base_url('assets\img\amico.svg') ?>" alt="">
     </div>
     <!-- tabel marketing -->
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
-                <table class="table custom-table-container">
-                    <thead class="thead">
-                        <tr>
-                            <th class="custom-padding">No.</th>
-                            <th class="custom-padding">Nama</th>
-                            <th class="custom-padding">Posisi</th>
-                            <th class="custom-padding">Email</th>
-                            <th class="custom-padding">No. HP/WA</th>
-                            <th class="custom-padding">Area Kerja</th>
-                            <th class="custom-padding" style="width:11%">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="data-marketing">
-                        <!-- <tr>
+                <div class="table-responsive">
+                    <table class="table custom-table-container">
+                        <thead class="thead">
+                            <tr>
+                                <th class="custom-padding">No.</th>
+                                <th class="custom-padding">Nama</th>
+                                <th class="custom-padding">Posisi</th>
+                                <th class="custom-padding">Email</th>
+                                <th class="custom-padding">No. HP/WA</th>
+                                <th class="custom-padding">Area Kerja</th>
+                                <th class="custom-padding" style="width:11%">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-marketing">
+                            <!-- <tr>
                             <td></td>
                             <td>1</td>
                             <td class="nama">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -383,8 +411,9 @@
                                 <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
                         </tr> -->
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

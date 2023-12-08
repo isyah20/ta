@@ -326,6 +326,19 @@
             max-width: 100%;
             overflow-x: auto;
         }
+
+        .card-3 {
+            margin-top: 10rem;
+        }
+
+        .form-select-custom {
+            width: 335px;
+        }
+
+        /* .card-2 {
+            top: 80%;
+            transform: translate(80%, -50%);
+        } */
     }
 </style>
 
@@ -592,7 +605,7 @@
         <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
         </h4>
         <div class="row">
-            <div class="col-6 ">
+            <div class="col-6">
                 <div class="card-input wow fadeInUp">
                     <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:8px;">
                         <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
