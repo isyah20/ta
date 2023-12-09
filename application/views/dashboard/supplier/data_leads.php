@@ -332,7 +332,7 @@
         }
 
         .card-3 {
-            margin-top: 10rem;
+            margin-top: 11rem;
         }
 
         .form-select-custom {
@@ -343,7 +343,7 @@
             /* position: absolute;
             top: 0%;
             transform: translate(10%, 50%); */
-            margin-top: -9rem;
+            margin-top: -8rem;
         }
 
         .card-title {
@@ -352,7 +352,7 @@
         }
 
         .custom-img {
-            margin-left: 145px;
+            margin-left: 130px;
         }
 
         /* .container-lg.wow.fadeInUp.animation {
