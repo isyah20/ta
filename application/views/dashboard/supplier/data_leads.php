@@ -154,10 +154,14 @@
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 450px;
+        width: 440px;
     }
 
     .custom-img {
+        margin-left: 13px;
+    }
+
+    .custom-img-search {
         margin-left: 13px;
     }
 
@@ -335,10 +339,32 @@
             width: 335px;
         }
 
-        /* .card-2 {
-            top: 80%;
-            transform: translate(80%, -50%);
+        .card-2 {
+            /* position: absolute;
+            top: 0%;
+            transform: translate(10%, 50%); */
+            margin-top: -9rem;
+        }
+
+        .card-title {
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .custom-img {
+            margin-left: 145px;
+        }
+
+        /* .container-lg.wow.fadeInUp.animation {
+            width: 100%;
         } */
+        .rounded-3 {
+            width: 200px;
+        }
+    }
+
+    .rounded-3 {
+        width: 100%;
     }
 </style>
 
@@ -579,7 +605,7 @@
 
     .card-3 {
         top: -50%;
-        transform: translate(2%, -50%);
+        transform: translate(0%, -50%);
     }
 
     .card-2 {
@@ -608,7 +634,7 @@
             <div class="col-6">
                 <div class="card-input wow fadeInUp">
                     <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:8px;">
-                        <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
+                        <img class="custom-img-search" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
                         <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                     </div>
                     <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
@@ -619,7 +645,7 @@
                 </div>
             </div>
             <div class="col-6 justify-content d-flex card-3">
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s">
                     <div class="shadow rounded-3 bg-white">
                         <div class="card-body">
                             <div>
@@ -632,7 +658,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s">
                     <div class="shadow rounded-3 bg-white">
                         <div class="card-body">
                             <div>
@@ -645,14 +671,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s">
                     <div class="shadow rounded-3 bg-white">
                         <div class="card-body card-data">
                             <div>
                                 <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
                             </div>
                             <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
                                 <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">0</h1>
                             </div>
                         </div>
