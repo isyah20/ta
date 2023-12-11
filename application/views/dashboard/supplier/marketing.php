@@ -43,6 +43,7 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
+        width: 69rem;
     }
 
     .btn-custom {
@@ -81,6 +82,14 @@
         /* border: none; */
         vertical-align: middle;
         height: 60px !important;
+    }
+
+    th.custom-padding-aksi,
+    td.custom-padding-aksi {
+        /* border: none; */
+        vertical-align: middle;
+        height: 60px !important;
+        width: 10%;
     }
 
     .form-select-custom {
@@ -245,7 +254,8 @@
         width: 200px;
         margin-top: 40px;
         margin-bottom: 10px;
-        margin-left: 300px;
+        margin-left: 200px;
+        margin-right: 50px;
     }
 
     .link {
@@ -268,11 +278,12 @@
 
         .custom-table-container {
             overflow-x: auto;
+            width: 45rem;
         }
 
-        .custom-padding {
-            width: auto;
-            white-space: nowrap;
+        .thead th,
+        .custom-padding-aksi {
+            width: auto !important;
         }
 
         .thead {
@@ -340,7 +351,7 @@
         }
 
         .img-custom {
-            margin-left: 10px;
+            margin-left: 60px;
         }
 
         .custom-table-container {
@@ -383,7 +394,7 @@
                                 <th class="custom-padding">Email</th>
                                 <th class="custom-padding">No. HP/WA</th>
                                 <th class="custom-padding">Area Kerja</th>
-                                <th class="custom-padding" style="width:11%">Aksi</th>
+                                <th class="custom-padding-aksi">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="data-marketing">
