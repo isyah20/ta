@@ -766,7 +766,7 @@ class PesertaTenderModel extends CI_Model
             $this->db->where('YEAR(paket.tanggal_pembuatan)', $tahun);
         }
         if ($id_lpse != '') {
-            $this->db->where('id_lpse', $id_lpse);
+            $this->db->where('paket.id_lpse', $id_lpse);
         }
 
         $result = $this->db->order_by('paket.tanggal_pembuatan', 'DESC')

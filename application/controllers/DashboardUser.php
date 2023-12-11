@@ -512,13 +512,13 @@ class DashboardUser extends CI_Controller
         if ($data != null) {
             // return json_encode($data['cariTahun']);
             // return json_encode($data['cariKLPD']);
-            $this->output
-                ->set_status_header(200)
-                ->set_content_type('application/json')
-                ->set_output(json_encode($data['cariKLPD'], JSON_PRETTY_PRINT))
-                ->_display();
+            // $this->output
+            //     ->set_status_header(200)
+            //     ->set_content_type('application/json')
+            //     ->set_output(json_encode($data['cariKLPD'], JSON_PRETTY_PRINT))
+            //     ->_display();
 
-            exit;
+            // exit;
 
             // die;
             $this->load->library('session');

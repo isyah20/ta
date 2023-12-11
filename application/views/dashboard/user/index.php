@@ -394,6 +394,11 @@
         border: none;
         border-radius: none;
     }
+
+    .select2-container {
+
+        max-width: calc(100% - 10%);
+    }
 </style>
 
 <div class="modal fade" id="npwpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" x-data="completeProfile">
@@ -859,34 +864,84 @@
     }
 
 
-    function formatRupiah(number) {
-        return 'Rp ' + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    function formatRupiahHPS(number) {
+        const roundedNumber = Math.round(number * 100) / 100; // Bulatkan ke dua angka desimal
+        const numString = roundedNumber.toString(); // Ubah angka menjadi string
+        const splitNum = numString.split('.'); // Pisahkan bagian desimal jika ada
+
+        let rupiah = splitNum[0]
+            .split('')
+            .reverse()
+            .reduce((acc, curr, index) => {
+                return curr + (index && index % 3 === 0 ? '.' : '') + acc;
+            }, '');
+
+        rupiah = 'Rp ' + rupiah; // Tambahkan 'Rp ' di depan
+
+        // Tambahkan bagian desimal jika ada
+        if (splitNum[1]) {
+            rupiah += ',' + (splitNum[1].length === 1 ? splitNum[1] + '0' : splitNum[1]);
+        } else {
+            rupiah += ',00'; // Tambahkan '00' jika tidak ada desimal
+        }
+
+        return rupiah;
     }
 
+    function removeComma(number) {
+        let angkaHasil = '';
+        let parsedNumber = parseFloat(number); // Mengonversi ke tipe data Number
+
+        if (!isNaN(parsedNumber)) {
+            // Jika parsedNumber adalah tipe data Number yang valid
+            if (parsedNumber % 1 !== 0) {
+                // Angka memiliki nilai desimal (angka dibelakang koma)
+                angkaHasil = Math.floor(parsedNumber); // Mengubah ke integer tanpa angka di belakang koma
+            } else {
+                // Angka tidak memiliki nilai desimal
+                angkaHasil = parsedNumber;
+            }
+        }
+
+        return angkaHasil;
+    }
+
+    function calculatePercentage(hargaPenawaran, nilaiHPS) {
+        const parsedOfferPrice = removeComma(hargaPenawaran);
+        const parsedHPSValue = removeComma(nilaiHPS);
+
+        const percentage = ((parsedOfferPrice - parsedHPSValue) / (parsedOfferPrice + parsedHPSValue) * 100);
+        const roundedPercentage = percentage.toFixed(2);
+
+        return roundedPercentage;
+    }
+
+
     function updateTable(data) {
+        console.log(formatRupiahHPS(123456789.123), 'RP'); // Output: Rp 123.456.789,12
         const tabelTenderIkut = document.getElementById('tender-ikut');
         tabelTenderIkut.innerHTML = '';
 
         if (data.length > 0) {
             data.forEach((pesertaIkut, index) => {
-                const persentase = ((pesertaIkut.harga_penawaran / pesertaIkut.nilai_hps_paket) * 100).toFixed(2);
                 const row = `<tr>
-                                <th></th>
-                                <td>${index + 1}</td>
-                                <td class="custom-padding">${pesertaIkut.nama_tender}</td>
-                                <td class="green-td">${formatRupiah(pesertaIkut.nilai_hps_paket)}</td>
-                                <td class="green-td">${formatRupiah(pesertaIkut.harga_penawaran)}</td>
-                                <td class="orange-td">${persentase}%</td>
-                            </tr>`;
+                            <th></th>
+                            <td>${index + 1}</td>
+                            <td class="custom-padding">${pesertaIkut.nama_tender}</td>
+                            <td class="green-td">${formatRupiahHPS(pesertaIkut.nilai_hps_paket)}</td>
+                            <td class="green-td">${formatRupiahHPS(pesertaIkut.harga_penawaran)}</td>
+                            <td class="orange-td">${calculatePercentage(pesertaIkut.harga_penawaran,pesertaIkut.nilai_hps_paket)}%</td>
+                        </tr>`;
                 tabelTenderIkut.insertAdjacentHTML('beforeend', row);
             });
         } else {
             const emptyRow = `<tr>
-                                <th colspan="6" style="text-align: center; padding: 10px;">Tidak ada data yang tersedia untuk ditampilkan.</th>
-                                </tr>`;
+                            <th colspan="6" style="text-align: center; padding: 10px;">Tidak ada data yang tersedia untuk ditampilkan.</th>
+                            </tr>`;
             tabelTenderIkut.insertAdjacentHTML('beforeend', emptyRow);
         }
     }
+
 
     // Fungsi untuk menambahkan kartu berdasarkan status peserta
     function addCardByStatus(data) {
@@ -894,7 +949,7 @@
         let htmlCard = ''; // Menggunakan let untuk deklarasi variabel agar hanya terbatas pada lingkup fungsi ini
 
         data.forEach(tender => {
-            console.log(tender);
+            // console.log(tender);
             htmlCard += `
             <div class="col-auto card-riwayat w-100">
                 <div class="col">
