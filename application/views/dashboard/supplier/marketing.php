@@ -43,7 +43,7 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
-        width: 69rem;
+        width: 100%;
     }
 
     .btn-custom {
