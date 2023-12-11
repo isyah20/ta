@@ -271,6 +271,10 @@
             margin-top: 6rem !important;
         }
 
+        .link .btn-simpan {
+            margin-top: 200px;
+        }
+
         .table {
             font-size: 14px;
             align-items: center;
@@ -351,7 +355,9 @@
         }
 
         .img-custom {
+            position: absolute;
             margin-left: 60px;
+            margin-top: 120px;
         }
 
         .custom-table-container {
