@@ -649,6 +649,7 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
+
                             <!-- <tr class="tbody-tr">
                             <td><span class="number">1</span></td>
                             <td class="perusahaan">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -930,6 +931,7 @@
                 beforeSend: addAuthorizationHeader,
                 success: function(data) {
                     total_leads = data.data;
+                    console.log(data);
 
                     $('#pagination-container').pagination({
                         dataSource: "<?php echo site_url('api/supplier/lead/filter'); ?>",
@@ -973,6 +975,7 @@
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+                    $('#data-leads').html('<tr><td align="center" colspan="9">Data tidak ditemukan!</td></tr>');
                 }
             });
         }
