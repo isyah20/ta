@@ -1316,12 +1316,19 @@ class ApiSupplier extends RestController
                 'message' => 'Berikan id'
             ], RestController::HTTP_BAD_REQUEST);
         } else {
-            if ($this->Supplier_api->deleteTimMarketing($id) > 0) {
-                $this->response([
-                    'status' => true,
-                    'id' => $id,
-                    'message' => 'Data berhasil dihapus'
-                ], RestController::HTTP_OK);
+            if ($this->Supplier_api->deleteTimMarketing($id_tim) > 0) {
+                if ($this->Supplier_model->resetPlotTim($id_tim)) {
+                    $this->response([
+                        'status' => true,
+                        'id' => $id_tim,
+                        'message' => 'Data berhasil dihapus'
+                    ], RestController::HTTP_OK);
+                } else {
+                    $this->response([
+                        'status' => true,
+                        'message' => 'Data gagal dihapus'
+                    ], RestController::HTTP_INTERNAL_ERROR);
+                }
             } else {
                 $this->response([
                     'status' => false,
@@ -1359,11 +1366,18 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_BAD_REQUEST);
         } else {
             if ($this->Supplier_api->deleteTimMarketing($id) > 0) {
-                $this->response([
-                    'status' => true,
-                    'id' => $id,
-                    'message' => 'Data berhasil dihapus'
-                ], RestController::HTTP_OK);
+                if ($this->Supplier_model->resetPlotTim($id)) {
+                    $this->response([
+                        'status' => true,
+                        'id' => $id,
+                        'message' => 'Data berhasil dihapus'
+                    ], RestController::HTTP_OK);
+                } else {
+                    $this->response([
+                        'status' => true,
+                        'message' => 'Data gagal dihapus'
+                    ], RestController::HTTP_INTERNAL_ERROR);
+                }
             } else {
                 $this->response([
                     'status' => false,

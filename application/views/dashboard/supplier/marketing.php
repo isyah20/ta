@@ -753,95 +753,95 @@
         })
     });
     $(document).ready(function() {
-    // Handle form submission
-    $('#submit-input').click(function(event) {
-        event.preventDefault();
+        // Handle form submission
+        $('#submit-input').click(function(event) {
+            event.preventDefault();
 
-        // Get the email input value
-        var emailInput = $('input[name=email]').val();
+            // Get the email input value
+            var emailInput = $('input[name=email]').val();
 
-        // Validate the email format
-        if (!isValidEmail(emailInput)) {
-            $('#submit-input').html('Tambahkan');
-            $('#submit-input').attr('disabled', false);
-            swal({
-                title: "Alamat email tidak valid",
-                text: "Harap masukkan alamat email yang benar",
-                icon: "error",
-                button: "Ok",
-            });
-        } else {
-            // Ask for confirmation
-            swal({
-                title: "Konfirmasi Email",
-                text: "Apakah email yang Anda masukan sudah benar?",
-                icon: "info",
-                buttons: ["Tidak", "Ya"]
-            }).then((confirmed) => {
-                if (confirmed) {
-                    $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
-                    $('#submit-input').attr('disabled', true);
-                    var formData = {
-                        nama_tim: $('input[name=nama_tim]').val(),
-                        posisi: $('input[name=posisi]').val(),
-                        email: emailInput,
-                        no_telp: $('input[name=no_telp]').val(),
-                        alamat: $('textarea[name=alamat]').val(),
-                    };
+            // Validate the email format
+            if (!isValidEmail(emailInput)) {
+                $('#submit-input').html('Tambahkan');
+                $('#submit-input').attr('disabled', false);
+                swal({
+                    title: "Alamat email tidak valid",
+                    text: "Harap masukkan alamat email yang benar",
+                    icon: "error",
+                    button: "Ok",
+                });
+            } else {
+                // Ask for confirmation
+                swal({
+                    title: "Konfirmasi Email",
+                    text: "Apakah email yang Anda masukan sudah benar?",
+                    icon: "info",
+                    buttons: ["Tidak", "Ya"]
+                }).then((confirmed) => {
+                    if (confirmed) {
+                        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                        $('#submit-input').attr('disabled', true);
+                        var formData = {
+                            nama_tim: $('input[name=nama_tim]').val(),
+                            posisi: $('input[name=posisi]').val(),
+                            email: emailInput,
+                            no_telp: $('input[name=no_telp]').val(),
+                            alamat: $('textarea[name=alamat]').val(),
+                        };
 
-                    // Make an AJAX request
-                    $.ajax({
-                        url: '<?= base_url("api/supplier/create") ?>',
-                        type: 'POST',
-                        data: formData,
-                        beforeSend: addAuthorizationHeader,
-                        success: function(response) {
-                            $('#submit-input').html('Tambahkan');
-                            $('#submit-input').attr('disabled', 'false');
-                            if (response.status == true) {
+                        // Make an AJAX request
+                        $.ajax({
+                            url: '<?= base_url("api/supplier/create") ?>',
+                            type: 'POST',
+                            data: formData,
+                            beforeSend: addAuthorizationHeader,
+                            success: function(response) {
+                                $('#submit-input').html('Tambahkan');
+                                $('#submit-input').attr('disabled', 'false');
+                                if (response.status == true) {
+                                    swal({
+                                        title: "Data berhasil ditambahkan!",
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then(function() {
+                                        window.location.href = "<?= base_url('suplier/marketing') ?>";
+                                    });
+                                } else {
+                                    swal({
+                                        title: "Data gagal ditambahkan!",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                $('#submit-input').html('Tambahkan');
+                                $('#submit-input').attr('disabled', false);
+                                var span = document.createElement("span");
+                                span.innerHTML = JSON.parse(xhr.responseText).message;
                                 swal({
-                                    title: "Data berhasil ditambahkan!",
-                                    icon: "success",
-                                    button: "Ok",
-                                }).then(function() {
-                                    window.location.href = "<?= base_url('suplier/marketing') ?>";
-                                });
-                            } else {
-                                swal({
-                                    title: "Data gagal ditambahkan!",
+                                    title: "ERROR",
+                                    content: span,
                                     icon: "error",
                                     button: "Ok",
                                 });
+                                console.log(xhr.responseText);
+                                console.log(JSON.parse(xhr.responseText).message);
                             }
-                        },
-                        error: function(xhr, status, error) {
-                            $('#submit-input').html('Tambahkan');
-                            $('#submit-input').attr('disabled', false);
-                            var span = document.createElement("span");
-                            span.innerHTML = JSON.parse(xhr.responseText).message;
-                            swal({
-                                title: "ERROR",
-                                content: span,
-                                icon: "error",
-                                button: "Ok",
-                            });
-                            console.log(xhr.responseText);
-                            console.log(JSON.parse(xhr.responseText).message);
-                        }
-                    });
-                } else {
-                    // User chose not to proceed
-                    $('#submit-input').html('Tambahkan');
-                    $('#submit-input').attr('disabled', false);
-                }
-            });
+                        });
+                    } else {
+                        // User chose not to proceed
+                        $('#submit-input').html('Tambahkan');
+                        $('#submit-input').attr('disabled', false);
+                    }
+                });
+            }
+        });
+
+        // Function to validate email format
+        function isValidEmail(email) {
+            var emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+            return emailPattern.test(email);
         }
     });
-
-    // Function to validate email format
-    function isValidEmail(email) {
-        var emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
-        return emailPattern.test(email);
-    }
-});
 </script>

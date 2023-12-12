@@ -25,6 +25,7 @@ class ApiSupplier extends RestController
         parent::__construct();
         $this->load->model('api/Reset_model');
         $this->load->model('api/Supplier_api');
+        $this->load->model('Supplier_model');
         // $this->load->model('api/Pengguna_model');
         $this->load->library('form_validation', 'google');
         $this->load->helper('form');
@@ -376,11 +377,18 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_BAD_REQUEST);
         } else {
             if ($this->Supplier_api->deleteTimMarketing($id) > 0) {
-                $this->response([
-                    'status' => true,
-                    'id' => $id,
-                    'message' => 'Data berhasil dihapus'
-                ], RestController::HTTP_OK);
+                if ($this->Supplier_model->resetPlotTim($id)) {
+                    $this->response([
+                        'status' => true,
+                        'id' => $id,
+                        'message' => 'Data berhasil dihapus'
+                    ], RestController::HTTP_OK);
+                } else {
+                    $this->response([
+                        'status' => true,
+                        'message' => 'Data gagal dihapus'
+                    ], RestController::HTTP_INTERNAL_ERROR);
+                }
             } else {
                 $this->response([
                     'status' => false,
@@ -683,7 +691,7 @@ class ApiSupplier extends RestController
             ], RestController::HTTP_NOT_FOUND);
         }
     }
-    
+
     //Get pemenang filter
     public function pemenangFiltered_post()
     {
@@ -724,7 +732,7 @@ class ApiSupplier extends RestController
 
         exit;
     }
-    
+
     public function getCRMLeads_get()
     {
         $id_pengguna = $this->input->get('id_pengguna');

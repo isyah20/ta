@@ -1108,8 +1108,24 @@
                 y: {
                     beginAtZero: true
                 }
+            },
+            onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    // Mengambil data yang terkait dengan elemen yang diklik
+                    const clickedIndex = elements[0].index;
+                    const clickedLabel = this.data.labels[clickedIndex];
+                    const clickedValue = this.data.datasets[0].data[clickedIndex];
+
+                    // Melakukan tindakan yang diinginkan, contohnya menampilkan informasi di console
+                    console.log('Bar di klik:', clickedLabel, 'dengan nilai:', clickedValue, clickedIndex);
+
+                    // Panggil fungsi atau lakukan tindakan lain sesuai kebutuhan
+                    // Misalnya:
+                    // myCustomFunction(clickedLabel, clickedValue);
+                }
             }
         }
+
     };
 
 
