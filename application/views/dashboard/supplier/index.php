@@ -355,8 +355,15 @@
         padding-left:10px;
     }
 
-    @media only screen and (min-width: 769px) and (max-width: 900px) {
-
+    @media(max-width: 900px) {
+        .sec-pemenang-terbaru {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .statistik-card-flex{
+            width: 50%;
+            margin-bottom:10px;
+        }
         .statistik-card-flex{
             width: 50%;
             margin-bottom:10px;
@@ -392,45 +399,6 @@
        }
 }
 
-    @media (max-width: 768px) {
-        .sec-pemenang-terbaru {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .statistik-card-flex{
-            width: 50%;
-            margin-bottom:10px;
-        }
-        .chart-tender-flex{
-            padding-top:0px 0px 0px 0px;
-            margin:0px;
-            width:525px;
-            height: 300px;
-        }
-        .statistik-tim{
-            margin-bottom:20px;
-        }
-        .statistik-tim-market{
-            margin-left:150px;
-        }
-        .chart-status {
-            width:100%; 
-            min-width: 400px; 
-            margin: 0 auto;
-        }
-        .search{
-            margin-top:90px;
-        }
-        .search-name{
-            width:55%;
-        }
-        .form-input-custom {
-            width:85%;
-        }
-       .export{
-           padding-left:35px;
-       }
-    }
 </style>
 
 <section class="mt-10 bg-white">
@@ -517,14 +485,14 @@
                             <div class="shadow chart-bg mt-4 chart-tender-flex chart-tender" style="border-radius: 10px;">
                                 <div class="container wow fadeInUp">
                                     <div style="padding:0;">
-                                        <h4 style="color:#333333; margin:10px 10px 0px 0px; font-size:20px; font-weight:500; padding-top:3px">Pemenang Tender Setiap Bulan
-                                        <div class="col-sm-1 form-select-custom d-flex" style="width: 100px; float:right">
+                                        <h4 style="color:#333333; padding:10px 10px 0px 0px; font-size:20px; font-weight:500;">Pemenang Tender Setiap Bulan
+                                        <div class="form-select-custom d-flex" style="width: 100px; float:right">
                                             <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                             <select class="select2-wilayah" id="wilayah" style="border:none;">
                                             </select>
                                         </div>
                                         </h4>
-                                        <div class="wow fadeInUp" style="margin:0; padding:0; padding-bottom:20px; width: 100%; height: 0%;">
+                                        <div class="wow fadeInUp" style="margin:0px; padding:0px; width: 100%; height: 0%;">
                                             <canvas id="lineChart" style="width:100%; height:100%;"></canvas>
                                         </div>
                                     </div>
