@@ -298,30 +298,6 @@
  color: var(--font-middle-grey, rgba(106, 106, 106, 0.90));
 }
 
-.progress-wrapper {
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.progress-info {
-  margin-bottom: 10px;
-}
-
-.progress-label span {
-  display: block;
-  text-align: left;
-  font-weight: bold;
-  margin-bottom: 5px; 
-}
-
-.progress {
-  height: 20px;
-}
-
-.progress-bar {
-  background-color: #F17D3A;
-}
-
     .circle {
         display: inline-block;
         width: 30px; 
@@ -335,11 +311,125 @@
         float:right;
     }
 
-    @media (max-width: 576px) {
+    .statistik-card{
+        width:23%;
+    }
+
+    .statistik-card2{
+        width:31%;
+    }
+    .statistik-tim-market{
+        margin-left:45px;
+        margin-top:20px
+    }
+
+    .chart-tender{
+        height:356px; 
+        border-radius:10px; 
+        width:650px;
+        padding-top:1px;
+    }
+
+    .chart-status{
+        width:100%; 
+        max-width: 400px; 
+        margin: 0 auto;
+        height:400px;
+    }
+    .chart2{
+        margin-left:15px; 
+        padding:7px;
+    }
+    .dashboard-hero {
+        height:480px;
+    }
+    .search{
+        margin-top:30px;
+    }
+
+    .search-name{
+        width:43%;
+    }
+    .export{
+        width:4%;
+        padding-left:10px;
+    }
+
+    @media only screen and (min-width: 769px) and (max-width: 900px) {
+
+        .statistik-card-flex{
+            width: 50%;
+            margin-bottom:10px;
+        }
+        .chart-tender-flex{
+            padding-top:0px 0px 0px 0px;
+            margin:0px;
+            width:525px;
+            height: 300px;
+        }
+        .statistik-tim{
+            margin-bottom:20px;
+        }
+        .statistik-tim-market{
+            margin-left:150px;
+        }
+        .chart-status {
+            width:100%; 
+            min-width: 400px; 
+            margin: 0 auto;
+        }
+        .search{
+            margin-top:90px;
+        }
+        .search-name{
+            width:55%;
+        }
+        .form-input-custom {
+            width:85%;
+        }
+       .export{
+           padding-left:35px;
+       }
+}
+
+    @media (max-width: 768px) {
         .sec-pemenang-terbaru {
             margin-left: auto;
             margin-right: auto;
         }
+        .statistik-card-flex{
+            width: 50%;
+            margin-bottom:10px;
+        }
+        .chart-tender-flex{
+            padding-top:0px 0px 0px 0px;
+            margin:0px;
+            width:525px;
+            height: 300px;
+        }
+        .statistik-tim{
+            margin-bottom:20px;
+        }
+        .statistik-tim-market{
+            margin-left:150px;
+        }
+        .chart-status {
+            width:100%; 
+            min-width: 400px; 
+            margin: 0 auto;
+        }
+        .search{
+            margin-top:90px;
+        }
+        .search-name{
+            width:55%;
+        }
+        .form-input-custom {
+            width:85%;
+        }
+       .export{
+           padding-left:35px;
+       }
     }
 </style>
 
@@ -357,9 +447,9 @@
 <section>
     <div class="container">
         <div class="row mt-3">
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 50%;">
+            <div class="col-md-9 wow fadeInUp animation" data-wow-delay="0.2s" >
                 <div class="row">
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33.33%;">
+                    <div class="statistik-card statistik-card-flex wow fadeInUp animation" data-wow-delay="0.2s">
                         <div class="shadow rounded-3 bg-white">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -373,8 +463,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33.33%;">
+                    </div>    
+                    <div class="statistik-card statistik-card-flex wow fadeInUp animation" data-wow-delay="0.2s">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -389,7 +479,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width: 33.33%;">
+                    <div class="statistik-card statistik-card-flex wow fadeInUp animation" data-wow-delay="0.2s">
                         <div class="shadow rounded-3 bg-white ">
                             <div class="card-body">
                                 <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
@@ -404,72 +494,77 @@
                             </div>
                         </div>
                     </div>
+                    <div class="statistik-card2 statistik-card-flex wow fadeInUp animation" data-wow-delay="0.2s">
+                        <div class="shadow rounded-3 bg-white">
+                            <div class="card-body">
+                                <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
+                                    <p class="card-title" style="padding-top:15px;padding-bottom:3px;">Total Data Leads</p>
+                                </div>
+                                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                                    <div class="d-flex" style="padding-left:6px">
+                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_blue.svg') ?>" alt="">
+                                        <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads"></h1>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                    </div>
                 </div>
-                <!-- Grafik riwayat pemenang tender-->
                 <div class="row">
-                    <div class="col-lg-12 pl-4">
-                        <div class="shadow chart-bg mt-4" style="height:100%; border-radius: 10px;">
-                            <div class="container wow fadeInUp">
-                                <div style="padding:0">
-                                    <h4 style="color:#333333; margin:10px; font-size:20px; font-weight:500; padding-top:3px">Pemenang Tender Setiap Bulan
-                                    <div class="col-md-1 form-select-custom d-flex" style="width: 100px; float:right">
-                                        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
-                                        <select class="select2-wilayah" id="wilayah" style="border:none;">
-                                        </select>
+                    <!-- Grafik riwayat pemenang tender-->
+                    <div class="col pl-4" >
+                            <div class="shadow chart-bg mt-4 chart-tender-flex chart-tender" style="border-radius: 10px;">
+                                <div class="container wow fadeInUp">
+                                    <div style="padding:0;">
+                                        <h4 style="color:#333333; margin:10px 10px 0px 0px; font-size:20px; font-weight:500; padding-top:3px">Pemenang Tender Setiap Bulan
+                                        <div class="col-sm-1 form-select-custom d-flex" style="width: 100px; float:right">
+                                            <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                                            <select class="select2-wilayah" id="wilayah" style="border:none;">
+                                            </select>
+                                        </div>
+                                        </h4>
+                                        <div class="wow fadeInUp" style="margin:0; padding:0; padding-bottom:20px; width: 100%; height: 0%;">
+                                            <canvas id="lineChart" style="width:100%; height:100%;"></canvas>
+                                        </div>
                                     </div>
-                                </h4>
-                                    <div class="chart-container wow fadeInUp" style="margin:0; padding:0">
-                                        <canvas id="lineChart" style="width: 500; height:225;"></canvas>
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    <div class="col wow fadeInUp animation" data-wow-delay="0.2s" style="width:25%" >
+                        <div class="shadow rounded-3 bg-white">
+                            <div class="card-body statistik-tim" style="margin-top:25px;height:355px;overflow-y: auto;">
+                                <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
+                                <h4 class="statistik-tim-market">Tim Marketing</h4>
+                                </div>
+                                <div class="class">
+                                    <table class="table">
+                                        <tbody id="total-plot-tim">
+                                        </tbody>
+                                        </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="wow fadeInUp animation" data-wow-delay="0.2s" style="width:25%;">
-                <div class="shadow rounded-3 bg-white">
-                    <div class="card-body">
-                        <div h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="card-title" style="padding-top:15px;padding-bottom:3px;">Total Data Leads</p>
-                        </div>
-                        <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="d-flex" style="padding-left:6px">
-                            <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_blue.svg') ?>" alt="">
-                                <h1 class="card-text wow fadeInUp" data-wow-delay="0.3s" id="total-leads"></h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow rounded-3 bg-white">
-                    <div class="card-body" style="margin-top:25px;height:355px;overflow-y: auto;">
-                        <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
-                           <h4 style="margin-left:45px;margin-top:20px">Tim Marketing</h4>
-                        </div>
-                        <div class="class">
-                               <table class="table">
-                                <tbody id="total-plot-tim">
-                                </tbody>
-                                </table>
-                           </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- Chart Pemenang Tender -->
-            <div class="wow fadeInUp animation col-sm-12" data-wow-delay="0.2s" style="width: 25%;">
-                <div class="shadow rounded-3 bg-white">
-                    <div class="dashboard-hero" style="height:480px;padding-left:0px">
-                        <div>
-                        <h4 class="text-center" style="padding-left:7px;padding-top:5px">Status CRM</h4>
+            <div class="col wow fadeInUp animation chart-status" data-wow-delay="0.2s" >
+                <div class="shadow rounded-3 flex-wrap">
+                    <div class="dashboard-hero" style="padding-left:0px";>
+                    <div>
+                        <h4 class="text-center" style="padding-left:0px;padding-top:5px;padding-bottom:15px">Status CRM</h4>
                             <center>
-                                <div class="chart2" style="margin-left:12px; padding:7px">
-                                    <canvas id="myDoughnutChart" width="300" height="300" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 10px 15px 0px 16px; border-width: 0px; cursor: default;" _echarts_instance_="ec_1698285832199"></canvas>
+                                <div class="" style="position: relative; height:250px; width:250px;margin:0px 0px 0px 15px">
+                                    <canvas id="myDoughnutChart"></canvas>
                                 </div>
                             </center>
                         </div>
                         <div class="px-3 ml-4 align-content-center justify-content-center align-items-center">
                             <div class="row display-flex"> 
-                                <div class="col" style="margin-top:5%;padding-left:30px">   
+                                <div class="col" style="padding-left:30px;padding-top:15px">   
                                 <ul class="custom-colored-dot-list">
                                     <li  class="color-grey">Tanpa Status<span id="statusBelumDihubungi" style="float:right">10%</span></li>
                                     <li  class="color-grey">Sedang Diproses<span id="statusDihubungi" style="float:right">10%</span></li>
@@ -492,10 +587,10 @@
                 <div class="col-md-12">
                     <div class="wow fadeInUp">
                         <div class="select-custom container-fluid">
-                            <div class="row" style="margin-top:30px">
+                            <div class="row search">
                             <h3 class="pb-2">Pemenang Tender Terbaru</h3>
                                 <!-- Search Nama -->
-                                <div class="col-md-1 form-select-custom" style="width:43%;padding:6px 5px 0px 15px;margin-right:10px ">
+                                <div class="col-md-1 form-select-custom search-name" style="padding:6px 5px 0px 15px;margin-right:10px ">
                                     <img src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" style="margin-bottom:0px;">
                                     <input id="keyword" type="text" class="form-input-custom" style="border:none;font-size:16px;padding-bottom:8px;margin-top:0px" placeholder="Cari nama tender atau pemenang">
                                 </div>
@@ -546,7 +641,7 @@
                                 <!-- Filtering -->
                                 <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width:4%;padding-left:11px;">
                                     <a class="form-select-custom d-flex" style="width:40px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="<?= base_url('assets\img\filtering.svg') ?>" width="40" style="padding:4px" alt="">
+                                        <img src="<?= base_url('assets\img\Sort.svg') ?>" width="40" style="padding:4px" alt="">
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end my-2 py-2 rounded-3">
                                         <li class="dropdown-item d-flex text-dropdown" data-sort="1">Nilai Penawaran Terendah</li>
@@ -555,7 +650,7 @@
                                         <li class="dropdown-item d-flex text-dropdown" data-sort="4">Penetapan Pemenang Terlama</li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-1" style="width:4%;padding-left:10px">
+                                <div class="col-sm-1 export">
                                     <a href="<?= base_url() ?>suplier/tender/export" type="button" class="form-select-custom d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ekspor Excel">
                                         <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
                                     </a>
