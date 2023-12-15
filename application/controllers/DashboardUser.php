@@ -677,6 +677,64 @@ class DashboardUser extends CI_Controller
         }
     }
 
+    public function updateMenangKalahByMonth()
+    {
+        $data = $this->input->post();
+        // $this->output
+        //     ->set_status_header(200)
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($data, JSON_PRETTY_PRINT))
+        //     ->_display();
+        // exit;
+        $sessionData = $this->session->user_data;
+        $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
+        $dataPesertaTender = $this->PesertaTenderModel->getDataTenderFilterByMonth($pengguna['npwp'], $data['cariKLPD'], $data['cariTahun'], $data['cariBulan']);
+
+        $dataIkut = [];
+        $dataMenangKalah = [];
+        $totalMenang = 0;
+        $totalKalah = 0;
+        $totalIkut = 0;
+        // $this->output
+        //     ->set_status_header(200)
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($dataPesertaTender, JSON_PRETTY_PRINT))
+        //     ->_display();
+        // exit;
+        foreach ($dataPesertaTender as $key => $value) {
+            if ($value['status_peserta'] == 'ikut') {
+                array_push($dataIkut, $value);
+            } else {
+                // $timeSeriesUser[((int)$value['month']) - 1]++;
+                array_push($dataMenangKalah, $value);
+                // if ($value['status_peserta'] == 'menang') {
+                //     array_push($dataMenang, $value);
+                // }
+            }
+
+            // Switch counting 
+            switch ($value['status_peserta']) {
+                case 'menang':
+                    $totalMenang++;
+                    break;
+                case 'kalah':
+                    $totalKalah++;
+                    break;
+                case 'ikut':
+                    $totalIkut++;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($dataMenangKalah, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
     public function update($id)
     {
         $this->form_validation->set_rules('npwp', 'NPWP', 'required|trim');

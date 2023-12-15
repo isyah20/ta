@@ -947,6 +947,7 @@
     function addCardByStatus(data) {
         const sumRiwayat = document.querySelector('.sum-riwayat');
         let htmlCard = ''; // Menggunakan let untuk deklarasi variabel agar hanya terbatas pada lingkup fungsi ini
+        sumRiwayat.innerHTML = htmlCard;
 
         data.forEach(tender => {
             // console.log(tender);
@@ -1004,6 +1005,30 @@
         page = 1; // Jika diperlukan, tetapi disarankan memindahkan kode ini ke dalam .done callback jika terkait dengan respons dari AJAX
     }
 
+    function updateCardWinLose(klpd, tahun, month) {
+
+        $.ajax({
+                url: "<?= base_url(); ?>user-dashboard/win-lose",
+                type: "POST",
+                data: {
+                    cariKLPD: klpd,
+                    cariTahun: tahun,
+                    cariBulan: month
+                },
+                beforeSend: (jqXHR, settings) => {
+                    // Tampilkan pesan loading jika diperlukan
+                    // $('#loading-filter').text('Loading...');
+                }
+            })
+            .done((result) => {
+                console.log(result, 'win_lose');
+                addCardByStatus(result);
+            })
+            .fail((jqXHR, textStatus, err) => {
+                console.error("AJAX request failed: " + textStatus, err);
+            });
+        page = 1; // Jika diperlukan, tetapi disarankan memindahkan kode ini ke dalam .done callback jika terkait dengan respons dari AJAX
+    }
 
 
     const barConfigHPS = {
@@ -1112,13 +1137,14 @@
             onClick: function(event, elements) {
                 if (elements.length > 0) {
                     // Mengambil data yang terkait dengan elemen yang diklik
-                    const clickedIndex = elements[0].index;
-                    const clickedLabel = this.data.labels[clickedIndex];
-                    const clickedValue = this.data.datasets[0].data[clickedIndex];
+                    const month = elements[0].index + 1;
+                    // const clickedLabel = this.data.labels[clickedIndex];
+                    // const clickedValue = this.data.datasets[0].data[clickedIndex];
 
-                    // Melakukan tindakan yang diinginkan, contohnya menampilkan informasi di console
-                    console.log('Bar di klik:', clickedLabel, 'dengan nilai:', clickedValue, clickedIndex);
+                    // // Melakukan tindakan yang diinginkan, contohnya menampilkan informasi di console
+                    // console.log('Bar di klik:', clickedLabel, 'dengan nilai:', clickedValue, clickedIndex);
 
+                    updateCardWinLose(valLPSE, valTahun, month);
                     // Panggil fungsi atau lakukan tindakan lain sesuai kebutuhan
                     // Misalnya:
                     // myCustomFunction(clickedLabel, clickedValue);
