@@ -331,8 +331,8 @@
 <section class="pt-5 pb-3">
   <div class="container wow fadeInUp" data-wow-delay="0.1s">
     <div class="mt-5">
-      <h4>Selamat Datang!</h4>
-      <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
+      <h4 style="padding-top:20px">Selamat Datang!
+      <p style="padding-top:0px">Yuk Segera Bagi Tugas Tim Marketingmu</p></h4>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pe-4">
       <button class="btn-add bg-color text-light w-100 wow fadeInUp" style="font-size:20px" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal" data-wow-delay="0.1s">Tambahkan Tim
@@ -506,7 +506,7 @@
                   `<div class="row"><div class="col-12">
                 <div class="title bg-color wow fadeInUp" data-wow-delay="0.2s" style="padding: 10px; margin-top:15px">
                 <div class="card card-name rounded-3" style="height: 40px;padding-top:2%"  onclick="toggleCardVisibility(this,'container` + index + 2 + `')">
-                  <h5 class="title-text" style="margin-left:5px;padding-top:15px;padding-bottom:10px">` + value.nama + `
+                  <h5 class="title-text" style="margin-left:5px;padding-top:17px;padding-bottom:7px">` + value.nama + `
                   </h5>
                   <span class="arrow-icon"><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
                   <span id="card-count-container` + index + 2 + `" class="badge" style="margin-top:0px;">` + value.jumlah + `</span>
