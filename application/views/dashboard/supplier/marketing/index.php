@@ -1433,7 +1433,7 @@
             case 'Tanpa Status':
                 return '#F17D3A';
             case 'Sedang Diproses':
-                return '#83D4F9';
+                return '#4F97DA';
             case 'Negosiasi':
                 return '#495894';
             case 'Selesai':

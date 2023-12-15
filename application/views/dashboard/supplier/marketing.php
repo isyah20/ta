@@ -43,6 +43,7 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
+        width: 100%;
     }
 
     .btn-custom {
@@ -81,6 +82,14 @@
         /* border: none; */
         vertical-align: middle;
         height: 60px !important;
+    }
+
+    th.custom-padding-aksi,
+    td.custom-padding-aksi {
+        /* border: none; */
+        vertical-align: middle;
+        height: 60px !important;
+        width: 10%;
     }
 
     .form-select-custom {
@@ -237,6 +246,22 @@
         margin-left: 13px;
     }
 
+    .title-mark {
+        margin-top: 50px;
+    }
+
+    .img-custom {
+        width: 200px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+        margin-left: 200px;
+        margin-right: 50px;
+    }
+
+    .link {
+        margin-top: 50px;
+    }
+
     @media (max-width: 767px) {
         .justify-content-start {
             justify-content: center !important;
@@ -253,11 +278,12 @@
 
         .custom-table-container {
             overflow-x: auto;
+            width: 45rem;
         }
 
-        .custom-padding {
-            width: auto;
-            white-space: nowrap;
+        .thead th,
+        .custom-padding-aksi {
+            width: auto !important;
         }
 
         .thead {
@@ -276,19 +302,14 @@
             white-space: nowrap;
         }
 
-        .container-lg img {
+        /* .container-lg img {
             width: 100%;
             height: auto;
-        }
+        } */
 
         .link .btn-simpan {
             font-size: 15px;
             padding: 8px 10px;
-        }
-
-        .container-lg img {
-            width: 100%;
-            height: auto;
         }
 
         h2 {
@@ -321,18 +342,35 @@
         }
 
         .link {
-            margin-top: 1rem;
+            margin-top: 5px;
+        }
+
+        .title-mark {
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .img-custom {
+            margin-left: 60px;
+        }
+
+        .custom-table-container {
+            margin-top: 20px;
+        }
+
+        .custom-img {
+            width: 20px;
         }
 
     }
 </style>
 <section class="bg-white pt-4 mt-4 w-100">
-    <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <div class="col-6">
-            <h4 class="mt-4 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Berikut merupakan daftar tim Anda!</p>
+    <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col">
+            <h4 class="wow fadeInUp title-mark">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Ini daftar tim kamu!</p>
             </h4>
             <div class="d-flex justify-content-start">
-                <div class="link d-flex flex-row align-items-center" style="margin-top:50px">
+                <div class="link d-flex">
                     <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputMarketingModal">Tambahkan Tim
                             <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
                         </a>
@@ -340,26 +378,27 @@
                 </div>
             </div>
         </div>
-        <img src="<?= base_url('assets\img\amico.svg') ?>" alt="" style="width: 200px; margin-top:40px; margin-bottom:10px; margin-right:50px">
+        <img class="img-custom" src="<?= base_url('assets\img\amico.svg') ?>" alt="">
     </div>
     <!-- tabel marketing -->
     <div class="container wow fadeInUp">
         <div class="row">
             <div class="col">
-                <table class="table custom-table-container">
-                    <thead class="thead">
-                        <tr>
-                            <th class="custom-padding" style="width:5%">No.</th>
-                            <th class="custom-padding" style="width:18%">Nama</th>
-                            <th class="custom-padding" style="width:15%">Posisi</th>
-                            <th class="custom-padding" style="width:20%">Email</th>
-                            <th class="custom-padding" style="width:17%">No. HP/WA</th>
-                            <th class="custom-padding" style="width:15%">Area Kerja</th>
-                            <th class="custom-padding" style="width:10%;">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="data-marketing">
-                        <!-- <tr>
+                <div class="table-responsive">
+                    <table class="table custom-table-container">
+                        <thead class="thead">
+                            <tr>
+                                <th class="custom-padding">No.</th>
+                                <th class="custom-padding">Nama</th>
+                                <th class="custom-padding">Posisi</th>
+                                <th class="custom-padding">Email</th>
+                                <th class="custom-padding">No. HP/WA</th>
+                                <th class="custom-padding">Area Kerja</th>
+                                <th class="custom-padding-aksi">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-marketing">
+                            <!-- <tr>
                             <td></td>
                             <td>1</td>
                             <td class="nama">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -383,8 +422,9 @@
                                 <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Hapus</a>
                             </td>
                         </tr> -->
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -404,28 +444,28 @@
 
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="inputMarketingModalLabel">Input Marketing</h3>
-                        <p class="text-center">Lengkapi data berikut untuk menambah anggota marketing Anda</p>
+                        <p class="text-center">Tambahkan untuk memasarkan produkmu</p>
                         <div class="input-popup justify-content-end">
                             <form id="form-input" class="row g-2">
                                 <div class="col-12">
                                     <label for="inputNama" class="form-label text-start">Nama</label>
-                                    <input type="text" name="nama_tim" class="form-control" id="inputNama" placeholder="contoh: Budi" required>
+                                    <input type="text" name="nama_tim" class="form-control" id="inputNama" placeholder="Masukkan Nama" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputPosisi" class="form-label text-start">Posisi</label>
-                                    <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="contoh: Staff Marketing" required>
+                                    <input type="text" name="posisi" class="form-control" id="inputPosisi" placeholder="Masukkan Posisi" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputEmail" class="form-label text-start">Email</label>
-                                    <input type="text" name="email" class="form-control" id="inputEmail" placeholder="contoh: budi@gmail.com" required>
+                                    <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Masukkan Email" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputNoHP" class="form-label text-start">No. HP/WA</label>
-                                    <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="contoh: 6289639851234" value="62" required>
+                                    <input type="text" name="no_telp" class="form-control" id="inputNoHP" placeholder="Masukkan No. HP/WA" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputKerja" class="form-label text-start">Area Kerja</label>
-                                    <textarea class="form-control" name="alamat" id="inputAlamat" placeholder="contoh: Kota Jakarta Selatan" rows="2" required></textarea>
+                                    <textarea class="form-control" name="area_kerja" id="inputAlamat" placeholder="Sleman, D.I. Yogyakarta" rows="2" required></textarea>
                                 </div>
                                 <div class="justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
@@ -525,7 +565,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAlamat" class="form-label text-start">Area Kerja</label>
-                                    <textarea class="form-control" name="alamat" id="inputAlamat1" placeholder="Sleman, D.I. Yogyakarta" rows="2" required></textarea>
+                                    <textarea class="form-control" name="area_kerja" id="inputAlamat1" placeholder="Sleman, D.I. Yogyakarta" rows="2" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
@@ -579,9 +619,9 @@
                         '<td class="custom-padding nama">' + data.data[i].nama_tim + '</td>' +
                         '<td class="custom-padding posisi">' + data.data[i].posisi + '</td>' +
                         '<td class="custom-padding"><a class="email" href="mailto:' + data.data[i].email + '">' + data.data[i].email + '</a></td>' +
-                        '<td class="custom-padding nohp"><a class="email" href="https://wa.me/' + data.data[i].no_telp + '">' + data.data[i].no_telp + '</a></td>' +
-                        '<td class="custom-padding">' + data.data[i].alamat + '</td>' +
-                        '<td class="custom-padding" style="text-align: center;">' +
+                        '<td class="custom-padding nohp">' + data.data[i].no_telp + '</td>' +
+                        '<td class="custom-padding" style="width: 450px">' + data.data[i].area_kerja + '</td>' +
+                        '<td class="custom-padding">' +
                         '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
                         '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data.data[i].id_tim + '"><img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="image" width="30px" style="margin:0px 5px;"></a>' +
                         '</td>' +
@@ -647,7 +687,7 @@
                         posisi: $("#inputPosisi1").val(),
                         email: $("#inputEmail1").val(),
                         no_telp: $("#inputNoHP1").val(),
-                        alamat: $("#inputAlamat1").val(),
+                        area_kerja: $("#inputAlamat1").val(),
                     };
 
                     // Get data from id
@@ -661,7 +701,7 @@
                             $('#inputPosisi1').val(data.data.posisi);
                             $('#inputEmail1').val(data.data.email);
                             $('#inputNoHP1').val(data.data.no_telp);
-                            $('#inputAlamat1').val(data.data.alamat);
+                            $('#inputAlamat1').val(data.data.area_kerja);
 
                             $("#form-edit").submit(function(event) {
                                 event.preventDefault();
@@ -674,7 +714,7 @@
                                     posisi: $("#inputPosisi1").val(),
                                     email: $("#inputEmail1").val(),
                                     no_telp: $("#inputNoHP1").val(),
-                                    alamat: $("#inputAlamat1").val(),
+                                    area_kerja: $("#inputAlamat1").val(),
                                     // nama_tim: $('input[name=nama_tim]').val(),
                                     // posisi: $('input[name=posisi]').val(),
                                     // email: $('input[name=email]').val(),
@@ -793,7 +833,7 @@
                             posisi: $('input[name=posisi]').val(),
                             email: emailInput,
                             no_telp: $('input[name=no_telp]').val(),
-                            alamat: $('textarea[name=alamat]').val(),
+                            area_kerja: $('textarea[name=area_kerja]').val(),
                         };
 
                         // Make an AJAX request

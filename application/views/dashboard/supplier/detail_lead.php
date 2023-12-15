@@ -123,7 +123,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-        margin-left: 25px;
+        margin-left: 16px;
         margin-bottom: 15px;
     }
     .h4 {
@@ -703,6 +703,7 @@
         font-size: 1rem;
         border: 1px solid;
         background-color: white;
+        margin-left: 17px;
     }
     .form-input-custom {
         border-radius: 20px;
@@ -813,8 +814,8 @@
 
 <section class="bg-white pt-3 my-5">
     <div class="container-lg d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.1s">
-        <div class="col-12 my-3">
-            <h2 id="namaPerusahaan" class="mb-2 wow fadeInUp" style="order: 1; font-size:26px">
+        <div class="col-12 my-4">
+            <h2 id="namaPerusahaan" class="mb-2 mt-3 wow fadeInUp" style="order: 1; font-size:26px">
                 -
             </h2>
             <div class="row icon-text-container">
@@ -1029,7 +1030,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-sm-2 form-select-custom d-flex space" style="width: 190px; margin-right:1%;">
+                                    <div class="col-sm-2 form-select-custom d-flex" style="width: 190px; margin-right:1%;">
 
                                         <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
 
