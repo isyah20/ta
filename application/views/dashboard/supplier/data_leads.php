@@ -599,8 +599,8 @@
                         <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                     </div>
                     <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
-                        <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
-                            <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:4px" alt="">
+                        <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ekspor Excel">
+                            <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:3px" alt="">
                         </a>
                     </div>
                 </div>
