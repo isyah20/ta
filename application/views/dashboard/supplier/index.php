@@ -609,7 +609,7 @@
                                 <!-- Filtering -->
                                 <div class="col-sm-1 dropdown dropdown-profile dropdown-sorting" style="width:4%;padding-left:11px;">
                                     <a class="form-select-custom d-flex" style="width:40px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="<?= base_url('assets\img\Sort.svg') ?>" width="40" style="padding:4px" alt="">
+                                        <img src="<?= base_url('assets\img\Sort.svg') ?>" width="40" style="padding:5px" alt="">
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end my-2 py-2 rounded-3">
                                         <li class="dropdown-item d-flex text-dropdown" data-sort="1">Nilai Penawaran Terendah</li>
@@ -620,7 +620,7 @@
                                 </div>
                                 <div class="col-sm-1 export">
                                     <a href="<?= base_url() ?>suplier/tender/export" type="button" class="form-select-custom d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ekspor Excel">
-                                        <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
+                                        <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:3px" alt="">
                                     </a>
                                 </div>
                             </div>
