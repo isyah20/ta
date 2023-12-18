@@ -51,8 +51,10 @@ class Peserta_model extends CI_Model
     }
 
     // Get nama peserta from table peserta by npwp in table peserta_tender. And get harga penwaran from peserta tender, where harga_penawaran not 0
-    public function getPesertaIkutTender($npwp) 
+    public function getPesertaIkutTender($npwp, $data) 
     {
+        $data['tahun'] = $tahun;
+        
         $this->db->select('peserta.nama_peserta, peserta_tender.harga_penawaran, paket.nama_tender, paket.nilai_hps_paket');
         $this->db->from('peserta_tender');
         $this->db->join('peserta', 'peserta.npwp = peserta_tender.npwp');

@@ -23,7 +23,7 @@ class DashboardUser extends CI_Controller
         $this->load->model('Pengguna_model');
         $this->load->model('Peserta_model');
         $this->load->model('PesertaTender_model');
-        $this->load->model('Api/PesertaTenderModel');
+        $this->load->model('api/PesertaTenderModel', 'PesertaTenderModel');
         $this->load->model('api/Peserta_model', 'ApiPesertaModel');
         $this->init();
     }

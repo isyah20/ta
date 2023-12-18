@@ -23,14 +23,15 @@
 
     th.custom-padding,
     td.custom-padding {
-        border: none;
+        /* border: none; */
         vertical-align: middle;
         height: 60px !important;
     }
 
     tbody {
         margin: 10px;
-        text-align: left;
+        text-align: middle;
+        vertical-align: center;
         font-size: 14.5px;
     }
 
@@ -60,6 +61,10 @@
         border-radius: 10px 10px 10px 10px;
         overflow: hidden;
         border: 1px solid var(--neutral-100, #F0E2E2);
+        top: -50%;
+        transform: translate(-0%, -0%);
+        /* position: relative;
+        z-index: 2; */
     }
 
     .shadow-sm {
@@ -95,9 +100,7 @@
 
     .card-input {
         font-size: 10px;
-        margin-top: 2rem;
         display: flex;
-        width: 500px;
     }
 
     .tbody-tr {
@@ -110,6 +113,7 @@
         padding: 5px 10px;
         gap: 10px;
         font-size: 13px;
+        align-content: center;
     }
 
     .btn.btn-outline-danger {
@@ -138,7 +142,7 @@
         color: #CCCCCC;
         border-radius: 20px;
         font-size: 1rem;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         border: 1px solid;
         background-color: white;
     }
@@ -150,8 +154,11 @@
     .form-input-custom {
         border-radius: 20px;
         font-size: 1rem;
-        width: 380px;
-        padding-left: 10px;
+        width: 450px;
+    }
+
+    .custom-img {
+        margin-left: 13px;
     }
 
     .allcontact {
@@ -557,72 +564,83 @@
         justify-content: center;
     }
 
+    .card-3 {
+        top: -50%;
+        transform: translate(2%, -50%);
+    }
+
+    .card-2 {
+        top: -50%;
+        transform: translate(-0%, -5%);
+    }
+
     .modal-lg {
         max-width: 735px;
     }
 </style>
 
-<section class="bg-white pt-5 mt-5">
+<!-- <section class="bg-white pt-5 mt-5">
     <div class="container-lg d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
         <h4 class="mb-0 wow fadeInUp">Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131;"></span>!<p class="pt-2">Yuk Lengkapi Data Calon Customermu</p>
         </h4>
     </div>
-</section>
+</section> -->
 
-<section class="bg-white ">
-    <div class="overflow">
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    <div class="card-input wow fadeInUp">
-                        <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:20px">
-                            <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
-                            <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
-                        </div>
-                        <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
-                            <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
-                                <img src="<?= base_url('assets\img\export.svg') ?>" width="40" style="padding:4px" alt="">
-                            </a>
+<section class="bg-white pt-5 mt-5">
+    <!-- <div class="overflow"> -->
+    <div class="container">
+        <h4 class="mb-0 wow fadeInUp">Hai <span class="fw-semibold nama-pengguna"></span>!<p class="pt-2">Segera Lengkapi <span class="fw-semibold" style="color: #df3131;">Data Leads</span> Anda!</p>
+        </h4>
+        <div class="row">
+            <div class="col-6 ">
+                <div class="card-input wow fadeInUp">
+                    <div class="form-select-custom custom-select" style="padding:5px 5px 5px 0px; margin-right:8px;">
+                        <img class="custom-img" src="<?= base_url('assets\img\icon_search.svg') ?>" width="20" alt="" style="">
+                        <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
+                    </div>
+                    <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
+                        <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ekspor Excel">
+                            <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:3px" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 justify-content d-flex card-3">
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body">
+                            <div>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">0</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 justify-content d-flex">
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px;">
-                        <div class="shadow rounded-3 bg-white">
-                            <div class="card-body">
-                                <div>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Total Data Leads</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta_(1).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp total-leads" data-wow-delay="0.3s">0</h1>
-                                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body">
+                            <div>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
+                            </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp total" data-wow-delay="0.3s">0</h1>
                             </div>
                         </div>
                     </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                        <div class="shadow rounded-3 bg-white">
-                            <div class="card-body">
-                                <div>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Sudah Dilengkapi</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img class="custom-img" src="<?= base_url('assets\img\icon_card_people_peserta.svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp total" data-wow-delay="0.3s">0</h1>
-                                </div>
+                </div>
+                <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
+                    <div class="shadow rounded-3 bg-white">
+                        <div class="card-body card-data">
+                            <div>
+                                <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
                             </div>
-                        </div>
-                    </div>
-                    <div class="container-lg wow fadeInUp animation" data-wow-delay="0.2s" style="width: 200px">
-                        <div class="shadow rounded-3 bg-white">
-                            <div class="card-body card-data">
-                                <div>
-                                    <h1 class="card-title wow fadeInUp" data-wow-delay="0.5s">Data Belum Dilengkapi</h1>
-                                </div>
-                                <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
-                                    <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
-                                    <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">0</h1>
-                                </div>
+                            <div class="d-flex wow fadeInUp" data-wow-delay="0.3s">
+                                <img src="<?= base_url('assets\img\icon_card_people_peserta_(2).svg') ?>" alt="" style="height: 37px; margin-right: 10px;">
+                                <h1 class="card-text wow fadeInUp belum-lengkap" data-wow-delay="0.3s">0</h1>
                             </div>
                         </div>
                     </div>
@@ -630,7 +648,8 @@
             </div>
         </div>
     </div>
-    <div class="container wow fadeInUp" style="margin-top:10px">
+    <!-- </div> -->
+    <div class="container wow fadeInUp card-2">
         <div class="row">
             <div class="col">
                 <div class="table-responsive">
@@ -689,9 +708,6 @@
                 <div class="modal-content">
                     <div class="modal-header border-0">
                         <img class="image-modal" src="<?= base_url("assets/img/red-whatsapp.svg") ?>" alt="Image" style="width: 75px; height: 75px; padding: 0;">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
-                            <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
-                        </button>
                     </div>
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="infoKontakModalLabel">Contact Person</h3>
@@ -853,15 +869,15 @@
                 var hasMultipleContacts = value.jumlah_kontak > 1 ? 'visible' : 'hidden';
                 leads +=
                     `<tr>
-                    <td style="text-align:center">` + rowNumber + `</td>
-                    <td class="perusahaan">` + (value.nama_perusahaan || '') + `</td>
-                    <td class="npwp">` + (value.npwp || '') + `</td>
-                    <td>` + (value.nama || '') + `</td>
-                    <td><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
-                    <td>` + (value.no_telp || '') + `</td>
-                    <td><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
-                    <td>` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
-                    <td>
+                    <td class="custom-padding" style="text-align:center">` + rowNumber + `</td>
+                    <td class="custom-padding perusahaan">` + (value.nama_perusahaan || '') + `</td>
+                    <td class="custom-padding npwp">` + (value.npwp || '') + `</td>
+                    <td class="custom-padding">` + (value.nama || '') + `</td>
+                    <td class="custom-padding"><a class="email" href="mailto:` + value.email + `">` + (value.email || '') + `</a></td>
+                    <td class="custom-padding">` + (value.no_telp || '') + `</td>
+                    <td class="custom-padding"><span><button class="allcontact contact" style="visibility:` + hasMultipleContacts + `" data-toggle="modal" data-target="#infoKontakModal" data-id="` + value.id + `"><img style="max-width:none" src="<?= base_url('assets/img/icon-all-contact.svg') ?>" alt="" title="Kontak lainnya"></img></button></span></td>
+                    <td class="custom-padding">` + (value.kabupaten || '') + `, ` + (value.provinsi || '') + `</td>
+                    <td class="custom-padding">
                         <a href="${base_url}suplier/leads/${value.id}" class="btn btn-success">Detail</a>
                     </td>
                 </tr>`;

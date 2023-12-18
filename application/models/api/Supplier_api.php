@@ -12,6 +12,7 @@ class Supplier_api extends CI_Model
     {
         parent::__construct();
         $this->load->helper('tanggal');
+        // $this->load->model('Tender_model');
         $this->client = new Client([
             // Base URI is used with relative requests
             'base_uri' => base_url(),
@@ -21,6 +22,8 @@ class Supplier_api extends CI_Model
             ],
         ]);
     }
+
+    public $interval_leads = 7;
 
     public function getTimMarketing($id_supplier)
     {
@@ -214,6 +217,19 @@ class Supplier_api extends CI_Model
         return $query->result();
     }
 
+    public function getPemenangByNPWPs($npwp, $keyword)
+    {
+        $this->db->select('pemenang.*, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(tgl_pemenang) AS tahun');
+        $this->db->from('pemenang');
+        $this->db->join('jenis_tender', 'pemenang.jenis_tender = jenis_tender.id_jenis', 'LEFT');
+        $this->db->where('npwp', $npwp);
+        if (!empty($keyword)) {
+            $this->db->like('nama_tender', $keyword);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function getTahun($npwp)
     {
         $this->db->select('pemenang.nama_pemenang, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(tgl_pemenang) AS tahun');
@@ -285,6 +301,19 @@ class Supplier_api extends CI_Model
 
     public function getDataLeads($id_pengguna, $page_size, $page_number)
     {
+        // $this->db->select(['data_leads.id_lead AS id', 'id_pengguna', 'nama_perusahaan', 'data_leads.npwp', 'profil', 'pemenang.*', 'kontak_lead.*', 'COUNT(kontak_lead.id_kontak) AS jumlah_kontak']);
+        // $this->db->from('data_leads');
+        // $this->db->join('pemenang', 'data_leads.id_pemenang = pemenang.id_pemenang', 'left');
+        // $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        // $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        // if (!empty($keyword)) {
+        //     $this->db->like('nama_perusahaan', $keyword);
+        // }
+        // $this->db->group_by('data_leads.id_lead');
+        // $this->db->order_by('id', 'DESC');
+        // $this->db->limit($page_size, $page_number);
+        // $query = $this->db->get();
+        // return $query->result_array();
 
         $sql = "SELECT
         data_leads.id_lead AS id,
@@ -310,6 +339,23 @@ class Supplier_api extends CI_Model
         LIMIT {$page_number},{$page_size}";
 
         return $this->db->query($sql);
+    }
+
+    public function getDataLeadsFiltered($id_pengguna, $page_size, $page_number, $keyword)
+    {
+        $this->db->select(['data_leads.id_lead AS id', 'id_pengguna', 'nama_perusahaan', 'data_leads.npwp', 'profil', 'pemenang.*', 'kontak_lead.*', 'COUNT(kontak_lead.id_kontak) AS jumlah_kontak']);
+        $this->db->from('data_leads');
+        $this->db->join('pemenang', 'data_leads.id_pemenang = pemenang.id_pemenang', 'left');
+        $this->db->join('kontak_lead', 'data_leads.id_lead = kontak_lead.id_lead', 'left');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        if (!empty($keyword)) {
+            $this->db->like('nama_perusahaan', $keyword);
+        }
+        $this->db->group_by('data_leads.id_lead');
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($page_size, $page_number);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function getCRMLeads($id_pengguna)
@@ -444,4 +490,30 @@ AND (data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim) OR data_leads.id_l
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function getLeadsTerbaru($id_pengguna)
+    {
+        // get count data leads where date is the last 7 days
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $this->db->where('DATEDIFF(CURRENT_DATE, data_leads.tgl) <=', $this->interval_leads);
+        
+        $query = $this->db->get();
+        // return $query->result_array();
+        return $query->row_array();
+    }
+
+    public function getLeadsNotPlotted($id_pengguna) {
+        $this->db->select(['COUNT(data_leads.id_lead) AS jumlah']);
+        $this->db->from('data_leads');
+        $this->db->where('data_leads.id_pengguna', $id_pengguna);
+        $this->db->where('data_leads.id_lead NOT IN (SELECT id_lead FROM plot_tim)');
+        // or id_lead is in table plot_tim but id_tim is 0
+        $this->db->or_where('data_leads.id_lead IN (SELECT id_lead FROM plot_tim WHERE id_tim = 0)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
 }

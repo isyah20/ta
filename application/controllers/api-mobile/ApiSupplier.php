@@ -752,10 +752,11 @@ class ApiSupplier extends RestController
 
     public function getLeads_get()
     {
+        $keyword = $this->input->get('keyword');
         $id_pengguna = $this->input->get('id_pengguna');
         $page_size = $_GET['pageSize'];
         $page_number = ($_GET['pageNumber'] - 1) * $page_size;
-        $response = $this->Supplier_api->getDataLeads($id_pengguna, $page_size, $page_number)->result();
+        $response = $this->Supplier_api->getDataLeadsFiltered($id_pengguna, $page_size, $page_number, $keyword);
 
         // $this->output
         //     ->set_status_header(200)
@@ -967,7 +968,8 @@ class ApiSupplier extends RestController
     public function getRiwayatPemenang_get()
     {
         $npwp = $this->input->get('npwp');
-        $data = $this->Supplier_api->getPemenangByNPWP($npwp);
+        $keyword = $this->input->get('keyword');
+        $data = $this->Supplier_api->getPemenangByNPWPs($npwp, $keyword);
 
         if ($data) {
             $this->response([

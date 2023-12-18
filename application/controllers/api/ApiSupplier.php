@@ -26,7 +26,8 @@ class ApiSupplier extends RestController
         $this->load->model('api/Reset_model');
         $this->load->model('api/Supplier_api');
         $this->load->model('Supplier_model');
-        // $this->load->model('api/Pengguna_model');
+        // $this->load->model('Tender_model');
+        $this->load->model('Tender_model');
         $this->load->library('form_validation', 'google');
         $this->load->helper('form');
         $this->load->library('email');
@@ -799,6 +800,86 @@ class ApiSupplier extends RestController
             $this->response([
                 'status' => false,
                 'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getJumlahPemenangPerMonth_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $tahun = $this->input->get('tahun');
+        // $preferensi = $this->Tender_model->getPreferensiPengguna($id_pengguna);
+        $data = $this->Supplier_model->getJumlahPerMonth($id_pengguna, $tahun);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                // 'message' => 'Data ditemukan'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getPemenang_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        // $tahun = $this->input->get('tahun');
+        $data = $this->Supplier_model->getJumlahPemenangTender($id_pengguna)->result_array();
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                // 'message' => 'Data ditemukan'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getLeadsTerbaru_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getLeadsTerbaru($id_pengguna);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                // 'message' => 'Data ditemukan'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getLeadsNotPlotted_get()
+    {
+        $id_pengguna = $this->input->get('id_pengguna');
+        $data = $this->Supplier_api->getLeadsNotPlotted($id_pengguna);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data,
+                // 'message' => 'Data ditemukan'
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'data' => $data,
+                // 'message' => 'Data tidak ditemukan'
             ], RestController::HTTP_NOT_FOUND);
         }
     }
