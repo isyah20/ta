@@ -409,9 +409,8 @@ class Supplier_model extends CI_Model
         }
 
     // Get jumlah pemenang tender based on user preferensi and keyword and id_pengguna
-    public function getJumKatalogPemenangTender($data) 
+    public function getJumKatalogPemenangTender($data)
     {
-        
     }
 
 
@@ -552,7 +551,8 @@ class Supplier_model extends CI_Model
         return $query->result_array();
     }
 
-    public function getNamaPerusahaanById($id){
+    public function getNamaPerusahaanById($id)
+    {
         $this->db->select('id_lead, nama_perusahaan');
         $this->db->from('data_leads');
         $this->db->where('id_lead', $id);
@@ -595,6 +595,14 @@ class Supplier_model extends CI_Model
             return $this->db->update('plot_tim', ['id_tim' => $id_tim]);
         }
         return $this->db->insert('plot_tim', ['id_tim' => $id_tim, 'id_lead' => $id_lead]);
+    }
+
+    public function resetPlotTim($id_tim)
+    {
+        $this->db->select('*');
+        $this->db->from('plot_tim');
+        $this->db->where('id_tim', $id_tim);
+        return $this->db->update('plot_tim', ['id_tim' => '0']);
     }
 
     public function insertPlotTim($id_lead, $id_tim)
@@ -651,11 +659,14 @@ class Supplier_model extends CI_Model
 
         if ($isSet > 0) {
             $this->db->where('id_lead', $id_lead);
-            $sql = $this->db->update('plot_tim', 
-            ['catatan' => $catatan,
-            'status' => $status,
-            'jadwal' => $jadwal
-            ]);
+            $sql = $this->db->update(
+                'plot_tim',
+                [
+                    'catatan' => $catatan,
+                    'status' => $status,
+                    'jadwal' => $jadwal
+                ]
+            );
 
             if ($sql) {
                 return $this->db->insert('history_marketing', ['id_lead' => $id_lead, 'status' => $status, 'catatan' => $catatan, 'jadwal' => $jadwal]);

@@ -77,6 +77,8 @@ class Supplier_api extends CI_Model
         // return $this->db->affected_rows();
     }
 
+
+
     public function deleteTimMarketing($id)
     {
         $this->db->select('tim_marketing.*');
@@ -272,7 +274,7 @@ class Supplier_api extends CI_Model
         $penawaran_awal = $data['penawaran_awal'];
         $penawaran_akhir = $data['penawaran_akhir'];
         $tahun = $data['tahun'];
-        
+
         $this->db->select('pemenang.*, jenis_tender.jenis_tender AS jenis_pengadaan, YEAR(pemenang.tgl_pemenang) AS tahun');
         $this->db->from('pemenang');
         $this->db->join('jenis_tender', 'pemenang.jenis_tender = jenis_tender.id_jenis', 'LEFT');
