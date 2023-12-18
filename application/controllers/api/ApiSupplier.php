@@ -803,7 +803,8 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getJumlahPemenangPerMonth_get() {
+    public function getJumlahPemenangPerMonth_get()
+    {
         $id_pengguna = $this->input->get('id_pengguna');
         $tahun = $this->input->get('tahun');
         // $preferensi = $this->Tender_model->getPreferensiPengguna($id_pengguna);
@@ -823,7 +824,8 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getPemenang_get() {
+    public function getPemenang_get()
+    {
         $id_pengguna = $this->input->get('id_pengguna');
         // $tahun = $this->input->get('tahun');
         $data = $this->Supplier_model->getJumlahPemenangTender($id_pengguna)->result_array();
@@ -842,7 +844,8 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getLeadsTerbaru_get() {
+    public function getLeadsTerbaru_get()
+    {
         $id_pengguna = $this->input->get('id_pengguna');
         $data = $this->Supplier_api->getLeadsTerbaru($id_pengguna);
 
@@ -860,7 +863,8 @@ class ApiSupplier extends RestController
         }
     }
 
-    public function getLeadsNotPlotted_get() {
+    public function getLeadsNotPlotted_get()
+    {
         $id_pengguna = $this->input->get('id_pengguna');
         $data = $this->Supplier_api->getLeadsNotPlotted($id_pengguna);
 
