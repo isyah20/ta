@@ -57,15 +57,15 @@ class Competitor extends CI_Controller
         }
 
         //get peserta
-        $peserta = $this->PesertaTender_model->pesertaCompetitor($npwp);
+        // $peserta = $this->PesertaTender_model->pesertaCompetitor($npwp);
 
-        if ($peserta['status'] != false) {
-            $peserta = $peserta['data'];
-            $npwp = $peserta['0']['npwp'];
-        } else {
-            $peserta = [];
-            $npwp = '0';
-        }
+        // if ($peserta['status'] != false) {
+        //     $peserta = $peserta['data'];
+        //     $npwp = $peserta['0']['npwp'];
+        // } else {
+        //     $peserta = [];
+        //     $npwp = '0';
+        // }
 
         $tahun = (int) date('Y');
 
@@ -232,7 +232,7 @@ class Competitor extends CI_Controller
             'title' => 'Know Your Competitor',
             'lpse' => json_decode($lpse->getBody()->getContents(), true)['data'],
             'npwp' => $npwp,
-            'peserta' => $peserta,
+            // 'peserta' => $peserta,
             'pengguna' => $pengguna,
             'timeSeries' => '{}', // json_encode($timeSeries),
             'range' => '{"range1": 0, "range2": 0, "range3": 0, "range4": 0, "range5": 0}', // json_encode($range),
@@ -277,12 +277,12 @@ class Competitor extends CI_Controller
                 $timeSeries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             }
             // var_dump($timeSeries);
-            ?>
-			<p class="d-none" id="chart1"><?php echo json_encode($timeSeries) ?></p>
-			<?php
+?>
+            <p class="d-none" id="chart1"><?php echo json_encode($timeSeries) ?></p>
+            <?php
 
-                        // get peserta tender (akumulasi ikut tender)
-                        $response = $this->PesertaTender_model->getFilterTotal($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
+            // get peserta tender (akumulasi ikut tender)
+            $response = $this->PesertaTender_model->getFilterTotal($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
             $total = json_decode($response->getBody()->getContents(), true);
 
             if ($total['status'] !== false) {
@@ -305,8 +305,8 @@ class Competitor extends CI_Controller
                 $akumulasi = [0, 0, 0, 0];
             }
             ?>
-			<p class="d-none" id="chart3"><?php echo json_encode($akumulasi) ?></p>
-			<?php
+            <p class="d-none" id="chart3"><?php echo json_encode($akumulasi) ?></p>
+            <?php
 
             //get tender by hps (hps competitor)
             $hps = $this->PesertaTender_model->getFilterHps($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
@@ -367,8 +367,8 @@ class Competitor extends CI_Controller
                 $range['range5'] = 0;
             }
             ?>
-			<p class="d-none" id="chart2"><?php echo json_encode($range) ?></p>
-			<?php
+            <p class="d-none" id="chart2"><?php echo json_encode($range) ?></p>
+            <?php
 
             //get peserta tender (penurunan hps)
             $ArrPenurunan = $this->PesertaTender_model->getFilterPenurunan($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
@@ -401,8 +401,8 @@ class Competitor extends CI_Controller
                 $penurunan['2'] = 0;
             }
             ?>
-			<p class="d-none" id="gap"><?php echo json_encode($penurunan) ?></p>
-			<?php
+            <p class="d-none" id="gap"><?php echo json_encode($penurunan) ?></p>
+            <?php
 
             // var_dump($data['cariKLPD']);
             //get peserta tender (by K/L/PD competitor)
@@ -429,15 +429,15 @@ class Competitor extends CI_Controller
             }
 
             ?>
-			<p class="d-none" id="chart5"><?php echo json_encode($klpd) ?></p>
-			<?php
+            <p class="d-none" id="chart5"><?php echo json_encode($klpd) ?></p>
+            <?php
 
             $latlong = $this->Lpse_model->getlatlong($data['cariKLPD']);
 
             ?>
-			<!-- <p class="d-none" id="chart5"><?php //echo json_encode($latlong);
+            <!-- <p class="d-none" id="chart5"><?php //echo json_encode($latlong);
                                                 // var_dump($response);
-            ?></p> -->
+                                                ?></p> -->
 <?php
 
             // var_dump($klpd);
