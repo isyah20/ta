@@ -39,217 +39,228 @@ class Competitor extends CI_Controller
         ]);
     }
 
-    public function index()
-    {
-        //get LPSE
-        $lpse = $this->client->request('GET', 'lpse', $this->client->getConfig('headers'));
+    // public function index()
+    // {
+    //     //get LPSE
+    //     $lpse = $this->client->request('GET', 'lpse', $this->client->getConfig('headers'));
 
-        //get npwp
-        try {
-            $penggunas = $this->client->request('GET', 'pengguna/' . $this->session->user_data['id_pengguna'], $this->client->getConfig('headers'));
-            $pengguna = json_decode($penggunas->getBody()->getContents(), true)['data'];
-            if ($pengguna['npwp'] != null) {
-                $npwp = $pengguna['npwp'];
-            } else {
-                $npwp = '0';
-            }
-        } catch (ClientException $e) {
-        }
+    //     //get npwp
+    //     try {
+    //         $penggunas = $this->client->request('GET', 'pengguna/' . $this->session->user_data['id_pengguna'], $this->client->getConfig('headers'));
+    //         $pengguna = json_decode($penggunas->getBody()->getContents(), true)['data'];
+    //         if ($pengguna['npwp'] != null) {
+    //             $npwp = $pengguna['npwp'];
+    //         } else {
+    //             $npwp = '0';
+    //         }
+    //     } catch (ClientException $e) {
+    //     }
 
-        //get peserta
-        $peserta = $this->PesertaTender_model->pesertaCompetitor($npwp);
+    //     //get peserta
+    //     $peserta = $this->PesertaTender_model->pesertaCompetitor($npwp);
 
-        if ($peserta['status'] != false) {
-            $peserta = $peserta['data'];
-            $npwp = $peserta['0']['npwp'];
-        } else {
-            $peserta = [];
-            $npwp = '0';
-        }
+    //     if ($peserta['status'] != false) {
+    //         $peserta = $peserta['data'];
+    //         $npwp = $peserta['0']['npwp'];
+    //     } else {
+    //         $peserta = [];
+    //         $npwp = '0';
+    //     }
 
-        $tahun = (int) date('Y');
+    //     $tahun = (int) date('Y');
 
-        // $response = $this->PesertaTender_model->getFilterTender($npwp, "", $tahun);
+    //     // $response = $this->PesertaTender_model->getFilterTender($npwp, "", $tahun);
 
-        // if ($response['status'] !=  false) {
-        // 	$monthly = $response['data'];
-        // 	$timeSeries = array();
+    //     // if ($response['status'] !=  false) {
+    //     // 	$monthly = $response['data'];
+    //     // 	$timeSeries = array();
 
-        // 	for ($i = 0; $i < 12; $i++) {
-        // 		$timeSeries[$i] = 0;
-        // 		foreach ($monthly as $bulan) {
-        // 			if ($bulan['month'] == $i + 1) {
-        // 				$timeSeries[$i]++;
-        // 			}
-        // 		}
-        // 	}
-        // } else {
-        // 	$timeSeries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        // }
+    //     // 	for ($i = 0; $i < 12; $i++) {
+    //     // 		$timeSeries[$i] = 0;
+    //     // 		foreach ($monthly as $bulan) {
+    //     // 			if ($bulan['month'] == $i + 1) {
+    //     // 				$timeSeries[$i]++;
+    //     // 			}
+    //     // 		}
+    //     // 	}
+    //     // } else {
+    //     // 	$timeSeries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    //     // }
 
-        // //get tender by hps (hps competitor)
-        // $hps = $this->PesertaTender_model->getFilterHps($npwp, "", $tahun);
+    //     // //get tender by hps (hps competitor)
+    //     // $hps = $this->PesertaTender_model->getFilterHps($npwp, "", $tahun);
 
-        // if ($hps['status'] !== false) {
-        // 	$hps = $hps['data'];
-        // 	$range  = array();
-        // 	$range1 = array();
-        // 	$range2 = array();
-        // 	$range3 = array();
-        // 	$range4 = array();
-        // 	$range5 = array();
+    //     // if ($hps['status'] !== false) {
+    //     // 	$hps = $hps['data'];
+    //     // 	$range  = array();
+    //     // 	$range1 = array();
+    //     // 	$range2 = array();
+    //     // 	$range3 = array();
+    //     // 	$range4 = array();
+    //     // 	$range5 = array();
 
-        // 	for ($i = 0; $i < 12; $i++) {
-        // 		$hps1 = 0;
-        // 		$hps2 = 0;
-        // 		$hps3 = 0;
-        // 		$hps4 = 0;
-        // 		$hps5 = 0;
-        // 		foreach ($hps as $range) {
-        // 			if ($range['month'] == $i + 1) {
-        // 				if ($range['nilai_hps'] < 500000000) {
-        // 					$hps1++;
-        // 				} else if ($range['nilai_hps'] >= 500000000 && $range['nilai_hps'] < 1000000000) {
-        // 					$hps2++;
-        // 				} else if ($range['nilai_hps'] >= 1000000000 && $range['nilai_hps'] < 10000000000) {
-        // 					$hps3++;
-        // 				} else if ($range['nilai_hps'] >= 10000000000 && $range['nilai_hps'] < 100000000000) {
-        // 					$hps4++;
-        // 				} else if ($range['nilai_hps'] >= 100000000000) {
-        // 					$hps5++;
-        // 				}
-        // 			}
-        // 		}
-        // 		$range1[] = $hps1;
-        // 		$range2[] = $hps2;
-        // 		$range3[] = $hps3;
-        // 		$range4[] = $hps4;
-        // 		$range5[] = $hps5;
-        // 	}
+    //     // 	for ($i = 0; $i < 12; $i++) {
+    //     // 		$hps1 = 0;
+    //     // 		$hps2 = 0;
+    //     // 		$hps3 = 0;
+    //     // 		$hps4 = 0;
+    //     // 		$hps5 = 0;
+    //     // 		foreach ($hps as $range) {
+    //     // 			if ($range['month'] == $i + 1) {
+    //     // 				if ($range['nilai_hps'] < 500000000) {
+    //     // 					$hps1++;
+    //     // 				} else if ($range['nilai_hps'] >= 500000000 && $range['nilai_hps'] < 1000000000) {
+    //     // 					$hps2++;
+    //     // 				} else if ($range['nilai_hps'] >= 1000000000 && $range['nilai_hps'] < 10000000000) {
+    //     // 					$hps3++;
+    //     // 				} else if ($range['nilai_hps'] >= 10000000000 && $range['nilai_hps'] < 100000000000) {
+    //     // 					$hps4++;
+    //     // 				} else if ($range['nilai_hps'] >= 100000000000) {
+    //     // 					$hps5++;
+    //     // 				}
+    //     // 			}
+    //     // 		}
+    //     // 		$range1[] = $hps1;
+    //     // 		$range2[] = $hps2;
+    //     // 		$range3[] = $hps3;
+    //     // 		$range4[] = $hps4;
+    //     // 		$range5[] = $hps5;
+    //     // 	}
 
-        // 	$range[0] = $range1;
-        // 	$range[1] = $range2;
-        // 	$range[2] = $range3;
-        // 	$range[3] = $range4;
-        // 	$range[4] = $range5;
+    //     // 	$range[0] = $range1;
+    //     // 	$range[1] = $range2;
+    //     // 	$range[2] = $range3;
+    //     // 	$range[3] = $range4;
+    //     // 	$range[4] = $range5;
 
-        // 	$range['range1'] = array_sum($range1);
-        // 	$range['range2'] = array_sum($range2);
-        // 	$range['range3'] = array_sum($range3);
-        // 	$range['range4'] = array_sum($range4);
-        // 	$range['range5'] = array_sum($range5);
-        // } else {
-        // 	$range['range1'] = 0;
-        // 	$range['range2'] = 0;
-        // 	$range['range3'] = 0;
-        // 	$range['range4'] = 0;
-        // 	$range['range5'] = 0;
-        // }
+    //     // 	$range['range1'] = array_sum($range1);
+    //     // 	$range['range2'] = array_sum($range2);
+    //     // 	$range['range3'] = array_sum($range3);
+    //     // 	$range['range4'] = array_sum($range4);
+    //     // 	$range['range5'] = array_sum($range5);
+    //     // } else {
+    //     // 	$range['range1'] = 0;
+    //     // 	$range['range2'] = 0;
+    //     // 	$range['range3'] = 0;
+    //     // 	$range['range4'] = 0;
+    //     // 	$range['range5'] = 0;
+    //     // }
 
-        // // get peserta tender (akumulasi ikut tender)
-        // $response = $this->PesertaTender_model->getFilterTotal($npwp, "", $tahun);
-        // $total = json_decode($response->getBody()->getContents(), true);
+    //     // // get peserta tender (akumulasi ikut tender)
+    //     // $response = $this->PesertaTender_model->getFilterTotal($npwp, "", $tahun);
+    //     // $total = json_decode($response->getBody()->getContents(), true);
 
-        // if ($total['status'] != false) {
-        // 	$total = $total['data'];
-        // 	$akumulasi = array();
+    //     // if ($total['status'] != false) {
+    //     // 	$total = $total['data'];
+    //     // 	$akumulasi = array();
 
-        // 	foreach ($total as $data) {
-        // 		$akumulasi[0] = (int)$data['menang_klpd'];
-        // 		$akumulasi[1] = (int)$data['ikut'];
-        // 	}
+    //     // 	foreach ($total as $data) {
+    //     // 		$akumulasi[0] = (int)$data['menang_klpd'];
+    //     // 		$akumulasi[1] = (int)$data['ikut'];
+    //     // 	}
 
-        // 	if (($total['0']['menang'] + $total['0']['kalah']) != 0) {
-        // 		$akumulasi[2] = round($total['0']['menang'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
-        // 		$akumulasi[3] = round($total['0']['kalah'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
-        // 	} else {
-        // 		$akumulasi[2] = 0;
-        // 		$akumulasi[3] = 0;
-        // 	}
-        // } else {
-        // 	$akumulasi = [0, 0, 0, 0];
-        // }
+    //     // 	if (($total['0']['menang'] + $total['0']['kalah']) != 0) {
+    //     // 		$akumulasi[2] = round($total['0']['menang'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
+    //     // 		$akumulasi[3] = round($total['0']['kalah'] / ($total['0']['menang'] + $total['0']['kalah']) * 100);
+    //     // 	} else {
+    //     // 		$akumulasi[2] = 0;
+    //     // 		$akumulasi[3] = 0;
+    //     // 	}
+    //     // } else {
+    //     // 	$akumulasi = [0, 0, 0, 0];
+    //     // }
 
-        //get peserta tender (penurunan hps)
-        // $ArrPenurunan = $this->PesertaTender_model->getFilterPenurunan($npwp, "", $tahun);
+    //     //get peserta tender (penurunan hps)
+    //     // $ArrPenurunan = $this->PesertaTender_model->getFilterPenurunan($npwp, "", $tahun);
 
-        // if ($ArrPenurunan['status'] !== false) {
-        // 	$ArrPenurunan = $ArrPenurunan['data'];
+    //     // if ($ArrPenurunan['status'] !== false) {
+    //     // 	$ArrPenurunan = $ArrPenurunan['data'];
 
-        // 	$sum  = 0;
-        // 	$var  = 0;
-        // 	$temp = array();
-        // 	foreach ($ArrPenurunan as $gap) {
-        // 		$sum    = $sum + $gap['penurunan'];
-        // 		$temp[] = $gap;
-        // 		$var++;
-        // 	}
+    //     // 	$sum  = 0;
+    //     // 	$var  = 0;
+    //     // 	$temp = array();
+    //     // 	foreach ($ArrPenurunan as $gap) {
+    //     // 		$sum    = $sum + $gap['penurunan'];
+    //     // 		$temp[] = $gap;
+    //     // 		$var++;
+    //     // 	}
 
-        // 	if ($var != 0) {
-        // 		$mean = $sum / $var;
-        // 	} else {
-        // 		$mean = 0;
-        // 	}
+    //     // 	if ($var != 0) {
+    //     // 		$mean = $sum / $var;
+    //     // 	} else {
+    //     // 		$mean = 0;
+    //     // 	}
 
-        // 	$penurunan[] = array();
-        // 	$penurunan['0'] = $temp;
-        // 	$penurunan['1'] = round($mean);
-        // 	$penurunan['2'] = round($sum);
-        // } else {
-        // 	$penurunan[] = array();
-        // 	$penurunan['0'] = [];
-        // 	$penurunan['1'] = 0;
-        // 	$penurunan['2'] = 0;
-        // }
+    //     // 	$penurunan[] = array();
+    //     // 	$penurunan['0'] = $temp;
+    //     // 	$penurunan['1'] = round($mean);
+    //     // 	$penurunan['2'] = round($sum);
+    //     // } else {
+    //     // 	$penurunan[] = array();
+    //     // 	$penurunan['0'] = [];
+    //     // 	$penurunan['1'] = 0;
+    //     // 	$penurunan['2'] = 0;
+    //     // }
 
-        // //get peserta tender (by K/L/PD competitor)
-        // $response = $this->client->request('GET', 'pesertatenderklpd/' . '0', $this->client->getConfig('headers'));
-        // $byKlpd = json_decode($response->getBody()->getContents(), true);
-        // // var_dump($byKlpd);
-        // // die;
-        // if ($byKlpd['status'] !== false) {
-        // 	$byKlpd = $byKlpd['data'];
-        // 	$klpd = array();
-        // 	$j = 0;
-        // 	$count = count($byKlpd);
+    //     // //get peserta tender (by K/L/PD competitor)
+    //     // $response = $this->client->request('GET', 'pesertatenderklpd/' . '0', $this->client->getConfig('headers'));
+    //     // $byKlpd = json_decode($response->getBody()->getContents(), true);
+    //     // // var_dump($byKlpd);
+    //     // // die;
+    //     // if ($byKlpd['status'] !== false) {
+    //     // 	$byKlpd = $byKlpd['data'];
+    //     // 	$klpd = array();
+    //     // 	$j = 0;
+    //     // 	$count = count($byKlpd);
 
-        // 	for ($i = 0; $i < 12; $i++) {
-        // 		if ($j < $count) {
-        // 			if ($byKlpd[$j]['month'] == ($i + 1)) {
-        // 				$klpd[] = (int)$byKlpd[$j]['count'];
-        // 				$j++;
-        // 			} else {
-        // 				$klpd[] = 0;
-        // 			}
-        // 		}
-        // 	}
-        // } else {
-        // 	$byKlpd = [];
-        // 	$klpd = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        // }
+    //     // 	for ($i = 0; $i < 12; $i++) {
+    //     // 		if ($j < $count) {
+    //     // 			if ($byKlpd[$j]['month'] == ($i + 1)) {
+    //     // 				$klpd[] = (int)$byKlpd[$j]['count'];
+    //     // 				$j++;
+    //     // 			} else {
+    //     // 				$klpd[] = 0;
+    //     // 			}
+    //     // 		}
+    //     // 	}
+    //     // } else {
+    //     // 	$byKlpd = [];
+    //     // 	$klpd = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    //     // }
 
+    //     $data = [
+    //         'title' => 'Know Your Competitor',
+    //         'lpse' => json_decode($lpse->getBody()->getContents(), true)['data'],
+    //         'npwp' => $npwp,
+    //         'peserta' => $peserta,
+    //         'pengguna' => $pengguna,
+    //         'timeSeries' => '{}', // json_encode($timeSeries),
+    //         'range' => '{"range1": 0, "range2": 0, "range3": 0, "range4": 0, "range5": 0}', // json_encode($range),
+    //         'akumulasi' => '[]', // json_encode($akumulasi),
+    //         'klpd' => '{}', // json_encode($klpd),
+    //         'penurunan' => '{}', // $penurunan,
+    //         'latlong' => '{}', // $byKlpd
+    //     ];
+
+    //     $userId = $this->session->user_data['id_pengguna'];
+    //     $this->load->library('user');
+
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('profile_pengguna/templates/navbar', [
+    //         'photo' => $this->user->getPhotoProfile((int) $userId, $this->db),
+    //         'userStatus' => (int) $this->session->user_data['status'],
+    //     ]);
+    //     $this->load->view('statistik/competitor');
+    //     $this->load->view('templates/footer');
+    // }
+
+    public function index(){
         $data = [
-            'title' => 'Know Your Competitor',
-            'lpse' => json_decode($lpse->getBody()->getContents(), true)['data'],
-            'npwp' => $npwp,
-            'peserta' => $peserta,
-            'pengguna' => $pengguna,
-            'timeSeries' => '{}', // json_encode($timeSeries),
-            'range' => '{"range1": 0, "range2": 0, "range3": 0, "range4": 0, "range5": 0}', // json_encode($range),
-            'akumulasi' => '[]', // json_encode($akumulasi),
-            'klpd' => '{}', // json_encode($klpd),
-            'penurunan' => '{}', // $penurunan,
-            'latlong' => '{}', // $byKlpd
+            'title' => 'Dashboard'
         ];
 
-        $userId = $this->session->user_data['id_pengguna'];
-        $this->load->library('user');
-
         $this->load->view('templates/header', $data);
-        $this->load->view('profile_pengguna/templates/navbar', [
-            'photo' => $this->user->getPhotoProfile((int) $userId, $this->db),
-            'userStatus' => (int) $this->session->user_data['status'],
-        ]);
+        $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('statistik/competitor');
         $this->load->view('templates/footer');
     }

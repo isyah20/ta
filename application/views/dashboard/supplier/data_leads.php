@@ -638,8 +638,8 @@
                         <input id="input-cari-tender" type="text" class="col-9 form-input-custom" style="border:none;" placeholder="Cari nama perusahaan">
                     </div>
                     <div class="col-sm-1" style="width: 8%;padding-left:0px;padding-right: 0px">
-                        <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport Excel">
-                            <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:4px" alt="">
+                        <a href="<?= base_url() ?>suplier/leads/export" type="button" class="form-select-custom col-1 d-flex width" style="width:40px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ekspor Excel">
+                            <img src="<?= base_url('assets\img\export.svg') ?>" width="60" style="padding:3px" alt="">
                         </a>
                     </div>
                 </div>
@@ -707,6 +707,7 @@
                             </tr>
                         </thead>
                         <tbody id="data-leads">
+
                             <!-- <tr class="tbody-tr">
                             <td><span class="number">1</span></td>
                             <td class="perusahaan">PT. Telekomunikasi Indonesia, Tbk.</td>
@@ -985,6 +986,7 @@
                 beforeSend: addAuthorizationHeader,
                 success: function(data) {
                     total_leads = data.data;
+                    console.log(data);
 
                     $('#pagination-container').pagination({
                         dataSource: "<?php echo site_url('api/supplier/lead/filter'); ?>",
@@ -1028,13 +1030,14 @@
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     //   toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+                    $('#data-leads').html('<tr><td align="center" colspan="9">Data tidak ditemukan!</td></tr>');
                 }
             });
         }
 
         // function filterLeads(id_pengguna, key) {
         //     $.ajax({
-        //         url: "<?php echo site_url('api/supplier/lead/filter'); ?>",
+        //         url: "<?php echo site_url('api/supplier/lead/filter'); ?>", 
         //         type: "GET",
         //         data: {
         //             id_pengguna: id_pengguna,

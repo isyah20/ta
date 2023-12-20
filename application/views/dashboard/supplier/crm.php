@@ -244,13 +244,12 @@
   }
 
   .btn-add {
-    padding: 7px 0px 2px 8%;
+    padding: 7px 0px 2px 0px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     border: none;
     width: 272px;
-    margin-left: 3px;
   }
 
 
@@ -332,12 +331,12 @@
 <section class="pt-5 pb-3">
   <div class="container wow fadeInUp" data-wow-delay="0.1s">
     <div class="mt-5">
-      <h4>Selamat Datang!</h4>
-      <h4>Yuk Segera Bagi Tugas Tim Marketingmu</h4>
+      <h4 style="padding-top:20px">Selamat Datang!
+      <p style="padding-top:0px">Yuk Segera Bagi Tugas Tim Marketingmu</p></h4>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pe-4">
-      <button class="btn-add bg-color text-light w-100 wow fadeInUp" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal" data-wow-delay="0.1s">Tambahkan Tim
-        <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left: 16%;margin-right:5px; padding-bottom:3px"></span>
+      <button class="btn-add bg-color text-light w-100 wow fadeInUp" style="font-size:20px" id="addContainerBtn" data-toggle="modal" data-target="#inputMarketingModal" data-wow-delay="0.1s">Tambahkan Tim
+        <span> <img src="<?= base_url('assets\img\add-white-button.svg') ?>" width="30px" alt="" style="float:right; margin-left:0px;margin-right:20px; padding-bottom:3px"></span>
       </button>
     </div>
   </div>
@@ -459,18 +458,18 @@
             },
             success: function(result) {
               console.log(result);
-              var leads = `<div id="container1"  margin-right: 50px;" class="workspace box wow fadeInUp box-full bg-color" data-id="0" data-wow-delay="0.1s">
-              <div class=" card-title card-name-company" style="padding-left:10px; margin-bottom:30px">
-            <h5 class=" title-company" > Daftar Perusahaan</h5>
-            <span id="card-count-container1" class="badge" style="margin-top:3px">` + result.jumlah + `</span></div>`;
+              var leads = `<div id="container1" class="workspace box wow fadeInUp box-full bg-color" data-id="0" data-wow-delay="0.1s">
+              <div class="card-title card-name-company" style="padding-left:0px; margin-bottom:30px">
+            <h5 class="title-company" style="padding-top:8px;padding-left:10px"> Daftar Leads</h5>
+            <span id="card-count-container1" class="badge" style="margin-top:0px">` + result.jumlah + `</span></div>`;
 
               $.each(result, function(index, value) {
                 var rowNumber = index + 1;
                 if (typeof value === 'object') {
                   leads +=
                     `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
-                <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981; font-weight:500;">` + value.wilayah + `</p>
+                <p style="padding-top:10px;padding">` + value.nama_perusahaan + `</p>
+                <p style="font-size: 14px; color:#10B981; font-weight:500; padding-bottom:10px;padding-top:0px">` + value.wilayah + `</p>
                 </div>`;
                 }
               });
@@ -507,10 +506,10 @@
                   `<div class="row"><div class="col-12">
                 <div class="title bg-color wow fadeInUp" data-wow-delay="0.2s" style="padding: 10px; margin-top:15px">
                 <div class="card card-name rounded-3" style="height: 40px;padding-top:2%"  onclick="toggleCardVisibility(this,'container` + index + 2 + `')">
-                  <h5 class="title-text" style="margin-left:10px">` + value.nama + `
+                  <h5 class="title-text" style="margin-left:5px;padding-top:17px;padding-bottom:7px">` + value.nama + `
                   </h5>
                   <span class="arrow-icon"><img src="<?= base_url("assets/img/arrow_drop_down.svg") ?>" style="width: 32px; height: 32px;float:right"></span>
-                  <span id="card-count-container` + index + 2 + `" class="badge" style="margin-top:3px">` + value.jumlah + `</span>
+                  <span id="card-count-container` + index + 2 + `" class="badge" style="margin-top:0px;">` + value.jumlah + `</span>
                   
                 </div>
                 </div>
@@ -564,8 +563,8 @@
                 var rowNumber = index + 1;
                 leads +=
                   `<div class="card drag-element" draggable="true" data-id="` + value.id_lead + `">
-                <p>` + value.nama_perusahaan + `</p>
-                <p style="font-size: 14px; color:#10B981;">` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</p>
+                <p style="padding-top:10px;padding">` + value.nama_perusahaan + `</p>
+                <p style="font-size: 14px; color:#10B981; font-weight:500; padding-bottom:10px;padding-top:0px">` + (value.lokasi_pekerjaan).substring((value.lokasi_pekerjaan).lastIndexOf('-') + 1).trim() + `</p>
                 </div>`;
               });
             },

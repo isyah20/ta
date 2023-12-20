@@ -86,10 +86,10 @@ class PesertaTenderModel extends CI_Model
 
     public function getPesertaTenderFilter($data)
     {
-        // $klpd = $data['id_lpse'];
-        // $tahun = $data['tahun'];
-        $klpd = json_decode(str_replace('&quot;', '', $data['klpd']), true);
-        $tahun = json_decode(str_replace('&quot;', '', $data['tahun']), true);
+        $klpd = $data['id_lpse'];
+        $tahun = $data['tahun'];
+        // $klpd = json_decode(str_replace('&quot;', '', $data['id_lpse']), true);
+        // $tahun = json_decode(str_replace('&quot;', '', $data['tahun']), true);
 
         // print_r($tahun);
         // print_r($klpd);
@@ -112,7 +112,7 @@ class PesertaTenderModel extends CI_Model
         // $this->db->where_in('id_lpse', $klpd);
         $this->db->group_by('paket.kode_tender');
         $query = $this->db->get();
-        var_dump($query->result_array());
+        // var_dump($query->result_array());
         return $query->result_array();
     }
 
@@ -277,13 +277,15 @@ class PesertaTenderModel extends CI_Model
         return $query->result_array();
     }
 
-    public function getJumlahMenangKlpd(?string $tahun = null, ?string $npwp = null, $klpd)
+    public function getJumlahMenangKlpd(?string $tahun = null, ?string $npwp = null,  ?string $klpd)
     {
         $this->db->select('COUNT(id_pemenang)');
         $this->db->from('pemenang');
         $this->db->join('paket', 'paket.kode_tender = pemenang.kode_tender');
         $this->db->where('npwp', $npwp, null, false);
-        $this->db->where_in('id_lpse', $klpd);
+        if ($klpd != null) {
+            $this->db->where_in('id_lpse', $klpd);
+        }
         if ($tahun != null) {
             $this->db->where("YEAR(`paket`.`tanggal_pembuatan`) = ($tahun)", null, false);
         }
@@ -469,7 +471,7 @@ class PesertaTenderModel extends CI_Model
 
         $this->db->select('count(kode_tender)');
         $this->db->from('paket');
-        $this->db->where("`kode_tender` IN ($sub)", null, false);   
+        $this->db->where("`kode_tender` IN ($sub)", null, false);
         $this->db->where("`nilai_hps_paket` < 500000000", null, false);
         $range1 = $this->db->get_compiled_select();
 
@@ -741,5 +743,79 @@ class PesertaTenderModel extends CI_Model
         $this->db->group_by('DATE_FORMAT(paket.tanggall_pembuatan, "%m")');
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    // data menang, kalah, ikut 
+    public function getDataTenderFilter($npwp, $id_lpse, $tahun)
+    {
+        $this->db->select('peserta_tender.*, paket.nilai_hps_paket, paket.nama_tender, pemenang.nilai_hps');
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 6, 2) AS month');
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 1, 4) AS year');
+        $this->db->select("CASE
+            WHEN pemenang.kode_tender IS NOT NULL AND pemenang.npwp = peserta_tender.npwp THEN 'menang'
+            WHEN pemenang.kode_tender IS NULL AND paket.status_tender NOT IN ('Tender Sudah Selesai', 'Selesai') THEN 'ikut'
+            WHEN pemenang.kode_tender IS NOT NULL AND pemenang.npwp != peserta_tender.npwp THEN 'kalah'
+            ELSE NULL
+        END AS status_peserta");
+        $this->db->from('peserta_tender');
+        $this->db->join('pemenang', 'pemenang.kode_tender = peserta_tender.kode_tender', 'left');
+        $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender', 'left');
+        $this->db->where_not_in('paket.status_tender', ['Gagal', 'Seleksi Batal', 'Tender Gagal', 'Seleksi Gagal', 'Tender Batal']);
+        $this->db->where('peserta_tender.npwp', $npwp);
+        $this->db->where('peserta_tender.harga_penawaran !=', 0);
+
+        if ($tahun != '') {
+            $this->db->where('YEAR(paket.tanggal_pembuatan)', $tahun);
+        }
+        if ($id_lpse != '') {
+            $this->db->where('paket.id_lpse', $id_lpse);
+        }
+
+        $result = $this->db->order_by('paket.tanggal_pembuatan', 'DESC')
+            ->get()
+            ->result_array();
+
+        return $result;
+    }
+    public function getDataTenderFilterByMonth($npwp, $id_lpse, $tahun, $bulan)
+    {
+        $this->db->select('peserta_tender.*, paket.nilai_hps_paket, paket.nama_tender, pemenang.nilai_hps');
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 6, 2) AS month');
+        $this->db->select('SUBSTRING(paket.tanggal_pembuatan, 1, 4) AS year');
+        $this->db->select("CASE
+              WHEN pemenang.kode_tender IS NOT NULL AND pemenang.npwp = peserta_tender.npwp THEN 'menang'
+              WHEN pemenang.kode_tender IS NULL AND paket.status_tender NOT IN ('Tender Sudah Selesai', 'Selesai') THEN 'ikut'
+              WHEN pemenang.kode_tender IS NOT NULL AND pemenang.npwp != peserta_tender.npwp THEN 'kalah'
+              ELSE NULL
+          END AS status_peserta");
+        $this->db->from('peserta_tender');
+        $this->db->join('pemenang', 'pemenang.kode_tender = peserta_tender.kode_tender', 'left');
+        $this->db->join('paket', 'paket.kode_tender = peserta_tender.kode_tender', 'left');
+        $this->db->where_not_in('paket.status_tender', ['Gagal', 'Seleksi Batal', 'Tender Gagal', 'Seleksi Gagal', 'Tender Batal']);
+        $this->db->where('peserta_tender.npwp', $npwp);
+        $this->db->where('peserta_tender.harga_penawaran !=', 0);
+
+        if ($tahun != '') {
+            $this->db->where('YEAR(paket.tanggal_pembuatan)', $tahun);
+        }
+        if ($id_lpse != '') {
+            $this->db->where('paket.id_lpse', $id_lpse);
+        }
+        if ($bulan != '') {
+            // Memeriksa apakah bulan dalam rentang 1 hingga 12
+            if (intval($bulan) >= 1 && intval($bulan) <= 12) {
+                $this->db->where("SUBSTRING(paket.tanggal_pembuatan, 6, 2) =", str_pad($bulan, 2, '0', STR_PAD_LEFT));
+            } else {
+                // Tindakan yang diambil jika parameter bulan tidak valid
+                // Misalnya, memberikan pesan kesalahan atau tindakan lainnya
+                // Di sini, saya hanya mencatat pesan log sebagai contoh
+                error_log("Nilai bulan tidak valid. Harap masukkan nilai bulan antara 1 hingga 12.");
+            }
+        }
+        $result = $this->db->order_by('paket.tanggal_pembuatan', 'DESC')
+            ->get()
+            ->result_array();
+
+        return $result;
     }
 }

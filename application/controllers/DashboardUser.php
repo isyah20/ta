@@ -23,7 +23,7 @@ class DashboardUser extends CI_Controller
         $this->load->model('Pengguna_model');
         $this->load->model('Peserta_model');
         $this->load->model('PesertaTender_model');
-        $this->load->model('Api/PesertaTenderModel');
+        $this->load->model('api/PesertaTenderModel', 'PesertaTenderModel');
         $this->load->model('api/Peserta_model', 'ApiPesertaModel');
         $this->init();
     }
@@ -55,7 +55,6 @@ class DashboardUser extends CI_Controller
         $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
         $npwpComplete = !empty($pengguna['npwp']);
 
-        
         $notif = null;
         try {
             $tenderResp = $this->client->request('GET', 'tender/notif', $this->client->getConfig('headers'));
@@ -77,7 +76,8 @@ class DashboardUser extends CI_Controller
         // var_dump($tahun);
         // die;
         $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' => "", 'tahun' => ''));
-
+        // var_dump($dataPesertaTender);
+        // die;
         // Get Peserta Tender yang sedang diikuti 
         // $pesertaTenderIkut = $this->ApiPesertaModel->getPesertaIkutTender($pengguna['npwp']);
         $pesertaTenderIkut = null;
@@ -92,7 +92,9 @@ class DashboardUser extends CI_Controller
             }
         } catch (ClientException $e) {
             $pesertaTenderIkut = null;
-        } 
+        }
+
+
 
         // Statistik Ikut Tender
         $timeSeriesUser = array_fill(0, 12, 0);
@@ -506,8 +508,19 @@ class DashboardUser extends CI_Controller
     public function chart()
     {
         $data = $this->input->post();
+
         if ($data != null) {
-            // return $data['cariTahun'];
+            // return json_encode($data['cariTahun']);
+            // return json_encode($data['cariKLPD']);
+            // $this->output
+            //     ->set_status_header(200)
+            //     ->set_content_type('application/json')
+            //     ->set_output(json_encode($data['cariKLPD'], JSON_PRETTY_PRINT))
+            //     ->_display();
+
+            // exit;
+
+            // die;
             $this->load->library('session');
             $this->load->library('user');
             $this->load->model('api/Peserta_model');
@@ -519,28 +532,83 @@ class DashboardUser extends CI_Controller
             $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
 
             // $peserta = $this->Peserta_model->getPesertaNpwp($pengguna['npwp']);
-            $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+            // $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+            // $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => $pengguna['npwp'], 'id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+            // $dataPesertaTender = $this->PesertaTenderModel->getPesertaPemenangTenderFilter(array('npwp' => '02.750.385.3-013.000', 'id_lpse' => '', 'tahun' => '2022'));
 
-            // Statistik Ikut Tender
+            // $dataPesertaTender["TEST"] = $data['cariTahun'];
+            // echo json_encode($dataPesertaTender);
+
+            // $dataPesertaTender = $this->PesertaTenderModel->getDataTenderFilter($pengguna['npwp'], '');
+
+
+            // var_dump($dataIkut, $dataPesertaTender);
+            $dataPesertaTender = $this->PesertaTenderModel->getDataTenderFilter($pengguna['npwp'], $data['cariKLPD'], $data['cariTahun']);
+
             $timeSeriesUser = array_fill(0, 12, 0);
+            $dataIkut = [];
+            $dataMenang = [];
+            $dataMenangKalah = [];
             $totalMenang = 0;
             $totalKalah = 0;
-            foreach ($dataPesertaTender as $dpt => $valueDPT) {
-                $timeSeriesUser[((int)$valueDPT['month']) - 1]++;
-                if ($valueDPT['status_pemenang'] == 'true') {
-                    $totalMenang++;
+            $totalIkut = 0;
+            foreach ($dataPesertaTender as $key => $value) {
+                if ($value['status_peserta'] == 'ikut') {
+                    array_push($dataIkut, $value);
                 } else {
-                    $totalKalah++;
+                    $timeSeriesUser[((int)$value['month']) - 1]++;
+                    array_push($dataMenangKalah, $value);
+                    if ($value['status_peserta'] == 'menang') {
+                        array_push($dataMenang, $value);
+                    }
+                }
+
+                // Switch counting 
+                switch ($value['status_peserta']) {
+                    case 'menang':
+                        $totalMenang++;
+                        break;
+                    case 'kalah':
+                        $totalKalah++;
+                        break;
+                    case 'ikut':
+                        $totalIkut++;
+                        break;
+                    default:
+                        break;
                 }
             }
 
+
+            // $totalSemua = $totalMenang + $totalKalah + $totalIkut;
+
+            // $totals = [
+            //     'total_menang' => $totalMenang,
+            //     'total_kalah' => $totalKalah,
+            //     'total_ikut' => $totalIkut,
+            //     'total_semua' => $totalSemua,
+            // ];
+            // die;
+            // exit;
+            // Statistik Ikut Tender
+
+
+            // return $timeSeriesUser;
+            // var_dump($timeSeriesUser);
+            // die;
+
+            // $tenderDiikuti = 0;
+            // $tenderDiikuti = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
+
             // time sereies chart Tender
-            $akumulasi[0] = $this->PesertaTenderModel->getJumlahTenderFilter(array('id_lpse' =>  $data['cariKLPD'], 'tahun' => $data['cariTahun']));
-            $akumulasi[1] = $totalMenang;
-            $akumulasi[2] = $totalKalah;
-            $akumulasi[3] = $totalKalah + $totalMenang;
-            $akumulasi[4] = (($totalKalah + $totalMenang) != 0) ? ($totalMenang / ($totalKalah + $totalMenang) * 100) : 0;
-            $akumulasi[5] = (($totalKalah + $totalMenang) != 0) ? ($totalKalah / ($totalKalah + $totalMenang) * 100) : 0;
+            $akumulasi[0] = $totalMenang;
+            $akumulasi[1] = $totalKalah;
+            $akumulasi[2] = $totalIkut;
+            $akumulasi[3] = ($totalKalah + $totalMenang + $totalIkut);
+            // $akumulasi[3] = $totalKalah + $totalMenang;
+            // $akumulasi[4] = (($totalKalah + $totalMenang + $tenderDiikuti) != 0) ? ($tenderDiikuti / ($totalKalah + $totalMenang + $tenderDiikuti) * 100) : 0;
+            // $akumulasi[5] = (($totalKalah + $totalMenang + $tenderDiikuti) != 0) ? ($totalMenang / ($totalKalah + $totalMenang + $tenderDiikuti) * 100) : 0;
+            // $akumulasi[6] = (($totalKalah + $totalMenang + $tenderDiikuti) != 0) ? ($totalKalah / ($totalKalah + $totalMenang + $tenderDiikuti) * 100) : 0;
 
             // hps chart ikut tender
             for ($i = 0; $i < 12; $i++) {
@@ -591,10 +659,82 @@ class DashboardUser extends CI_Controller
             $range['range4'] = array_sum($range4);
             $range['range5'] = array_sum($range5);
 
-            echo '<p class="d-none" id="chart1">' . json_encode($timeSeriesUser) . '</p><p class="d-none" id="chart3">' . json_encode($range) . '</p><p class="d-none" id="chart2">' . json_encode($akumulasi) . '</p>';
+            $dataChart['time_series'] = $timeSeriesUser;
+            $dataChart['range'] = $range;
+            $dataChart['akumulasi'] = $akumulasi;
+            $dataChart['win_lose'] = $dataMenangKalah;
+            $dataChart['join'] = $dataIkut;
+            // return json_encode($dataChart);
+            $this->output
+                ->set_status_header(200)
+                ->set_content_type('application/json')
+                ->set_output(json_encode($dataChart, JSON_PRETTY_PRINT))
+                ->_display();
+
+            exit;
+
+            // echo '<p class="d-none" id="chart1">' . json_encode($timeSeriesUser) . '</p><p class="d-none" id="chart3">' . json_encode($range) . '</p><p class="d-none" id="chart2">' . json_encode($akumulasi) . '</p>';
         }
     }
 
+    public function updateMenangKalahByMonth()
+    {
+        $data = $this->input->post();
+        // $this->output
+        //     ->set_status_header(200)
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($data, JSON_PRETTY_PRINT))
+        //     ->_display();
+        // exit;
+        $sessionData = $this->session->user_data;
+        $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
+        $dataPesertaTender = $this->PesertaTenderModel->getDataTenderFilterByMonth($pengguna['npwp'], $data['cariKLPD'], $data['cariTahun'], $data['cariBulan']);
+
+        $dataIkut = [];
+        $dataMenangKalah = [];
+        $totalMenang = 0;
+        $totalKalah = 0;
+        $totalIkut = 0;
+        // $this->output
+        //     ->set_status_header(200)
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($dataPesertaTender, JSON_PRETTY_PRINT))
+        //     ->_display();
+        // exit;
+        foreach ($dataPesertaTender as $key => $value) {
+            if ($value['status_peserta'] == 'ikut') {
+                array_push($dataIkut, $value);
+            } else {
+                // $timeSeriesUser[((int)$value['month']) - 1]++;
+                array_push($dataMenangKalah, $value);
+                // if ($value['status_peserta'] == 'menang') {
+                //     array_push($dataMenang, $value);
+                // }
+            }
+
+            // Switch counting 
+            switch ($value['status_peserta']) {
+                case 'menang':
+                    $totalMenang++;
+                    break;
+                case 'kalah':
+                    $totalKalah++;
+                    break;
+                case 'ikut':
+                    $totalIkut++;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($dataMenangKalah, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
     public function update($id)
     {
         $this->form_validation->set_rules('npwp', 'NPWP', 'required|trim');

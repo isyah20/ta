@@ -355,9 +355,7 @@
         }
 
         .img-custom {
-            position: absolute;
             margin-left: 60px;
-            margin-top: 120px;
         }
 
         .custom-table-container {
