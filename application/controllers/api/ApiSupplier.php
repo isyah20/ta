@@ -26,8 +26,7 @@ class ApiSupplier extends RestController
         $this->load->model('api/Reset_model');
         $this->load->model('api/Supplier_api');
         $this->load->model('Supplier_model');
-        // $this->load->model('Tender_model');
-        $this->load->model('Tender_model');
+        // $this->load->model('api/Pengguna_model');
         $this->load->library('form_validation', 'google');
         $this->load->helper('form');
         $this->load->library('email');
