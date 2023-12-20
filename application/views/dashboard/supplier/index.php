@@ -197,7 +197,8 @@
         color: #B89494;
         font-size: 14px;
         font-weight: bold;
-        padding: 8% 0% 2% 3%;
+        padding:15px 10px 4px 10px;
+        /* padding: 8% 0% 2% 3%; */
     }
 
     .card-title {
@@ -259,7 +260,7 @@
 
 .custom-colored-dot-list li {
   position: relative;
-  padding-left: 20px; /* Jarak antara titik dan teks */
+  padding-left: 20px; 
   line-height: 1.5;
 }
 
@@ -318,10 +319,6 @@
     .statistik-card2{
         width:31%;
     }
-    .statistik-tim-market{
-        margin-left:45px;
-        margin-top:20px
-    }
 
     .chart-tender{
         height:356px; 
@@ -354,6 +351,12 @@
         width:4%;
         padding-left:10px;
     }
+    .pie-chart{
+            position: relative; 
+            height:200px; 
+            width:200px;
+            margin:0px 0px 0px 15px;
+        }
 
     @media(max-width: 900px) {
         .sec-pemenang-terbaru {
@@ -364,26 +367,23 @@
             width: 50%;
             margin-bottom:10px;
         }
-        .statistik-card-flex{
-            width: 50%;
-            margin-bottom:10px;
+        .card-text{
+            font-size:35px;
         }
         .chart-tender-flex{
-            padding-top:0px 0px 0px 0px;
-            margin:0px;
             width:525px;
             height: 300px;
-        }
-        .statistik-tim{
-            margin-bottom:20px;
-        }
-        .statistik-tim-market{
-            margin-left:150px;
         }
         .chart-status {
             width:100%; 
             min-width: 400px; 
             margin: 0 auto;
+        }
+        .pie-chart{
+            position: relative; 
+            height:250px; 
+            width:250px;
+            margin:0px 0px 0px 15px;
         }
         .search{
             margin-top:90px;
@@ -399,12 +399,35 @@
        }
 }
 
+@media(max-width: 786px){
+    .statistik-card-flex{
+            width: 100%;
+            margin-bottom:10px;
+        }
+
+    .chart-tender-flex{
+            width:101%;
+            height:93%;
+        }
+    .chart-filter{
+        margin-top:4px;
+    }
+    .chart-status {
+            width:100%; 
+            min-width: 350px; 
+            margin: 0 auto;
+        }
+    .search-name{
+            width:100%;
+        }
+}
+
 </style>
 
 <section class="mt-10 bg-white">
     <div class="container">
         <div class="row justify-content d-flex content-above-navbar">
-            <div class="col-md-5 d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
+            <div class="d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
                 <h4 class="mb-0 ms-2 mt-4 wow fadeInUp w-660" style="padding-top:8px;font-size:26px">
                     Selamat Datang <span class="fw-semibold nama-pengguna" style="color: #df3131; font-size:26px"></span>!<p>Mulai pantau dan kelola pemenang tender</p>
                 </h4>
@@ -413,7 +436,7 @@
     </div>
  </session>
 <section>
-    <div class="container">
+    <div class="container center">
         <div class="row mt-3">
             <div class="col-md-9 wow fadeInUp animation" data-wow-delay="0.2s" >
                 <div class="row">
@@ -486,7 +509,7 @@
                                 <div class="container wow fadeInUp">
                                     <div style="padding:0;">
                                         <h4 style="color:#333333; padding:10px 10px 0px 0px; font-size:20px; font-weight:500;">Pemenang Tender Setiap Bulan
-                                        <div class="form-select-custom d-flex" style="width: 100px; float:right">
+                                        <div class="form-select-custom chart-filter" style="width: 100px; float:right">
                                             <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
                                             <select class="select2-wilayah" id="wilayah" style="border:none;">
                                             </select>
@@ -498,19 +521,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                    </div>
     
                     <div class="col wow fadeInUp animation" data-wow-delay="0.2s" style="width:25%" >
                         <div class="shadow rounded-3 bg-white">
-                            <div class="card-body statistik-tim" style="margin-top:25px;height:355px;overflow-y: auto;">
-                                <div class="d-flex wow fadeInUp pb-3 text-center" data-wow-delay="0.3s">
-                                <h4 class="statistik-tim-market">Tim Marketing</h4>
+                            <div class="card-body mb-4" style="margin-top:25px;height:355px;overflow-y: auto;padding-left:5px">
+                                <div class="text-center wow fadeInUp pb-3 pt-3" data-wow-delay="0.3s">
+                                <h4>Tim Marketing</h4>
                                 </div>
-                                <div class="class">
+                                <div >
                                     <table class="table">
                                         <tbody id="total-plot-tim">
                                         </tbody>
-                                        </table>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -525,7 +548,7 @@
                     <div>
                         <h4 class="text-center" style="padding-left:0px;padding-top:5px;padding-bottom:15px">Status CRM</h4>
                             <center>
-                                <div class="" style="position: relative; height:250px; width:250px;margin:0px 0px 0px 15px">
+                                <div class="pie-chart">
                                     <canvas id="myDoughnutChart"></canvas>
                                 </div>
                             </center>
