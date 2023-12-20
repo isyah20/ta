@@ -347,6 +347,7 @@
     .card-select {
         font-size: 10px;
         display: flex;
+        margin-top: 10px;
     }
 
     .form-select-custom {
@@ -498,7 +499,7 @@
                 </div>
                 <!-- End of Filter Tahun -->
 
-                <div class="dashboard-hero mt-4">
+                <div class="dashboard-hero mt-2">
                     <!-- <div class="row col-sm-8 justify-content-center mx-1 px-1 ">
 
                     </div> -->
@@ -596,8 +597,8 @@
                     foreach ($notif as $row) : ?>
                         <div class="scrollable-container">
                             <div class="custom-scroll">
-                                <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
-                                    <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
+                                <div class="mt-1 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                                    <div class="row summary-box d-flex align-content-center mb-2 " style="height: auto">
                                         <div class="col-2">
                                             <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
                                         </div>
@@ -614,7 +615,7 @@
                 } else { ?>
                     <div class="scrollable-container">
                         <div class="custom-scroll">
-                            <div class="mt-2 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
+                            <div class="mt-1 mb-1" style="max-height: 125px; border-radius: 10px; box-shadow: 1px 2px 7px 5px rgba(153, 153, 153, 0.30);">
                                 <div class="row summary-box d-flex align-content-center mb-2" style="height: auto">
                                     <div class="col-2">
                                         <img src="assets/img/notif-tender.png" style="margin-top: 10%; width: 45px" alt="">
