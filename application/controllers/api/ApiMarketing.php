@@ -202,4 +202,20 @@ class ApiMarketing extends RestController {
             ], RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function getTotalStatusPlotTimEachTim_get($id){
+        $data = $this->marketing->getTotalStatusPlotTimEachTim($id);
+
+        if ($data) {
+            $this->response([
+                'status' => true,
+                'data' => $data
+            ], RestController::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
 }
