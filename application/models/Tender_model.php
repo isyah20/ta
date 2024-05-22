@@ -371,7 +371,7 @@ class Tender_model extends CI_Model
                 ORDER BY {$order}
                 LIMIT {$page_number},{$page_size}";
 
-                $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna)
+        $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna)
                 SELECT p.id_pemenang, p.nama_pemenang, p.npwp, {$id_pengguna}
                 FROM preferensi, pemenang p
                 LEFT JOIN data_leads dl ON p.npwp = dl.npwp AND {$id_pengguna} = dl.id_pengguna
@@ -381,8 +381,8 @@ class Tender_model extends CI_Model
                 AND (dl.npwp IS NULL OR dl.id_pengguna IS NULL)
                 GROUP BY p.npwp;";
 
-                $this->db->query($sql2);
-                return $this->db->query($sql);
+        $this->db->query($sql2);
+        return $this->db->query($sql);
     }
 
     public function getPemenangTerbaruByPengguna($data)
@@ -427,7 +427,7 @@ class Tender_model extends CI_Model
                 GROUP BY kode_tender,npwp
                 ORDER BY {$order}";
 
-                $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna)
+        $sql2 = "INSERT INTO data_leads (id_pemenang, nama_perusahaan, npwp, id_pengguna)
                 SELECT p.id_pemenang, p.nama_pemenang, p.npwp, {$id_pengguna}
                 FROM preferensi, pemenang p
                 LEFT JOIN data_leads dl ON p.npwp = dl.npwp AND {$id_pengguna} = dl.id_pengguna
@@ -437,8 +437,8 @@ class Tender_model extends CI_Model
                 AND (dl.npwp IS NULL OR dl.id_pengguna IS NULL)
                 GROUP BY p.npwp;";
 
-                $this->db->query($sql2);
-                return $this->db->query($sql);
+        $this->db->query($sql2);
+        return $this->db->query($sql);
     }
 
     // Get Semua Tender 

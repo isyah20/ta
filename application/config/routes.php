@@ -152,6 +152,30 @@ $route['api/supplier/tim-suplier'] = 'DashboardUserSupplier/getTimMarketingByIdS
 $route['api/supplier/lead/tim'] = 'DashboardUserSupplier/getLeadByIdTim';
 $route['api/supplier/tim/add'] = 'DashboardUserSupplier/addTimMarketing';
 $route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarketing/$1';
+
+//routes spk
+$route['suplier/spk'] = 'DashboardUserSupplier/spk';
+$route['suplier/spk/getDataKriteria'] = 'DashboardUserSupplier/getDataKriteria';
+$route['suplier/spk/tambahKriteria'] = 'DashboardUserSupplier/tambahKriteria';
+$route['suplier/spk/updateKriteria/(:num)'] = 'DashboardUserSupplier/updateKriteria/$1';
+$route['suplier/spk/hapusKriteria/(:num)'] = 'DashboardUserSupplier/hapusKriteria/$1';
+$route['api/supplier/getDataKriteria'] = 'api/ApiSupplier/getDataKriteria';
+$route['api/supplier/createDataKriteria'] = 'api/ApiSupplier/createDataKriteria';
+$route['api/supplier/deleteDataKriteria/(:num)'] = 'api/ApiSupplier/deleteDataKriteria/$1';
+$route['api/supplier/updateDataKriteria/(:num)'] = 'api/ApiSupplier/updateDataKriteria/$1';
+$route['api/supplier/getDataAlternatif'] = 'api/ApiSupplier/getDataAlternatif';
+$route['api/supplier/createDataAlternatif'] = 'api/ApiSupplier/createDataAlternatif';
+$route['api/supplier/deleteDataAlternatif/(:num)'] = 'api/ApiSupplier/deleteDataAlternatif/$1';
+$route['api/supplier/updateDataAlternatif/(:num)'] = 'api/ApiSupplier/updateDataAlternatif/$1';
+$route['ahp'] = 'ahp/index';
+$route['ahp/add_criteria'] = 'ahp/add_criteria';
+$route['ahp/add_alternative'] = 'ahp/add_alternative';
+$route['ahp/calculate'] = 'ahp/calculate_ahp';
+$route['ahp/get_results'] = 'ahp/get_results';
+$route['ahp/results'] = 'ahp/view_results';
+// $route['spk'] = 'spk/index';
+// $route['spk/hitung_ahp'] = 'spk/hitung_ahp';
+
 // $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';
@@ -293,6 +317,8 @@ $route['api/simpanPreferensi'] = 'Preferensi/simpanPreferensi';
 $route['monitoring/(:num)'] = 'Preferensi/hapus_pref/$1';
 $route['monitoring/tender'] = 'Preferensi';
 $route['selectkateg/(:num)'] = 'Preferensi/selectkateg/$1';*/
+$route['api/getPesertaByKeyword'] = 'Competitor/getPesertaByKeyword';
+$route['api/getDataChartByNPWP'] = 'Competitor/getDataChartByNPWP';
 
 //===========================================
 // Admin
@@ -398,6 +424,10 @@ $route['artikel'] = 'admin/artikel';
 
 $route['api/statistikhome'] = 'api/ApiTender/getdatastatistik';
 
+//restAPI route for SPK
+
+
+
 // restAPI route for Marketing
 $route['api/marketing/get/(:num)'] = 'api/ApiMarketing/show/$1';
 $route['api/marketing/getLeadsByTim'] = 'api/ApiMarketing/getLeadsByTim';
@@ -432,8 +462,8 @@ $route['api/supplier/getTotalDataLeadFiltered'] = 'api/ApiSupplier/getTotalDataL
 $route['api/supplier/getLead'] = 'api/ApiSupplier/getLeads';
 $route['api/supplier/getCRMLeads'] = 'api/ApiSupplier/getCRMLeads';
 $route['api/supplier/getJumlahPerMonth'] = 'api/ApiSupplier/getJumlahPemenangPerMonth';
-$route['api/supplier/getPemenang'] = 'api/ApiSupplier/getPemenang'; 
-$route['api/supplier/getLeadsTerbaru'] = 'api/ApiSupplier/getLeadsTerbaru'; 
+$route['api/supplier/getPemenang'] = 'api/ApiSupplier/getPemenang';
+$route['api/supplier/getLeadsTerbaru'] = 'api/ApiSupplier/getLeadsTerbaru';
 $route['api/supplier/getLeadsNotPlotted'] = 'api/ApiSupplier/getLeadsNotPlotted';
 
 // restAPI for know your market

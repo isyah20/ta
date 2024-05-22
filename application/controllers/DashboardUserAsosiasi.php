@@ -31,7 +31,6 @@ class DashboardUserAsosiasi extends CI_Controller
         ]);
     }
 
-<<<<<<< HEAD
    /*  public function index()
     {
         $notif = null;
@@ -44,12 +43,6 @@ class DashboardUserAsosiasi extends CI_Controller
         } catch (ClientException $e) {
             $notif = null;
         }
-=======
-    public function index(){
-        // $data = null;
-        $sessionData = $this->session->user_data;
-        $pengguna = $this->Pengguna_model->getPenggunaById((int) $sessionData['id_pengguna'])['data'];
->>>>>>> 4b4b971fc6d22283e67772bc23e129ba16c20e2f
         $id_pengguna = $this->session->user_data['id_pengguna'];
 
         $data_asosiasi = null;

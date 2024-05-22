@@ -131,4 +131,16 @@ class Marketing_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function getTotalStatusPlotTimEachTim($id_supplier) {
+        
+        $this->db->select('dl.id_pengguna, pt.status, COUNT(*) as jumlah_status');
+        $this->db->from('plot_tim pt');
+        $this->db->join('data_leads dl', 'pt.id_lead = dl.id_lead');
+        $this->db->where('dl.id_pengguna', $id_supplier);
+        $this->db->group_by('pt.status');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

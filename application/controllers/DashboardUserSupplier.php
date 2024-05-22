@@ -551,6 +551,107 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('dashboard/supplier/marketing');
         $this->load->view('templates/footer');
     }
+
+    public function spk()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/spk');
+        $this->load->view('templates/footer');
+    }
+
+    public function getDataKriteria()
+    {
+        $data = $this->Supplier_model->getDataKriteria(); // Mengambil data kriteria dari model
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+
+    public function tambahKriteria()
+    {
+        $nama_kriteria = $this->input->post('nama_kriteria');
+        $bobot_kriteria = $this->input->post('bobot_kriteria');
+
+        $data = array(
+            'nama' => $nama_kriteria,
+            'bobot' => $bobot_kriteria
+        );
+
+        $this->Supplier_model->tambahKriteria($data); // Panggil method tambahKriteria pada model
+
+        // Redirect atau tampilkan pesan sukses
+        redirect('suplier/spk');
+    }
+
+    public function updateKriteria($id)
+    {
+        // Mengambil data dari formulir
+        $nama_kriteria = $this->input->post('nama_kriteria');
+        $bobot_kriteria = $this->input->post('bobot_kriteria');
+
+        $data = array(
+            'nama' => $nama_kriteria,
+            'bobot' => $bobot_kriteria
+        );
+
+        $this->Supplier_model->updateKriteria($id, $data); // Panggil method updateKriteria pada model
+
+        // Redirect atau tampilkan pesan sukses
+        redirect('suplier/spk');
+    }
+
+    public function hapusKriteria($id)
+    {
+        $this->Supplier_model->hapusKriteria($id); // Panggil method hapusKriteria pada model
+
+        // Redirect atau tampilkan pesan sukses
+        redirect('suplier/spk');
+    }
+    public function hitung_ahp()
+    {
+        $results = $this->Spk_model->calculate_ahp();
+        echo json_encode($results);
+    }
+
+    public function simpan_kriteria()
+    {
+        $data = [
+            'kriteria' => $this->input->post('nama_kriteria'),
+            'bobot' => $this->input->post('bobot')
+        ];
+        $this->Spk_model->insert_kriteria($data);
+        redirect('ahp');
+    }
+
+    public function simpan_alternatif()
+    {
+        $data = [
+            'nama' => $this->input->post('nama_alternatif'),
+            'riwayat_perusahaan' => $this->input->post('riwayat_perusahaan'),
+            'riwayat_menang' => $this->input->post('riwayat_menang'),
+            'lokasi' => $this->input->post('lokasi_tender'),
+            'hps' => $this->input->post('nilai_hps')
+        ];
+        $this->Spk_model->insert_alternatif($data);
+        redirect('ahp');
+    }
+
+    /* public function spk_view()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/spk_view');
+        $this->load->view('templates/footer');
+    } */
+
     public function testCRM()
     {
         $id_lead = $this->input->post('id_lead');

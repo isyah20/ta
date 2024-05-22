@@ -254,17 +254,156 @@ class Competitor extends CI_Controller
     //     $this->load->view('templates/footer');
     // }
 
-    public function index(){
+
+
+    public function index()
+    {
         $data = [
             'title' => 'Dashboard'
         ];
+        $this->load->model('PesertaTender_model');
+        // $data = $this->Tender_model->getPreferensiPengguna($_COOKIE['id_pengguna']);
+        // $data = $this->PesertaTender_model->getPesertaByKeyword(10, '');
+        // var_dump($data, 'test');
+        // die;
 
         $this->load->view('templates/header', $data);
         $this->load->view('profile_pengguna/templates/navbar');
         $this->load->view('statistik/competitor');
         $this->load->view('templates/footer');
     }
+    public function getPesertaByKeyword()
+    {
+        $keyword = $this->input->post('keyword');
 
+        $data = $this->PesertaTender_model->getPesertaByKeyword(10, $keyword);
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
+    }
+    public function getDataChartByNPWP()
+    {
+        $data = $this->input->post();
+
+        if ($data != null) {
+            $this->load->library('session');
+            $this->load->library('user');
+            $this->load->model('api/Peserta_model');
+            $this->load->model('api/PesertaTenderModel');
+            $this->load->model('scrapping/Pengguna_model');
+            $this->load->model('scrapping/Lpse_model');
+
+
+            $dataPesertaTender = $this->PesertaTenderModel->getDataTenderFilter($data['npwp'], '', '');
+
+            $timeSeriesUser = array_fill(0, 12, 0);
+            $dataIkut = [];
+            $dataMenang = [];
+            $dataMenangKalah = [];
+            $totalMenang = 0;
+            $totalKalah = 0;
+            $totalIkut = 0;
+            foreach ($dataPesertaTender as $key => $value) {
+                if ($value['status_peserta'] == 'ikut') {
+                    array_push($dataIkut, $value);
+                } else {
+                    $timeSeriesUser[((int)$value['month']) - 1]++;
+                    array_push($dataMenangKalah, $value);
+                    if ($value['status_peserta'] == 'menang') {
+                        array_push($dataMenang, $value);
+                    }
+                }
+
+                // Switch counting 
+                switch ($value['status_peserta']) {
+                    case 'menang':
+                        $totalMenang++;
+                        break;
+                    case 'kalah':
+                        $totalKalah++;
+                        break;
+                    case 'ikut':
+                        $totalIkut++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // time sereies chart Tender
+            $akumulasi[0] = $totalMenang;
+            $akumulasi[1] = $totalKalah;
+            $akumulasi[2] = $totalIkut;
+            $akumulasi[3] = ($totalKalah + $totalMenang + $totalIkut);
+
+            // hps chart ikut tender
+            for ($i = 0; $i < 12; $i++) {
+                $hps1 = 0;
+                $hps2 = 0;
+                $hps3 = 0;
+                $hps4 = 0;
+                $hps5 = 0;
+                foreach ($dataPesertaTender as $range) {
+                    if ($range['month'] == $i + 1) {
+
+                        switch (true) {
+                            case $range['nilai_hps'] >= 100000000000:
+                                $hps5++;
+                                break;
+                            case $range['nilai_hps'] >= 10000000000:
+                                $hps4++;
+                                break;
+                            case $range['nilai_hps'] >= 1000000000:
+                                $hps3++;
+                                break;
+                            case $range['nilai_hps'] >= 500000000:
+                                $hps2++;
+                                break;
+                            default:
+                                $hps1++;
+                                break;
+                        }
+                    }
+                }
+
+                $range1[] = $hps1;
+                $range2[] = $hps2;
+                $range3[] = $hps3;
+                $range4[] = $hps4;
+                $range5[] = $hps5;
+            }
+
+            $range[0] = $range1;
+            $range[1] = $range2;
+            $range[2] = $range3;
+            $range[3] = $range4;
+            $range[4] = $range5;
+
+            $range['range1'] = array_sum($range1);
+            $range['range2'] = array_sum($range2);
+            $range['range3'] = array_sum($range3);
+            $range['range4'] = array_sum($range4);
+            $range['range5'] = array_sum($range5);
+
+            $dataChart['time_series'] = $timeSeriesUser;
+            $dataChart['range'] = $range;
+            $dataChart['akumulasi'] = $akumulasi;
+            $dataChart['win_lose'] = $dataMenangKalah;
+            $dataChart['join'] = $dataIkut;
+            // return json_encode($dataChart);
+            $this->output
+                ->set_status_header(200)
+                ->set_content_type('application/json')
+                ->set_output(json_encode($dataChart, JSON_PRETTY_PRINT))
+                ->_display();
+
+            exit;
+        }
+    }
     public function chart()
     {
         $data = $this->input->post();
@@ -288,12 +427,12 @@ class Competitor extends CI_Controller
                 $timeSeries = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             }
             // var_dump($timeSeries);
-            ?>
-			<p class="d-none" id="chart1"><?php echo json_encode($timeSeries) ?></p>
-			<?php
+?>
+            <p class="d-none" id="chart1"><?php echo json_encode($timeSeries) ?></p>
+            <?php
 
-                        // get peserta tender (akumulasi ikut tender)
-                        $response = $this->PesertaTender_model->getFilterTotal($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
+            // get peserta tender (akumulasi ikut tender)
+            $response = $this->PesertaTender_model->getFilterTotal($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
             $total = json_decode($response->getBody()->getContents(), true);
 
             if ($total['status'] !== false) {
@@ -316,8 +455,8 @@ class Competitor extends CI_Controller
                 $akumulasi = [0, 0, 0, 0];
             }
             ?>
-			<p class="d-none" id="chart3"><?php echo json_encode($akumulasi) ?></p>
-			<?php
+            <p class="d-none" id="chart3"><?php echo json_encode($akumulasi) ?></p>
+            <?php
 
             //get tender by hps (hps competitor)
             $hps = $this->PesertaTender_model->getFilterHps($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
@@ -378,8 +517,8 @@ class Competitor extends CI_Controller
                 $range['range5'] = 0;
             }
             ?>
-			<p class="d-none" id="chart2"><?php echo json_encode($range) ?></p>
-			<?php
+            <p class="d-none" id="chart2"><?php echo json_encode($range) ?></p>
+            <?php
 
             //get peserta tender (penurunan hps)
             $ArrPenurunan = $this->PesertaTender_model->getFilterPenurunan($data['cariPeserta'], $data['cariKLPD'], $data['cariTahun']);
@@ -412,8 +551,8 @@ class Competitor extends CI_Controller
                 $penurunan['2'] = 0;
             }
             ?>
-			<p class="d-none" id="gap"><?php echo json_encode($penurunan) ?></p>
-			<?php
+            <p class="d-none" id="gap"><?php echo json_encode($penurunan) ?></p>
+            <?php
 
             // var_dump($data['cariKLPD']);
             //get peserta tender (by K/L/PD competitor)
@@ -440,15 +579,15 @@ class Competitor extends CI_Controller
             }
 
             ?>
-			<p class="d-none" id="chart5"><?php echo json_encode($klpd) ?></p>
-			<?php
+            <p class="d-none" id="chart5"><?php echo json_encode($klpd) ?></p>
+            <?php
 
             $latlong = $this->Lpse_model->getlatlong($data['cariKLPD']);
 
             ?>
-			<!-- <p class="d-none" id="chart5"><?php //echo json_encode($latlong);
+            <!-- <p class="d-none" id="chart5"><?php //echo json_encode($latlong);
                                                 // var_dump($response);
-            ?></p> -->
+                                                ?></p> -->
 <?php
 
             // var_dump($klpd);

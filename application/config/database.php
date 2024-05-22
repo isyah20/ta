@@ -76,10 +76,10 @@ $query_builder = true;
 
 $db['default'] = [
     'dsn' => '',
-    'hostname' => 'dev.swevel.com',
-    'username' => 'tenderplus',
-    'password' => 'C%87SfcjjaHb*te',
-    'database' => 'tenderplus',
+    'hostname' => 'srv1042.hstgr.io',
+    'username' => 'u839377893_dev_tenderplus',
+    'password' => 'Tenderplus123',
+    'database' => 'u839377893_dev_tenderplus',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => false,

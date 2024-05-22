@@ -357,6 +357,17 @@ class PesertaTender_model extends CI_Model
         $data = json_decode($data->getBody()->getContents(), true);
         return $data;
     }
+    public function getPesertaByKeyword($limit, $keyword)
+    {
+        // var_dump($klpd);
+        $this->db->select('npwp, nama_peserta');
+        $this->db->distinct();
+        $this->db->from('peserta');
+        $this->db->like('nama_peserta', $keyword);
+        $this->db->limit($limit);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     // public function getPesertaMenawarPerMonth()
     // {
     //     $this->db->select('COUNT(npwp) as jumlah_peserta, tender.tgl_pembuatan as bulan');

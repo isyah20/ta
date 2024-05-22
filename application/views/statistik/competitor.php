@@ -397,6 +397,90 @@
         overflow: hidden;
         /* This ensures the border radius affects child elements */
     }
+
+    /* .form-select-custom {
+        width: 300px;
+        color: #CCCCCC;
+        border-radius: 20px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        border: 1px solid;
+        background-color: white;
+        margin-top: 0;
+        height: 2rem;
+    }
+
+    .form-select-custom:hover {
+        border: 1.5px solid var(--primary-red-500, #D21B1B);
+    } */
+
+    /* .form-input-custom {
+        border-radius: 20px;
+        font-size: 1rem;
+        width: 92%;
+    }
+
+
+    .sum-semua-notif {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .dashboard-hero {
+        background-color: #ffeee6;
+        width: 100%;
+        min-height: 100px;
+        height: auto;
+        border-radius: 10px;
+        padding: 2em;
+    } */
+
+    /* SELECT 2 */
+    /* .select2-container--default .select2-selection--single {
+        background-color: none;
+        border: none;
+        border-radius: none;
+    }
+
+    .select2-container {
+
+        max-width: calc(100% - 10%);
+    } */
+
+
+    /* GPT NEW */
+    /* Kustomisasi gaya untuk input select */
+    /* .select2-container {
+        display: inline-block;
+        position: relative;
+        width: 300px;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 34px;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        padding: .375rem .75rem;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        margin-top: 0;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 32px;
+        top: 1px;
+    }
+
+    .select2-container .select2-selection__placeholder {
+        color: #6c757d;
+    }
+
+    .select2-container .select2-search__field {
+        display: none;
+    } */
 </style>
 
 <div class="modal fade" id="npwpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" x-data="completeProfile">
@@ -423,7 +507,20 @@
     </div>
 </div>
 
+<section class="bg-white">
+    <div class="container-lg">
+        <div class="row justify-content d-flex content-above-navbar">
+            <div class="d-flex justify-content-left align-items-left wow fadeInUp" data-wow-delay="0.1s">
+                <h4 class="mb-0 ms-2 mt-4 wow fadeInUp w-660" style="padding-top:8px;font-size:26px">
+                    Hai, Berikut Merupakan Performa <p>Dari Perusahaan <span class="fw-semibold nama-pengguna" style="color: #df3131; font-size:26px"></span></p>
+                </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="user-dashboard" class="user-dashboard mt-5 py-5 bg-white" style="margin-top:70px">
+    <!-- <input id="input-cari-tender" type="text" class="form-select-custom custom-select" placeholder="Cari nama perusahaan">
     <div class="container" data-aos="fade_up">
         <div class="row">
             <div class="col-lg-12" style="margin:0">
@@ -431,8 +528,181 @@
                 <h4 style="font-weight:510; font-size:22px;" class="mt-2 mb-2">Berikut Performa dari PT Maju Mundur Abadi</h4>
             </div>
         </div>
+    </div> -->
+    <style>
+        /* Gaya untuk input dan daftar hasil pencarian */
+        .custom-select {
+            position: relative;
+            width: 300px;
+        }
+
+        .custom-select input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .custom-select .search-results {
+            display: none;
+            position: absolute;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .custom-select .search-results ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .custom-select .search-results ul li {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .custom-select .search-results ul li:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
+    <!-- </head>
+<body> -->
+
+    <!-- Elemen untuk pencarian dinamis -->
+    <div class="custom-select">
+        <input type="text" id="myInput" placeholder="Pilih atau cari opsi">
+        <div id="search-results" class="search-results">
+            <ul id="myUL"></ul>
+        </div>
     </div>
 
+    <script>
+        // Daftar opsi yang akan dicari
+        const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
+
+        const input = document.getElementById('myInput');
+        const containerResult = document.getElementById('search-results');
+        const ul = document.getElementById('myUL');
+
+        input.addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            // const matches = options.filter(option => option.toLowerCase().includes(searchValue));
+            $.ajax({
+                    url: "<?= base_url(); ?>api/getPesertaByKeyword",
+                    type: "POST",
+                    data: {
+                        keyword: searchValue,
+                    },
+                    beforeSend: (jqXHR, settings) => {
+                        // Tampilkan pesan loading jika diperlukan
+                        // $('#loading-filter').text('Loading...');
+                    }
+                })
+                .done((result) => {
+                    console.log(result);
+                    renderResults(result);
+
+                })
+                .fail((jqXHR, textStatus, err) => {
+                    // Tangani kesalahan atau tampilkan pesan kesalahan jika permintaan gagal
+                    // $('#loading-filter').text('');
+                    console.error("AJAX request failed: " + textStatus, err);
+                    // Tampilkan pesan kesalahan kepada pengguna jika diperlukan
+                    // alert("AJAX request failed: " + textStatus);
+                });
+        });
+
+        function renderResults(results) {
+            ul.innerHTML = '';
+
+            if (results.length === 0) {
+                ul.style.display = 'none';
+                return;
+            }
+
+            results.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = result.nama_peserta;
+
+                li.addEventListener('click', function() {
+                    input.value = result.nama_peserta;
+                    input.data_npwp = result.npwp;
+                    ul.style.display = 'none';
+
+                    getDataChart(input.data_npwp);
+                });
+
+                ul.appendChild(li);
+            });
+            console.log(ul);
+            ul.style.display = 'block';
+            containerResult.appendChild(ul);
+            containerResult.style.display = 'block';
+
+        }
+    </script>
+    <!-- filter LPSE -->
+    <div class="container " data-wow-delay="0.1s">
+        <div class="row">
+            <div class="card-select">
+                <div class="select-custom container-fluid">
+                    <div class="row">
+                        <div class="col form-select-custom d-flex" style="width: 300px;">
+                            <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+                            <select id="select-lpse" class="" style="border:none;">
+                                <option value="">Semua LPSE</option>
+                                <?php foreach ($lpse as $lpse) : ?>
+                                    <option value="<?= $lpse['id_lpse'] ?>"><?php echo $lpse['nama_lpse'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+
+                        <script>
+                            // $(document).ready(function() {
+                            //     $('#select-lpse').select2();
+                            // });
+
+                            $(document).ready(function() {
+                                $('#select-lpse').select2({
+                                    minimumResultsForSearch: Infinity, // Menghilangkan dropdown dan hanya menampilkan kotak input
+                                    tags: true // Set tags ke true untuk memungkinkan penambahan nilai baru
+                                });
+                            });
+                            $(document).ready(function() {
+                                $('#select-tahun').select2({
+                                    width: '100%',
+                                    minimumResultsForSearch: Infinity
+                                });
+
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-select-custom d-flex" style="width: 200px;">
+        <img src="<?= base_url('assets\img\icon_filter.svg') ?>" width="20" alt="">
+        <select id="select-tahun" class="" style="border:none;">
+            <option class="select-tahun-option" selected value="">Semua tahun</option>
+            <?php $tahun = (int) date('Y');
+            for ($i = 0; $i < 5; $i++) :
+            ?>
+                <option class="select-tahun-option" value="<?= $tahun ?>"><?= $tahun ?></option>
+            <?php
+                $tahun--;
+            endfor;  ?>
+
+        </select>
+    </div>
+    <!-- End of Filter Tahun -->
 
     <!-- riwayat menang kalah  -->
     <div class="container-lg pt-3 wow fadeInUp" data-wow-delay="0.1s">
@@ -490,7 +760,7 @@
                                     <th>Persentase Penurunan</th>
                                 </tr>
                             </thead>
-                            <tbody id="data-leads">
+                            <tbody id="tender-ikut">
                                 <tr>
                                     <th></th>
                                     <td>1</td>
@@ -533,7 +803,7 @@
                     <img src="<?= base_url('assets/img/img_competitor.png') ?>" class="dh-img" alt="" style="margin-bottom: -20px;">
                     <div class="card-rate">
                         <h5>RATA - RATA PERSENTASE PENURUNAN HPS</h5>
-                        <h3>18%</h3>
+                        <h3 id="presentasePenurunanHPS">18%</h3>
                     </div>
                 </div>
             </div>
@@ -561,27 +831,27 @@
                         <!-- For large screens, it will take up 4 columns. For extra small screens, it will take up all 12 columns -->
                         <div class="col-auto card-hps justify-content-between align-items-center px-4" style="background: #EF5350;">
                             <h6>> 10 Miliar</h6>
-                            <h6 class="border-suram">9</h6>
+                            <h6 id="summary5" class="border-suram">9</h6>
                         </div>
 
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #495894;">
                             <h6>1 - 10 Miliar</h6>
-                            <h6 class="border-suram">197</h6>
+                            <h6 id="summary4" class="border-suram">197</h6>
 
                         </div>
                         <div class="col-auto card-hps justify-content-between align-item-center px-4 " style="background: #F17D3A;">
                             <h6>500 Juta - 1 Miliar</h6>
-                            <h6 class="border-suram">93</h6>
+                            <h6 id="summary3" class="border-suram">93</h6>
                         </div>
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #83D4FA;">
                             <h6>100 - 500 Juta</h6>
-                            <h6 class="border-suram">229</h6>
+                            <h6 id="summary2" class="border-suram">229</h6>
 
                         </div>
                         <div class="col-auto card-hps justify-content-between px-4" style="background: #EF5350;">
                             <h6>
                                 < 100 Juta</h6>
-                                    <h6 class="border-suram">342</h6>
+                                    <h6 id="summary1" class="border-suram">342</h6>
 
                         </div>
                     </div>
@@ -607,7 +877,98 @@
         }, () => Math.floor(Math.random() * 100));
     }
 
-    const barconfig = {
+    function getDataChart(inputNPWP) {
+        console.log(inputNPWP);
+        $.ajax({
+                url: "<?= base_url(); ?>api/getDataChartByNPWP",
+                type: "POST",
+                data: {
+                    npwp: inputNPWP,
+                },
+                beforeSend: (jqXHR, settings) => {
+                    // Tampilkan pesan loading jika diperlukan
+                    // $('#loading-filter').text('Loading...');
+                }
+            })
+            .done((result) => {
+                console.log(result);
+                updateDoughnutWinLose(result);
+                updateTable(result.join);
+                updateSummaryHPS(result);
+                // addCardByStatus(result.win_lose);
+
+                // renderResults(result);
+
+            })
+            .fail((jqXHR, textStatus, err) => {
+                // Tangani kesalahan atau tampilkan pesan kesalahan jika permintaan gagal
+                // $('#loading-filter').text('');
+                console.error("AJAX request failed: " + textStatus, err);
+                // Tampilkan pesan kesalahan kepada pengguna jika diperlukan
+                // alert("AJAX request failed: " + textStatus);
+            });
+    }
+
+
+    var totalTender = 0;
+    var data = [Math.random() * 100, Math.random() * 100];
+    for (var i = 0; i < data.length; i++) {
+        totalTender += data[i];
+    }
+
+    var doughnutWinLoseChartConfig = {
+        type: 'doughnut',
+        data: {
+            labels: ['Menang', 'Kalah'],
+            datasets: [{
+                data: data,
+                backgroundColor: ['#56C474', '#EF5350'],
+                borderWidth: 2, // Add gaps between segments
+                borderColor: 'white' // Color of the gaps
+            }]
+        },
+        options: {
+            cutout: '65%', // Make the doughnut thinner
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        // This will change the shape of the legend item to be a circle.
+                        usePointStyle: true,
+                        boxWidth: 10 // The size of the legend color box
+                    }
+                }
+            },
+            animation: {
+                onComplete: function() {
+                    var ctx = this.ctx;
+                    ctx.save();
+
+                    // Draw "Total Tender" text with smaller font
+                    ctx.font = "14px Ubuntu";
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fontWeight = 500;
+                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                    ctx.fillText("Total Tender", centerX, centerY - 10);
+
+                    // Draw the numerical value with larger font
+                    ctx.font = "30px Ubuntu";
+                    ctx.fontWeight = 700;
+                    ctx.fillText(totalTender.toFixed(2), centerX, centerY + 20);
+
+                    ctx.restore();
+                }
+            }
+        }
+    };
+    var ctxDoughnutWinLose = document.getElementById('myDoughnutChart').getContext('2d');
+    var doughnutWinLoseChart = new Chart(ctxDoughnutWinLose, doughnutWinLoseChartConfig);
+
+    const barRangeHPSConfig = {
         type: 'bar',
         data: {
             labels: [
@@ -665,11 +1026,11 @@
         }
     };
 
-    var ctxStackedBar = document.getElementById('stackedBarChart').getContext('2d');
-    var stackedBarChart = new Chart(ctxStackedBar, barconfig);
+    var ctxStackedBarRangeHPS = document.getElementById('stackedBarChart').getContext('2d');
+    var stackedBarRangeHPSChart = new Chart(ctxStackedBarRangeHPS, barRangeHPSConfig);
 
     //ikut tender 
-    const barConfig = {
+    const barTimeSeriesConfig = {
         type: 'bar',
         data: {
             labels: [
@@ -707,70 +1068,173 @@
         }
     };
 
-    var ctxBarChart = document.getElementById('chart-ikuttender').getContext('2d');
-    var barChart = new Chart(ctxBarChart, barConfig);
+    var ctxBarChartTimeSeries = document.getElementById('chart-ikuttender').getContext('2d');
+    var barChartTimeSeries = new Chart(ctxBarChartTimeSeries, barTimeSeriesConfig);
+
+    function updateDoughnutWinLose(newData) {
+        // Memperbarui data pada grafik Doughnut
+        barRangeHPSConfig.data.datasets[0].data = newData.range[0];
+        barRangeHPSConfig.data.datasets[1].data = newData.range[1];
+        barRangeHPSConfig.data.datasets[2].data = newData.range[2];
+        barRangeHPSConfig.data.datasets[3].data = newData.range[3];
+        barRangeHPSConfig.data.datasets[4].data = newData.range[4];
+        doughnutWinLoseChart.data.datasets[0].data = [newData.akumulasi[0], newData.akumulasi[1]];
+        barChartTimeSeries.data.datasets[0].data = newData.time_series;
+
+        // Mengambil total tender baru
+        var newTotalTender = 1;
+        var newTotalTender = newData.akumulasi[0] + newData.akumulasi[1];
+        doughnutWinLoseChartConfig.options.animation = {
+            onComplete: function() {
+                var ctx = this.ctx;
+                ctx.save();
+
+                // Draw "Total Tender" text with smaller font
+                ctx.font = "14px Ubuntu";
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fontWeight = 500;
+                var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
+                var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
+                ctx.fillText("Total Tender", centerX, centerY - 10);
+
+                // Draw the numerical value with larger font
+                ctx.font = "30px Ubuntu";
+                ctx.fontWeight = 700;
+                ctx.fillText(newTotalTender, centerX, centerY + 20);
+
+                ctx.restore();
+            }
+        };
+
+        if (doughnutWinLoseChart) {
+            doughnutWinLoseChart.destroy(); // Hancurkan chart sebelumnya
+        }
+        if (barChartTimeSeries) {
+            barChartTimeSeries.destroy(); // Hancurkan chart sebelumnya
+        }
+        if (stackedBarRangeHPSChart) {
+            stackedBarRangeHPSChart.destroy(); // Hancurkan chart sebelumnya
+        }
+
+
+        doughnutWinLoseChart = new Chart(document.getElementById('myDoughnutChart').getContext('2d'), doughnutWinLoseChartConfig);
+        barChartTimeSeries = new Chart(document.getElementById('chart-ikuttender').getContext('2d'), barTimeSeriesConfig);
+        stackedBarRangeHPSChart = new Chart(document.getElementById('stackedBarChart').getContext('2d'), barRangeHPSConfig);
+
+    }
+
+
+    // TABEL
+    function formatRupiahHPS(number) {
+        const roundedNumber = Math.round(number * 100) / 100; // Bulatkan ke dua angka desimal
+        const numString = roundedNumber.toString(); // Ubah angka menjadi string
+        const splitNum = numString.split('.'); // Pisahkan bagian desimal jika ada
+
+        let rupiah = splitNum[0]
+            .split('')
+            .reverse()
+            .reduce((acc, curr, index) => {
+                return curr + (index && index % 3 === 0 ? '.' : '') + acc;
+            }, '');
+
+        rupiah = 'Rp ' + rupiah; // Tambahkan 'Rp ' di depan
+
+        // Tambahkan bagian desimal jika ada
+        if (splitNum[1]) {
+            rupiah += ',' + (splitNum[1].length === 1 ? splitNum[1] + '0' : splitNum[1]);
+        } else {
+            rupiah += ',00'; // Tambahkan '00' jika tidak ada desimal
+        }
+
+        return rupiah;
+    }
+
+    function removeComma(number) {
+        let angkaHasil = '';
+        let parsedNumber = parseFloat(number); // Mengonversi ke tipe data Number
+
+        if (!isNaN(parsedNumber)) {
+            // Jika parsedNumber adalah tipe data Number yang valid
+            if (parsedNumber % 1 !== 0) {
+                // Angka memiliki nilai desimal (angka dibelakang koma)
+                angkaHasil = Math.floor(parsedNumber); // Mengubah ke integer tanpa angka di belakang koma
+            } else {
+                // Angka tidak memiliki nilai desimal
+                angkaHasil = parsedNumber;
+            }
+        }
+
+        return angkaHasil;
+    }
+
+    function calculatePercentage(hargaPenawaran, nilaiHPS) {
+        const parsedOfferPrice = removeComma(hargaPenawaran);
+        const parsedHPSValue = removeComma(nilaiHPS);
+
+        const percentage = ((parsedOfferPrice - parsedHPSValue) / (parsedOfferPrice + parsedHPSValue) * 100);
+        const roundedPercentage = percentage.toFixed(2);
+
+        return roundedPercentage;
+    }
+
+
+    function updateTable(data) {
+        console.log(formatRupiahHPS(123456789.123), 'RP'); // Output: Rp 123.456.789,12
+        const tabelTenderIkut = document.getElementById('tender-ikut');
+        const textRataRataPresentase = document.getElementById('presentasePenurunanHPS');
+        tabelTenderIkut.innerHTML = '';
+        var totalPresentase = 0.0;
+
+        if (data.length > 0) {
+            data.forEach((pesertaIkut, index) => {
+                const row = `<tr>
+                            <th></th>
+                            <td>${index + 1}</td>
+                            <td class="custom-padding">${pesertaIkut.nama_tender}</td>
+                            <td class="green-td">${formatRupiahHPS(pesertaIkut.nilai_hps_paket)}</td>
+                            <td class="green-td">${formatRupiahHPS(pesertaIkut.harga_penawaran)}</td>
+                            <td class="orange-td">${calculatePercentage(pesertaIkut.harga_penawaran,pesertaIkut.nilai_hps_paket)}%</td>
+                        </tr>`;
+                tabelTenderIkut.insertAdjacentHTML('beforeend', row);
+                totalPresentase += parseFloat(calculatePercentage(pesertaIkut.harga_penawaran, pesertaIkut.nilai_hps_paket));
+            });
+            console.log(totalPresentase, 'total presentase');
+            textRataRataPresentase.innerHTML = (totalPresentase / data.length) + '%';
+        } else {
+            const emptyRow = `<tr>
+                            <th colspan="6" style="text-align: center; padding: 10px;">Tidak ada data yang tersedia untuk ditampilkan.</th>
+                            </tr>`;
+            tabelTenderIkut.insertAdjacentHTML('beforeend', emptyRow);
+            textRataRataPresentase.innerHTML = '0%';
+        }
+    }
+
+    function updateSummaryHPS(data) {
+        // console.log(data.range.range1);
+
+        $('#summary1').html(data.range.range1);
+        $('#summary2').html(data.range.range2);
+        $('#summary3').html(data.range.range3);
+        $('#summary4').html(data.range.range4);
+        $('#summary5').html(data.range.range5);
+
+        // dataChart3 = data.time_series;
+
+        // dataDoughnutChart = {
+        //     '0': data.akumulasi[0],
+        //     '1': data.akumulasi[1],
+        //     '2': data.akumulasi[2],
+        // };
+        updateChartData(data)
+    }
 </script>
 
 
 <!-- doughnut chart -->
 <script>
-    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
 
-    var totalTender = 0;
-    var data = [Math.random() * 100, Math.random() * 100];
-    for (var i = 0; i < data.length; i++) {
-        totalTender += data[i];
-    }
-
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Menang', 'Kalah'],
-            datasets: [{
-                data: data,
-                backgroundColor: ['#56C474', '#EF5350'],
-                borderWidth: 2, // Add gaps between segments
-                borderColor: 'white' // Color of the gaps
-            }]
-        },
-        options: {
-            cutout: '65%', // Make the doughnut thinner
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                        // This will change the shape of the legend item to be a circle.
-                        usePointStyle: true,
-                        boxWidth: 10 // The size of the legend color box
-                    }
-                }
-            },
-            animation: {
-                onComplete: function() {
-                    var ctx = this.ctx;
-                    ctx.save();
-
-                    // Draw "Total Tender" text with smaller font
-                    ctx.font = "14px Ubuntu";
-                    ctx.fillStyle = 'black';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fontWeight = 500;
-                    var centerX = this.chartArea.left + (this.chartArea.right - this.chartArea.left) / 2;
-                    var centerY = this.chartArea.top + (this.chartArea.bottom - this.chartArea.top) / 2;
-                    ctx.fillText("Total Tender", centerX, centerY - 10);
-
-                    // Draw the numerical value with larger font
-                    ctx.font = "30px Ubuntu";
-                    ctx.fontWeight = 700;
-                    ctx.fillText(totalTender.toFixed(2), centerX, centerY + 20);
-
-                    ctx.restore();
-                }
-            }
-        }
-    });
 </script>
 <!-- <script>
     var ctx = document.getElementById('doughnutChart').getContext('2d');

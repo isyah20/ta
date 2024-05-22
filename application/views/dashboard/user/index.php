@@ -344,6 +344,7 @@
         background: var(--X, rgba(10, 10, 10, 0.15));
 
     }
+
     .card-select {
         font-size: 10px;
         display: flex;
