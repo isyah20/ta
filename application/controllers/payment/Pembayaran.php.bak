@@ -1,0 +1,936 @@
+<?php
+
+defined('BASEPATH') or exit('No direct script access allowed');
+
+use Midtrans\Config;
+use Midtrans\Notification;
+
+class Pembayaran extends CI_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->model('Promo_model');
+        $this->load->model('PaketPembelian_model');
+        $this->load->model('Pembayaran_model');
+        $this->load->model('Order_model');
+        $this->load->model('api/Pengguna_model', 'Pengguna_model');
+    }
+
+    public function index()
+    {
+        $this->load->library('user');
+        $user = $this->session->userdata('user_data');
+        $photo = null;
+        if ($user != null) {
+            $photo = $this->user->getPhotoProfile((int) $user['id_pengguna'], $this->db);
+        }
+
+        $data = [
+            'title' => 'Pembayaran',
+            'photo' => $photo,
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('payment/pembayaran', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function invoice()
+    {
+        $data = [
+            'title' => 'Pembayaran',
+        ];
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('payment/invoice');
+        $this->load->view('templates/footer');
+    }
+
+    public function qr_scan()
+    {
+        $data = [
+            'title' => 'Pembayaran',
+        ];
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
+        $this->load->view('payment/scan-qr');
+        $this->load->view('templates/footer');
+    }
+
+    public function cekpromo($data)
+    {
+        // 		parse_str(file_get_contents('php://input'), $data);
+        $response = $this->Promo_model->getData($data)->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
+
+    public function ceknpwp()
+    {
+        if (!$this->session->userdata('user_data')) {
+            redirect('login');
+        }
+
+        $response = $this->Pengguna_model->getnpwp($this->session->user_data['id_pengguna'])->row();
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
+
+    public function updateProfil()
+    {
+        if (!$this->session->userdata('user_data')) {
+            redirect('login');
+        }
+        parse_str(file_get_contents('php://input'), $data);
+        $data['id_pengguna'] = $this->session->user_data['id_pengguna'];
+
+        $response = $this->Pengguna_model->updateProfil($data);
+
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+            ->_display();
+        exit;
+    }
+
+    public function paketPembelian()
+    {
+        $paket = $this->PaketPembelian_model->getAllData();
+        $responseData = [
+            'message' => 'Success',
+            'data' => $paket,
+        ];
+
+        $jsonResponse = json_encode($responseData);
+        echo $jsonResponse;
+    }
+
+    public function create()
+    {
+        if (!$this->session->userdata('user_data')) {
+            redirect('login');
+        }
+        parse_str(file_get_contents('php://input'), $data);
+        $result = json_decode($data['result']);
+        $detail_order = json_decode($data['detail_order']);
+
+        $data_order = [
+            "id_order" => $result->order_id,
+            "durasi" => $data["durasi_bulan"],
+            "id_pengguna" => $this->session->user_data['id_pengguna'],
+            "ppn" => $data["ppn"],
+            "diskon" => $data["diskon"],
+            "total_harga" => $data["total"],
+            "kode_promo" => $data["kode_promo"],
+            "status" => '0',
+            "tgl_berakhir" => date('Y-m-d', strtotime('+' . $data["durasi_bulan"] . ' months', strtotime(date('Y-m-d')))),
+            "tgl_order" => date('Y-m-d'),
+        ];
+
+        $data_detail = [];
+        for ($i = 0; $i < count($detail_order); $i++) {
+            $data_detail[] = [
+                'id_order' => $result->order_id,
+                'id_paket_pembelian' => $detail_order[$i],
+            ];
+        }
+
+        $data_pembayaran = [
+            "snap_token" => $data["token"],
+            "id_order" => $result->order_id,
+            "total_bayar" => $data["total"],
+            "jenis_pembayaran" => $result->payment_type,
+            "kode_status" => $result->status_code,
+            "url_slip" => $result->pdf_url,
+            "status_pesan" => $result->transaction_status,
+            "transaction_id" => $result->transaction_id,
+            "tgl_pembayaran" => date('Y-m-d H:i:s'),
+        ];
+
+        if ($result->payment_type == 'bank_transfer') {
+            // bca, bni, bri
+            if (isset($result->va_numbers)) {
+                $data_pembayaran += [
+                    'bank' => $result->va_numbers[0]->bank,
+                    'nomor_va' => $result->va_numbers[0]->va_number,
+                ];
+            } else {
+                // permata
+                $data_pembayaran += [
+                    'bank' => 'permata',
+                    'nomor_va' => $result->permata_va_number,
+                ];
+            }
+        } elseif ($result->payment_type == 'echannel') {
+            // mandiri
+            $data_pembayaran += [
+                'bank' => 'mandiri',
+                'bill_key' => $result->bill_key,
+                'biller_code' => $result->biller_code,
+            ];
+        } elseif ($result->payment_type == 'qris') {
+            $data_pembayaran += [
+                'bank' => $result->acquirer,
+            ];
+            $data_pembayaran["url_slip"] = $result->action[0]->url;
+        } elseif ($result->payment_type == 'gopay') {
+            $data_pembayaran += [
+                'bank' => $result->payment_type,
+            ];
+            $data_pembayaran["url_slip"] = $result->action[0]->url;
+        }
+
+        if ($result->status_code == '200') {
+            $data_order["status"] = '1';
+            if ($data["kode_promo"] != '' || $data["kode_promo"] != null) {
+                $this->Promo_model->updateKuota($data["kode_promo"]);
+            }
+        }
+
+        $this->load->library('email');
+        $config = [];
+        $config['charset'] = 'utf-8';
+        $config['useragent'] = 'Codeigniter';
+        $config['protocol'] = "smtp";
+        $config['mailtype'] = "html";
+        // $config['smtp_host'] = "tenderplus.id"; //pengaturan smtp
+        $config['smtp_host'] = "srv42.niagahoster.com"; //pengaturan smtp
+        $config['smtp_port'] = "465";
+        $config['smtp_timeout'] = "60";
+// 			$config['smtp_user'] = "noreply@tenderplus.id"; // isi dengan email
+        $config['smtp_user'] = "payment@tenderplus.id"; // isi dengan email
+// 			$config['smtp_pass'] = "C%87SfcjjaHb*te1"; // isi dengan password
+        $config['smtp_pass'] = "C%87SfcjjaHb*te"; // isi dengan password
+        $config['crlf'] = "\r\n";
+        $config['newline'] = "\r\n";
+        $config['smtp_crypto'] = "ssl"; //pengaturan smtp
+        $config['wordwrap'] = true;
+
+        //memanggil library email dan set konfigurasi untuk pengiriman email
+        $this->email->initialize($config);
+
+        //konfigurasi pengiriman
+        $this->email->from('support@tenderplus.id', 'Tender Plus');
+        $this->email->to($this->input->post('email'));
+        $this->email->subject("Tagihan Akun Premium");
+        $message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <title></title>
+    <style type="text/css" rel="stylesheet" media="all">
+    /* Base ------------------------------ */
+    
+    @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&display=swap");
+    body {
+      width: 100% !important;
+      height: 100%;
+      margin: 0;
+      -webkit-text-size-adjust: none;
+    }
+    
+    a {
+      color: #3869D4;
+    }
+    
+    a img {
+      border: none;
+    }
+    
+    td {
+      word-break: break-word;
+    }
+    
+    .preheader {
+      display: none !important;
+      visibility: hidden;
+      mso-hide: all;
+      font-size: 1px;
+      line-height: 1px;
+      max-height: 0;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    /* Type ------------------------------ */
+    
+    body,
+    td,
+    th {
+      font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+    }
+    
+    h1 {
+      margin-top: 0;
+      color: #333333;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: left;
+    }
+    
+    h2 {
+      margin-top: 0;
+      color: #333333;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: left;
+    }
+    
+    h3 {
+      margin-top: 0;
+      color: #333333;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: left;
+    }
+    
+    td,
+    th {
+      font-size: 16px;
+    }
+    
+    p,
+    ul,
+    ol,
+    blockquote {
+      margin: .4em 0 1.1875em;
+      font-size: 16px;
+      line-height: 1.625;
+    }
+    
+    p.sub {
+      font-size: 13px;
+    }
+    /* Utilities ------------------------------ */
+    
+    .align-right {
+      text-align: right;
+    }
+    
+    .align-left {
+      text-align: left;
+    }
+    
+    .align-center {
+      text-align: center;
+    }
+    
+    .u-margin-bottom-none {
+      margin-bottom: 0;
+    }
+    /* Buttons ------------------------------ */
+    
+    .button {
+      background-color: #3869D4;
+      border-top: 10px solid #3869D4;
+      border-right: 18px solid #3869D4;
+      border-bottom: 10px solid #3869D4;
+      border-left: 18px solid #3869D4;
+      display: inline-block;
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 3px;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+      -webkit-text-size-adjust: none;
+      box-sizing: border-box;
+    }
+    
+    .button--green {
+      background-color: #22BC66;
+      border-top: 10px solid #22BC66;
+      border-right: 18px solid #22BC66;
+      border-bottom: 10px solid #22BC66;
+      border-left: 18px solid #22BC66;
+    }
+    
+    .button--red {
+      background-color: #FF6136;
+      border-top: 10px solid #FF6136;
+      border-right: 18px solid #FF6136;
+      border-bottom: 10px solid #FF6136;
+      border-left: 18px solid #FF6136;
+    }
+    
+    @media only screen and (max-width: 500px) {
+      .button {
+        width: 100% !important;
+        text-align: center !important;
+      }
+    }
+    /* Attribute list ------------------------------ */
+    
+    .attributes {
+      margin: 0 0 21px;
+    }
+    
+    .attributes_content {
+      background-color: #F4F4F7;
+      padding: 16px;
+    }
+    
+    .attributes_item {
+      padding: 0;
+    }
+    /* Related Items ------------------------------ */
+    
+    .related {
+      width: 100%;
+      margin: 0;
+      padding: 25px 0 0 0;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+    }
+    
+    .related_item {
+      padding: 10px 0;
+      color: #CBCCCF;
+      font-size: 15px;
+      line-height: 18px;
+    }
+    
+    .related_item-title {
+      display: block;
+      margin: .5em 0 0;
+    }
+    
+    .related_item-thumb {
+      display: block;
+      padding-bottom: 10px;
+    }
+    
+    .related_heading {
+      border-top: 1px solid #CBCCCF;
+      text-align: center;
+      padding: 25px 0 10px;
+    }
+    /* Discount Code ------------------------------ */
+    
+    .discount {
+      width: 100%;
+      margin: 0;
+      padding: 24px;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+      background-color: #F4F4F7;
+      border: 2px dashed #CBCCCF;
+    }
+    
+    .discount_heading {
+      text-align: center;
+    }
+    
+    .discount_body {
+      text-align: center;
+      font-size: 15px;
+    }
+    /* Social Icons ------------------------------ */
+    
+    .social {
+      width: auto;
+    }
+    
+    .social td {
+      padding: 0;
+      width: auto;
+    }
+    
+    .social_icon {
+      height: 20px;
+      margin: 0 8px 10px 8px;
+      padding: 0;
+    }
+    /* Data table ------------------------------ */
+    
+    .purchase {
+      width: 100%;
+      margin: 0;
+      padding: 35px 0;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+    }
+    
+    .purchase_content {
+      width: 100%;
+      margin: 0;
+      padding: 25px 0 0 0;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+    }
+    
+    .purchase_item {
+      padding: 10px 0;
+      color: #51545E;
+      font-size: 15px;
+      line-height: 18px;
+    }
+    
+    .purchase_heading {
+      padding-bottom: 8px;
+      border-bottom: 1px solid #EAEAEC;
+    }
+    
+    .purchase_heading p {
+      margin: 0;
+      color: #85878E;
+      font-size: 12px;
+    }
+    
+    .purchase_footer {
+      padding-top: 15px;
+      border-top: 1px solid #EAEAEC;
+    }
+    
+    .purchase_total {
+      margin: 0;
+      text-align: right;
+      font-weight: bold;
+      color: #333333;
+    }
+    
+    .purchase_total--label {
+      padding: 0 15px 0 0;
+    }
+    
+    body {
+      background-color: #F2F4F6;
+      color: #51545E;
+    }
+    
+    p {
+      color: #51545E;
+    }
+    
+    .email-wrapper {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+      background-color: #F2F4F6;
+    }
+    
+    .email-content {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+    }
+    /* Masthead ----------------------- */
+    
+    .email-masthead {
+      padding: 25px 0;
+      text-align: center;
+    }
+    
+    .email-masthead_logo {
+      width: 94px;
+    }
+    
+    .email-masthead_name {
+      font-size: 16px;
+      font-weight: bold;
+      color: #A8AAAF;
+      text-decoration: none;
+      text-shadow: 0 1px 0 white;
+    }
+    /* Body ------------------------------ */
+    
+    .email-body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+    }
+    
+    .email-body_inner {
+      width: 570px;
+      margin: 0 auto;
+      padding: 0;
+      -premailer-width: 570px;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+      background-color: #FFFFFF;
+    }
+    
+    .email-footer {
+      width: 570px;
+      margin: 0 auto;
+      padding: 0;
+      -premailer-width: 570px;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+      text-align: center;
+    }
+    
+    .email-footer p {
+      color: #A8AAAF;
+    }
+    
+    .body-action {
+      width: 100%;
+      margin: 30px auto;
+      padding: 0;
+      -premailer-width: 100%;
+      -premailer-cellpadding: 0;
+      -premailer-cellspacing: 0;
+      text-align: center;
+    }
+    
+    .body-sub {
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid #EAEAEC;
+    }
+    
+    .content-cell {
+      padding: 45px;
+    }
+    /*Media Queries ------------------------------ */
+    
+    @media only screen and (max-width: 600px) {
+      .email-body_inner,
+      .email-footer {
+        width: 100% !important;
+      }
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      body,
+      .email-body,
+      .email-body_inner,
+      .email-content,
+      .email-wrapper,
+      .email-masthead,
+      .email-footer {
+        background-color: #333333 !important;
+        color: #FFF !important;
+      }
+      p,
+      ul,
+      ol,
+      blockquote,
+      h1,
+      h2,
+      h3,
+      span,
+      .purchase_item {
+        color: #FFF !important;
+      }
+      .attributes_content,
+      .discount {
+        background-color: #222 !important;
+      }
+      .email-masthead_name {
+        text-shadow: none !important;
+      }
+    }
+    
+    :root {
+      color-scheme: light dark;
+      supported-color-schemes: light dark;
+    }
+    </style>
+    <!--[if mso]>
+    <style type="text/css">
+      .f-fallback  {
+        font-family: Arial, sans-serif;
+      }
+    </style>
+  <![endif]-->
+  </head>
+  <body>
+    <span class="preheader">Berikut adalah tagihan untuk pembelian Anda pada {{ tanggal pembelian }}. Harap lakukan pembayaran paling lambat {{ tanggal jatuh tempo }}</span>
+    <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        <td align="center">
+          <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td class="email-masthead">
+                <a href="https://tenderplus.id" class="f-fallback email-masthead_name" style="font-size: 32px;">
+                TenderPlus.id
+              </a>
+              </td>
+            </tr>
+            <!-- Email Body -->
+            <tr>
+              <td class="email-body" width="570" cellpadding="0" cellspacing="0">
+                <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                  <!-- Body content -->
+                  <tr>
+                    <td class="content-cell">
+                      <div class="f-fallback">
+                        <h1>Hi {{name}},</h1>
+                        <p>Terima kasih telah menggunakan fitur premium tenderplus.id. Berikut adalah rincian yang harus Anda bayar.</p>
+                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td class="attributes_content">
+                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px;">
+                                    <span class="f-fallback">
+              <strong>Total Bayar</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>:</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>{{total}}</strong>
+            </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px;">
+                                    <span class="f-fallback">
+              <strong>Bayar Sebelum</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>:</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>{{tgl}}</strong>
+            </span>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <p>Silakan lakukan pembayaran ke:</p>
+                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td class="attributes_content">
+                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px;">
+                                    <span class="f-fallback">
+              <strong>Bank</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>:</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>{{total}}</strong>
+            </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px;">
+                                    <span class="f-fallback">
+              <strong>Nomor Virtual Akun</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>:</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>{{tgl}}</strong>
+            </span>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <table class="body" role="presentation">
+                          <tr>
+                            <td>
+                              <p class="f-fallback sub">Klik url dibawah untuk langkah-langkah membayar.</p>
+                              <p class="f-fallback sub">{{action_url}}</p>
+                            </td>
+                          </tr>
+                        </table>
+                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td class="attributes_content">
+                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px;">
+                                    <span class="f-fallback">
+              <strong>Bank</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>:</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>{{total}}</strong>
+            </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px;">
+                                    <span class="f-fallback">
+              <strong>Kode Penyedia Jasa</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>:</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>{{tgl}}</strong>
+            </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px;">
+                                    <span class="f-fallback">
+              <strong>Kode Bayar</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>:</strong>
+            </span>
+                                  </td>
+                                  <td class="attributes_item">
+                                    <span class="f-fallback">
+              <strong>{{tgl}}</strong>
+            </span>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <table class="body" role="presentation">
+                          <tr>
+                            <td>
+                              <p class="f-fallback sub">Klik url dibawah untuk langkah-langkah membayar.</p>
+                              <p class="f-fallback sub">{{action_url}}</p>
+                            </td>
+                          </tr>
+                        </table>
+                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td class="attributes_content">
+                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px; text-align: center;">
+                                    <span class="f-fallback">
+              <strong>QRIS</strong>
+            </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="attributes_item" style="width: 170px; text-align: center;"> <img src="https://api.midtrans.com/v2/qris/b0bffcd1-93e5-4cca-a423-b1ecd99e34c1/qr-code" style="width: 240px">
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <p>Jika terdapat pertanyaan Anda dapat membalas email ini.</p>
+                        <p>Terima Kasih,
+                          <br>Tim TenderPlus.id</p>
+                        <!-- Sub copy -->
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td class="content-cell" align="center">
+                      <p class="f-fallback sub align-center">
+                        TenderPlus.id, Indonesia
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>';
+        $message = $this->load->view('payment/email-tagihan', $data, true);
+        $this->email->message($message);
+
+        $this->Pembayaran_model->insert($data_pembayaran);
+        $this->Order_model->insert($data_order);
+        $this->Order_model->insert_detail($data_detail);
+    }
+
+    // Callback untuk midtrans
+    //https://github.com/Midtrans/midtrans-php/blob/master/examples/notification-handler.php
+    public function notification()
+    {
+        Config::$isProduction = false;
+        Config::$serverKey = $_SERVER['MIDTRANS_SERVER_KEY'];
+
+        $notif = null;
+        try {
+            $notif = new Notification();
+        } catch (\Exception $ex) {
+            exit($ex->getMessage());
+        }
+
+        // TODO: handle duplikasi order_id
+        $resp = $notif->getResponse();
+        $transaction = $resp->transaction_status;
+        $paymentType = $resp->payment_type;
+        $orderId = $resp->order_id;
+        $fraud = $resp->fraud_status;
+
+        if ($transaction == 'capture') {
+        } elseif ($transaction == 'settlement') {
+        } elseif ($transaction == 'pending') {
+        } elseif ($transaction == 'deny') {
+        } elseif ($transaction == 'expire') {
+        } elseif ($transaction == 'cancel') {
+        }
+    }
+}

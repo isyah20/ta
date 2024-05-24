@@ -1,0 +1,157 @@
+.market{
+    margin-top: 80px;
+    margin-bottom: 0px;
+    padding-bottom: 40px;
+    background-color:white; 
+}
+.card-market{
+    background-color:white; 
+    box-shadow: 0px 0px 25px 2px rgba(225, 203, 203, 0.3); 
+    border-radius: 10px;
+}
+
+.card-market-small{
+    background-color:white;
+    box-shadow: 0px 0px 5px 2px rgba(225, 203, 203, 0.3); 
+    border-radius: 5px;
+}
+.number-peserta{
+    font-size:14px;
+    width:25px;
+    height:25px;
+    color:white;
+    background-color: #553333; 
+    border-radius:10px;
+}
+.select-tahun{
+    color:#B89494;
+    border-color: #B89494;
+    border-radius:4px;
+}
+.select-tahun-option:hover{
+    color: #ffffff;
+    background-color: #B89494;
+}
+
+
+.market hr {
+	border: 1.5px solid #8b6464;
+	background-color: #8b6464;
+}
+
+.market h5 {
+	color: #8b6464;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+#myChart{
+    height: 385px;
+}
+
+#myChart2{
+    height: 200px;
+}
+
+#myChart3{
+    height: 392px;
+}
+
+.img-report{
+    height: 250px;
+}
+
+.table-peserta{
+    border-radius: 10px; 
+    overflow : auto;
+    max-height: 590px; 
+    box-shadow: 0px 0px 5px 2px rgba(225, 203, 203, 0.3);
+}
+
+.judul2{
+    color:#B89494;
+    font-size:16px;
+    font-weight: 700;
+}
+
+.judul3{
+    color:#B89494;
+    font-size:9px;
+    font-weight: 700;
+}
+
+.isi1{
+    color:#553333;
+    font-weight: 700;
+}
+
+.isi2{
+    color:#553333;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 1400px) {
+    .judul2{
+        font-size: 14px;
+    }
+    
+    .judul3{
+        font-size: 7px;
+    }
+
+    .isi1{
+        font-size: 14px;
+    }
+
+    #myChart{
+        height: 385px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .filter{
+        background-color: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    #myChart{
+        height: 350px;
+    }
+
+    #myChart2{
+        height: 350px;
+    }
+
+    #myChart2{
+        height: 350px;
+    }
+
+    .judul3{
+        font-size: 14px;
+    }
+    
+    .isi2{
+        font-size: 24px;
+    }
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+/*contoh1*/
+/*support google chrome*/
+.filter-item::-webkit-input-placeholder{
+	color: black;
+}
+ 
+/*support mozilla*/
+.filter-item:-moz-input-placeholder{
+	color: black;
+}
+ 
+/*support internet explorer*/
+.filter-item:-ms-input-placeholder{
+	color: black;
+}

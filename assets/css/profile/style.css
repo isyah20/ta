@@ -1,0 +1,598 @@
+* {
+	margin: 0;
+}
+body {
+	background-color: #f5f5f5;
+	font-family: "ubuntu";
+}
+
+/*--=====================================--
+#####          Kompetitor            #####
+--======================================--*/
+
+.kompetitor .text-1 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 22px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #8b6464;
+}
+
+.kompetitor hr {
+	border: 3px solid #f0e2e2;
+}
+
+.kompetitor h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 39px;
+	color: #000000;
+}
+
+.kompetitor .form-select {
+	border: none;
+	background: #f0e2e2;
+
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+	/* border: none; */
+
+	line-height: 28px;
+	background-image: url("../../img/caret-down-fill.svg");
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 16px 12px;
+}
+
+.kompetitor .form-select:focus {
+	border-color: #e05151;
+	/* background-color: #e05151; */
+	/* outline: 0; */
+	box-shadow: 0 0 0 0.25rem rgba(245, 128, 128, 0.25);
+}
+
+.kompetitor .filter {
+	/* color: #ffffff; */
+	align-items: center;
+	background: #ffffff;
+
+	border: 1.5px solid #e1cbcb;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+
+	/* height: 50px;
+	font-weight: 700;
+	font-size: 16px;
+	font-style: normal; */
+	/* border: none; */
+
+	/* height: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    font-style: normal;*/
+}
+.kompetitor .filter-item a {
+	padding: 1px 0;
+	/* margin: 0px; */
+}
+
+.kompetitor .filter-item {
+	background: #f0e2e2;
+
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+	/* border: none; */
+
+	line-height: 50px;
+}
+
+.kompetitor .series .bar-chart-series {
+	background: #ffff;
+	border: none;
+}
+
+.kompetitor .series .bar-chart-series h1 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 25px;
+	display: flex;
+	align-items: center;
+	color: #000000;
+}
+
+.kompetitor .statistik-menang .tag-1 {
+	margin-top: 4px;
+	margin-right: 8px;
+	height: 18px;
+	width: 18px;
+	background-color: #f8a5a5;
+	border-radius: 50%;
+}
+
+.kompetitor .statistik-menang .tag-2 {
+	margin-top: 4px;
+	margin-right: 8px;
+	height: 18px;
+	width: 18px;
+	background-color: #6ee7b7;
+	border-radius: 50%;
+}
+
+@media (min-width: 992px) {
+	.kompetitor .statistik-menang {
+		margin-top: 110px;
+	}
+}
+
+.kompetitor .statistik-menang .card-1 {
+	background: url("../../img/card_kompetitor.svg");
+	background-size: cover;
+	background-color: #f5f5f5;
+	border: none;
+	border-radius: 15px;
+	/*background-color: #f46f31;*/
+}
+
+.kompetitor .statistik-menang h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 22px;
+	line-height: 39px;
+	color: #ffffff;
+	margin-bottom: -20px;
+}
+
+.kompetitor .statistik-menang h5 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 25px;
+	color: #ffffff;
+}
+
+.kompetitor .statistik-menang .card .card-header {
+	background: none;
+	border: none;
+}
+
+.kompetitor .statistik-menang .card .card-body {
+	margin: auto;
+}
+
+.kompetitor .statistik-menang .tender-diikuti {
+	/*background: #f46f31;*/
+	background-color: #f5f5f5;
+	background-size: 110%;
+	background-position: center;
+	background-image: url("../../img/card2_kompetitor.svg");
+	border: none;
+	border-radius: 15px;
+}
+
+.kompetitor .statistik-menang .tender-diikuti img {
+	width: 60px;
+}
+
+.kompetitor .statistik-menang .tender-diikuti .card-header {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 34px;
+	line-height: 39px;
+	color: #ffffff;
+}
+
+.kompetitor .statistik-menang .tender-diikuti .card-body p {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	padding-top: 10px;
+	font-size: 40px;
+	color: #ffffff;
+}
+
+.kompetitor .riwayat-tender .card-header {
+	background: none;
+	border: none;
+}
+
+.kompetitor .riwayat-tender h3 {
+	font-family: "Ubuntu";
+	padding-top: 20px;
+	padding-left: 20px;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 28px;
+	display: flex;
+	align-items: center;
+	color: #000000;
+}
+
+.kompetitor .riwayat-tender hr {
+	border: 1px solid #b89494;
+	transform: rotate(-0.07deg);
+}
+
+.kompetitor .riwayat-tender h3 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 28px;
+	display: flex;
+	align-items: center;
+	color: #000000;
+}
+
+.kompetitor .riwayat-tender h4 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20px;
+	display: flex;
+	align-items: flex-end;
+	text-align: center;
+	color: #b89494;
+}
+
+.kompetitor .riwayat-tender h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 34px;
+	line-height: 39px;
+	color: #553333;
+}
+
+.kompetitor .riwayat-tender img {
+	width: 40px;
+}
+
+/*-========================================
+    #     Wilayah & Jumlah Menang     #
+=========================================-*/
+
+.kompetitor .wilayah .line-chart .card .card-header {
+	background: none;
+	border: none;
+	padding-top: 15px;
+}
+
+.kompetitor .wilayah .line-chart .card .card-header .form-select {
+	border: none;
+	background: #ffff;
+
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+	border: 1px solid #8b6464;
+	border-radius: 5px;
+	width: 200px;
+	height: 40px;
+	font-size: 12px;
+
+	background-image: url("../../img/caret-down-fill2.svg");
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 16px 12px;
+}
+
+.kompetitor .wilayah .line-chart .card .card-header .form-select:focus {
+	border-color: #e05151;
+	/* background-color: #e05151; */
+	/* outline: 0; */
+	box-shadow: 0 0 0 0.25rem rgba(245, 128, 128, 0.25);
+}
+
+.kompetitor .wilayah .line-chart hr {
+	border: 1px solid #b89494;
+}
+
+.kompetitor .wilayah .line-chart h3 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 28px;
+	display: flex;
+	align-items: center;
+	color: #000000;
+}
+
+.kompetitor .wilayah .line-chart .card-header p {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 15px;
+	line-height: 22px;
+	color: #b89494;
+}
+
+.kompetitor .wilayah .line-chart .card-body h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	margin-top: -10px;
+	font-weight: 700;
+	font-size: 34px;
+	color: #553333;
+}
+
+.kompetitor .wilayah .line-chart .card .card-body .card {
+	background: #ffffff;
+	box-shadow: 0px 0px 25px 2px rgba(153, 153, 153, 0.15);
+	border-radius: 10px;
+	border: none;
+}
+
+/*-=================================================
+		#		Penawaran HPS Terendah 		#
+==================================================-*/
+
+.kompetitor .penawaran h2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 34px;
+	line-height: 39px;
+	color: #000000;
+}
+
+.kompetitor .penawaran .pilihan {
+	width: 40%;
+}
+
+.kompetitor .penawaran .text_presentase {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	text-align: center;
+	color: #000000;
+}
+
+.kompetitor .penawaran .presentase {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 64px;
+	line-height: 74px;
+	text-align: center;
+	color: #000000;
+}
+
+@media (max-width: 1100px) {
+	.kompetitor .penawaran .pilihan {
+		width: 100%;
+	}
+}
+.kompetitor .penawaran table,
+.kompetitor .penawaran th,
+.kompetitor .penawaran td {
+	border-top: 1px solid #f0e2e2;
+	border-bottom: 1px solid #f0e2e2;
+	padding-left: 5px;
+}
+.kompetitor .penawaran table {
+	border: 1px solid #f0e2e2;
+	border-collapse: collapse;
+}
+
+.kompetitor .penawaran th {
+	background: #f0e2e2;
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	/*text-align: center;*/
+	color: #8b6464;
+}
+
+.kompetitor .penawaran .td1 {
+	font-family: "Ubuntu";
+	width: 250px;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 20px;
+	color: #000000;
+}
+
+.kompetitor .penawaran .td2 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	width: 250px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 22px;
+	color: #000000;
+}
+
+.kompetitor .penawaran .td3 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	width: 90px;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 22px;
+	color: #139728;
+}
+
+.kompetitor .penawaran .td4 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	width: 90px;
+	font-size: 14px;
+	line-height: 22px;
+	color: #00c008;
+}
+
+.kompetitor .penawaran .td5 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 700;
+	width: 50px;
+	font-size: 14px;
+	line-height: 22px;
+	color: #000000;
+}
+
+.kompetitor .penawaran .td6 {
+	font-family: "Ubuntu";
+	font-style: normal;
+	font-weight: 400;
+	width: 250px;
+	font-size: 14px;
+	line-height: 22px;
+	color: #000000;
+}
+
+.kompetitor .penawaran table {
+	width: 100%;
+}
+
+/* ------------------------------------------------------
+CLASS FOOTER 
+--------------------------------------------------------*/
+.footer-top {
+	font-family: "Poppins", sans-serif;
+	font-style: normal;
+	background-color: #2d2d2d;
+	color: #ffff;
+	padding: 24px;
+}
+
+.footer-top .footer-img {
+	width: 250px;
+	height: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	justify-self: left;
+}
+
+.footer-top h6 {
+	font-size: 14px;
+	font-weight: 250px;
+	margin-bottom: 10px;
+}
+
+.footer-top .sosmed-icon {
+	height: 15px;
+	width: auto;
+}
+
+.footer-top a {
+	font-size: 12px;
+	font-weight: 100px;
+	margin-bottom: 10px;
+	color: #d9d9d9;
+	text-align: left;
+	background-color: #ffffff00;
+}
+
+.footer-top a:hover {
+	color: #ffffff;
+	background-color: #ffffff00;
+}
+
+.back-to-top {
+	position: fixed;
+	/* visibility: hidden; */
+	/* z-index: 1000; */
+	width: 40px;
+	height: 40px;
+	bottom: 40px;
+	right: 40px;
+	background-color: #db2828;
+	color: rgb(255, 255, 255);
+	border-radius: 3px;
+	text-align: center;
+	padding: 5px;
+}
+
+.back-to-top:hover {
+	background-color: #b61818;
+}
+
+.back-to-top .active {
+	visibility: visible;
+}
+
+.float-call {
+	position: fixed;
+	width: 250px;
+	height: 40px;
+	bottom: 40px;
+	right: 90px;
+	background-color: #db2828;
+	color: rgb(255, 255, 255);
+	border-radius: 3px;
+	text-align: center;
+	padding: 7px;
+	font-family: "Ubuntu";
+	font-size: 14px;
+	font-weight: 300px;
+}
+
+.float-call span {
+	margin: 3px;
+}
+
+.float-call:hover {
+	background-color: #b61818;
+	color: #ffff;
+}
+
+.float-img {
+	width: 20px;
+	height: 20px;
+	margin: auto;
+}
+
+.my-float {
+	margin-top: 22px;
+}
+
+.social-links a {
+	height: 40px;
+	width: 40px;
+	border-radius: 40px;
+	border: 1px solid #d21b1b;
+	background-color: rgba(255, 255, 255, 0);
+	padding: 4px;
+	margin: auto;
+}
+
+.social-links a:hover {
+	border: 1px solid #eb650d;
+	color: #eb650d;
+	/* background-color: rgb(255, 255, 255); */
+}
+
+.social-links .iconify {
+	height: 20px;
+	width: 20px;
+	margin: 1px;
+	justify-content: center;
+	color: #d21b1b;
+	padding-top: 5px;
+}
+.social-links a:hover > .iconify {
+	color: #eb650d;
+}
+
+.my-float {
+	margin-top: 22px;
+}
