@@ -571,7 +571,7 @@ class DashboardUserSupplier extends CI_Controller
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    public function tambahKriteria()
+    /*public function tambahKriteria()
     {
         $nama_kriteria = $this->input->post('nama_kriteria');
         $bobot_kriteria = $this->input->post('bobot_kriteria');
@@ -585,7 +585,7 @@ class DashboardUserSupplier extends CI_Controller
 
         // Redirect atau tampilkan pesan sukses
         redirect('suplier/spk');
-    }
+    }*/
 
     public function updateKriteria($id)
     {
@@ -604,20 +604,20 @@ class DashboardUserSupplier extends CI_Controller
         redirect('suplier/spk');
     }
 
-    public function hapusKriteria($id)
+    /*public function hapusKriteria($id)
     {
         $this->Supplier_model->hapusKriteria($id); // Panggil method hapusKriteria pada model
 
         // Redirect atau tampilkan pesan sukses
         redirect('suplier/spk');
-    }
-    public function hitung_ahp()
+    }*/
+    /*public function hitung_ahp()
     {
         $results = $this->Spk_model->calculate_ahp();
         echo json_encode($results);
-    }
+    }*/
 
-    public function simpan_kriteria()
+    /*public function simpan_kriteria()
     {
         $data = [
             'kriteria' => $this->input->post('nama_kriteria'),
@@ -625,9 +625,9 @@ class DashboardUserSupplier extends CI_Controller
         ];
         $this->Spk_model->insert_kriteria($data);
         redirect('ahp');
-    }
+    }*/
 
-    public function simpan_alternatif()
+    /*public function simpan_alternatif()
     {
         $data = [
             'nama' => $this->input->post('nama_alternatif'),
@@ -638,6 +638,64 @@ class DashboardUserSupplier extends CI_Controller
         ];
         $this->Spk_model->insert_alternatif($data);
         redirect('ahp');
+    }*/
+
+	public function add_kriteria()
+    {
+        $kriteria = $this->input->post('nama_kriteria');
+        $bobot = $this->input->post('bobot');
+
+        // Debugging: Cek nilai input
+        echo "Nama Kriteria: " . $kriteria . "<br>";
+        echo "Bobot: " . $bobot . "<br>";
+
+        $data = [
+            'nama_kriteria' => $kriteria,
+            'bobot' => $bobot
+        ];
+
+        // Debugging: Cek data array
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
+        if ($this->Supplier_model->insert($data)) {
+            echo json_encode(['status' => true]);
+        } else {
+            echo json_encode(['status' => false, 'message' => 'Failed to add criteria.']);
+        }
+    }
+
+    public function add_alternatif()
+    {
+        $riwayat_perusahaan = $this->input->post('riwayat_perusahaan');
+        $riwayat_menang = $this->input->post('riwayat_menang');
+        $lokasi_tender = $this->input->post('lokasi_tender');
+        $nilai_hps = $this->input->post('nilai_hps');
+
+        // Debugging: Cek nilai input
+        echo "Riwayat Perusahaan: " . $riwayat_perusahaan . "<br>";
+        echo "Riwayat Menang: " . $riwayat_menang . "<br>";
+        echo "Lokasi Tender: " . $lokasi_tender . "<br>";
+        echo "Nilai HPS: " . $nilai_hps . "<br>";
+
+        $data = [
+            'riwayat_perusahaan' => $riwayat_perusahaan,
+            'riwayat_menang' => $riwayat_menang,
+            'lokasi_tender' => $lokasi_tender,
+            'nilai_hps' => $nilai_hps
+        ];
+
+        // Debugging: Cek data array
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
+        if ($this->Supplier_model->insert($data)) {
+            echo json_encode(['status' => true]);
+        } else {
+            echo json_encode(['status' => false, 'message' => 'Failed to add alternative.']);
+        }
     }
 
     /* public function spk_view()
