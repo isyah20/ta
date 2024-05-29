@@ -24,6 +24,7 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->model('Pemenang_model');
         $this->load->model('Supplier_model');
         $this->load->model('Tender_model');
+        $this->load->model('Ahp_model');
         $this->load->model('api/Supplier_api');
         $this->load->model('api/Pemenang_model', 'pemenang');
         $this->init();
@@ -564,28 +565,34 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function getDataKriteria()
+    public function getKriteria()
     {
-        $data = $this->Supplier_model->getDataKriteria(); // Mengambil data kriteria dari model
+        $data = $this->Ahp_model->get_criteria(); // Mengambil data kriteria dari model
+        $json_data = json_encode($data);
+        $this->output->set_content_type('application/json')->set_output($json_data);
+    }
+    public function getAlternatif()
+    {
+        $data = $this->Ahp_model->get_alternatives(); // Mengambil data kriteria dari model
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }
 
-    /*public function tambahKriteria()
+    /* public function addKriteria()
     {
-        $nama_kriteria = $this->input->post('nama_kriteria');
+        $kriteria = $this->input->post('nama_kriteria');
         $bobot_kriteria = $this->input->post('bobot_kriteria');
 
         $data = array(
-            'nama' => $nama_kriteria,
+            'nama' => $kriteria,
             'bobot' => $bobot_kriteria
         );
 
-        $this->Supplier_model->tambahKriteria($data); // Panggil method tambahKriteria pada model
+        $this->Supplier_model->addKriteria($data); // Panggil method tambahKriteria pada model
 
         // Redirect atau tampilkan pesan sukses
         redirect('suplier/spk');
-    }*/
+    } */
 
     public function updateKriteria($id)
     {
@@ -604,20 +611,20 @@ class DashboardUserSupplier extends CI_Controller
         redirect('suplier/spk');
     }
 
-    /*public function hapusKriteria($id)
+    public function hapusKriteria($id)
     {
         $this->Supplier_model->hapusKriteria($id); // Panggil method hapusKriteria pada model
 
         // Redirect atau tampilkan pesan sukses
         redirect('suplier/spk');
-    }*/
-    /*public function hitung_ahp()
+    }
+    public function hitung_ahp()
     {
         $results = $this->Spk_model->calculate_ahp();
         echo json_encode($results);
-    }*/
+    }
 
-    /*public function simpan_kriteria()
+    /* public function simpan_kriteria()
     {
         $data = [
             'kriteria' => $this->input->post('nama_kriteria'),
@@ -625,9 +632,9 @@ class DashboardUserSupplier extends CI_Controller
         ];
         $this->Spk_model->insert_kriteria($data);
         redirect('ahp');
-    }*/
+    }
 
-    /*public function simpan_alternatif()
+    public function simpan_alternatif()
     {
         $data = [
             'nama' => $this->input->post('nama_alternatif'),
@@ -638,9 +645,8 @@ class DashboardUserSupplier extends CI_Controller
         ];
         $this->Spk_model->insert_alternatif($data);
         redirect('ahp');
-    }*/
-
-	public function add_kriteria()
+    } */
+    public function add_kriteria()
     {
         $kriteria = $this->input->post('nama_kriteria');
         $bobot = $this->input->post('bobot');
@@ -697,6 +703,7 @@ class DashboardUserSupplier extends CI_Controller
             echo json_encode(['status' => false, 'message' => 'Failed to add alternative.']);
         }
     }
+
 
     /* public function spk_view()
     {
