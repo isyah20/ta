@@ -545,10 +545,36 @@
         // Fetch kriteria data
         function fetchKriteriaData() {
             $.ajax({
-                url: '<?= base_url("Ahp/get_kriteria") ?>',
+                url: '<?= base_url("suplier/spk/getKriteria") ?>',
                 method: 'GET',
+                dataType: 'json', // Pastikan responsenya diparse sebagai JSON
                 success: function(data) {
-                    $('#data-kriteria').html(data);
+                    console.log('Response:', data); // Debugging: log the response
+                    let html = '';
+
+                    // Check if response is an array
+                    if (Array.isArray(data)) {
+                        for (let i = 0; i < data.length; i++) {
+                            html += '<tr>' +
+                                '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
+                                '<td class="custom-padding nama">' + data[i].kriteria + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].bobot + '</td>' +
+                                '<td class="custom-padding">' +
+                                '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
+                                '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" width="30px" style="margin:0px 5px;"></a>' +
+                                '</td>' +
+                                '</tr>';
+                        }
+                    } else {
+                        console.error('Unexpected response format:', data);
+                    }
+
+                    $('#data-kriteria').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', error);
                 }
             });
         }
@@ -596,10 +622,39 @@
         // Fetch alternatif data
         function fetchAlternatifData() {
             $.ajax({
-                url: '<?= base_url("Ahp/get_alternatif") ?>',
+                url: '<?= base_url("suplier/spk/getAlternatif") ?>',
                 method: 'GET',
+                dataType: 'json', // Pastikan responsenya diparse sebagai JSON
                 success: function(data) {
-                    $('#data-alternatif').html(data);
+                    console.log('Response:', data); // Debugging: log the response
+                    let html = '';
+
+                    // Check if response is an array
+                    if (Array.isArray(data)) {
+                        for (let i = 0; i < data.length; i++) {
+                            html += '<tr>' +
+                                '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].nama_perusahaan + '</td>' +
+                                '<td class="custom-padding nama">' + data[i].riwayat_perusahaan + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].riwayat_menang + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].lokasi_tender + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].nilai_hps + '</td>' +
+                                '<td class="custom-padding">' +
+                                '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
+                                '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" width="30px" style="margin:0px 5px;"></a>' +
+                                '</td>' +
+                                '</tr>';
+                        }
+                    } else {
+                        console.error('Unexpected response format:', data);
+                    }
+
+                    $('#data-alternatif').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', error);
                 }
             });
         }
