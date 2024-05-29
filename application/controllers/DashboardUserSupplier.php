@@ -24,6 +24,7 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->model('Pemenang_model');
         $this->load->model('Supplier_model');
         $this->load->model('Tender_model');
+        $this->load->model('Ahp_model');
         $this->load->model('api/Supplier_api');
         $this->load->model('api/Pemenang_model', 'pemenang');
         $this->init();
@@ -566,7 +567,7 @@ class DashboardUserSupplier extends CI_Controller
 
     public function getDataKriteria()
     {
-        $data = $this->Supplier_model->getDataKriteria(); // Mengambil data kriteria dari model
+        $data = $this->Ahp_model->get_all_criteria(); // Mengambil data kriteria dari model
         $json_data = json_encode($data);
         $this->output->set_content_type('application/json')->set_output($json_data);
     }

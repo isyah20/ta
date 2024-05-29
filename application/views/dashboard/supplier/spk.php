@@ -201,7 +201,7 @@
                                 </tr>
                             </thead>
                             <tbody id="data-kriteria">
-                                <tr>
+                                <!-- <tr>
                                     <td>1</td>
                                     <td class="riwayat_perusahaan">Riwayat Perusahaan</td>
                                     <td class="bobot">10</td>
@@ -244,7 +244,7 @@
                                             </a>
                                         </span>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -534,13 +534,40 @@
         // Fetch kriteria data
         function fetchKriteriaData() {
             $.ajax({
-                url: '<?= base_url("spk/get_kriteria") ?>',
+                url: '<?= base_url("suplier/spk/getDataKriteria") ?>',
                 method: 'GET',
+                dataType: 'json',  // Pastikan responsenya diparse sebagai JSON
                 success: function(data) {
-                    $('#data-kriteria').html(data);
+                    console.log('Response:', data);  // Debugging: log the response
+                    let html = '';
+
+                    // Check if response is an array
+                    if (Array.isArray(data)) {
+                        for (let i = 0; i < data.length; i++) {
+                            html += '<tr>' +
+                                '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
+                                '<td class="custom-padding nama">' + data[i].kriteria + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].bobot + '</td>' +
+                                '<td class="custom-padding">' +
+                                '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
+                                '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" width="30px" style="margin:0px 5px;"></a>' +
+                                '</td>' +
+                                '</tr>';
+                        }
+                    } else {
+                        console.error('Unexpected response format:', data);
+                    }
+
+                    $('#data-kriteria').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', error);
                 }
             });
         }
+
 
         // Fetch perusahaan data
         function fetchPerusahaanData() {
@@ -553,6 +580,7 @@
             });
         }
     });
+
     $(document).ready(function() {
         // Fetch and display alternatif data
         fetchAlternatifData();
@@ -585,7 +613,7 @@
         // Fetch alternatif data
         function fetchAlternatifData() {
             $.ajax({
-                url: '<?= base_url("spk/get_alternatif") ?>',
+                url: '<?= base_url("api/supplier/getDataAlternatif") ?>',
                 method: 'GET',
                 success: function(data) {
                     $('#data-alternatif').html(data);
