@@ -155,26 +155,8 @@ $route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarke
 
 //routes spk
 $route['suplier/spk'] = 'DashboardUserSupplier/spk';
-$route['suplier/spk/getDataKriteria'] = 'DashboardUserSupplier/getDataKriteria';
-$route['suplier/spk/tambahKriteria'] = 'DashboardUserSupplier/tambahKriteria';
-$route['suplier/spk/updateKriteria/(:num)'] = 'DashboardUserSupplier/updateKriteria/$1';
-$route['suplier/spk/hapusKriteria/(:num)'] = 'DashboardUserSupplier/hapusKriteria/$1';
-$route['api/supplier/getDataKriteria'] = 'api/ApiSupplier/getDataKriteria';
-$route['api/supplier/createDataKriteria'] = 'api/ApiSupplier/createDataKriteria';
-$route['api/supplier/deleteDataKriteria/(:num)'] = 'api/ApiSupplier/deleteDataKriteria/$1';
-$route['api/supplier/updateDataKriteria/(:num)'] = 'api/ApiSupplier/updateDataKriteria/$1';
-$route['api/supplier/getDataAlternatif'] = 'api/ApiSupplier/getDataAlternatif';
-$route['api/supplier/createDataAlternatif'] = 'api/ApiSupplier/createDataAlternatif';
-$route['api/supplier/deleteDataAlternatif/(:num)'] = 'api/ApiSupplier/deleteDataAlternatif/$1';
-$route['api/supplier/updateDataAlternatif/(:num)'] = 'api/ApiSupplier/updateDataAlternatif/$1';
-$route['ahp'] = 'ahp/index';
-$route['ahp/add_criteria'] = 'ahp/add_criteria';
-$route['ahp/add_alternative'] = 'ahp/add_alternative';
-$route['ahp/calculate'] = 'ahp/calculate_ahp';
-$route['ahp/get_results'] = 'ahp/get_results';
-$route['ahp/results'] = 'ahp/view_results';
-// $route['spk'] = 'spk/index';
-// $route['spk/hitung_ahp'] = 'spk/hitung_ahp';
+$route['suplier/spk/getKriteria'] = 'DashboardUserSupplier/getKriteria';
+$route['suplier/spk/getAlternatif'] = 'DashboardUserSupplier/getAlternatif';
 
 // $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
