@@ -746,7 +746,8 @@ class Supplier_model extends CI_Model
         $this->db->insert('tim_marketing', $data);
         return $this->db->affected_rows();
     }
-	public function getKriteria()
+
+    public function getKriteria()
     {
         $this->db->select(['*']);
         $this->db->from('data_kriteria');
@@ -796,4 +797,6 @@ class Supplier_model extends CI_Model
 
         return $result;
     }
+    
+
 }

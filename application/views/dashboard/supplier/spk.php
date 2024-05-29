@@ -208,7 +208,6 @@
                             </thead>
                             <tbody id="data-kriteria">
                                 <!-- <tr>
-                                <!-- <tr>
                                     <td>1</td>
                                     <td class="riwayat_perusahaan">Riwayat Perusahaan</td>
                                     <td class="bobot">10</td>
@@ -267,11 +266,10 @@
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-0">
-                        <button type="button" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                        <button type="button" id="btn-close-kriteria" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
                             <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                         </button>
                     </div>
-
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="inputKriteriaModalLabel">Input Kriteria</h3>
                         <div class="input-popup justify-content-end">
@@ -293,7 +291,6 @@
                                 <div class="justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
                                         <span>
-                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
                                             <button type="submit" id="submit-input" class="btn-custom text-white text-center" style="width:407px;border:none">
                                                 Tambahkan
                                             </button>
@@ -525,23 +522,39 @@
         // Handle kriteria form submission
         $('#form-input').on('submit', function(e) {
             e.preventDefault();
-
             const kriteria = $('#inputNama').val();
             const bobot = $('#inputBobot').val();
-
             $.ajax({
                 type: 'POST',
-                url: '<?= base_url("Ahp/add_kriteria") ?>',
+                url: '<?= base_url("suplier/spk/addKriteria") ?>',
                 data: {
                     kriteria: kriteria,
                     bobot: bobot
                 },
                 success: function(response) {
-                    $('#inputKriteriaModal').modal('hide');
                     fetchKriteriaData();
+                    swal({
+                        title: "Data berhasil diubah",
+                        icon: "success",
+                        button: "Ok",
+                        }).then(function() {
+                            $('#btn-close-kriteria').click();
+                    });
+                },
+                error: function(xhr, status, error) {
+                    var span = document.createElement("span");
+                    span.innerHTML = JSON.parse(xhr.responseText).message;
+                    swal({
+                        title: "ERROR",
+                        content: span,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                    console.log(xhr.responseText);
                 }
             });
         });
+
 
         // Fetch kriteria data
         function fetchKriteriaData() {
@@ -579,18 +592,6 @@
                 }
             });
         }
-
-
-        // Fetch perusahaan data
-        /* function fetchPerusahaanData() {
-            $.ajax({
-                url: '<?= base_url("spk/get_perusahaan") ?>',
-                method: 'GET',
-                success: function(data) {
-                    $('#data-perusahaan').html(data);
-                }
-            });
-        } */
     });
 
     $(document).ready(function() {
@@ -692,98 +693,6 @@
     });
 
     
-    $(document).ready(function() {
-        // Handle form submission
-        $('#submit-input').click(function(event) {
-            event.preventDefault();
-
-            // Get the criteria name and weight input values
-            var criteriaName = $('input[name=nama_kriteria]').val();
-            var weight = $('input[name=bobot]').val();
-
-            // Validate the criteria name (for example, checking if it's not empty)
-            if (!criteriaName || !weight) {
-                $('#submit-input').html('Submit');
-                $('#submit-input').attr('disabled', false);
-                swal({
-                    title: "Invalid input",
-                    text: "Please fill in all fields correctly",
-                    icon: "error",
-                    button: "Ok",
-                });
-            } else {
-                // Ask for confirmation
-                swal({
-                    title: "Confirm Submission",
-                    text: "Are you sure the information you entered is correct?",
-                    icon: "info",
-                    buttons: ["No", "Yes"]
-                }).then((confirmed) => {
-                    if (confirmed) {
-                        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
-                        $('#submit-input').attr('disabled', true);
-
-                        var formData = {
-                            nama_kriteria: criteriaName,
-                            bobot: weight
-                        };
-
-                        // Make an AJAX request
-                        $.ajax({
-                            url: '<?= base_url("ahp/add_kriteria") ?>',
-                            type: 'POST',
-                            data: formData,
-                            beforeSend: addAuthorizationHeader,
-                            success: function(response) {
-                                $('#submit-input').html('Submit');
-                                $('#submit-input').attr('disabled', false);
-                                if (response.status == true) {
-                                    swal({
-                                        title: "Data successfully added!",
-                                        icon: "success",
-                                        button: "Ok",
-                                    }).then(function() {
-                                        // Optionally, reload the page or redirect
-                                        location.reload();
-                                    });
-                                } else {
-                                    swal({
-                                        title: "Failed to add data!",
-                                        icon: "error",
-                                        button: "Ok",
-                                    });
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                $('#submit-input').html('Submit');
-                                $('#submit-input').attr('disabled', false);
-                                var span = document.createElement("span");
-                                span.innerHTML = JSON.parse(xhr.responseText).message;
-                                swal({
-                                    title: "ERROR",
-                                    content: span,
-                                    icon: "error",
-                                    button: "Ok",
-                                });
-                                console.log(xhr.responseText);
-                                console.log(JSON.parse(xhr.responseText).message);
-                            }
-                        });
-                    } else {
-                        // User chose not to proceed
-                        $('#submit-input').html('Submit');
-                        $('#submit-input').attr('disabled', false);
-                    }
-                });
-            }
-        });
-
-        // Function to add Authorization header
-        function addAuthorizationHeader(xhr) {
-            var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
-            xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
-        }
-    });
 </script>
 
 

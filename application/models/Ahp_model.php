@@ -9,12 +9,12 @@ class Ahp_model extends CI_Model
         parent::__construct();
         $this->load->model('Ahp_model');
     }
-    public function get_all_criteria()
+    public function get_criteria()
     {
         return $this->db->get('data_kriteria')->result();
     }
 
-    public function get_all_alternatives()
+    public function get_alternatives()
     {
         return $this->db->get('data_alternatif')->result();
     }
@@ -176,4 +176,3 @@ class Ahp_model extends CI_Model
 //         return $results;
 //     }
 // }
-
