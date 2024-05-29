@@ -1,23 +1,76 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+class Kriteria_model extends CI_Model{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    //model kriteria
+    public function get_criteria()
+    {
+        return $this->db->get('data_kriteria')->result();
+    }
+    public function add_criteria($data)
+    {
+        return $this->db->insert('data_kriteria', $data);
+    }
+    public function update_criteria($id, $data)
+    {
+        return $this->db->where('id_kriteria', $id)->update('data_kriteria', $data);
+    }
+    public function delete_criteria($id)
+    {
+        return $this->db->where('id_kriteria', $id)->delete('data_kriteria');
+    }
+    public function get_pairwise_comparisons()
+    {
+        // Retrieve the pairwise comparison data from the database
+        return $this->db->get('kriteria_pairwise')->result();
+    }
+}
+
+class Alternatif_model extends CI_Model{
+    //model alternatif
+    public function get_alternative()
+    {
+        return $this->db->get('data_alternatif')->result();
+    }
+    public function add_alternative($data)
+    {
+        return $this->db->insert('data_alternatif', $data);
+    }
+    public function update_alternative($id, $data)
+    {
+        return $this->db->where('id_alternatif', $id)->update('data_alternatif', $data);
+    }
+    public function delete_alternative($id)
+    {
+        return $this->db->where('id_alternatif', $id)->delete('data_alternatif');
+    }
+    public function get_pairwise_comparisons($criteria_id)
+    {
+        // Retrieve the pairwise comparison data for a specific criterion from the database
+        return $this->db->get_where('alternatif_pairwise', ['criteria_id' => $criteria_id])->result();
+    }
+}
 class Ahp_model extends CI_Model
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Ahp_model');
-    }
-    public function get_all_criteria()
-    {
-        return $this->db->get('data_kriteria')->result();
     }
 
-    public function get_all_alternatives()
+    public function add_result($data)
     {
-        return $this->db->get('data_alternatif')->result();
+        return $this->db->insert('result', $data);
     }
+    public function get_results()
+    {
+        return $this->db->get('result')->result();
+    }
+
 
     public function get_alternative_scores($alternative_id, $kriteria_id)
     {
@@ -25,53 +78,13 @@ class Ahp_model extends CI_Model
             ->where('id_kriteria', $kriteria_id)
             ->get('nilai_alternatif')->row();
     }
-
-    public function add_criteria($data)
-    {
-        return $this->db->insert('data_kriteria', $data);
-    }
-
-    public function add_alternative($data)
-    {
-        return $this->db->insert('data_alternatif', $data);
-    }
-
     public function add_alternative_score($data)
     {
         return $this->db->insert('nilai_alternatif', $data);
     }
+    
 
-    public function update_criteria($id, $data)
-    {
-        return $this->db->where('id_kriteria', $id)->update('data_kriteria', $data);
-    }
-
-    public function update_alternative($id, $data)
-    {
-        return $this->db->where('id_alternatif', $id)->update('data_alternatif', $data);
-    }
-
-    public function delete_criteria($id)
-    {
-        return $this->db->where('id_kriteria', $id)->delete('data_kriteria');
-    }
-
-    public function delete_alternative($id)
-    {
-        return $this->db->where('id_alternatif', $id)->delete('data_alternatif');
-    }
-
-    public function add_result($data)
-    {
-        return $this->db->insert('result', $data);
-    }
-
-    public function get_results()
-    {
-        return $this->db->get('result')->result();
-    }
-
-    public function calculate_scores()
+    /* public function calculate_scores()
     {
         // Data Alternatif (dummy data)
         $alternatives = [
@@ -102,7 +115,7 @@ class Ahp_model extends CI_Model
         }
 
         return $scores;
-    }
+    } */
 
     public function sort_scores($scores)
     {
@@ -176,4 +189,3 @@ class Ahp_model extends CI_Model
 //         return $results;
 //     }
 // }
-

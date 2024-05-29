@@ -20,7 +20,8 @@
         width: 210px;
         font-size: 15px;
         align-content: center;
-        padding-top: 8px;
+        padding-top: 5px;
+        margin-bottom: 8px;
     }
 
     .link .btn-simpan:hover {
@@ -28,7 +29,12 @@
     }
 
     .custom-img {
-        margin-left: 13px;
+        margin-left: 10px;
+    }
+
+    .custom-img-view {
+        margin-left: 10px;
+        width: 25px;
     }
 
     .thead {
@@ -139,7 +145,7 @@
         /* Ganti ukuran font sesuai dengan keinginan Anda */
     }
 
-    hujan samarkan derasnya .custom-button {
+    .custom-button {
         background: none;
         border: none;
         display: flex;
@@ -201,7 +207,7 @@
                                 </tr>
                             </thead>
                             <tbody id="data-kriteria">
-                                <tr>
+                                <!-- <tr>
                                     <td>1</td>
                                     <td class="riwayat_perusahaan">Riwayat Perusahaan</td>
                                     <td class="bobot">10</td>
@@ -244,7 +250,7 @@
                                             </a>
                                         </span>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -255,7 +261,7 @@
     <!-- end tabel kriteria -->
 
     <!-- modal input kriteria -->
-    <div class="col-12 py-5">
+    <div class="col-12 py-1">
         <div class="modal fade" id="inputKriteriaModal" tabindex="-1" role="dialog" aria-labelledby="inputKriteriaModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -283,14 +289,19 @@
                                     <label for="inputBobot" class="form-label">Bobot</label>
                                     <input type="number" class="form-control" id="inputBobot" name="bobot" required>
                                 </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary w-100">Simpan</button>
+                                <div class="justify-content-start mt-3 gap-2">
+                                    <div class="link flex-row align-items-center w-100">
+                                        <span>
+                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                            <button type="submit" id="submit-input" class="btn-custom text-white text-center" style="width:407px;border:none">
+                                                Tambahkan
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-
-                    <div class="modal-footer border-0"></div>
                 </div>
             </div>
         </div>
@@ -332,7 +343,7 @@
                             </thead>
                             <tbody id="data-alternatif">
                                 <!-- Data Alternatif akan ditambahkan disini -->
-                                <tr>
+                                <!-- <tr>
                                     <td>1</td>
                                     <td class="nama">PT ABC</td>
                                     <td class="riwayat_perusahaan">10</td>
@@ -373,7 +384,7 @@
                                             </a>
                                         </span>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -384,7 +395,7 @@
     <!-- end tabel alternatif -->
 
     <!-- modal input alternatif -->
-    <div class="col-12 py-5">
+    <div class="col-12 py-1">
         <div class="modal fade" id="inputAlternatifModal" tabindex="-1" role="dialog" aria-labelledby="inputAlternatifModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -414,14 +425,19 @@
                                     <label for="inputNilaiHPS" class="form-label">Nilai HPS</label>
                                     <input type="text" class="form-control" id="inputNilaiHPS" name="nilai_hps" required>
                                 </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary w-100">Simpan</button>
+                                <div class="justify-content-start mt-3 gap-2">
+                                    <div class="link flex-row align-items-center w-100">
+                                        <span>
+                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
+                                            <button type="submit" id="submit-input" class="btn-custom text-white text-center" style="width:407px;border:none">
+                                                Tambahkan
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-
-                    <div class="modal-footer border-0"></div>
                 </div>
             </div>
         </div>
@@ -432,10 +448,10 @@
     <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
         <div class="col">
             <div class="d-flex justify-content-start">
-                <div class="link d-flex">
+                <div id="result-container" class="link d-flex">
                     <span>
                         <a class="btn btn-sm border btn-outline btn-simpan" id="btn-rekomendasi">Lihat Rekomendasi
-                            <img class="custom-img" src="<?= base_url('assets\img\icon-view.svg') ?>" width="19" alt="" style="">
+                            <img class="custom-img-view" src="<?= base_url('assets\img\eye.svg') ?>" width="19" alt="" style="">
                         </a>
                     </span>
                 </div>
@@ -456,11 +472,10 @@
                                     <th class="custom-padding">No.</th>
                                     <th class="custom-padding">Perusahaan</th>
                                     <th class="custom-padding">Skor Total</th>
-                                    <!-- <th class="custom-padding">Tanggal Perhitungan</th> -->
+                                    <th class="custom-padding">Tanggal Perhitungan</th>
                                 </tr>
                             </thead>
                             <tbody id="result-body">
-                                <!-- Data akan dimuat di sini menggunakan AJAX -->
                             </tbody>
                         </table>
                     </div>
@@ -469,6 +484,21 @@
         </div>
     </div>
 
+    <!-- Button to trigger the result fetching -->
+    <!-- <button id="btn-rekomendasi" class="btn btn-primary mt-3">Get Recommendations</button>
+    <div id="result-container" class="mt-4" style="display: none;">
+        <h2>Results</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Alternative</th>
+                    <th>Total Score</th>
+                </tr>
+            </thead>
+            <tbody id="result-body"></tbody>
+        </table>
+    </div> -->
 
 </section>
 
@@ -480,12 +510,16 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
+    var id_pengguna = <?= $_COOKIE['id_pengguna'] ?>;
+    var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+
+    function addAuthorizationHeader(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+    }
+
     $(document).ready(function() {
         // Fetch and display kriteria data
         fetchKriteriaData();
-
-        // Fetch and display perusahaan data
-        fetchPerusahaanData();
 
         // Handle kriteria form submission
         $('#form-input').on('submit', function(e) {
@@ -496,7 +530,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '<?= base_url("spk/add_kriteria") ?>',
+                url: '<?= base_url("Ahp/add_kriteria") ?>',
                 data: {
                     kriteria: kriteria,
                     bobot: bobot
@@ -508,33 +542,10 @@
             });
         });
 
-        // Handle perusahaan form submission
-        $('#form-input').on('submit', function(e) {
-            e.preventDefault();
-
-            const nama_perusahaan = $('#inputNamaPerusahaan').val();
-            const email = $('#inputEmail').val();
-            const telp = $('#inputTelp').val();
-
-            $.ajax({
-                type: 'POST',
-                url: '<?= base_url("spk/add_perusahaan") ?>',
-                data: {
-                    nama_perusahaan: nama_perusahaan,
-                    email: email,
-                    telp: telp
-                },
-                success: function(response) {
-                    $('#inputPerusahaanModal').modal('hide');
-                    fetchPerusahaanData();
-                }
-            });
-        });
-
         // Fetch kriteria data
         function fetchKriteriaData() {
             $.ajax({
-                url: '<?= base_url("spk/get_kriteria") ?>',
+                url: '<?= base_url("Ahp/get_kriteria") ?>',
                 method: 'GET',
                 success: function(data) {
                     $('#data-kriteria').html(data);
@@ -543,7 +554,7 @@
         }
 
         // Fetch perusahaan data
-        function fetchPerusahaanData() {
+        /* function fetchPerusahaanData() {
             $.ajax({
                 url: '<?= base_url("spk/get_perusahaan") ?>',
                 method: 'GET',
@@ -551,7 +562,7 @@
                     $('#data-perusahaan').html(data);
                 }
             });
-        }
+        } */
     });
     $(document).ready(function() {
         // Fetch and display alternatif data
@@ -568,7 +579,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '<?= base_url("spk/add_alternatif") ?>',
+                url: '<?= base_url("Ahp/add_alternatif") ?>',
                 data: {
                     riwayat_perusahaan: riwayat_perusahaan,
                     riwayat_menang: riwayat_menang,
@@ -585,7 +596,7 @@
         // Fetch alternatif data
         function fetchAlternatifData() {
             $.ajax({
-                url: '<?= base_url("spk/get_alternatif") ?>',
+                url: '<?= base_url("Ahp/get_alternatif") ?>',
                 method: 'GET',
                 success: function(data) {
                     $('#data-alternatif').html(data);
@@ -596,7 +607,7 @@
     $(document).ready(function() {
         $('#btn-rekomendasi').on('click', function() {
             $.ajax({
-                url: '<?= base_url('ahp/get_results') ?>',
+                url: '<?= base_url('Ahp/get_results') ?>',
                 type: 'GET',
                 success: function(data) {
                     const results = JSON.parse(data);
@@ -620,7 +631,101 @@
             });
         });
     });
+    $(document).ready(function() {
+        // Handle form submission
+        $('#submit-input').click(function(event) {
+            event.preventDefault();
+
+            // Get the criteria name and weight input values
+            var criteriaName = $('input[name=nama_kriteria]').val();
+            var weight = $('input[name=bobot]').val();
+
+            // Validate the criteria name (for example, checking if it's not empty)
+            if (!criteriaName || !weight) {
+                $('#submit-input').html('Submit');
+                $('#submit-input').attr('disabled', false);
+                swal({
+                    title: "Invalid input",
+                    text: "Please fill in all fields correctly",
+                    icon: "error",
+                    button: "Ok",
+                });
+            } else {
+                // Ask for confirmation
+                swal({
+                    title: "Confirm Submission",
+                    text: "Are you sure the information you entered is correct?",
+                    icon: "info",
+                    buttons: ["No", "Yes"]
+                }).then((confirmed) => {
+                    if (confirmed) {
+                        $('#submit-input').html('<div style="width:20px; height:20px; background-color:white;" class="spinner-border text-danger m-0 p-0"></div><span class="ms-2">Loading...</span>');
+                        $('#submit-input').attr('disabled', true);
+
+                        var formData = {
+                            nama_kriteria: criteriaName,
+                            bobot: weight
+                        };
+
+                        // Make an AJAX request
+                        $.ajax({
+                            url: '<?= base_url("ahp/add_kriteria") ?>',
+                            type: 'POST',
+                            data: formData,
+                            beforeSend: addAuthorizationHeader,
+                            success: function(response) {
+                                $('#submit-input').html('Submit');
+                                $('#submit-input').attr('disabled', false);
+                                if (response.status == true) {
+                                    swal({
+                                        title: "Data successfully added!",
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then(function() {
+                                        // Optionally, reload the page or redirect
+                                        location.reload();
+                                    });
+                                } else {
+                                    swal({
+                                        title: "Failed to add data!",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                $('#submit-input').html('Submit');
+                                $('#submit-input').attr('disabled', false);
+                                var span = document.createElement("span");
+                                span.innerHTML = JSON.parse(xhr.responseText).message;
+                                swal({
+                                    title: "ERROR",
+                                    content: span,
+                                    icon: "error",
+                                    button: "Ok",
+                                });
+                                console.log(xhr.responseText);
+                                console.log(JSON.parse(xhr.responseText).message);
+                            }
+                        });
+                    } else {
+                        // User chose not to proceed
+                        $('#submit-input').html('Submit');
+                        $('#submit-input').attr('disabled', false);
+                    }
+                });
+            }
+        });
+
+        // Function to add Authorization header
+        function addAuthorizationHeader(xhr) {
+            var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
+            xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
+        }
+    });
 </script>
+
+
 <!-- <script>
     $(document).ready(function() {
         $('#btn-rekomendasi').on('click', function() {

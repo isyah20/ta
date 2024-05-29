@@ -746,4 +746,56 @@ class Supplier_model extends CI_Model
         $this->db->insert('tim_marketing', $data);
         return $this->db->affected_rows();
     }
+
+    public function getKriteria()
+    {
+        $this->db->select(['*']);
+        $this->db->from('data_kriteria');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    /* public function addKriteria($data)
+    {
+        return $this->db->insert('data_kriteria', $data);
+    } */
+    public function updateKriteria($id, $data)
+    {
+        $this->db->where('id_kriteria', $id);
+        return $this->db->update('data_kriteria', $data);
+    }
+    public function deleteKriteria($id)
+    {
+        $this->db->where('id_kriteria', $id);
+        $this->db->delete('data_kriteria');
+    }
+
+    public function insertKriteria($data)
+    {
+        // Debugging: Cek data sebelum insert
+        echo "Data before insert: <pre>";
+        print_r($data);
+        echo "</pre>";
+
+        $result = $this->db->insert('data_kriteria', $data);
+
+        // Debugging: Cek hasil insert
+        echo "Insert Result: " . ($result ? 'Success' : 'Fail') . "<br>";
+
+        return $result;
+    }
+    public function insertAlternatif($data)
+    {
+        // Debugging: Cek data sebelum insert
+        echo "Data before insert: <pre>";
+        print_r($data);
+        echo "</pre>";
+
+        $result = $this->db->insert('data_alternatif', $data);
+
+        // Debugging: Cek hasil insert
+        echo "Insert Result: " . ($result ? 'Success' : 'Fail') . "<br>";
+
+        return $result;
+    }
+
 }
