@@ -648,7 +648,7 @@ class DashboardUserSupplier extends CI_Controller
     } */
     public function add_kriteria()
     {
-        $kriteria = $this->input->post('nama_kriteria');
+        $kriteria = $this->input->post('kriteria');
         $bobot = $this->input->post('bobot');
 
         // Debugging: Cek nilai input
@@ -656,7 +656,7 @@ class DashboardUserSupplier extends CI_Controller
         echo "Bobot: " . $bobot . "<br>";
 
         $data = [
-            'nama_kriteria' => $kriteria,
+            'kriteria' => $kriteria,
             'bobot' => $bobot
         ];
 
@@ -665,27 +665,31 @@ class DashboardUserSupplier extends CI_Controller
         print_r($data);
         echo "</pre>";
 
-        if ($this->Supplier_model->insert($data)) {
+        if ($this->Ahp_model->add_criteria($data)) {
             echo json_encode(['status' => true]);
         } else {
             echo json_encode(['status' => false, 'message' => 'Failed to add criteria.']);
         }
     }
 
+
     public function add_alternatif()
     {
+        $nama_perusahaan = $this->input->post('nama_perusahaan');
         $riwayat_perusahaan = $this->input->post('riwayat_perusahaan');
         $riwayat_menang = $this->input->post('riwayat_menang');
         $lokasi_tender = $this->input->post('lokasi_tender');
         $nilai_hps = $this->input->post('nilai_hps');
 
         // Debugging: Cek nilai input
+        echo "Nama Perusahaan: " . $nama_perusahaan . "<br>";
         echo "Riwayat Perusahaan: " . $riwayat_perusahaan . "<br>";
         echo "Riwayat Menang: " . $riwayat_menang . "<br>";
         echo "Lokasi Tender: " . $lokasi_tender . "<br>";
         echo "Nilai HPS: " . $nilai_hps . "<br>";
 
         $data = [
+            'nama_perusahaan' => $nama_perusahaan,
             'riwayat_perusahaan' => $riwayat_perusahaan,
             'riwayat_menang' => $riwayat_menang,
             'lokasi_tender' => $lokasi_tender,
@@ -697,7 +701,7 @@ class DashboardUserSupplier extends CI_Controller
         print_r($data);
         echo "</pre>";
 
-        if ($this->Supplier_model->insert($data)) {
+        if ($this->Ahp_model->insert($data)) {
             echo json_encode(['status' => true]);
         } else {
             echo json_encode(['status' => false, 'message' => 'Failed to add alternative.']);

@@ -157,7 +157,8 @@ $route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarke
 $route['suplier/spk'] = 'DashboardUserSupplier/spk';
 $route['suplier/spk/getKriteria'] = 'DashboardUserSupplier/getKriteria';
 $route['suplier/spk/getAlternatif'] = 'DashboardUserSupplier/getAlternatif';
-
+$route['suplier/spk/addKriteria'] = 'DashboardUserSupplier/add_kriteria';
+$route['suplier/spk/addAlternatif'] = 'DashboardUserSupplier/add_alternatif';
 // $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
 $route['index_table/(:num)'] = 'DashboardUserSupplier/index_table$1';

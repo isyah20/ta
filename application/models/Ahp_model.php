@@ -31,7 +31,7 @@ class Ahp_model extends CI_Model
         return $this->db->insert('data_kriteria', $data);
     }
 
-    public function add_alternative($data)
+    public function add_alternatif($data)
     {
         return $this->db->insert('data_alternatif', $data);
     }
