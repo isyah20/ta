@@ -270,11 +270,10 @@
                             <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                         </button>
                     </div>
-
                     <div class="modal-body border-0">
                         <h3 class="modal-title" id="inputKriteriaModalLabel">Input Kriteria</h3>
                         <div class="input-popup justify-content-end">
-                            <form id="form-input" class="row g-2">
+                            <form id="form-input-kriteria" class="row g-2">
                                 <div class="col-12">
                                     <label for="inputNama" class="form-label text-start">Kriteria</label>
                                     <select name="nama_kriteria" class="form-control" id="inputNama" required>
@@ -292,7 +291,6 @@
                                 <div class="justify-content-start mt-3 gap-2">
                                     <div class="link flex-row align-items-center w-100">
                                         <span>
-                                            <!-- <input type="submit" class="btn-custom text-white text-center" value="Tambahkan"> -->
                                             <button type="submit" id="submit-input" class="btn-custom text-white text-center" style="width:407px;border:none">
                                                 Tambahkan
                                             </button>
@@ -454,9 +452,11 @@
             <div class="d-flex justify-content-start">
                 <div id="result-container" class="link d-flex">
                     <span>
-                        <a class="btn btn-sm border btn-outline btn-simpan" id="btn-rekomendasi">Lihat Rekomendasi
-                            <img class="custom-img-view" src="<?= base_url('assets\img\eye.svg') ?>" width="19" alt="" style="">
-                        </a>
+                        <form method="post" action="<?php echo site_url('AHPController/calculate'); ?>">
+                            <a class="btn btn-sm border btn-outline btn-simpan" id="btn-rekomendasi">Lihat Rekomendasi
+                                <img class="custom-img-view" src="<?= base_url('assets\img\eye.svg') ?>" width="19" alt="" style="">
+                            </a>
+                        </form>
                     </span>
                 </div>
             </div>
@@ -464,7 +464,7 @@
     </div>
 
     <!-- Tempat untuk menampilkan hasil rekomendasi -->
-    <div class="alternatif">
+    <div class="rekomendasi">
         <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
             <div class="row">
                 <div class="col">
@@ -473,13 +473,12 @@
                         <table class="table custom-table-container">
                             <thead class="thead">
                                 <tr>
-                                    <th class="custom-padding">No.</th>
-                                    <th class="custom-padding">Perusahaan</th>
-                                    <th class="custom-padding">Skor Total</th>
-                                    <th class="custom-padding">Tanggal Perhitungan</th>
+                                    <th class="custom-padding">ID Alternatif</th>
+                                    <th class="custom-padding">Nama Alternatif</th>
+                                    <th class="custom-padding">Skor Akhir</th>
                                 </tr>
                             </thead>
-                            <tbody id="result-body">
+                            <tbody id="hasil">
                             </tbody>
                         </table>
                     </div>
@@ -524,28 +523,6 @@
     $(document).ready(function() {
         // Fetch and display kriteria data
         fetchKriteriaData();
-
-        // Handle kriteria form submission
-        $('#form-input').on('submit', function(e) {
-            e.preventDefault();
-
-            const kriteria = $('#inputNama').val();
-            const bobot = $('#inputBobot').val();
-
-            $.ajax({
-                type: 'POST',
-                url: '<?= base_url("Ahp/add_kriteria") ?>',
-                data: {
-                    kriteria: kriteria,
-                    bobot: bobot
-                },
-                success: function(response) {
-                    $('#inputKriteriaModal').modal('hide');
-                    fetchKriteriaData();
-                }
-            });
-        });
-
         // Fetch kriteria data
         function fetchKriteriaData() {
             $.ajax({
@@ -564,9 +541,9 @@
                                 '<td class="custom-padding nama">' + data[i].kriteria + '</td>' +
                                 '<td class="custom-padding posisi">' + data[i].bobot + '</td>' +
                                 '<td class="custom-padding">' +
-                                '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
-                                '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
-                                '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
+                                /* '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' + */
+                                '<a href="#" id="delete-kriteria" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
                                 '<img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" width="30px" style="margin:0px 5px;"></a>' +
                                 '</td>' +
                                 '</tr>';
@@ -583,7 +560,7 @@
             });
         };
         // Handle form submission
-        $('#form-input').on('submit', function(e) {
+        $('#form-input-kriteria').on('submit', function(e) {
             e.preventDefault();
             const kriteria = $('#inputNama').val();
             const bobot = $('#inputBobot').val();
@@ -597,58 +574,51 @@
                 success: function(response) {
                     fetchKriteriaData();
                     swal({
-                        title: "Data berhasil ditambah",
+                        title: "Data berhasil diubah",
                         icon: "success",
-                        button: "ok",
+                        button: "Ok",
                     }).then(function() {
-                        $('#(inputModalKriteria)'), hide();
+                        $('#btn-close-kriteria').click();
                     });
                 },
                 error: function(xhr, status, error) {
                     var span = document.createElement("span");
                     span.innerHTML = JSON.parse(xhr.responseText).message;
                     swal({
-                        title: ("ERROR"),
+                        title: "ERROR",
                         content: span,
                         icon: "error",
-                        button: "ok"
+                        button: "Ok",
                     });
-                    console.log(xhr, responseText);
+                    console.log(xhr.responseText);
                 }
             });
         });
+        //delete kriteria
+        $('delete-kriteria').click(function() {
+            var id = $(this).data('id');
+            var row = $('#row_' + id);
 
+            if (confirm('Are you sure you want to delete this data?')) {
+                $.ajax({
+                    url: '<?php echo base_url('suplier/spk/deleteKriteria'); ?>' + id,
+                    type: 'DELETE',
+                    success: function(response) {
+                        var result = JSON.parse(response);
+                        if (result.status == 'success') {
+                            row.remove();
+                            alert(result.message);
+                        } else {
+                            alert(result.message);
+                        }
+                    }
+                });
+            }
+        });
     });
     $(document).ready(function() {
         // Fetch and display alternatif data
         fetchAlternatifData();
-
-        // Handle alternatif form submission
-        $('#form-input-alternatif').on('submit', function(e) {
-            e.preventDefault();
-            const nama_perusahaan = $('#inputNamaPerusahaan').val();
-            const riwayat_perusahaan = $('#inputRiwayatPerusahaan').val();
-            const riwayat_menang = $('#inputRiwayatMenang').val();
-            const lokasi_tender = $('#inputLokasiTender').val();
-            const nilai_hps = $('#inputNilaiHps').val();
-
-            $.ajax({
-                type: 'POST',
-                url: '<?= base_url("Ahp/add_alternatif") ?>',
-                data: {
-                    nama_perusahaan: nama_perusahaan,
-                    riwayat_perusahaan: riwayat_perusahaan,
-                    riwayat_menang: riwayat_menang,
-                    lokasi_tender: lokasi_tender,
-                    nilai_hps: nilai_hps
-                },
-                success: function(response) {
-                    $('#inputAlternatifModal').modal('hide');
-                    fetchAlternatifData();
-                }
-            });
-        });
-
         // Fetch alternatif data
         function fetchAlternatifData() {
             $.ajax({
@@ -665,7 +635,7 @@
                             html += '<tr>' +
                                 '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
                                 '<td class="custom-padding posisi">' + data[i].nama_perusahaan + '</td>' +
-                                '<td class="custom-padding nama">' + data[i].riwayat_perusahaan + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].riwayat_perusahaan + '</td>' +
                                 '<td class="custom-padding posisi">' + data[i].riwayat_menang + '</td>' +
                                 '<td class="custom-padding posisi">' + data[i].lokasi_tender + '</td>' +
                                 '<td class="custom-padding posisi">' + data[i].nilai_hps + '</td>' +
@@ -688,8 +658,9 @@
                 }
             });
         };
+
         // Handle form submission
-        $('#form-input').on('submit', function(e) {
+        $('#form-input-alternatif').on('submit', function(e) {
             e.preventDefault();
             const nama_perusahaan = $('#inputNamaPerusahaan').val();
             const riwayat_perusahaan = $('#inputRiwayatPerusahaan').val();
@@ -700,33 +671,85 @@
                 type: 'POST',
                 url: '<?= base_url("suplier/spk/addAlternatif") ?>',
                 data: {
-                    kriteria: kriteria,
-                    bobot: bobot
+                    nama_perusahaan: nama_perusahaan,
+                    riwayat_perusahaan: riwayat_perusahaan,
+                    riwayat_menang: riwayat_menang,
+                    lokasi_tender: lokasi_tender,
+                    nilai_hps: nilai_hps
                 },
                 success: function(response) {
-                    fetchKriteriaData();
+                    fetchAlternatifData();
                     swal({
-                        title: "Data berhasil diubah",
+                        title: "Data berhasil ditambah",
                         icon: "success",
-                        button: "ok",
+                        button: "Ok",
                     }).then(function() {
-                        $('#btn-close-alternatif'), click();
+                        $('#btn-close-alternatif').click();
                     });
                 },
                 error: function(xhr, status, error) {
                     var span = document.createElement("span");
                     span.innerHTML = JSON.parse(xhr.responseText).message;
                     swal({
-                        title: ("ERROR"),
+                        title: "ERROR",
                         content: span,
                         icon: "error",
-                        button: "ok"
+                        button: "Ok",
                     });
-                    console.log(xhr, responseText);
+                    console.log(xhr.responseText);
                 }
             });
         });
+        //delete alternatif
+        $('.delete-button').click(function() {
+            var id = $(this).data('id');
+            var row = $('#row_' + id);
+
+            if (confirm('Are you sure you want to delete this data?')) {
+                $.ajax({
+                    url: '<?php echo base_url('DataController/delete/'); ?>' + id,
+                    type: 'DELETE',
+                    success: function(response) {
+                        var result = JSON.parse(response);
+                        if (result.status == 'success') {
+                            row.remove();
+                            alert(result.message);
+                        } else {
+                            alert(result.message);
+                        }
+                    }
+                });
+            }
+        });
     });
+    $(document).ready(function() {
+        $.ajax({
+            url: "<?php echo site_url('suplier/spk/hitung'); ?>",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                var tableBody = $("#hasil tbody");
+                tableBody.empty(); // Clear any existing rows
+
+                data.forEach(function(item) {
+                    var row = "<tr>" +
+                        "<td>" + item.id_alternatif + "</td>" +
+                        "<td>" + item.nama_alternatif + "</td>" +
+                        "<td>" + item.skor + "</td>" +
+                        "</tr>";
+                    tableBody.append(row);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error: " + status + error);
+            }
+        });
+    });
+</script>
+
+
+<!-- script hitung lama -->
+<!-- <script>
     $(document).ready(function() {
         $('#btn-rekomendasi').on('click', function() {
             $.ajax({
@@ -754,14 +777,7 @@
             });
         });
     });
-
-
-    // Function to add Authorization header
-    function addAuthorizationHeader(xhr) {
-        var basicAuth = btoa("beetend" + ":" + "76oZ8XuILKys5");
-        xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
-    };
-</script>
+</script> -->
 
 
 <!-- <script>

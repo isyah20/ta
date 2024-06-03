@@ -51,7 +51,7 @@ class Ahp_model extends CI_Model
         return $this->db->where('id_alternatif', $id)->update('data_alternatif', $data);
     }
 
-    public function delete_criteria($id)
+    public function delete_kriteria($id)
     {
         return $this->db->where('id_kriteria', $id)->delete('data_kriteria');
     }
@@ -60,6 +60,47 @@ class Ahp_model extends CI_Model
     {
         return $this->db->where('id_alternatif', $id)->delete('data_alternatif');
     }
+    //perbandingan
+    public function get_perbandingan_kriteria()
+    {
+        return $this->db->get('perbandingan_kriteria')->result();
+    }
+    public function get_perbandingan_alternatif()
+    {
+        return $this->db->get('perbandingan_alternatif')->result();
+    }
+
+    //model penilaian
+    public function get_all_penilaian()
+    {
+        return $this->db->get('penilaian')->result();
+    }
+
+    public function get_penilaian_by_id($id)
+    {
+        return $this->db->get_where('penilaian', array('id_penilaian' => $id))->row();
+    }
+
+    public function insert_penilaian($data)
+    {
+        return $this->db->insert('penilaian', $data);
+    }
+
+    public function update_penilaian($id, $data)
+    {
+        return $this->db->where('id_penilaian', $id)->update('penilaian', $data);
+    }
+
+    public function delete_penilaian($id)
+    {
+        return $this->db->where('id_penilaian', $id)->delete('penilaian');
+    }
+
+
+
+
+
+
 
     public function add_result($data)
     {

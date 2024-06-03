@@ -611,18 +611,18 @@ class DashboardUserSupplier extends CI_Controller
         redirect('suplier/spk');
     }
 
-    public function hapusKriteria($id)
+    public function delete_kriteria($id)
     {
-        $this->Supplier_model->hapusKriteria($id); // Panggil method hapusKriteria pada model
+        $this->Ahp_model->delete_kriteria($id); // Panggil method hapusKriteria pada model
 
         // Redirect atau tampilkan pesan sukses
         redirect('suplier/spk');
     }
-    public function hitung_ahp()
+    /*public function hitung_ahp()
     {
         $results = $this->Spk_model->calculate_ahp();
         echo json_encode($results);
-    }
+    }*/
 
     /* public function simpan_kriteria()
     {
@@ -632,9 +632,9 @@ class DashboardUserSupplier extends CI_Controller
         ];
         $this->Spk_model->insert_kriteria($data);
         redirect('ahp');
-    }
+    }*/
 
-    public function simpan_alternatif()
+    /*public function simpan_alternatif()
     {
         $data = [
             'nama' => $this->input->post('nama_alternatif'),
@@ -701,25 +701,92 @@ class DashboardUserSupplier extends CI_Controller
         print_r($data);
         echo "</pre>";
 
-        if ($this->Ahp_model->insert($data)) {
+        if ($this->Ahp_model->add_alternatif($data)) {
             echo json_encode(['status' => true]);
         } else {
-            echo json_encode(['status' => false, 'message' => 'Failed to add alternative.']);
+            echo json_encode(['status' => false, 'message' => 'Failed to add alternatif.']);
         }
+    }
+    //controller penilaian
+    public function calculate()
+    {
+        // Ambil data kriteria, alternatif, dan penilaian dari database
+        $kriteria = $this->Ahp_model->get_criteria();
+        $alternatif = $this->Ahp_model->get_alternatives();
+        $penilaian = $this->Ahp_model->get_all_penilaian();
+        $perbandingan_kriteria = $this->Ahp_model->get_perbandingan_kriteria();
+        $perbandingan_alternatif = $this->Ahp_model->get_perbandingan_alternatif();
+
+        // Buat matriks perbandingan kriteria
+        $matriks_kriteria = [];
+        foreach ($perbandingan_kriteria as $pk) {
+            $matriks_kriteria[$pk->kriteria_1][$pk->kriteria_2] = $pk->nilai;
+        }
+
+        // Menghitung bobot kriteria
+        $bobot_kriteria = $this->hitung_bobot($matriks_kriteria, count($kriteria));
+
+        // Buat matriks perbandingan alternatif untuk setiap kriteria
+        $matriks_alternatif = [];
+        foreach ($perbandingan_alternatif as $pa) {
+            $matriks_alternatif[$pa->kriteria][$pa->alternatif_1][$pa->alternatif_2] = $pa->nilai;
+        }
+
+        // Menghitung bobot alternatif untuk setiap kriteria
+        $bobot_alternatif = [];
+        foreach ($kriteria as $k) {
+            $bobot_alternatif[$k->id_kriteria] = $this->hitung_bobot($matriks_alternatif[$k->id_kriteria], count($alternatif));
+        }
+
+        // Menghitung skor akhir untuk setiap alternatif
+        $skor_akhir = [];
+        foreach ($alternatif as $a) {
+            $skor_akhir[$a->id_alternatif] = 0;
+            foreach ($kriteria as $k) {
+                $skor_akhir[$a->id_alternatif] += $bobot_alternatif[$k->id_kriteria][$a->id_alternatif] * $bobot_kriteria[$k->id_kriteria];
+            }
+        }
+
+        // Urutkan skor akhir dari yang terbesar ke terkecil
+        arsort($skor_akhir);
+
+        // Siapkan data untuk dikirim ke view
+        $data['skor_akhir'] = $skor_akhir;
+        $data['alternatif'] = $alternatif;
+
+        // Tampilkan hasil perhitungan AHP di view
+        $this->load->view('hasil_ahp', $data);
+    }
+
+    private function hitung_bobot($matriks, $n)
+    {
+        // Menghitung jumlah setiap kolom
+        $jumlah_kolom = array_fill(0, $n, 0);
+        for ($i = 0; $i < $n; $i++) {
+            for ($j = 0; $j < $n; $j++) {
+                $jumlah_kolom[$j] += $matriks[$i][$j];
+            }
+        }
+
+        // Membagi setiap elemen dengan jumlah kolomnya untuk mendapatkan matriks normalisasi
+        $matriks_normalisasi = [];
+        for ($i = 0; $i < $n; $i++) {
+            for ($j = 0; $j < $n; $j++) {
+                $matriks_normalisasi[$i][$j] = $matriks[$i][$j] / $jumlah_kolom[$j];
+            }
+        }
+
+        // Menghitung bobot rata-rata setiap baris
+        $bobot = [];
+        for ($i = 0; $i < $n; $i++) {
+            $bobot[$i] = array_sum($matriks_normalisasi[$i]) / $n;
+        }
+
+        return $bobot;
     }
 
 
-    /* public function spk_view()
-    {
-        $data = [
-            'title' => 'Dashboard'
-        ];
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('profile_pengguna/templates/navbar');
-        $this->load->view('dashboard/supplier/spk_view');
-        $this->load->view('templates/footer');
-    } */
 
     public function testCRM()
     {
