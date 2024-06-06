@@ -167,6 +167,14 @@
     .nama {
         font-weight: bold;
     }
+
+    .colspan-2 {
+        text-align: center;
+    }
+
+    .radio {
+        margin-left: 10px;
+    }
 </style>
 
 <section class="bg-white pt-5 mt-5 w-100">
@@ -447,7 +455,92 @@
     <!-- end modal input alternatif -->
 
     <!-- perbandingan kriteria -->
+    <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col">
+            <h5 class="wow fadeInUp">Perbandingan Kriteria</h5>
+        </div>
+    </div>
+    <!-- tabel perbandingan kriteria -->
+    <div class="perbandingan_kriteria">
+        <div class="container d-flex wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row">
+                <div class="col-6">
+                    <div class="table-responsive">
+                        <table class="table custom-table-container">
+                            <thead class="thead">
+                                <tr>
+                                    <th class="custom-padding" colspan="2">Perbandingan</th>
+                                    <th class="custom-padding">Nilai Perbandingan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="radio" name="comparison1"><span class="radio">Riwayat Perusahaan</span></td>
+                                    <td><input type="radio" name="comparison2"><span class="radio">Riwayat Menang</span></td>
+                                    <td><input type="text" name="nilai1"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="comparison3"><span class="radio">Riwayat Perusahaan</span></td>
+                                    <td><input type="radio" name="comparison4"><span class="radio">Nilai HPS</span></td>
+                                    <td><input type="text" name="nilai2"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="comparison5"><span class="radio">Riwayat Perusahaan</span></td>
+                                    <td><input type="radio" name="comparison6"><span class="radio">Lokasi Tender</span></td>
+                                    <td><input type="text" name="nilai3"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="comparison7"><span class="radio">Riwayat Menang</span></td>
+                                    <td><input type="radio" name="comparison8"><span class="radio">Nilai HPS</span></td>
+                                    <td><input type="text" name="nilai4"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="comparison9"><span class="radio">Riwayat Menang</span></td>
+                                    <td><input type="radio" name="comparison10"><span class="radio">Lokasi Tender</span></td>
+                                    <td><input type="text" name="nilai5"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="comparison11"><span class="radio">Nilai HPS</span></td>
+                                    <td><input type="radio" name="comparison12"><span class="radio">Lokasi Tender</span></td>
+                                    <td><input type="text" name="nilai6"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h5>petunjuk pemilihan</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- perbandingan alternatif -->
+    <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col">
+            <h5 class="wow fadeInUp">Perbandingan Alternatif</h5>
+        </div>
+    </div>
+
+    <!-- card perbandingan alternatif -->
+    <div class="perbandingan-alternatif">
+        <div class="container-lg">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text thead" for="inputGroupSelect01">Kriteria</label>
+                        <select class="form-select" id="inputGroupSelect01">
+                            <option selected>Pilih...</option>
+                            <option value="1">Riwayat Perusahaan</option>
+                            <option value="2">Riwayat Menang</option>
+                            <option value="3">Lokasi Tender</option>
+                            <option value="4">Nilai HPS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- button rekomendasi -->
     <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
@@ -525,7 +618,7 @@
                         for (let i = 0; i < data.length; i++) {
                             html += '<tr>' +
                                 '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
-                                '<td class="custom-padding nama">' + data[i].kriteria + '</td>' +
+                                '<td class="custom-padding posisi">' + data[i].kriteria + '</td>' +
                                 '<td class="custom-padding posisi">' + data[i].bobot + '</td>' +
                                 '<td class="custom-padding">' +
                                 /* '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
