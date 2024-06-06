@@ -155,11 +155,11 @@ $route['api/supplier/tim/delete/(:num)'] = 'DashboardUserSupplier/deleteTimMarke
 
 //routes spk
 $route['suplier/spk'] = 'DashboardUserSupplier/spk';
-$route['suplier/spk/getKriteria'] = 'DashboardUserSupplier/getKriteria';
-$route['suplier/spk/getAlternatif'] = 'DashboardUserSupplier/getAlternatif';
-$route['suplier/spk/addKriteria'] = 'DashboardUserSupplier/add_kriteria';
-$route['suplier/spk/addAlternatif'] = 'DashboardUserSupplier/add_alternatif';
-$route['suplier/spk/deleteKriteria'] = 'DashboardUserSupplier/delete_kriteria';
+$route['suplier/spk/getKriteria'] = 'Kriteria/getKriteria';
+$route['suplier/spk/getAlternatif'] = 'Alternatif/getAlternatif';
+$route['suplier/spk/addKriteria'] = 'Kriteria/add_kriteria';
+$route['suplier/spk/addAlternatif'] = 'Alternatif/add_alternatif';
+$route['supplier/spk/deleteKriteria/(:num)'] = 'Kriteria/delete_kriteria/$1';
 $route['suplier/spk/hitung'] = 'DashboardUserSupplier/calculate';
 
 // $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';

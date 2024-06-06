@@ -9,15 +9,9 @@ class Ahp_model extends CI_Model
         parent::__construct();
         $this->load->model('Ahp_model');
     }
-    public function get_criteria()
-    {
-        return $this->db->get('data_kriteria')->result();
-    }
+    
 
-    public function get_alternatives()
-    {
-        return $this->db->get('data_alternatif')->result();
-    }
+    
 
     public function get_alternative_scores($alternative_id, $kriteria_id)
     {
@@ -25,40 +19,9 @@ class Ahp_model extends CI_Model
             ->where('id_kriteria', $kriteria_id)
             ->get('nilai_alternatif')->row();
     }
-
-    public function add_criteria($data)
-    {
-        return $this->db->insert('data_kriteria', $data);
-    }
-
-    public function add_alternatif($data)
-    {
-        return $this->db->insert('data_alternatif', $data);
-    }
-
     public function add_alternative_score($data)
     {
         return $this->db->insert('nilai_alternatif', $data);
-    }
-
-    public function update_criteria($id, $data)
-    {
-        return $this->db->where('id_kriteria', $id)->update('data_kriteria', $data);
-    }
-
-    public function update_alternative($id, $data)
-    {
-        return $this->db->where('id_alternatif', $id)->update('data_alternatif', $data);
-    }
-
-    public function delete_kriteria($id)
-    {
-        return $this->db->where('id_kriteria', $id)->delete('data_kriteria');
-    }
-
-    public function delete_alternative($id)
-    {
-        return $this->db->where('id_alternatif', $id)->delete('data_alternatif');
     }
     //perbandingan
     public function get_perbandingan_kriteria()

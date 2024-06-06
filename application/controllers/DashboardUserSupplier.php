@@ -565,148 +565,16 @@ class DashboardUserSupplier extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function getKriteria()
-    {
-        $data = $this->Ahp_model->get_criteria(); // Mengambil data kriteria dari model
-        $json_data = json_encode($data);
-        $this->output->set_content_type('application/json')->set_output($json_data);
-    }
-    public function getAlternatif()
-    {
-        $data = $this->Ahp_model->get_alternatives(); // Mengambil data kriteria dari model
-        $json_data = json_encode($data);
-        $this->output->set_content_type('application/json')->set_output($json_data);
-    }
+    
 
-    /* public function addKriteria()
-    {
-        $kriteria = $this->input->post('nama_kriteria');
-        $bobot_kriteria = $this->input->post('bobot_kriteria');
+    
 
-        $data = array(
-            'nama' => $kriteria,
-            'bobot' => $bobot_kriteria
-        );
-
-        $this->Supplier_model->addKriteria($data); // Panggil method tambahKriteria pada model
-
-        // Redirect atau tampilkan pesan sukses
-        redirect('suplier/spk');
-    } */
-
-    public function updateKriteria($id)
-    {
-        // Mengambil data dari formulir
-        $nama_kriteria = $this->input->post('nama_kriteria');
-        $bobot_kriteria = $this->input->post('bobot_kriteria');
-
-        $data = array(
-            'nama' => $nama_kriteria,
-            'bobot' => $bobot_kriteria
-        );
-
-        $this->Supplier_model->updateKriteria($id, $data); // Panggil method updateKriteria pada model
-
-        // Redirect atau tampilkan pesan sukses
-        redirect('suplier/spk');
-    }
-
-    public function delete_kriteria($id)
-    {
-        $this->Ahp_model->delete_kriteria($id); // Panggil method hapusKriteria pada model
-
-        // Redirect atau tampilkan pesan sukses
-        redirect('suplier/spk');
-    }
-    /*public function hitung_ahp()
-    {
-        $results = $this->Spk_model->calculate_ahp();
-        echo json_encode($results);
-    }*/
-
-    /* public function simpan_kriteria()
-    {
-        $data = [
-            'kriteria' => $this->input->post('nama_kriteria'),
-            'bobot' => $this->input->post('bobot')
-        ];
-        $this->Spk_model->insert_kriteria($data);
-        redirect('ahp');
-    }*/
-
-    /*public function simpan_alternatif()
-    {
-        $data = [
-            'nama' => $this->input->post('nama_alternatif'),
-            'riwayat_perusahaan' => $this->input->post('riwayat_perusahaan'),
-            'riwayat_menang' => $this->input->post('riwayat_menang'),
-            'lokasi' => $this->input->post('lokasi_tender'),
-            'hps' => $this->input->post('nilai_hps')
-        ];
-        $this->Spk_model->insert_alternatif($data);
-        redirect('ahp');
-    } */
-    public function add_kriteria()
-    {
-        $kriteria = $this->input->post('kriteria');
-        $bobot = $this->input->post('bobot');
-
-        // Debugging: Cek nilai input
-        echo "Nama Kriteria: " . $kriteria . "<br>";
-        echo "Bobot: " . $bobot . "<br>";
-
-        $data = [
-            'kriteria' => $kriteria,
-            'bobot' => $bobot
-        ];
-
-        // Debugging: Cek data array
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-
-        if ($this->Ahp_model->add_criteria($data)) {
-            echo json_encode(['status' => true]);
-        } else {
-            echo json_encode(['status' => false, 'message' => 'Failed to add criteria.']);
-        }
-    }
+    
+    
+    
 
 
-    public function add_alternatif()
-    {
-        $nama_perusahaan = $this->input->post('nama_perusahaan');
-        $riwayat_perusahaan = $this->input->post('riwayat_perusahaan');
-        $riwayat_menang = $this->input->post('riwayat_menang');
-        $lokasi_tender = $this->input->post('lokasi_tender');
-        $nilai_hps = $this->input->post('nilai_hps');
-
-        // Debugging: Cek nilai input
-        echo "Nama Perusahaan: " . $nama_perusahaan . "<br>";
-        echo "Riwayat Perusahaan: " . $riwayat_perusahaan . "<br>";
-        echo "Riwayat Menang: " . $riwayat_menang . "<br>";
-        echo "Lokasi Tender: " . $lokasi_tender . "<br>";
-        echo "Nilai HPS: " . $nilai_hps . "<br>";
-
-        $data = [
-            'nama_perusahaan' => $nama_perusahaan,
-            'riwayat_perusahaan' => $riwayat_perusahaan,
-            'riwayat_menang' => $riwayat_menang,
-            'lokasi_tender' => $lokasi_tender,
-            'nilai_hps' => $nilai_hps
-        ];
-
-        // Debugging: Cek data array
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-
-        if ($this->Ahp_model->add_alternatif($data)) {
-            echo json_encode(['status' => true]);
-        } else {
-            echo json_encode(['status' => false, 'message' => 'Failed to add alternatif.']);
-        }
-    }
+    
     //controller penilaian
     public function calculate()
     {

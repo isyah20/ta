@@ -446,6 +446,9 @@
     </div>
     <!-- end modal input alternatif -->
 
+    <!-- perbandingan kriteria -->
+
+
     <!-- button rekomendasi -->
     <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
         <div class="col">
@@ -486,22 +489,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Button to trigger the result fetching -->
-    <!-- <button id="btn-rekomendasi" class="btn btn-primary mt-3">Get Recommendations</button>
-    <div id="result-container" class="mt-4" style="display: none;">
-        <h2>Results</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Alternative</th>
-                    <th>Total Score</th>
-                </tr>
-            </thead>
-            <tbody id="result-body"></tbody>
-        </table>
-    </div> -->
 
 </section>
 
@@ -628,9 +615,11 @@
                 success: function(data) {
                     console.log('Response:', data); // Debugging: log the response
                     let html = '';
+                    //let alternatifCount = 0;
 
                     // Check if response is an array
                     if (Array.isArray(data)) {
+                        //alternatifCount = data.length; // Update kriteria count
                         for (let i = 0; i < data.length; i++) {
                             html += '<tr>' +
                                 '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
@@ -652,6 +641,9 @@
                     }
 
                     $('#data-alternatif').html(html);
+
+                    // Update the hidden input with alternatif count
+                    //$('#alternatifCount').val(alternatifCount);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching data:', error);
@@ -667,6 +659,18 @@
             const riwayat_menang = $('#inputRiwayatMenang').val();
             const lokasi_tender = $('#inputLokasiTender').val();
             const nilai_hps = $('#inputNilaiHps').val();
+            const alternatifCount = parseInt($('#alternatifCount').val(), 10);
+
+            if (alternatifCount >= 3) {
+                swal({
+                    title: "ERROR",
+                    text: "Jumlah alternatif tidak boleh lebih dari 3",
+                    icon: "error",
+                    button: "Ok",
+                });
+                return;
+            }
+
             $.ajax({
                 type: 'POST',
                 url: '<?= base_url("suplier/spk/addAlternatif") ?>',
