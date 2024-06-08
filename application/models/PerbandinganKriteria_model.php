@@ -10,7 +10,7 @@ class PerbandinganKriteria_model extends CI_Model
     }
 
     // Mengambil data kriteria
-    public function getKriteria($id = null)
+    public function get_criteria($id = null)
     {
         if ($id == null) {
             return $this->db->get('data_kriteria')->result_array();
@@ -41,7 +41,7 @@ class PerbandinganKriteria_model extends CI_Model
         $this->db->update('perbandingan_kriteria', ['nilai_perbandingan' => $nilai]);
     }
 
-    /* public function getNumWithIdKriteriaPV($id_kriteria)
+    public function getNumWithIdKriteriaPV($id_kriteria)
     {
         return $this->db->get_where('tb_bobot_kriteria', ['id_kriteria' => $id_kriteria])->num_rows();
     }
@@ -55,5 +55,5 @@ class PerbandinganKriteria_model extends CI_Model
     {
         $this->db->where(['id_kriteria' => $id_kriteria]);
         $this->db->update('tb_bobot_kriteria', ['nilai' => $pv]);
-    } */
+    }
 }

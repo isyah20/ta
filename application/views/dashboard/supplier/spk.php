@@ -52,7 +52,7 @@
     }
 
     .table-responsive {
-        width: 81rem;
+        width: fit-content;
     }
 
     .table {
@@ -175,6 +175,18 @@
     .radio {
         margin-left: 10px;
     }
+
+    .table-kriteria {
+        width: 40rem;
+    }
+
+    .table-perkri {
+        width: 40rem;
+    }
+
+    .card-info {
+        border-radius: 30px
+    }
 </style>
 
 <section class="bg-white pt-5 mt-5 w-100">
@@ -186,87 +198,84 @@
         <img class="img-custom" src="<?= base_url('assets\img\amico.svg') ?>" alt="">
     </div>
 
-    <!-- tabel kriteria -->
-    <div class="kriteria">
-        <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
-            <div class="col">
-                <h5 class="wow fadeInUp">Data Kriteria</h5>
-                <div class="d-flex justify-content-start">
-                    <div class="link d-flex">
-                        <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputKriteriaModal">Tambahkan Kriteria
-                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="19" alt="" style="">
-                            </a>
-                        </span>
+    <!-- tabel kriteria dan alternatif -->
+    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
+        <div class="row">
+            <!-- Tabel Kriteria -->
+            <div class="col-6">
+                <div class="kriteria">
+                    <div class="col">
+                        <h5>Data Kriteria</h5>
+                        <div class="d-flex justify-content-start">
+                            <div class="link d-flex">
+                                <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputKriteriaModal">Tambahkan Kriteria
+                                        <img class="custom-img" src="<?= base_url('assets/img/icon-plus.svg') ?>" width="19" alt="">
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="table-responsive table-kriteria">
+                            <table class="table custom-table-container">
+                                <thead class="thead">
+                                    <tr>
+                                        <th class="custom-padding">No.</th>
+                                        <th class="custom-padding">Kriteria</th>
+                                        <th class="custom-padding">Bobot</th>
+                                        <th class="custom-padding">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data-kriteria">
+                                    <!-- Data Kriteria akan ditambahkan disini -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-lg d-flex wow fadeInUp">
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table custom-table-container">
-                            <thead class="thead">
-                                <tr>
-                                    <th class="custom-padding">No.</th>
-                                    <th class="custom-padding">Kriteria</th>
-                                    <th class="custom-padding">Bobot</th>
-                                    <th class="custom-padding">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="data-kriteria">
-                                <!-- <tr>
-                                    <td>1</td>
-                                    <td class="riwayat_perusahaan">Riwayat Perusahaan</td>
-                                    <td class="bobot">10</td>
-                                    <td>
-                                        <span><a class="btn btn-sm border btn-outline btn-simpan" href="<?= base_url('spk_view') ?>">Edit
-                                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="riwayat_menang">Riwayat menang</td>
-                                    <td class="bobot">10</td>
-                                    <td>
-                                        <span><a class="btn btn-sm border btn-outline btn-simpan" href="<?= base_url('spk_view') ?>">Edit
-                                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="lokasi">Lokasi tender</td>
-                                    <td class="bobot">30</td>
-                                    <td>
-                                        <span><a class="btn btn-sm border btn-outline btn-simpan" href="<?= base_url('spk_view') ?>">Edit
-                                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td class="hps">Nilai HPS</td>
-                                    <td class="bobot">50</td>
-                                    <td>
-                                        <span><a class="btn btn-sm border btn-outline btn-simpan" href="<?= base_url('spk_view') ?>">Edit
-                                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr> -->
-                            </tbody>
-                        </table>
+            <!-- End Tabel Kriteria -->
+
+            <!-- Tabel Alternatif -->
+            <div class="col-6 col-alternatif">
+                <div class="alternatif">
+                    <div class="col">
+                        <h5>Data Alternatif</h5>
+                        <div class="d-flex justify-content-start">
+                            <div class="link d-flex">
+                                <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputAlternatifModal">Tambahkan Alternatif
+                                        <img class="custom-img" src="<?= base_url('assets/img/icon-plus.svg') ?>" width="19" alt="">
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class="table custom-table-container">
+                                <thead class="thead">
+                                    <tr>
+                                        <th class="custom-padding">No.</th>
+                                        <th class="custom-padding">Nama Perusahaan</th>
+                                        <th class="custom-padding">Riwayat Perusahaan</th>
+                                        <th class="custom-padding">Riwayat Menang</th>
+                                        <th class="custom-padding">Lokasi Tender</th>
+                                        <th class="custom-padding">Nilai HPS</th>
+                                        <th class="custom-padding">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data-alternatif">
+                                    <!-- Data Alternatif akan ditambahkan disini -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- End Tabel Alternatif -->
         </div>
     </div>
-    <!-- end tabel kriteria -->
+
 
     <!-- modal input kriteria -->
     <div class="col-12 py-1">
@@ -313,92 +322,6 @@
         </div>
     </div>
     <!-- end modal input kriteria -->
-
-
-    <!-- Alternatif -->
-    <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
-        <div class="col">
-            <h5 class="wow fadeInUp">Data Alternatif</h5>
-            <div class="d-flex justify-content-start">
-                <div class="link d-flex">
-                    <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputAlternatifModal">Tambahkan Alternatif
-                            <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="19" alt="" style="">
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- tabel alternatif -->
-    <div class="alternatif">
-        <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table custom-table-container">
-                            <thead class="thead">
-                                <tr>
-                                    <th class="custom-padding">No.</th>
-                                    <th class="custom-padding">Nama Perusahaan</th>
-                                    <th class="custom-padding">Riwayat Perusahaan</th>
-                                    <th class="custom-padding">Riwayat Menang</th>
-                                    <th class="custom-padding">Lokasi Tender</th>
-                                    <th class="custom-padding">Nilai HPS</th>
-                                    <th class="custom-padding">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="data-alternatif">
-                                <!-- Data Alternatif akan ditambahkan disini -->
-                                <!-- <tr>
-                                    <td>1</td>
-                                    <td class="nama">PT ABC</td>
-                                    <td class="riwayat_perusahaan">10</td>
-                                    <td class="riwayat_menang">7</td>
-                                    <td class="lokasi">malang</td>
-                                    <td class="hps">100000000</td>
-                                    <td>
-                                        <span><a class="btn btn-sm border btn-outline btn-simpan" href="<?= base_url('spk_view') ?>">Edit
-                                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="nama">PT DEF</td>
-                                    <td class="riwayat_perusahaan">5</td>
-                                    <td class="riwayat_menang">3</td>
-                                    <td class="lokasi">surabaya</td>
-                                    <td class="hps">200000000</td>
-                                    <td>
-                                        <span><a class="btn btn-sm border btn-outline btn-simpan" href="<?= base_url('spk_view') ?>">Edit
-                                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="nama">PT GHI</td>
-                                    <td class="riwayat_perusahaan">11</td>
-                                    <td class="riwayat_menang">5</td>
-                                    <td class="lokasi">bandung</td>
-                                    <td class="hps">190000000</td>
-                                    <td>
-                                        <span><a class="btn btn-sm border btn-outline btn-simpan" href="<?= base_url('spk_view') ?>">Edit
-                                                <img class="custom-img" src="<?= base_url('assets\img\icon-plus.svg') ?>" width="20" alt="" style="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr> -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end tabel alternatif -->
 
     <!-- modal input alternatif -->
     <div class="col-12 py-1">
@@ -455,17 +378,17 @@
     <!-- end modal input alternatif -->
 
     <!-- perbandingan kriteria -->
-    <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
         <div class="col">
             <h5 class="wow fadeInUp">Perbandingan Kriteria</h5>
         </div>
     </div>
     <!-- tabel perbandingan kriteria -->
     <div class="perbandingan_kriteria">
-        <div class="container d-flex wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container wow fadeInUp" data-wow-delay="0.1s">
             <div class="row">
                 <div class="col-6">
-                    <div class="table-responsive">
+                    <div class="table-responsive table-perkri">
                         <table class="table custom-table-container">
                             <thead class="thead">
                                 <tr>
@@ -509,7 +432,14 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <h5>petunjuk pemilihan</h5>
+                    <div class="card-info">
+                        <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="col">
+                                <h5 class="wow fadeInUp">Petunjuk pengisian</h5>
+                                <h6>Pilih elemen yang lebih penting, dan isi nilai perbandingan sesuai tabel dibawah ini</h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
