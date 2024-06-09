@@ -17,7 +17,21 @@ class PerbandinganAlternatif extends CI_Controller
 
         // $this->load->library('input');
         $this->load->model('PerbandinganAlternatif_model');
+        $this->load->model('Kriteria_model');
         $this->init();
+    }
+    public function index()
+    {
+        $data['data_kriteria'] = $this->Kriteria_model->get_criteria();
+
+       /*  $this->load->view('templates/header', $data);
+        $this->load->view('profile_pengguna/templates/navbar');
+        $this->load->view('dashboard/supplier/spk');
+        $this->load->view('templates/footer'); */
+        
+        $this->load->view('templates/header');
+        $this->load->view('perbandingan_alternatif/index', $data);
+        $this->load->view('templates/footer');
     }
 
     public function tabel()

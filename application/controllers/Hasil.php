@@ -19,4 +19,14 @@ class Hasil extends CI_Controller
         $this->load->model('Hasil_model');
         $this->init();
     }
+    /* public function index()
+    {
+        $data['jumlah_kriteria'] = $this->model->getNumKriteria();
+        $data['jumlah_alternatif'] = $this->model->getNumAlternatif();
+        $data['ranking'] = $this->model->getRanking();
+
+        $this->load->view('templates/header');
+        $this->load->view('hasil/index', $data);
+        $this->load->view('templates/footer');
+    } */
 }

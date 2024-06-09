@@ -8,6 +8,24 @@ class PerbandinganKriteria_model extends CI_Model
         parent::__construct();
         $this->load->model('PerbandinganKriteria_model');
     }
+    public function save_comparison_data($data)
+    {
+        // Lakukan penyimpanan data ke database
+        $comparison_data = array(
+            'comparison1' => $data['comparison1'],
+            'comparison2' => $data['comparison2'],
+            'nilai1' => $data['nilai1'],
+            // tambahkan untuk semua nilai yang lain
+        );
+
+        $this->db->insert('perbandingan', $comparison_data);
+
+        if ($this->db->affected_rows() > 0) {
+            return array('status' => 'success', 'message' => 'Data berhasil disimpan.');
+        } else {
+            return array('status' => 'error', 'message' => 'Terjadi kesalahan saat menyimpan data.');
+        }
+    }
 
     // Mengambil data kriteria
     public function get_criteria($id = null)
@@ -43,17 +61,17 @@ class PerbandinganKriteria_model extends CI_Model
 
     public function getNumWithIdKriteriaPV($id_kriteria)
     {
-        return $this->db->get_where('tb_bobot_kriteria', ['id_kriteria' => $id_kriteria])->num_rows();
+        return $this->db->get_where('bobot_kriteria', ['id_kriteria' => $id_kriteria])->num_rows();
     }
 
     public function insertKriteriaPV($id_kriteria, $pv)
     {
-        $this->db->insert('tb_bobot_kriteria', ['id_kriteria' => $id_kriteria, 'nilai' => $pv]);
+        $this->db->insert('bobot_kriteria', ['id_kriteria' => $id_kriteria, 'nilai' => $pv]);
     }
 
     public function updateKriteriaPV($id_kriteria, $pv)
     {
         $this->db->where(['id_kriteria' => $id_kriteria]);
-        $this->db->update('tb_bobot_kriteria', ['nilai' => $pv]);
+        $this->db->update('bobot_kriteria', ['nilai' => $pv]);
     }
 }

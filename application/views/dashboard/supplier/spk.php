@@ -45,6 +45,11 @@
         width: 100px;
     }
 
+    .thead-card {
+        color: #E05151;
+        background-color: #f0e2e2;
+    }
+
     tbody {
         text-align: left;
         font-size: 15px;
@@ -186,6 +191,10 @@
 
     .card-info {
         border-radius: 30px
+    }
+
+    .table-rek {
+        width: 81rem;
     }
 </style>
 
@@ -378,16 +387,12 @@
     <!-- end modal input alternatif -->
 
     <!-- perbandingan kriteria -->
-    <div class="container-lg wow fadeInUp" data-wow-delay="0.1s">
-        <div class="col">
-            <h5 class="wow fadeInUp">Perbandingan Kriteria</h5>
-        </div>
-    </div>
     <!-- tabel perbandingan kriteria -->
     <div class="perbandingan_kriteria">
         <div class="container wow fadeInUp" data-wow-delay="0.1s">
             <div class="row">
                 <div class="col-6">
+                    <h5 class="wow fadeInUp">Perbandingan Kriteria</h5>
                     <div class="table-responsive table-perkri">
                         <table class="table custom-table-container">
                             <thead class="thead">
@@ -396,7 +401,7 @@
                                     <th class="custom-padding">Nilai Perbandingan</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table-perbandingan-kriteria">
                                 <tr>
                                     <td><input type="radio" name="comparison1"><span class="radio">Riwayat Perusahaan</span></td>
                                     <td><input type="radio" name="comparison2"><span class="radio">Riwayat Menang</span></td>
@@ -437,6 +442,49 @@
                             <div class="col">
                                 <h5 class="wow fadeInUp">Petunjuk pengisian</h5>
                                 <h6>Pilih elemen yang lebih penting, dan isi nilai perbandingan sesuai tabel dibawah ini</h6>
+                                <div class="table-responsive">
+                                    <table class="table custom-table-container">
+                                        <thead class="thead thead-card">
+                                            <tr>
+                                                <th class="custom-padding">Tingkat Kepentingan</th>
+                                                <th class="custom-padding">Definisi</th>
+                                                <th class="custom-padding">Keterangan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Sama pentingnya</td>
+                                                <td>Kedua elemen sama pentingnya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Sedikit lebih penting</td>
+                                                <td>Elemen yang satu sedikit lebih penting dari elemen lainnya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Lebih penting</td>
+                                                <td>Elemen yang satu lebih penting daripada elemen lainnya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>Sangat penting</td>
+                                                <td>Satu elemen sangat penting daripada elemen lainnya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>Mutlak lebih penting</td>
+                                                <td>satu elemen jelas mutlak penting daripada elemen lainnya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2,4,6,8</td>
+                                                <td>Nilai Tengah</td>
+                                                <td>Diberikan bila terdapat keraguan penilaian diantara dua tingkat kepentingan yang berdekatan</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -444,6 +492,7 @@
             </div>
         </div>
     </div>
+    <!-- end perbandingan kriteria -->
 
     <!-- perbandingan alternatif -->
     <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
@@ -495,16 +544,17 @@
             <div class="row">
                 <div class="col">
                     <h5 class="wow fadeInUp">Hasil Rekomendasi</h5>
-                    <div class="table-responsive">
+                    <div class="table-responsive table-rek">
                         <table class="table custom-table-container">
                             <thead class="thead">
                                 <tr>
-                                    <th class="custom-padding">ID Alternatif</th>
+                                    <th class="custom-padding">No</th>
                                     <th class="custom-padding">Nama Alternatif</th>
                                     <th class="custom-padding">Skor Akhir</th>
                                 </tr>
                             </thead>
-                            <tbody id="hasil">
+                            <tbody>
+
                             </tbody>
                         </table>
                     </div>
@@ -626,6 +676,8 @@
             }
         });
     });
+
+    // alternatif
     $(document).ready(function() {
         // Fetch and display alternatif data
         fetchAlternatifData();
@@ -749,6 +801,77 @@
             }
         });
     });
+
+    // perbandingan kriteria
+    $(document).ready(function() {
+        // Fetch and display kriteria data
+        fetchPerbandinganKriteriaData();
+        // Fetch kriteria data
+        function fetchPerbandinganKriteriaData() {
+            $(document).ready(function() {
+                $.ajax({
+                    url: "<?php echo base_url('supplier/spk/getPerbandinganKriteria'); ?>",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var tableBody = $(".table-perbandingan-kriteria");
+                        data.forEach(function(item) {
+                            var row = "<tr>" +
+                                "<td><input type='radio' name='comparison" + item.id_kriteria1 + "'><span class='radio'>" + item.nama_kriteria1 + "</span></td>" +
+                                "<td><input type='radio' name='comparison" + item.id_kriteria2 + "'><span class='radio'>" + item.nama_kriteria2 + "</span></td>" +
+                                "<td><input type='text' name='nilai" + item.id_kriteria1 + "_" + item.id_kriteria2 + "' value='" + item.nilai_perbandingan + "'></td>" +
+                                "</tr>";
+                            tableBody.append(row);
+                        });
+                    }
+                });
+            });
+
+            /* $.ajax({
+                url: '<?= base_url("supplier/spk/getPerbandinganKriteria") ?>',
+                method: 'GET',
+                dataType: 'json', // Pastikan responsenya diparse sebagai JSON
+                success: function(data) {
+                    console.log('Response:', data); // Debugging: log the response
+                    let html = '';
+
+                    // Check if response is an array
+                    if (Array.isArray(data)) {
+                        for (let i = 0; i < data.length; i++) {
+                            var data = {
+                                comparison1: $('input[name="comparison1"]:checked').val(),
+                                comparison2: $('input[name="comparison2"]:checked').val(),
+                                nilai1: $('#nilai1').val(),
+                                comparison3: $('input[name="comparison3"]:checked').val(),
+                                comparison4: $('input[name="comparison4"]:checked').val(),
+                                nilai2: $('#nilai2').val(),
+                                comparison5: $('input[name="comparison5"]:checked').val(),
+                                comparison6: $('input[name="comparison6"]:checked').val(),
+                                nilai3: $('#nilai3').val(),
+                                comparison7: $('input[name="comparison7"]:checked').val(),
+                                comparison8: $('input[name="comparison8"]:checked').val(),
+                                nilai4: $('#nilai4').val(),
+                                comparison9: $('input[name="comparison9"]:checked').val(),
+                                comparison10: $('input[name="comparison10"]:checked').val(),
+                                nilai5: $('#nilai5').val(),
+                                comparison11: $('input[name="comparison11"]:checked').val(),
+                                comparison12: $('input[name="comparison12"]:checked').val(),
+                                nilai6: $('#nilai6').val()
+                            };
+                        }
+                    } else {
+                        console.error('Unexpected response format:', data);
+                    }
+
+                    $('#table-perbandingan-kriteria').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', error);
+                }
+            }); */
+        };
+    });
+
     $(document).ready(function() {
         $.ajax({
             url: "<?php echo site_url('suplier/spk/hitung'); ?>",
@@ -773,59 +896,3 @@
         });
     });
 </script>
-
-
-<!-- script hitung lama -->
-<!-- <script>
-    $(document).ready(function() {
-        $('#btn-rekomendasi').on('click', function() {
-            $.ajax({
-                url: '<?= base_url('Ahp/get_results') ?>',
-                type: 'GET',
-                success: function(data) {
-                    const results = JSON.parse(data);
-                    let rows = '';
-                    results.forEach((result, index) => {
-                        rows += `
-                                <tr>
-                                    <td>${index + 1}</td>
-                                    <td>${result.nama_alternatif}</td>
-                                    <td>${result.total_score}</td>
-                                    /* <td>${result.calculated_at}</td> */
-                                </tr>
-                            `;
-                    });
-                    $('#result-body').html(rows);
-                    $('#result-container').show();
-                },
-                error: function() {
-                    alert('Failed to fetch results.');
-                }
-            });
-        });
-    });
-</script> -->
-
-
-<!-- <script>
-    $(document).ready(function() {
-        $('#btn-rekomendasi').on('click', function() {
-            $.ajax({
-                url: '<?= base_url('spk/hitung_ahp') ?>',
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    $('#result-body').empty();
-                    let no = 1;
-                    data.forEach(function(item) {
-                        $('#result-body').append('<tr><td>' + no + '</td><td>' + item.nama + '</td><td>' + item.score + '</td></tr>');
-                        no++;
-                    });
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script> -->
