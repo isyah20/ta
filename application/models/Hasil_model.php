@@ -21,8 +21,8 @@ class Hasil_model extends CI_Model
 
     public function getRanking()
     {
-        $query = "SELECT data_alternatif.id_alternatif, data_alternatif.nama_perusahaan, ranking.id_alternatif, ranking.nilai FROM data_alternatif, tb_ranking 
-                  WHERE data_alternatif.id_alternatif = ranking.id_alternatif ORDER BY nilai DESC";
+        $query ="SELECT data_alternatif.id_alternatif, data_alternatif.nama_perusahaan, ranking.id_alternatif, ranking.nilai FROM data_alternatif, tb_ranking 
+                WHERE data_alternatif.id_alternatif = ranking.id_alternatif ORDER BY nilai DESC";
         return $this->db->query($query)->result_array();
     }
 }
