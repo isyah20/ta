@@ -162,6 +162,7 @@ $route['suplier/spk/addAlternatif'] = 'Alternatif/add_alternatif';
 $route['supplier/spk/deleteKriteria/(:num)'] = 'Kriteria/delete_kriteria/$1';
 $route['supplier/spk/getPerbandinganKriteria'] = 'PerbandinganKriteria/save_comparison_data';
 $route['supplier/spk/addPerbandinganKriteria'] = 'PerbandinganKriteria/simpan';
+$route['supplier/spk/proses'] = 'PerbandinganKriteria/proses';
 
 // $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';
 $route['index_table'] = 'DashboardUserSupplier/index_table';

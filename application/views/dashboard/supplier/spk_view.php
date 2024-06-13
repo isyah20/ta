@@ -1,65 +1,76 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPK AHP</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
-    <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+    <title>Hasil Proses AHP</title>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h2>Data Kriteria</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Kriteria</th>
-                    <th>Bobot</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($kriteria as $index => $k) : ?>
-                    <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= $k['kriteria'] ?></td>
-                        <td><?= $k['bobot'] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+    <h1>Hasil Proses AHP</h1>
 
-        <h2>Data Alternatif</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Nama</th>
-                    <th>Riwayat Perusahaan</th>
-                    <th>Riwayat Menang</th>
-                    <th>Lokasi</th>
-                    <th>Nilai HPS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($alternatif as $index => $a) : ?>
-                    <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= $a['nama'] ?></td>
-                        <td><?= $a['riwayat_perusahaan'] ?></td>
-                        <td><?= $a['riwayat_menang'] ?></td>
-                        <td><?= $a['lokasi'] ?></td>
-                        <td><?= $a['hps'] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+    <h2>Matriks Perbandingan Kriteria</h2>
+    <table border="1">
+        <?php for ($x = 0; $x < $n; $x++) : ?>
+            <tr>
+                <?php for ($y = 0; $y < $n; $y++) : ?>
+                    <td><?php echo $matrik[$x][$y]; ?></td>
+                <?php endfor; ?>
+            </tr>
+        <?php endfor; ?>
+    </table>
 
-        <a class="btn btn-primary" id="btn-rekomendasi" href="<?= base_url('spk/hitung_ahp') ?>">Lihat Rekomendasi</a>
-    </div>
+    <h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>
+    <table border="1">
+        <tr>
+            <?php foreach ($jmlmpb as $mpb) : ?>
+                <td><?php echo $mpb; ?></td>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+
+    <h2>Matriks yang Dinormalisasi</h2>
+    <table border="1">
+        <?php for ($x = 0; $x < $n; $x++) : ?>
+            <tr>
+                <?php for ($y = 0; $y < $n; $y++) : ?>
+                    <td><?php echo $matrikb[$x][$y]; ?></td>
+                <?php endfor; ?>
+            </tr>
+        <?php endfor; ?>
+    </table>
+
+    <h2>Jumlah Nilai Normalisasi (MNK)</h2>
+    <table border="1">
+        <tr>
+            <?php foreach ($jmlmnk as $mnk) : ?>
+                <td><?php echo $mnk; ?></td>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+
+    <h2>Priority Vector</h2>
+    <table border="1">
+        <tr>
+            <?php foreach ($pv as $p) : ?>
+                <td><?php echo $p; ?></td>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+
+    <h2>Eigen Vector</h2>
+    <table border="1">
+        <tr>
+            <?php foreach ($eigenVektor as $ev) : ?>
+                <td><?php echo $ev; ?></td>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+
+    <h2>Consistency Index</h2>
+    <p><?php echo $consIndex; ?></p>
+
+    <h2>Consistency Ratio</h2>
+    <p><?php echo $consRatio; ?></p>
 </body>
 
-</html> -->
+</html>
