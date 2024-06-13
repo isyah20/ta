@@ -122,6 +122,21 @@
         cursor: pointer;
     }
 
+    .btn-submit {
+        display: flex;
+        padding: 15px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        border-radius: 5px;
+        background: var(--primary-red-400, #E05151);
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+
+    }
+
     .btn-batal {
         display: flex;
         padding: 15px 30px;
@@ -215,14 +230,14 @@
                 <div class="kriteria">
                     <div class="col">
                         <h5>Data Kriteria</h5>
-                        <div class="d-flex justify-content-start">
+                        <!-- <div class="d-flex justify-content-start">
                             <div class="link d-flex">
                                 <span><a class="btn btn-sm border btn-outline btn-simpan" data-toggle="modal" data-target="#inputKriteriaModal">Tambahkan Kriteria
                                         <img class="custom-img" src="<?= base_url('assets/img/icon-plus.svg') ?>" width="19" alt="">
                                     </a>
                                 </span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col">
                         <div class="table-responsive table-kriteria">
@@ -231,12 +246,28 @@
                                     <tr>
                                         <th class="custom-padding">No.</th>
                                         <th class="custom-padding">Kriteria</th>
-                                        <th class="custom-padding">Bobot</th>
-                                        <th class="custom-padding">Aksi</th>
+                                        <!-- <th class="custom-padding">Bobot</th> -->
+                                        <!-- <th class="custom-padding">Aksi</th> -->
                                     </tr>
                                 </thead>
                                 <tbody id="data-kriteria">
                                     <!-- Data Kriteria akan ditambahkan disini -->
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Riwayat Perusahaan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Riwayat Menang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Lokasi Tender</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Nilai HPS</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -287,7 +318,7 @@
 
 
     <!-- modal input kriteria -->
-    <div class="col-12 py-1">
+    <!-- <div class="col-12 py-1">
         <div class="modal fade" id="inputKriteriaModal" tabindex="-1" role="dialog" aria-labelledby="inputKriteriaModalLabel" aria-hidden="true" style="margin-top: -30px;">
             <div class="modal-dialog custom-modal" role="document">
                 <div class="modal-content">
@@ -329,7 +360,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- end modal input kriteria -->
 
     <!-- modal input alternatif -->
@@ -393,48 +424,56 @@
             <div class="row">
                 <div class="col-6">
                     <h5 class="wow fadeInUp">Perbandingan Kriteria</h5>
-                    <div class="table-responsive table-perkri">
-                        <table class="table custom-table-container">
-                            <thead class="thead">
-                                <tr>
-                                    <th class="custom-padding" colspan="2">Perbandingan</th>
-                                    <th class="custom-padding">Nilai Perbandingan</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-perbandingan-kriteria">
-                                <tr>
-                                    <td><input type="radio" name="comparison1"><span class="radio">Riwayat Perusahaan</span></td>
-                                    <td><input type="radio" name="comparison2"><span class="radio">Riwayat Menang</span></td>
-                                    <td><input type="text" name="nilai1"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="comparison3"><span class="radio">Riwayat Perusahaan</span></td>
-                                    <td><input type="radio" name="comparison4"><span class="radio">Nilai HPS</span></td>
-                                    <td><input type="text" name="nilai2"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="comparison5"><span class="radio">Riwayat Perusahaan</span></td>
-                                    <td><input type="radio" name="comparison6"><span class="radio">Lokasi Tender</span></td>
-                                    <td><input type="text" name="nilai3"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="comparison7"><span class="radio">Riwayat Menang</span></td>
-                                    <td><input type="radio" name="comparison8"><span class="radio">Nilai HPS</span></td>
-                                    <td><input type="text" name="nilai4"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="comparison9"><span class="radio">Riwayat Menang</span></td>
-                                    <td><input type="radio" name="comparison10"><span class="radio">Lokasi Tender</span></td>
-                                    <td><input type="text" name="nilai5"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="comparison11"><span class="radio">Nilai HPS</span></td>
-                                    <td><input type="radio" name="comparison12"><span class="radio">Lokasi Tender</span></td>
-                                    <td><input type="text" name="nilai6"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <form id="form-perbandingan">
+                        <div class="table-responsive table-perkri">
+                            <table class="table custom-table-container">
+                                <thead class="thead">
+                                    <tr>
+                                        <th class="custom-padding" colspan="2">Perbandingan</th>
+                                        <th class="custom-padding">Nilai Perbandingan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-perbandingan-kriteria">
+                                    <tr>
+                                        <td><input type="radio" name="comparison[0][id_kriteria1]" value="1"><span class="radio">Riwayat Perusahaan</span></td>
+                                        <td><input type="radio" name="comparison[0][id_kriteria2]" value="2"><span class="radio">Riwayat Menang</span></td>
+                                        <td><input type="text" name="comparison[0][nilai]"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="comparison[1][id_kriteria1]" value="1"><span class="radio">Riwayat Perusahaan</span></td>
+                                        <td><input type="radio" name="comparison[1][id_kriteria2]" value="3"><span class="radio">Nilai HPS</span></td>
+                                        <td><input type="text" name="comparison[1][nilai]"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="comparison[2][id_kriteria1]" value="1"><span class="radio">Riwayat Perusahaan</span></td>
+                                        <td><input type="radio" name="comparison[2][id_kriteria2]" value="4"><span class="radio">Lokasi Tender</span></td>
+                                        <td><input type="text" name="comparison[2][nilai]"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="comparison[3][id_kriteria1]" value="2"><span class="radio">Riwayat Menang</span></td>
+                                        <td><input type="radio" name="comparison[3][id_kriteria2]" value="3"><span class="radio">Nilai HPS</span></td>
+                                        <td><input type="text" name="comparison[3][nilai]"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="comparison[4][id_kriteria1]" value="2"><span class="radio">Riwayat Menang</span></td>
+                                        <td><input type="radio" name="comparison[4][id_kriteria2]" value="4"><span class="radio">Lokasi Tender</span></td>
+                                        <td><input type="text" name="comparison[4][nilai]"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="comparison[5][id_kriteria1]" value="3"><span class="radio">Nilai HPS</span></td>
+                                        <td><input type="radio" name="comparison[5][id_kriteria2]" value="4"><span class="radio">Lokasi Tender</span></td>
+                                        <td><input type="text" name="comparison[5][nilai]"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <button class="border btn-submit btn-sm" type="submit">Submit
+                                <img class="custom-img" src="<?= base_url('assets/img/icon-plus.svg') ?>" width="19" alt="">
+                            </button>
+
+                            <!-- <button type="submit">Submit</button> -->
+                        </div>
+                    </form>
                 </div>
                 <div class="col-6">
                     <div class="card-info">
@@ -544,7 +583,72 @@
             <div class="row">
                 <div class="col">
                     <h5 class="wow fadeInUp">Hasil Rekomendasi</h5>
-                    <div class="table-responsive table-rek">
+                    <h1>Hasil Proses AHP</h1>
+
+                    <h2>Matriks Perbandingan Kriteria</h2>
+                    <table border="1">
+                        <?php for ($x = 0; $x < $n; $x++) : ?>
+                            <tr>
+                                <?php for ($y = 0; $y < $n; $y++) : ?>
+                                    <td><?php echo $matrik[$x][$y]; ?></td>
+                                <?php endfor; ?>
+                            </tr>
+                        <?php endfor; ?>
+                    </table>
+
+                    <h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>
+                    <table border="1">
+                        <tr>
+                            <?php foreach ($jmlmpb as $mpb) : ?>
+                                <td><?php echo $mpb; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </table>
+
+                    <h2>Matriks yang Dinormalisasi</h2>
+                    <table border="1">
+                        <?php for ($x = 0; $x < $n; $x++) : ?>
+                            <tr>
+                                <?php for ($y = 0; $y < $n; $y++) : ?>
+                                    <td><?php echo $matrikb[$x][$y]; ?></td>
+                                <?php endfor; ?>
+                            </tr>
+                        <?php endfor; ?>
+                    </table>
+
+                    <h2>Jumlah Nilai Normalisasi (MNK)</h2>
+                    <table border="1">
+                        <tr>
+                            <?php foreach ($jmlmnk as $mnk) : ?>
+                                <td><?php echo $mnk; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </table>
+
+                    <h2>Priority Vector</h2>
+                    <table border="1">
+                        <tr>
+                            <?php foreach ($pv as $p) : ?>
+                                <td><?php echo $p; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </table>
+
+                    <h2>Eigen Vector</h2>
+                    <table border="1">
+                        <tr>
+                            <?php foreach ($eigenVektor as $ev) : ?>
+                                <td><?php echo $ev; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </table>
+
+                    <h2>Consistency Index</h2>
+                    <p><?php echo $consIndex; ?></p>
+
+                    <h2>Consistency Ratio</h2>
+                    <p><?php echo $consRatio; ?></p>
+                    <!-- <div class="table-responsive table-rek">
                         <table class="table custom-table-container">
                             <thead class="thead">
                                 <tr>
@@ -557,7 +661,7 @@
 
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -580,102 +684,104 @@
         xhr.setRequestHeader("Authorization", "Basic " + basicAuth);
     }
 
-    $(document).ready(function() {
-        // Fetch and display kriteria data
-        fetchKriteriaData();
-        // Fetch kriteria data
-        function fetchKriteriaData() {
-            $.ajax({
-                url: '<?= base_url("suplier/spk/getKriteria") ?>',
-                method: 'GET',
-                dataType: 'json', // Pastikan responsenya diparse sebagai JSON
-                success: function(data) {
-                    console.log('Response:', data); // Debugging: log the response
-                    let html = '';
 
-                    // Check if response is an array
-                    if (Array.isArray(data)) {
-                        for (let i = 0; i < data.length; i++) {
-                            html += '<tr>' +
-                                '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
-                                '<td class="custom-padding posisi">' + data[i].kriteria + '</td>' +
-                                '<td class="custom-padding posisi">' + data[i].bobot + '</td>' +
-                                '<td class="custom-padding">' +
-                                /* '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
-                                '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' + */
-                                '<a href="#" id="delete-kriteria" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
-                                '<img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" width="30px" style="margin:0px 5px;"></a>' +
-                                '</td>' +
-                                '</tr>';
-                        }
-                    } else {
-                        console.error('Unexpected response format:', data);
-                    }
+    // $(document).ready(function() {
+    //     // Fetch and display kriteria data
+    //     fetchKriteriaData();
+    //     // Fetch kriteria data
+    //     function fetchKriteriaData() {
+    //         $.ajax({
+    //             url: '<?= base_url("suplier/spk/getKriteria") ?>',
+    //             method: 'GET',
+    //             dataType: 'json', // Pastikan responsenya diparse sebagai JSON
+    //             success: function(data) {
+    //                 console.log('Response:', data); // Debugging: log the response
+    //                 let html = '';
 
-                    $('#data-kriteria').html(html);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching data:', error);
-                }
-            });
-        };
-        // Handle form submission
-        $('#form-input-kriteria').on('submit', function(e) {
-            e.preventDefault();
-            const kriteria = $('#inputNama').val();
-            const bobot = $('#inputBobot').val();
-            $.ajax({
-                type: 'POST',
-                url: '<?= base_url("suplier/spk/addKriteria") ?>',
-                data: {
-                    kriteria: kriteria,
-                    bobot: bobot
-                },
-                success: function(response) {
-                    fetchKriteriaData();
-                    swal({
-                        title: "Data berhasil diubah",
-                        icon: "success",
-                        button: "Ok",
-                    }).then(function() {
-                        $('#btn-close-kriteria').click();
-                    });
-                },
-                error: function(xhr, status, error) {
-                    var span = document.createElement("span");
-                    span.innerHTML = JSON.parse(xhr.responseText).message;
-                    swal({
-                        title: "ERROR",
-                        content: span,
-                        icon: "error",
-                        button: "Ok",
-                    });
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-        //delete kriteria
-        $('delete-kriteria').click(function() {
-            var id = $(this).data('id');
-            var row = $('#row_' + id);
+    //                 // Check if response is an array
+    //                 if (Array.isArray(data)) {
+    //                     for (let i = 0; i < data.length; i++) {
+    //                         html += '<tr>' +
+    //                             '<td class="custom-padding text-center">' + (i + 1) + '</td>' +
+    //                             '<td class="custom-padding posisi">' + data[i].kriteria + '</td>' +
+    //                             '<td class="custom-padding posisi">' + data[i].bobot + '</td>' +
+    //                             '<td class="custom-padding">' +
+    //                             /* '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
+    //                             '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' + */
+    //                             '<a href="#" id="delete-kriteria" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
+    //                             '<img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" width="30px" style="margin:0px 5px;"></a>' +
+    //                             '</td>' +
+    //                             '</tr>';
+    //                     }
+    //                 } else {
+    //                     console.error('Unexpected response format:', data);
+    //                 }
 
-            if (confirm('Are you sure you want to delete this data?')) {
-                $.ajax({
-                    url: '<?php echo base_url('suplier/spk/deleteKriteria'); ?>' + id,
-                    type: 'DELETE',
-                    success: function(response) {
-                        var result = JSON.parse(response);
-                        if (result.status == 'success') {
-                            row.remove();
-                            alert(result.message);
-                        } else {
-                            alert(result.message);
-                        }
-                    }
-                });
-            }
-        });
-    });
+    //                 $('#data-kriteria').html(html);
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error('Error fetching data:', error);
+    //             }
+    //         });
+    //     };
+    //     // Handle form submission
+    //     $('#form-input-kriteria').on('submit', function(e) {
+    //         e.preventDefault();
+    //         const kriteria = $('#inputNama').val();
+    //         const bobot = $('#inputBobot').val();
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?= base_url("suplier/spk/addKriteria") ?>',
+    //             data: {
+    //                 kriteria: kriteria,
+    //                 bobot: bobot
+    //             },
+    //             success: function(response) {
+    //                 fetchKriteriaData();
+    //                 swal({
+    //                     title: "Data berhasil diubah",
+    //                     icon: "success",
+    //                     button: "Ok",
+    //                 }).then(function() {
+    //                     $('#btn-close-kriteria').click();
+    //                 });
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 var span = document.createElement("span");
+    //                 span.innerHTML = JSON.parse(xhr.responseText).message;
+    //                 swal({
+    //                     title: "ERROR",
+    //                     content: span,
+    //                     icon: "error",
+    //                     button: "Ok",
+    //                 });
+    //                 console.log(xhr.responseText);
+    //             }
+    //         });
+    //     });
+    //     //delete kriteria
+    //     $('delete-kriteria').click(function() {
+    //         var id = $(this).data('id');
+    //         var row = $('#row_' + id);
+
+    //         if (confirm('Are you sure you want to delete this data?')) {
+    //             $.ajax({
+    //                 url: '<?php echo base_url('suplier/spk/deleteKriteria'); ?>' + id,
+    //                 type: 'DELETE',
+    //                 success: function(response) {
+    //                     var result = JSON.parse(response);
+    //                     if (result.status == 'success') {
+    //                         row.remove();
+    //                         alert(result.message);
+    //                     } else {
+    //                         alert(result.message);
+    //                     }
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
+
 
     // alternatif
     $(document).ready(function() {
@@ -826,6 +932,60 @@
                     }
                 });
             });
+
+            $('#form-perbandingan').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('supplier/spk/addPerbandinganKriteria') ?>", // Ganti dengan URL controller yang sesuai
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Tampilkan respons atau lakukan sesuatu
+                        alert('Data berhasil dikirim');
+                    },
+                    error: function(response) {
+                        // Tampilkan pesan error
+                        alert('Gagal mengirim data');
+                    }
+                });
+            });
+
+            // Handle form submission
+            /* $('#form-perbandingan').on('submit', function(e) {
+                e.preventDefault();
+                const nama_kriteria = $('#inputNama').val();
+                const nilai = $('#inputBobot').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= base_url("suplier/spk/addKriteria") ?>',
+                    data: {
+                        kriteria: kriteria,
+                        bobot: bobot
+                    },
+                    success: function(response) {
+                        fetchKriteriaData();
+                        swal({
+                            title: "Data berhasil diubah",
+                            icon: "success",
+                            button: "Ok",
+                        }).then(function() {
+                            $('#btn-close-kriteria').click();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        var span = document.createElement("span");
+                        span.innerHTML = JSON.parse(xhr.responseText).message;
+                        swal({
+                            title: "ERROR",
+                            content: span,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        console.log(xhr.responseText);
+                    }
+                });
+            }); */
 
             /* $.ajax({
                 url: '<?= base_url("supplier/spk/getPerbandinganKriteria") ?>',

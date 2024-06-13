@@ -8,70 +8,78 @@ class PerbandinganKriteria_model extends CI_Model
         parent::__construct();
         $this->load->model('PerbandinganKriteria_model');
     }
-    public function save_comparison_data($data)
+    public function insertPerbandinganKriteria($id_kriteria1, $id_kriteria2, $nilai)
     {
-        // Lakukan penyimpanan data ke database
-        $comparison_data = array(
-            'comparison1' => $data['comparison1'],
-            'comparison2' => $data['comparison2'],
-            'nilai1' => $data['nilai1'],
-            // tambahkan untuk semua nilai yang lain
-        );
-
-        $this->db->insert('perbandingan', $comparison_data);
-
-        if ($this->db->affected_rows() > 0) {
-            return array('status' => 'success', 'message' => 'Data berhasil disimpan.');
-        } else {
-            return array('status' => 'error', 'message' => 'Terjadi kesalahan saat menyimpan data.');
-        }
+        $data = [
+            'id_kriteria1' => $id_kriteria1,
+            'id_kriteria2' => $id_kriteria2,
+            'nilai_perbandingan' => $nilai
+        ];
+        $this->db->insert('perbandingan_kriteria', $data);
     }
 
-    // Mengambil data kriteria
-    public function get_criteria($id = null)
+    // Mengambil ID kriteria berdasarkan indeks
+    public function getKriteriaId($index)
     {
-        if ($id == null) {
-            return $this->db->get('data_kriteria')->result_array();
-        } else {
-            return $this->db->get_where('data_kriteria', ['id_kriteria' => $id])->row_array();
-        }
+        $query = $this->db->get('kriteria');
+        $result = $query->result_array();
+        return isset($result[$index]['id']) ? $result[$index]['id'] : null;
     }
 
-    // Mengambil jumlah n data kriteria
+    // Menyimpan perbandingan kriteria
+    /* public function insertPerbandinganKriteria($id_kriteria1, $id_kriteria2, $nilai)
+    {
+        $data = [
+            'id_kriteria1' => $id_kriteria1,
+            'id_kriteria2' => $id_kriteria2,
+            'nilai' => $nilai
+        ];
+        $this->db->insert('perbandingan_kriteria', $data);
+    } */
+
+    // Memperbarui perbandingan kriteria
+    public function updatePerbandinganKriteria($id_kriteria1, $id_kriteria2, $nilai)
+    {
+        $this->db->where('id_kriteria1', $id_kriteria1);
+        $this->db->where('id_kriteria2', $id_kriteria2);
+        $this->db->update('perbandingan_kriteria', ['nilai' => $nilai]);
+    }
+
+    // Mengambil jumlah kriteria
     public function getNumKriteria()
     {
-        return $this->db->get('data_kriteria')->num_rows();
+        return $this->db->count_all('kriteria');
     }
 
-    public function getNumPerbandinganKriteria($id_kriteria1, $id_kriteria2, $id_kriteria3, $id_kriteria4)
+    // Mengambil jumlah perbandingan kriteria antara dua kriteria tertentu
+    public function getNumPerbandinganKriteria($id_kriteria1, $id_kriteria2)
     {
-        return $this->db->get_where('perbandingan_kriteria', ['id_kriteria1' => $id_kriteria1, 'id_kriteria2' =>$id_kriteria2, 'id_kriteria3' =>$id_kriteria3, 'id_kriteria4' => $id_kriteria4])->num_rows();
+        $this->db->where('id_kriteria1', $id_kriteria1);
+        $this->db->where('id_kriteria2', $id_kriteria2);
+        return $this->db->count_all_results('perbandingan_kriteria');
     }
 
-    public function insertPerbandinganKriteria($id_kriteria1, $id_kriteria2, $id_kriteria3, $id_kriteria4, $nilai)
-    {
-        $this->db->insert('perbandingan_kriteria', ['id_kriteria1' => $id_kriteria1, 'id_kriteria2' => $id_kriteria2, 'id_kriteria3' =>$id_kriteria3, 'id_kriteria4' => $id_kriteria4, 'nilai_perbandingan' => $nilai]);
-    }
-
-    public function updatePerbandinganKriteria($id_kriteria1, $id_kriteria2,$id_kriteria3, $id_kriteria4, $nilai)
-    {
-        $this->db->where(['id_kriteria1' => $id_kriteria1, 'id_kriteria2' => $id_kriteria2,'id_kriteria3' => $id_kriteria3, 'id_kriteria4' => $id_kriteria4]);
-        $this->db->update('perbandingan_kriteria', ['nilai_perbandingan' => $nilai]);
-    }
-
+    // Mengambil jumlah nilai PV untuk kriteria tertentu
     public function getNumWithIdKriteriaPV($id_kriteria)
     {
-        return $this->db->get_where('bobot_kriteria', ['id_kriteria' => $id_kriteria])->num_rows();
+        $this->db->where('id_kriteria', $id_kriteria);
+        return $this->db->count_all_results('pv_kriteria');
     }
 
-    public function insertKriteriaPV($id_kriteria, $pv)
+    // Menyimpan nilai PV untuk kriteria tertentu
+    public function insertKriteriaPV($id_kriteria, $nilai_pv)
     {
-        $this->db->insert('bobot_kriteria', ['id_kriteria' => $id_kriteria, 'nilai' => $pv]);
+        $data = [
+            'id_kriteria' => $id_kriteria,
+            'nilai_pv' => $nilai_pv
+        ];
+        $this->db->insert('pv_kriteria', $data);
     }
 
-    public function updateKriteriaPV($id_kriteria, $pv)
+    // Memperbarui nilai PV untuk kriteria tertentu
+    public function updateKriteriaPV($id_kriteria, $nilai_pv)
     {
-        $this->db->where(['id_kriteria' => $id_kriteria]);
-        $this->db->update('bobot_kriteria', ['nilai' => $pv]);
+        $this->db->where('id_kriteria', $id_kriteria);
+        $this->db->update('pv_kriteria', ['nilai_pv' => $nilai_pv]);
     }
 }
