@@ -589,69 +589,7 @@
                         <!-- Tempat untuk hasil dari AJAX -->
                     </div>
 
-                    <h2>Matriks Perbandingan Kriteria</h2>
-                    <table border="1">
-                        <?php for ($x = 0; $x < $n; $x++) : ?>
-                            <tr>
-                                <?php for ($y = 0; $y < $n; $y++) : ?>
-                                    <td><?php echo $matrik[$x][$y]; ?></td>
-                                <?php endfor; ?>
-                            </tr>
-                        <?php endfor; ?>
-                    </table>
 
-                    <h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>
-                    <table border="1">
-                        <tr>
-                            <?php foreach ($jmlmpb as $mpb) : ?>
-                                <td><?php echo $mpb; ?></td>
-                            <?php endforeach; ?>
-                        </tr>
-                    </table>
-
-                    <h2>Matriks yang Dinormalisasi</h2>
-                    <table border="1">
-                        <?php for ($x = 0; $x < $n; $x++) : ?>
-                            <tr>
-                                <?php for ($y = 0; $y < $n; $y++) : ?>
-                                    <td><?php echo $matrikb[$x][$y]; ?></td>
-                                <?php endfor; ?>
-                            </tr>
-                        <?php endfor; ?>
-                    </table>
-
-                    <h2>Jumlah Nilai Normalisasi (MNK)</h2>
-                    <table border="1">
-                        <tr>
-                            <?php foreach ($jmlmnk as $mnk) : ?>
-                                <td><?php echo $mnk; ?></td>
-                            <?php endforeach; ?>
-                        </tr>
-                    </table>
-
-                    <h2>Priority Vector</h2>
-                    <table border="1">
-                        <tr>
-                            <?php foreach ($pv as $p) : ?>
-                                <td><?php echo $p; ?></td>
-                            <?php endforeach; ?>
-                        </tr>
-                    </table>
-
-                    <h2>Eigen Vector</h2>
-                    <table border="1">
-                        <tr>
-                            <?php foreach ($eigenVektor as $ev) : ?>
-                                <td><?php echo $ev; ?></td>
-                            <?php endforeach; ?>
-                        </tr>
-                    </table>
-
-                    <h2>Consistency Index</h2>
-                    <p><?php echo $consIndex; ?></p>
-
-                    <h2>Consistency Ratio</h2>
-                    <p><?php echo $consRatio; ?></p>
                     <!-- <div class="table-responsive table-rek">
                         <table class="table custom-table-container">
                             <thead class="thead">
@@ -676,13 +614,15 @@
 <script>
     $(document).ready(function() {
         $.ajax({
-            url: "<?php echo base_url('supplier/spk/proses'); ?>", // Ganti dengan URL yang sesuai
-            type: "GET", // Atau POST sesuai kebutuhan Anda
+            url: "<?php echo base_url('supplier/spk/proses'); ?>",
+            type: "POST", // Sesuaikan dengan metode yang Anda gunakan di dalam fungsi proses()
             dataType: "json",
             success: function(response) {
                 if (response.status == 'success') {
-                    // Menampilkan data di dalam div #result
-                    var html = '<h2>Matriks Perbandingan Kriteria</h2>';
+                    var html = '';
+
+                    // Tampilkan matriks perbandingan kriteria
+                    html += '<h2>Matriks Perbandingan Kriteria</h2>';
                     html += '<table border="1">';
                     for (var x = 0; x < response.data.n; x++) {
                         html += '<tr>';
@@ -693,6 +633,7 @@
                     }
                     html += '</table>';
 
+                    // Tampilkan jumlah tiap kolom kriteria (MPB)
                     html += '<h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>';
                     html += '<table border="1"><tr>';
                     for (var i = 0; i < response.data.jmlmpb.length; i++) {
@@ -700,6 +641,7 @@
                     }
                     html += '</tr></table>';
 
+                    // Tampilkan matriks yang dinormalisasi
                     html += '<h2>Matriks yang Dinormalisasi</h2>';
                     html += '<table border="1">';
                     for (var x = 0; x < response.data.n; x++) {
@@ -711,6 +653,7 @@
                     }
                     html += '</table>';
 
+                    // Tampilkan jumlah nilai normalisasi (MNK)
                     html += '<h2>Jumlah Nilai Normalisasi (MNK)</h2>';
                     html += '<table border="1"><tr>';
                     for (var i = 0; i < response.data.jmlmnk.length; i++) {
@@ -718,6 +661,7 @@
                     }
                     html += '</tr></table>';
 
+                    // Tampilkan priority vector (PV)
                     html += '<h2>Priority Vector</h2>';
                     html += '<table border="1"><tr>';
                     for (var i = 0; i < response.data.pv.length; i++) {
@@ -725,6 +669,7 @@
                     }
                     html += '</tr></table>';
 
+                    // Tampilkan eigen vector
                     html += '<h2>Eigen Vector</h2>';
                     html += '<table border="1"><tr>';
                     for (var i = 0; i < response.data.eigenVektor.length; i++) {
@@ -732,13 +677,15 @@
                     }
                     html += '</tr></table>';
 
+                    // Tampilkan consistency index
                     html += '<h2>Consistency Index</h2>';
                     html += '<p>' + response.data.consIndex + '</p>';
 
+                    // Tampilkan consistency ratio
                     html += '<h2>Consistency Ratio</h2>';
                     html += '<p>' + response.data.consRatio + '</p>';
 
-                    // Memasukkan HTML ke dalam div #result
+                    // Masukkan HTML ke dalam elemen dengan id #result
                     $('#result').html(html);
                 } else {
                     alert('Gagal memuat data. Silakan coba lagi.');
@@ -751,6 +698,7 @@
         });
     });
 </script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

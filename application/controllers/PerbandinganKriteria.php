@@ -69,12 +69,20 @@ class PerbandinganKriteria extends CI_Controller
                 $urut++;
                 $pilih = "pilih" . $urut;
                 $bobot = "bobot" . $urut;
+
+                // Ambil nilai dari input post, pastikan tidak nol
+                $nilai = $this->input->post($bobot);
+                if ($nilai == 0) {
+                    // Atur nilai default jika input post bernilai nol
+                    $nilai = 0.0001; // Contoh nilai kecil yang tidak nol
+                }
+
                 if ($this->input->post($pilih) == 1) {
-                    $matrik[$x][$y] = $this->input->post($bobot);
-                    $matrik[$y][$x] = 1 / $this->input->post($bobot);
+                    $matrik[$x][$y] = $nilai;
+                    $matrik[$y][$x] = 1 / $nilai;
                 } else {
-                    $matrik[$x][$y] = 1 / $this->input->post($bobot);
-                    $matrik[$y][$x] = $this->input->post($bobot);
+                    $matrik[$x][$y] = 1 / $nilai;
+                    $matrik[$y][$x] = $nilai;
                 }
 
                 $id_kriteria1 = $this->PerbandinganKriteria_model->getKriteriaId($x);
@@ -107,7 +115,11 @@ class PerbandinganKriteria extends CI_Controller
         $matrikb = array();
         for ($x = 0; $x < $n; $x++) {
             for ($y = 0; $y < $n; $y++) {
-                $matrikb[$x][$y] = $matrik[$x][$y] / $jmlmpb[$y];
+                if ($jmlmpb[$y] != 0) { // Pastikan pembaginya tidak nol
+                    $matrikb[$x][$y] = $matrik[$x][$y] / $jmlmpb[$y];
+                } else {
+                    $matrikb[$x][$y] = 0; // Atau atur nilai default
+                }
                 $jmlmnk[$x] += $matrikb[$x][$y];
             }
 
@@ -136,9 +148,9 @@ class PerbandinganKriteria extends CI_Controller
         $data['consRatio'] = $consRatio;
 
         // Load view dan kirimkan data
-        
         $this->load->view('dashboard/supplier/spk', $data);
     }
+
 
     private function getEigenVector($matrik, $pv, $n)
     {
