@@ -21,7 +21,7 @@ class PerbandinganKriteria_model extends CI_Model
     // Mengambil ID kriteria berdasarkan indeks
     public function getKriteriaId($index)
     {
-        $query = $this->db->get('kriteria');
+        $query = $this->db->get('data_kriteria');
         $result = $query->result_array();
         return isset($result[$index]['id']) ? $result[$index]['id'] : null;
     }
@@ -48,7 +48,7 @@ class PerbandinganKriteria_model extends CI_Model
     // Mengambil jumlah kriteria
     public function getNumKriteria()
     {
-        return $this->db->count_all('kriteria');
+        return $this->db->count_all('data_kriteria');
     }
 
     // Mengambil jumlah perbandingan kriteria antara dua kriteria tertentu
