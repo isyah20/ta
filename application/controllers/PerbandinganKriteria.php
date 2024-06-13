@@ -137,18 +137,24 @@ class PerbandinganKriteria extends CI_Controller
         $consIndex = $this->getConsIndex($matrik, $pv, $n);
         $consRatio = $this->getConsRatio($consIndex, $n);
 
-        $data['n'] = $n;
-        $data['matrik'] = $matrik;
-        $data['jmlmpb'] = $jmlmpb;
-        $data['jmlmnk'] = $jmlmnk;
-        $data['matrikb'] = $matrikb;
-        $data['pv'] = $pv;
-        $data['eigenVektor'] = $eigenVektor;
-        $data['consIndex'] = $consIndex;
-        $data['consRatio'] = $consRatio;
+        $data = array(
+            'status' => 'success',
+            'data' => array(
+                'n' => $n,
+                'matrik' => $matrik,
+                'jmlmpb' => $jmlmpb,
+                'jmlmnk' => $jmlmnk,
+                'matrikb' => $matrikb,
+                'pv' => $pv,
+                'eigenVektor' => $eigenVektor,
+                'consIndex' => $consIndex,
+                'consRatio' => $consRatio
+            )
+        );
 
-        // Load view dan kirimkan data
-        $this->load->view('dashboard/supplier/spk', $data);
+        // Mengirimkan data dalam format JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 
 

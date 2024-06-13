@@ -611,19 +611,21 @@
 
 </section>
 
+
 <script>
     $(document).ready(function() {
         $.ajax({
             url: "<?php echo base_url('supplier/spk/proses'); ?>",
-            type: "POST", // Sesuaikan dengan metode yang Anda gunakan di dalam fungsi proses()
+            type: "POST",
             dataType: "json",
             success: function(response) {
                 if (response.status == 'success') {
                     var html = '';
 
-                    // Tampilkan matriks perbandingan kriteria
+                    // Matriks perbandingan kriteria
+                    html += '<section>';
                     html += '<h2>Matriks Perbandingan Kriteria</h2>';
-                    html += '<table border="1">';
+                    html += '<table class="table-bordered">';
                     for (var x = 0; x < response.data.n; x++) {
                         html += '<tr>';
                         for (var y = 0; y < response.data.n; y++) {
@@ -632,18 +634,24 @@
                         html += '</tr>';
                     }
                     html += '</table>';
+                    html += '</section>';
 
-                    // Tampilkan jumlah tiap kolom kriteria (MPB)
+                    // Jumlah tiap kolom kriteria (MPB)
+                    html += '<section>';
                     html += '<h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>';
-                    html += '<table border="1"><tr>';
+                    html += '<table class="table-bordered">';
+                    html += '<tr>';
                     for (var i = 0; i < response.data.jmlmpb.length; i++) {
                         html += '<td>' + response.data.jmlmpb[i] + '</td>';
                     }
-                    html += '</tr></table>';
+                    html += '</tr>';
+                    html += '</table>';
+                    html += '</section>';
 
-                    // Tampilkan matriks yang dinormalisasi
+                    // Matriks yang dinormalisasi
+                    html += '<section>';
                     html += '<h2>Matriks yang Dinormalisasi</h2>';
-                    html += '<table border="1">';
+                    html += '<table class="table-bordered">';
                     for (var x = 0; x < response.data.n; x++) {
                         html += '<tr>';
                         for (var y = 0; y < response.data.n; y++) {
@@ -652,38 +660,55 @@
                         html += '</tr>';
                     }
                     html += '</table>';
+                    html += '</section>';
 
-                    // Tampilkan jumlah nilai normalisasi (MNK)
+                    // Jumlah nilai normalisasi (MNK)
+                    html += '<section>';
                     html += '<h2>Jumlah Nilai Normalisasi (MNK)</h2>';
-                    html += '<table border="1"><tr>';
+                    html += '<table class="table-bordered">';
+                    html += '<tr>';
                     for (var i = 0; i < response.data.jmlmnk.length; i++) {
                         html += '<td>' + response.data.jmlmnk[i] + '</td>';
                     }
-                    html += '</tr></table>';
+                    html += '</tr>';
+                    html += '</table>';
+                    html += '</section>';
 
-                    // Tampilkan priority vector (PV)
-                    html += '<h2>Priority Vector</h2>';
-                    html += '<table border="1"><tr>';
+                    // Priority vector (PV)
+                    html += '<section>';
+                    html += '<h2>Priority Vector (PV)</h2>';
+                    html += '<table class="table-bordered">';
+                    html += '<tr>';
                     for (var i = 0; i < response.data.pv.length; i++) {
                         html += '<td>' + response.data.pv[i] + '</td>';
                     }
-                    html += '</tr></table>';
+                    html += '</tr>';
+                    html += '</table>';
+                    html += '</section>';
 
-                    // Tampilkan eigen vector
+                    // Eigen vector
+                    html += '<section>';
                     html += '<h2>Eigen Vector</h2>';
-                    html += '<table border="1"><tr>';
+                    html += '<table class="table-bordered">';
+                    html += '<tr>';
                     for (var i = 0; i < response.data.eigenVektor.length; i++) {
                         html += '<td>' + response.data.eigenVektor[i] + '</td>';
                     }
-                    html += '</tr></table>';
+                    html += '</tr>';
+                    html += '</table>';
+                    html += '</section>';
 
-                    // Tampilkan consistency index
+                    // Consistency index
+                    html += '<section>';
                     html += '<h2>Consistency Index</h2>';
                     html += '<p>' + response.data.consIndex + '</p>';
+                    html += '</section>';
 
-                    // Tampilkan consistency ratio
+                    // Consistency ratio
+                    html += '<section>';
                     html += '<h2>Consistency Ratio</h2>';
                     html += '<p>' + response.data.consRatio + '</p>';
+                    html += '</section>';
 
                     // Masukkan HTML ke dalam elemen dengan id #result
                     $('#result').html(html);
@@ -698,6 +723,7 @@
         });
     });
 </script>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
