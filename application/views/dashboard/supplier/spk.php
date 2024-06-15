@@ -470,8 +470,6 @@
                             <button class="border btn-submit btn-sm" type="submit">Submit
                                 <img class="custom-img" src="<?= base_url('assets/img/icon-plus.svg') ?>" width="19" alt="">
                             </button>
-
-                            <!-- <button type="submit">Submit</button> -->
                         </div>
                     </form>
                 </div>
@@ -981,7 +979,7 @@
                             var row = "<tr>" +
                                 "<td><input type='radio' name='comparison" + item.id_kriteria1 + "'><span class='radio'>" + item.nama_kriteria1 + "</span></td>" +
                                 "<td><input type='radio' name='comparison" + item.id_kriteria2 + "'><span class='radio'>" + item.nama_kriteria2 + "</span></td>" +
-                                "<td><input type='text' name='nilai" + item.id_kriteria1 + "_" + item.id_kriteria2 + "' value='" + item.nilai_perbandingan + "'></td>" +
+                                "<td><input type='text' name='nilai" + item.id_kriteria1 + "_" + item.id_kriteria2 + "' value='" + item.nilai + "'></td>" +
                                 "</tr>";
                             tableBody.append(row);
                         });

@@ -8,58 +8,95 @@ class PerbandinganAlternatif_model extends CI_Model
         parent::__construct();
         $this->load->model('PerbandinganAlternatif_model');
     }
-    public function getKriteria($id = null)
+
+    // Ambil data kriteria berdasarkan id_kriteria
+    public function getKriteria($id_kriteria)
     {
-        if ($id == null) {
-            return $this->db->get('data_kriteria')->result_array();
-        } else {
-            return $this->db->get_where('data_kriteria', ['id_kriteria' => $id])->row_array();
-        }
+        $this->db->where('id_kriteria', $id_kriteria);
+        $query = $this->db->get('kriteria');
+        return $query->row_array();
     }
 
-    public function getAlternatif($id = null)
+    // Ambil semua data alternatif
+    public function getAlternatif()
     {
-        if ($id == null) {
-            return $this->db->get('data_alternatif')->result_array();
-        } else {
-            return $this->db->get_where('data_alternatif', ['id_alternatif' => $id])->row_array();
-        }
+        $query = $this->db->get('alternatif');
+        return $query->result_array();
     }
 
+    // Hitung jumlah alternatif
     public function getNumAlternatif()
     {
-        return $this->db->get('data_alternatif')->num_rows();
+        return $this->db->count_all('alternatif');
     }
 
-    public function getNumPerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_alternatif3, $id_kriteria)
+    // Ambil id alternatif berdasarkan index
+    public function getAlternatifId($index)
     {
-        return $this->db->get_where('perbandingan_alternatif', ['id_alternatif1' => $id_alternatif1, 'id_alternatif2' => $id_alternatif2, 'id_alternatif3' => $id_alternatif3, 'id_kriteria' => $id_kriteria])->num_rows();
+        $query = $this->db->get('alternatif', 1, $index);
+        return $query->row_array();
     }
 
-    public function insertPerbandinganAlternatif($id_alternatif1, $id_alternatif2,$id_alternatif3, $id_kriteria, $nilai)
+    // Hitung jumlah perbandingan alternatif berdasarkan id_alternatif1, id_alternatif2, dan id_kriteria
+    public function getNumPerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria)
     {
-        $this->db->insert('perbandingan_alternatif', ['id_alternatif1' => $id_alternatif1, 'id_alternatif2' => $id_alternatif2, 'id_alternatif3' => $id_alternatif3,'id_kriteria' => $id_kriteria, 'nilai_perbandingan' => $nilai]);
+        $this->db->where('id_alternatif1', $id_alternatif1);
+        $this->db->where('id_alternatif2', $id_alternatif2);
+        $this->db->where('id_kriteria', $id_kriteria);
+        return $this->db->count_all_results('perbandingan_alternatif');
     }
 
-    public function updatePerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_alternatif3, $id_kriteria, $nilai)
+    // Insert data perbandingan alternatif ke database
+    public function insertPerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria, $nilai)
     {
-        $this->db->where(['id_alternatif1' => $id_alternatif1, 'id_alternatif2' => $id_alternatif2, 'id_alternatif1' => $id_alternatif1,'id_kriteria' => $id_kriteria]);
-        $this->db->update('perbandingan_alternatif', ['nilai_perbandingan' => $nilai]);
+        $data = array(
+            'id_alternatif1' => $id_alternatif1,
+            'id_alternatif2' => $id_alternatif2,
+            'id_kriteria' => $id_kriteria,
+            'nilai' => $nilai
+        );
+        $this->db->insert('perbandingan_alternatif', $data);
     }
 
-    /* public function getNumWithIdAlternatifPV($id_alternatif, $id_kriteria)
+    // Update data perbandingan alternatif di database
+    public function updatePerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria, $nilai)
     {
-        return $this->db->get_where('tb_bobot_alternatif', ['id_alternatif' => $id_alternatif, 'id_kriteria' => $id_kriteria])->num_rows();
+        $data = array(
+            'nilai' => $nilai
+        );
+        $this->db->where('id_alternatif1', $id_alternatif1);
+        $this->db->where('id_alternatif2', $id_alternatif2);
+        $this->db->where('id_kriteria', $id_kriteria);
+        $this->db->update('perbandingan_alternatif', $data);
     }
 
-    public function insertAlternatifPV($id_alternatif, $id_kriteria, $pv)
+    // Hitung jumlah alternatif PV berdasarkan id_alternatif dan id_kriteria
+    public function getNumWithIdAlternatifPV($id_alternatif, $id_kriteria)
     {
-        $this->db->insert('tb_bobot_alternatif', ['id_alternatif' => $id_alternatif, 'id_kriteria' => $id_kriteria, 'nilai' => $pv]);
+        $this->db->where('id_alternatif', $id_alternatif);
+        $this->db->where('id_kriteria', $id_kriteria);
+        return $this->db->count_all_results('pv_alternatif');
     }
 
-    public function updateAlternatifPV($id_alternatif, $id_kriteria, $pv)
+    // Insert data alternatif PV ke database
+    public function insertAlternatifPV($id_alternatif, $id_kriteria, $nilai_pv)
     {
-        $this->db->where(['id_alternatif' => $id_alternatif, 'id_kriteria' => $id_kriteria]);
-        $this->db->update('tb_bobot_alternatif', ['nilai' => $pv]);
-    } */
+        $data = array(
+            'id_alternatif' => $id_alternatif,
+            'id_kriteria' => $id_kriteria,
+            'nilai_pv' => $nilai_pv
+        );
+        $this->db->insert('pv_alternatif', $data);
+    }
+
+    // Update data alternatif PV di database
+    public function updateAlternatifPV($id_alternatif, $id_kriteria, $nilai_pv)
+    {
+        $data = array(
+            'nilai_pv' => $nilai_pv
+        );
+        $this->db->where('id_alternatif', $id_alternatif);
+        $this->db->where('id_kriteria', $id_kriteria);
+        $this->db->update('pv_alternatif', $data);
+    }
 }

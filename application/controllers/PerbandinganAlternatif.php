@@ -20,27 +20,14 @@ class PerbandinganAlternatif extends CI_Controller
         $this->load->model('Kriteria_model');
         $this->init();
     }
-    public function index()
-    {
-        $data['data_kriteria'] = $this->Kriteria_model->get_criteria();
-
-       /*  $this->load->view('templates/header', $data);
-        $this->load->view('profile_pengguna/templates/navbar');
-        $this->load->view('dashboard/supplier/spk');
-        $this->load->view('templates/footer'); */
-        
-        $this->load->view('templates/header');
-        $this->load->view('perbandingan_alternatif/index', $data);
-        $this->load->view('templates/footer');
-    }
 
     public function tabel()
     {
         $id_kriteria = $this->input->post('id_kriteria');
-        $data['data_kriteria'] = $this->model->getKriteria($id_kriteria);
-        $data['data_alternatif'] = $this->model->getAlternatif();
-        $data['jumlah_alternatif'] = $this->model->getNumAlternatif();
-        $data['skala_perbandingan'] = $this->db->get('tb_skala_perbandingan')->result_array();
+        $data['data_kriteria'] = $this->PerbandinganAlternatif_model->getKriteria($id_kriteria);
+        $data['data_alternatif'] = $this->PerbandinganAlternatif_model->getAlternatif();
+        $data['jumlah_alternatif'] = $this->PerbandinganAlternatif_model->getNumAlternatif();
+        $data['skala_perbandingan'] = $this->db->get('skala_perbandingan')->result_array();
 
         $this->load->view('templates/header');
         $this->load->view('perbandingan_alternatif/tabel_perbandingan', $data);
@@ -49,15 +36,10 @@ class PerbandinganAlternatif extends CI_Controller
 
     public function proses($id_kriteria)
     {
-        // Jumlah Alternatif
-        $n = $this->model->getNumAlternatif();
-
+        $n = $this->PerbandinganAlternatif_model->getNumAlternatif();
         $matrik = array();
         $urut = 0;
 
-        // Memetakan nilai dalam bentuk matrik
-        // x = baris
-        // y = kolom
         for ($x = 0; $x <= ($n - 2); $x++) {
             for ($y = ($x + 1); $y <= ($n - 1); $y++) {
                 $urut++;
@@ -71,24 +53,22 @@ class PerbandinganAlternatif extends CI_Controller
                     $matrik[$y][$x] = $this->input->post($bobot);
                 }
 
-                $id_alternatif1 = getAlternatifId($x);
-                $id_alternatif2 = getAlternatifId($y);
+                $id_alternatif1 = $this->PerbandinganAlternatif_model->getAlternatifId($x)['id_alternatif'];
+                $id_alternatif2 = $this->PerbandinganAlternatif_model->getAlternatifId($y)['id_alternatif'];
 
-                $jumlahPerbandingan = $this->model->getNumPerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria);
+                $jumlahPerbandingan = $this->PerbandinganAlternatif_model->getNumPerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria);
                 if ($jumlahPerbandingan == 0) {
-                    $this->model->insertPerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria, $matrik[$x][$y]);
+                    $this->PerbandinganAlternatif_model->insertPerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria, $matrik[$x][$y]);
                 } else {
-                    $this->model->updatePerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria, $matrik[$x][$y]);
+                    $this->PerbandinganAlternatif_model->updatePerbandinganAlternatif($id_alternatif1, $id_alternatif2, $id_kriteria, $matrik[$x][$y]);
                 }
             }
         }
 
-        // Diagonal -> bernilai 1
         for ($i = 0; $i <= ($n - 1); $i++) {
             $matrik[$i][$i] = 1;
         }
 
-        // Inisialisasi jumlah tiap kolom dan baris alternatif
         $jmlmpb = array();
         $jmlmnk = array();
         for ($i = 0; $i <= ($n - 1); $i++) {
@@ -96,7 +76,6 @@ class PerbandinganAlternatif extends CI_Controller
             $jmlmnk[$i] = 0;
         }
 
-        // Menghitung jumlah pada kolom alternatif tabel perbandingan berpasangan
         for ($x = 0; $x <= ($n - 1); $x++) {
             for ($y = 0; $y <= ($n - 1); $y++) {
                 $value = $matrik[$x][$y];
@@ -104,8 +83,6 @@ class PerbandinganAlternatif extends CI_Controller
             }
         }
 
-        // Menghitung jumlah pada baris alternatif tabel nilai alternatif
-        // Matrikb merupakan matrik yang telah dinormalisasi
         for ($x = 0; $x <= ($n - 1); $x++) {
             for ($y = 0; $y <= ($n - 1); $y++) {
                 $matrikb[$x][$y] = $matrik[$x][$y] / $jmlmpb[$y];
@@ -113,22 +90,20 @@ class PerbandinganAlternatif extends CI_Controller
                 $jmlmnk[$x] += $value;
             }
 
-            // Nilai Priority Vektor
             $pv[$x] = $jmlmnk[$x] / $n;
 
-            // Memasukan nilai priority vektor ke dalam tabel tb_pv_alternatif
-            $id_alternatif = getAlternatifId($x);
-            $jumlahPV = $this->model->getNumWithIdAlternatifPV($id_alternatif, $id_kriteria);
+            $id_alternatif = $this->PerbandinganAlternatif_model->getAlternatifId($x)['id_alternatif'];
+            $jumlahPV = $this->PerbandinganAlternatif_model->getNumWithIdAlternatifPV($id_alternatif, $id_kriteria);
             if ($jumlahPV == 0) {
-                $this->model->insertAlternatifPV($id_alternatif, $id_kriteria, $pv[$x]);
+                $this->PerbandinganAlternatif_model->insertAlternatifPV($id_alternatif, $id_kriteria, $pv[$x]);
             } else {
-                $this->model->updateAlternatifPV($id_alternatif, $id_kriteria, $pv[$x]);
+                $this->PerbandinganAlternatif_model->updateAlternatifPV($id_alternatif, $id_kriteria, $pv[$x]);
             }
         }
 
-        $eigenVektor = getEigenVector($jmlmpb, $jmlmnk, $n);
-        $consIndex = getConsIndex($jmlmpb, $jmlmnk, $n);
-        $consRatio = getConsRatio($jmlmpb, $jmlmnk, $n);
+        $eigenVektor = $this->getEigenVector($pv, $matrik, $n);
+        $consIndex = $this->getConsIndex($eigenVektor, $pv, $n);
+        $consRatio = $this->getConsRatio($consIndex, $n);
 
         $data['n'] = $n;
         $data['matrik'] = $matrik;
@@ -139,11 +114,46 @@ class PerbandinganAlternatif extends CI_Controller
         $data['eigenVektor'] = $eigenVektor;
         $data['consIndex'] = $consIndex;
         $data['consRatio'] = $consRatio;
-        $data['data_kriteria'] = $this->model->getKriteria($id_kriteria);
+        $data['data_kriteria'] = $this->PerbandinganAlternatif_model->getKriteria($id_kriteria);
 
         $this->load->view('templates/header');
         $this->load->view('perbandingan_alternatif/output', $data);
         $this->load->view('templates/footer');
+    }
+
+    private function getEigenVector($pv, $matrik, $n)
+    {
+        $eigenVektor = array();
+        for ($i = 0; $i < $n; $i++) {
+            $sum = 0;
+            for ($j = 0; $j < $n; $j++) {
+                $sum += $matrik[$i][$j] * $pv[$j];
+            }
+            $eigenVektor[$i] = $sum;
+        }
+        return $eigenVektor;
+    }
+
+    private function getConsIndex($eigenVektor, $pv, $n)
+    {
+        $sum = 0;
+        for ($i = 0; $i < $n; $i++) {
+            $sum += $eigenVektor[$i] / $pv[$i];
+        }
+        $lambda_max = $sum / $n;
+        $consIndex = ($lambda_max - $n) / ($n - 1);
+        return $consIndex;
+    }
+
+    private function getConsRatio($consIndex, $n)
+    {
+        $RI = array(
+            1 => 0.00, 2 => 0.00, 3 => 0.58, 4 => 0.90,
+            5 => 1.12, 6 => 1.24, 7 => 1.32, 8 => 1.41,
+            9 => 1.45, 10 => 1.49
+        );
+        $consRatio = $consIndex / $RI[$n];
+        return $consRatio;
     }
 
 }

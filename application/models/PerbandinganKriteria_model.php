@@ -13,7 +13,7 @@ class PerbandinganKriteria_model extends CI_Model
         $data = [
             'id_kriteria1' => $id_kriteria1,
             'id_kriteria2' => $id_kriteria2,
-            'nilai_perbandingan' => $nilai
+            'nilai' => $nilai
         ];
         $this->db->insert('perbandingan_kriteria', $data);
     }

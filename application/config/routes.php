@@ -160,7 +160,7 @@ $route['suplier/spk/getAlternatif'] = 'Alternatif/getAlternatif';
 $route['suplier/spk/addKriteria'] = 'Kriteria/add_kriteria';
 $route['suplier/spk/addAlternatif'] = 'Alternatif/add_alternatif';
 $route['supplier/spk/deleteKriteria/(:num)'] = 'Kriteria/delete_kriteria/$1';
-$route['supplier/spk/getPerbandinganKriteria'] = 'PerbandinganKriteria/save_comparison_data';
+$route['supplier/spk/getPerbandinganKriteria'] = 'PerbandinganKriteria/simpan';
 $route['supplier/spk/addPerbandinganKriteria'] = 'PerbandinganKriteria/simpan';
 $route['supplier/spk/proses'] = 'PerbandinganKriteria/proses';
 
