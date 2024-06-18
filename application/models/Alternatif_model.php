@@ -20,13 +20,20 @@ class Alternatif_model extends CI_Model
         return $this->db->insert('data_alternatif', $data);
     }
 
-    public function update_alternative($id, $data)
-    {
-        return $this->db->where('id_alternatif', $id)->update('data_alternatif', $data);
-    }
-
     public function delete_alternative($id)
     {
         return $this->db->where('id_alternatif', $id)->delete('data_alternatif');
+    }
+
+    // Metode untuk mendapatkan data berdasarkan ID
+    public function get_alternative_by_id($id)
+    {
+        return $this->db->where('id_kriteria', $id)->get('data_alternatif')->row_array();
+    }
+
+    // Metode untuk mengupdate data
+    public function update_alternative($id, $data)
+    {
+        return $this->db->where('id_kriteria', $id)->update('data_alternatif', $data);
     }
 }

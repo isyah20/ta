@@ -417,6 +417,73 @@
     </div>
     <!-- end modal input alternatif -->
 
+    <!-- Modal delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus data ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a id="deleteBtn" class="btn btn-danger" href="#">Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End modal delete -->
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="edit-id" name="id">
+                        <div class="form-group">
+                            <label for="edit-nama_perusahaan">Nama Perusahaan</label>
+                            <input type="text" class="form-control" id="edit-nama_perusahaan" name="nama_perusahaan">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-riwayat_perusahaan">Riwayat Perusahaan</label>
+                            <input type="text" class="form-control" id="edit-riwayat_perusahaan" name="riwayat_perusahaan">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-riwayat_menang">Riwayat Menang</label>
+                            <input type="text" class="form-control" id="edit-riwayat_menang" name="riwayat_menang">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-lokasi_tender">Lokasi Tender</label>
+                            <input type="text" class="form-control" id="edit-lokasi_tender" name="lokasi_tender">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-nilai_hps">Nilai HPS</label>
+                            <input type="text" class="form-control" id="edit-nilai_hps" name="nilai_hps">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="saveEditBtn">Simpan Perubahan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Edit -->
+
+
     <!-- perbandingan kriteria -->
     <!-- tabel perbandingan kriteria -->
     <div class="perbandingan_kriteria">
@@ -565,9 +632,9 @@
                 <div id="result-container" class="link d-flex">
                     <span>
                         <form method="post" action="<?php echo site_url('AHPController/calculate'); ?>">
-                            <a class="btn btn-sm border btn-outline btn-simpan" id="btn-rekomendasi">Lihat Rekomendasi
+                            <button class="btn btn-sm border btn-outline btn-simpan" id="hitungAHP">Lihat Rekomendasi
                                 <img class="custom-img-view" src="<?= base_url('assets\img\eye.svg') ?>" width="19" alt="" style="">
-                            </a>
+                            </button>
                         </form>
                     </span>
                 </div>
@@ -583,7 +650,7 @@
                     <h5 class="wow fadeInUp">Hasil Rekomendasi</h5>
                     <h1>Hasil Proses AHP</h1>
 
-                    <div id="result">
+                    <div id="hasilPerhitungan">
                         <!-- Tempat untuk hasil dari AJAX -->
                     </div>
 
@@ -609,7 +676,7 @@
 
 </section>
 
-
+<!-- perbandingan kriteria -->
 <script>
     $(document).ready(function() {
         $.ajax({
@@ -722,6 +789,86 @@
     });
 </script>
 
+<!-- perbandingan alternatif -->
+<!-- <script>
+    $(document).ready(function() {
+        $('#hitungAHP').on('click', function() {
+            var id_kriteria = $('#inputGroupSelect01').val();
+            if (id_kriteria === 'Pilih...') {
+                alert('Silakan pilih kriteria.');
+                return;
+            }
+
+            $.ajax({
+                url: '<?php echo site_url('supplier/spk/prosesAlternatif'); ?>',
+                type: 'POST',
+                data: {
+                    id_kriteria: id_kriteria
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#hasilPerhitungan').show();
+
+                    // Clear previous results
+                    $('#hasilPerhitungan .container-lg').html('');
+
+                    // Append results
+                    $('#hasilPerhitungan .container-lg').append('<h6>Kriteria: ' + response.data_kriteria.nama_kriteria + '</h6>');
+
+                    // Matriks Perbandingan
+                    var matrikTable = '<h5>Matriks Perbandingan</h5><table class="table table-bordered"><thead><tr><th>Alternatif</th>';
+                    for (var i = 0; i < response.n; i++) {
+                        matrikTable += '<th>Alternatif ' + (i + 1) + '</th>';
+                    }
+                    matrikTable += '</tr></thead><tbody>';
+                    for (var i = 0; i < response.n; i++) {
+                        matrikTable += '<tr><td>Alternatif ' + (i + 1) + '</td>';
+                        for (var j = 0; j < response.n; j++) {
+                            matrikTable += '<td>' + parseFloat(response.matrik[i][j]).toFixed(4) + '</td>';
+                        }
+                        matrikTable += '</tr>';
+                    }
+                    matrikTable += '</tbody></table>';
+                    $('#hasilPerhitungan .container-lg').append(matrikTable);
+
+                    // Tambahkan hasil perhitungan lainnya (Jumlah Perbandingan, Matriks Normalisasi, Priority Vector, Eigen Vector, Consistency Index, Consistency Ratio)
+                    // Implementasi serupa untuk setiap bagian
+
+                    // Priority Vector
+                    var pvTable = '<h5>Priority Vector</h5><table class="table table-bordered"><thead><tr><th>Alternatif</th><th>Priority Vector</th></tr></thead><tbody>';
+                    for (var i = 0; i < response.n; i++) {
+                        pvTable += '<tr><td>Alternatif ' + (i + 1) + '</td><td>' + parseFloat(response.pv[i]).toFixed(4) + '</td></tr>';
+                    }
+                    pvTable += '</tbody></table>';
+                    $('#hasilPerhitungan .container-lg').append(pvTable);
+
+                    // Eigen Vector
+                    var eigenTable = '<h5>Eigen Vector</h5><table class="table table-bordered"><thead><tr><th>Alternatif</th><th>Eigen Vector</th></tr></thead><tbody>';
+                    for (var i = 0; i < response.n; i++) {
+                        eigenTable += '<tr><td>Alternatif ' + (i + 1) + '</td><td>' + parseFloat(response.eigenVektor[i]).toFixed(4) + '</td></tr>';
+                    }
+                    eigenTable += '</tbody></table>';
+                    $('#hasilPerhitungan .container-lg').append(eigenTable);
+
+                    // Consistency Index
+                    $('#hasilPerhitungan .container-lg').append('<h5>Consistency Index</h5><p>' + parseFloat(response.consIndex).toFixed(4) + '</p>');
+
+                    // Consistency Ratio
+                    var consRatioText = '<h5>Consistency Ratio</h5><p>' + parseFloat(response.consRatio).toFixed(4) + '</p>';
+                    if (response.consRatio < 0.1) {
+                        consRatioText += '<p>Consistency Ratio is acceptable (CR < 0.1)</p>';
+                    } else {
+                        consRatioText += '<p>Consistency Ratio is not acceptable (CR >= 0.1)</p>';
+                    }
+                    $('#hasilPerhitungan .container-lg').append(consRatioText);
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan: ' + error);
+                }
+            });
+        });
+    });
+</script> -->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -864,9 +1011,9 @@
                                 '<td class="custom-padding posisi">' + data[i].lokasi_tender + '</td>' +
                                 '<td class="custom-padding posisi">' + data[i].nilai_hps + '</td>' +
                                 '<td class="custom-padding">' +
-                                '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editMarketingModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<a href="#" class="btn-edt" data-toggle="modal" data-bs-placement="top" title="Ubah" data-target="#editModal" data-id="' + data[i].id_alternatif + '">' +
                                 '<img src="<?= base_url("assets/img/icon-pencil-edit.svg") ?>" alt="Edit" width="30px" style="margin:0px 5px;"></a>' +
-                                '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_kriteria + '">' +
+                                '<a href="#" class="btn-del" data-toggle="modal" data-bs-placement="top" title="Hapus" data-target="#deleteModal" data-id="' + data[i].id_alternatif + '">' +
                                 '<img src="<?= base_url("assets/img/icon-delete.svg") ?>" alt="Delete" width="30px" style="margin:0px 5px;"></a>' +
                                 '</td>' +
                                 '</tr>';
@@ -940,25 +1087,91 @@
             });
         });
         //delete alternatif
-        $('.delete-button').click(function() {
-            var id = $(this).data('id');
-            var row = $('#row_' + id);
+        // Ketika modal delete akan ditampilkan
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Tombol yang memicu modal
+            var id = button.data('id'); // Ambil data-id dari tombol
+            var modal = $(this);
 
-            if (confirm('Are you sure you want to delete this data?')) {
-                $.ajax({
-                    url: '<?php echo base_url('DataController/delete/'); ?>' + id,
-                    type: 'DELETE',
-                    success: function(response) {
-                        var result = JSON.parse(response);
-                        if (result.status == 'success') {
-                            row.remove();
-                            alert(result.message);
-                        } else {
-                            alert(result.message);
-                        }
+            // Set URL delete di tombol konfirmasi hapus
+            var deleteUrl = "<?php echo base_url('supplier/spk/deleteAlternatif/'); ?>" + id;
+            modal.find('#deleteBtn').attr('href', deleteUrl);
+        });
+
+        // Ketika tombol delete di modal diklik
+        $('#deleteBtn').click(function(e) {
+            e.preventDefault(); // Mencegah link default
+            var deleteUrl = $(this).attr('href');
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: deleteUrl,
+                type: 'POST',
+                success: function(response) {
+                    var result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        $('#deleteModal').modal('hide'); // Sembunyikan modal
+                        $('#row_' + id).remove(); // Hapus baris dari tabel
+                        alert(result.message);
+                    } else {
+                        alert(result.message);
                     }
-                });
-            }
+                },
+                error: function() {
+                    alert('Terjadi kesalahan saat menghapus data.');
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        // Ketika modal edit akan ditampilkan
+        $('#editModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Tombol yang memicu modal
+            var id = button.data('id'); // Ambil data-id dari tombol
+
+            // Lakukan request AJAX untuk mendapatkan data detail
+            $.ajax({
+                url: '<?= base_url("supplier/spk/getAlternatifById/") ?>' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Isi form dengan data yang diperoleh
+                    $('#edit-id').val(data.id_kriteria);
+                    $('#edit-nama_perusahaan').val(data.nama_perusahaan);
+                    $('#edit-riwayat_perusahaan').val(data.riwayat_perusahaan);
+                    $('#edit-riwayat_menang').val(data.riwayat_menang);
+                    $('#edit-lokasi_tender').val(data.lokasi_tender);
+                    $('#edit-nilai_hps').val(data.nilai_hps);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        });
+
+        // Ketika tombol simpan perubahan diklik
+        $('#saveEditBtn').click(function() {
+            var formData = $('#editForm').serialize();
+
+            $.ajax({
+                url: '<?= base_url("supplier/spk/updateAlternatif") ?>',
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    var result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        $('#editModal').modal('hide'); // Sembunyikan modal
+                        fetchAlternatifData(); // Refresh data
+                        alert(result.message);
+                    } else {
+                        alert(result.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan saat mengupdate data.');
+                }
+            });
         });
     });
 

@@ -60,6 +60,8 @@ class Alternatif extends CI_Controller
         } else {
             echo json_encode(['status' => false, 'message' => 'Failed to add alternatif.']);
         }
+
+        
         /* // Fetch current kriteria count from the database
         $this->load->model('Alternatif_model');
         $currentAlternatifCount = $this->Alternatif_model->get_alternatives();
@@ -75,4 +77,45 @@ class Alternatif extends CI_Controller
         } */
     }
 
+    public function delete_alternatif($id)
+    {
+        // Tambahkan debugging
+        error_log("Delete request for ID: " . $id);
+
+        if ($this->Alternatif_model->delete_alternative($id)) {
+            $response = array('status' => 'success', 'message' => 'Data alternatif berhasil dihapus.', 'id' => $id);
+        } else {
+            $response = array('status' => 'error', 'message' => 'Data alternatif gagal dihapus.');
+        }
+
+        echo json_encode($response);
+    }
+
+    // Metode untuk mendapatkan data berdasarkan ID
+    public function getAlternatifById($id)
+    {
+        $data = $this->Alternatif_model->get_alternative_by_id($id);
+        echo json_encode($data);
+    }
+
+    // Metode untuk mengupdate data
+    public function updateAlternatif()
+    {
+        $id = $this->input->post('id');
+        $data = array(
+            'nama_perusahaan' => $this->input->post('nama_perusahaan'),
+            'riwayat_perusahaan' => $this->input->post('riwayat_perusahaan'),
+            'riwayat_menang' => $this->input->post('riwayat_menang'),
+            'lokasi_tender' => $this->input->post('lokasi_tender'),
+            'nilai_hps' => $this->input->post('nilai_hps')
+        );
+
+        if ($this->Alternatif_model->update_alternative($id, $data)) {
+            $response = array('status' => 'success', 'message' => 'Data alternatif berhasil diupdate.');
+        } else {
+            $response = array('status' => 'error', 'message' => 'Data alternatif gagal diupdate.');
+        }
+
+        echo json_encode($response);
+    }
 }

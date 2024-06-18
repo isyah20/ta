@@ -160,9 +160,15 @@ $route['suplier/spk/getAlternatif'] = 'Alternatif/getAlternatif';
 $route['suplier/spk/addKriteria'] = 'Kriteria/add_kriteria';
 $route['suplier/spk/addAlternatif'] = 'Alternatif/add_alternatif';
 $route['supplier/spk/deleteKriteria/(:num)'] = 'Kriteria/delete_kriteria/$1';
+$route['supplier/spk/deleteAlternatif/(:num)'] = 'Alternatif/delete_alternatif/$1';
+$route['supplier/spk/getAlternatifById/(:num)'] = 'Alternatif/getAlternatifById/$1';
+$route['supplier/spk/updateAlternatif'] = 'Alternatif/updateAlternatif';
 $route['supplier/spk/getPerbandinganKriteria'] = 'PerbandinganKriteria/simpan';
 $route['supplier/spk/addPerbandinganKriteria'] = 'PerbandinganKriteria/simpan';
 $route['supplier/spk/proses'] = 'PerbandinganKriteria/proses';
+
+//$route['supplier/spk/getPerbandinganAlternatif'] = 'PerbandinganAlternatif/tabel';
+//$route['supplier/spk/prosesAlternatif'] = 'PerbandinganAlternatif/proses';
 
 // $route['api/supplier/send-email'] = 'api/ApiSupplier/sendEmailPassword';
 $route['index_table'] = 'DashboardUserSupplier/index_table';
