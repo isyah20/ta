@@ -443,45 +443,54 @@
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                <div class="modal-header border-0">
+                    <button type="button" id="btn-close-alternatif" class="btn btn-link" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none;">
+                        <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <input type="hidden" id="edit-id" name="id">
-                        <div class="form-group">
-                            <label for="edit-nama_perusahaan">Nama Perusahaan</label>
-                            <input type="text" class="form-control" id="edit-nama_perusahaan" name="nama_perusahaan">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit-riwayat_perusahaan">Riwayat Perusahaan</label>
-                            <input type="text" class="form-control" id="edit-riwayat_perusahaan" name="riwayat_perusahaan">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit-riwayat_menang">Riwayat Menang</label>
-                            <input type="text" class="form-control" id="edit-riwayat_menang" name="riwayat_menang">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit-lokasi_tender">Lokasi Tender</label>
-                            <input type="text" class="form-control" id="edit-lokasi_tender" name="lokasi_tender">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit-nilai_hps">Nilai HPS</label>
-                            <input type="text" class="form-control" id="edit-nilai_hps" name="nilai_hps">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" id="saveEditBtn">Simpan Perubahan</button>
+
+                <div class="modal-body border-0">
+                    <h3 class="modal-title" id="inputAlternatifModalLabel">Edit Alternatif</h3>
+                    <div class="input-popup justify-content-end">
+                        <form id="editForm" class="row g-2">
+                            <input type="hidden" id="edit-id" name="id_kriteria">
+                            <div class="col-12">
+                                <label for="edit-nama_perusahaan" class="form-label text-start">Nama Perusahaan</label>
+                                <input type="text" class="form-control" id="edit-nama_perusahaan" name="nama_perusahaan" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="edit-riwayat_perusahaan" class="form-label text-start">Riwayat Perusahaan</label>
+                                <input type="text" class="form-control" id="edit-riwayat_perusahaan" name="riwayat_perusahaan" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="edit-riwayat_menang" class="form-label">Riwayat Menang</label>
+                                <input type="text" class="form-control" id="edit-riwayat_menang" name="riwayat_menang" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="edit-lokasi_tender" class="form-label">Lokasi Tender</label>
+                                <input type="text" class="form-control" id="edit-lokasi_tender" name="lokasi_tender" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="edit-nilai_hps" class="form-label">Nilai HPS</label>
+                                <input type="text" class="form-control" id="edit-nilai_hps" name="nilai_hps" required>
+                            </div>
+                            <div class="justify-content-start mt-3 gap-2">
+                                <div class="link flex-row align-items-center w-100">
+                                    <span>
+                                        <button type="submit" id="saveEditBtn" class="btn-custom text-white text-center" style="width:407px;border:none">
+                                            Simpan Perubahan
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End Modal Edit -->
+
 
 
     <!-- perbandingan kriteria -->
@@ -790,7 +799,7 @@
 </script>
 
 <!-- perbandingan alternatif -->
-<!-- <script>
+<script>
     $(document).ready(function() {
         $('#hitungAHP').on('click', function() {
             var id_kriteria = $('#inputGroupSelect01').val();
@@ -868,7 +877,7 @@
             });
         });
     });
-</script> -->
+</script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1086,6 +1095,8 @@
                 }
             });
         });
+
+
         //delete alternatif
         // Ketika modal delete akan ditampilkan
         $('#deleteModal').on('show.bs.modal', function(event) {
@@ -1094,15 +1105,16 @@
             var modal = $(this);
 
             // Set URL delete di tombol konfirmasi hapus
-            var deleteUrl = "<?php echo base_url('supplier/spk/deleteAlternatif/'); ?>" + id;
-            modal.find('#deleteBtn').attr('href', deleteUrl);
+            var deleteUrl = '<?= base_url("supplier/spk/deleteAlternatif/") ?>' + id;
+            modal.find('#deleteBtn').attr('data-url', deleteUrl);
+            modal.find('#deleteBtn').attr('data-id', id);
         });
 
         // Ketika tombol delete di modal diklik
         $('#deleteBtn').click(function(e) {
             e.preventDefault(); // Mencegah link default
-            var deleteUrl = $(this).attr('href');
-            var id = $(this).data('id');
+            var deleteUrl = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
 
             $.ajax({
                 url: deleteUrl,
@@ -1110,21 +1122,35 @@
                 success: function(response) {
                     var result = JSON.parse(response);
                     if (result.status === 'success') {
-                        $('#deleteModal').modal('hide'); // Sembunyikan modal
-                        $('#row_' + id).remove(); // Hapus baris dari tabel
-                        alert(result.message);
+                        fetchAlternatifData(); // Refresh data
+                        swal({
+                            title: "Data berhasil dihapus",
+                            icon: "success",
+                            button: "Ok",
+                        }).then(function() {
+                            $('#deleteModal').modal('hide'); // Sembunyikan modal
+                        });
                     } else {
-                        alert(result.message);
+                        swal({
+                            title: "Gagal menghapus data",
+                            text: result.message,
+                            icon: "error",
+                            button: "Ok",
+                        });
                     }
                 },
                 error: function() {
-                    alert('Terjadi kesalahan saat menghapus data.');
+                    swal({
+                        title: "Terjadi kesalahan",
+                        text: "Terjadi kesalahan saat menghapus data.",
+                        icon: "error",
+                        button: "Ok",
+                    });
                 }
             });
         });
-    });
 
-    $(document).ready(function() {
+        //edit alternatif
         // Ketika modal edit akan ditampilkan
         $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Tombol yang memicu modal
@@ -1151,7 +1177,8 @@
         });
 
         // Ketika tombol simpan perubahan diklik
-        $('#saveEditBtn').click(function() {
+        $('#saveEditBtn').click(function(e) {
+            e.preventDefault(); // Mencegah form submit default
             var formData = $('#editForm').serialize();
 
             $.ajax({
@@ -1161,15 +1188,30 @@
                 success: function(response) {
                     var result = JSON.parse(response);
                     if (result.status === 'success') {
-                        $('#editModal').modal('hide'); // Sembunyikan modal
                         fetchAlternatifData(); // Refresh data
-                        alert(result.message);
+                        swal({
+                            title: "Data berhasil diupdate",
+                            icon: "success",
+                            button: "Ok",
+                        }).then(function() {
+                            $('#editModal').modal('hide'); // Sembunyikan modal
+                        });
                     } else {
-                        alert(result.message);
+                        swal({
+                            title: "Gagal mengupdate data",
+                            text: result.message,
+                            icon: "error",
+                            button: "Ok",
+                        });
                     }
                 },
                 error: function(xhr, status, error) {
-                    alert('Terjadi kesalahan saat mengupdate data.');
+                    swal({
+                        title: "Terjadi kesalahan",
+                        text: "Terjadi kesalahan saat mengupdate data.",
+                        icon: "error",
+                        button: "Ok",
+                    });
                 }
             });
         });
@@ -1217,85 +1259,6 @@
                     }
                 });
             });
-
-            // Handle form submission
-            /* $('#form-perbandingan').on('submit', function(e) {
-                e.preventDefault();
-                const nama_kriteria = $('#inputNama').val();
-                const nilai = $('#inputBobot').val();
-                $.ajax({
-                    type: 'POST',
-                    url: '<?= base_url("suplier/spk/addKriteria") ?>',
-                    data: {
-                        kriteria: kriteria,
-                        bobot: bobot
-                    },
-                    success: function(response) {
-                        fetchKriteriaData();
-                        swal({
-                            title: "Data berhasil diubah",
-                            icon: "success",
-                            button: "Ok",
-                        }).then(function() {
-                            $('#btn-close-kriteria').click();
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        var span = document.createElement("span");
-                        span.innerHTML = JSON.parse(xhr.responseText).message;
-                        swal({
-                            title: "ERROR",
-                            content: span,
-                            icon: "error",
-                            button: "Ok",
-                        });
-                        console.log(xhr.responseText);
-                    }
-                });
-            }); */
-
-            /* $.ajax({
-                url: '<?= base_url("supplier/spk/getPerbandinganKriteria") ?>',
-                method: 'GET',
-                dataType: 'json', // Pastikan responsenya diparse sebagai JSON
-                success: function(data) {
-                    console.log('Response:', data); // Debugging: log the response
-                    let html = '';
-
-                    // Check if response is an array
-                    if (Array.isArray(data)) {
-                        for (let i = 0; i < data.length; i++) {
-                            var data = {
-                                comparison1: $('input[name="comparison1"]:checked').val(),
-                                comparison2: $('input[name="comparison2"]:checked').val(),
-                                nilai1: $('#nilai1').val(),
-                                comparison3: $('input[name="comparison3"]:checked').val(),
-                                comparison4: $('input[name="comparison4"]:checked').val(),
-                                nilai2: $('#nilai2').val(),
-                                comparison5: $('input[name="comparison5"]:checked').val(),
-                                comparison6: $('input[name="comparison6"]:checked').val(),
-                                nilai3: $('#nilai3').val(),
-                                comparison7: $('input[name="comparison7"]:checked').val(),
-                                comparison8: $('input[name="comparison8"]:checked').val(),
-                                nilai4: $('#nilai4').val(),
-                                comparison9: $('input[name="comparison9"]:checked').val(),
-                                comparison10: $('input[name="comparison10"]:checked').val(),
-                                nilai5: $('#nilai5').val(),
-                                comparison11: $('input[name="comparison11"]:checked').val(),
-                                comparison12: $('input[name="comparison12"]:checked').val(),
-                                nilai6: $('#nilai6').val()
-                            };
-                        }
-                    } else {
-                        console.error('Unexpected response format:', data);
-                    }
-
-                    $('#table-perbandingan-kriteria').html(html);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching data:', error);
-                }
-            }); */
         };
     });
 
