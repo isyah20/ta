@@ -91,17 +91,15 @@ class Alternatif extends CI_Controller
         echo json_encode($response);
     }
 
-    // Metode untuk mendapatkan data berdasarkan ID
     public function getAlternatifById($id)
     {
-        $data = $this->Alternatif_model->get_alternative_by_id($id);
+        $data = $this->Alternatif_model->get_by_id($id);
         echo json_encode($data);
     }
 
-    // Metode untuk mengupdate data
     public function updateAlternatif()
     {
-        $id = $this->input->post('id');
+        $id = $this->input->post('id_kriteria');
         $data = array(
             'nama_perusahaan' => $this->input->post('nama_perusahaan'),
             'riwayat_perusahaan' => $this->input->post('riwayat_perusahaan'),
@@ -109,13 +107,11 @@ class Alternatif extends CI_Controller
             'lokasi_tender' => $this->input->post('lokasi_tender'),
             'nilai_hps' => $this->input->post('nilai_hps')
         );
-
-        if ($this->Alternatif_model->update_alternative($id, $data)) {
-            $response = array('status' => 'success', 'message' => 'Data alternatif berhasil diupdate.');
+        $result = $this->Alternatif_model->update($id, $data);
+        if ($result) {
+            echo json_encode(['status' => 'success']);
         } else {
-            $response = array('status' => 'error', 'message' => 'Data alternatif gagal diupdate.');
+            echo json_encode(['status' => 'error', 'message' => 'Update failed.']);
         }
-
-        echo json_encode($response);
-    }
+    }        
 }

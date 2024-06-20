@@ -20,20 +20,20 @@ class PerbandinganAlternatif_model extends CI_Model
     // Ambil semua data alternatif
     public function getAlternatif()
     {
-        $query = $this->db->get('alternatif');
+        $query = $this->db->get('data_alternatif');
         return $query->result_array();
     }
 
     // Hitung jumlah alternatif
     public function getNumAlternatif()
     {
-        return $this->db->count_all('alternatif');
+        return $this->db->count_all('data_alternatif');
     }
 
     // Ambil id alternatif berdasarkan index
     public function getAlternatifId($index)
     {
-        $query = $this->db->get('alternatif', 1, $index);
+        $query = $this->db->get('data_alternatif', 1, $index);
         return $query->row_array();
     }
 

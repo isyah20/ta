@@ -5,20 +5,16 @@ use App\components\traits\ClientApi;
 
 class PerbandinganAlternatif extends CI_Controller
 {
-    use ClientApi;
-
     public function __construct()
     {
         parent::__construct();
-        // if (!$this->session->userdata('user_data') && $this->session->userdata('user_data')['kategori'] != 4) {
         if (!get_cookie('id_pengguna')) {
             redirect('login');
         }
 
-        // $this->load->library('input');
         $this->load->model('PerbandinganAlternatif_model');
+        $this->load->model('PerbandinganKriteria_model');
         $this->load->model('Kriteria_model');
-        $this->init();
     }
 
     public function tabel()
@@ -36,73 +32,131 @@ class PerbandinganAlternatif extends CI_Controller
 
     public function proses()
     {
-        $id_kriteria = $this->input->post('id_kriteria');
-        $n = $this->PerbandinganAlternatif_model->getNumAlternatif();
+        // Jumlah Kriteria
+        $n = $this->PerbandinganKriteria_model->getNumKriteria();
+
+        if ($n == 0) {
+            $response = array(
+                'status' => 'error',
+                'message' => 'Jumlah kriteria tidak boleh nol.'
+            );
+            echo json_encode($response);
+            return;
+        }
+
         $matrik = array();
         $urut = 0;
 
-        for ($x = 0; $x <= ($n - 2); $x++) {
-            for ($y = ($x + 1); $y <= ($n - 1); $y++) {
+        // Memetakan nilai dalam bentuk matrik
+        for ($x = 0; $x < $n; $x++) {
+            for ($y = $x + 1; $y < $n; $y++) {
                 $urut++;
                 $pilih = "pilih" . $urut;
                 $bobot = "bobot" . $urut;
+                $bobot_value = $this->input->post($bobot);
+                if ($bobot_value == 0) {
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Nilai bobot tidak boleh nol.'
+                    );
+                    echo json_encode($response);
+                    return;
+                }
                 if ($this->input->post($pilih) == 1) {
-                    $matrik[$x][$y] = $this->input->post($bobot);
-                    $matrik[$y][$x] = 1 / $this->input->post($bobot);
+                    $matrik[$x][$y] = $bobot_value;
+                    $matrik[$y][$x] = 1 / $bobot_value;
                 } else {
-                    $matrik[$x][$y] = 1 / $this->input->post($bobot);
-                    $matrik[$y][$x] = $this->input->post($bobot);
+                    $matrik[$x][$y] = 1 / $bobot_value;
+                    $matrik[$y][$x] = $bobot_value;
+                }
+
+                $id_kriteria1 = $this->PerbandinganKriteria_model->getKriteriaId($x);
+                $id_kriteria2 = $this->PerbandinganKriteria_model->getKriteriaId($y);
+
+                $jumlahPerbandingan = $this->PerbandinganKriteria_model->getNumPerbandinganKriteria($id_kriteria1, $id_kriteria2);
+                if ($jumlahPerbandingan == 0) {
+                    $this->PerbandinganKriteria_model->insertPerbandinganKriteria($id_kriteria1, $id_kriteria2, $matrik[$x][$y]);
+                } else {
+                    $this->PerbandinganKriteria_model->updatePerbandinganKriteria($id_kriteria1, $id_kriteria2, $matrik[$x][$y]);
                 }
             }
         }
 
-        for ($i = 0; $i <= ($n - 1); $i++) {
+        // Diagonal -> bernilai 1
+        for ($i = 0; $i < $n; $i++) {
             $matrik[$i][$i] = 1;
         }
 
-        $jmlmpb = array();
-        $jmlmnk = array();
-        for ($i = 0; $i <= ($n - 1); $i++) {
-            $jmlmpb[$i] = 0;
-            $jmlmnk[$i] = 0;
-        }
+        $jmlmpb = array_fill(0, $n, 0);
+        $jmlmnk = array_fill(0, $n, 0);
 
-        for ($x = 0; $x <= ($n - 1); $x++) {
-            for ($y = 0; $y <= ($n - 1); $y++) {
-                $value = $matrik[$x][$y];
-                $jmlmpb[$y] += $value;
+        // Menghitung jumlah pada kolom kriteria tabel perbandingan berpasangan
+        for ($x = 0; $x < $n; $x++) {
+            for ($y = 0; $y < $n; $y++) {
+                $jmlmpb[$y] += $matrik[$x][$y];
             }
         }
 
-        for ($x = 0; $x <= ($n - 1); $x++) {
-            for ($y = 0; $y <= ($n - 1); $y++) {
+        // Tambahkan data intermediate sebelum pembagian
+        $response_intermediate = array(
+            'status' => 'intermediate',
+            'data' => array(
+                'n' => $n,
+                'matrik' => $matrik,
+                'jmlmpb' => $jmlmpb,
+            )
+        );
+        echo json_encode($response_intermediate);
+        return;
+
+        $matrikb = array();
+        for ($x = 0; $x < $n; $x++) {
+            for ($y = 0; $y < $n; $y++) {
+                if ($jmlmpb[$y] == 0) {
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Jumlah kolom kriteria tidak boleh nol.'
+                    );
+                    echo json_encode($response);
+                    return;
+                }
                 $matrikb[$x][$y] = $matrik[$x][$y] / $jmlmpb[$y];
-                $value = $matrikb[$x][$y];
-                $jmlmnk[$x] += $value;
+                $jmlmnk[$x] += $matrikb[$x][$y];
             }
 
             $pv[$x] = $jmlmnk[$x] / $n;
+            $id_kriteria = $this->PerbandinganKriteria_model->getKriteriaId($x);
+            $jumlahPV = $this->PerbandinganKriteria_model->getNumWithIdKriteriaPV($id_kriteria);
+            if ($jumlahPV == 0) {
+                $this->PerbandinganKriteria_model->insertKriteriaPV($id_kriteria, $pv[$x]);
+            } else {
+                $this->PerbandinganKriteria_model->updateKriteriaPV($id_kriteria, $pv[$x]);
+            }
         }
 
-        $eigenVektor = $this->getEigenVector($pv, $matrik, $n);
-        $consIndex = $this->getConsIndex($eigenVektor, $pv, $n);
+        $eigenVektor = $this->getEigenVector($matrik, $pv, $n);
+        $consIndex = $this->getConsIndex($matrik, $pv, $n);
         $consRatio = $this->getConsRatio($consIndex, $n);
 
-        $data = array(
-            'n' => $n,
-            'matrik' => $matrik,
-            'jmlmpb' => $jmlmpb,
-            'jmlmnk' => $jmlmnk,
-            'matrikb' => $matrikb,
-            'pv' => $pv,
-            'eigenVektor' => $eigenVektor,
-            'consIndex' => $consIndex,
-            'consRatio' => $consRatio,
-            'data_kriteria' => $this->PerbandinganAlternatif_model->getKriteria($id_kriteria)
+        $response = array(
+            'status' => 'success',
+            'data' => array(
+                'n' => $n,
+                'matrik' => $matrik,
+                'jmlmpb' => $jmlmpb,
+                'jmlmnk' => $jmlmnk,
+                'matrikb' => $matrikb,
+                'pv' => $pv,
+                'eigenVektor' => $eigenVektor,
+                'consIndex' => $consIndex,
+                'consRatio' => $consRatio
+            )
         );
 
-        echo json_encode($data);
+        echo json_encode($response);
     }
+
+
 
     private function getEigenVector($pv, $matrik, $n)
     {
@@ -138,5 +192,4 @@ class PerbandinganAlternatif extends CI_Controller
         $consRatio = $consIndex / $RI[$n];
         return $consRatio;
     }
-
 }

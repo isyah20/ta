@@ -440,7 +440,7 @@
     <!-- End modal delete -->
 
     <!-- Modal Edit -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header border-0">
@@ -448,7 +448,6 @@
                         <img src="<?= base_url("assets/img/button-x-popup.png") ?>" alt="Cancel" style="width: 32px; height: 32px; padding: 0;">
                     </button>
                 </div>
-
                 <div class="modal-body border-0">
                     <h3 class="modal-title" id="inputAlternatifModalLabel">Edit Alternatif</h3>
                     <div class="input-popup justify-content-end">
@@ -477,7 +476,7 @@
                             <div class="justify-content-start mt-3 gap-2">
                                 <div class="link flex-row align-items-center w-100">
                                     <span>
-                                        <button type="submit" id="saveEditBtn" class="btn-custom text-white text-center" style="width:407px;border:none">
+                                        <button type="submit" id="saveEditBtn" class="btn-custom text-white text-center" style="width: 407px; border: none;">
                                             Simpan Perubahan
                                         </button>
                                     </span>
@@ -490,6 +489,9 @@
         </div>
     </div>
     <!-- End Modal Edit -->
+
+
+
 
 
 
@@ -607,14 +609,14 @@
     </div>
     <!-- end perbandingan kriteria -->
 
-    <!-- perbandingan alternatif -->
+    <!-- Perbandingan Alternatif -->
     <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
         <div class="col">
             <h5 class="wow fadeInUp">Perbandingan Alternatif</h5>
         </div>
     </div>
 
-    <!-- card perbandingan alternatif -->
+    <!-- Card Perbandingan Alternatif -->
     <div class="perbandingan-alternatif">
         <div class="container-lg">
             <div class="row">
@@ -634,54 +636,39 @@
         </div>
     </div>
 
-    <!-- button rekomendasi -->
+    <!-- Button Rekomendasi -->
     <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
         <div class="col">
             <div class="d-flex justify-content-start">
                 <div id="result-container" class="link d-flex">
                     <span>
-                        <form method="post" action="<?php echo site_url('AHPController/calculate'); ?>">
-                            <button class="btn btn-sm border btn-outline btn-simpan" id="hitungAHP">Lihat Rekomendasi
-                                <img class="custom-img-view" src="<?= base_url('assets\img\eye.svg') ?>" width="19" alt="" style="">
-                            </button>
-                        </form>
+                        <button class="btn btn-sm border btn-outline btn-simpan" id="hitungAHP">
+                            Lihat Rekomendasi
+                            <img class="custom-img-view" src="<?= base_url('assets/img/eye.svg') ?>" width="19" alt="">
+                        </button>
                     </span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Tempat untuk menampilkan hasil rekomendasi -->
+    <!-- Tempat untuk Menampilkan Hasil Rekomendasi -->
     <div class="rekomendasi">
         <div class="container-lg d-flex wow fadeInUp" data-wow-delay="0.1s">
             <div class="row">
                 <div class="col">
                     <h5 class="wow fadeInUp">Hasil Rekomendasi</h5>
                     <h1>Hasil Proses AHP</h1>
-
                     <div id="hasilPerhitungan">
                         <!-- Tempat untuk hasil dari AJAX -->
                     </div>
-
-
-                    <!-- <div class="table-responsive table-rek">
-                        <table class="table custom-table-container">
-                            <thead class="thead">
-                                <tr>
-                                    <th class="custom-padding">No</th>
-                                    <th class="custom-padding">Nama Alternatif</th>
-                                    <th class="custom-padding">Skor Akhir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
 </section>
 
@@ -801,83 +788,95 @@
 <!-- perbandingan alternatif -->
 <script>
     $(document).ready(function() {
-        $('#hitungAHP').on('click', function() {
-            var id_kriteria = $('#inputGroupSelect01').val();
-            if (id_kriteria === 'Pilih...') {
-                alert('Silakan pilih kriteria.');
-                return;
-            }
+        $.ajax({
+            url: "<?php echo base_url('supplier/spk/proses2'); ?>",
+            type: "POST",
+            dataType: "json",
+            success: function(response) {
+                if (response.status == 'success') {
+                    var html = '';
 
-            $.ajax({
-                url: '<?php echo site_url('supplier/spk/prosesAlternatif'); ?>',
-                type: 'POST',
-                data: {
-                    id_kriteria: id_kriteria
-                },
-                dataType: 'json',
-                success: function(response) {
-                    $('#hasilPerhitungan').show();
-
-                    // Clear previous results
-                    $('#hasilPerhitungan .container-lg').html('');
-
-                    // Append results
-                    $('#hasilPerhitungan .container-lg').append('<h6>Kriteria: ' + response.data_kriteria.nama_kriteria + '</h6>');
-
-                    // Matriks Perbandingan
-                    var matrikTable = '<h5>Matriks Perbandingan</h5><table class="table table-bordered"><thead><tr><th>Alternatif</th>';
-                    for (var i = 0; i < response.n; i++) {
-                        matrikTable += '<th>Alternatif ' + (i + 1) + '</th>';
-                    }
-                    matrikTable += '</tr></thead><tbody>';
-                    for (var i = 0; i < response.n; i++) {
-                        matrikTable += '<tr><td>Alternatif ' + (i + 1) + '</td>';
-                        for (var j = 0; j < response.n; j++) {
-                            matrikTable += '<td>' + parseFloat(response.matrik[i][j]).toFixed(4) + '</td>';
+                    // Tampilkan matriks perbandingan kriteria
+                    html += '<h2>Matriks Perbandingan Kriteria</h2>';
+                    html += '<table border="1">';
+                    for (var x = 0; x < response.data.n; x++) {
+                        html += '<tr>';
+                        for (var y = 0; y < response.data.n; y++) {
+                            html += '<td>' + response.data.matrik[x][y] + '</td>';
                         }
-                        matrikTable += '</tr>';
+                        html += '</tr>';
                     }
-                    matrikTable += '</tbody></table>';
-                    $('#hasilPerhitungan .container-lg').append(matrikTable);
+                    html += '</table>';
 
-                    // Tambahkan hasil perhitungan lainnya (Jumlah Perbandingan, Matriks Normalisasi, Priority Vector, Eigen Vector, Consistency Index, Consistency Ratio)
-                    // Implementasi serupa untuk setiap bagian
-
-                    // Priority Vector
-                    var pvTable = '<h5>Priority Vector</h5><table class="table table-bordered"><thead><tr><th>Alternatif</th><th>Priority Vector</th></tr></thead><tbody>';
-                    for (var i = 0; i < response.n; i++) {
-                        pvTable += '<tr><td>Alternatif ' + (i + 1) + '</td><td>' + parseFloat(response.pv[i]).toFixed(4) + '</td></tr>';
+                    // Tampilkan jumlah tiap kolom kriteria (MPB)
+                    html += '<h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>';
+                    html += '<table border="1"><tr>';
+                    for (var i = 0; i < response.data.jmlmpb.length; i++) {
+                        html += '<td>' + response.data.jmlmpb[i] + '</td>';
                     }
-                    pvTable += '</tbody></table>';
-                    $('#hasilPerhitungan .container-lg').append(pvTable);
+                    html += '</tr></table>';
 
-                    // Eigen Vector
-                    var eigenTable = '<h5>Eigen Vector</h5><table class="table table-bordered"><thead><tr><th>Alternatif</th><th>Eigen Vector</th></tr></thead><tbody>';
-                    for (var i = 0; i < response.n; i++) {
-                        eigenTable += '<tr><td>Alternatif ' + (i + 1) + '</td><td>' + parseFloat(response.eigenVektor[i]).toFixed(4) + '</td></tr>';
+                    // Tampilkan matriks yang dinormalisasi
+                    html += '<h2>Matriks yang Dinormalisasi</h2>';
+                    html += '<table border="1">';
+                    for (var x = 0; x < response.data.n; x++) {
+                        html += '<tr>';
+                        for (var y = 0; y < response.data.n; y++) {
+                            html += '<td>' + response.data.matrikb[x][y] + '</td>';
+                        }
+                        html += '</tr>';
                     }
-                    eigenTable += '</tbody></table>';
-                    $('#hasilPerhitungan .container-lg').append(eigenTable);
+                    html += '</table>';
 
-                    // Consistency Index
-                    $('#hasilPerhitungan .container-lg').append('<h5>Consistency Index</h5><p>' + parseFloat(response.consIndex).toFixed(4) + '</p>');
-
-                    // Consistency Ratio
-                    var consRatioText = '<h5>Consistency Ratio</h5><p>' + parseFloat(response.consRatio).toFixed(4) + '</p>';
-                    if (response.consRatio < 0.1) {
-                        consRatioText += '<p>Consistency Ratio is acceptable (CR < 0.1)</p>';
-                    } else {
-                        consRatioText += '<p>Consistency Ratio is not acceptable (CR >= 0.1)</p>';
+                    // Tampilkan jumlah nilai normalisasi (MNK)
+                    html += '<h2>Jumlah Nilai Normalisasi (MNK)</h2>';
+                    html += '<table border="1"><tr>';
+                    for (var i = 0; i < response.data.jmlmnk.length; i++) {
+                        html += '<td>' + response.data.jmlmnk[i] + '</td>';
                     }
-                    $('#hasilPerhitungan .container-lg').append(consRatioText);
-                },
-                error: function(xhr, status, error) {
-                    alert('Terjadi kesalahan: ' + error);
+                    html += '</tr></table>';
+
+                    // Tampilkan priority vector (PV)
+                    html += '<h2>Priority Vector</h2>';
+                    html += '<table border="1"><tr>';
+                    for (var i = 0; i < response.data.pv.length; i++) {
+                        html += '<td>' + response.data.pv[i] + '</td>';
+                    }
+                    html += '</tr></table>';
+
+                    // Tampilkan eigen vector
+                    html += '<h2>Eigen Vector</h2>';
+                    html += '<table border="1"><tr>';
+                    for (var i = 0; i < response.data.eigenVektor.length; i++) {
+                        html += '<td>' + response.data.eigenVektor[i] + '</td>';
+                    }
+                    html += '</tr></table>';
+
+                    // Tampilkan consistency index
+                    html += '<h2>Consistency Index</h2>';
+                    html += '<p>' + response.data.consIndex + '</p>';
+
+                    // Tampilkan consistency ratio
+                    html += '<h2>Consistency Ratio</h2>';
+                    html += '<p>' + response.data.consRatio + '</p>';
+
+                    // Masukkan HTML ke dalam elemen dengan id #result
+                    $('#result').html(html);
+                } else {
+                    console.error('AJAX Error: Unexpected Response');
+                    alert('Gagal memuat data. Silakan coba lagi.');
                 }
-            });
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', status, error);
+                alert('Terjadi kesalahan saat memuat data. Silakan coba lagi.');
+            }
         });
     });
 </script>
+
+
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1165,10 +1164,7 @@
                     // Isi form dengan data yang diperoleh
                     $('#edit-id').val(data.id_kriteria);
                     $('#edit-nama_perusahaan').val(data.nama_perusahaan);
-                    $('#edit-riwayat_perusahaan').val(data.riwayat_perusahaan);
-                    $('#edit-riwayat_menang').val(data.riwayat_menang);
-                    $('#edit-lokasi_tender').val(data.lokasi_tender);
-                    $('#edit-nilai_hps').val(data.nilai_hps);
+                    // Lanjutkan untuk mengisi field lainnya sesuai kebutuhan
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching data:', error);
@@ -1177,9 +1173,9 @@
         });
 
         // Ketika tombol simpan perubahan diklik
-        $('#saveEditBtn').click(function(e) {
+        $('#editForm').on('submit', function(e) {
             e.preventDefault(); // Mencegah form submit default
-            var formData = $('#editForm').serialize();
+            var formData = $(this).serialize();
 
             $.ajax({
                 url: '<?= base_url("supplier/spk/updateAlternatif") ?>',
@@ -1212,6 +1208,7 @@
                         icon: "error",
                         button: "Ok",
                     });
+                    console.error("AJAX Error:", status, error);
                 }
             });
         });
