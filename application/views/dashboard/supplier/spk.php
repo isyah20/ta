@@ -788,89 +788,96 @@
 <!-- perbandingan alternatif -->
 <script>
     $(document).ready(function() {
-        $.ajax({
-            url: "<?php echo base_url('supplier/spk/proses2'); ?>",
-            type: "POST",
-            dataType: "json",
-            success: function(response) {
-                if (response.status == 'success') {
-                    var html = '';
-
-                    // Tampilkan matriks perbandingan kriteria
-                    html += '<h2>Matriks Perbandingan Kriteria</h2>';
-                    html += '<table border="1">';
-                    for (var x = 0; x < response.data.n; x++) {
-                        html += '<tr>';
-                        for (var y = 0; y < response.data.n; y++) {
-                            html += '<td>' + response.data.matrik[x][y] + '</td>';
-                        }
-                        html += '</tr>';
-                    }
-                    html += '</table>';
-
-                    // Tampilkan jumlah tiap kolom kriteria (MPB)
-                    html += '<h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>';
-                    html += '<table border="1"><tr>';
-                    for (var i = 0; i < response.data.jmlmpb.length; i++) {
-                        html += '<td>' + response.data.jmlmpb[i] + '</td>';
-                    }
-                    html += '</tr></table>';
-
-                    // Tampilkan matriks yang dinormalisasi
-                    html += '<h2>Matriks yang Dinormalisasi</h2>';
-                    html += '<table border="1">';
-                    for (var x = 0; x < response.data.n; x++) {
-                        html += '<tr>';
-                        for (var y = 0; y < response.data.n; y++) {
-                            html += '<td>' + response.data.matrikb[x][y] + '</td>';
-                        }
-                        html += '</tr>';
-                    }
-                    html += '</table>';
-
-                    // Tampilkan jumlah nilai normalisasi (MNK)
-                    html += '<h2>Jumlah Nilai Normalisasi (MNK)</h2>';
-                    html += '<table border="1"><tr>';
-                    for (var i = 0; i < response.data.jmlmnk.length; i++) {
-                        html += '<td>' + response.data.jmlmnk[i] + '</td>';
-                    }
-                    html += '</tr></table>';
-
-                    // Tampilkan priority vector (PV)
-                    html += '<h2>Priority Vector</h2>';
-                    html += '<table border="1"><tr>';
-                    for (var i = 0; i < response.data.pv.length; i++) {
-                        html += '<td>' + response.data.pv[i] + '</td>';
-                    }
-                    html += '</tr></table>';
-
-                    // Tampilkan eigen vector
-                    html += '<h2>Eigen Vector</h2>';
-                    html += '<table border="1"><tr>';
-                    for (var i = 0; i < response.data.eigenVektor.length; i++) {
-                        html += '<td>' + response.data.eigenVektor[i] + '</td>';
-                    }
-                    html += '</tr></table>';
-
-                    // Tampilkan consistency index
-                    html += '<h2>Consistency Index</h2>';
-                    html += '<p>' + response.data.consIndex + '</p>';
-
-                    // Tampilkan consistency ratio
-                    html += '<h2>Consistency Ratio</h2>';
-                    html += '<p>' + response.data.consRatio + '</p>';
-
-                    // Masukkan HTML ke dalam elemen dengan id #result
-                    $('#result').html(html);
-                } else {
-                    console.error('AJAX Error: Unexpected Response');
-                    alert('Gagal memuat data. Silakan coba lagi.');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX Error:', status, error);
-                alert('Terjadi kesalahan saat memuat data. Silakan coba lagi.');
+        $('#hitungAHP').on('click', function() {
+            var id_kriteria = $('#inputGroupSelect01').val();
+            if (id_kriteria === 'Pilih...') {
+                alert('Silakan pilih kriteria.');
+                return;
             }
+            $.ajax({
+                url: "<?php echo base_url('supplier/spk/proses2'); ?>",
+                type: "POST",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status == 'success') {
+                        var html = '';
+
+                        // Tampilkan matriks perbandingan kriteria
+                        html += '<h2>Matriks Perbandingan Kriteria</h2>';
+                        html += '<table border="1">';
+                        for (var x = 0; x < response.data.n; x++) {
+                            html += '<tr>';
+                            for (var y = 0; y < response.data.n; y++) {
+                                html += '<td>' + response.data.matrik[x][y] + '</td>';
+                            }
+                            html += '</tr>';
+                        }
+                        html += '</table>';
+
+                        // Tampilkan jumlah tiap kolom kriteria (MPB)
+                        html += '<h2>Jumlah Tiap Kolom Kriteria (MPB)</h2>';
+                        html += '<table border="1"><tr>';
+                        for (var i = 0; i < response.data.jmlmpb.length; i++) {
+                            html += '<td>' + response.data.jmlmpb[i] + '</td>';
+                        }
+                        html += '</tr></table>';
+
+                        // Tampilkan matriks yang dinormalisasi
+                        html += '<h2>Matriks yang Dinormalisasi</h2>';
+                        html += '<table border="1">';
+                        for (var x = 0; x < response.data.n; x++) {
+                            html += '<tr>';
+                            for (var y = 0; y < response.data.n; y++) {
+                                html += '<td>' + response.data.matrikb[x][y] + '</td>';
+                            }
+                            html += '</tr>';
+                        }
+                        html += '</table>';
+
+                        // Tampilkan jumlah nilai normalisasi (MNK)
+                        html += '<h2>Jumlah Nilai Normalisasi (MNK)</h2>';
+                        html += '<table border="1"><tr>';
+                        for (var i = 0; i < response.data.jmlmnk.length; i++) {
+                            html += '<td>' + response.data.jmlmnk[i] + '</td>';
+                        }
+                        html += '</tr></table>';
+
+                        // Tampilkan priority vector (PV)
+                        html += '<h2>Priority Vector</h2>';
+                        html += '<table border="1"><tr>';
+                        for (var i = 0; i < response.data.pv.length; i++) {
+                            html += '<td>' + response.data.pv[i] + '</td>';
+                        }
+                        html += '</tr></table>';
+
+                        // Tampilkan eigen vector
+                        html += '<h2>Eigen Vector</h2>';
+                        html += '<table border="1"><tr>';
+                        for (var i = 0; i < response.data.eigenVektor.length; i++) {
+                            html += '<td>' + response.data.eigenVektor[i] + '</td>';
+                        }
+                        html += '</tr></table>';
+
+                        // Tampilkan consistency index
+                        html += '<h2>Consistency Index</h2>';
+                        html += '<p>' + response.data.consIndex + '</p>';
+
+                        // Tampilkan consistency ratio
+                        html += '<h2>Consistency Ratio</h2>';
+                        html += '<p>' + response.data.consRatio + '</p>';
+
+                        // Masukkan HTML ke dalam elemen dengan id #result
+                        $('#result').html(html);
+                    } else {
+                        console.error('AJAX Error: Unexpected Response');
+                        alert('Gagal memuat data. Silakan coba lagi.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    alert('Terjadi kesalahan saat memuat data. Silakan coba lagi.');
+                }
+            });
         });
     });
 </script>
