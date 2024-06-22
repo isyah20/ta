@@ -167,6 +167,7 @@ $route['supplier/spk/getPerbandinganKriteria'] = 'PerbandinganKriteria/simpan';
 $route['supplier/spk/addPerbandinganKriteria'] = 'PerbandinganKriteria/simpan';
 $route['supplier/spk/proses'] = 'PerbandinganKriteria/proses';
 $route['supplier/spk/proses2'] = 'PerbandinganAlternatif/proses';
+$route['supplier/spk/hasil'] = 'Hasil/load_hasil';
 
 //$route['supplier/spk/getPerbandinganAlternatif'] = 'PerbandinganAlternatif/tabel';
 //$route['supplier/spk/prosesAlternatif'] = 'PerbandinganAlternatif/proses';

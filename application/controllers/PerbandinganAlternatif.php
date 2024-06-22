@@ -97,18 +97,6 @@ class PerbandinganAlternatif extends CI_Controller
             }
         }
 
-        // Tambahkan data intermediate sebelum pembagian
-        $response_intermediate = array(
-            'status' => 'intermediate',
-            'data' => array(
-                'n' => $n,
-                'matrik' => $matrik,
-                'jmlmpb' => $jmlmpb,
-            )
-        );
-        echo json_encode($response_intermediate);
-        return;
-
         $matrikb = array();
         for ($x = 0; $x < $n; $x++) {
             for ($y = 0; $y < $n; $y++) {
@@ -134,8 +122,8 @@ class PerbandinganAlternatif extends CI_Controller
             }
         }
 
-        $eigenVektor = $this->getEigenVector($matrik, $pv, $n);
-        $consIndex = $this->getConsIndex($matrik, $pv, $n);
+        $eigenVektor = $this->getEigenVector($pv, $matrik, $n);
+        $consIndex = $this->getConsIndex($eigenVektor, $pv, $n);
         $consRatio = $this->getConsRatio($consIndex, $n);
 
         $response = array(
@@ -155,7 +143,6 @@ class PerbandinganAlternatif extends CI_Controller
 
         echo json_encode($response);
     }
-
 
 
     private function getEigenVector($pv, $matrik, $n)

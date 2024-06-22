@@ -35,26 +35,6 @@ class PerbandinganKriteria extends CI_Controller
         echo json_encode(['status' => 'success']);
     }
 
-    /* public function save_comparison()
-    {
-        $data = $this->input->post();
-        $result = $this->PerbandinganKriteria_model->save_comparison_data($data);
-
-        echo json_encode($result);
-    } */
-
-    /* public function index()
-    {
-
-        $data['data'] = $this->model->get_criteria();
-        $data['jumlah'] = $this->model->getNumKriteria();
-        $data['skala_perbandingan'] = $this->db->get('tb_skala_perbandingan')->result_array();
-
-        $this->load->view('templates/header');
-        $this->load->view('perbandingan_kriteria/index', $data);
-        $this->load->view('templates/footer');
-    } */
-
     public function proses()
     {
         // Jumlah Kriteria

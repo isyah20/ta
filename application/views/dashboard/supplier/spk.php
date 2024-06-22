@@ -658,7 +658,6 @@
             <div class="row">
                 <div class="col">
                     <h5 class="wow fadeInUp">Hasil Rekomendasi</h5>
-                    <h1>Hasil Proses AHP</h1>
                     <div id="hasilPerhitungan">
                         <!-- Tempat untuk hasil dari AJAX -->
                     </div>
@@ -667,8 +666,8 @@
         </div>
     </div>
 
-
-
+    <!-- hasil -->
+    
 
 </section>
 
@@ -798,6 +797,9 @@
                 url: "<?php echo base_url('supplier/spk/proses2'); ?>",
                 type: "POST",
                 dataType: "json",
+                data: {
+                    id_kriteria: id_kriteria
+                }, // Ensure you send necessary data
                 success: function(response) {
                     if (response.status == 'success') {
                         var html = '';
@@ -866,24 +868,40 @@
                         html += '<h2>Consistency Ratio</h2>';
                         html += '<p>' + response.data.consRatio + '</p>';
 
-                        // Masukkan HTML ke dalam elemen dengan id #result
                         $('#result').html(html);
                     } else {
-                        console.error('AJAX Error: Unexpected Response');
-                        alert('Gagal memuat data. Silakan coba lagi.');
+                        alert(response.message);
                     }
                 },
-                error: function(xhr, status, error) {
-                    console.error('AJAX Error:', status, error);
-                    alert('Terjadi kesalahan saat memuat data. Silakan coba lagi.');
+                error: function() {
+                    alert('Terjadi kesalahan dalam pengolahan data.');
                 }
             });
         });
     });
 </script>
 
+<!-- perangkingan -->
+<script>
+    $(document).ready(function() {
+        // Fungsi untuk memuat konten matriks perbandingan dan perangkingan menggunakan AJAX
+        function loadContent() {
+            $.ajax({
+                url: "<?php echo base_url('supplier/spk/hasil'); ?>",
+                type: "GET",
+                success: function(response) {
+                    $("#content-wrapper").html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: " + status + " - " + error);
+                }
+            });
+        }
 
-
+        // Panggil fungsi loadContent saat halaman pertama kali dimuat
+        loadContent();
+    });
+</script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js" integrity="sha512-hJsxoiLoVRkwHNvA5alz/GVA+eWtVxdQ48iy4sFRQLpDrBPn6BFZeUcW4R4kU+Rj2ljM9wHwekwVtsb0RY/46Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
